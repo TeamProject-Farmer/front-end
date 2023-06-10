@@ -1,4 +1,4 @@
-// import 'tailwindcss/tailwind.css';
+import 'tailwindcss/tailwind.css';
 import React from 'react';
 import { ThemeProvider } from '@emotion/react';
 import { AppProps } from 'next/app';

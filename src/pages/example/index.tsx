@@ -5,7 +5,12 @@ import React from 'react';
 const index = () => {
   return (
     <Styled.Container>
-      <Styled.LoginBox>안녕하세요 테스트입니다.</Styled.LoginBox>
+      <Styled.LoginBox>
+        안녕하세요 테스트입니다.
+        <h1 className="text-blue-300 text-3xl font-bold underline">
+          tailwind css 입니다.
+        </h1>
+      </Styled.LoginBox>
     </Styled.Container>
   );
 };
