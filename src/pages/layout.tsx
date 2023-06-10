@@ -10,7 +10,7 @@ type Props = {
   title?: string;
 };
 
-const Layout = ({ children, title = '파머 프로젝트' }: Props) => (
+const Layout = ({ children, title = 'Farmer FE' }: Props) => (
   <div className={inter.className}>
     <Head>
       <title>{title}</title>
