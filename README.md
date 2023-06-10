@@ -47,7 +47,7 @@
 
 # Git Convention
 
-# \***\*브랜치 머지 전략 📌\*\***
+# **브랜치 머지 전략 📌**
 
 - Git Flow 전략
 - 기본적으로 main, feature, hotfix 등의 브랜치를 사용
