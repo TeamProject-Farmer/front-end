@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
+import Option from '@assets/images/option.svg';
 
 const gridInputWrapperStyles = css`
   display: grid;
@@ -55,6 +56,10 @@ const Styled = {
     margin-bottom: 10px;
     grid-template-columns: 1fr 1fr;
   `,
+  AtSpan: styled.span`
+    color: ${theme.colors.gray};
+    font-weight: 700;
+  `,
   PostButton: styled.button`
     width: 100%;
     height: 50px;
@@ -93,7 +98,6 @@ const Styled = {
     display: flex;
     align-items: center;
     border: 1.5px solid #000000;
-    margin-bottom: 20px;
     padding: 0 15px;
   `,
   Checkbox: styled.input`
@@ -146,6 +150,17 @@ const Styled = {
     font-size: 12px;
     font-weight: 500;
     color: #e53c3c;
+  `,
+  OptionContainer: styled.div``,
+  DotContainer: styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  `,
+  Dot: styled(Option)`
+    position: absolute;
+    cursor: pointer;
+    margin-right: 5px;
   `,
 };
 
