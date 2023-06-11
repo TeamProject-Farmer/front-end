@@ -8,11 +8,7 @@ const gridInputWrapperStyles = css`
   align-items: center;
 `;
 
-export const Styled = {
-  // OptionButton: styled(Option)`
-  //   position: absolute;
-  //   cursor: pointer;
-  // `,
+const Styled = {
   Container: styled.div`
     display: flex;
     justify-content: center;
@@ -152,3 +148,5 @@ export const Styled = {
     color: #e53c3c;
   `,
 };
+
+export default Styled;

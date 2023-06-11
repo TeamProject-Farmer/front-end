@@ -5,7 +5,7 @@ import { emailOptions } from 'src/utils/emailListUtil';
 import { IAuthForm } from 'src/types/registerPage';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { postcodeScriptUrl } from 'react-daum-postcode/lib/loadPostcode';
-import { Styled } from '@pages/register/styles';
+import Styled from '@components/Form/styles';
 import FormButton from '../FormButton';
 
 const InputGroup = () => {

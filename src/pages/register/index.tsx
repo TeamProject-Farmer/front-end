@@ -7,9 +7,9 @@ import { emailOptions } from 'src/utils/emailListUtil';
 import { IAuthForm } from 'src/types/registerPage';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { postcodeScriptUrl } from 'react-daum-postcode/lib/loadPostcode';
-import { Styled } from './styles';
 import Header from '@components/Form/Header';
 import InputGroup from '@components/Form/InputGroup';
+import Styled from '../../components/Form/styles';
 
 const RegisterPage = () => {
   // const [selectedEmail, setSelectedEmail] = useState('');

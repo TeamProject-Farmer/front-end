@@ -1,4 +1,4 @@
-import { Styled } from '@pages/register/styles';
+import Styled from '@components/Form/styles';
 import React from 'react';
 import SnsCircles from '../SnsCircles';
 
