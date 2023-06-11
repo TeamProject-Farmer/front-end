@@ -9,10 +9,10 @@ import Styled from '@components/Form/styles';
 import FormButton from '../FormButton';
 
 const InputGroup = () => {
-  const [selectedEmail, setSelectedEmail] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
 
+  // react-hook-form Valid Lists
   const {
     register,
     formState: { errors },
@@ -27,6 +27,10 @@ const InputGroup = () => {
   });
 
   const emailValid = register('email', {
+    required: '필수 항목입니다.',
+  });
+
+  const selectedEmail = register('selectedEmail', {
     required: '필수 항목입니다.',
   });
 
@@ -54,6 +58,10 @@ const InputGroup = () => {
     },
   });
 
+  const nameValid = register('name', {
+    required: '필수 항목입니다.',
+  });
+
   const postCodeValid = register('postCode', {
     required: '필수 항목입니다.',
   });
@@ -66,8 +74,12 @@ const InputGroup = () => {
     required: '필수 항목입니다.',
   });
 
+  const nicknameValid = register('nickname', {
+    required: '필수 항목입니다.',
+  });
+
   const checkBoxValid = register('checked', {
-    validate: value => value === true || '필수 항목입니다.',
+    required: '필수 항목입니다.',
   });
 
   const getFirstErrorMessage = (error: FieldError) => {
@@ -77,11 +89,13 @@ const InputGroup = () => {
     return '';
   };
 
+  // 체크박스 기능
   const handleCheckboxChange = () => {
     setIsChecked(prev => !prev);
     clearErrors('checked');
   };
 
+  // 이메일 옵션 리스트
   const handleOptionClick = (email: string) => {
     email === '직접입력'
       ? setValue('selectedEmail', '')
@@ -90,6 +104,7 @@ const InputGroup = () => {
     trigger('selectedEmail');
   };
 
+  // 카카오 postcode 기능
   const open = useDaumPostcodePopup(postcodeScriptUrl);
 
   const handleComplete = data => {
@@ -108,26 +123,35 @@ const InputGroup = () => {
     }
     setValue('postCode', data.zonecode);
     setValue('basicAddress', fullAddress);
+    clearErrors('postCode');
+    clearErrors('basicAddress');
   };
 
   const handleClick = () => {
-    open({ onComplete: handleComplete });
+    open({
+      onComplete: handleComplete,
+      height: 500,
+      top: (window.innerHeight - 500) / 2,
+      left: (window.innerWidth - 500) / 2,
+    });
   };
+
   return (
-    <>
+    <Styled.Section>
+      {/* 이메일 입력 필드 */}
       <Styled.Label>이메일</Styled.Label>
       <Styled.EmailGridInputWrapper>
         <Styled.Input {...emailValid} placeholder="이메일" type="email" />
-        <span>@</span>
-        <div>
-          <Styled.Input
-            {...register('selectedEmail', {
-              required: '필수 항목입니다.',
-            })}
-            placeholder="선택해주세요"
-            type="email"
-            onClick={() => setIsDropdownOpen(prev => !prev)}
-          />
+        <Styled.AtSpan>@</Styled.AtSpan>
+        <Styled.OptionContainer>
+          <Styled.DotContainer>
+            <Styled.Input
+              {...selectedEmail}
+              placeholder="선택해주세요"
+              type="email"
+            />
+            <Styled.Dot onClick={() => setIsDropdownOpen(prev => !prev)} />
+          </Styled.DotContainer>
           {isDropdownOpen && (
             <Styled.Dropdown>
               {emailOptions.map((email, index) => (
@@ -140,7 +164,7 @@ const InputGroup = () => {
               ))}
             </Styled.Dropdown>
           )}
-        </div>
+        </Styled.OptionContainer>
       </Styled.EmailGridInputWrapper>
       <Styled.ErrorText>
         {getFirstErrorMessage(errors.email || errors.selectedEmail)}
@@ -178,11 +202,7 @@ const InputGroup = () => {
       {/* 이름 입력 필드 */}
       <Styled.InputWrapper>
         <Styled.Label>이름</Styled.Label>
-        <Styled.Input
-          {...register('name', { required: '필수 항목입니다.' })}
-          placeholder="이름"
-          type="text"
-        />
+        <Styled.Input {...nameValid} placeholder="이름" type="text" />
       </Styled.InputWrapper>
       <Styled.ErrorText>{errors?.name?.message}</Styled.ErrorText>
 
@@ -235,11 +255,7 @@ const InputGroup = () => {
         <Styled.InputSubText>
           다른유저와 겹치지 않도록 입력해주세요.(2~15자)
         </Styled.InputSubText>
-        <Styled.Input
-          {...register('nickname', { required: '필수 항목입니다.' })}
-          type="text"
-          placeholder="닉네임"
-        />
+        <Styled.Input {...nicknameValid} type="text" placeholder="닉네임" />
         <Styled.ErrorText>{errors?.nickname?.message}</Styled.ErrorText>
       </Styled.InputWrapper>
 
@@ -255,8 +271,9 @@ const InputGroup = () => {
           />
           <Styled.CheckboxLabel>전체동의</Styled.CheckboxLabel>
         </Styled.CheckboxWrapper>
+        <Styled.ErrorText>{errors?.checked?.message}</Styled.ErrorText>
       </Styled.InputWrapper>
-      <Styled.ErrorText>{errors?.checked?.message}</Styled.ErrorText>
+      <Styled.Gap />
 
       {/* 회원가입 버튼 */}
       <FormButton
@@ -264,9 +281,11 @@ const InputGroup = () => {
         label="회원가입하기"
         backgroundColor="#F7F8FA"
         borderColor="#000000"
-        onClick={handleSubmit(() => {})}
+        onClick={handleSubmit(() => {
+          console.log('회원가입 성공'); // 임시
+        })}
       />
-    </>
+    </Styled.Section>
   );
 };
 
