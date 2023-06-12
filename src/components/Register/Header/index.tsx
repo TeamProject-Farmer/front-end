@@ -1,6 +1,6 @@
-import Styled from '@components/Form/styles';
 import React from 'react';
 import SnsCircles from '../SnsCircles';
+import Styled from '../styles';
 
 const Header = () => {
   return (

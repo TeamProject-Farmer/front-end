@@ -1,8 +1,8 @@
+import Footer from '@components/Register/Footer';
+import Header from '@components/Register/Header';
+import InputGroup from '@components/Register/InputGroup';
+import Styled from '@components/Register/styles';
 import React from 'react';
-import Header from '@components/Form/Header';
-import InputGroup from '@components/Form/InputGroup';
-import Styled from '../../components/Form/styles';
-import Footer from '@components/Form/Footer';
 
 const RegisterPage = () => {
   return (

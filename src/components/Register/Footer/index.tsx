@@ -1,5 +1,5 @@
-import Styled from '@components/Form/styles';
 import React from 'react';
+import Styled from '../styles';
 
 const Footer = () => {
   return (
