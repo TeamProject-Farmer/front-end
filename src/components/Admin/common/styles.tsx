@@ -27,6 +27,12 @@ const Styled = {
     color: #000000;
     display: flex;
   `,
+
+  SmallButtonBox: styled.button`
+    width: 157px;
+    height: 52px;
+    background: #d9d9d9;
+  `,
 };
 
 export default Styled;

@@ -20,6 +20,7 @@ const Styled = {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 18px;
+    height: 78px;
   `,
   ContentHeaderTitle: styled.div`
     font-style: normal;

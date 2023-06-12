@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
-import SideBar from '@components/adminPage/sidebar/SideBar';
-import AdminLayout from '@components/adminPage/layout/AdminLayout';
+import SideBar from '@components/Admin/SideBar';
 
 const admin = () => {
   const router = useRouter();
@@ -9,7 +8,7 @@ const admin = () => {
   return (
     <Wrapper>
       <SideBar router={router.asPath} />
-      <AdminLayout />
+      <NotYet>아직 개발 중입니다.</NotYet>
     </Wrapper>
   );
 };
@@ -18,4 +17,8 @@ const Wrapper = styled.div`
   display: flex;
 `;
 
+const NotYet = styled.div`
+  margin-top: 20px;
+  margin-left: 500px;
+`;
 export default admin;

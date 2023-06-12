@@ -9,8 +9,7 @@ interface PropsList {
 
 const sidebar = (props: PropsList) => {
   const { router } = props;
-  console.log('router주소');
-  console.log(router);
+  
   return (
     <Styled.Wrapper>
       <SideBarHeader />

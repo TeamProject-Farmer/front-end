@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
-import SideBar from '@components/adminPage/sidebar/SideBar';
-import AdminLayout from '@components/adminPage/layout/AdminLayout';
+import SideBar from '@components/Admin/SideBar';
+import AdminLayout from '@components/Admin/layout/AdminLayout';
 
 const admin = () => {
   const router = useRouter();
@@ -9,7 +9,7 @@ const admin = () => {
   return (
     <Wrapper>
       <SideBar router={router.asPath} />
-      <AdminLayout />
+      <AdminLayout /> {/*<- 홈 부분 아직 추가 안됨*/}
     </Wrapper>
   );
 };
