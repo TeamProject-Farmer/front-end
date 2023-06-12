@@ -2,11 +2,11 @@ import 'tailwindcss/tailwind.css';
 import React from 'react';
 import { ThemeProvider } from '@emotion/react';
 import { AppProps } from 'next/app';
-import { globalStyles } from '../styles/globalStyle';
 import theme from '../styles/theme';
 import Layout from './layout';
 import { RecoilRoot } from 'recoil';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { globalStyles } from '@styles/globalStyle';
 
 const queryClient = new QueryClient();
 
