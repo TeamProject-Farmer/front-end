@@ -1,5 +1,5 @@
 import { ButtonProps } from 'src/types';
-import { Styled } from './styles';
+import Styled from '../styles';
 
 const FormButton = ({
   label,
@@ -14,7 +14,7 @@ const FormButton = ({
       borderColor={borderColor}
       onClick={onClick}
     >
-      <Styled.Label color={color}>{label}</Styled.Label>
+      <Styled.ButtonLabel color={color}>{label}</Styled.ButtonLabel>
     </Styled.Button>
   );
 };

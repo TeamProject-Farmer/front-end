@@ -2,11 +2,19 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import Option from '@assets/images/option.svg';
+import { ButtonProps, CircleProps } from 'src/types';
 
 const gridInputWrapperStyles = css`
   display: grid;
   grid-gap: 10px;
   align-items: center;
+`;
+
+const iconStyles = css`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
 `;
 
 const Styled = {
@@ -161,6 +169,37 @@ const Styled = {
     position: absolute;
     cursor: pointer;
     margin-right: 5px;
+  `,
+
+  // sns 아이콘
+  IconWarrper: styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 15px;
+    margin-bottom: 20px;
+  `,
+  Icon: styled.div<CircleProps>`
+    ${iconStyles}
+    background-color: ${props => props.color};
+    ${props => props.marginRight && `margin-right: ${props.marginRight}px`};
+    ${props => props.marginLeft && `margin-left: ${props.marginLeft}px`};
+  `,
+
+  // formButton
+  Button: styled.button<ButtonProps>`
+    width: 100%;
+    height: 50px;
+    border-radius: ${props => (props.borderColor ? '5px' : '3px')};
+    margin-top: 15px;
+    background-color: ${props => props.backgroundColor};
+    border: ${props =>
+      props.borderColor ? `1px solid ${[props.borderColor]}` : null};
+  `,
+  ButtonLabel: styled.span<ButtonProps>`
+    color: ${props => props.color};
+    font-size: 16px;
+    font-weight: 700;
   `,
 };
 
