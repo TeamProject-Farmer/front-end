@@ -12,6 +12,7 @@ const index = () => {
         <h1 className="text-blue-300 text-3xl font-bold underline">
           tailwind css 입니다.
         </h1>
+        
       </Styled.LoginBox>
     </Styled.Container>
   );
