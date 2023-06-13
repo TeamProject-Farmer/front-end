@@ -68,4 +68,9 @@ export const Styled = {
   Logo: styled(Logo)`
     margin-bottom: 30px;
   `,
+  ErrorText: styled.span`
+    font-size: 12px;
+    font-weight: 500;
+    color: #e53c3c;
+  `,
 };
