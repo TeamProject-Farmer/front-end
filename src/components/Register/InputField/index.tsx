@@ -1,6 +1,6 @@
 import React from 'react';
 import Styled from '../styles';
-import { InputProps } from 'src/types/registerPage';
+import { InputProps } from 'src/types/register/registerPage';
 
 const InputField = ({
   label,

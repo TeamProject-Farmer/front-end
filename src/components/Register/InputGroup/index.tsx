@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import theme from 'src/styles/theme';
 import { FieldError, useForm } from 'react-hook-form';
-import { emailOptions } from 'src/utils/emailListUtil';
+import { emailOptions } from 'src/utils/register/emailListUtil';
 import {
   DaumPostcodeData,
   FieldName,
   IAuthForm,
   Validate,
-} from 'src/types/registerPage';
+} from 'src/types/register/registerPage';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { postcodeScriptUrl } from 'react-daum-postcode/lib/loadPostcode';
 import FormButton from '../FormButton';
@@ -17,7 +17,7 @@ import {
   requiredErrorMessage,
   validatePassword,
   validatePhoneNumber,
-} from 'src/utils/formUtil';
+} from 'src/utils/register/formUtil';
 
 const InputGroup = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
