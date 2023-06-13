@@ -1,6 +1,4 @@
 import React from 'react';
-import theme from 'src/styles/theme';
-import FormButton from '@components/Register/FormButton';
 import SnsCircles from '@components/Register/SnsCircles';
 import { Styled } from '@components/Login/styles';
 import InputGroup from '@components/Login/InputGroup';
