@@ -17,7 +17,7 @@ import {
   requiredErrorMessage,
   validatePassword,
   validatePhoneNumber,
-} from 'src/utils/fromUtil';
+} from 'src/utils/formUtil';
 
 const InputGroup = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
