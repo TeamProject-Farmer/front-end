@@ -15,10 +15,3 @@ export const validatePassword = (value: string) => {
   }
   return true;
 };
-
-export const validateComfirmPassword = (value: string) => {
-  if (!/^(?=.*[a-zA-Z])(?=.*\d).{8,}$/.test(value)) {
-    return '영문과 숫자를 포함한 8자 이상의 비밀번호를 입력해주세요.';
-  }
-  return true;
-};
