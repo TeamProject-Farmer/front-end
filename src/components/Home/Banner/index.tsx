@@ -1,4 +1,5 @@
 import Styled from './styles'
+import Button from '../common/Button'
 import Icon from '../common/Icon'
 
 const Banner = () => {
@@ -9,7 +10,7 @@ const Banner = () => {
         <p>사무공간, 생활공간을</p>
         <p>그린 친화적으로</p>
       </Styled.Content>
-      <Styled.BuyBtn>구매하러 가기</Styled.BuyBtn>
+      <Button content='구매하러 가기'/>
       <Styled.Events>
         <Styled.Event>farmer</Styled.Event>
         <Styled.Event>Event 01</Styled.Event>

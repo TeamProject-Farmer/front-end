@@ -1,4 +1,5 @@
 import Styled from './styles'
+import Title from '../common/Title'
 import Plant from './Plant'
 
 const plantsData = [
@@ -12,7 +13,7 @@ const plantsData = [
 const Category = () => {
   return (
     <Styled.Wrapper>
-      <Styled.Title>카테고리</Styled.Title>
+      <Title title='카테고리'/>
       <Styled.Plants>
         {
           plantsData.map((plant) => (

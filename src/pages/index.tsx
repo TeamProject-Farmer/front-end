@@ -4,6 +4,8 @@ import Head from 'next/head';
 import Header from '@components/Home/Header';
 import Banner from '@components/Home/Banner';
 import Category from '@components/Home/Category';
+import ShopPrev from '@components/Home/ShopPrev';
+import BestPlant from '@components/Home/BestPlant';
 
 const IndexPage = () => (
   <div>
@@ -14,6 +16,8 @@ const IndexPage = () => (
     <Header/>
     <Banner/>
     <Category/>
+    <ShopPrev/>
+    <BestPlant/>
   </div>
 );
 

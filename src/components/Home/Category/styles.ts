@@ -9,12 +9,8 @@ const Styled = {
     justify-content: center;
     align-items: center;
   `,
-  Title: styled.p`
-    font-size: 30px;
-    font-weight: 700;
-    margin-bottom: 85px;
-  `,
   Plants: styled.ul`
+    margin-top: 85px;
     display: flex;
     justify-content: center;
     align-items: center;

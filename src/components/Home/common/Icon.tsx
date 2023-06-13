@@ -1,4 +1,3 @@
-import styled from '@emotion/styled';
 import Image from 'next/image';
 
 interface IIconProps {
@@ -20,9 +19,3 @@ const Icon = ({src, width, height}:IIconProps) => {
 }
 
 export default Icon
-
-const Styled = {
-  Wrapper: `
-    
-  `
-}

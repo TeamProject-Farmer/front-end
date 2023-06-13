@@ -20,14 +20,7 @@ const Styled = {
     align-items: center;
   `,
   BuyBtn: styled.p`
-    width: 142px;
-    height: 57px;
     margin-top: 60px;
-    background-color:#707070;
-    font-size: 18px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   `,
   Events: styled.ul`
     margin-top: 208px;
