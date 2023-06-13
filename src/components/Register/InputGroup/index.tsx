@@ -2,18 +2,23 @@ import React, { useState } from 'react';
 import theme from 'src/styles/theme';
 import { FieldError, useForm } from 'react-hook-form';
 import { emailOptions } from 'src/utils/emailListUtil';
-import { IAuthForm } from 'src/types/registerPage';
+import { FieldName, IAuthForm, Validate } from 'src/types/registerPage';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { postcodeScriptUrl } from 'react-daum-postcode/lib/loadPostcode';
 import FormButton from '../FormButton';
 import Styled from '../styles';
 import InputField from '../InputField';
+import {
+  requiredErrorMessage,
+  validatePassword,
+  validatePhoneNumber,
+} from 'src/utils/fromUtil';
 
 const InputGroup = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
 
-  // react-hook-form Valid Lists
+  // react-hook-form
   const {
     register,
     formState: { errors },
@@ -27,62 +32,33 @@ const InputGroup = () => {
     mode: 'onChange',
   });
 
-  const emailValid = register('email', {
-    required: '필수 항목입니다.',
-  });
+  // form validation hook
+  const useFormValidation = (fieldName: FieldName, value?: Validate) => {
+    const validation = register(fieldName, {
+      required: requiredErrorMessage,
+      validate: value,
+    });
 
-  const selectedEmail = register('selectedEmail', {
-    required: '필수 항목입니다.',
-  });
+    return validation;
+  };
 
-  const passwordValid = register('password', {
-    required: '필수 항목입니다.',
-    pattern: {
-      value: /^(?=.*[a-zA-Z])(?=.*\d).{8,}$/,
-      message: '영문과 숫자를 포함한 8자 이상의 비밀번호를 입력해주세요.',
-    },
-  });
+  // 비밀번호 일치 불일치
+  const matchesPassword = (value: string) =>
+    value === getValues().password || '비밀번호가 일치하지 않습니다.';
 
-  const phoneValid = register('phone', {
-    required: '필수 항목입니다.',
-    pattern: {
-      value: /^\d{11}$/,
-      message: '"-"을 제외한 11자리 번호를 입력해주세요.',
-    },
-  });
+  const emailValid = useFormValidation('email');
+  const selectedEmail = useFormValidation('selectedEmail');
+  const nameValid = useFormValidation('name');
+  const postCodeValid = useFormValidation('postCode');
+  const basicAddressValid = useFormValidation('basicAddress');
+  const detailaAddressValid = useFormValidation('detailAddress');
+  const nicknameValid = useFormValidation('nickname');
+  const checkBoxValid = useFormValidation('checked');
+  const passwordValid = useFormValidation('password', validatePassword);
+  const phoneValid = useFormValidation('phone', validatePhoneNumber);
+  const passwordConfirm = useFormValidation('passwordConfirm', matchesPassword);
 
-  const passwordConfirm = register('passwordConfirm', {
-    required: '필수 항목입니다.',
-    validate: {
-      matchesPassword: value =>
-        value === getValues().password || '비밀번호가 일치하지 않습니다.',
-    },
-  });
-
-  const nameValid = register('name', {
-    required: '필수 항목입니다.',
-  });
-
-  const postCodeValid = register('postCode', {
-    required: '필수 항목입니다.',
-  });
-
-  const basicAddressValid = register('basicAddress', {
-    required: '필수 항목입니다.',
-  });
-
-  const detailaAddressValid = register('detailAddress', {
-    required: '필수 항목입니다.',
-  });
-
-  const nicknameValid = register('nickname', {
-    required: '필수 항목입니다.',
-  });
-
-  const checkBoxValid = register('checked', {
-    required: '필수 항목입니다.',
-  });
-
+  // 에러 중복시 하나의 에러만 render
   const getFirstErrorMessage = (error: FieldError) => {
     if (error) {
       return error.message;
