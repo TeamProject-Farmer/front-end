@@ -16,6 +16,32 @@ export interface IAuthForm {
   checked: boolean;
 }
 
+export interface DaumPostcodeData {
+  address: string;
+  addressType: string;
+  bname: string;
+  buildingName: string;
+  zonecode: string;
+  // 추가적인 필드들을 필요에 따라 정의
+}
+
+export type FieldName =
+  | 'email'
+  | 'selectedEmail'
+  | 'password'
+  | 'passwordConfirm'
+  | 'name'
+  | 'phone'
+  | 'postCode'
+  | 'basicAddress'
+  | 'detailAddress'
+  | 'nickname'
+  | 'checked';
+
+export type Validate = (
+  value: any,
+) => boolean | string | Promise<boolean | string>;
+
 // input fields types
 export interface InputProps {
   label: string;
