@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import theme from 'src/styles/theme';
 import { FieldError, useForm } from 'react-hook-form';
 import { emailOptions } from 'src/utils/emailListUtil';
-import { FieldName, IAuthForm, Validate } from 'src/types/registerPage';
+import {
+  DaumPostcodeData,
+  FieldName,
+  IAuthForm,
+  Validate,
+} from 'src/types/registerPage';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { postcodeScriptUrl } from 'react-daum-postcode/lib/loadPostcode';
 import FormButton from '../FormButton';
@@ -84,7 +89,7 @@ const InputGroup = () => {
   // 카카오 postcode 기능
   const open = useDaumPostcodePopup(postcodeScriptUrl);
 
-  const handleComplete = data => {
+  const handleComplete = (data: DaumPostcodeData) => {
     let fullAddress = data.address;
     let extraAddress = '';
 
