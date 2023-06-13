@@ -1,6 +1,7 @@
 // error message
 export const requiredErrorMessage = '필수 항목입니다.';
 
+// form validation
 export const validatePhoneNumber = (value: string) => {
   if (!/^\d{11}$/.test(value)) {
     return '올바르지 않은 전화번호 형식입니다. "-"를 제외한 11자 숫자';
@@ -21,7 +22,3 @@ export const validateComfirmPassword = (value: string) => {
   }
   return true;
 };
-
-export type Validate = (
-  value: any,
-) => boolean | string | Promise<boolean | string>;
