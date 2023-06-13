@@ -16,9 +16,9 @@ const Header = () => {
         <Icon src='logo'width={100}/>
         </Styled.Logo>
         <Styled.Utils>
-          <Icon src='myPage'/>
-          <Icon src='search'/>
-          <Icon src='cart'/>
+          <li><Icon src='myPage'/></li>
+          <li><Icon src='search'/></li>
+          <li><Icon src='cart'/></li>
         </Styled.Utils>
       </Styled.Header>
     </Styled.Wrapper>

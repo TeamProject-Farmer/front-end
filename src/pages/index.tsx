@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import Head from 'next/head';
 import Header from '@components/Home/Header';
+import Banner from '@components/Home/Banner';
 
 const IndexPage = () => (
   <div>
@@ -10,6 +11,7 @@ const IndexPage = () => (
       <link rel="icon" href="/favicon.ico" />
     </Head>
     <Header/>
+    <Banner/>
   </div>
 );
 
