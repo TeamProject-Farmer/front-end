@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import Option from '@assets/images/option.svg';
-import { ButtonProps, CircleProps } from 'src/types';
+import { ButtonProps, CircleProps } from 'src/types/register/registerPage';
 
 const gridInputWrapperStyles = css`
   display: grid;

@@ -1,4 +1,4 @@
-import { ButtonProps } from 'src/types';
+import { ButtonProps } from 'src/types/register/registerPage';
 import Styled from '../styles';
 
 const FormButton = ({
