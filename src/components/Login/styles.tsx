@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import Logo from '@assets/images/logo.svg';
-import { StyleProps } from 'src/types/login/loginPage';
+import { StyleProps } from 'src/types/login/types';
 
 export const Styled = {
   Container: styled.div`
