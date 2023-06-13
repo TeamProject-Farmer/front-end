@@ -1,16 +1,18 @@
 import Styled from './styles';
-import AdminLayout from './AdminLayout';
+import AdminLayout from './Admin';
 import SearchBar from '../common/SearchBar';
+import Member from '../Member/MemberWrapper';
 
-const GroupLayout = () => {
+const MemberLayout = () => {
   return (
     <AdminLayout>
       <Styled.ContentHeader>
         <Styled.ContentHeaderTitle>회원관리</Styled.ContentHeaderTitle>
         <SearchBar />
       </Styled.ContentHeader>
+      <Member />
     </AdminLayout>
   );
 };
 
-export default GroupLayout;
+export default MemberLayout;

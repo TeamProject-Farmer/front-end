@@ -17,7 +17,7 @@ const Styled = {
     width: 100%;
     height: 81px;
 
-    color: #ffffff;
+    color: ${theme.colors.white};;
     padding-left: 31px;
     display: flex;
     flex-direction: column;
@@ -45,7 +45,7 @@ const Styled = {
     display: flex;
     align-items: center;
     &:hover {
-      background: #156df0;
+      background: ${theme.colors.blue};
     }
   `,
   ActiveMenuWrapper: styled.div`
@@ -53,7 +53,7 @@ const Styled = {
     height: 80px;
     display: flex;
     align-items: center;
-    background: #156df0;
+    background: ${theme.colors.blue};
   `,
   MenuImageBox: styled.div`
     width: 40px;
@@ -67,7 +67,7 @@ const Styled = {
     font-weight: 700;
     font-size: 20px;
     line-height: 24px;
-    color: #ffffff;
+    color: ${theme.colors.white};;
 
     margin-left: 45px;
   `,

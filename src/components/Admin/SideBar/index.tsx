@@ -16,20 +16,20 @@ const sidebar = (props: PropsList) => {
       <Link href="/admin">
         <SiderBarMenu imageName="home" menuName="홈" router={router}/>
       </Link>
-      <Link href="/admin/administrator">
-        <SiderBarMenu imageName="administrator" menuName="계정"  router={router}/>
+      <Link href="/admin/account">
+        <SiderBarMenu imageName="account" menuName="계정"  router={router}/>
       </Link>
-      <Link href="/admin/group">
-        <SiderBarMenu imageName="group" menuName="회원"  router={router}/>
+      <Link href="/admin/member">
+        <SiderBarMenu imageName="member" menuName="회원"  router={router}/>
       </Link>
       <Link href="/admin/cart">
         <SiderBarMenu imageName="cart" menuName="주문"  router={router}/>
       </Link>
-      <Link href="/admin/item">
-        <SiderBarMenu imageName="item" menuName="상품"  router={router}/>
+      <Link href="/admin/product">
+        <SiderBarMenu imageName="product" menuName="상품"  router={router}/>
       </Link>
-      <Link href="/admin/clipboard">
-        <SiderBarMenu imageName="clipboard" menuName="게시판"  router={router}/>
+      <Link href="/admin/board">
+        <SiderBarMenu imageName="board" menuName="게시판"  router={router}/>
       </Link>
       <Link href="/admin/settings">
         <SiderBarMenu imageName="settings" menuName="기타 설정"  router={router}/>

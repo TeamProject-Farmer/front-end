@@ -9,10 +9,12 @@ const Styled = {
     padding-top: 23px !important;
     padding: 48px;
     width: 1510px;
+    min-height:100vh;
     background-color: #eeeeee;
+    overflow: hidden;
   `,
   LayoutContentWrapper: styled.div`
-    padding-bottom: 36px;
+    
   `,
   ContentHeader: styled.div`
     width: 100%;
