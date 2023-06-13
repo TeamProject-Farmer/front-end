@@ -97,6 +97,7 @@ const Styled = {
     font-size: 14px;
     font-weight: 500;
     line-height: 20px;
+    margin-top: -5px;
     margin-bottom: 10px;
     color: ${theme.colors.gray};
   `,

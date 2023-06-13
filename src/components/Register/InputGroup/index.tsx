@@ -7,6 +7,7 @@ import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { postcodeScriptUrl } from 'react-daum-postcode/lib/loadPostcode';
 import FormButton from '../FormButton';
 import Styled from '../styles';
+import InputField from '../InputField';
 
 const InputGroup = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -177,71 +178,56 @@ const InputGroup = () => {
       />
 
       {/* 비밀번호 입력 필드 */}
-      <Styled.InputWrapper>
-        <Styled.Label>비밀번호</Styled.Label>
-        <Styled.InputSubText>
-          영문, 숫자를 포함한 8자 이상의 <br /> 비밀번호를 입력해주세요.
-        </Styled.InputSubText>
-        <Styled.Input
-          {...passwordValid}
-          placeholder="비밀번호"
-          type="password"
-        />
-        <Styled.ErrorText>{errors?.password?.message}</Styled.ErrorText>
-      </Styled.InputWrapper>
-      <Styled.InputWrapper>
-        <Styled.Label>비밀번호 확인</Styled.Label>
-        <Styled.Input
-          {...passwordConfirm}
-          placeholder="비밀번호 확인"
-          type="password"
-        />
-        <Styled.ErrorText>{errors?.passwordConfirm?.message}</Styled.ErrorText>
-      </Styled.InputWrapper>
+      <InputField
+        label="비밀번호"
+        subText={
+          <>
+            영문, 숫자를 포함한 8자 이상의
+            <br />
+            비밀번호를 입력해주세요.
+          </>
+        }
+        placeholder="이름을 입력해주세요"
+        inputProps={passwordValid}
+        error={errors?.password?.message}
+        type="password"
+      />
+      <InputField
+        label="비밀번호 확인"
+        placeholder="비밀번호 확인"
+        inputProps={passwordConfirm}
+        error={errors?.passwordConfirm?.message}
+        type="password"
+      />
 
       {/* 이름 입력 필드 */}
-      <Styled.InputWrapper>
-        <Styled.Label>이름</Styled.Label>
-        <Styled.Input {...nameValid} placeholder="이름" type="text" />
-      </Styled.InputWrapper>
-      <Styled.ErrorText>{errors?.name?.message}</Styled.ErrorText>
+      <InputField
+        label="이름"
+        placeholder="이름을 입력해주세요"
+        inputProps={nameValid}
+        error={errors?.name?.message}
+      />
 
       {/* 전화번호 입력 필드 */}
-      <Styled.InputWrapper>
-        <Styled.Label>전화번호</Styled.Label>
-        <Styled.Input
-          {...phoneValid}
-          placeholder="‘-’를 제외한 휴대폰 11자리"
-          type="text"
-        />
-      </Styled.InputWrapper>
-      <Styled.ErrorText>{errors?.phone?.message}</Styled.ErrorText>
+      <InputField
+        label="전화번호"
+        placeholder="‘-’를 제외한 휴대폰 11자리"
+        inputProps={phoneValid}
+        error={errors?.phone?.message}
+      />
 
       {/* 주소 입력 필드 */}
       <Styled.InputWrapper>
         <Styled.Label>주소</Styled.Label>
         <Styled.AddressGridInputWrapper>
-          <Styled.Input
-            {...postCodeValid}
-            readOnly
-            type="text"
-            placeholder="우편번호"
-          />
+          <Styled.Input {...postCodeValid} readOnly placeholder="우편번호" />
           <Styled.PostButton onClick={handleClick}>
             우편번호 찾기
           </Styled.PostButton>
         </Styled.AddressGridInputWrapper>
-        <Styled.Input
-          {...basicAddressValid}
-          type="text"
-          placeholder="기본주소"
-        />
+        <Styled.Input {...basicAddressValid} placeholder="기본주소" />
         <Styled.Gap />
-        <Styled.Input
-          {...detailaAddressValid}
-          type="text"
-          placeholder="상세주소"
-        />
+        <Styled.Input {...detailaAddressValid} placeholder="상세주소" />
       </Styled.InputWrapper>
       <Styled.ErrorText>
         {getFirstErrorMessage(
@@ -250,14 +236,13 @@ const InputGroup = () => {
       </Styled.ErrorText>
 
       {/* 닉네임 입력 필드 */}
-      <Styled.InputWrapper>
-        <Styled.Label>닉네임</Styled.Label>
-        <Styled.InputSubText>
-          다른유저와 겹치지 않도록 입력해주세요.(2~15자)
-        </Styled.InputSubText>
-        <Styled.Input {...nicknameValid} type="text" placeholder="닉네임" />
-        <Styled.ErrorText>{errors?.nickname?.message}</Styled.ErrorText>
-      </Styled.InputWrapper>
+      <InputField
+        label="닉네임"
+        subText="다른유저와 겹치지 않도록 입력해주세요.(2~15자)"
+        placeholder="닉네임"
+        inputProps={nicknameValid}
+        error={errors?.nickname?.message}
+      />
 
       {/* 약관 동의 필드 */}
       <Styled.InputWrapper>
@@ -280,7 +265,7 @@ const InputGroup = () => {
         color={theme.colors.gray}
         label="회원가입하기"
         backgroundColor="#F7F8FA"
-        borderColor="#000000"
+        borderColor={theme.colors.black}
         onClick={handleSubmit(() => {
           console.log('회원가입 성공'); // 임시
         })}
