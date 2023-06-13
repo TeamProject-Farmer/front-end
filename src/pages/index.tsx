@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import Head from 'next/head';
 import Header from '@components/Home/Header';
 import Banner from '@components/Home/Banner';
+import Category from '@components/Home/Category';
 
 const IndexPage = () => (
   <div>
@@ -12,6 +13,7 @@ const IndexPage = () => (
     </Head>
     <Header/>
     <Banner/>
+    <Category/>
   </div>
 );
 

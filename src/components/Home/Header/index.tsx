@@ -13,7 +13,7 @@ const Header = () => {
         <Icon src='menu'/>
         </Styled.Menu>
         <Styled.Logo>
-        <Icon src='logo'width={100}/>
+        <Icon src='logo'width={180}/>
         </Styled.Logo>
         <Styled.Utils>
           <li><Icon src='myPage'/></li>

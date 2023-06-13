@@ -1,5 +1,5 @@
 import Styled from './styles'
-import Image from 'next/image'
+import Icon from '../common/Icon'
 
 const Banner = () => {
   return (
@@ -15,6 +15,7 @@ const Banner = () => {
         <Styled.Event>Event 01</Styled.Event>
         <Styled.Event>Event 02</Styled.Event>
      </Styled.Events>
+     <Styled.DownBtn><Icon src='arrowDown' width={60} height={60}/></Styled.DownBtn>
     </Styled.Wrapper>
   )
 }

@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 
 const Styled = {
   Wrapper: styled.div`
+    position: relative;
     width: 1920px;
     height: 876px;
     display: flex;
@@ -48,8 +49,12 @@ const Styled = {
           top: 50%;
           left: 120%;
       }
-    
   `,
+  DownBtn: styled.div`
+    position: absolute;
+    bottom: 60px;
+    left: 60px;
+  `
 }
 
 export default Styled
