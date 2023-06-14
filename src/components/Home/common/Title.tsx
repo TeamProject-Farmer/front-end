@@ -1,17 +1,27 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 
-const Title = ({title}) => {
-  return (
-    <Styled.Title>{title}</Styled.Title>
-  )
+interface ComponentProps {
+  title: string;
+  color?: string;
 }
 
-export default Title
+const Component: React.FC<ComponentProps> = ({ title, color }) => {
+  return <StyledComponent color={color}>{title}</StyledComponent>;
+};
 
-const Styled = {
-  Title: styled.p`
-    font-size: 30px;
-    font-weight: 700;
-    margin-top: 180px;
-  `,
-}
+const StyledComponent = styled.p<{ color?: string }>`
+  font-weight: 700;
+  font-size: 30px;
+  color: ${({ color }) => color || 'black'};
+`;
+
+const StyledTitle = styled(Component)<ComponentProps>`
+`;
+
+const Title = ({ title, color }:ComponentProps) => (
+  <StyledTitle title={title} color={color} />
+);
+
+export default Title;
+
+

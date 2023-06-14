@@ -5,12 +5,12 @@ import theme from '@styles/theme';
 const Styled = {
   Wrapper: styled.div`
     width: 1920px;
-    height: 1100px;
     display: flex;
     align-items: center;
     justify-content: center;
   `,
   ReviewContainer: styled.div`
+    background-color: pink;
     width: 1200px;
     height: 830px;
     border: 5px solid ${theme.colors.green1};
@@ -19,6 +19,7 @@ const Styled = {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     overflow: hidden;
   `,
   Title: styled.p`

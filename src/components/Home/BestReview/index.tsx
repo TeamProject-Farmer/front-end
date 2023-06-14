@@ -1,4 +1,5 @@
 import Styled from './styles'
+import Title from '../common/Title';
 import Review from './Review';
 
 const reviews = [];
@@ -20,7 +21,7 @@ const BestReview = () => {
   return (
     <Styled.Wrapper>
       <Styled.ReviewContainer>
-        <Styled.Title>베스트 리뷰</Styled.Title>
+        <Title title='베스트 리뷰' color='#285430'/>
         <Styled.Reviews>
           {
             reviews.map((review) => (

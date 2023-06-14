@@ -10,7 +10,7 @@ const Styled = {
     align-items: center;
   `,
   Plants: styled.ul`
-    margin-top: 85px;
+    margin-top: 41px;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -1,5 +1,3 @@
-import React from 'react';
-import styled from '@emotion/styled';
 import Head from 'next/head';
 import Header from '@components/Home/Header';
 import Banner from '@components/Home/Banner';
@@ -7,6 +5,7 @@ import Category from '@components/Home/Category';
 import ShopPrev from '@components/Home/ShopPrev';
 import BestPlant from '@components/Home/BestPlant';
 import BestReview from '@components/Home/BestReview';
+import News from '@components/Home/News';
 
 const IndexPage = () => (
   <div>
@@ -20,6 +19,7 @@ const IndexPage = () => (
     <ShopPrev/>
     <BestPlant/>
     <BestReview/>
+    <News/>
   </div>
 );
 
