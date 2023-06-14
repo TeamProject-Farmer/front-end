@@ -8,7 +8,7 @@ const Styled = {
   Event: styled.div`
   position:relative;
     height: 50px;
-    background-color: ${theme.colors.green};
+    background-color: ${theme.colors.green1};
     color: #FFFFFF;
     font-size: 18px;
     display: flex;
