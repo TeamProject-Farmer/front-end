@@ -6,6 +6,7 @@ import ShopPrev from '@components/Home/ShopPrev';
 import BestPlant from '@components/Home/BestPlant';
 import BestReview from '@components/Home/BestReview';
 import News from '@components/Home/News';
+import Footer from '@components/Home/Footer';
 
 const IndexPage = () => (
   <div>
@@ -20,6 +21,7 @@ const IndexPage = () => (
     <BestPlant/>
     <BestReview/>
     <News/>
+    <Footer/>
   </div>
 );
 

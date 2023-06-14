@@ -18,6 +18,7 @@ const Styled = {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-bottom: 60px;
   `,
   BuyBtn: styled.p`
     margin-top: 60px;

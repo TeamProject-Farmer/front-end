@@ -10,13 +10,11 @@ const Styled = {
     justify-content: center;
   `,
   Plants: styled.div`
-    margin-top: 50px;
+    margin: 50px 0;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 37px;
   `
-  
-
 }
 
 export default Styled;
