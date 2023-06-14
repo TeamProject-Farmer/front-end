@@ -10,7 +10,6 @@ const Styled = {
     justify-content: center;
   `,
   ReviewContainer: styled.div`
-    background-color: pink;
     width: 1200px;
     height: 830px;
     border: 5px solid ${theme.colors.green1};

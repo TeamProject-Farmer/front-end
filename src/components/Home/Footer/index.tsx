@@ -1,10 +1,10 @@
-import React from 'react'
+import Styled from './styles';
 
 const Footer = () => {
   return (
-    <div>
+    <Styled.Wrapper>
       
-    </div>
+    </Styled.Wrapper>
   )
 }
 
