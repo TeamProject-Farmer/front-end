@@ -129,6 +129,9 @@ const Styled = {
       font-weight: 700;
       cursor: pointer;
       margin-left: 5px;
+      :hover {
+        text-decoration: underline;
+      }
     }
   `,
   Gap: styled.div`
