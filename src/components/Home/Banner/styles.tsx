@@ -1,30 +1,52 @@
 import styled from '@emotion/styled';
+import theme from '@styles/theme';
 
 const Styled = {
   Wrapper: styled.div`
     position: relative;
     width: 1920px;
     height: 876px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     background-image: url('/assets/images/home/banner.png');
   `,
-  Content: styled.div`
-    font-size: 40px;
-    font-weight: 900;
+  ContentBox: styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    margin-bottom: 60px;
+    /* align-items: center; */
+    border: 1px solid pink;
+    width: 670px;
+    height: 610px;
+    padding: 120px 100px;
+    position: absolute;
+    top: 118px;
+    left: 388px;
   `,
-  BuyBtn: styled.p`
-    margin-top: 60px;
+  Slogan: styled.p`
+    font-size: 90px;
+    color: #fff;
+  `,
+  Description: styled.p`
+    font-size: 30px;
+    color: ${theme.colors.green1}
+  `,
+  ShopBtn: styled.p`
+    margin-top: 30px;
+    flex-grow: 0;
+    border: 1px solid ${theme.colors.green1};
+    border-radius: 10px;
+    width: 169px;
+    height: 53px;
+    padding: 11px 8px;
+    font-size: 20px;
+    color: ${theme.colors.green1};
+    display: flex;
+    align-items: center;
+    justify-content: center;
   `,
   Events: styled.ul`
-    margin-top: 208px;
+    position: absolute;
+    left: 705px;
+    bottom: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,11 +65,6 @@ const Styled = {
       top: 50%;
       left: 120%;
     }
-  `,
-  DownBtn: styled.div`
-    position: absolute;
-    bottom: 60px;
-    left: 60px;
   `,
 };
 

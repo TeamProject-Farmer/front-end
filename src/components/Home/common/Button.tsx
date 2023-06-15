@@ -1,16 +1,20 @@
-import styled from '@emotion/styled';
+import styled from '@emotion/styled'
 
-interface ComponentProps {
+interface IBtnProps {
   content: string;
   color?: string;
 }
 
-const Component: React.FC<ComponentProps> = ({ content, color }) => {
-  return <StyledComponent color={color}>{content}</StyledComponent>;
+const Button = ({content, color}: IBtnProps) => {
+  return (
+    <StyledButton color={color}>{content}</StyledButton>
+  )
 };
 
-const StyledComponent = styled.p<{ color?: string }>`
-  padding: ${({ color }) => (color ? '8px 14px' : '15px 19px')};
+export default Button;
+
+const StyledButton = styled.p<{color?: string}>`
+  padding: ${({ color }) => color ? '8px 14px' : '15px 19px'};
   margin: ${({ color }) => color && '7px 0'};
   background-color: ${({ color }) => color || '#707070'};
   color: ${({ color }) => color && '#fff'};
@@ -19,14 +23,5 @@ const StyledComponent = styled.p<{ color?: string }>`
   justify-content: center;
   align-items: center;
   box-sizing: content-box;
-  width: ${({ color }) => color && '80px'};
-  flex-grow: 0;
+  width: ${({ color }) => color && '80px'}; 
 `;
-
-const StyledButton = styled(Component)<ComponentProps>``;
-
-const Button = ({ content, color }: ComponentProps) => {
-  return <StyledButton content={content} color={color} />;
-};
-
-export default Button;
