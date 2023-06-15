@@ -173,7 +173,7 @@ const Styled = {
   `,
 
   // sns 아이콘
-  IconWarrper: styled.div`
+  IconWrapper: styled.div`
     display: flex;
     flex-direction: row;
     justify-content: center;
