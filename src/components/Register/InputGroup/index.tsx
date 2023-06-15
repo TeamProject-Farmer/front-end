@@ -7,7 +7,7 @@ import {
   FieldName,
   IAuthForm,
   Validate,
-} from 'src/types/register/registerPage';
+} from 'src/types/register/types';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { postcodeScriptUrl } from 'react-daum-postcode/lib/loadPostcode';
 import FormButton from '../FormButton';
