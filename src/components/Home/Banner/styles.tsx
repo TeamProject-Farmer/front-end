@@ -12,7 +12,6 @@ const Styled = {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* align-items: center; */
     border: 1px solid pink;
     width: 670px;
     height: 610px;
@@ -27,7 +26,7 @@ const Styled = {
   `,
   Description: styled.p`
     font-size: 30px;
-    color: ${theme.colors.green1}
+    color: ${theme.colors.green1};
   `,
   ShopBtn: styled.p`
     margin-top: 30px;
