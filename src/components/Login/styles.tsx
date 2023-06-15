@@ -3,7 +3,7 @@ import theme from '@styles/theme';
 import Logo from '@assets/images/logo.svg';
 import { StyleProps } from 'src/types/login/types';
 
-export const Styled = {
+const Styled = {
   Container: styled.div`
     justify-content: center;
     align-items: center;
@@ -74,3 +74,5 @@ export const Styled = {
     color: #e53c3c;
   `,
 };
+
+export default Styled;
