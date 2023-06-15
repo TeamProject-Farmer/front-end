@@ -1,6 +1,6 @@
 import React from 'react';
 import SnsCircles from '@components/Register/SnsCircles';
-import { Styled } from '@components/Login/styles';
+import Styled from '@components/Login/styles';
 import InputGroup from '@components/Login/InputGroup';
 import Footer from '@components/Login/Footer';
 import TextField from '@components/Login/TextField';

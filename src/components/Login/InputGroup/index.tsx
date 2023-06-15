@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Styled } from '../styles';
+import Styled from '../styles';
 import FormButton from '@components/Register/FormButton';
 import { ErrorText } from 'src/types/login/types';
 
