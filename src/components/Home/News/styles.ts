@@ -37,7 +37,7 @@ const Styled = {
   ImgBox: styled.div`
     width: 650px;
     background-image: url('/assets/images/home/newsImage.png');
-  `
-}
+  `,
+};
 
 export default Styled;

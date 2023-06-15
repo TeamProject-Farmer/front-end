@@ -14,7 +14,7 @@ const Styled = {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 37px;
-  `
-}
+  `,
+};
 
 export default Styled;

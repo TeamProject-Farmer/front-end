@@ -1,15 +1,15 @@
 import styled from '@emotion/styled';
-import theme from '@styles/theme'
+import theme from '@styles/theme';
 
 const Styled = {
   Wrapper: styled.div`
     width: 1920px;
   `,
   Event: styled.div`
-  position:relative;
+    position: relative;
     height: 50px;
     background-color: ${theme.colors.green1};
-    color: #FFFFFF;
+    color: #ffffff;
     font-size: 18px;
     display: flex;
     align-items: center;
@@ -32,7 +32,6 @@ const Styled = {
     display: flex;
     gap: 20px;
   `,
-
-}
+};
 
 export default Styled;

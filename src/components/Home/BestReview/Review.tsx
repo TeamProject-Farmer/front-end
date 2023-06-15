@@ -1,32 +1,29 @@
-import styled from '@emotion/styled'
-import theme from '@styles/theme'
-import Icon from '../Common/Icon'
+import styled from '@emotion/styled';
+import theme from '@styles/theme';
+import Icon from '../Common/Icon';
 
-const Review = ({userName, star, like, title, content}) => {
-
-  function CountStar() {
+const Review = ({ userName, star, like, title, content }) => {
+  function countStar() {
     const stars = [];
-      for (let i = 0; i < 5; i++) {
-        const iconSrc = i < star ? 'star' : 'emptyStar';
-        stars.push(<Icon key={i} src={iconSrc} />);
-      }
-      return stars;
+    for (let i = 0; i < 5; i++) {
+      const iconSrc = i < star ? 'star' : 'emptyStar';
+      stars.push(<Icon key={i} src={iconSrc} />);
+    }
+    return stars;
   }
 
   return (
     <Styled.Wrapper>
       <Styled.UserBox>
         <Styled.UserName>{userName}</Styled.UserName>
-        <Icon src='moreBtn' width={25} height={25}/>
+        <Icon src="moreBtn" width={25} height={25} />
       </Styled.UserBox>
-      <Styled.ImgBox/>
+      <Styled.ImgBox />
       <Styled.ContentBox>
         <Styled.StarBox>
-          <Styled.Star>
-            {CountStar()}
-          </Styled.Star>
+          <Styled.Star>{countStar()}</Styled.Star>
           <Styled.Like>
-            <Icon src='thumbsUp'/>
+            <Icon src="thumbsUp" />
             <Styled.LikeQty>{like}</Styled.LikeQty>
           </Styled.Like>
         </Styled.StarBox>
@@ -34,10 +31,10 @@ const Review = ({userName, star, like, title, content}) => {
         <Styled.Content>{content}</Styled.Content>
       </Styled.ContentBox>
     </Styled.Wrapper>
-  )
-}
+  );
+};
 
-export default Review
+export default Review;
 
 const Styled = {
   Wrapper: styled.div`
@@ -52,22 +49,18 @@ const Styled = {
   `,
   UserBox: styled.div`
     margin-bottom: 17px;
-    display:flex;
+    display: flex;
     justify-content: space-between;
-    
   `,
   UserName: styled.div`
     font-size: 16px;
     font-weight: 500;
   `,
-  MoreBtn: styled.p`
-    
-  `,
+  MoreBtn: styled.p``,
   ImgBox: styled.div`
     width: 266px;
     height: 266px;
     background-color: ${theme.colors.lightGray};
-    
   `,
   ContentBox: styled.div`
     margin-top: 12px;
@@ -75,7 +68,6 @@ const Styled = {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    
   `,
   StarBox: styled.div`
     display: flex;
@@ -83,7 +75,6 @@ const Styled = {
   `,
   Star: styled.div`
     display: flex;
-    
   `,
   Like: styled.div`
     position: relative;
@@ -109,4 +100,4 @@ const Styled = {
     font-weight: 500;
     font-size: 12px;
   `,
-}
+};

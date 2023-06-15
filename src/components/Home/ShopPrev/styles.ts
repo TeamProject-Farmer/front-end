@@ -21,7 +21,7 @@ const Styled = {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    `,
+  `,
   Title: styled.p`
     margin-bottom: 37px;
     font-size: 30px;
@@ -44,7 +44,7 @@ const Styled = {
     display: flex;
     align-items: center;
     justify-content: center;
-  `
-}
+  `,
+};
 
 export default Styled;

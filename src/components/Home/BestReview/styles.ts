@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 
-
 const Styled = {
   Wrapper: styled.div`
     width: 1920px;
@@ -33,7 +32,6 @@ const Styled = {
     align-items: center;
     gap: 32px;
   `,
-
-}
+};
 
 export default Styled;

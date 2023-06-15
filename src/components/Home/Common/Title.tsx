@@ -15,13 +15,10 @@ const StyledComponent = styled.p<{ color?: string }>`
   color: ${({ color }) => color || 'black'};
 `;
 
-const StyledTitle = styled(Component)<ComponentProps>`
-`;
+const StyledTitle = styled(Component)<ComponentProps>``;
 
-const Title = ({ title, color }:ComponentProps) => (
+const Title = ({ title, color }: ComponentProps) => (
   <StyledTitle title={title} color={color} />
 );
 
 export default Title;
-
-

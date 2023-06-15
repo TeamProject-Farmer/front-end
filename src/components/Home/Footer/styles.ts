@@ -38,7 +38,7 @@ const Styled = {
     font-weight: 600;
     font-size: 20px;
     color: ${theme.colors.green1};
-  `
-}
+  `,
+};
 
 export default Styled;

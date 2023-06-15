@@ -34,21 +34,21 @@ const Styled = {
     position: relative;
     font-size: 20px;
     :not(:last-child)::before {
-          content: '';
-          position:absolute;
-          display: block;
-          background-color: #000;
-          width: 125px;
-          height: 2px;
-          top: 50%;
-          left: 120%;
-      }
+      content: '';
+      position: absolute;
+      display: block;
+      background-color: #000;
+      width: 125px;
+      height: 2px;
+      top: 50%;
+      left: 120%;
+    }
   `,
   DownBtn: styled.div`
     position: absolute;
     bottom: 60px;
     left: 60px;
-  `
-}
+  `,
+};
 
-export default Styled
+export default Styled;
