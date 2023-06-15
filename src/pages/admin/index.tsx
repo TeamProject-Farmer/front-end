@@ -6,8 +6,6 @@ import HomeLayout from '@components/Admin/AdminBody/Home';
 
 const admin = () => {
   const router = useRouter();
-  const category = router.query.menu;
-
   return (
     <Wrapper>
       <SideBar router={router.asPath} />

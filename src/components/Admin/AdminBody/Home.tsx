@@ -1,9 +1,9 @@
 import Styled from './styles';
 import AdminLayout from './Admin';
-import Todo from '../Home/Todo';
-import SmallInnerBox from '../Home/SmallInnerBox';
-import Event from '../Home/Event';
-import Banner from '../Home/Banner';
+import Todo from './Home/Todo';
+import SmallInnerBox from './Home/SmallInnerBox';
+import Event from './Home/Event';
+import Banner from './Home/Banner';
 const HomeLayout = () => {
   return (
     <AdminLayout>

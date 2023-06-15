@@ -1,5 +1,4 @@
 import Image from 'next/image';
-
 import Styled from './styles';
 
 interface PropsList {
@@ -10,7 +9,7 @@ interface PropsList {
 
 const SiderBarMenu = (props: PropsList) => {
   const { imageName, menuName, router } = props;
-  const imageUrl = `/assets/images/admin/${imageName}.png`;
+  const imageUrl = `/assets/images/admin/${imageName}.png`; //추후 업데이트되면 svg로 변경할 예정
 
   return router == `/admin/${imageName}` ? (
     <>

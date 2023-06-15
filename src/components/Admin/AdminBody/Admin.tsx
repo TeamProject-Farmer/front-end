@@ -1,5 +1,5 @@
 import Styled from './styles';
-import CurrentTime from '../common/CurrentTime';
+import CurrentTime from '../Common/CurrentTime';
 
 const AdminLayout = props => {
   return (
