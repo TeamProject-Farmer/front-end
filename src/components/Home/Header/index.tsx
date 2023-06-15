@@ -1,6 +1,6 @@
 import React from 'react'
 import Styled from './styles'
-import Icon from '@components/Home/common/Icon'
+import Icon from '@components/Home/Common/Icon'
 
 const Header = () => {
   return (

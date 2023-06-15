@@ -1,6 +1,6 @@
 import Styled from './styles'
-import Button from '../common/Button'
-import Icon from '../common/Icon'
+import Button from '../Common/Button'
+import Icon from '../Common/Icon'
 
 const Banner = () => {
   return (

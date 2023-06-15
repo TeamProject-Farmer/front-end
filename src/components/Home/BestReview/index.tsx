@@ -1,5 +1,5 @@
 import Styled from './styles'
-import Title from '../common/Title';
+import Title from '../Common/Title';
 import Review from './Review';
 
 const reviews = [];

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import Icon from '../common/Icon'
+import Icon from '../Common/Icon'
 import theme from '@styles/theme'
 
 const Plant = ({title, discount, price, star, review, specialPrice, freeShipping}) => {

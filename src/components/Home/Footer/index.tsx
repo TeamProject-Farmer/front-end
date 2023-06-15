@@ -1,6 +1,6 @@
 import Styled from './styles';
 import Image from 'next/image';
-import Button from '../common/Button';
+import Button from '../Common/Button';
 
 const Footer = () => {
   return (

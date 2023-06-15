@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import theme from '@styles/theme'
-import Icon from '../common/Icon'
+import Icon from '../Common/Icon'
 
 const Review = ({userName, star, like, title, content}) => {
 
