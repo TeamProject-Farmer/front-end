@@ -1,12 +1,12 @@
 import Image from 'next/image';
 
-interface IIconProps {
+interface IconProps {
   src: string;
   width?: number;
   height?: number;
 }
 
-const Icon = ({ src, width, height }: IIconProps) => {
+const Icon = ({ src, width, height }: IconProps) => {
   return (
     <Image
       src={`assets/images/home/${src}.svg`}

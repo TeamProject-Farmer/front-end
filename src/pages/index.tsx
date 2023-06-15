@@ -9,7 +9,7 @@ import News from '@components/Home/News';
 import Footer from '@components/Home/Footer';
 
 const IndexPage = () => (
-  <div>
+  <>
     <Header />
     <Banner />
     <Category />
@@ -18,7 +18,7 @@ const IndexPage = () => (
     <BestReview />
     <News />
     <Footer />
-  </div>
+  </>
 );
 
 export default IndexPage;
