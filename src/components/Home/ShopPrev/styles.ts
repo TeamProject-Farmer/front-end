@@ -37,13 +37,19 @@ const Styled = {
     width: 390px;
     height: 120px;
     border-radius: 15px;
-    background-color: ${theme.colors.lightGray};
     text-transform: uppercase;
     font-size: 20px;
     font-weight: 700;
+    color: ${theme.colors.green1};
     display: flex;
+    gap: 7px;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    box-shadow: 0px 1px 4px 2px rgba(0, 0, 0, 0.25);
+    &:hover {
+      background-color: ${theme.colors.green3};
+    }
   `,
 };
 

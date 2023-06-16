@@ -12,7 +12,6 @@ const Styled = {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    border: 1px solid pink;
     width: 670px;
     height: 610px;
     padding: 120px 100px;
@@ -41,6 +40,12 @@ const Styled = {
     display: flex;
     align-items: center;
     justify-content: center;
+  `,
+  Event1: styled.div`
+    
+  `,
+  Event2: styled.div`
+    
   `,
   Events: styled.ul`
     position: absolute;

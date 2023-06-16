@@ -13,6 +13,8 @@ const Banner = () => {
         </Styled.Description>
         <Styled.ShopBtn>&gt; Shop Now</Styled.ShopBtn>
       </Styled.ContentBox>
+      <Styled.Event1/>
+      <Styled.Event2/>
       <Styled.Events>
           <Styled.Event>farmer</Styled.Event>
           <Styled.Event>Event 01</Styled.Event>

@@ -1,8 +1,10 @@
 import React from 'react';
 import Styled from './styles';
 import Icon from '@components/Home/Common/Icon';
+import { useState } from 'react';
 
 const Header = () => {
+  const [close, setClose] = useState(false)
   return (
     <Styled.Wrapper>
       <Styled.Event>
