@@ -42,10 +42,14 @@ const Styled = {
     justify-content: center;
   `,
   Event1: styled.div`
-    
+    width: 1920px;
+    height: 876px;
+    background-color: pink;
   `,
   Event2: styled.div`
-    
+    width: 1920px;
+    height: 876px;
+    background-color: skyblue;
   `,
   Events: styled.ul`
     position: absolute;

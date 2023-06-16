@@ -1,26 +1,31 @@
 import Styled from './styles';
 import Button from '../Common/Button';
 import Icon from '../Common/Icon';
+import Slider from './Slider';
 
 const Banner = () => {
   return (
-    <Styled.Wrapper>
-      <Styled.ContentBox>
-        <Styled.Slogan>Let's be a</Styled.Slogan>
-        <Styled.Slogan>Farmer!</Styled.Slogan>        
-        <Styled.Description>
-          사무공간, 생활공간을 그린 친화적으로
-        </Styled.Description>
-        <Styled.ShopBtn>&gt; Shop Now</Styled.ShopBtn>
-      </Styled.ContentBox>
-      <Styled.Event1/>
-      <Styled.Event2/>
-      <Styled.Events>
-          <Styled.Event>farmer</Styled.Event>
-          <Styled.Event>Event 01</Styled.Event>
-          <Styled.Event>Event 02</Styled.Event>
-        </Styled.Events>
-    </Styled.Wrapper>
+  //   <Styled.Wrapper>
+  //     <Styled.ContentBox>
+  //       <Styled.Slogan>Let's be a</Styled.Slogan>
+  //       <Styled.Slogan>Farmer!</Styled.Slogan>        
+  //       <Styled.Description>
+  //         사무공간, 생활공간을 그린 친화적으로
+  //       </Styled.Description>
+  //       <Styled.ShopBtn>&gt; Shop Now</Styled.ShopBtn>
+  //     </Styled.ContentBox>
+  //     <Styled.Event1/>
+  //     <Styled.Event2/>
+  //     <Styled.Events>
+  //         <Styled.Event>farmer</Styled.Event>
+  //         <Styled.Event>Event 01</Styled.Event>
+  //         <Styled.Event>Event 02</Styled.Event>
+  //       </Styled.Events>
+  //   </Styled.Wrapper>
+  // 
+  <>
+  <Slider/>
+  </>
   );
 };
 
