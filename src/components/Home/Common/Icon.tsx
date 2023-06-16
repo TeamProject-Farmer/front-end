@@ -4,9 +4,10 @@ interface IconProps {
   src: string;
   width?: number;
   height?: number;
+  onClick?: () => void;
 }
 
-const Icon = ({ src, width, height }: IconProps) => {
+const Icon = ({ src, width, height, onClick }: IconProps) => {
   return (
     <Image
       src={`assets/images/home/${src}.svg`}
@@ -14,6 +15,7 @@ const Icon = ({ src, width, height }: IconProps) => {
       width={typeof width === 'undefined' ? 20 : `${width}`}
       height={typeof height === 'undefined' ? 20 : `${height}`}
       style={{ objectFit: 'contain' }}
+      onClick={onClick}
     />
   );
 };
