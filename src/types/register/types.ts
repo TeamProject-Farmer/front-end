@@ -59,6 +59,7 @@ export interface ButtonProps {
   backgroundColor?: string;
   borderColor?: string;
   onClick?: () => void;
+  disabled?: boolean;
 }
 
 // SnsCircle
