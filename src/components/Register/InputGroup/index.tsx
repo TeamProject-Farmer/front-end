@@ -18,6 +18,8 @@ import {
   validatePassword,
   validatePhoneNumber,
 } from 'src/utils/register/formUtil';
+import { emailCheck, emailVerification } from 'src/apis/register/email';
+import { getJoin } from 'src/apis/register/join';
 
 const InputGroup = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -30,12 +32,15 @@ const InputGroup = () => {
     handleSubmit,
     getValues,
     clearErrors,
-    setError,
     setValue,
     trigger,
+    watch,
   } = useForm<IAuthForm>({
     mode: 'onChange',
   });
+
+  // email 변수로 할당해주기 (example + @ example.com)
+  const email = `${getValues().email}@${getValues().selectedEmail}`;
 
   // form validation hook
   const useFormValidation = (fieldName: FieldName, value?: Validate) => {
@@ -51,12 +56,13 @@ const InputGroup = () => {
   const matchesPassword = (value: string) =>
     value === getValues().password || '비밀번호가 일치하지 않습니다.';
 
+  // validation
   const emailValid = useFormValidation('email');
   const selectedEmail = useFormValidation('selectedEmail');
   const nameValid = useFormValidation('name');
   const postCodeValid = useFormValidation('postCode');
   const basicAddressValid = useFormValidation('basicAddress');
-  const detailaAddressValid = useFormValidation('detailAddress');
+  const detailAddressValid = useFormValidation('detailAddress');
   const nicknameValid = useFormValidation('nickname');
   const checkBoxValid = useFormValidation('checked');
   const passwordValid = useFormValidation('password', validatePassword);
@@ -118,6 +124,34 @@ const InputGroup = () => {
     });
   };
 
+  // 이메일 인증 발송
+  const handleSendEmail = async () => {
+    await emailVerification(email);
+  };
+
+  // 이메일 인증 확인 & 회원가입
+  const handleEmailCheck = async () => {
+    try {
+      const response = await emailCheck(email);
+      // 인증 확인 성공시 회원가입 API
+      if (response.data === 'DONE') {
+        await getJoin(
+          email,
+          getValues().password,
+          getValues().passwordConfirm,
+          getValues().nickname,
+          getValues().phone,
+          getValues().basicAddress,
+          getValues().nickname,
+        );
+      }
+    } catch (error) {
+      // 실패시 이메일 인증 확인 alert
+      console.error(error);
+      window.alert('이메일 인증을 확인해주세요.');
+    }
+  };
+
   return (
     <Styled.Section>
       {/* 이메일 입력 필드 */}
@@ -156,6 +190,8 @@ const InputGroup = () => {
         label="이메일 인증하기"
         backgroundColor="#F7F8FA"
         borderColor="#000000"
+        disabled={!watch('email') || !watch('selectedEmail')} // email 미입력시 비활성화
+        onClick={handleSendEmail}
       />
 
       {/* 비밀번호 입력 필드 */}
@@ -208,7 +244,7 @@ const InputGroup = () => {
         </Styled.AddressGridInputWrapper>
         <Styled.Input {...basicAddressValid} placeholder="기본주소" />
         <Styled.Gap />
-        <Styled.Input {...detailaAddressValid} placeholder="상세주소" />
+        <Styled.Input {...detailAddressValid} placeholder="상세주소" />
       </Styled.InputWrapper>
       <Styled.ErrorText>
         {getFirstErrorMessage(
@@ -248,7 +284,7 @@ const InputGroup = () => {
         backgroundColor="#F7F8FA"
         borderColor={theme.colors.black}
         onClick={handleSubmit(() => {
-          console.log('회원가입 성공'); // 임시
+          handleEmailCheck();
         })}
       />
     </Styled.Section>
