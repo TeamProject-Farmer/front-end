@@ -2,19 +2,12 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import Option from '@assets/images/register/option.svg';
-import { ButtonProps, CircleProps } from 'src/types/register/types';
+import { ButtonProps } from 'src/types/register/types';
 
 const gridInputWrapperStyles = css`
   display: grid;
   grid-gap: 10px;
   align-items: center;
-`;
-
-const iconStyles = css`
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  cursor: pointer;
 `;
 
 const Styled = {
@@ -178,16 +171,10 @@ const Styled = {
   // sns 아이콘
   IconWrapper: styled.div`
     display: flex;
-    flex-direction: row;
     justify-content: center;
     margin-top: 15px;
     margin-bottom: 20px;
-  `,
-  Icon: styled.div<CircleProps>`
-    ${iconStyles}
-    background-color: ${props => props.color};
-    ${props => props.marginRight && `margin-right: ${props.marginRight}px`};
-    ${props => props.marginLeft && `margin-left: ${props.marginLeft}px`};
+    gap: 20px;
   `,
 
   // formButton
