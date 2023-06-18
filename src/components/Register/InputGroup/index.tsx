@@ -142,7 +142,6 @@ const InputGroup = () => {
           getValues().nickname,
           getValues().phone,
           getValues().basicAddress,
-          getValues().nickname,
         );
       }
     } catch (error) {

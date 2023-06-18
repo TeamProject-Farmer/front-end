@@ -4,7 +4,6 @@ import request from '../base';
 export const getJoin = async (
   email,
   password,
-  pwcheck,
   username,
   ph,
   address,
@@ -14,7 +13,6 @@ export const getJoin = async (
     const formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
-    formData.append('pwcheck', pwcheck);
     formData.append('username', username);
     formData.append('ph', ph);
     formData.append('address', address);
