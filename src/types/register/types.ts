@@ -61,10 +61,3 @@ export interface ButtonProps {
   onClick?: () => void;
   disabled?: boolean;
 }
-
-// SnsCircle
-export interface CircleProps {
-  color?: string;
-  marginRight?: number;
-  marginLeft?: number;
-}
