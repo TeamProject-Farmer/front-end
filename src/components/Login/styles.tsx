@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import Logo from '@assets/images/logo.svg';
+import Logo from '@assets/images/common/logo.svg';
 import { StyleProps } from 'src/types/login/types';
 
 const Styled = {
