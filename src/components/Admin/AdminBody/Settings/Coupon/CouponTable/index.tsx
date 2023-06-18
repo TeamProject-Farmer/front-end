@@ -1,7 +1,7 @@
 // import Styled from './styles';
 
 const CouponTable = () => {
-  let data = ['asdf', 'asdf', 'asdf', 'asdf', 'asdf', 'asdf', 'asdf'];
+  
   return (
     <>
       <table>

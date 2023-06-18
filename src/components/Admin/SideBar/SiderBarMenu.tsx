@@ -17,7 +17,7 @@ const SiderBarMenu = (props: PropsList) => {
         <Styled.MenuImageBox>
           <Image
             src={imageUrl}
-            alt="HomeIcon"
+            alt="Icon"
             width={40}
             height={40}
             style={{ objectFit: 'contain' }}

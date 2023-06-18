@@ -19,7 +19,7 @@ const Styled = {
     left: 27px;
     top: 17px;
   `,
-  LayoutTime: styled.div`
+  TimeWrapper: styled.div`
     font-style: normal;
     font-weight: 700;
     font-size: 23px;
