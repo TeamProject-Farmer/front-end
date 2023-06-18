@@ -1,14 +1,12 @@
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import Option from '@assets/images/option.svg';
 
 const Styled = {
   LayoutWrapper: styled.div`
     margin-left: 411px;
     padding-top: 23px !important;
     padding: 48px;
-    width: 1510px;
+    width: 100%;
     min-height:100vh;
     background-color: #eeeeee;
     overflow: hidden;

@@ -1,10 +1,9 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import Option from '@assets/images/option.svg';
 
 const Styled = {
-    InnerBoxWrapper: styled.div`
+  InnerBoxWrapper: styled.div`
     width: 33.3%;
     height: fit-content;
     display: flex;

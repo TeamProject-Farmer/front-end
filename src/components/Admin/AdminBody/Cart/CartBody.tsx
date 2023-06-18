@@ -1,15 +1,45 @@
-import Styled from './styles';
-import CartTabWrapper from './CartTabWrapper';
-import FooterButtonWrapper from '../../Common/FooterButtonWrapper';
-import SmallButton from '../../Common/FooterButtonWrapper/SmallButton';
+import { useState } from 'react';
+import InnerBody from '@components/Admin/Common/InnerBody';
+import SingleTab from '../../Common/InnerBody/Tab/SingleTab';
 import StatusBox from '@components/Admin/Common/InnerBody/InnerBox/StatusBox';
+import SmallButton from '../../Common/FooterButtonWrapper/SmallButton';
+import WarningModal from '@components/Admin/Common/Modal/WarningModal';
+import ManageCart from '@components/Admin/Common/Modal/ManageCart';
 
 const CartBody = () => {
+  const [modalOpen, setModalOpen] = useState(0);
+
+  function openModal() {
+    setModalOpen(1);
+  }
+  function openModal2() {
+    setModalOpen(2);
+  }
+  function closeModal() {
+    setModalOpen(0);
+  }
+
   return (
     <>
-      <Styled.Wrapper>
-        <CartTabWrapper />
-        <Styled.BodyWrapper>
+      {modalOpen === 2 ? <ManageCart id={0} modalClose={closeModal} /> : null}
+      {modalOpen === 1 ? (
+        <WarningModal
+          title="주문정보"
+          content="주문정보는"
+          modalOpen={modalOpen}
+          modalClose={closeModal}
+        />
+      ) : null}
+      <InnerBody
+        tabProps={
+          <>
+            <SingleTab text="주문" />
+            <SingleTab text="반품" />
+            <SingleTab text="교환" />
+            <SingleTab text="환불" />
+          </>
+        }
+        innerBoxProps={
           <StatusBox
             title="스칸답서스"
             first="2023.04.05"
@@ -18,13 +48,15 @@ const CartBody = () => {
             last="배송중"
             checkBox={true}
           />
-        </Styled.BodyWrapper>
-        <FooterButtonWrapper>
-          <SmallButton text="추가" />
-          <SmallButton text="수정" />
-          <SmallButton text="삭제" />
-        </FooterButtonWrapper>
-      </Styled.Wrapper>
+        }
+        footerButtonProps={
+          <>
+            <SmallButton text="추가" modalOpen={openModal2} />
+            <SmallButton text="수정" />
+            <SmallButton text="삭제" modalOpen={openModal} />
+          </>
+        }
+      />
     </>
   );
 };

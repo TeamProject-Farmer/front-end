@@ -1,11 +1,24 @@
+import { useState } from 'react';
+import InnerBody from '@components/Admin/Common/InnerBody';
 import AccountInnerBox from './AccountInnerBox';
 import SingleTab from '../../Common/InnerBody/Tab/SingleTab';
 import SmallButton from '../../Common/FooterButtonWrapper/SmallButton';
-import InnerBody from '@components/Admin/Common/InnerBody';
+import ManageAccount from '@components/Admin/Common/Modal/ManageAccount';
 
 const AccountBody = () => {
+  const [modalOpen, setModalOpen] = useState(0);
+
+  function openModal() {
+    setModalOpen(2);
+  }
+  function closeModal() {
+    setModalOpen(0);
+  }
   return (
     <>
+      {modalOpen === 2 ? (
+        <ManageAccount id={1} modalClose={closeModal} />
+      ) : null}
       <InnerBody
         tabProps={
           <>
@@ -23,7 +36,7 @@ const AccountBody = () => {
         }
         footerButtonProps={
           <>
-            <SmallButton text="추가" />
+            <SmallButton text="추가" modalOpen={openModal} />
             <SmallButton text="수정" />
           </>
         }

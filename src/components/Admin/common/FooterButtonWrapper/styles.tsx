@@ -3,6 +3,7 @@ import theme from '@styles/theme';
 
 const Styled = {
   ButtonWrapper: styled.div`
+  width: 100%;
     display: flex;
     margin-top: 20px;
     justify-content: flex-end;

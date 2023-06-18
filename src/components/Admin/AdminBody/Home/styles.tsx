@@ -54,6 +54,7 @@ const Styled = {
     background: #fbfbfb;
     border: 1px solid #ababab;
     border-radius: 5px;
+    padding: 20px;
   `,
 
   // Event

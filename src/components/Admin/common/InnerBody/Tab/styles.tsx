@@ -30,6 +30,7 @@ const Styled = {
     justify-content: center;
     &:hover {
       border-bottom: 1px solid ${theme.colors.blue};
+      color: ${theme.colors.blue};
     }
   `,
 };
