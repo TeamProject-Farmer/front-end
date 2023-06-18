@@ -70,7 +70,7 @@ const ManageMember = (props: PropsList) => {
             <TotalMember />
           </Styled.Body>
           <Styled.Footer>
-            <Styled.Button>확인</Styled.Button>
+            <Styled.Button>저장</Styled.Button>
             <Styled.Button onClick={close}>취소</Styled.Button>
           </Styled.Footer>
         </Styled.ModalBox>
