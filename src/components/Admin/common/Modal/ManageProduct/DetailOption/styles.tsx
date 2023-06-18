@@ -9,10 +9,15 @@ const Styled = {
     border: 1px solid #ababab;
     border-radius: 5px;
     padding: 8px;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
   `,
   Option: styled.div`
     display: flex;
-    margin: 15px 0;
+    margin: 7px 0;
   `,
   InnerBox: styled.div`
     width: 820px;
