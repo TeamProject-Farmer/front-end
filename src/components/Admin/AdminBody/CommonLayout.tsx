@@ -1,5 +1,5 @@
 import Styled from './styles';
-import AdminLayout from './Admin';
+import AdminLayout from './AdminLayout';
 import SearchBar from '../Common/SearchBar';
 import AccountBody from './Account/AccountBody';
 import MemberBody from './Member/MemberBody';
@@ -25,7 +25,7 @@ const CommonLayout = (props: PropsList) => {
     headerTitle = '주문관리';
     pageComponent = <CartBody />;
   } else if (cate == 'product') {
-    headerTitle = '상품관리'; 
+    headerTitle = '상품관리';
     pageComponent = <ProductrBody />;
   } else if (cate == 'board') {
     headerTitle = '게시판관리';
@@ -34,7 +34,9 @@ const CommonLayout = (props: PropsList) => {
     //예외처리하기
   }
   return (
-    <AdminLayout> {/* Header 부분, Tab, 검색바, 기타 등등 세부 사이즈 어떻게 할건지 논의 필요*/}
+    <AdminLayout>
+      {' '}
+      {/* Header 부분, Tab, 검색바, 기타 등등 세부 사이즈 어떻게 할건지 논의 필요*/}
       <Styled.ContentHeader>
         <Styled.ContentHeaderTitle>{headerTitle}</Styled.ContentHeaderTitle>
         <SearchBar />

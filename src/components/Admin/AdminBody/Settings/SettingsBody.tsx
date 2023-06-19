@@ -1,5 +1,5 @@
 import Styled from '../styles';
-import AdminLayout from '../Admin';
+import AdminLayout from '../AdminLayout';
 import Coupon from './Coupon';
 import Point from './Point';
 

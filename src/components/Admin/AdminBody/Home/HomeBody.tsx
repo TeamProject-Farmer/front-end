@@ -1,5 +1,5 @@
 import Styled from '../styles';
-import AdminLayout from '../Admin';
+import AdminLayout from '../AdminLayout';
 import Todo from './Todo';
 import SmallInnerBox from './SmallInnerBox';
 import Event from './Event';
