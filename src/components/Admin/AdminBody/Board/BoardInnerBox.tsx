@@ -65,10 +65,6 @@ const BoardInnerBox = (props: PropsList) => {
       </Styled.StarWrapper>
     );
   }
-  //위 방식과 밑의 방식 중에서 고민 중
-  // else if (like == 4) {
-  //   stars = '⭐⭐⭐⭐☆';
-  // }
 
   return (
     <>
