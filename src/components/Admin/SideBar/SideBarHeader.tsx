@@ -1,6 +1,7 @@
 import Styled from "./styles"
 
 const SideBarHeader = () => {
+  //사이즈 수정 필요
   return (
     <Styled.HeaderWrapper>
       <Styled.HeaderUser>안녕하세요, Sarah님</Styled.HeaderUser>
