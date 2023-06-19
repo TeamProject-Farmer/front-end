@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import closeIcon from '@assets/images/Admin/closeIcon.svg';
+import closeIcon from '@assets/images/admin/closeIcon.svg';
 interface CssProps {
   top: number;
 }

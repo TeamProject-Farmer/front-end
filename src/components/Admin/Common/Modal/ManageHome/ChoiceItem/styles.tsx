@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import leftArrow from '@assets/images/Admin/leftArrow.svg';
+import leftArrow from '@assets/images/admin/leftArrow.svg';
 
 const Styled = {
   Wrapper: styled.div`

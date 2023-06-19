@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import closeIcon from '@assets/images/Admin/closeIcon.svg';
-import imageIcon from '@assets/images/Admin/imageIcon.svg';
-import addIcon from '@assets/images/Admin/circleAddButton.svg';
+import closeIcon from '@assets/images/admin/closeIcon.svg';
+import imageIcon from '@assets/images/admin/imageIcon.svg';
+import addIcon from '@assets/images/admin/circleAddButton.svg';
 
 interface CssProps {
   top: number;

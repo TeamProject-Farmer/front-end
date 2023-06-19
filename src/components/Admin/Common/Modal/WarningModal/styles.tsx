@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import WarningIcon from '@assets/images/Admin/warningIcon.svg';
-import closeIcon from '@assets/images/Admin/closeIcon.svg';
+import WarningIcon from '@assets/images/admin/warningIcon.svg';
+import closeIcon from '@assets/images/admin/closeIcon.svg';
 interface CssProps {
   top: number;
 }
