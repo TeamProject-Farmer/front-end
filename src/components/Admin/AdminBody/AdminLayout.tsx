@@ -1,10 +1,10 @@
 import Styled from './styles';
-// import CurrentTime from '../Common/CurrentTime';
+import CurrentTime from '../Common/CurrentTime';
 
 const AdminLayout = props => {
   return (
     <Styled.LayoutWrapper>
-      {/* <CurrentTime /> */}
+      <CurrentTime />
       <Styled.LayoutContentWrapper>
         {props.children}
       </Styled.LayoutContentWrapper>
