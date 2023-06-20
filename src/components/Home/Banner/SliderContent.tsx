@@ -32,7 +32,6 @@ const SliderContent = ({sliderContents, activeIndex}) => {
             <Styled.Content
               key={content.id}
               id={content.id}
-              // src={`/assets/images/home/bannerBg${content.id}.png`}
               variants={imgVariants}
               initial="initial"
               animate="start"

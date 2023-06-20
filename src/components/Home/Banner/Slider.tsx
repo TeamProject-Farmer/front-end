@@ -5,28 +5,12 @@ import Indicator from './Indicator'
 
 const sliderContents = [
   {id: 0, title: 'farmer'},
-  {id: 1, title: 'event01'},
-  {id: 2, title: 'event02'}
+  {id: 1, title: 'Event 01'},
+  {id: 2, title: 'Event 02'}
 ] 
 
 const Slider = () => {
-  const [activeIndex, setActiveIndex] = useState(1)
-
-  const prevSlide = () => {
-    if (activeIndex === 0) {
-      setActiveIndex(sliderContents.length - 1);
-    } else {
-      setActiveIndex(activeIndex - 1);
-    }
-  };
-
-  const nextSlide = () => {
-    if (activeIndex === sliderContents.length - 1) {
-      setActiveIndex(0);
-    } else {
-      setActiveIndex(activeIndex + 1);
-    }
-  };
+  const [activeIndex, setActiveIndex] = useState(0)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -44,7 +28,7 @@ const Slider = () => {
       <SliderContent sliderContents={sliderContents} activeIndex={activeIndex}/>
       <Indicator 
         activeIndex={activeIndex}
-        sliderContent={sliderContents}
+        sliderContents={sliderContents}
         onclick={(clickedIndex) => setActiveIndex(clickedIndex)}
       />
     </Styled.Wrapper>
