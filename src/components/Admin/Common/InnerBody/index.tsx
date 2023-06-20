@@ -1,6 +1,7 @@
 import Styled from './styles';
 import TabWrapper from './Tab/TabWrapper';
 import FooterButtonWrapper from '../FooterButtonWrapper';
+
 interface PropsList {
   tabProps: any;
   innerBoxProps: any;

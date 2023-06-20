@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import Blank from '@assets/images/Admin/BlankStar.svg';
-import Filled from '@assets/images/Admin/Star.svg';
+import Blank from '@assets/images/admin/BlankStar.svg';
+import Filled from '@assets/images/admin/Star.svg';
 
 const Styled = {
   InnerBoxWrapper: styled.div`

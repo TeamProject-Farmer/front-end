@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
 import Image from 'next/image';
+import { useEffect } from 'react';
 import Styled from './styles';
 import DetailOption from './DetailOption';
 import FooterButtonWrapper from '../../FooterButtonWrapper';

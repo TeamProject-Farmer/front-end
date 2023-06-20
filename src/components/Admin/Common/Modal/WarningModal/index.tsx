@@ -1,5 +1,5 @@
-import Styled from './styles';
 import { useEffect } from 'react';
+import Styled from './styles';
 
 interface PropsList {
   title: string;
