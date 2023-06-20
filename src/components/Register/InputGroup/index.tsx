@@ -6,6 +6,7 @@ import {
   DaumPostcodeData,
   FieldName,
   IAuthForm,
+  RegisterData,
   Validate,
 } from 'src/types/register/types';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
@@ -15,15 +16,21 @@ import Styled from '../styles';
 import InputField from '../InputField';
 import {
   requiredErrorMessage,
+  validateName,
+  validateNickname,
   validatePassword,
   validatePhoneNumber,
 } from 'src/utils/register/formUtil';
 import { emailCheck, emailVerification } from 'src/apis/register/email';
 import { getJoin } from 'src/apis/register/join';
+import { scrollToTop } from 'src/utils/register/scrollUp';
+import { useRouter } from 'next/router';
 
 const InputGroup = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+
+  const router = useRouter();
 
   // react-hook-form
   const {
@@ -35,6 +42,7 @@ const InputGroup = () => {
     setValue,
     trigger,
     watch,
+    setError,
   } = useForm<IAuthForm>({
     mode: 'onChange',
   });
@@ -59,11 +67,11 @@ const InputGroup = () => {
   // validation
   const emailValid = useFormValidation('email');
   const selectedEmail = useFormValidation('selectedEmail');
-  const nameValid = useFormValidation('name');
+  const nameValid = useFormValidation('name', validateName);
   const postCodeValid = useFormValidation('postCode');
   const basicAddressValid = useFormValidation('basicAddress');
   const detailAddressValid = useFormValidation('detailAddress');
-  const nicknameValid = useFormValidation('nickname');
+  const nicknameValid = useFormValidation('nickname', validateNickname);
   const checkBoxValid = useFormValidation('checked');
   const passwordValid = useFormValidation('password', validatePassword);
   const phoneValid = useFormValidation('phone', validatePhoneNumber);
@@ -126,28 +134,50 @@ const InputGroup = () => {
 
   // 이메일 인증 발송
   const handleSendEmail = async () => {
-    await emailVerification(email);
+    try {
+      const res = await emailVerification(email);
+      console.log(res.data);
+    } catch (error) {
+      setError('email', { message: '이미 인증된 메일입니다.' });
+    }
   };
 
-  // 이메일 인증 확인 & 회원가입
+  // 회원가입
+  const handleJoin = async (joinData: RegisterData) => {
+    try {
+      await getJoin(joinData);
+      router.push('/login');
+    } catch (error) {
+      // 닉네임 중복 검사
+      const res = error.response.data;
+      res.message === '해당 닉네임이 존재합니다.'
+        ? setError('nickname', { message: '이미 존재하는 닉네임입니다.' })
+        : console.log(res);
+    }
+  };
+
+  // 이메일 인증 확인
   const handleEmailCheck = async () => {
     try {
       const response = await emailCheck(email);
       // 인증 확인 성공시 회원가입 API
       if (response.data === 'DONE') {
-        await getJoin(
+        const joinData = {
           email,
-          getValues().password,
-          getValues().passwordConfirm,
-          getValues().nickname,
-          getValues().phone,
-          getValues().basicAddress,
-        );
+          password: getValues().password,
+          nickname: getValues().nickname,
+          name: getValues().name,
+          phone: getValues().phone,
+          postCode: getValues().postCode,
+          address: getValues().basicAddress,
+          detailAddress: getValues().detailAddress,
+        };
+        await handleJoin(joinData);
       }
     } catch (error) {
-      // 실패시 이메일 인증 확인 alert
       console.error(error);
-      window.alert('이메일 인증을 확인해주세요.');
+      setError('email', { message: '이메일 인증을 확인해주세요.' });
+      scrollToTop();
     }
   };
 
@@ -254,7 +284,7 @@ const InputGroup = () => {
       {/* 닉네임 입력 필드 */}
       <InputField
         label="닉네임"
-        subText="다른유저와 겹치지 않도록 입력해주세요.(2~15자)"
+        subText="다른유저와 겹치지 않도록 입력해주세요.(2~10자)"
         placeholder="닉네임"
         inputProps={nicknameValid}
         error={errors?.nickname?.message}
