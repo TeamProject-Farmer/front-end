@@ -1,10 +1,11 @@
 import {AnimatePresence, motion} from 'framer-motion'
 import styled from '@emotion/styled';
 
-const SliderContent = ({sliderContent, activeIndex}) => {
+const SliderContent = ({sliderContents, activeIndex}) => {
+
   const imgVariants = {
     initial: {
-      opacity: 0,
+      opacity: 1,
       transition: {
         duration: 1,
       },
@@ -22,13 +23,16 @@ const SliderContent = ({sliderContent, activeIndex}) => {
       },
     },
   };
+
   return (
     <Styled.Wrapper>
       <AnimatePresence initial={false}>
-        {sliderContent.map((slide, slideIndex) =>
-          activeIndex === slideIndex ? (
-            <motion.img
-              key={`slide-${slideIndex}`}
+        {sliderContents.map((content) =>
+          activeIndex === content.id ? (
+            <Styled.Content
+              key={content.id}
+              id={content.id}
+              // src={`/assets/images/home/bannerBg${content.id}.png`}
               variants={imgVariants}
               initial="initial"
               animate="start"
@@ -45,9 +49,12 @@ export default SliderContent
 
 const Styled = {
   Wrapper: styled.div`
-    
   `,
   Content: styled(motion.div)`
-    
-  `
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url('/assets/images/home/bannerBg${props => props.id}.png');
+    background-size: 100% auto;
+    `,
 }
