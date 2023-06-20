@@ -1,31 +1,26 @@
+import { RegisterData } from 'src/types/register/types';
 import request from '../base';
 
 // 회원가입 API
-export const getJoin = async (
+export const getJoin = async ({
   email,
   password,
-  username,
-  ph,
-  address,
   nickname,
-) => {
-  try {
-    const formData = new FormData();
-    formData.append('email', email);
-    formData.append('password', password);
-    formData.append('username', username);
-    formData.append('ph', ph);
-    formData.append('address', address);
-    formData.append('nickname', nickname);
+  name,
+  phone,
+  postCode,
+  address,
+  detailAddress,
+}: RegisterData) => {
+  const formData = new FormData();
+  formData.append('email', email);
+  formData.append('password', password);
+  formData.append('nickname', nickname);
+  formData.append('username', name);
+  formData.append('ph', phone);
+  formData.append('zipcode', postCode);
+  formData.append('address', address);
+  formData.append('detailAddress', detailAddress);
 
-    const response = await request({
-      method: 'POST',
-      url: '/member/join/membership',
-      data: formData,
-    });
-
-    console.log(response.data);
-  } catch (error) {
-    console.log(error);
-  }
+  return request.post('/member/join/membership', formData);
 };
