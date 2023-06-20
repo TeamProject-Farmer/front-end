@@ -61,3 +61,15 @@ export interface ButtonProps {
   onClick?: () => void;
   disabled?: boolean;
 }
+
+// register Form type
+export interface RegisterData {
+  email: string;
+  password: string;
+  nickname: string;
+  name: string;
+  phone: string;
+  postCode: string;
+  address: string;
+  detailAddress: string;
+}
