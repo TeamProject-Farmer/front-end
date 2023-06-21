@@ -1,5 +1,11 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
+import { keyframes } from '@emotion/react';
+
+const carousel = keyframes`
+  0% { transform: translateX(0); }
+	100% { transform: translateX(calc(-277px * 6))}
+`
 
 const Styled = {
   Wrapper: styled.div`
@@ -26,6 +32,7 @@ const Styled = {
     display: flex;
     align-items: center;
     gap: 32px;
+    animation: ${carousel} 40s linear infinite;
   `,
 };
 
