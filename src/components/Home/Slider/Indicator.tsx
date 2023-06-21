@@ -2,7 +2,6 @@ import styled from '@emotion/styled'
 import theme from '@styles/theme'
 
 const Indicator = ({activeIndex, sliderContents, onclick}) => {
-  console.log(activeIndex)
   return (
     <Style.Indicator>
       {

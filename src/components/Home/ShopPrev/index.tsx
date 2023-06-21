@@ -28,7 +28,7 @@ const ShopPrev = () => {
             category.map((size) => (
               <Styled.List 
                 key={size.id} 
-                onMouseEnter={()=>setHoveredSize(size.id)} 
+                onMouseEnter={() => handleMouseEnter(size.id)} 
                 onMouseLeave={handleMouseLeave}
               >
                 {

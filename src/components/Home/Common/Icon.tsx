@@ -12,9 +12,9 @@ const Icon = ({ src, width, height, onClick }: IconProps) => {
     <Image
       src={`assets/images/home/${src}.svg`}
       alt={`${src}Icon`}
-      width={typeof width === 'undefined' ? 20 : `${width}`}
-      height={typeof height === 'undefined' ? 20 : `${height}`}
-      style={{ objectFit: 'contain' }}
+      width={width}
+      height={height}
+      style={{ width: width, height: height}}
       onClick={onClick}
     />
   );

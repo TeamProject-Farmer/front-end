@@ -7,7 +7,7 @@ const Review = ({ userName, star, like, title, content }) => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
       const iconSrc = i < star ? 'star' : 'emptyStar';
-      stars.push(<Icon key={i} src={iconSrc} />);
+      stars.push(<Icon key={i} src={iconSrc} width={30} height={28} />);
     }
     return stars;
   }
@@ -23,7 +23,7 @@ const Review = ({ userName, star, like, title, content }) => {
         <Styled.StarBox>
           <Styled.Star>{countStar()}</Styled.Star>
           <Styled.Like>
-            <Icon src="thumbsUp" />
+            <Icon src="thumbsUp" width={28} height={28}/>
             <Styled.LikeQty>{like}</Styled.LikeQty>
           </Styled.Like>
         </Styled.StarBox>
