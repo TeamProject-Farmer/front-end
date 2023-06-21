@@ -59,11 +59,17 @@ export interface ButtonProps {
   backgroundColor?: string;
   borderColor?: string;
   onClick?: () => void;
+  disabled?: boolean;
 }
 
-// SnsCircle
-export interface CircleProps {
-  color?: string;
-  marginRight?: number;
-  marginLeft?: number;
+// register Form type
+export interface RegisterData {
+  email: string;
+  password: string;
+  nickname: string;
+  name: string;
+  phone: string;
+  postCode: string;
+  address: string;
+  detailAddress: string;
 }

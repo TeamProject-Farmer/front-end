@@ -1,12 +1,16 @@
 import Styled from '../styles';
+import Google from '@assets/images/login/google.svg';
+import Kakao from '@assets/images/login/kakao.svg';
+import Naver from '@assets/images/login/naver.svg';
 
+// 백엔드 소셜로그인 기능 구현되면 API 적용 예정
 const SnsCircles = () => {
   return (
-    <Styled.IconWarrper>
-      <Styled.Icon color="#3B5998" marginRight={20} />
-      <Styled.Icon color="#FFEB00" />
-      <Styled.Icon color="#00C63B" marginLeft={20} />
-    </Styled.IconWarrper>
+    <Styled.IconWrapper>
+      <Google className="cursor-pointer" />
+      <Kakao className="cursor-pointer" />
+      <Naver className="cursor-pointer" />
+    </Styled.IconWrapper>
   );
 };
 

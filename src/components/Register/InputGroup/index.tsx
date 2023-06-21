@@ -6,6 +6,7 @@ import {
   DaumPostcodeData,
   FieldName,
   IAuthForm,
+  RegisterData,
   Validate,
 } from 'src/types/register/types';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
@@ -15,13 +16,21 @@ import Styled from '../styles';
 import InputField from '../InputField';
 import {
   requiredErrorMessage,
+  validateName,
+  validateNickname,
   validatePassword,
   validatePhoneNumber,
 } from 'src/utils/register/formUtil';
+import { emailCheck, emailVerification } from 'src/apis/register/email';
+import { getJoin } from 'src/apis/register/join';
+import { scrollToTop } from 'src/utils/register/scrollUp';
+import { useRouter } from 'next/router';
 
 const InputGroup = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+
+  const router = useRouter();
 
   // react-hook-form
   const {
@@ -30,12 +39,16 @@ const InputGroup = () => {
     handleSubmit,
     getValues,
     clearErrors,
-    setError,
     setValue,
     trigger,
+    watch,
+    setError,
   } = useForm<IAuthForm>({
     mode: 'onChange',
   });
+
+  // email 변수로 할당해주기 (example + @ example.com)
+  const email = `${getValues().email}@${getValues().selectedEmail}`;
 
   // form validation hook
   const useFormValidation = (fieldName: FieldName, value?: Validate) => {
@@ -51,13 +64,14 @@ const InputGroup = () => {
   const matchesPassword = (value: string) =>
     value === getValues().password || '비밀번호가 일치하지 않습니다.';
 
+  // validation
   const emailValid = useFormValidation('email');
   const selectedEmail = useFormValidation('selectedEmail');
-  const nameValid = useFormValidation('name');
+  const nameValid = useFormValidation('name', validateName);
   const postCodeValid = useFormValidation('postCode');
   const basicAddressValid = useFormValidation('basicAddress');
-  const detailaAddressValid = useFormValidation('detailAddress');
-  const nicknameValid = useFormValidation('nickname');
+  const detailAddressValid = useFormValidation('detailAddress');
+  const nicknameValid = useFormValidation('nickname', validateNickname);
   const checkBoxValid = useFormValidation('checked');
   const passwordValid = useFormValidation('password', validatePassword);
   const phoneValid = useFormValidation('phone', validatePhoneNumber);
@@ -118,6 +132,55 @@ const InputGroup = () => {
     });
   };
 
+  // 이메일 인증 발송
+  const handleSendEmail = async () => {
+    try {
+      const res = await emailVerification(email);
+      console.log(res.data);
+    } catch (error) {
+      setError('email', { message: '이미 인증된 메일입니다.' });
+    }
+  };
+
+  // 회원가입
+  const handleJoin = async (joinData: RegisterData) => {
+    try {
+      await getJoin(joinData);
+      router.push('/login');
+    } catch (error) {
+      // 닉네임 중복 검사
+      const res = error.response.data;
+      res.message === '해당 닉네임이 존재합니다.'
+        ? setError('nickname', { message: '이미 존재하는 닉네임입니다.' })
+        : console.log(res);
+    }
+  };
+
+  // 이메일 인증 확인
+  const handleEmailCheck = async () => {
+    try {
+      const response = await emailCheck(email);
+      // 인증 확인 성공시 회원가입 API
+      if (response.data === 'DONE') {
+        const joinData = {
+          email,
+          password: getValues().password,
+          nickname: getValues().nickname,
+          name: getValues().name,
+          phone: getValues().phone,
+          postCode: getValues().postCode,
+          address: getValues().basicAddress,
+          detailAddress: getValues().detailAddress,
+        };
+        await handleJoin(joinData);
+      }
+    } catch (error) {
+      console.error(error);
+      setError('email', { message: '이메일 인증을 확인해주세요.' });
+      scrollToTop();
+    }
+  };
+
   return (
     <Styled.Section>
       {/* 이메일 입력 필드 */}
@@ -156,6 +219,8 @@ const InputGroup = () => {
         label="이메일 인증하기"
         backgroundColor="#F7F8FA"
         borderColor="#000000"
+        disabled={!watch('email') || !watch('selectedEmail')} // email 미입력시 비활성화
+        onClick={handleSendEmail}
       />
 
       {/* 비밀번호 입력 필드 */}
@@ -208,7 +273,7 @@ const InputGroup = () => {
         </Styled.AddressGridInputWrapper>
         <Styled.Input {...basicAddressValid} placeholder="기본주소" />
         <Styled.Gap />
-        <Styled.Input {...detailaAddressValid} placeholder="상세주소" />
+        <Styled.Input {...detailAddressValid} placeholder="상세주소" />
       </Styled.InputWrapper>
       <Styled.ErrorText>
         {getFirstErrorMessage(
@@ -219,7 +284,7 @@ const InputGroup = () => {
       {/* 닉네임 입력 필드 */}
       <InputField
         label="닉네임"
-        subText="다른유저와 겹치지 않도록 입력해주세요.(2~15자)"
+        subText="다른유저와 겹치지 않도록 입력해주세요.(2~10자)"
         placeholder="닉네임"
         inputProps={nicknameValid}
         error={errors?.nickname?.message}
@@ -248,7 +313,7 @@ const InputGroup = () => {
         backgroundColor="#F7F8FA"
         borderColor={theme.colors.black}
         onClick={handleSubmit(() => {
-          console.log('회원가입 성공'); // 임시
+          handleEmailCheck();
         })}
       />
     </Styled.Section>
