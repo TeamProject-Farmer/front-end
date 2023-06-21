@@ -1,6 +1,6 @@
 import Event from '@components/Home/Event';
 import Header from '@components/Home/Header';
-import Banner from '@components/Home/Banner';
+import Slider from '@components/Home/Slider';
 import Category from '@components/Home/Category';
 import ShopPrev from '@components/Home/ShopPrev';
 import BestPlant from '@components/Home/BestPlant';
@@ -12,7 +12,7 @@ const IndexPage = () => (
   <>
     <Event/>
     <Header />
-    <Banner />
+    <Slider />
     <Category />
     <ShopPrev />
     <BestPlant />

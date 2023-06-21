@@ -42,6 +42,5 @@ const Styled = {
     position: relative;
     width: 1920px;
     height: 876px;
-    /* background-color: black; */
   `
 }
