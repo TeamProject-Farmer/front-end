@@ -4,7 +4,7 @@ import { keyframes } from '@emotion/react';
 
 const carousel = keyframes`
   0% { transform: translateX(0); }
-	100% { transform: translateX(calc(-277px * 6))}
+	100% { transform: translateX(calc(-309px * 6))}
 `
 
 const Styled = {
@@ -28,10 +28,10 @@ const Styled = {
     color: ${theme.colors.green1};
   `,
   Reviews: styled.div`
+    width: 1920px;
     margin-top: 51px;
     display: flex;
     align-items: center;
-    gap: 32px;
     animation: ${carousel} 40s linear infinite;
   `,
 };

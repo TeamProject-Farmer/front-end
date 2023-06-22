@@ -38,6 +38,7 @@ export default Review;
 
 const Styled = {
   Wrapper: styled.div`
+    margin-right: 32px;
     width: 277px;
     height: 426px;
     padding: 0 5px;
