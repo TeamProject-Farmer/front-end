@@ -10,6 +10,7 @@ const carousel = keyframes`
 const Styled = {
   Wrapper: styled.div`
     width: 1920px;
+    overflow-x: hidden;
     display: flex;
     align-items: center;
     justify-content: center;

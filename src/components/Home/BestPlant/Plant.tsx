@@ -1,8 +1,10 @@
 import styled from '@emotion/styled';
 import Icon from '../Common/Icon';
 import theme from '@styles/theme';
+import Image from 'next/image';
 
 const Plant = ({
+  rank,
   title,
   discount,
   price,
@@ -13,26 +15,27 @@ const Plant = ({
 }) => {
   return (
     <Styled.Wrapper>
-      <Styled.ImgBox>
-        <Styled.LikeBtn>
-          <Icon src="like" width={29} height={25} />
-        </Styled.LikeBtn>
-      </Styled.ImgBox>
+      <Styled.RankingBox>{rank}</Styled.RankingBox>
+        <Image
+          src='/assets/images/home/plant.png'
+          alt='plant image'
+          width={160}
+          height={201}
+        />
+      <Styled.Title>{title}</Styled.Title>
       <Styled.Content>
-        <Styled.Title>{title}</Styled.Title>
-        <Styled.PriceBox>
-          <Styled.Discount>{discount}</Styled.Discount>
-          <Styled.Price>{price}</Styled.Price>
-        </Styled.PriceBox>
-        <Styled.ReviewBox>
+        <Styled.flexBox>
+          <Styled.PriceBox>
+            <Styled.Discount>{discount}</Styled.Discount>
+            <Styled.Price>{price}</Styled.Price>
+          </Styled.PriceBox>
           <Styled.Star>
-            <Icon src="star" width={16} height={15} />
+            <Icon src="star" width={12} height={12} />
             {star}
           </Styled.Star>
-          <Styled.Review>리뷰 {review}</Styled.Review>
-        </Styled.ReviewBox>
+          </Styled.flexBox>
         <Styled.EventBox>
-          <Styled.SpecialPrice>특가상품</Styled.SpecialPrice>
+          <Styled.SpecialPrice>특가</Styled.SpecialPrice>
           <Styled.FreeShipping>무료배송</Styled.FreeShipping>
         </Styled.EventBox>
         <Styled.Title />
@@ -45,27 +48,46 @@ export default Plant;
 
 const Styled = {
   Wrapper: styled.div`
-    width: 272px;
-    border: 1px solid #000;
-  `,
-  ImgBox: styled.div`
     position: relative;
-    height: 271px;
-    background-color: ${theme.colors.lightGray};
-  `,
-  LikeBtn: styled.div`
-    position: absolute;
-    top: 15px;
-    right: 15px;
-  `,
-  Content: styled.div`
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 310px;
+    height: 392px;
+    background-color: #ECF9E9;
+    /* box-shadow: 0px 0px 16px 8px rgba(215, 215, 215, 0.25); */
+    border-radius: 10px;
+  `,
+  RankingBox: styled.p`
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    background-color: #47AC3A;
+  `,
+  Content: styled.div`
+    width: 310px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 40px 0;
     gap: 4.5px;
-    padding: 13px;
   `,
   Title: styled.p`
-    font-size: 16px;
+    font-size: 25px;
+    font-weight: 600;
+    margin-top: 18px;
+  `,
+  flexBox: styled.div`
+    display: flex;
+    justify-content: space-between;
   `,
   PriceBox: styled.div`
     display: flex;
@@ -73,16 +95,12 @@ const Styled = {
   `,
   Discount: styled.p`
     color: #5f8d4e;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 700;
   `,
   Price: styled.p`
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 600;
-  `,
-  ReviewBox: styled.div`
-    display: flex;
-    gap: 10px;
   `,
   Star: styled.p`
     display: flex;
@@ -102,9 +120,9 @@ const Styled = {
   SpecialPrice: styled.p`
     background-color: #a4be7b;
     border-radius: 4px;
-    padding: 3px 5px;
-    font-size: 10px;
-    font-weight: 700;
+    padding: 5px 8px;
+    font-size: 12px;
+    color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -112,9 +130,8 @@ const Styled = {
   FreeShipping: styled.p`
     background-color: ${theme.colors.lightGray};
     border-radius: 4px;
-    padding: 3px 5px;
+    padding: 5px 10px;
     font-size: 10px;
-    font-weight: 700;
     display: flex;
     align-items: center;
     justify-content: center;
