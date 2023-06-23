@@ -1,11 +1,8 @@
 import { useEffect } from 'react';
 import Styled from './styles';
+import {modalPropsList} from '../ModalType';
 
-interface PropsList {
-  id: number;
-  modalClose: () => void;
-}
-const QNA = (props: PropsList) => {
+const QNA = (props: modalPropsList) => {
   const { id, modalClose } = props;
   const close = modalClose;
   useEffect(() => {

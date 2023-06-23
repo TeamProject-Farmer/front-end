@@ -1,12 +1,7 @@
 import Styled from './styles';
+import {singleTabPropsList} from '@components/Admin/Type'
 
-interface PropsList {
-  text: string;
-  fieldName?: string;
-  name?: string;
-  setState?: React.Dispatch<React.SetStateAction<string>>;
-}
-const SingleTab = (props: PropsList) => { 
+const SingleTab = (props: singleTabPropsList) => { 
   const { text, fieldName, name, setState } = props;
     console.log('name')
     console.log(name)

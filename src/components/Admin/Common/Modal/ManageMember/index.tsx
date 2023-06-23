@@ -1,12 +1,9 @@
 import { useEffect } from 'react';
 import Styled from './styles';
 import TotalMember from './TotalMember';
+import {modalPropsList} from '../ModalType'
 
-interface PropsList {
-  id: number;
-  modalClose: () => void;
-}
-const ManageMember = (props: PropsList) => {
+const ManageMember = (props: modalPropsList) => {
   const { id, modalClose } = props;
   const close = modalClose;
   useEffect(() => {

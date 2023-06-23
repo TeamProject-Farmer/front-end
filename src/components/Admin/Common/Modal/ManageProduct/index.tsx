@@ -4,12 +4,9 @@ import Styled from './styles';
 import DetailOption from './DetailOption';
 import FooterButtonWrapper from '../../FooterButtonWrapper';
 import SmallButton from '../../FooterButtonWrapper/SmallButton';
+import {modalPropsList} from '../ModalType'
 
-interface PropsList {
-  id: number;
-  modalClose: () => void;
-}
-const ManageProduct = (props: PropsList) => {
+const ManageProduct = (props: modalPropsList) => {
   const { id, modalClose } = props;
   const close = modalClose;
   useEffect(() => {

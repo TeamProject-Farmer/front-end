@@ -2,21 +2,18 @@ import { useEffect } from 'react';
 import Image from 'next/image';
 import Styled from './styles';
 import ChoiceItem from '../ChoiceItem';
+import {modalPropsList} from  '../../ModalType';
 
-interface PropsList {
-  id: number;
-  modalClose: () => void;
-}
-const ManageEvent = (props: PropsList) => {
+const ManageEvent = (props: modalPropsList) => {
   const { id, modalClose } = props;
   const close = modalClose;
 
-  useEffect(() => {
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, []);
+  // useEffect(() => {
+  //   document.body.style.overflow = 'hidden';
+  //   return () => {
+  //     document.body.style.overflow = 'unset';
+  //   };
+  // }, []);
 
   return (
     <>

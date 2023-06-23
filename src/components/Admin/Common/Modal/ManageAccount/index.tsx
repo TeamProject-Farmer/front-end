@@ -1,11 +1,8 @@
 import { useEffect } from 'react';
 import Styled from './styles';
+import { modalPropsList } from '../ModalType';
 
-interface PropsList {
-  id: number;
-  modalClose: () => void;
-}
-const ManageAccount = (props: PropsList) => {
+const ManageAccount = (props: modalPropsList) => {
   const { id, modalClose } = props;
   const close = modalClose;
   useEffect(() => {

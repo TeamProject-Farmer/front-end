@@ -1,12 +1,9 @@
 import { useEffect } from 'react';
 import Styled from './styles';
 import ChoiceItem from '../ChoiceItem';
+import { modalPropsList } from '../../ModalType';
 
-interface PropsList {
-  id: number;
-  modalClose: () => void;
-}
-const BannerImage = (props: PropsList) => {
+const BannerImage = (props: modalPropsList) => {
   const { id, modalClose } = props;
   const close = modalClose;
   useEffect(() => {

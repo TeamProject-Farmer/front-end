@@ -1,10 +1,7 @@
 import Styled from './styles';
+import {middleButtonPropsList} from '@components/Admin/Type';
 
-interface PropsList {
-  text: string;
-  modalOpen?: () => void | undefined;
-}
-const MiddleButton = (props: PropsList) => {
+const MiddleButton = (props: middleButtonPropsList) => {
   const { text, modalOpen } = props;
   return (
     <Styled.MiddleButtonBox onClick={modalOpen}>{text}</Styled.MiddleButtonBox>

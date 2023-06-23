@@ -1,14 +1,8 @@
 import { useEffect } from 'react';
 import Styled from './styles';
+import {warningPropsList} from '../ModalType'
 
-interface PropsList {
-  title: string;
-  content: string;
-  modalOpen: number;
-  modalClose: () => void;
-}
-
-const WarningModal = (props: PropsList) => {
+const WarningModal = (props: warningPropsList) => {
   const { title, content, modalOpen, modalClose } = props;
   // const open = modalOpen;
   const close = modalClose;

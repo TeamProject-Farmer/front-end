@@ -1,14 +1,7 @@
 import Styled from './styles';
+import {statusBoxPropsList} from '@components/Admin/Type'
 
-interface PropsList {
-  title: string;
-  first: string;
-  second: string;
-  third: string;
-  last: string;
-  checkBox: boolean;
-}
-const StatusBox = (props: PropsList) => {
+const StatusBox = (props: statusBoxPropsList) => {
   const { title, first, second, third, last, checkBox } = props;
 
   if (checkBox) {

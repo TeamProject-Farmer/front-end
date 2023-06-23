@@ -1,14 +1,9 @@
 import Styled from './styles';
 import TabWrapper from './Tab/TabWrapper';
 import FooterButtonWrapper from '../FooterButtonWrapper';
+import {innerBodyPropsList} from '@components/Admin/Type'
 
-interface PropsList {
-  tabProps: any;
-  innerBoxProps: any;
-  footerButtonProps: any;
-}
-
-const InnerBody = (props: PropsList) => {
+const InnerBody = (props: innerBodyPropsList) => {
   const { tabProps, innerBoxProps, footerButtonProps } = props;
   return (
     <>

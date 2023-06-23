@@ -1,13 +1,8 @@
 import Styled from './styles';
+import {TotalList} from '../ModalType'
 
 const TotalMember = () => {
-  const TotalList = [
-    '방문수',
-    '구매건수',
-    '누적구매액',
-    '누적적립액',
-    '계정상태',
-  ];
+  
   return (
     <Styled.TotalWrapper>
       {TotalList.map(item => (
