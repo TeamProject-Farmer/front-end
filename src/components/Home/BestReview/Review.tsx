@@ -3,7 +3,7 @@ import theme from '@styles/theme';
 import Icon from '../Common/Icon';
 
 const Review = ({ userName, star, like, title, content }) => {
-  function countStar() {
+  const countStar = () => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
       const iconSrc = i < star ? 'star' : 'emptyStar';
@@ -11,6 +11,13 @@ const Review = ({ userName, star, like, title, content }) => {
     }
     return stars;
   }
+
+  // const countStar = () => {
+  //   return Array(5).fill().map((_, index) => {
+  //     const iconSrc = index < star ? 'star' : 'emptyStar';
+  //     return <Icon key={index} src={iconSrc} width={30} height={28} />;
+  //   });
+  // }
 
   return (
     <Styled.Wrapper>
