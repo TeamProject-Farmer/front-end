@@ -14,6 +14,14 @@ const BoardInnerBox = (props: PropsList) => {
   let stars = null;
   const filledStar = <Styled.Star />;
   const blankStar = <Styled.BlankStar />;
+  // const maxStars = 5;
+  // let stars = (
+  //   <Styled.StarWrapper>
+  //     {Array.from({ length: maxStars }, (_, index) =>
+  //       index < like ? filledStar : blankStar,
+  //     )}
+  //   </Styled.StarWrapper>
+  // );
   if (like == 1) {
     stars = (
       <Styled.StarWrapper>
