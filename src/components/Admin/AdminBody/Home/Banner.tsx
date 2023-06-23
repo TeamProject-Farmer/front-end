@@ -7,12 +7,12 @@ import BannerImage from '@components/Admin/Common/Modal/ManageHome/BannerImage';
 const Banner = () => {
   const [modalOpen, setModalOpen] = useState(0);
 
-  function openModal() {
+  const openModal = () => {
     setModalOpen(3);
-  }
-  function closeModal() {
+  };
+  const closeModal = () => {
     setModalOpen(0);
-  }
+  };
   return (
     <>
       {modalOpen === 3 ? <BannerImage id={0} modalClose={closeModal} /> : null}

@@ -9,13 +9,13 @@ import ManageMember from '@components/Admin/Common/Modal/ManageMember';
 const MemberBody = () => {
   const [modalOpen, setModalOpen] = useState(0);
 
-  function openModal() {
+  const openModal = () => {
     setModalOpen(1);
-  }
-  function openModal2() {
+  };
+  const openModal2 = () => {
     setModalOpen(2);
-  }
-  function closeModal() {
+  };
+  const closeModal = () => {
     setModalOpen(0);
   }
 

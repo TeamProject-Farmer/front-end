@@ -9,16 +9,15 @@ import ManageCart from '@components/Admin/Common/Modal/ManageCart';
 const CartBody = () => {
   const [modalOpen, setModalOpen] = useState(0);
 
-  function openModal() {
+  const openModal = () => {
     setModalOpen(1);
-  }
-  function openModal2() {
+  };
+  const openModal2 = () => {
     setModalOpen(2);
-  }
-  function closeModal() {
+  };
+  const closeModal = () => {
     setModalOpen(0);
   }
-
   return (
     <>
       {modalOpen === 2 ? <ManageCart id={0} modalClose={closeModal} /> : null}
