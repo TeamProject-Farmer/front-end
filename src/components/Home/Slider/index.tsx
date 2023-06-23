@@ -13,14 +13,12 @@ const Slider = () => {
   const [activeIndex, setActiveIndex] = useState(0)
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (activeIndex === sliderContents.length - 1) {
-        setActiveIndex(0);
-      } else {
-        setActiveIndex(activeIndex + 1);
-      }
+    const sliderInterval = setInterval(() => {
+      setActiveIndex( prevIndex => (
+        prevIndex === sliderContents.length - 1 ? 0 : prevIndex + 1
+      ))
     }, 3000);
-    return () => clearInterval(interval);
+    return () => clearInterval(sliderInterval);
   }, [activeIndex]);
 
   return (
