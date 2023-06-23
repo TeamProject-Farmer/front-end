@@ -1,11 +1,7 @@
 import styled from '@emotion/styled';
+import { ITitleProps } from 'src/types/home/types';
 
-interface TitleProps {
-  title: string;
-  color?: string;
-}
-
-const Title = ({ title, color }: TitleProps) => (
+const Title = ({ title, color }: ITitleProps) => (
   <StyledTitle color={color}>{title}</StyledTitle>
 );
 

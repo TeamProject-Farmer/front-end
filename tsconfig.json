@@ -23,6 +23,12 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["custom.d.ts", "next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "custom.d.ts",
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/components/Form/styles.tsx"
+  ],
   "exclude": ["node_modules"]
 }

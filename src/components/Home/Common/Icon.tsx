@@ -1,11 +1,5 @@
 import Image from 'next/image';
-
-interface IconProps {
-  src: string;
-  width?: number;
-  height?: number;
-  onClick?: () => void;
-}
+import { IconProps } from 'src/types/home/types';
 
 const Icon = ({ src, width, height, onClick }: IconProps) => {
   return (
