@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Styled from './styles';
 import SiderBarMenu from './SiderBarMenu';
 import SideBarHeader from './SideBarHeader';
-import {sideBarMenuItems} from '@components/Admin/Type'
+import {sideBarMenuItems} from '@components/Admin/ArrayItem'
 
 interface PropsList {
   router: string;

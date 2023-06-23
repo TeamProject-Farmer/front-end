@@ -1,15 +1,9 @@
 import Styled from './styles';
 import CheckBox from '@components/Admin/Common/InnerBody/InnerBox/CheckBox';
+import {productInnerPropsList} from '@components/Admin/Type'
 
-interface PropsList {
-  title: string;
-  date: string;
-  category: string;
-  price: number;
-  discount: number;
-  productCode: string;
-}
-const ProductInnerBox = (props: PropsList) => {
+
+const ProductInnerBox = (props: productInnerPropsList) => {
   const { title, date, category, price, discount, productCode } = props;
   return (
     <>

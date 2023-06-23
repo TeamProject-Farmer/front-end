@@ -1,13 +1,8 @@
 import Styled from './styles';
 import CheckBox from '@components/Admin/Common/InnerBody/InnerBox/CheckBox';
+import {accouontInnerPropsList} from '@components/Admin/Type'
 
-interface PropsList {
-  nickname: string;
-  manager: string;
-  registerDate: string;
-  role: string;
-}
-const AccountInnerBox = (props: PropsList) => {
+const AccountInnerBox = (props: accouontInnerPropsList) => {
   const { nickname, manager, registerDate, role } = props;
   return (
     <>

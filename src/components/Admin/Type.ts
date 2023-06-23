@@ -1,10 +1,32 @@
-export const sideBarMenuItems = [
-  { href: '/admin', imageName: 'home', menuName: '홈' },
-  { href: '/admin/account', imageName: 'account', menuName: '계정' },
-  { href: '/admin/member', imageName: 'member', menuName: '회원' },
-  { href: '/admin/cart', imageName: 'cart', menuName: '주문' },
-  { href: '/admin/product', imageName: 'product', menuName: '상품' },
-  { href: '/admin/board', imageName: 'board', menuName: '게시판' },
-  { href: '/admin/settings', imageName: 'settings', menuName: '기타 설정' },
-  { href: '/admin/logout', imageName: 'logout', menuName: '로그아웃' },
-];;
+export interface accouontInnerPropsList {
+  nickname: string;
+  manager: string;
+  registerDate: string;
+  role: string;
+}
+export interface boardInnerPropsList {
+  id: string;
+  title: string;
+  like: number;
+  buyer: string;
+  commentTitle: string;
+  comment: string;
+}
+
+export interface memberInnerPropsList {
+  nickname: string;
+  email: string;
+  phoneNum: string;
+  name: string;
+  grade: string;
+  registerDate: string;
+}
+
+export interface productInnerPropsList {
+  title: string;
+  date: string;
+  category: string;
+  price: number;
+  discount: number;
+  productCode: string;
+}

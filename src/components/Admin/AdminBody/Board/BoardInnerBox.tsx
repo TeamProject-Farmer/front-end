@@ -1,15 +1,8 @@
 import Styled from './styles';
 import CheckBox from '@components/Admin/Common/InnerBody/InnerBox/CheckBox';
+import {boardInnerPropsList} from '@components/Admin/Type'
 
-interface PropsList {
-  id: string;
-  title: string;
-  like: number;
-  buyer: string;
-  commentTitle: string;
-  comment: string;
-}
-const BoardInnerBox = (props: PropsList) => {
+const BoardInnerBox = (props: boardInnerPropsList) => {
   const { id, title, like, buyer, commentTitle, comment } = props;
   let stars = null;
   const filledStar = <Styled.Star />;
