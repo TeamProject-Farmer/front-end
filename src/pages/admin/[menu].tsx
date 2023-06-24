@@ -4,33 +4,20 @@ import SideBar from '@components/Admin/SideBar';
 import SettingsBody from '@components/Admin/AdminBody/Settings/SettingsBody';
 import CommonLayout from '@components/Admin/AdminBody/CommonLayout';
 
-const admin = () => {
+const Admin = () => {
   const router = useRouter();
   const category = router.query.menu;
-  let pageComponent = null;
+  const pageComponents = {
+    settings: <SettingsBody />,
+    logout: <NotYet>로그아웃</NotYet>,
+  };
 
-  if (category == 'settings') {
-    pageComponent = (
-      <Wrapper>
-        <SideBar router={router.asPath} />
-        <SettingsBody />
-      </Wrapper>
-    );
-  } else if (category == 'logout') {
-    pageComponent = (
-      <Wrapper>
-        <SideBar router={router.asPath} />
-        <NotYet>로그아웃</NotYet>
-      </Wrapper>
-    );
-  } else {
-    pageComponent = (
-      <Wrapper>
-        <SideBar router={router.asPath} />
-        <CommonLayout cate={category} />
-      </Wrapper>
-    );
-  }
+  const pageComponent = (
+    <Wrapper>
+      <SideBar router={router.asPath} />
+      {pageComponents[category.toString()] || <CommonLayout cate={category} />}
+    </Wrapper>
+  );
   return <>{pageComponent}</>;
 };
 
@@ -42,4 +29,4 @@ const NotYet = styled.div`
   margin-top: 20px;
   margin-left: 500px;
 `;
-export default admin;
+export default Admin;
