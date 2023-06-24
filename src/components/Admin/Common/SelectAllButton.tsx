@@ -1,9 +1,7 @@
 import Styled from './styles';
+import {selectAllPropsList} from '@components/Admin/Type'
 
-interface PropsList {
-  text: string;
-}
-const SelectAllButton = (props: PropsList) => {
+const SelectAllButton = (props: selectAllPropsList) => {
   const { text } = props;
   return <Styled.SelectAllBox>{text}</Styled.SelectAllBox>;
 };

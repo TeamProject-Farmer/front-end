@@ -1,3 +1,5 @@
+import React, { SetStateAction, Dispatch } from 'react'
+
 export interface accouontInnerPropsList {
   nickname: string;
   manager: string;
@@ -55,7 +57,7 @@ export interface singleTabPropsList {
   text: string;
   fieldName?: string;
   name?: string;
-  setState?: React.Dispatch<React.SetStateAction<string>>;
+  setState?:Dispatch<SetStateAction<string>>;
 }
 
 export interface innerBodyPropsList {
@@ -64,3 +66,12 @@ export interface innerBodyPropsList {
   footerButtonProps: any;
 }
 
+export interface selectAllPropsList {
+  text: string;
+}
+
+export interface sideBarMenuPropsList {
+  imageName: string;
+  menuName: string;
+  router: string;
+}

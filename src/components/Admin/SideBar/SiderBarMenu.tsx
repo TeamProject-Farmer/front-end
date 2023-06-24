@@ -1,13 +1,9 @@
 import Image from 'next/image';
 import Styled from './styles';
+import {sideBarMenuPropsList} from '@components/Admin/Type'
 
-interface PropsList {
-  imageName: string;
-  menuName: string;
-  router: string;
-}
 
-const SiderBarMenu = (props: PropsList) => {
+const SiderBarMenu = (props: sideBarMenuPropsList) => {
   const { imageName, menuName, router } = props;
   const imageUrl = `/assets/images/admin/${imageName}.png`; //추후 업데이트되면 svg로 변경할 예정
 

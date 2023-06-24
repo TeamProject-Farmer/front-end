@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import InnerBody from '@components/Admin/Common/InnerBody';
-import AccountInnerBox from './AccountInnerBox';
+// import AccountInnerBox from './AccountInnerBox';
 import SingleTab from '../../Common/InnerBody/Tab/SingleTab';
 import SmallButton from '../../Common/FooterButtonWrapper/SmallButton';
 import ManageAccount from '@components/Admin/Common/Modal/ManageAccount';
@@ -33,24 +33,7 @@ const AccountBody = () => {
         };
       });
       setData(Info);
-      for (let t = 0; t < res.data.totalElements; t++) {
-        
-      }
-      
-      // innerBoxList =
-      //   res.data.content &&
-      //   res.data.content.map(i => {
-      //     return (
-      //       <AccountInnerBox
-      //         nickname={i.nickname}
-      //         manager={i.grade}
-      //         registerDate="2023-04-02"
-      //         role={i.role}
-      //       ></AccountInnerBox>
-      //     );
-      //   });
-      innerBoxList = data;
-      console.log(innerBoxList);
+  
     } catch (error) {
       console.error(error);
     }
@@ -86,10 +69,15 @@ const AccountBody = () => {
               fieldName={fieldName}
               setState={setFieldName}
             />
-            <SingleTab name="username" text="이름순" fieldName={fieldName} />
+            <SingleTab
+              name="username"
+              text="이름순"
+              fieldName={fieldName}
+              setState={setFieldName}
+            />
           </>
         }
-        innerBoxProps={innerBoxList}
+        innerBoxProps={data}
         footerButtonProps={
           <>
             <SmallButton text="추가" modalOpen={openModal} />

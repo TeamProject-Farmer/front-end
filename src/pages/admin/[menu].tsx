@@ -6,7 +6,11 @@ import CommonLayout from '@components/Admin/AdminBody/CommonLayout';
 
 const Admin = () => {
   const router = useRouter();
-  const category = router.query.menu;
+  const menu = router.query.menu;
+  let category:string;
+  if(menu){
+    category = menu.toString();
+  }
   const pageComponents = {
     settings: <SettingsBody />,
     logout: <NotYet>로그아웃</NotYet>,
@@ -15,7 +19,7 @@ const Admin = () => {
   const pageComponent = (
     <Wrapper>
       <SideBar router={router.asPath} />
-      {pageComponents[category.toString()] || <CommonLayout cate={category} />}
+      {pageComponents[category] || <CommonLayout cate={category} />}
     </Wrapper>
   );
   return <>{pageComponent}</>;
