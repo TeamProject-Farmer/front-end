@@ -8,7 +8,7 @@ interface PropsList {
   router: string;
 }
 
-const sidebar = (props: PropsList) => {
+const SideBar = (props: PropsList) => {
   const { router } = props;
   
   return (
@@ -27,4 +27,4 @@ const sidebar = (props: PropsList) => {
   );
 };
 
-export default sidebar;
+export default SideBar;

@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import SideBar from '@components/Admin/SideBar';
 import HomeBody from '@components/Admin/AdminBody/Home/HomeBody';
 
-const admin = () => {
+const Admin = () => {
   const router = useRouter();
   return (
     <Wrapper>
@@ -17,4 +17,4 @@ const Wrapper = styled.div`
   display: flex;
 `;
 
-export default admin;
+export default Admin;
