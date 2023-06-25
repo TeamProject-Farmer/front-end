@@ -25,18 +25,19 @@ const MemberBody = () => {
   const handleMemberList = async () => {
     try {
       const res = await memberList(fieldName);
-      console.log('dataaaaaaaa')
-      console.log(res.data.content)
+      console.log('dataaaaaaaa');
+      console.log(res.data.content);
       const component = res.data.content.map(i => {
         return (
           <MemberInnerBox
-          key={i.id}
+            key={i.id}
+            id={i.id}
             nickname={i.nickname}
             email={i.email}
             phoneNum={i.ph}
             name={i.username}
             grade={i.grade}
-            registerDate={'temp - 2023-04-01'}
+            registerDate={'temp 2023-04-01'}
           />
         );
       });

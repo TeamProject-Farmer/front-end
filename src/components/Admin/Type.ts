@@ -23,6 +23,7 @@ export interface memberInnerPropsList {
   name: string;
   grade: string;
   registerDate: string;
+  id: number;
 }
 
 export interface productInnerPropsList {

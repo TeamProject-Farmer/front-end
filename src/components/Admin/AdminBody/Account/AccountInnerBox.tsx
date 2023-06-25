@@ -4,6 +4,8 @@ import {accouontInnerPropsList} from '@components/Admin/Type'
 
 const AccountInnerBox = (props: accouontInnerPropsList) => {
   const { nickname, manager, registerDate, role, checkList } = props;
+  //추후 id 추가예정
+  
   return (
     <>
       <Styled.InnerBoxWrapper>
