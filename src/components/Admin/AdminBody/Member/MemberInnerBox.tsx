@@ -3,7 +3,7 @@ import CheckBox from '@components/Admin/Common/InnerBody/InnerBox/CheckBox';
 import {memberInnerPropsList} from '@components/Admin/Type'
 
 const MemberInnerBox = (props: memberInnerPropsList) => {
-  const { nickname, email, phoneNum, name, grade, registerDate,id } = props;
+  const { nickname, email, phoneNum, name, grade, registerDate} = props;
   return (
     <>
       <Styled.InnerBoxWrapper>
@@ -15,7 +15,7 @@ const MemberInnerBox = (props: memberInnerPropsList) => {
           <Styled.Content>회원등급: {grade}</Styled.Content>
           <Styled.Content>가입날짜: {registerDate}</Styled.Content>
         </Styled.InnerBox>
-        <CheckBox id={id}/> {/* 나중에 id값 넣어줄 예정 */}
+        <CheckBox id={nickname}/> {/* 나중에 id값 넣어줄 예정 */}
         
       </Styled.InnerBoxWrapper>
     </>

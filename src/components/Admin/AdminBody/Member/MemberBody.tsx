@@ -48,7 +48,6 @@ const MemberBody = () => {
         }
         innerBoxProps={<MemberInnerBox
           key={0}
-          id={0}
           nickname={'asdf'}
           email={'asdf'}
           phoneNum={'asdf'}
