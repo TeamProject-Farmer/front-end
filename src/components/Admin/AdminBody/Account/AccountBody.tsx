@@ -59,7 +59,6 @@ const AccountBody = () => {
   }, [fieldName]);
 
   const handleCheckAll = () => {
-    console.log('is All Check?');
     console.log(checkList.length === idList.length);
     setCheckList(checkList.length === idList.length ? [] : idList);
   };
