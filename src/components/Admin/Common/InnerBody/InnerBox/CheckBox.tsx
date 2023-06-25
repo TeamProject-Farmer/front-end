@@ -3,7 +3,6 @@ import Styled from './styles';
 interface PropsList {
   id: number;
   checkList?: number[];
-  //추후 추가 예정
 }
 
 const CheckBox = (props: PropsList) => {
