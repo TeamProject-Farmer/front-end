@@ -3,14 +3,21 @@ import theme from '@styles/theme';
 import Icon from '../Common/Icon';
 
 const Review = ({ userName, star, like, title, content }) => {
-  function countStar() {
+  const countStar = () => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
       const iconSrc = i < star ? 'star' : 'emptyStar';
-      stars.push(<Icon key={i} src={iconSrc} />);
+      stars.push(<Icon key={i} src={iconSrc} width={30} height={28} />);
     }
     return stars;
   }
+
+  // const countStar = () => {
+  //   return Array(5).fill().map((_, index) => {
+  //     const iconSrc = index < star ? 'star' : 'emptyStar';
+  //     return <Icon key={index} src={iconSrc} width={30} height={28} />;
+  //   });
+  // }
 
   return (
     <Styled.Wrapper>
@@ -23,7 +30,7 @@ const Review = ({ userName, star, like, title, content }) => {
         <Styled.StarBox>
           <Styled.Star>{countStar()}</Styled.Star>
           <Styled.Like>
-            <Icon src="thumbsUp" />
+            <Icon src="thumbsUp" width={28} height={28}/>
             <Styled.LikeQty>{like}</Styled.LikeQty>
           </Styled.Like>
         </Styled.StarBox>
@@ -38,6 +45,7 @@ export default Review;
 
 const Styled = {
   Wrapper: styled.div`
+    margin-right: 32px;
     width: 277px;
     height: 426px;
     padding: 0 5px;

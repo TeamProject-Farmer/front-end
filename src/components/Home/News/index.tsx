@@ -1,16 +1,27 @@
 import Styled from './styles';
-import Title from '../Common/Title';
+import Image from 'next/image';
 
 const News = () => {
   return (
     <Styled.Wrapper>
-      <Title title="관련 뉴스" />
-      <Styled.NewsContainer>
+        <Styled.Title>farmer news</Styled.Title>
+          <Styled.ImgBox>
+            <Styled.FlexBox>
+              <Styled.ImgTitle>관련 뉴스</Styled.ImgTitle>
+              <Styled.ShopBtn>&gt; Shop Now</Styled.ShopBtn>
+            </Styled.FlexBox>
+            <Image
+              src='/assets/images/home/newsImage.png'
+              alt='news image'
+              width={553}
+              height={600}
+            />
+          </Styled.ImgBox>
         <Styled.ContentBox>
-          <Styled.Title>
+          <Styled.ContentTitle>
             다욱식물 건강하게 키우는 범 - 기본적인 다육이 화분 관리법에 대한 팁
             (물 주기)
-          </Styled.Title>
+          </Styled.ContentTitle>
           <Styled.Content>
             안녕하세요. 쇼핑카트 입니다. 이 글을 시작으로, 제가 사무실에서
             키워온 다육식물에 대한 팁을 조금 씩 드려볼까 합니다. 이번 글에서는
@@ -40,8 +51,6 @@ const News = () => {
             다육식물을 자주 보실 수 있습니다. 예전에 미국 샌프란시스코에..
           </Styled.Content>
         </Styled.ContentBox>
-        <Styled.ImgBox />
-      </Styled.NewsContainer>
     </Styled.Wrapper>
   );
 };

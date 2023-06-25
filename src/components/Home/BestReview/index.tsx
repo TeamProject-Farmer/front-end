@@ -4,7 +4,7 @@ import Review from './Review';
 
 const reviews = [];
 
-for (let id = 1; id <= 6; id++) {
+for (let id = 1; id <= 12; id++) {
   const newReview = {
     id: id,
     userName: 'USER NAME',

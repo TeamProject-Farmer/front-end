@@ -1,19 +1,15 @@
 import Image from 'next/image';
+import { IconProps } from 'src/types/home/types';
 
-interface IconProps {
-  src: string;
-  width?: number;
-  height?: number;
-}
-
-const Icon = ({ src, width, height }: IconProps) => {
+const Icon = ({ src, width, height, onClick }: IconProps) => {
   return (
     <Image
       src={`assets/images/home/${src}.svg`}
       alt={`${src}Icon`}
-      width={typeof width === 'undefined' ? 20 : `${width}`}
-      height={typeof height === 'undefined' ? 20 : `${height}`}
-      style={{ objectFit: 'contain' }}
+      width={width}
+      height={height}
+      style={{ width: width, height: height}}
+      onClick={onClick}
     />
   );
 };
