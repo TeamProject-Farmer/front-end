@@ -4,7 +4,7 @@ import SideBar from '@components/Admin/SideBar';
 import SettingsBody from '@components/Admin/AdminBody/Settings/SettingsBody';
 import CommonLayout from '@components/Admin/AdminBody/CommonLayout';
 
-const Admin = () => {
+const admin = () => {
   const router = useRouter();
   const menu = router.query.menu;
   let category:string;
@@ -33,4 +33,4 @@ const NotYet = styled.div`
   margin-top: 20px;
   margin-left: 500px;
 `;
-export default Admin;
+export default admin;
