@@ -4,7 +4,7 @@ import request from '../base';
 //   page: number;
 //   fieldName: string;
 // }
-
+//관리자 권한 계정 리스트
 export const accountList = async (fieldName: string) => {
   // const { page, fieldName } = props;
   

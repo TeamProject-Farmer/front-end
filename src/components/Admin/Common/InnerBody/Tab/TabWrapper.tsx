@@ -1,12 +1,16 @@
 import Styled from './styles';
-import SelectAllButton from '../../SelectAllButton';
 
-const TabWrapper = props => {
+interface TempProps {
+  handleCheckAll?: ()=>void;
+  children?: any;
+  
+}
+const TabWrapper = (props:TempProps) => {
   return (
     <>
       <Styled.TabWrapper>
         <Styled.TabContainer>{props.children}</Styled.TabContainer>
-        <SelectAllButton text="전체 선택"></SelectAllButton>
+        <Styled.SelectAllButton onClick={props.handleCheckAll} >전체선택</Styled.SelectAllButton>
       </Styled.TabWrapper>
     </>
   );

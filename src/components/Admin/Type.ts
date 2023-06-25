@@ -3,11 +3,12 @@ import React, { SetStateAction, Dispatch } from 'react'
 export interface accouontInnerPropsList {
   nickname: string;
   manager: string;
-  registerDate: string;
+  registerDate: number;
   role: string;
+  checkList?: number[]; //string인지 number인지 check하기
 }
 export interface boardInnerPropsList {
-  id: string;
+  id: number;
   title: string;
   like: number;
   buyer: string;
@@ -65,14 +66,15 @@ export interface innerBodyPropsList {
   tabProps: any;
   innerBoxProps: any;
   footerButtonProps: any;
-}
-
-export interface selectAllPropsList {
-  text: string;
+  handleCheckAll?: ()=>void;
 }
 
 export interface sideBarMenuPropsList {
   imageName: string;
   menuName: string;
   router: string;
+}
+
+export interface buttonProps {
+  isChecked?: boolean;
 }

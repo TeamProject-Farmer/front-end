@@ -1,13 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import InnerBody from '@components/Admin/Common/InnerBody';
 import MemberInnerBox from './MemberInnerBox';
 import SingleTab from '../../Common/InnerBody/Tab/SingleTab';
 import SmallButton from '../../Common/FooterButtonWrapper/SmallButton';
 import WarningModal from '@components/Admin/Common/Modal/WarningModal';
 import ManageMember from '@components/Admin/Common/Modal/ManageMember';
+import { memberList, memberData } from 'src/apis/admin/member';
 
 const MemberBody = () => {
-  const [modalOpen, setModalOpen] = useState(0);
+  const [modalOpen, setModalOpen] = useState<number>(0);
+  const [fieldName, setFieldName] = useState<string>('username');
+  const [pageNum, setPageNumber] = useState<number>(0);
+  const [listData, setListData] = useState<string>('');
 
   const openModal = () => {
     setModalOpen(1);
@@ -17,16 +21,33 @@ const MemberBody = () => {
   };
   const closeModal = () => {
     setModalOpen(0);
-  }
-
-  const TempList = [
-    'Mark',
-    'abcd1234@naver.com',
-    '010-1111-XXXX',
-    '홍길동',
-    '일반',
-    '2023-04-01',
-  ];
+  };
+  const handleMemberList = async () => {
+    try {
+      const res = await memberList(fieldName);
+      console.log('dataaaaaaaa')
+      console.log(res.data.content)
+      const component = res.data.content.map(i => {
+        return (
+          <MemberInnerBox
+          key={i.id}
+            nickname={i.nickname}
+            email={i.email}
+            phoneNum={i.ph}
+            name={i.username}
+            grade={i.grade}
+            registerDate={'temp - 2023-04-01'}
+          />
+        );
+      });
+      setListData(component);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    handleMemberList();
+  }, [fieldName]);
   return (
     <>
       {modalOpen === 1 ? (
@@ -37,33 +58,34 @@ const MemberBody = () => {
           modalClose={closeModal}
         />
       ) : null}
-      {modalOpen === 2 ? (
-        <ManageMember
-          id={0}
-          modalClose={closeModal}
-        />
-      ) : null}
+      {modalOpen === 2 ? <ManageMember id={0} modalClose={closeModal} /> : null}
       <InnerBody
         tabProps={
           <>
-            <SingleTab text="등록일순" />
-            <SingleTab text="이름순" />
-            <SingleTab text="회원등급순" />
+            <SingleTab
+              name="createdDate"
+              text="등록일순"
+              fieldName={fieldName}
+              setState={setFieldName}
+            />
+            <SingleTab
+              name="username"
+              text="이름순"
+              fieldName={fieldName}
+              setState={setFieldName}
+            />
+            <SingleTab
+              name="grade"
+              text="회원등급순"
+              fieldName={fieldName}
+              setState={setFieldName}
+            />
           </>
         }
-        innerBoxProps={
-          <MemberInnerBox
-            nickname={TempList[0]}
-            email={TempList[1]}
-            phoneNum={TempList[2]}
-            name={TempList[3]}
-            grade={TempList[4]}
-            registerDate={TempList[5]}
-          />
-        }
+        innerBoxProps={listData}
         footerButtonProps={
           <>
-            <SmallButton text="수정"  modalOpen={openModal2} />
+            <SmallButton text="수정" modalOpen={openModal2} />
             <SmallButton text="삭제" modalOpen={openModal} />
           </>
         }

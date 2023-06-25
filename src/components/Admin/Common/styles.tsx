@@ -57,20 +57,7 @@ const Styled = {
   }
 `,
 
-  SelectAllBox: styled.button`
-    width: 211px;
-    height: 49px;
-    background: #d9d9d9;
-    border-radius: 1px;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 19px;
-    color: #000000;
-    &:hover {
-      box-shadow: 1px 1px 1px 1px #ababab9d;
-    }
-  `,
+  
 };
 
 export default Styled;
