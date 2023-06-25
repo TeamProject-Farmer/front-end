@@ -3,9 +3,8 @@ import React, { SetStateAction, Dispatch } from 'react'
 export interface accouontInnerPropsList {
   nickname: string;
   manager: string;
-  registerDate: number;
+  registerDate: string;
   role: string;
-  checkList?: number[]; //string인지 number인지 check하기
 }
 export interface boardInnerPropsList {
   id: number;
@@ -58,9 +57,7 @@ export interface statusBoxPropsList {
 //추후 다른 곳에서도 수정완료되면 선택에서 필수로 수정 예정
 export interface singleTabPropsList {
   text: string;
-  fieldName?: string;
-  name?: string;
-  setState?:Dispatch<SetStateAction<string>>;
+
 }
 
 export interface innerBodyPropsList {

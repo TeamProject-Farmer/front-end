@@ -5,13 +5,11 @@ import SingleTab from '../../Common/InnerBody/Tab/SingleTab';
 import SmallButton from '../../Common/FooterButtonWrapper/SmallButton';
 import WarningModal from '@components/Admin/Common/Modal/WarningModal';
 import ManageMember from '@components/Admin/Common/Modal/ManageMember';
-import { memberList, memberData } from 'src/apis/admin/member';
 
 const MemberBody = () => {
   const [modalOpen, setModalOpen] = useState<number>(0);
   const [fieldName, setFieldName] = useState<string>('username');
-  const [pageNum, setPageNumber] = useState<number>(0);
-  const [listData, setListData] = useState<string>('');
+
 
   const openModal = () => {
     setModalOpen(1);
@@ -22,33 +20,7 @@ const MemberBody = () => {
   const closeModal = () => {
     setModalOpen(0);
   };
-  const handleMemberList = async () => {
-    try {
-      const res = await memberList(fieldName);
-      console.log('dataaaaaaaa');
-      console.log(res.data.content);
-      const component = res.data.content.map(i => {
-        return (
-          <MemberInnerBox
-            key={i.id}
-            id={i.id}
-            nickname={i.nickname}
-            email={i.email}
-            phoneNum={i.ph}
-            name={i.username}
-            grade={i.grade}
-            registerDate={'temp 2023-04-01'}
-          />
-        );
-      });
-      setListData(component);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  useEffect(() => {
-    handleMemberList();
-  }, [fieldName]);
+
   return (
     <>
       {modalOpen === 1 ? (
@@ -64,26 +36,26 @@ const MemberBody = () => {
         tabProps={
           <>
             <SingleTab
-              name="createdDate"
               text="등록일순"
-              fieldName={fieldName}
-              setState={setFieldName}
             />
             <SingleTab
-              name="username"
               text="이름순"
-              fieldName={fieldName}
-              setState={setFieldName}
             />
             <SingleTab
-              name="grade"
               text="회원등급순"
-              fieldName={fieldName}
-              setState={setFieldName}
             />
           </>
         }
-        innerBoxProps={listData}
+        innerBoxProps={<MemberInnerBox
+          key={0}
+          id={0}
+          nickname={'asdf'}
+          email={'asdf'}
+          phoneNum={'asdf'}
+          name={'asdf'}
+          grade={'asdf'}
+          registerDate={'temp 2023-04-01'}
+        />}
         footerButtonProps={
           <>
             <SmallButton text="수정" modalOpen={openModal2} />

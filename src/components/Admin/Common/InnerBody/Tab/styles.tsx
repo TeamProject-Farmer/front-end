@@ -1,11 +1,6 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 
-interface tabProps {
-  fieldState: boolean;
-}
-
-
 const Styled = {
   TabWrapper: styled.div`
     height: 113px;
@@ -23,7 +18,7 @@ const Styled = {
     display: flex;
     height: 100%;
   `,
-  TabBox: styled.div<tabProps>`
+  TabBox: styled.div`
     width: 200px;
     height: 100%;
     font-style: normal;
@@ -33,7 +28,6 @@ const Styled = {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: ${props => (props.fieldState ? `${theme.colors.blue}` : 'black')};
     &:hover {
       border-bottom: 1px solid ${theme.colors.blue};
       color: ${theme.colors.blue};
