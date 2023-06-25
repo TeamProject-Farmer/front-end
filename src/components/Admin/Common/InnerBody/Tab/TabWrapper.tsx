@@ -2,9 +2,9 @@ import Styled from './styles';
 
 interface TempProps {
   handleCheckAll?: ()=>void;
-  children?: any;
-  
+  children?: any; //추후 변경 예정
 }
+
 const TabWrapper = (props:TempProps) => {
   return (
     <>
