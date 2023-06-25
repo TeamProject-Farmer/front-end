@@ -1,7 +1,7 @@
 import Styled from './styles';
 
 interface PropsList {
-  id?: number | string |undefined;
+  id?: string;
 }
 
 const CheckBox = (props: PropsList) => {

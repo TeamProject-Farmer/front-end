@@ -38,7 +38,7 @@ const BoardBody = () => {
         }
         innerBoxProps={
           <BoardInnerBox
-            id={0}
+            id={'0'}
             title="스칸답서스"
             like={4}
             buyer="mark"

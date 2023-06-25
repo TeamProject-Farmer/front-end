@@ -7,7 +7,7 @@ export interface accouontInnerPropsList {
   role: string;
 }
 export interface boardInnerPropsList {
-  id: number;
+  id: string;
   title: string;
   like: number;
   buyer: string;
