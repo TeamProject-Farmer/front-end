@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import InnerBody from '@components/Admin/Common/InnerBody';
-// import AccountInnerBox from './AccountInnerBox';
+import AccountInnerBox from './AccountInnerBox';
 import SingleTab from '../../Common/InnerBody/Tab/SingleTab';
 import SmallButton from '../../Common/FooterButtonWrapper/SmallButton';
 import ManageAccount from '@components/Admin/Common/Modal/ManageAccount';
@@ -17,29 +17,24 @@ const AccountBody = () => {
   const closeModal = () => {
     setModalOpen(0);
   };
-  let innerBoxList: string = null;
   const handleAccountList = async () => {
     try {
       const res = await accountList(fieldName);
-      console.log(res.data.content);
-      console.log(res.data.content[0]);
-      console.log(res.data.totalElements);
-      const Info = res.data.content.map(i => {
-        return {
-          nickname: i.nickname,
-          manager: i.grade,
-          registerDate: i.id,
-          role: i.role,
-        };
+      const component = res.data.content.map(i => {
+        return (
+          <AccountInnerBox
+            nickname={i.nickname}
+            manager={i.grade}
+            registerDate={i.id}
+            role={i.role}
+          ></AccountInnerBox>
+        );
       });
-      setData(Info);
-  
+      setData(component);
     } catch (error) {
       console.error(error);
     }
   };
-  console.log('data');
-  console.log(data);
   const handleAccountSearch = async () => {
     try {
       const response = await accountSearch(15);
@@ -47,9 +42,7 @@ const AccountBody = () => {
       console.error(error);
     }
   };
-
   useEffect(() => {
-    //test code
     handleAccountList();
     handleAccountSearch();
   }, []);
@@ -59,7 +52,6 @@ const AccountBody = () => {
       {modalOpen === 2 ? (
         <ManageAccount id={1} modalClose={closeModal} />
       ) : null}
-      {innerBoxList}
       <InnerBody
         tabProps={
           <>
