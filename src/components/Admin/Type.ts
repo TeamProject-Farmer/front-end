@@ -53,6 +53,7 @@ export interface statusBoxPropsList {
   checkBox: boolean;
 }
 
+//추후 다른 곳에서도 수정완료되면 선택에서 필수로 수정 예정
 export interface singleTabPropsList {
   text: string;
   fieldName?: string;

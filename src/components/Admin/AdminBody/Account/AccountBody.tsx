@@ -4,7 +4,7 @@ import AccountInnerBox from './AccountInnerBox';
 import SingleTab from '../../Common/InnerBody/Tab/SingleTab';
 import SmallButton from '../../Common/FooterButtonWrapper/SmallButton';
 import ManageAccount from '@components/Admin/Common/Modal/ManageAccount';
-import { accountList, accountSearch } from 'src/apis/admin/account';
+import { accountList, accountData } from 'src/apis/admin/account';
 
 const AccountBody = () => {
   const [modalOpen, setModalOpen] = useState<number>(0);
@@ -37,7 +37,7 @@ const AccountBody = () => {
   };
   const handleAccountSearch = async () => {
     try {
-      const response = await accountSearch(15);
+      const response = await accountData(15);
     } catch (error) {
       console.error(error);
     }

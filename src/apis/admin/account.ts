@@ -13,7 +13,8 @@ export const accountList = async (fieldName: string) => {
   });
 };
 
-export const accountSearch = async (memberId: number) => {  
+//관리자 단건 조회
+export const accountData = async (memberId: number) => {  
   return request({
     url: `/admin/account/?managers/${memberId}`,
   });
