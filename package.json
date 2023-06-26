@@ -22,7 +22,8 @@
     "react-hook-form": "^7.44.3",
     "react-query": "^3.39.3",
     "react-redux": "^8.1.1",
-    "redux": "^4.2.1"
+    "redux": "^4.2.1",
+    "redux-persist": "^6.0.0"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.0.1",
