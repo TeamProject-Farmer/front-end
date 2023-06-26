@@ -1,32 +1,25 @@
-import React from 'react';
 import Styled from './styles';
 import Icon from '@components/Home/Common/Icon';
 
 const Header = () => {
   return (
     <Styled.Wrapper>
-      <Styled.Event>
-        첫 구매라면 누구나 최대 2만원 할인받기
-        <Styled.CloseBtn>
-          <Icon src="close" />
-        </Styled.CloseBtn>
-      </Styled.Event>
       <Styled.Header>
         <Styled.Menu>
-          <Icon src="menu" />
+          <Icon src="menu" width={30} height={30} />
         </Styled.Menu>
         <Styled.Logo>
-          <Icon src="logo" width={180} />
+          <Icon src="logo" width={150} height={33} />
         </Styled.Logo>
         <Styled.Utils>
           <li>
-            <Icon src="myPage" />
+            <Icon src="myPage" width={30} height={30} />
           </li>
           <li>
-            <Icon src="search" />
+            <Icon src="search" width={30} height={30} />
           </li>
           <li>
-            <Icon src="cart" />
+            <Icon src="cart" width={30} height={30} />
           </li>
         </Styled.Utils>
       </Styled.Header>

@@ -1,9 +1,5 @@
 import styled from '@emotion/styled'
-
-interface IBtnProps {
-  content: string;
-  color?: string;
-}
+import { IBtnProps } from 'src/types/home/types';
 
 const Button = ({content, color}: IBtnProps) => {
   return (
