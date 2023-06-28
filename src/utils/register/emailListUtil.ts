@@ -5,5 +5,4 @@ export const emailOptions = [
   'nate.com',
   'yahoo.com',
   'kakao.com',
-  '직접입력',
 ];
