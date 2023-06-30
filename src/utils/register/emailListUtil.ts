@@ -1,9 +1,8 @@
 export const emailOptions = [
   'naver.com',
-  'gmail.com',
-  'hanmail.com',
+  'hanmail.net',
+  'daum.net',
   'nate.com',
   'yahoo.com',
   'kakao.com',
-  '직접입력',
 ];

@@ -93,9 +93,7 @@ const InputGroup = () => {
 
   // 이메일 옵션 리스트
   const handleOptionClick = (email: string) => {
-    email === '직접입력'
-      ? setValue('selectedEmail', '')
-      : setValue('selectedEmail', email);
+    setValue('selectedEmail', email);
     setIsDropdownOpen(false);
     trigger('selectedEmail');
   };
@@ -146,7 +144,6 @@ const InputGroup = () => {
   const handleJoin = async (joinData: RegisterData) => {
     try {
       await getJoin(joinData);
-      router.push('/login');
     } catch (error) {
       // 닉네임 중복 검사
       const res = error.response.data;
@@ -173,6 +170,7 @@ const InputGroup = () => {
           detailAddress: getValues().detailAddress,
         };
         await handleJoin(joinData);
+        router.push('/login');
       }
     } catch (error) {
       console.error(error);
@@ -194,8 +192,10 @@ const InputGroup = () => {
               {...selectedEmail}
               placeholder="선택해주세요"
               type="email"
+              readOnly
+              style={{ cursor: 'pointer' }}
+              onClick={() => setIsDropdownOpen(prev => !prev)}
             />
-            <Styled.Dot onClick={() => setIsDropdownOpen(prev => !prev)} />
           </Styled.DotContainer>
           {isDropdownOpen && (
             <Styled.Dropdown>
@@ -215,10 +215,9 @@ const InputGroup = () => {
         {getFirstErrorMessage(errors.email || errors.selectedEmail)}
       </Styled.ErrorText>
       <FormButton
-        color="#BBBBBB"
+        color={theme.colors.white}
         label="이메일 인증하기"
-        backgroundColor="#F7F8FA"
-        borderColor="#000000"
+        backgroundColor={theme.colors.green1}
         disabled={!watch('email') || !watch('selectedEmail')} // email 미입력시 비활성화
         onClick={handleSendEmail}
       />
@@ -308,10 +307,9 @@ const InputGroup = () => {
 
       {/* 회원가입 버튼 */}
       <FormButton
-        color={theme.colors.gray}
+        color={theme.colors.white}
         label="회원가입하기"
-        backgroundColor="#F7F8FA"
-        borderColor={theme.colors.black}
+        backgroundColor={theme.colors.green1}
         onClick={handleSubmit(() => {
           handleEmailCheck();
         })}
