@@ -93,14 +93,25 @@ const InputField = ({label, field, width, placeholder}: InputFieldProps) => {
         </Styled.PhoneWrapper>
       ) : field === 'address' ? (
         <Styled.AddressWrapper>
-          <Styled.PostcodeWrapper>
+          <Styled.flexWrapper>
             <Styled.Input {...postCodeValid} placeholder="우편번호" width={250} />
             <Button text="주소검색" />
-          </Styled.PostcodeWrapper>
+          </Styled.flexWrapper>
           <Styled.Input {...basicAddressValid} placeholder="기본주소" />
           <Styled.Input {...detailAddressValid} placeholder="상세주소" />
         </Styled.AddressWrapper>
-      ) : (
+      ) : field === 'coupon' ? (
+          <Styled.flexWrapper>
+            <Styled.Input width={660} />
+            <Button text="전액사용" />
+          </Styled.flexWrapper>
+      ) : field === 'point' ? (
+          <Styled.flexWrapper>
+            <Styled.Input width={660} />
+            <Button text="쿠폰적용" />
+          </Styled.flexWrapper>
+      )
+      : (
         <Styled.Input />
       )}
     </Styled.InputWrapper>
@@ -175,7 +186,7 @@ const Styled = {
     flex-direction: column;
     gap: 17px;
   `,
-  PostcodeWrapper: styled.div`
+  flexWrapper: styled.div`
     display: flex;
   `
 
