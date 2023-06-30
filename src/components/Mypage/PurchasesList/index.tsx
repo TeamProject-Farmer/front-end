@@ -1,8 +1,10 @@
 import React from 'react';
 import { Styled } from '../styles';
 import theme from '@styles/theme';
+import { useRouter } from 'next/router';
 
 const PurchasesList = () => {
+  const route = useRouter();
   const purchases = [
     {
       name: '식물명 식물이름',
@@ -32,12 +34,11 @@ const PurchasesList = () => {
   ];
 
   return (
-    <Styled.BoxWrapper>
+    <Styled.BoxWrapper margin="8">
       <Styled.TextBox>
         <Styled.HeaderDiv>
-          {/* 더보기 클릭시 구매목록 페이지로 이동 */}
           <Styled.HeaderText>구매목록</Styled.HeaderText>
-          <Styled.More />
+          <Styled.More onClick={() => route.push('/mypage/purchases')} />
         </Styled.HeaderDiv>
         <Styled.ListWrapper>
           {/* 6개까지 가능해서 일단 slice 메서드 적용 */}
