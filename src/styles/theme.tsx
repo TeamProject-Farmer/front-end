@@ -11,6 +11,7 @@ const theme: Theme = {
     green3: '#A4BE7B',
     pointGreen: '#59B941',
     apricot: '#E5D9B6',
+    loginGreen: '#8AC22B',
   },
 };
 
