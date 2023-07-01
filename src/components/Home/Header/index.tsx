@@ -1,6 +1,8 @@
 import Styled from './styles';
 import Icon from '@components/Home/Common/Icon';
+import Logo from '@assets/images/home/logo.svg';
 
+// 헤더 렌더링 안되는 이슈 발생, 수정 필요할듯
 const Header = () => {
   return (
     <Styled.Wrapper>
@@ -9,7 +11,7 @@ const Header = () => {
           <Icon src="menu" width={30} height={30} />
         </Styled.Menu>
         <Styled.Logo>
-          <Icon src="logo" width={150} height={33} />
+          <Logo />
         </Styled.Logo>
         <Styled.Utils>
           <li>
