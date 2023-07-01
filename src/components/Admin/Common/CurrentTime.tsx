@@ -1,6 +1,5 @@
 import Clock from 'react-live-clock';
 import styled from '@emotion/styled';
-import theme from '@styles/theme';
 
 const CurrentTime = () => {
   return (
