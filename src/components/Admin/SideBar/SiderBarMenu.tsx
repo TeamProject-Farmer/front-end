@@ -2,9 +2,9 @@ import Image from 'next/image';
 import styled from '@emotion/styled';
 import { sideMenuProps } from '../Type';
 import Icon from './Icon';
+
 const SiderBarMenu = (props: sideMenuProps) => {
   const { isCurrentPage, imageName, text } = props;
-  const imageUrl = `/assets/images/admin/${imageName}Icon.svg`;
   let color = null;
   if(isCurrentPage){
     color = '#9CDC1F';

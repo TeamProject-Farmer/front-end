@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import HomeIcon from '@assets/images/admin/homeIcon.svg'
+import HomeIcon from '@assets/images/admin/homeIcon.svg';
 
 const Styled = {
   Wrapper: styled.div`
@@ -8,10 +8,11 @@ const Styled = {
     left: 0;
     height: 100vh;
     max-height: 100%;
-    width:240px;
+    width: 240px;
     background-color: #353535;
     display: flex;
     flex-direction: column;
+    z-index: 2;
   `,
   Header: styled.div`
     width: 100%;
@@ -22,7 +23,6 @@ const Styled = {
     justify-content: center;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   `,
-
 };
 
 export default Styled;
