@@ -1,4 +1,5 @@
 import {useState} from 'react'
+import theme from '@styles/theme';
 import styled from '@emotion/styled'
 import { FieldError, useForm } from 'react-hook-form';
 import { emailOptions } from 'src/utils/register/emailListUtil';
@@ -88,28 +89,37 @@ const InputField = ({label, field, width, placeholder}: InputFieldProps) => {
           </Styled.EmailOptionWrapper>
         </Styled.EmailWrapper>
       ) : field === 'phone' ? (
-        <Styled.PhoneWrapper>
+        <Styled.FlexGapWrapper>
           <Styled.Input />
-        </Styled.PhoneWrapper>
+        </Styled.FlexGapWrapper>
       ) : field === 'address' ? (
-        <Styled.AddressWrapper>
-          <Styled.flexWrapper>
+        <Styled.FlexColumnWrapper>
+          <Styled.FlexWrapper>
             <Styled.Input {...postCodeValid} placeholder="우편번호" width={250} />
             <Button text="주소검색" />
-          </Styled.flexWrapper>
+          </Styled.FlexWrapper>
           <Styled.Input {...basicAddressValid} placeholder="기본주소" />
           <Styled.Input {...detailAddressValid} placeholder="상세주소" />
-        </Styled.AddressWrapper>
+        </Styled.FlexColumnWrapper>
       ) : field === 'coupon' ? (
-          <Styled.flexWrapper>
+        <Styled.FlexColumnWrapper>
+          <Styled.FlexWrapper>
             <Styled.Input width={660} />
             <Button text="전액사용" />
-          </Styled.flexWrapper>
+          </Styled.FlexWrapper>
+          <Styled.Explanation>1회 구매시 적립금 최소 사용금액은 2,000원입니다.</Styled.Explanation>
+          </Styled.FlexColumnWrapper>
       ) : field === 'point' ? (
-          <Styled.flexWrapper>
+        <Styled.FlexColumnWrapper>
+          <Styled.FlexWrapper>
             <Styled.Input width={660} />
             <Button text="쿠폰적용" />
-          </Styled.flexWrapper>
+          </Styled.FlexWrapper>
+          <Styled.FlexGapWrapper>
+            <Styled.Explanation>적립금과 쿠폰은 중복사용이 불가합니다.</Styled.Explanation>
+            <Styled.Explanation>일부 할인 상품에 한하여 쿠폰 사용이 제한될 수 있습니다.</Styled.Explanation>
+          </Styled.FlexGapWrapper>
+        </Styled.FlexColumnWrapper>
       )
       : (
         <Styled.Input />
@@ -122,6 +132,7 @@ export default InputField
 
 const Styled = {
   InputWrapper: styled.div`
+    position: relative;
     display: flex;
     align-items: center;
   `,
@@ -167,7 +178,7 @@ const Styled = {
     margin: 0;
     list-style: none;
     z-index: 1;
-`,
+  `,
   Option: styled.li`
       font-size: 14px;
       padding: 10px;
@@ -175,19 +186,24 @@ const Styled = {
       &:hover {
         background-color: #f1f1f1;
       }
-    `,
-  PhoneWrapper: styled.div`
+  `,
+  FlexWrapper: styled.div`
+    display: flex;
+  `,
+  FlexGapWrapper: styled.div`
     display: flex;
     align-items: center;
     gap: 11px;
   `,
-  AddressWrapper: styled.div`
+  FlexColumnWrapper: styled.div`
     display: flex;
     flex-direction: column;
     gap: 17px;
   `,
-  flexWrapper: styled.div`
-    display: flex;
-  `
-
+  Explanation: styled.p`
+    padding: 6px 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: #F0F0F0;
+  `,
 }

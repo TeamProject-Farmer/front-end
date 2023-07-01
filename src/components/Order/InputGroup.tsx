@@ -32,7 +32,7 @@ const Styled = {
       position: absolute;
       display: block;
       background-color: ${theme.colors.green4};
-      width: 1200px;
+      width: 1198px;
       height: 15px;
       top: 0;
       left: 0;
