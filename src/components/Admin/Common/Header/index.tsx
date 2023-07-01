@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import styled from '@emotion/styled';
 import CurrentTime from '../CurrentTime';
-import searchIcon from '@assets/images/admin/searchIcon.svg';
+
 const Header = () => {
   return (
     <Styled.Wrapper>

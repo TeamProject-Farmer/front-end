@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import styled from '@emotion/styled';
 import { sideMenuProps } from '../Type';
-
+import Icon from './Icon';
 
 const SiderBarMenu = (props: sideMenuProps) => {
   const { isCurrentPage, imageName, text } = props;
@@ -15,7 +15,7 @@ const SiderBarMenu = (props: sideMenuProps) => {
     <>
       <Styled.Wrapper isClicked={isCurrentPage}>
         <Styled.MenuWrapper>
-          
+          <Icon imageName={imageName} colorName={color}/>
           <Styled.Menu>{text}</Styled.Menu>
         </Styled.MenuWrapper>
         <Image

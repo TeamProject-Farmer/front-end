@@ -16,8 +16,7 @@ const SideBar = (props: PropsList) => {
   } else {
     category = menuName;
   }
-  console.log('category');
-  console.log(category);
+  
   return (
     <Styled.Wrapper>
       <Styled.Header>
@@ -27,6 +26,7 @@ const SideBar = (props: PropsList) => {
             alt="logo"
             width={150}
             height={34}
+            priority
           ></Image>
         </Link>
       </Styled.Header>
