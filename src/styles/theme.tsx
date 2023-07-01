@@ -13,6 +13,9 @@ const theme: Theme = {
     apricot: '#E5D9B6',
     loginGreen: '#8AC22B',
   },
+  size: {
+    mainWidth: '1200px'
+  },
 };
 
 export default theme;
