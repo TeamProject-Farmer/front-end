@@ -28,6 +28,7 @@ const PurchasesList = () => {
     },
     // 추후 API 로 불러올 임시 데이터 (맥북 기준 5개까지 리스팅 가능)
     // 반응형 적용되야 할듯..
+    // 타입 선언 전
   ];
 
   return (
@@ -53,6 +54,7 @@ const PurchasesList = () => {
                 {purchase.name}
                 {index}
               </Styled.Title>
+              {/* 클릭시 리뷰 작성 페이지로 route */}
               <Styled.ReviewText>{purchase.review}</Styled.ReviewText>
             </Styled.ListDiv>
           ))}
