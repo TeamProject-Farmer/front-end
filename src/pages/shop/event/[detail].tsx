@@ -1,6 +1,7 @@
+import EventDetail from "@components/Shop/EventDetail";
 
 const EventDetailPage = () => {
-  return <div>기획선 상세 페이지</div>;
+  return <EventDetail></EventDetail>;
 }
 
 export default EventDetailPage;
