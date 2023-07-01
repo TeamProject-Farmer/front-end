@@ -1,5 +1,5 @@
 import Layout from '@components/Mypage/Layout/layout';
-import Row from '@components/Mypage/Main/MyCoupons';
+import Row from '@components/Mypage/MyCoupons';
 import React from 'react';
 
 const index = () => {
