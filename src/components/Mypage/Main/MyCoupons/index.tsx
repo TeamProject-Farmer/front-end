@@ -15,7 +15,7 @@ const Row = () => {
           {couponsData.map((coupon, index) => (
             <Styled.Coupon key={index}>
               {coupon.icon}
-              <h1>{coupon.title}</h1>
+              <Styled.CouponText>{coupon.title}</Styled.CouponText>
             </Styled.Coupon>
           ))}
         </Styled.CouponWrapper>
