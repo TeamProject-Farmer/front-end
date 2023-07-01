@@ -1,31 +1,29 @@
 import {useState} from 'react'
 import theme from '@styles/theme';
 import styled from '@emotion/styled'
-import { FieldError, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { emailOptions } from 'src/utils/register/emailListUtil';
 import {
-  DaumPostcodeData,
   FieldName,
   IAuthForm,
   Validate,
 } from 'src/types/register/types';
 import {
   requiredErrorMessage,
-  validatePhoneNumber,
 } from 'src/utils/register/formUtil';
 import Option from '@assets/images/register/option.svg';
-import { useDaumPostcodePopup } from 'react-daum-postcode';
-import { postcodeScriptUrl } from 'react-daum-postcode/lib/loadPostcode';
 import Button from './Button';
 
 interface InputFieldProps {
-  label: string;
+  label?: string;
+  required?: boolean;
   field: string;
   width?: number;
   placeholder?: string;
+  checkBoxLabel?: string;
 }
 
-const InputField = ({label, field, width, placeholder}: InputFieldProps) => {
+const InputField = ({label, required, field, width, placeholder, checkBoxLabel}: InputFieldProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
    // react-hook-form
@@ -62,8 +60,13 @@ const InputField = ({label, field, width, placeholder}: InputFieldProps) => {
   const detailAddressValid = useFormValidation('detailAddress');
 
   return (
-    <Styled.InputWrapper>
-      <Styled.Label>{label}</Styled.Label>
+    <Styled.InputWrapper field={field}>
+      {label && 
+        <Styled.Label>
+          {label}
+          {required && <Styled.AstBox>*</Styled.AstBox>}
+        </Styled.Label>
+      }
       {field === 'email' ? (
         <Styled.EmailWrapper>
           <Styled.Input width={width} />
@@ -121,7 +124,13 @@ const InputField = ({label, field, width, placeholder}: InputFieldProps) => {
           </Styled.FlexGapWrapper>
         </Styled.FlexColumnWrapper>
       )
-      : (
+      : field === 'card' || field === 'instalment' ? (
+        <Styled.Input width={844} placeholder={placeholder} />
+      ) :
+      field === 'shippingMsg' ? (
+        <Styled.Input width={750} placeholder={placeholder}/>
+      ) :
+      (
         <Styled.Input />
       )}
     </Styled.InputWrapper>
@@ -131,14 +140,18 @@ const InputField = ({label, field, width, placeholder}: InputFieldProps) => {
 export default InputField
 
 const Styled = {
-  InputWrapper: styled.div`
+  InputWrapper: styled.div<{field: string}>`
     position: relative;
     display: flex;
-    align-items: center;
+    align-items: ${({field}) => field === 'coupon' || field === 'point' ? 'flex-start' : 'center'};
   `,
   Label: styled.label`
     font-size: 16px;
     width: 95px;
+  `,
+  AstBox: styled.span`
+    color: ${theme.colors.pointGreen};
+    margin: 2px;
   `,
   Input: styled.input<{width?:number}>`
     outline: none;

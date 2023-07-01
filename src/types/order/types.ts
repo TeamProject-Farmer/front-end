@@ -4,3 +4,8 @@ export interface OrderedProduct {
   count: number;
   price: number;
 }
+
+export interface PayMethod {
+  id: string;
+  title: string;
+}
