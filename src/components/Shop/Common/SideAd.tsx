@@ -1,11 +1,14 @@
 import styled from '@emotion/styled';
 import sideAdImage from '@assets/images/shop/sideAdImage.svg';
 import close from '@assets/images/shop/closeIcon.svg';
-
-const SideAd = () => {
+interface Props {
+  top?: number;
+}
+const SideAd = (props:Props) => {
+  const {top} = props;
   return (
     <Styled.Wrapper>
-      <Styled.SideAd>
+      <Styled.SideAd top={top}>
         <Styled.CloseIcon></Styled.CloseIcon>
         <Styled.SideAdImage></Styled.SideAdImage>
       </Styled.SideAd>
@@ -20,10 +23,10 @@ const Styled = {
     margin-right: 36px;
     margin-left: 15px;
   `,
-  SideAd: styled.div`
+  SideAd: styled.div<Props>`
     //일단 임의로 fixed로 설정해둠
     position: fixed;
-    top: 110px;
+    top: ${props => (props.top ? `${props.top}px` : '134px')};
     border-radius: 18px;
     width: 160px;
     height: 300px;
@@ -31,7 +34,6 @@ const Styled = {
     justify-content: center;
   `,
   SideAdImage: styled(sideAdImage)`
-    //일단 임의로 fixed로 설정해둠
     width: inherit;
     height: inherit;
     border-radius: 18px;

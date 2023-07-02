@@ -1,23 +1,29 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
 import theme from '@styles/theme';
+
+//interface들은 추후 디자인, props 내용 결정되면 옮기도록 하겠습니다!
 interface PropsList {
   number?: number;
   image: string;
   contentTitle: string;
-  pricePercent: number;
+  pricePercent?: number;
   totalPrice: string | number;
   reviewScore: number;
   totalReview: string | number;
-  
+  //props가 이렇게 많으면 차라리 새로 만드는게 낫지않을까 하는 생각이 드는데 다른분들은 혹시 어떻게 생각하시나요?
+  imageSize?: number;
   totalWidth?: number;
   totalHeight?: number;
+  paddingTop?:number;
   titleSize?: number;
   exceptPercent?: boolean;
   priceSize?: number;
   reviewSize?: number;
   isSpecialPrice?: boolean;
+  contentPadding?:number;
 }
+
 const Item = (props: PropsList) => {
   const {
     number,
@@ -27,9 +33,19 @@ const Item = (props: PropsList) => {
     totalPrice,
     reviewScore,
     totalReview,
+    imageSize,
+    totalWidth,
+    totalHeight,
+    paddingTop,
+    titleSize,
+    priceSize,
+    reviewSize,
+    exceptPercent,
+    isSpecialPrice,contentPadding,
+    
   } = props;
   return (
-    <Styled.Wrapper>
+    <Styled.Wrapper totalWidth={totalWidth} totalHeight={totalHeight}>
       {number ? <Styled.NumberBox>{number}</Styled.NumberBox> : null}
       <Styled.HeartBox>
         <Image
@@ -39,15 +55,21 @@ const Item = (props: PropsList) => {
           height={25.88}
         />
       </Styled.HeartBox>
-      <Styled.ImageWrapper>{image}</Styled.ImageWrapper>
-      <Styled.ContentWrapper>
+      <Styled.ImageWrapper imageSize={imageSize}>{image}</Styled.ImageWrapper>
+      <Styled.ContentWrapper paddingTop={paddingTop} contentPadding={contentPadding}>
         {/* 데이터가 어떠한 형식으로 넘어오는지에 따라 수정이 필요할 것 같습니다. */}
-        <Styled.ContentTitle>{contentTitle}</Styled.ContentTitle>
-        <Styled.ContentPrice>
-          <div>{pricePercent}%</div>
-          <div>{totalPrice}</div>
+        <Styled.ContentTitle titleSize={titleSize}>{contentTitle}</Styled.ContentTitle>
+        <Styled.ContentPrice priceSize={priceSize}>
+          {exceptPercent ? (
+            <Styled.Price>{totalPrice}</Styled.Price>
+          ) : (
+            <>
+              <Styled.PricePercent>{pricePercent}%</Styled.PricePercent>
+              <Styled.Price>{totalPrice}</Styled.Price>
+            </>
+          )}
         </Styled.ContentPrice>
-        <Styled.ContentReview>
+        <Styled.ContentReview reviewSize={reviewSize}>
           <Image
             src="/assets/images/shop/filledStar.svg"
             alt="heartIcon"
@@ -59,8 +81,14 @@ const Item = (props: PropsList) => {
         </Styled.ContentReview>
         {/* 태그 부분들에 대해서는 추가적인 정보가 필요할 것 같습니다. */}
         <Styled.ContentTagWrapper>
-          <Styled.ContentTag color="#62c655">특가</Styled.ContentTag>
-          <Styled.ContentTag color="#d9d9d9">무료배송</Styled.ContentTag>
+          {isSpecialPrice ? (
+            <>
+              <Styled.ContentTag color="#62c655">특가</Styled.ContentTag>
+              <Styled.ContentTag color="#d9d9d9">무료배송</Styled.ContentTag>
+            </>
+          ) : (
+            <Styled.ContentTag color="#d9d9d9">무료배송</Styled.ContentTag>
+          )}
         </Styled.ContentTagWrapper>
       </Styled.ContentWrapper>
     </Styled.Wrapper>
@@ -68,18 +96,20 @@ const Item = (props: PropsList) => {
 };
 
 interface CssProps {
+  imageSize?: number;
   totalWidth?: number;
   totalHeight?: number;
+  paddingTop?:number;
   titleSize?: number;
-  exceptPercent?: boolean;
   priceSize?: number;
   reviewSize?: number;
-  isSpecialPrice?: boolean;
+  contentPadding?:number;
 }
 const Styled = {
-  Wrapper: styled.div`
-    width: 280px;
-    height: 410px;
+  Wrapper: styled.div<CssProps>`
+    width: ${props => (props.totalWidth ? `${props.totalWidth}px` : '280px')};
+    height: ${props =>
+      props.totalHeight ? `${props.totalHeight}px` : '410px;'};
     display: flex;
     flex-direction: column;
     border: 1px solid ${theme.colors.black};
@@ -112,9 +142,9 @@ const Styled = {
     right: 0;
     padding: 15.5px;
   `,
-  ImageWrapper: styled.div`
+  ImageWrapper: styled.div<CssProps>`
     width: 100%;
-    height: 279.5px;
+    height: ${props => (props.imageSize ? `${props.imageSize}px` : '279.5px')};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -124,39 +154,42 @@ const Styled = {
     font-size: 30px;
     font-weight: 700;
   `,
-  ContentWrapper: styled.div`
+  ContentWrapper: styled.div<CssProps>`
     display: flex;
     flex-direction: column;
     font-size: 18px;
     font-weight: 500;
-    padding: 13.46px 17.64px;
+    padding: ${props => (props.paddingTop ? `${props.paddingTop}px 17.64px` : '13.46px ')};
     & > div {
-      margin-bottom: 4.78px;
+      margin-bottom: ${props => (props.contentPadding ? `${props.contentPadding}px` : '4.78px')};
       display: flex;
       align-items: center;
     }
     & > div:last-child {
-      margin-top: 7px;
+      margin-top: ${props => (props.contentPadding ? '3px' : '7px')};
     }
   `,
-  ContentTitle: styled.div`
+  ContentTitle: styled.div<CssProps>`
     width: 174.32px;
     height: 19.67px;
+    font-size: ${props => (props.titleSize ? `${props.titleSize}px` : '')};
   `,
-  ContentPrice: styled.div`
+  ContentPrice: styled.div<CssProps>`
     display: flex;
-    & > div:first-child {
-      color: #33b822;
-      font-weight: 700;
-      margin-right: 8px;
-    }
-    & > div:last-child {
-      font-weight: 600;
-    }
+    font-size: ${props => (props.priceSize ? `${props.priceSize}px` : '')};
   `,
-  ContentReview: styled.div`
+  PricePercent: styled.div`
+    color: #33b822;
+    font-weight: 700;
+    margin-right: 8px;
+  `,
+  Price: styled.div`
+    font-weight: 600;
+  `,
+  ContentReview: styled.div<CssProps>`
     display: flex;
-    font-size: 14px;
+    font-size: ${props =>
+      props.reviewSize ? `${props.reviewSize}px` : '14px'};
     & > div:first-of-type {
       font-weight: 700;
       margin: 0 4.9px;

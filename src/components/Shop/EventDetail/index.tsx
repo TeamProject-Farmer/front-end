@@ -79,6 +79,7 @@ const EventDetail = () => {
               totalPrice={i.totalPrice}
               reviewScore={i.reviewScore}
               totalReview={i.totalReview}
+              isSpecialPrice={true}
             ></Item>
           ))}
           {/* 어떤 조건으로 생기는지에 따라 다를 것 같음 */}

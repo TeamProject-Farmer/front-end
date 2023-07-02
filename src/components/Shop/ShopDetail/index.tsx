@@ -60,17 +60,26 @@ const ShopDetail = () => {
       <Styled.Title>키움용품</Styled.Title>
       <Styled.ContentWrapper>
         <Styled.PickWrapper>
+          <SideAd top={450}/>
           <Styled.PickTitle>MD's PICK</Styled.PickTitle>
           <Styled.PickItemWrapper>
             {TempList.map(i => (
               <Item
-                number={i.id}
                 image={i.image}
                 contentTitle={i.contentTitle}
-                pricePercent={i.pricePercent}
                 totalPrice={i.totalPrice}
                 reviewScore={i.reviewScore}
                 totalReview={i.totalReview}
+                imageSize ={215}
+                totalWidth={216}
+                totalHeight={311}
+                titleSize={16}
+                exceptPercent={true}
+                priceSize={16}
+                reviewSize={12}
+                isSpecialPrice={false}
+                paddingTop={6}
+                contentPadding={1}
               ></Item>
             ))}
             <Styled.PickItemButton />
@@ -84,7 +93,31 @@ const ShopDetail = () => {
             <div>높은가격순</div>
           </div>
         </Styled.OrderWrapper>
+        <Styled.OrderItemWrapper>
+          {/* 추후 api 연동 */}
+        {TempList.map(i => (
+              <Item
+                image={i.image}
+                contentTitle={i.contentTitle}
+                totalPrice={i.totalPrice}
+                pricePercent={i.pricePercent}
+                reviewScore={i.reviewScore}
+                totalReview={i.totalReview}
+                imageSize ={232.5}
+                totalWidth={249.17}
+                totalHeight={333.3}
+                titleSize={16}
+                exceptPercent={false}
+                priceSize={16}
+                reviewSize={12}
+                paddingTop={6}
+                contentPadding={1}
+                isSpecialPrice={true}
+              ></Item>
+            ))}
+        </Styled.OrderItemWrapper>
       </Styled.ContentWrapper>
+      <div>footer 불러올 예정</div>
     </Styled.Wrapper>
   );
 };
@@ -116,10 +149,11 @@ const Styled = {
     display: flex;
     flex-direction: column;
     margin-top: 110px;
-    position: relative;
     align-items: center;
+    
   `,
   PickWrapper: styled.div`
+    position: relative;
     margin-top: 88px;
     margin-bottom: 65px;
     display: flex;
@@ -146,7 +180,7 @@ const Styled = {
     right: -40px;
   `,
   OrderWrapper: styled.div`
-    width: 100vw;
+    width: 99vw;
     max-width: 100%;
     height: 60px;
     /* 디자인처럼 색이 잘 보이려면 3px로 바꿔야할 것 같음 */
@@ -163,6 +197,17 @@ const Styled = {
         font-size: 16px;
         font-weight: 500;
       }
+    }
+  `,
+  OrderItemWrapper: styled.div`
+    width: ${theme.size.mainWidth};
+    height: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 70px 0;
+    & > div {
+      margin-bottom: 74px;
     }
   `,
 };
