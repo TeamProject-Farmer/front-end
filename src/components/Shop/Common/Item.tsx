@@ -9,6 +9,14 @@ interface PropsList {
   totalPrice: string | number;
   reviewScore: number;
   totalReview: string | number;
+  
+  totalWidth?: number;
+  totalHeight?: number;
+  titleSize?: number;
+  exceptPercent?: boolean;
+  priceSize?: number;
+  reviewSize?: number;
+  isSpecialPrice?: boolean;
 }
 const Item = (props: PropsList) => {
   const {
@@ -59,6 +67,15 @@ const Item = (props: PropsList) => {
   );
 };
 
+interface CssProps {
+  totalWidth?: number;
+  totalHeight?: number;
+  titleSize?: number;
+  exceptPercent?: boolean;
+  priceSize?: number;
+  reviewSize?: number;
+  isSpecialPrice?: boolean;
+}
 const Styled = {
   Wrapper: styled.div`
     width: 280px;

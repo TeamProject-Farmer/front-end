@@ -1,5 +1,7 @@
+import ShopDetail from "@components/Shop/ShopDetail";
+
 const CategoryPage = () => {
-  return <div>샵 세부 페이지</div>;
+  return <ShopDetail />;
 }
 
 export default CategoryPage;
