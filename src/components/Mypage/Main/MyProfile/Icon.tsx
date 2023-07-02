@@ -1,12 +1,7 @@
 import { Styled } from '@components/Mypage/styles';
+import { ReactNode } from 'react';
 
-export const IconText = ({
-  icon,
-  text,
-}: {
-  icon: React.ReactNode;
-  text: string;
-}) => {
+export const IconText = ({ icon, text }: { icon: ReactNode; text: string }) => {
   return (
     <Styled.TextWrapper>
       {icon}
