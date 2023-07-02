@@ -72,6 +72,7 @@ const Styled = {
     font-family: Inter;
     font-style: normal;
     line-height: normal;
+    margin-bottom: 24px;
   `,
   NumberBox: styled.div`
     position: absolute;
