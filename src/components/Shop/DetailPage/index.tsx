@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
+import Panel from './Panel';
 
 const DetailPage = () => {
-  return <div></div>;
+  return <div><Panel /></div>;
 }
 
 const Styled={
