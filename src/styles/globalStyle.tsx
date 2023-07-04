@@ -22,6 +22,9 @@ export const globalStyles = (
         -webkit-box-shadow: 0 0 0 1000px white inset;
         box-shadow: 0 0 0 1000px white inset;
       }
+      :focus {
+        outline: none;
+      }
     `}
   />
 );

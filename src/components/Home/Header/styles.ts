@@ -2,9 +2,7 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 
 const Styled = {
-  Wrapper: styled.div`
-    width: 1920px;
-  `,
+  Wrapper: styled.div``, // 임시 수정
   Event: styled.div`
     position: relative;
     height: 50px;
@@ -20,7 +18,7 @@ const Styled = {
     right: 10px;
   `,
   Header: styled.header`
-    padding: 0 400px;
+    padding: 0 200px; // 임시 수정
     height: 80px;
     display: flex;
     justify-content: space-between;

@@ -6,12 +6,15 @@ const theme: Theme = {
     white: '#ffffff',
     gray: '#BBBBBB',
     lightGray: '#D9D9D9',
+    mypageGray: '#606367',
     green1: '#285430',
     green2: '#5F8D4E',
     green3: '#A4BE7B',
+    green4: '#ECF9E9',
     pointGreen: '#59B941',
     apricot: '#E5D9B6',
     loginGreen: '#8AC22B',
+    borderGray: '#ABABAB',
   },
   //전반적으로 main 부분의 width size가 아래와 같다고 생각해서 넣었는데 이상하면 빼겠습니다!
   size: {
