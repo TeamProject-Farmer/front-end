@@ -1,5 +1,4 @@
 import styled from '@emotion/styled'
-import { OrderedProduct } from 'src/types/order/types'
 
 const ProductList = ({productList}) => {
   return (
@@ -11,11 +10,11 @@ const ProductList = ({productList}) => {
         return (
           <Styled.ProductWrapper key={id}>
             <Styled.ImgBox/>
-            <Styled.ContentBox>
+            <Styled.ContentWrapper>
               <Styled.FontBlack>상품명 : {title}</Styled.FontBlack>
               <Styled.FontGray>수량 : {count}</Styled.FontGray>
               <Styled.FontBlack>{price}</Styled.FontBlack>
-            </Styled.ContentBox>
+            </Styled.ContentWrapper>
           </Styled.ProductWrapper>
         )
       })
@@ -45,7 +44,7 @@ const Styled = {
     height: 90px;
     background-color: #D9D9D9;
   `,
-  ContentBox: styled.div`
+  ContentWrapper: styled.div`
     display: flex;
     flex-direction: column;
     gap: 7px;

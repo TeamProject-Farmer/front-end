@@ -1,10 +1,5 @@
 import styled from '@emotion/styled'
-
-interface ButtonProps {
-  text: string;
-  bgColor?: string;
-  color?: string;
-}
+import { ButtonProps } from 'src/types/order/types'
 
 const Button = ({text, bgColor, color}:ButtonProps) => {
   return (

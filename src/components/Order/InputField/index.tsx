@@ -11,15 +11,7 @@ import {
   requiredErrorMessage,
 } from 'src/utils/register/formUtil';
 import Button from './Button';
-
-interface InputFieldProps {
-  label?: string;
-  required?: boolean;
-  field: string;
-  width?: number;
-  placeholder?: string;
-  checkBoxLabel?: string;
-}
+import {InputFieldProps} from 'src/types/order/types'
 
 const InputField = ({label, required, field, width, placeholder, checkBoxLabel}: InputFieldProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);

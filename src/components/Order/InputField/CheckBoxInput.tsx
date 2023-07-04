@@ -1,9 +1,5 @@
 import styled from '@emotion/styled'
-
-interface CheckBoxInputProps {
-  label: string;
-  smallBox?: boolean; 
-}
+import { CheckBoxInputProps } from 'src/types/order/types'
 
 const CheckBoxInput = ({label, smallBox}:CheckBoxInputProps) => {
   return (
