@@ -10,7 +10,7 @@ const theme: Theme = {
     green1: '#285430',
     green2: '#5F8D4E',
     green3: '#A4BE7B',
-    green4: '#ECF9E9',
+    green4: '#2B730A',
     pointGreen: '#59B941',
     apricot: '#E5D9B6',
     loginGreen: '#8AC22B',
