@@ -12,7 +12,7 @@ const Footer = () => {
         height={207}
         style={{ objectFit: 'contain' }}
       />
-      <Styled.InfoBox>
+      <Styled.InfoWrapper>
         <Styled.Info>
           <Styled.BoldContent>파머(주)</Styled.BoldContent>
           <Styled.Content>
@@ -30,7 +30,7 @@ const Footer = () => {
             </Styled.Content>
           </Styled.AccountBox>
         </Styled.Info>
-      </Styled.InfoBox>
+      </Styled.InfoWrapper>
     </Styled.Wrapper>
   );
 };
