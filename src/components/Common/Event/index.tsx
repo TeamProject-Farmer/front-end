@@ -1,6 +1,6 @@
 import Styled from './styles'
 import { useState } from 'react'
-import Icon from '../Common/Icon'
+import Icon from '../../Home/Common/Icon'
 
 const Event = () => {
   const [close, setClose] = useState(false)

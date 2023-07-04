@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import Header from '@components/Home/Header'
-import Footer from '@components/Home/Footer'
+import Header from '@components/Common/Header'
+import Footer from '@components/Common/Footer'
 import { ILayoutProps } from 'src/types/search/types'
 
 const Layout = ({children}: ILayoutProps) => {

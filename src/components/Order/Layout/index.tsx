@@ -1,6 +1,6 @@
 import React from 'react'
-import Header from '@components/Home/Header'
-import Footer from '@components/Home/Footer'
+import Header from '@components/Common/Header'
+import Footer from '@components/Common/Footer'
 import styled from '@emotion/styled'
 import { ILayoutProps } from '../../../types/order/types';
 
@@ -8,7 +8,6 @@ import { ILayoutProps } from '../../../types/order/types';
 const Layout = ({children}: ILayoutProps) => {
   return (
     <Styled.Wrapper>
-      <Header/>
       <Styled.FlexWrapper>
         <Styled.Title>주문/결제</Styled.Title>
         <Styled.StateBox>
@@ -17,7 +16,6 @@ const Layout = ({children}: ILayoutProps) => {
         </Styled.StateBox>
       </Styled.FlexWrapper>
       {children}
-      <Footer/>
     </Styled.Wrapper>
   )
 }
