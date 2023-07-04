@@ -23,7 +23,6 @@ const Styled = {
     align-items: center;
   `,
   Input: styled.input`
-    
   `,
   Label: styled.label<{smallBox: boolean}>`
     font-size: ${({smallBox}) => smallBox ? '14px' : '16px'};

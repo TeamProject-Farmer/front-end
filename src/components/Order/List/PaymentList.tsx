@@ -49,6 +49,9 @@ const Styled = {
     height: 155px;
     box-sizing: border-box;
     border: ${({isClicked}) => isClicked ? '3px solid #47AC3A;' : '1px solid #ABABAB'};
+    :not(:last-child){
+      border-right: ${({isClicked}) => isClicked ? '' : 'none'};
+    }
     background-color: ${({isClicked}) => isClicked ? '#ECFFEA' : '#fff'};
     display: flex;
     flex-direction: column;

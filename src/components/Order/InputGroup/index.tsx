@@ -38,7 +38,7 @@ const WrapperStyle = css`
   gap: 25px;
   width: 1200px;
   padding: 20px;
-  border: 1px solid #000;
+  border-bottom: 1px solid #000;
 `
 
 const Styled = {
