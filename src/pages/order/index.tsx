@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Styled from './style'
+import Styled from '../../components/Order/styles'
 import Layout from '@components/Order/Layout'
 import InputGroup from '@components/Order/InputGroup'
 import InputField from '@components/Order/InputField'

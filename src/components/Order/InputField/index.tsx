@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import Styled from './style';
+import Styled from './styles';
 import { useForm } from 'react-hook-form';
 import { emailOptions } from 'src/utils/register/emailListUtil';
 import {
