@@ -47,14 +47,6 @@ const Item = (props: PropsList) => {
   return (
     <Styled.Wrapper totalWidth={totalWidth} totalHeight={totalHeight}>
       {number ? <Styled.NumberBox>{number}</Styled.NumberBox> : null}
-      <Styled.HeartBox>
-        <Image
-          src="/assets/images/shop/heartIcon.svg"
-          alt="heartIcon"
-          width={30.09}
-          height={25.88}
-        />
-      </Styled.HeartBox>
       <Styled.ImageWrapper imageSize={imageSize}>{image}</Styled.ImageWrapper>
       <Styled.ContentWrapper paddingTop={paddingTop} contentPadding={contentPadding}>
         {/* 데이터가 어떠한 형식으로 넘어오는지에 따라 수정이 필요할 것 같습니다. */}
@@ -119,7 +111,6 @@ const Styled = {
     font-family: Inter;
     font-style: normal;
     line-height: normal;
-    margin-bottom: 24px;
   `,
   NumberBox: styled.div`
     position: absolute;
@@ -136,12 +127,7 @@ const Styled = {
     font-size: 22px;
     font-weight: 700;
   `,
-  HeartBox: styled.div`
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 15.5px;
-  `,
+
   ImageWrapper: styled.div<CssProps>`
     width: 100%;
     height: ${props => (props.imageSize ? `${props.imageSize}px` : '279.5px')};

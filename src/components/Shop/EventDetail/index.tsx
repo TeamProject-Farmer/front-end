@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import Item from '../Common/Item';
 import SideAd from '../Common/SideAd';
+import Category from '../Common/Category';
 
 const EventDetail = () => {
   //임시로 넣은 리스트입니다.
@@ -64,6 +65,7 @@ const EventDetail = () => {
   return (
     <Styled.Wrapper>
       <div>header 갖고 올 예정</div>
+      <Category />
       <Styled.VerticalLine />
       {/* 데이터가 어떻게 넘어오냐에 따라 다를 것 같음 */}
       <Styled.ContentWrapper>
@@ -82,9 +84,7 @@ const EventDetail = () => {
               isSpecialPrice={true}
             ></Item>
           ))}
-          {/* 어떤 조건으로 생기는지에 따라 다를 것 같음 */}
-          <Styled.BlankItem />
-          <Styled.BlankItem />
+          {/*sticky 속성 때문에 최대 아이템 개수를 정해야할 것 같음 */}
         </Styled.ItemWrapper>
       </Styled.ContentWrapper>
       <div>footer 갖고 올 예정</div>
@@ -112,6 +112,7 @@ const Styled = {
     width: ${theme.size.mainWidth};
     margin-top: 110px;
     position: relative;
+    height: 2615px;
   `,
   ImageWrapper: styled.div`
     width: inherit;
@@ -124,7 +125,14 @@ const Styled = {
     height: fit-content;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    align-content: flex-start;
+    & > div {
+      margin-right: 26px;
+      margin-bottom: 25px;
+    }
+    & > div:nth-child(4n) {
+      margin-right: 0;
+    }
   `,
   BlankItem: styled.div`
     width: 280px;

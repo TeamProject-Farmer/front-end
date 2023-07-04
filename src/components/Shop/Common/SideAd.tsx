@@ -23,11 +23,15 @@ const Styled = {
     left: -210px;
     margin-right: 36px;
     margin-left: 15px;
+    width: fit-content;
+    height: inherit;
+    top: 0;
   `,
   SideAd: styled.div<Props>`
     //일단 임의로 fixed로 설정해둠 나중에 위치 관련해서 수정 필요할 것 같음
     margin-top: 20px;
-    position: fixed;
+    position: sticky;
+    /* 만약 위치를 고정해도 된다면 굳이 props로 받지 않아도 될 것 같음 */
     top: ${props => (props.top ? `${props.top}px` : '134px')};
     border-radius: 18px;
     //디자인 상 width는 114px인데 다 안들어가서 임의로 161px로 늘림

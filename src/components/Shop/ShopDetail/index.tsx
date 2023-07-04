@@ -2,6 +2,8 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import Item from '../Common/Item';
 import SideAd from '../Common/SideAd';
+import Category from '../Common/Category';
+import Footer from '@components/Home/Footer';
 
 const ShopDetail = () => {
   //임시로 넣은 리스트입니다.
@@ -52,14 +54,23 @@ const ShopDetail = () => {
       totalReview: '1,105',
     },
   ];
+
+  //이 부분 지원님 코드랑 겹치는 부분이 있어서 나중에 외부파일에서 한꺼번에 관리하면 좋을 것 같습니다!
+  const tempOptions: string[] = [
+    '신상품순',
+    '리뷰많은순',
+    '낮은가격순',
+    '높은가격순',
+  ];
+
   return (
     <Styled.Wrapper>
+      {/* home header 호출하니 이미지 호출이 안되는 문제가 있어서 임시로 비워둡니다! */}
       <div>header 불러올 예정</div>
-      <div>카테고리</div>
+      <Category />
       <Styled.Title>키움용품</Styled.Title>
       <Styled.ContentWrapper>
         <Styled.PickWrapper>
-          <SideAd top={450}/>
           <Styled.PickTitle>MD's PICK</Styled.PickTitle>
           <Styled.PickItemWrapper>
             {TempList.map(i => (
@@ -69,7 +80,7 @@ const ShopDetail = () => {
                 totalPrice={i.totalPrice}
                 reviewScore={i.reviewScore}
                 totalReview={i.totalReview}
-                imageSize ={215}
+                imageSize={215}
                 totalWidth={216}
                 totalHeight={311}
                 titleSize={16}
@@ -85,37 +96,37 @@ const ShopDetail = () => {
         </Styled.PickWrapper>
         <Styled.OrderWrapper>
           <div>
-            <div>신상품순</div>
-            <div>리뷰많은순</div>
-            <div>낮은가격순</div>
-            <div>높은가격순</div>
+            {tempOptions.map((option, index) => (
+              <div key={index}>{option}</div>
+            ))}
           </div>
         </Styled.OrderWrapper>
         <Styled.OrderItemWrapper>
+          <SideAd top={0} />
           {/* 추후 api 연동 */}
-        {TempList.map(i => (
-              <Item
-                image={i.image}
-                contentTitle={i.contentTitle}
-                totalPrice={i.totalPrice}
-                pricePercent={i.pricePercent}
-                reviewScore={i.reviewScore}
-                totalReview={i.totalReview}
-                imageSize ={232.5}
-                totalWidth={249.17}
-                totalHeight={333.3}
-                titleSize={16}
-                exceptPercent={false}
-                priceSize={16}
-                reviewSize={12}
-                paddingTop={6}
-                contentPadding={1}
-                isSpecialPrice={true}
-              ></Item>
-            ))}
+          {TempList.map(i => (
+            <Item
+              image={i.image}
+              contentTitle={i.contentTitle}
+              totalPrice={i.totalPrice}
+              pricePercent={i.pricePercent}
+              reviewScore={i.reviewScore}
+              totalReview={i.totalReview}
+              imageSize={232.5}
+              totalWidth={252.7}
+              totalHeight={333.3}
+              titleSize={16}
+              exceptPercent={false}
+              priceSize={16}
+              reviewSize={12}
+              paddingTop={6}
+              contentPadding={1}
+              isSpecialPrice={true}
+            ></Item>
+          ))}
         </Styled.OrderItemWrapper>
       </Styled.ContentWrapper>
-      <div>footer 불러올 예정</div>
+      <Footer />
     </Styled.Wrapper>
   );
 };
@@ -148,10 +159,8 @@ const Styled = {
     flex-direction: column;
     margin-top: 110px;
     align-items: center;
-    
   `,
   PickWrapper: styled.div`
-    position: relative;
     margin-top: 88px;
     margin-bottom: 65px;
     display: flex;
@@ -168,11 +177,9 @@ const Styled = {
     margin: 0 auto;
     width: ${theme.size.mainWidth};
     height: fit-content;
-    position: relative;
     display: flex;
     justify-content: space-between;
   `,
-
   OrderWrapper: styled.div`
     width: 99vw;
     max-width: 100%;
@@ -194,14 +201,19 @@ const Styled = {
     }
   `,
   OrderItemWrapper: styled.div`
+    position: relative;
     width: ${theme.size.mainWidth};
-    height: fit-content;
+    height: 1562px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    align-content: flex-start;
     margin: 70px 0;
     & > div {
       margin-bottom: 74px;
+      margin-right: 63px;
+    }
+    & > div:nth-child(4n + 1) {
+      margin-right: 0;
     }
   `,
 };
