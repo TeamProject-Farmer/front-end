@@ -3,15 +3,15 @@ import Kakao from '@assets/images/login/kakao.svg';
 import Naver from '@assets/images/login/naver.svg';
 
 // 카카오
-const CLIENT_ID = process.env.NEXT_PUBLIC_KAKAO_API_KEY;
-const REDIRECT_URI = 'http://localhost:3000/login/kakao'; // 추후 배포 주소로 변경 예정
-export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}`;
+const KAKAO_CLIENT_ID = process.env.NEXT_PUBLIC_KAKAO_API_KEY;
+const KAKAO_REDIRECT_URI = 'http://localhost:3000/login/kakao'; // 추후 배포 주소로 변경 예정
+export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}`;
 
 // 네이버
 const NAVER_CLIENT_ID = process.env.NEXT_PUBLIC_NAVER_API_KEY;
-const NAVER_REDIRECT_URL = 'http://localhost:3000/login/naver';
-const STATE = 'Movie-inner';
-export const NAVER_AUTH_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${NAVER_CLIENT_ID}&state=state&redirect_uri=${NAVER_REDIRECT_URL}`;
+const NAVER_REDIRECT_URI = 'http://localhost:3000/login/naver';
+// const STATE = 'Farmer';
+export const NAVER_AUTH_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${NAVER_CLIENT_ID}&state=state&redirect_uri=${NAVER_REDIRECT_URI}`;
 
 // 구글
 const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
