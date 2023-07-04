@@ -12,7 +12,7 @@ const Footer = () => {
         height={207}
         style={{ objectFit: 'contain' }}
       />
-      <Styled.InfoWrapper>
+      <Styled.InfoBox>
         <Styled.Info>
           <Styled.BoldContent>파머(주)</Styled.BoldContent>
           <Styled.Content>
@@ -30,7 +30,16 @@ const Footer = () => {
             </Styled.Content>
           </Styled.AccountBox>
         </Styled.Info>
-      </Styled.InfoWrapper>
+        <Styled.Info>
+          <Styled.BoldContent>고객센터</Styled.BoldContent>
+          <Styled.Tel>1234-1234</Styled.Tel>
+          <Styled.Content>
+            평일 AM 09:00 ~ PM 05:30 / 주말, 공휴일 휴무
+          </Styled.Content>
+          <Styled.Content>점심 AM 12:00 ~ PM 01:00</Styled.Content>
+          <Button content="채팅상담" color="#285430" />
+        </Styled.Info>
+      </Styled.InfoBox>
     </Styled.Wrapper>
   );
 };
