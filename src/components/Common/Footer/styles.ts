@@ -3,11 +3,10 @@ import theme from '@styles/theme';
 
 const Styled = {
   Wrapper: styled.div`
-    width: 100%; // 임시 수정
+    width: 1920px;
     height: 400px;
     display: flex;
     padding: 0 370px;
-    /* justify-content: center; */
     align-items: center;
     border-top: 4px solid ${theme.colors.green1};
   `,

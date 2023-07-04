@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import Head from 'next/head';
 import Header from '@components/Common/Header';
-import Footer from '@components/Login/Footer';
+import Footer from '@components/Common/Footer';
 
 import { Inter } from 'next/font/google';
 
