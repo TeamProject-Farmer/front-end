@@ -5,8 +5,8 @@ const Styled = {
   Wrapper: styled.div`
     width: 1920px;
     height: 400px;
-    display: flex;
     padding: 0 370px;
+    display: flex;
     align-items: center;
     border-top: 4px solid ${theme.colors.green1};
   `,

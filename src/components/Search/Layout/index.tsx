@@ -7,9 +7,7 @@ import { ILayoutProps } from 'src/types/search/types'
 const Layout = ({children}: ILayoutProps) => {
   return (
     <Styled.Wrapper>
-      <Header/>
         {children}
-      <Footer/>
     </Styled.Wrapper>
   )
 }
