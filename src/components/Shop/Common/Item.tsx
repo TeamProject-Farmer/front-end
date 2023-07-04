@@ -83,7 +83,7 @@ const Item = (props: PropsList) => {
         <Styled.ContentTagWrapper>
           {isSpecialPrice ? (
             <>
-              <Styled.ContentTag color="#62c655">특가</Styled.ContentTag>
+              <Styled.ContentTag color="#62C655">특가</Styled.ContentTag>
               <Styled.ContentTag color="#d9d9d9">무료배송</Styled.ContentTag>
             </>
           ) : (
@@ -179,7 +179,7 @@ const Styled = {
     font-size: ${props => (props.priceSize ? `${props.priceSize}px` : '')};
   `,
   PricePercent: styled.div`
-    color: #33b822;
+    color: #62C655;
     font-weight: 700;
     margin-right: 8px;
   `,

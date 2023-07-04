@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import Item from '../Common/Item';
 import SideAd from '../Common/SideAd';
-import Arrow from '@assets/images/shop/rightArrow.svg';
 
 const ShopDetail = () => {
   //임시로 넣은 리스트입니다.
@@ -82,7 +81,6 @@ const ShopDetail = () => {
                 contentPadding={1}
               ></Item>
             ))}
-            <Styled.PickItemButton />
           </Styled.PickItemWrapper>
         </Styled.PickWrapper>
         <Styled.OrderWrapper>
@@ -174,11 +172,7 @@ const Styled = {
     display: flex;
     justify-content: space-between;
   `,
-  PickItemButton: styled(Arrow)`
-    position: absolute;
-    top: 40%;
-    right: -40px;
-  `,
+
   OrderWrapper: styled.div`
     width: 99vw;
     max-width: 100%;
