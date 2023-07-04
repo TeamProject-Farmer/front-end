@@ -6,9 +6,9 @@ import InputField from '@components/Order/InputField'
 import CheckBoxInput from '@components/Order/InputField/CheckBoxInput'
 import ProductList from '@components/Order/List/ProductList'
 import PaymentList from '@components/Order/List/PaymentList'
-import { OrderedProduct } from 'src/types/order/types'
+import { IOrderedProduct } from 'src/types/order/types'
 
-const productList: OrderedProduct[] = [{id: '1', title: '상품명', count: 1, price: 12900}]
+const productList: IOrderedProduct[] = [{id: '1', title: '상품명', count: 1, price: 12900}]
 
 const index = () => {
   return (

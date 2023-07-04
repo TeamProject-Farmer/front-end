@@ -11,9 +11,9 @@ import {
   requiredErrorMessage,
 } from 'src/utils/register/formUtil';
 import Button from './Button';
-import {InputFieldProps} from 'src/types/order/types'
+import {IInputFieldProps} from 'src/types/order/types'
 
-const InputField = ({label, required, field, width, placeholder, checkBoxLabel}: InputFieldProps) => {
+const InputField = ({label, required, field, width, placeholder, checkBoxLabel}: IInputFieldProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
    // react-hook-form

@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import { IconProps } from 'src/types/home/types';
+import { IIconProps } from 'src/types/home/types';
 
-const Icon = ({ src, width, height, onClick }: IconProps) => {
+const Icon = ({ src, width, height, onClick }: IIconProps) => {
   return (
     <Image
       src={`assets/images/home/${src}.svg`}

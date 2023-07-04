@@ -2,10 +2,10 @@ import React from 'react'
 import Header from '@components/Home/Header'
 import Footer from '@components/Home/Footer'
 import styled from '@emotion/styled'
-import { LayoutProps } from '../../../types/order/types';
+import { ILayoutProps } from '../../../types/order/types';
 
 
-const Layout = ({children}: LayoutProps) => {
+const Layout = ({children}: ILayoutProps) => {
   return (
     <Styled.Wrapper>
       <Header/>

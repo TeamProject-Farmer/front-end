@@ -8,7 +8,7 @@ export interface ITitleProps {
   color?: string;
 }
 
-export interface IconProps {
+export interface IIconProps {
   src: string;
   width?: number;
   height?: number;

@@ -1,4 +1,4 @@
-export interface InputFieldProps {
+export interface IInputFieldProps {
   label?: string;
   required?: boolean;
   field: string;
@@ -7,12 +7,12 @@ export interface InputFieldProps {
   checkBoxLabel?: string;
 }
 
-export interface CheckBoxInputProps {
+export interface ICheckBoxInputProps {
   label: string;
   smallBox?: boolean; 
 }
 
-export interface ButtonProps {
+export interface IButtonProps {
   text: string;
   bgColor?: string;
   color?: string;
@@ -24,11 +24,11 @@ export interface InputGroupProps {
   children: React.ReactNode;
 }
 
-export interface LayoutProps {
+export interface ILayoutProps {
   children: React.ReactNode;
 }
 
-export interface OrderedProduct {
+export interface IOrderedProduct {
   id: string;
   title: string;
   count: number;

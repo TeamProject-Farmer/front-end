@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
-import { CheckBoxInputProps } from 'src/types/order/types'
+import { ICheckBoxInputProps } from 'src/types/order/types'
 
-const CheckBoxInput = ({label, smallBox}:CheckBoxInputProps) => {
+const CheckBoxInput = ({label, smallBox}: ICheckBoxInputProps) => {
   return (
     <Styled.Wrapper>
       <Styled.Input type='checkbox'/>

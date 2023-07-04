@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
-import { ButtonProps } from 'src/types/order/types'
+import { IButtonProps } from 'src/types/order/types'
 
-const Button = ({text, bgColor, color}:ButtonProps) => {
+const Button = ({text, bgColor, color}:IButtonProps) => {
   return (
     <Styled.Wrapper bgColor={bgColor} color={color}>
       {text}
