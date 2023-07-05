@@ -46,9 +46,6 @@ const InputField = ({label, required, field, width, placeholder}: IInputFieldPro
   };
 
   const selectedEmail = useFormValidation('selectedEmail');
-  const postCodeValid = useFormValidation('postCode');
-  const basicAddressValid = useFormValidation('basicAddress');
-  const detailAddressValid = useFormValidation('detailAddress');
 
   return (
     <Styled.InputWrapper field={field}>
@@ -91,11 +88,11 @@ const InputField = ({label, required, field, width, placeholder}: IInputFieldPro
       ) : field === 'address' ? (
         <Styled.FlexColumnWrapper>
           <Styled.FlexWrapper>
-            <Styled.Input {...postCodeValid} placeholder="우편번호" width={250} />
+            <Styled.Input placeholder="우편번호" width={250} />
             <Button text="주소검색" />
           </Styled.FlexWrapper>
-          <Styled.Input {...basicAddressValid} placeholder="기본주소" />
-          <Styled.Input {...detailAddressValid} placeholder="상세주소" />
+          <Styled.Input placeholder="기본주소" />
+          <Styled.Input placeholder="상세주소" />
         </Styled.FlexColumnWrapper>
       ) : field === 'coupon' ? (
         <Styled.FlexColumnWrapper>

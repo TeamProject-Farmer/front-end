@@ -30,5 +30,4 @@ const Styled = {
     align-items: center;
     gap: 111px;
   `,
-
 }

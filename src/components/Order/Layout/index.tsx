@@ -1,6 +1,4 @@
 import React from 'react'
-import Header from '@components/Common/Header'
-import Footer from '@components/Common/Footer'
 import styled from '@emotion/styled'
 import { ILayoutProps } from '../../../types/order/types';
 

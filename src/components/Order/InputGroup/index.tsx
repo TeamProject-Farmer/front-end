@@ -57,4 +57,3 @@ const Styled = {
     font-size: 20px;
   `,
 }
-
