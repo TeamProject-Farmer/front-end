@@ -5,6 +5,8 @@ import SideAd from '@components/Shop/Common/SideAd';
 import OptionBox from './OptionBox';
 import DetailImage from './DetailImage';
 import Review from './Review';
+import Inquiry from './Inquiry';
+import Notice from './Notice';
 
 const ContentWrapper = () => {
   const tempOptions: string[] = [
@@ -22,6 +24,8 @@ const ContentWrapper = () => {
         <Styled.ExceptOption>
           <DetailImage />
           <Review />
+          <Inquiry />
+          <Notice />
         </Styled.ExceptOption>
         <OptionBox />
       </Styled.ContentWrapper>

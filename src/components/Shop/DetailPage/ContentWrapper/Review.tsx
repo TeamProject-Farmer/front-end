@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
+import Image from 'next/image';
 import VerticalLine from '@components/Shop/Common/VerticalLine';
 import photo from '@assets/images/shop/photoIcon.svg';
 import totalStars from '@assets/images/shop/tempReviewStars.svg';
 import downArrow from '@assets/images/shop/downArrow1.svg';
-import Image from 'next/image';
 import tempStar1 from '@assets/images/shop/tempStars1.svg';
 import tempStar2 from '@assets/images/shop/tempStars2.svg';
 
@@ -31,7 +31,7 @@ const Review = () => {
         </div>
         <VerticalLine height={100.5} />
         <div>
-          {/* 데이터가 어떻게 넣어올지 모르겠어서 우선은 이미지로 넣어뒀습니다! */}
+          {/* 데이터가 어떻게 넘어올지 모르겠어서 우선은 이미지로 넣어뒀습니다! */}
           <Image alt="temp" src='/assets/images/shop/tempTotal.jpg' width={240} height={100}></Image>
         </div>
       </Styled.TotalLike>
