@@ -3,7 +3,8 @@ import styled from '@emotion/styled';
 interface Props {
   height: number;
 }
-const VerticalLine = ({ height }: Props) => {
+const VerticalLine = (props: Props) => {
+  const {height} = props;
   return <Styled.Line height={height}></Styled.Line>;
 };
 
