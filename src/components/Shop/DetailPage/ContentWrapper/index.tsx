@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import OrderBar from '@components/Shop/Common/OrderBar';
 import SideAd from '@components/Shop/Common/SideAd';
+import OptionBox from './OptionBox';
 import DetailImage from './DetailImage';
 import Review from './Review';
 
@@ -22,6 +23,7 @@ const ContentWrapper = () => {
           <DetailImage />
           <Review />
         </Styled.ExceptOption>
+        <OptionBox />
       </Styled.ContentWrapper>
     </Styled.Wrapper>
   );
@@ -33,7 +35,6 @@ const Styled = {
     flex-direction: column;
     width: ${theme.size.mainWidth};
     margin: 0 auto;
-    height: fit-content;
   `,
   ContentWrapper: styled.div`
     margin-top: 58px;

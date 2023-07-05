@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import Footer from '@components/Home/Footer';
+import Footer from '@components/Common/Footer';
 
 const Shop = () => {
   const Add1: string = '식물 키우기 어려우시죠?';

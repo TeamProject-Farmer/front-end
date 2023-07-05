@@ -4,7 +4,7 @@ import Item from '../Common/Item';
 import OrderBar from '../Common/OrderBar';
 import SideAd from '../Common/SideAd';
 import Category from '../Common/Category';
-import Footer from '@components/Home/Footer';
+import Footer from '@components/Common/Footer';
 
 const ShopDetail = () => {
   //임시로 넣은 리스트입니다.

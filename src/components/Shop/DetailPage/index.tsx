@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import Category from '../Common/Category';
 import Panel from './Panel';
 import PreviewPhoto from './PreviewPhoto';
-import Footer from '@components/Home/Footer';
+import Footer from '@components/Common/Footer';
 import ContentWrapper from './ContentWrapper';
 
 const DetailPage = () => {
