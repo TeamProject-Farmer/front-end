@@ -12,8 +12,9 @@ import {
 } from 'src/utils/register/formUtil';
 import Button from './Button';
 import {IInputFieldProps} from 'src/types/order/types'
+import Icon from '@components/Common/Icon';
 
-const InputField = ({label, required, field, width, placeholder, checkBoxLabel}: IInputFieldProps) => {
+const InputField = ({label, required, field, width, placeholder}: IInputFieldProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
    // react-hook-form
@@ -66,7 +67,9 @@ const InputField = ({label, required, field, width, placeholder, checkBoxLabel}:
               {...selectedEmail}
               placeholder="선택해주세요"
             />
-            {/* <div onClick={() => setIsDropdownOpen(prev => !prev)} />
+            <Styled.IconWrapper onClick={() => setIsDropdownOpen(prev => !prev)}>
+              <Icon name="dropDown" width={15} height={13} />
+            </Styled.IconWrapper>
             {isDropdownOpen && (
               <Styled.Dropdown>
                 {emailOptions.map((email, index) => (
@@ -78,7 +81,7 @@ const InputField = ({label, required, field, width, placeholder, checkBoxLabel}:
                   </Styled.Option>
                 ))}
               </Styled.Dropdown>
-            )} */}
+            )}
           </Styled.EmailOptionWrapper>
         </Styled.EmailWrapper>
       ) : field === 'phone' ? (

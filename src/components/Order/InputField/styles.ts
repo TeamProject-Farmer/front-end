@@ -34,6 +34,12 @@ const Styled = {
   EmailOptionWrapper: styled.div`
     position: relative;
   `,
+  IconWrapper: styled.div`
+    position: absolute;
+    top: 14px;
+    right: 13px;
+    cursor: pointer;
+  `,
   Dropdown: styled.ul`
     width: 300px;
     position: absolute;

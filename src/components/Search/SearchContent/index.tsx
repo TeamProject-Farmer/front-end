@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled';
-import Plant from './Plant';
+import Plant from '../../Common/Product';
 
 const plants = [];
 
@@ -21,22 +21,20 @@ for (let id = 1; id <= 7; id++) {
 
 const SearchContent = () => {
   return (
-    <div>
-      <Styled.Wrapper>
-        {plants.map(plant => (
-          <Plant
-            key={plant.id}
-            title={plant.title}
-            discount={plant.discount}
-            price={plant.price}
-            star={plant.star}
-            review={plant.review}
-            specialPrice={plant.specialPrice}
-            freeShipping={plant.freeShipping}
-          />
-        ))}
-      </Styled.Wrapper>
-    </div>
+    <Styled.Wrapper>
+      {plants.map(plant => (
+        <Plant
+          key={plant.id}
+          title={plant.title}
+          discount={plant.discount}
+          price={plant.price}
+          star={plant.star}
+          review={plant.review}
+          specialPrice={plant.specialPrice}
+          freeShipping={plant.freeShipping}
+        />
+      ))}
+    </Styled.Wrapper>
   )
 }
 
@@ -47,5 +45,6 @@ const Styled = {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 37px;
+    padding-bottom: 130px;
   `
 }

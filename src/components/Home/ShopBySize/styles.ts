@@ -27,7 +27,7 @@ const Styled = {
     font-size: 30px;
     font-weight: 700;
     text-transform: uppercase;
-    color: ${theme.colors.green1};
+    color: ${theme.colors.green2};
   `,
   SizeBox: styled.ul`
     display: flex;
@@ -50,7 +50,7 @@ const Styled = {
     box-shadow: 0px 1px 4px 2px rgba(0, 0, 0, 0.25);
     &:hover {
       color: #fff;
-      background-color: ${theme.colors.green3};
+      background-color: ${theme.colors.green2};
     }
   `,
 };

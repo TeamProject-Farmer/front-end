@@ -1,5 +1,5 @@
 import Styled from './styles';
-import Icon from '../Common/Icon';
+import Icon from '@components/Common/Icon';
 import { useState } from 'react';
 
 const category = [
@@ -33,8 +33,8 @@ const ShopPrev = () => {
               >
                 {
                   hoveredSize === size.id ?
-                    <Icon src={size.hover} width={46} height={46}/>
-                  : <Icon src={size.src} width={46} height={46}/> 
+                    <Icon name={size.hover} width={46} height={46}/>
+                  : <Icon name={size.src} width={46} height={46}/> 
                 }
             {size.id}
           </Styled.List>

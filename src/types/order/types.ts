@@ -4,7 +4,6 @@ export interface IInputFieldProps {
   field: string;
   width?: number;
   placeholder?: string;
-  checkBoxLabel?: string;
 }
 
 export interface ICheckBoxInputProps {

@@ -1,43 +1,5 @@
 import styled from '@emotion/styled';
-import Icon from 'src/components/Home/Common/Icon';
 import theme from '@styles/theme';
-
-const Plant = ({
-  title,
-  discount,
-  price,
-  star,
-  review,
-  specialPrice,
-  freeShipping,
-}) => {
-  return (
-    <Styled.Wrapper>
-      <Styled.ImgBox/>
-      <Styled.Content>
-        <Styled.Title>{title}</Styled.Title>
-        <Styled.PriceBox>
-          <Styled.Discount>{discount}</Styled.Discount>
-          <Styled.Price>{price}</Styled.Price>
-        </Styled.PriceBox>
-        <Styled.ReviewBox>
-          <Styled.Star>
-            <Icon src="star" width={16} height={15} />
-            {star}
-          </Styled.Star>
-          <Styled.Review>리뷰 {review}</Styled.Review>
-        </Styled.ReviewBox>
-        <Styled.EventBox>
-          <Styled.SpecialPrice>특가상품</Styled.SpecialPrice>
-          <Styled.FreeShipping>무료배송</Styled.FreeShipping>
-        </Styled.EventBox>
-        <Styled.Title />
-      </Styled.Content>
-    </Styled.Wrapper>
-  );
-};
-
-export default Plant;
 
 const Styled = {
   Wrapper: styled.div`
@@ -77,6 +39,8 @@ const Styled = {
   `,
   Star: styled.p`
     display: flex;
+    align-items: center;
+    gap: 4.8px;
     font-size: 12px;
     font-weight: 600;
   `,
@@ -111,3 +75,5 @@ const Styled = {
     justify-content: center;
   `,
 };
+
+export default Styled;

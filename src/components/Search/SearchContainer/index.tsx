@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import theme from '@styles/theme'
-import Icon from '@components/Home/Common/Icon'
+import Icon from '@components/Common/Icon'
 import Keyword from '../Keyword'
 import { IKeyword } from 'src/types/search/types'
 
@@ -12,7 +12,7 @@ const SearchContainer = () => {
   return (
     <Styled.Wrapper>
       <Styled.IconWrapper>
-        <Icon src="search" width={26} height={25} />
+        <Icon name="search" width={26} height={25} />
       </Styled.IconWrapper>
       <Styled.Input type='search'/>
       <Styled.KeywordWrapper>
