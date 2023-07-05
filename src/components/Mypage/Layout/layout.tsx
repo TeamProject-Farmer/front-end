@@ -1,8 +1,8 @@
 import React, { ReactNode } from 'react';
 import { Styled } from '../styles';
-import Header from '@components/Home/Header';
+import Header from '@components/Common/Header';
 import Navbar from './Navbar';
-import Footer from '@components/Home/Footer';
+import Footer from '@components/Common/Footer';
 
 type Props = {
   children?: ReactNode;

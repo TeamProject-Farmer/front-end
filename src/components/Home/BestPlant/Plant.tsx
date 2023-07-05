@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import Icon from '../Common/Icon';
+import Icon from '@components/Common/Icon';
 import theme from '@styles/theme';
 import Image from 'next/image';
 
@@ -30,7 +30,7 @@ const Plant = ({
             <Styled.Price>{price}</Styled.Price>
           </Styled.PriceBox>
           <Styled.Star>
-            <Icon src="star" width={12} height={12} />
+            <Icon name="star" width={16} height={15} />
             {star}
           </Styled.Star>
           </Styled.flexBox>
@@ -104,6 +104,8 @@ const Styled = {
   `,
   Star: styled.p`
     display: flex;
+    gap: 4.8px;
+    align-items: center;
     font-size: 12px;
     font-weight: 600;
   `,

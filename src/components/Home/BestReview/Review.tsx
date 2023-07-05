@@ -1,13 +1,13 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import Icon from '../Common/Icon';
+import Icon from '@components/Common/Icon';
 
 const Review = ({ userName, star, like, title, content }) => {
   const countStar = () => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
-      const iconSrc = i < star ? 'star' : 'emptyStar';
-      stars.push(<Icon key={i} src={iconSrc} width={30} height={28} />);
+      const iconSrc = i < star ? 'fullStar' : 'emptyStar';
+      stars.push(<Icon key={i} name={iconSrc} width={30} height={28} />);
     }
     return stars;
   }
@@ -15,7 +15,7 @@ const Review = ({ userName, star, like, title, content }) => {
   // const countStar = () => {
   //   return Array(5).fill().map((_, index) => {
   //     const iconSrc = index < star ? 'star' : 'emptyStar';
-  //     return <Icon key={index} src={iconSrc} width={30} height={28} />;
+  //     return <Icon key={index} name={iconSrc} width={30} height={28} />;
   //   });
   // }
 
@@ -23,14 +23,14 @@ const Review = ({ userName, star, like, title, content }) => {
     <Styled.Wrapper>
       <Styled.UserBox>
         <Styled.UserName>{userName}</Styled.UserName>
-        <Icon src="moreBtn" width={25} height={25} />
+        <Icon name="moreBtn" width={25} height={25} />
       </Styled.UserBox>
       <Styled.ImgBox />
       <Styled.ContentBox>
         <Styled.StarBox>
           <Styled.Star>{countStar()}</Styled.Star>
           <Styled.Like>
-            <Icon src="thumbsUp" width={28} height={28}/>
+            <Icon name="thumbsUp" width={28} height={30}/>
             <Styled.LikeQty>{like}</Styled.LikeQty>
           </Styled.Like>
         </Styled.StarBox>
@@ -97,7 +97,8 @@ const Styled = {
     top: 0;
     right: -11px;
     border-radius: 50%;
-    background-color: ${theme.colors.lightGray};
+    color: #fff;
+    background-color: ${theme.colors.pointGreen};
     font-size: 12px;
   `,
   Title: styled.p`
