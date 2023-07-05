@@ -1,5 +1,7 @@
+import { IconName } from '@components/Common/Icon';
+
 export interface IIconProps {
-  name: string;
+  name: IconName | string;
   width: number;
   height: number;
 }

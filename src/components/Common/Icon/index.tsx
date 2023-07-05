@@ -15,3 +15,23 @@ const Icon = ({ name, width, height }: IIconProps) => {
 }
 
 export default Icon
+
+export type IconName = 
+  | "closeBtn"
+  | "menu"
+  | "myPage"
+  | "search"
+  | "cart"
+  | "star"
+  | "largeBtn_w"
+  | "largeBtn"
+  | "mediumBtn_w"
+  | "mediumBtn"
+  | "smallBtn_w"
+  | "smallBtn"
+  | "moreBtn"
+  | "fullStar"
+  | "emptyStar"
+  | "thumbsUp"
+  | "dropDown"
+  | "viewMore"
