@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import Item from '../Common/Item';
+import OrderBar from '../Common/OrderBar';
 import SideAd from '../Common/SideAd';
 import Category from '../Common/Category';
 import Footer from '@components/Home/Footer';
@@ -94,13 +95,7 @@ const ShopDetail = () => {
             ))}
           </Styled.PickItemWrapper>
         </Styled.PickWrapper>
-        <Styled.OrderWrapper>
-          <div>
-            {tempOptions.map((option, index) => (
-              <div key={index}>{option}</div>
-            ))}
-          </div>
-        </Styled.OrderWrapper>
+        <OrderBar optionList={tempOptions} />
         <Styled.OrderItemWrapper>
           <SideAd top={0} />
           {/* 추후 api 연동 */}
@@ -179,26 +174,6 @@ const Styled = {
     height: fit-content;
     display: flex;
     justify-content: space-between;
-  `,
-  OrderWrapper: styled.div`
-    width: 99vw;
-    max-width: 100%;
-    height: 60px;
-    /* 디자인처럼 색이 잘 보이려면 3px로 바꿔야할 것 같음 */
-    border-top: 2px solid ${theme.colors.green1};
-    border-bottom: 2px solid ${theme.colors.green1};
-    & > div {
-      width: ${theme.size.mainWidth};
-      height: inherit;
-      display: flex;
-      align-items: center;
-      margin: 0 auto;
-      & > div {
-        padding-right: 113px;
-        font-size: 16px;
-        font-weight: 500;
-      }
-    }
   `,
   OrderItemWrapper: styled.div`
     position: relative;

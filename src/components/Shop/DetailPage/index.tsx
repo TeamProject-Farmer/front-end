@@ -3,6 +3,7 @@ import Category from '../Common/Category';
 import Panel from './Panel';
 import PreviewPhoto from './PreviewPhoto';
 import Footer from '@components/Home/Footer';
+import ContentWrapper from './ContentWrapper';
 
 const DetailPage = () => {
   return (
@@ -11,6 +12,7 @@ const DetailPage = () => {
       <Category />
       <Panel />
       <PreviewPhoto />
+      <ContentWrapper />
       <Footer />
     </Styled.Wrapper>
   );
