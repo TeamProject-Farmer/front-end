@@ -1,10 +1,9 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-
+import VerticalLine from '@components/Shop/Common/VerticalLine';
 import photo from '@assets/images/shop/photoIcon.svg';
 import totalStars from '@assets/images/shop/tempReviewStars.svg';
 import downArrow from '@assets/images/shop/downArrow1.svg';
-import tempTotal from '@assets/images/shop/tempTotal.jpg';
 import Image from 'next/image';
 import tempStar1 from '@assets/images/shop/tempStars1.svg';
 import tempStar2 from '@assets/images/shop/tempStars2.svg';
@@ -30,17 +29,17 @@ const Review = () => {
           <Styled.TotalStars />
           <div>4.7</div>
         </div>
-
+        <VerticalLine height={100.5} />
         <div>
           {/* 데이터가 어떻게 넣어올지 모르겠어서 우선은 이미지로 넣어뒀습니다! */}
-          <Image alt="temp" src={tempTotal} width={240} height={100}></Image>
+          <Image alt="temp" src='/assets/images/shop/tempTotal.jpg' width={240} height={100}></Image>
         </div>
       </Styled.TotalLike>
       <Styled.ReviewTitle>
         <div>
           <div>베스트순</div>
           <div>최신순</div>
-
+          <VerticalLine height={22} />
           <Styled.PhotoReviewBtn>
             <Styled.PhotoIcon />
             <div>사진리뷰</div>
@@ -79,7 +78,7 @@ const Review = () => {
             </div>
           </Styled.EachStars>
           <Styled.ShoppingOption>
-
+            <VerticalLine height={35} />
             <div>
               <div>공기정화식물 01</div>
               <div>선택 01</div>
