@@ -12,8 +12,8 @@ import tempStar2 from '@assets/images/shop/tempStars2.svg';
 const Review = () => {
   const tempList = [
     { id: 0, src: '/assets/images/shop/tempImage6.svg' },
-    { id: 0, src: '/assets/images/shop/tempImage7.svg' },
-    { id: 0, src: '/assets/images/shop/tempImage8.svg' },
+    { id: 1, src: '/assets/images/shop/tempImage7.svg' },
+    { id: 2, src: '/assets/images/shop/tempImage8.svg' },
   ];
   return (
     <Styled.Wrapper>
@@ -207,6 +207,7 @@ const Styled = {
     border-bottom: 1px solid ${theme.colors.green1};
     /* 사이즈가 좀 다르게 나온 것 같아서 다시 확인해 봐야할 것 같음 디자인 상은 400px*/
     /* height: 400px; */
+    height: fit-content;
     display: flex;
     flex-direction: column;
     font-size: 14px;
