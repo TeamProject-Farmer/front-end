@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
-import Panel from './Panel';
 import Category from '../Common/Category';
-
+import Panel from './Panel';
+import PreviewPhoto from './PreviewPhoto';
 import Footer from '@components/Home/Footer';
 
 const DetailPage = () => {
@@ -10,7 +10,7 @@ const DetailPage = () => {
       <div>헤더 들어갈 예정</div>
       <Category />
       <Panel />
-
+      <PreviewPhoto />
       <Footer />
     </Styled.Wrapper>
   );
