@@ -86,6 +86,7 @@ const Inquiry = () => {
         </Styled.Single>
       ))}
       </Styled.Container>
+      {/* 백엔드에서 데이터 어떻게 들어오는지 보고 결정해야할 것 같음 */}
       <div>페이지네이션 들어갈 부분</div>
     </Styled.Wrapper>
   );

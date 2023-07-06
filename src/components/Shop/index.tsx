@@ -7,7 +7,6 @@ const Shop = () => {
   const Add2: string = '내 반려식물을 등록하고 관리해보세요.';
   return (
     <Styled.Wrapper>
-      {/* header, footer, category 부분은 홈 부분과 겹쳐서 여쭤보고 진행하면 좋을 것 같음 */}
       <Styled.EventWrapper>
         <Styled.SmallEvent>
           <div>
@@ -23,7 +22,6 @@ const Shop = () => {
   );
 };
 
-// 겹치는 부분이 많다면 style 파일을 만들어서 관리하는게 나아보임
 const Styled = {
   Wrapper: styled.div`
     width: 100vw;

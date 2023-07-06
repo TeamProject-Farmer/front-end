@@ -32,7 +32,12 @@ const Review = () => {
         <VerticalLine height={100.5} />
         <div>
           {/* 데이터가 어떻게 넘어올지 모르겠어서 우선은 이미지로 넣어뒀습니다! */}
-          <Image alt="temp" src='/assets/images/shop/tempTotal.jpg' width={240} height={100}></Image>
+          <Image
+            alt="temp"
+            src="/assets/images/shop/tempTotal.jpg"
+            width={240}
+            height={100}
+          ></Image>
         </div>
       </Styled.TotalLike>
       <Styled.ReviewTitle>
@@ -97,7 +102,7 @@ const Review = () => {
         </Styled.SingleReview>
       ))}
       {/* 백엔드에서 데이터 어떻게 들어오는지 보고 결정해야할 것 같음 */}
-      <div>페이지네이션 들어갈 부분</div>
+      <Styled.PaginationBox>페이지네이션 들어갈 부분</Styled.PaginationBox>
     </Styled.Wrapper>
   );
 };
@@ -149,9 +154,9 @@ const Styled = {
       font-weight: 700;
       display: flex;
       align-items: center;
-      & > div:last-child {
-        margin-left: 17.5px;
-      }
+    }
+    & > div:first-child > div:last-child {
+      margin-left: 17.5px;
     }
     & > :nth-child(2) {
       width: 1px;
@@ -163,9 +168,9 @@ const Styled = {
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      & > div {
-        width: 240px;
-      }
+    }
+    & > div:last-child > div {
+      width: 240px;
     }
   `,
   TotalStars: styled(totalStars)``,
@@ -216,9 +221,9 @@ const Styled = {
       display: flex;
       align-items: center;
       gap: 5px;
-      & > svg {
-        margin-right: 2px;
-      }
+    }
+    & > div > svg {
+      margin-right: 2px;
     }
   `,
   EachStars: styled.div`
@@ -266,6 +271,9 @@ const Styled = {
     display: flex;
     align-items: center;
     justify-content: center;
+  `,
+  PaginationBox: styled.div`
+    margin-top: 33px;
   `,
 };
 

@@ -42,12 +42,14 @@ const Styled = {
     flex-direction: column;
     width: ${theme.size.mainWidth};
     margin: 0 auto;
-    height: 5315px;
+    
   `,
   ContentWrapper: styled.div`
     margin-top: 58px;
     display: flex;
     margin-bottom: 187px;
+    height: 5315px;
+    position: relative;
   `,
   ExceptOption: styled.div`
     display: flex;
