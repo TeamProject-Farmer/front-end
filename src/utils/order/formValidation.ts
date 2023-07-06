@@ -1,3 +1,5 @@
+import { FieldError } from 'react-hook-form';
+
 export const requiredErrorMsg = '필수 항목입니다.';
 
 export const validateName = (value: string) => {
@@ -8,7 +10,7 @@ export const validateName = (value: string) => {
 }
 
 export const validateMobile = (value: string) => {
-  if (/^[0-9]{3,4}-[0-9]{4}/.test(value)) {
+  if (!/^[0-9]{3,4}-[0-9]{4}/.test(value) || value.length > 9) {
     return '올바르지 않은 전화번호 형식입니다.'
   }
   return true;

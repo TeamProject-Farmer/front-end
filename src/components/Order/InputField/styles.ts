@@ -29,8 +29,8 @@ const Styled = {
     right: 13px;
     cursor: pointer;
   `,
-  Dropdown: styled.select`
-    width: 750px;
+  Dropdown: styled.select<{isMobile?: boolean}>`
+    width: ${({isMobile}) => isMobile ? '230px' : '750px'};
     height: 40px;
     padding-left: 10px;
     border-radius: 4px;

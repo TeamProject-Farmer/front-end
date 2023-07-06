@@ -24,7 +24,7 @@ const index = () => {
         <InputGroup title='배송지'>
           <InputField label='받는사람' field='text' required={true} />
           <InputField label='주소' field='address' required={true}/>
-          <InputField label='휴대전화' field='phone' required={true}/>
+          <InputField label='휴대전화' field='mobile' required={true}/>
         </InputGroup>
         <InputGroup title='' before='none'>
           <Styled.InnerPaddingWrapper field="shippingMsg">

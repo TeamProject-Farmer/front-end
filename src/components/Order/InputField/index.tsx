@@ -1,23 +1,23 @@
-import {useState, useEffect} from 'react'
+import {useEffect} from 'react'
 import Styled from './styles';
 import { useForm } from 'react-hook-form';
 import { mobileOptions, shippingMsgOptions } from 'src/utils/order/optionList';
-import { addHyphen } from 'src/utils/order/addHyphen';
-import { TFieldName, TValidate } from 'src/types/order/types';
+import { formatPhoneNumber } from 'src/utils/order/formatPhoneNumber';
+import { TFieldName, TValidate, DaumPostcodeData } from 'src/types/order/types';
 import {requiredErrorMsg, validateName, validateMobile} from 'src/utils/order/formValidation'
 import Button from './Button';
 import {IInputFieldProps} from 'src/types/order/types'
-import Icon from '@components/Common/Icon';
-import CheckBoxInput from './CheckBoxInput';
+import { useDaumPostcodePopup } from 'react-daum-postcode';
+import { postcodeScriptUrl } from 'react-daum-postcode/lib/loadPostcode';
 
 const InputField = ({label, required, field, placeholder}: IInputFieldProps) => {
 
-   // react-hook-form
    const {
     register,
     formState: { errors },
     setValue,
     watch,
+    clearErrors
   } = useForm({
     mode: 'onChange',
   });
@@ -26,7 +26,7 @@ const InputField = ({label, required, field, placeholder}: IInputFieldProps) => 
   const watchMobileInput = watch('mobile')
 
   useEffect(() => {
-    setTimeout(() => { setValue('mobile', addHyphen(watchMobileInput)); }, 0.00001);
+    setTimeout(() => { setValue('mobile', formatPhoneNumber(watchMobileInput)); }, 0.00001);
   }, [watchMobileInput])
 
   // input 유효성 검사
@@ -38,9 +38,44 @@ const InputField = ({label, required, field, placeholder}: IInputFieldProps) => 
     return validation;
   };
 
-  // validation
   const nameValid = useFormValidation('name', validateName)
   const mobileValid = useFormValidation('mobile', validateMobile)
+  const postCodeValid = useFormValidation('postCode');
+  const basicAddressValid = useFormValidation('basicAddress');
+  const detailAddressValid = useFormValidation('detailAddress');
+
+  // 카카오 postcode 기능
+  const open = useDaumPostcodePopup(postcodeScriptUrl);
+
+  const handleComplete = (data: DaumPostcodeData) => {
+    let fullAddress = data.address;
+    let extraAddress = '';
+
+    if (data.addressType === 'R') {
+      if (data.bname !== '') {
+        extraAddress += data.bname;
+      }
+      if (data.buildingName !== '') {
+        extraAddress +=
+          extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName;
+      }
+      fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
+    }
+    setValue('postCode', data.zonecode);
+    setValue('basicAddress', fullAddress);
+    clearErrors('postCode');
+    clearErrors('basicAddress');
+  };
+
+  const handleClick = () => {
+    open({
+      onComplete: handleComplete,
+      height: 500,
+      top: (window.innerHeight - 500) / 2,
+      left: (window.innerWidth - 500) / 2,
+    });
+  };
+
 
   return (
     <Styled.InputWrapper field={field}>
@@ -52,7 +87,7 @@ const InputField = ({label, required, field, placeholder}: IInputFieldProps) => 
       }
       {field === 'mobile' ? (
         <Styled.FlexGapWrapper>
-          <Styled.Dropdown>
+          <Styled.Dropdown isMobile={true}>
             {mobileOptions.map((number, index) => (
               <Styled.Option
                 key={index}
@@ -63,17 +98,18 @@ const InputField = ({label, required, field, placeholder}: IInputFieldProps) => 
             ))}
           </Styled.Dropdown>
           -
-          <Styled.Input type='text' {...mobileValid} width={230} />
+          <Styled.Input type='text' {...mobileValid} width={520} />
           <p>{errors?.mobile?.message}</p>
         </Styled.FlexGapWrapper>
       ) : field === 'address' ? (
         <Styled.FlexColumnWrapper>
           <Styled.FlexWrapper>
-            <Styled.Input placeholder="우편번호" width={250} />
-            <Button text="주소검색" />
+            <Styled.Input {...postCodeValid} readOnly placeholder="우편번호" width={250} />
+            <Button onClick={handleClick} text="주소검색" />
           </Styled.FlexWrapper>
-          <Styled.Input placeholder="기본주소" />
-          <Styled.Input placeholder="상세주소" />
+          <Styled.Input {...basicAddressValid} placeholder="기본주소" />
+          <Styled.Input {...detailAddressValid} placeholder="상세주소" />
+          <p>{errors?.postCode?.message || errors?.basicAddress?.message || errors?.detailAddress?.message}</p>
         </Styled.FlexColumnWrapper>
       ) : field === 'coupon' ? (
         <Styled.FlexColumnWrapper>

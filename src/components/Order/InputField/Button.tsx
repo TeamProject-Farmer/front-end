@@ -1,9 +1,9 @@
 import styled from '@emotion/styled'
 import { IButtonProps } from 'src/types/order/types'
 
-const Button = ({text, bgColor, color}:IButtonProps) => {
+const Button = ({text, bgColor, color, onClick}:IButtonProps) => {
   return (
-    <Styled.Wrapper bgColor={bgColor} color={color}>
+    <Styled.Wrapper onClick={onClick} bgColor={bgColor} color={color}>
       {text}
     </Styled.Wrapper>
   )

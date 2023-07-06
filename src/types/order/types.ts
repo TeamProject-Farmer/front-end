@@ -1,6 +1,9 @@
 export type TFieldName =
   | 'name'
   | 'mobile'
+  | 'postCode'
+  | 'basicAddress'
+  | 'detailAddress'
   | 'checked';
 
 export type TValidate = (
@@ -26,6 +29,7 @@ export interface IButtonProps {
   text: string;
   bgColor?: string;
   color?: string;
+  onClick?: () => void;
 }
 
 export interface InputGroupProps {
@@ -48,4 +52,12 @@ export interface IOrderedProduct {
 export interface PayMethod {
   id: string;
   title: string;
+}
+
+export interface DaumPostcodeData {
+  address: string;
+  addressType: string;
+  bname: string;
+  buildingName: string;
+  zonecode: string;
 }
