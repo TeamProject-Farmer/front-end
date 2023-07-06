@@ -4,7 +4,6 @@ import Item from '../Common/Item';
 import OrderBar from '../Common/OrderBar';
 import SideAd from '../Common/SideAd';
 import Category from '../Common/Category';
-import Footer from '@components/Common/Footer';
 
 const ShopDetail = () => {
   //임시로 넣은 리스트입니다.
@@ -67,7 +66,6 @@ const ShopDetail = () => {
   return (
     <Styled.Wrapper>
       {/* home header 호출하니 이미지 호출이 안되는 문제가 있어서 임시로 비워둡니다! */}
-      <div>header 불러올 예정</div>
       <Category />
       <Styled.Title>키움용품</Styled.Title>
       <Styled.ContentWrapper>
@@ -121,7 +119,6 @@ const ShopDetail = () => {
           ))}
         </Styled.OrderItemWrapper>
       </Styled.ContentWrapper>
-      <Footer />
     </Styled.Wrapper>
   );
 };

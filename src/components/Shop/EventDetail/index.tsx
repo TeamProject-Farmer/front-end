@@ -64,7 +64,6 @@ const EventDetail = () => {
   ];
   return (
     <Styled.Wrapper>
-      <div>header 갖고 올 예정</div>
       <Category />
       <Styled.VerticalLine />
       {/* 데이터가 어떻게 넘어오냐에 따라 다를 것 같음 */}
@@ -87,7 +86,6 @@ const EventDetail = () => {
           {/*sticky 속성 때문에 최대 아이템 개수를 정해야할 것 같음 */}
         </Styled.ItemWrapper>
       </Styled.ContentWrapper>
-      <div>footer 갖고 올 예정</div>
     </Styled.Wrapper>
   );
 };
