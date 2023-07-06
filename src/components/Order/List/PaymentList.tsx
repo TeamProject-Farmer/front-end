@@ -9,7 +9,7 @@ const payMethodList: PayMethod[] = [
   {id: 'kakao', title: '카카오페이'},
   {id: 'toss', title: '토스페이'},
   {id: 'payco', title: '페이코'},
-  {id: 'phone', title: '핸드폰'},
+  {id: 'mobile', title: '핸드폰'},
 ]
 
 const PaymentList = () => {

@@ -1,3 +1,13 @@
+export type TFieldName =
+  | 'name'
+  | 'mobile'
+  | 'checked';
+
+export type TValidate = (
+  value: any,
+) => boolean | string | Promise<boolean | string>;
+  
+
 export interface IInputFieldProps {
   label?: string;
   required?: boolean;

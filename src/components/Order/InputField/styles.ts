@@ -21,18 +21,7 @@ const Styled = {
     height: 40px;
     border-radius: 4px;
     padding-left: 10px; 
-    border: 1px solid #ABABAB;
-  `,
-  EmailWrapper: styled.div`
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  `,
-  EmailAt: styled.p`
-    font-size: 18px;
-  `,
-  EmailOptionWrapper: styled.div`
-    position: relative;
+    border: 1px solid ${theme.colors.borderGray};
   `,
   IconWrapper: styled.div`
     position: absolute;
@@ -40,31 +29,24 @@ const Styled = {
     right: 13px;
     cursor: pointer;
   `,
-  Dropdown: styled.ul`
-    width: 300px;
-    position: absolute;
-    max-height: 130px;
-    overflow-y: auto;
-    border: 1px solid #000000;
+  Dropdown: styled.select`
+    width: 750px;
+    height: 40px;
+    padding-left: 10px;
+    border-radius: 4px;
+    border: 1px solid #ABABAB;
     background-color: #fff;
-    border-top: none;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    z-index: 1;
   `,
-  Option: styled.li`
-      font-size: 14px;
-      padding: 10px;
-      cursor: pointer;
-      &:hover {
-        background-color: #f1f1f1;
-      }
+  Option: styled.option`
+    font-size: 14px;
+    padding: 10px;
+    cursor: pointer;
   `,
   FlexWrapper: styled.div`
     display: flex;
   `,
   FlexGapWrapper: styled.div`
+    position: relative;
     display: flex;
     align-items: center;
     gap: 11px;

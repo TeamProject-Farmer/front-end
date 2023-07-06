@@ -1,51 +1,46 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import Styled from './styles';
 import { useForm } from 'react-hook-form';
-import { emailOptions } from 'src/utils/register/emailListUtil';
-import {
-  FieldName,
-  IAuthForm,
-  Validate,
-} from 'src/types/register/types';
-import {
-  requiredErrorMessage,
-} from 'src/utils/register/formUtil';
+import { mobileOptions, shippingMsgOptions } from 'src/utils/order/optionList';
+import { addHyphen } from 'src/utils/order/addHyphen';
+import { TFieldName, TValidate } from 'src/types/order/types';
+import {requiredErrorMsg, validateName, validateMobile} from 'src/utils/order/formValidation'
 import Button from './Button';
 import {IInputFieldProps} from 'src/types/order/types'
 import Icon from '@components/Common/Icon';
+import CheckBoxInput from './CheckBoxInput';
 
-const InputField = ({label, required, field, width, placeholder}: IInputFieldProps) => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+const InputField = ({label, required, field, placeholder}: IInputFieldProps) => {
 
    // react-hook-form
    const {
     register,
     formState: { errors },
     setValue,
-    trigger,
-  } = useForm<IAuthForm>({
+    watch,
+  } = useForm({
     mode: 'onChange',
   });
 
-  const handleOptionClick = (email: string) => {
-    email === '직접입력'
-      ? setValue('selectedEmail', '')
-      : setValue('selectedEmail', email);
-    setIsDropdownOpen(false);
-    trigger('selectedEmail');
-  };
+  //전화번호 입력시 자동으로 하이픈 생성
+  const watchMobileInput = watch('mobile')
 
-  // form validation hook
-  const useFormValidation = (fieldName: FieldName, value?: Validate) => {
+  useEffect(() => {
+    setTimeout(() => { setValue('mobile', addHyphen(watchMobileInput)); }, 0.00001);
+  }, [watchMobileInput])
+
+  // input 유효성 검사
+  const useFormValidation = (fieldName: TFieldName, value?: TValidate) => {
     const validation = register(fieldName, {
-      required: requiredErrorMessage,
+      required: requiredErrorMsg,
       validate: value,
     });
-
     return validation;
   };
 
-  const selectedEmail = useFormValidation('selectedEmail');
+  // validation
+  const nameValid = useFormValidation('name', validateName)
+  const mobileValid = useFormValidation('mobile', validateMobile)
 
   return (
     <Styled.InputWrapper field={field}>
@@ -55,35 +50,21 @@ const InputField = ({label, required, field, width, placeholder}: IInputFieldPro
           {required && <Styled.AstBox>*</Styled.AstBox>}
         </Styled.Label>
       }
-      {field === 'email' ? (
-        <Styled.EmailWrapper>
-          <Styled.Input width={width} />
-          <Styled.EmailAt>@</Styled.EmailAt>
-          <Styled.EmailOptionWrapper>
-            <Styled.Input
-              {...selectedEmail}
-              placeholder="선택해주세요"
-            />
-            <Styled.IconWrapper onClick={() => setIsDropdownOpen(prev => !prev)}>
-              <Icon name="dropDown" width={15} height={13} />
-            </Styled.IconWrapper>
-            {isDropdownOpen && (
-              <Styled.Dropdown>
-                {emailOptions.map((email, index) => (
-                  <Styled.Option
-                    key={index}
-                    onClick={() => handleOptionClick(email)}
-                  >
-                    {email}
-                  </Styled.Option>
-                ))}
-              </Styled.Dropdown>
-            )}
-          </Styled.EmailOptionWrapper>
-        </Styled.EmailWrapper>
-      ) : field === 'phone' ? (
+      {field === 'mobile' ? (
         <Styled.FlexGapWrapper>
-          <Styled.Input />
+          <Styled.Dropdown>
+            {mobileOptions.map((number, index) => (
+              <Styled.Option
+                key={index}
+                value={number}
+              >
+                {number}
+              </Styled.Option>
+            ))}
+          </Styled.Dropdown>
+          -
+          <Styled.Input type='text' {...mobileValid} width={230} />
+          <p>{errors?.mobile?.message}</p>
         </Styled.FlexGapWrapper>
       ) : field === 'address' ? (
         <Styled.FlexColumnWrapper>
@@ -118,10 +99,24 @@ const InputField = ({label, required, field, width, placeholder}: IInputFieldPro
         <Styled.Input width={844} placeholder={placeholder} />
       ) :
       field === 'shippingMsg' ? (
-        <Styled.Input width={750} placeholder={placeholder}/>
+        <Styled.FlexColumnWrapper>
+            <Styled.Dropdown>
+              {shippingMsgOptions.map((msg, index) => (
+                <Styled.Option
+                  key={index}
+                  value={msg}
+                >
+                  {msg}
+                </Styled.Option>
+              ))}
+            </Styled.Dropdown>
+        </Styled.FlexColumnWrapper>
       ) :
       (
-        <Styled.Input />
+        <>
+        <Styled.Input type="text" {...nameValid} />
+        <p>{errors?.name?.message}</p>
+        </>
       )}
     </Styled.InputWrapper>
   );
