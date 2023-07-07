@@ -1,29 +1,27 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 
-const ProductList = ({productList}) => {
+const ProductList = ({ productList }) => {
   return (
     <Styled.Wrapper>
-    {
-      productList &&
-      productList.map((ele) => {
-        const {id, title, count, price} = ele;
-        return (
-          <Styled.ProductWrapper key={id}>
-            <Styled.ImgBox/>
-            <Styled.ContentWrapper>
-              <Styled.FontBlack>상품명 : {title}</Styled.FontBlack>
-              <Styled.FontGray>수량 : {count}</Styled.FontGray>
-              <Styled.FontBlack>{price}</Styled.FontBlack>
-            </Styled.ContentWrapper>
-          </Styled.ProductWrapper>
-        )
-      })
-    }
-  </Styled.Wrapper>
-  )
-}
+      {productList &&
+        productList.map(ele => {
+          const { id, title, count, price } = ele;
+          return (
+            <Styled.ProductWrapper key={id}>
+              <Styled.ImgBox />
+              <Styled.ContentWrapper>
+                <Styled.FontBlack>상품명 : {title}</Styled.FontBlack>
+                <Styled.FontGray>수량 : {count}</Styled.FontGray>
+                <Styled.FontBlack>{price}</Styled.FontBlack>
+              </Styled.ContentWrapper>
+            </Styled.ProductWrapper>
+          );
+        })}
+    </Styled.Wrapper>
+  );
+};
 
-export default ProductList
+export default ProductList;
 
 const Styled = {
   Wrapper: styled.div`
@@ -34,7 +32,7 @@ const Styled = {
     width: 847px;
     height: 130px;
     border-radius: 8px;
-    background-color: #F0F0F0;
+    background-color: #f0f0f0;
     display: flex;
     gap: 20px;
     padding: 20px;
@@ -42,7 +40,7 @@ const Styled = {
   ImgBox: styled.div`
     width: 90px;
     height: 90px;
-    background-color: #D9D9D9;
+    background-color: #d9d9d9;
   `,
   ContentWrapper: styled.div`
     display: flex;
@@ -56,4 +54,4 @@ const Styled = {
     font-size: 16px;
     color: #606367;
   `,
-}
+};

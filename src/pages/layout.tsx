@@ -13,7 +13,6 @@ type Props = {
 };
 
 const Layout = ({ children, title = 'Farmer FE' }: Props) => (
-  
   <div className={inter.className}>
     <Head>
       <title>{title}</title>
@@ -21,9 +20,9 @@ const Layout = ({ children, title = 'Farmer FE' }: Props) => (
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <Styled.Wrapper>
-      <Header/>
+      <Header />
       {children}
-      <Footer/>
+      <Footer />
     </Styled.Wrapper>
   </div>
 );
@@ -36,5 +35,5 @@ const Styled = {
     display: flex;
     flex-direction: column;
     align-items: center;
-  `
-}
+  `,
+};

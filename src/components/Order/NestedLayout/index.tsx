@@ -1,9 +1,8 @@
-import React from 'react'
-import styled from '@emotion/styled'
+import React from 'react';
+import styled from '@emotion/styled';
 import { ILayoutProps } from '../../../types/order/types';
 
-
-const NestedLayout = ({children}: ILayoutProps) => {
+const NestedLayout = ({ children }: ILayoutProps) => {
   return (
     <Styled.Wrapper>
       <Styled.FlexWrapper>
@@ -15,10 +14,10 @@ const NestedLayout = ({children}: ILayoutProps) => {
       </Styled.FlexWrapper>
       {children}
     </Styled.Wrapper>
-  )
-}
+  );
+};
 
-export default NestedLayout
+export default NestedLayout;
 
 const Styled = {
   Wrapper: styled.div`
@@ -41,7 +40,7 @@ const Styled = {
     display: flex;
     gap: 10px;
   `,
-  State: styled.div<{color?: string}>`
-    color: ${({color}) => color ? color : '#000'};
-  `
-}
+  State: styled.div<{ color?: string }>`
+    color: ${({ color }) => (color ? color : '#000')};
+  `,
+};

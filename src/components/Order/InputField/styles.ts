@@ -1,11 +1,12 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 import theme from '@styles/theme';
 
 const Styled = {
-  InputWrapper: styled.div<{field: string}>`
+  InputWrapper: styled.div<{ field: string }>`
     position: relative;
     display: flex;
-    align-items: ${({field}) => field === 'coupon' || field === 'point' ? 'flex-start' : 'center'};
+    align-items: ${({ field }) =>
+      field === 'coupon' || field === 'point' ? 'flex-start' : 'center'};
   `,
   Label: styled.label`
     font-size: 16px;
@@ -15,12 +16,12 @@ const Styled = {
     color: ${theme.colors.pointGreen};
     margin: 2px;
   `,
-  Input: styled.input<{width?:number}>`
+  Input: styled.input<{ width?: number }>`
     outline: none;
-    width: ${({ width }) => width ? width: '300'}px;
+    width: ${({ width }) => (width ? width : '300')}px;
     height: 40px;
     border-radius: 4px;
-    padding-left: 10px; 
+    padding-left: 10px;
     border: 1px solid ${theme.colors.borderGray};
   `,
   IconWrapper: styled.div`
@@ -29,12 +30,12 @@ const Styled = {
     right: 13px;
     cursor: pointer;
   `,
-  Dropdown: styled.select<{isMobile?: boolean}>`
-    width: ${({isMobile}) => isMobile ? '230px' : '750px'};
+  Dropdown: styled.select<{ isMobile?: boolean }>`
+    width: ${({ isMobile }) => (isMobile ? '230px' : '750px')};
     height: 40px;
     padding-left: 10px;
     border-radius: 4px;
-    border: 1px solid #ABABAB;
+    border: 1px solid #ababab;
     background-color: #fff;
   `,
   Option: styled.option`
@@ -60,8 +61,8 @@ const Styled = {
     padding: 6px 12px;
     font-size: 16px;
     border-radius: 5px;
-    background-color: #F0F0F0;
+    background-color: #f0f0f0;
   `,
-}
+};
 
 export default Styled;

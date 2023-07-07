@@ -1,22 +1,25 @@
-import React from 'react'
-import styled from '@emotion/styled'
-import theme from '@styles/theme'
+import React from 'react';
+import styled from '@emotion/styled';
+import theme from '@styles/theme';
 
-const sortingOptions: string[] = ['신상품순', '리뷰많은순', '낮은가격순', '높은가격순']
+const sortingOptions: string[] = [
+  '신상품순',
+  '리뷰많은순',
+  '낮은가격순',
+  '높은가격순',
+];
 
 const SearchUtils = () => {
   return (
     <Styled.Wrapper>
-      {
-        sortingOptions?.map((option, index) => (
-          <div key={index}>{option}</div>
-        ))
-      }
+      {sortingOptions?.map((option, index) => (
+        <div key={index}>{option}</div>
+      ))}
     </Styled.Wrapper>
-  )
-}
+  );
+};
 
-export default SearchUtils
+export default SearchUtils;
 
 const Styled = {
   Wrapper: styled.div`
@@ -30,4 +33,4 @@ const Styled = {
     align-items: center;
     gap: 111px;
   `,
-}
+};

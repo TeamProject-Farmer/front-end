@@ -5,7 +5,7 @@ import BestPlant from '@components/Home/BestPlant';
 import BestReview from '@components/Home/BestReview';
 import News from '@components/Home/News';
 import Layout from './layout';
-import type { NextPageWithLayout } from './_app'
+import type { NextPageWithLayout } from './_app';
 import { ReactElement } from 'react';
 
 const IndexPage: NextPageWithLayout = () => (
@@ -20,11 +20,7 @@ const IndexPage: NextPageWithLayout = () => (
 );
 
 IndexPage.getLayout = function getLayout(page: ReactElement) {
-  return (
-    <Layout>
-      {page}
-    </Layout>
-  )
-}
+  return <Layout>{page}</Layout>;
+};
 
 export default IndexPage;
