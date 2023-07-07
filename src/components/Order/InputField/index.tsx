@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Styled from './styles';
 import { useForm } from 'react-hook-form';
 import { mobileOptions, shippingMsgOptions } from 'src/utils/order/optionList';
@@ -86,6 +86,16 @@ const InputField = ({
     });
   };
 
+  //배송 메시지 직접 입력
+  const [showShippingMsgInput, setShowShippingMsgInput] =
+    useState<boolean>(false);
+
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    if (event.target.value === '직접 입력') {
+      setShowShippingMsgInput(true);
+    }
+  };
+
   return (
     <Styled.InputWrapper field={field}>
       {label && (
@@ -104,7 +114,7 @@ const InputField = ({
             ))}
           </Styled.Dropdown>
           -
-          <Styled.Input type="text" {...mobileValid} width={520} />
+          <Styled.Input type="text" {...mobileValid} width={360} />
           <p>{errors?.mobile?.message}</p>
         </Styled.FlexGapWrapper>
       ) : field === 'address' ? (
@@ -155,19 +165,20 @@ const InputField = ({
         <Styled.Input width={844} placeholder={placeholder} />
       ) : field === 'shippingMsg' ? (
         <Styled.FlexColumnWrapper>
-          <Styled.Dropdown>
+          <Styled.Dropdown onChange={handleChange}>
             {shippingMsgOptions.map((msg, index) => (
               <Styled.Option key={index} value={msg}>
                 {msg}
               </Styled.Option>
             ))}
           </Styled.Dropdown>
+          {showShippingMsgInput && <Styled.Input width={750} />}
         </Styled.FlexColumnWrapper>
       ) : (
-        <>
+        <Styled.FlexGapWrapper>
           <Styled.Input type="text" {...nameValid} />
           <p>{errors?.name?.message}</p>
-        </>
+        </Styled.FlexGapWrapper>
       )}
     </Styled.InputWrapper>
   );

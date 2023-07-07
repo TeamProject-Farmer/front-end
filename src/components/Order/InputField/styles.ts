@@ -31,7 +31,7 @@ const Styled = {
     cursor: pointer;
   `,
   Dropdown: styled.select<{ isMobile?: boolean }>`
-    width: ${({ isMobile }) => (isMobile ? '230px' : '750px')};
+    width: ${({ isMobile }) => (isMobile ? '130px' : '750px')};
     height: 40px;
     padding-left: 10px;
     border-radius: 4px;
@@ -43,6 +43,7 @@ const Styled = {
     padding: 10px;
     cursor: pointer;
   `,
+  ShippingMsgInputWrapper: styled.div``,
   FlexWrapper: styled.div`
     display: flex;
   `,
