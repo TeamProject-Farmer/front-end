@@ -3,7 +3,7 @@ import theme from '@styles/theme';
 
 const Styled = {
   Wrapper: styled.div`
-    width: 272px;
+    width: 280px;
     border: 1px solid #000;
   `,
   ImgBox: styled.div`
@@ -25,7 +25,7 @@ const Styled = {
     gap: 10px;
   `,
   Discount: styled.p`
-    color: #5f8d4e;
+    color: #33b822;
     font-size: 16px;
     font-weight: 700;
   `,
@@ -55,7 +55,7 @@ const Styled = {
     margin-top: 3px;
   `,
   SpecialPrice: styled.p`
-    background-color: #a4be7b;
+    background-color: #62c655;
     border-radius: 4px;
     padding: 3px 5px;
     font-size: 10px;
@@ -65,7 +65,7 @@ const Styled = {
     justify-content: center;
   `,
   FreeShipping: styled.p`
-    background-color: ${theme.colors.lightGray};
+    background-color: ${theme.colors.green4};
     border-radius: 4px;
     padding: 3px 5px;
     font-size: 10px;
