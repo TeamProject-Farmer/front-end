@@ -1,18 +1,21 @@
 import React, { useState } from 'react'
 import Styled from '../../components/Order/styles'
-import Layout from '@components/Order/Layout'
+import Layout from '@pages/layout'
+import NestedLayout from '@components/Order/NestedLayout'
 import InputGroup from '@components/Order/InputGroup'
 import InputField from '@components/Order/InputField'
 import CheckBoxInput from '@components/Order/InputField/CheckBoxInput'
 import ProductList from '@components/Order/List/ProductList'
 import PaymentList from '@components/Order/List/PaymentList'
 import { IOrderedProduct } from 'src/types/order/types'
+import type { NextPageWithLayout } from '@pages/_app'
+import { ReactElement } from 'react';
 
 const productList: IOrderedProduct[] = [{id: '1', title: '상품명', count: 1, price: 12900}]
 
-const index = () => {
+const OrderPage: NextPageWithLayout = () => {
   return (
-    <Layout>
+    <>
       <Styled.Wrapper>
         {/* 주문정보 */}
         <InputGroup title='주문정보'>
@@ -96,9 +99,19 @@ const index = () => {
       </Styled.Wrapper>
       <Styled.PayWrapper>
           <Styled.PayNow>결제하기</Styled.PayNow>
-        </Styled.PayWrapper>
-    </Layout>
+      </Styled.PayWrapper>
+    </>
   )
 }
 
-export default index
+export default OrderPage
+
+OrderPage.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <Layout>
+      <NestedLayout>
+      {page}
+      </NestedLayout>
+    </Layout>
+  )
+}

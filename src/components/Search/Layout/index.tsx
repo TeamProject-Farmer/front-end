@@ -1,10 +1,8 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import Header from '@components/Common/Header'
-import Footer from '@components/Common/Footer'
 import { ILayoutProps } from 'src/types/search/types'
 
-const Layout = ({children}: ILayoutProps) => {
+const NestedLayout = ({children}: ILayoutProps) => {
   return (
     <Styled.Wrapper>
         {children}
@@ -12,7 +10,7 @@ const Layout = ({children}: ILayoutProps) => {
   )
 }
 
-export default Layout
+export default NestedLayout
 
 const Styled = {
   Wrapper: styled.div`

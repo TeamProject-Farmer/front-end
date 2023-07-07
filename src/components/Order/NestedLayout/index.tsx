@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import { ILayoutProps } from '../../../types/order/types';
 
 
-const Layout = ({children}: ILayoutProps) => {
+const NestedLayout = ({children}: ILayoutProps) => {
   return (
     <Styled.Wrapper>
       <Styled.FlexWrapper>
@@ -18,7 +18,7 @@ const Layout = ({children}: ILayoutProps) => {
   )
 }
 
-export default Layout
+export default NestedLayout
 
 const Styled = {
   Wrapper: styled.div`

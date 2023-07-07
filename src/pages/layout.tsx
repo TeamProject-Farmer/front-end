@@ -3,7 +3,6 @@ import Head from 'next/head';
 import Header from '@components/Common/Header';
 import Footer from '@components/Common/Footer';
 import styled from '@emotion/styled';
-
 import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -14,6 +13,7 @@ type Props = {
 };
 
 const Layout = ({ children, title = 'Farmer FE' }: Props) => (
+  
   <div className={inter.className}>
     <Head>
       <title>{title}</title>
@@ -32,6 +32,7 @@ export default Layout;
 
 const Styled = {
   Wrapper: styled.div`
+    width: 1920px;
     display: flex;
     flex-direction: column;
     align-items: center;
