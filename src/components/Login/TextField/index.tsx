@@ -8,9 +8,6 @@ const TextField = () => {
     <>
       <Styled.TextWrapper>
         <Styled.SubText color={theme.colors.black} size={14}>
-          비밀번호 재설정 {/* 추후 Link 설정 */}
-        </Styled.SubText>
-        <Styled.SubText color={theme.colors.black} size={14}>
           <Link href="/register">회원가입</Link>
         </Styled.SubText>
       </Styled.TextWrapper>

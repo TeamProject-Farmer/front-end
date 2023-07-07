@@ -11,3 +11,9 @@ export interface StyleProps {
   color: string;
   weight?: number;
 }
+
+// 로그인 API
+export interface LoginUserProps {
+  email: string;
+  password: string;
+}
