@@ -64,6 +64,10 @@ const Styled = {
     border-radius: 5px;
     background-color: #f0f0f0;
   `,
+  ErrorMsg: styled.p`
+    color: #f00;
+    font-size: 14px;
+  `,
 };
 
 export default Styled;

@@ -93,6 +93,8 @@ const InputField = ({
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     if (event.target.value === '직접 입력') {
       setShowShippingMsgInput(true);
+    } else {
+      setShowShippingMsgInput(false);
     }
   };
 
@@ -115,7 +117,7 @@ const InputField = ({
           </Styled.Dropdown>
           -
           <Styled.Input type="text" {...mobileValid} width={360} />
-          <p>{errors?.mobile?.message}</p>
+          <Styled.ErrorMsg>{errors?.mobile?.message}</Styled.ErrorMsg>
         </Styled.FlexGapWrapper>
       ) : field === 'address' ? (
         <Styled.FlexColumnWrapper>
@@ -130,11 +132,11 @@ const InputField = ({
           </Styled.FlexWrapper>
           <Styled.Input {...basicAddressValid} placeholder="기본주소" />
           <Styled.Input {...detailAddressValid} placeholder="상세주소" />
-          <p>
+          <Styled.ErrorMsg>
             {errors?.postCode?.message ||
               errors?.basicAddress?.message ||
               errors?.detailAddress?.message}
-          </p>
+          </Styled.ErrorMsg>
         </Styled.FlexColumnWrapper>
       ) : field === 'coupon' ? (
         <Styled.FlexColumnWrapper>
@@ -177,7 +179,7 @@ const InputField = ({
       ) : (
         <Styled.FlexGapWrapper>
           <Styled.Input type="text" {...nameValid} />
-          <p>{errors?.name?.message}</p>
+          <Styled.ErrorMsg>{errors?.name?.message}</Styled.ErrorMsg>
         </Styled.FlexGapWrapper>
       )}
     </Styled.InputWrapper>
