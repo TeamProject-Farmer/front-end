@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import Footer from '@components/Common/Footer';
 
 const Shop = () => {
   const Add1: string = '식물 키우기 어려우시죠?';
@@ -17,7 +16,6 @@ const Shop = () => {
         <Styled.NormalEvent>이벤트 페이지</Styled.NormalEvent>
         <Styled.NormalEvent>이벤트 페이지</Styled.NormalEvent>
       </Styled.EventWrapper>
-      <Footer />
     </Styled.Wrapper>
   );
 };
