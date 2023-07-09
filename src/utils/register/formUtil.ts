@@ -15,3 +15,10 @@ export const validatePassword = (value: string) => {
   }
   return true;
 };
+
+export const validateNickname = (value: string) => {
+  if (!/^[a-zA-Z가-힣0-9]{2,10}$/.test(value)) {
+    return '2자 이상 10자 이내의 닉네임을 입력해주세요. (특수문자 X)';
+  }
+  return true;
+};

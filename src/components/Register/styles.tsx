@@ -1,20 +1,13 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import Option from '@assets/images/option.svg';
-import { ButtonProps, CircleProps } from 'src/types/register/types';
+import Option from '@assets/images/register/option.svg';
+import { ButtonProps } from 'src/types/register/types';
 
 const gridInputWrapperStyles = css`
   display: grid;
   grid-gap: 10px;
   align-items: center;
-`;
-
-const iconStyles = css`
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  cursor: pointer;
 `;
 
 const Styled = {
@@ -25,7 +18,7 @@ const Styled = {
   `,
   Wrapper: styled.div`
     margin: 50px;
-    flex: 0 0 300px;
+    flex: 0 0 500px;
     text-align: center;
   `,
   Header: styled.span`
@@ -62,7 +55,7 @@ const Styled = {
   AddressGridInputWrapper: styled.div`
     ${gridInputWrapperStyles}
     margin-bottom: 10px;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 1fr;
   `,
   AtSpan: styled.span`
     color: ${theme.colors.gray};
@@ -71,10 +64,9 @@ const Styled = {
   PostButton: styled.button`
     width: 100%;
     height: 50px;
-    border: 1px solid ${theme.colors.black};
-    background-color: #f7f8fa;
+    background-color: ${theme.colors.green1};
     border-radius: 5px;
-    color: ${theme.colors.gray};
+    color: ${theme.colors.white};
     font-size: 16px;
     font-weight: 700;
   `,
@@ -102,8 +94,8 @@ const Styled = {
     color: ${theme.colors.gray};
   `,
   CheckboxWrapper: styled.div`
-    width: 300px;
-    height: 100px;
+    width: 500px;
+    height: 200px;
     display: flex;
     align-items: center;
     border: 1.5px solid #000000;
@@ -121,6 +113,7 @@ const Styled = {
     margin-left: 8px;
   `,
   LoginText: styled.h5`
+    float: left;
     font-size: 12px;
     margin-top: 10px;
     color: #000000;
@@ -129,6 +122,9 @@ const Styled = {
       font-weight: 700;
       cursor: pointer;
       margin-left: 5px;
+      :hover {
+        text-decoration: underline;
+      }
     }
   `,
   Gap: styled.div`
@@ -143,7 +139,7 @@ const Styled = {
     }
   `,
   Dropdown: styled.ul`
-    width: 120px;
+    width: 208.5px;
     position: absolute;
     background-color: ${theme.colors.white};
     max-height: 130px;
@@ -173,18 +169,12 @@ const Styled = {
   `,
 
   // sns 아이콘
-  IconWarrper: styled.div`
+  IconWrapper: styled.div`
     display: flex;
-    flex-direction: row;
     justify-content: center;
     margin-top: 15px;
     margin-bottom: 20px;
-  `,
-  Icon: styled.div<CircleProps>`
-    ${iconStyles}
-    background-color: ${props => props.color};
-    ${props => props.marginRight && `margin-right: ${props.marginRight}px`};
-    ${props => props.marginLeft && `margin-left: ${props.marginLeft}px`};
+    gap: 20px;
   `,
 
   // formButton
