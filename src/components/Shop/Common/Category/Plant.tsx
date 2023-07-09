@@ -11,7 +11,7 @@ const Plant = (props: Props) => {
   return (
     <Styled.PlantWrapper>
       <Image
-        src={`/assets/images/home/${src}.png`}
+        src={`/assets/images/common/${src}.svg`}
         alt={name}
         width={169}
         height={212}
