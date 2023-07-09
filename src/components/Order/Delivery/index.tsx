@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from '@emotion/styled';
 import InputGroup from '../InputGroup';
 import InputField from '../InputField';
 import CheckBoxInput from '../InputField/CheckBoxInput';

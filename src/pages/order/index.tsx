@@ -5,10 +5,9 @@ import NestedLayout from '@components/Order/NestedLayout';
 import Delivery from '@components/Order/Delivery';
 import Payment from '@components/Order/Payment';
 import InputGroup from '@components/Order/InputGroup';
-import InputField from '@components/Order/InputField';
 import CheckBoxInput from '@components/Order/InputField/CheckBoxInput';
 import ProductList from '@components/Order/List/ProductList';
-import PaymentList from '@components/Order/List/PaymentList';
+import Agreement from '@components/Order/Agreement';
 import { IOrderedProduct } from 'src/types/order/types';
 import type { NextPageWithLayout } from '@pages/_app';
 import { ReactElement } from 'react';
@@ -32,21 +31,7 @@ const OrderPage: NextPageWithLayout = () => {
         {/* 적립금 쿠폰 */}
         <Payment />
         {/* 약관동의 */}
-        <Styled.AgreementWrapper>
-          <Styled.FlexWrapper agreement={true}>
-            <Styled.FlexColumnWrapper>
-              <CheckBoxInput
-                smallBox={false}
-                label="아래 내용에 모두 동의합니다. (필수)"
-              />
-              <Styled.InnerPaddingWrapper field="agreement">
-                <CheckBoxInput label="개인정보 제 3자 제공" />
-                <CheckBoxInput label="개인정보 수집 및 이용" />
-              </Styled.InnerPaddingWrapper>
-            </Styled.FlexColumnWrapper>
-            <CheckBoxInput label="결제대행 서비스 이용약관 동의 (필수)" />
-          </Styled.FlexWrapper>
-        </Styled.AgreementWrapper>
+        <Agreement />
       </Styled.Wrapper>
       <Styled.PayWrapper>
         <Styled.PayNow>결제하기</Styled.PayNow>
