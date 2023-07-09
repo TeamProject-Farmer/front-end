@@ -16,7 +16,6 @@ const theme: Theme = {
     loginGreen: '#8AC22B',
     borderGray: '#ABABAB',
   },
-  //전반적으로 main 부분의 width size가 아래와 같다고 생각해서 넣었는데 이상하면 빼겠습니다!
   size: {
     mainWidth: '1200px',
     shopDetailWidth: '692px',

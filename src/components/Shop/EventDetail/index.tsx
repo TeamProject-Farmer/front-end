@@ -3,6 +3,7 @@ import theme from '@styles/theme';
 import Item from '../Common/Item';
 import SideAd from '../Common/SideAd';
 import Category from '../Common/Category';
+import Product from '@components/Common/Product';
 
 const EventDetail = () => {
   //임시로 넣은 리스트입니다.
@@ -72,16 +73,17 @@ const EventDetail = () => {
         <Styled.ImageWrapper />
         <Styled.ItemWrapper>
           {TempList.map(i => (
-            <Item
-              number={i.id}
-              image={i.image}
-              contentTitle={i.contentTitle}
-              pricePercent={i.pricePercent}
-              totalPrice={i.totalPrice}
-              reviewScore={i.reviewScore}
-              totalReview={i.totalReview}
-              isSpecialPrice={true}
-            ></Item>
+            <Product 
+            key={i.id}
+            // image={i.image}
+            title={i.contentTitle}
+            discount={i.pricePercent}
+            price={i.totalPrice}
+            star={i.reviewScore}
+            review={i.totalReview}
+            specialPrice={true}
+            freeShipping={true}
+            />
           ))}
           {/*sticky 속성 때문에 최대 아이템 개수를 정해야할 것 같음 */}
         </Styled.ItemWrapper>

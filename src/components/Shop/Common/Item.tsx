@@ -11,7 +11,6 @@ interface PropsList {
   totalPrice: string | number;
   reviewScore: number;
   totalReview: string | number;
-  //props가 이렇게 많으면 차라리 새로 만드는게 낫지않을까 하는 생각이 드는데 다른분들은 혹시 어떻게 생각하시나요?
   imageSize?: number;
   totalWidth?: number;
   totalHeight?: number;
@@ -24,6 +23,7 @@ interface PropsList {
   contentPadding?:number;
 }
 
+//나중에 Common > Product 코드 수정된 후 적용시켜주도록 하겠습니다
 const Item = (props: PropsList) => {
   const {
     number,
