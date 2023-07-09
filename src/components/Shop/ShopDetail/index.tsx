@@ -1,11 +1,19 @@
+import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import Item from '../Common/Item';
 import OrderBar from '../Common/OrderBar';
 import SideAd from '../Common/SideAd';
 import Category from '../Common/Category';
+import { current } from '@reduxjs/toolkit';
 
 const ShopDetail = () => {
+  const router = useRouter();
+  const menu = router.query.category;
+  let category: string;
+  if (menu) {
+    category = menu.toString();
+  }
   //임시로 넣은 리스트입니다.
   const TempList = [
     {
@@ -62,12 +70,19 @@ const ShopDetail = () => {
     '낮은가격순',
     '높은가격순',
   ];
-
+  const currentPage = {
+    fleshy: '다육이',
+    cactus: '선인장',
+    phalaenopsis: '호접란',
+    scindapsus: '스킨답서스',
+    palm: '야자목',
+    petProduction: '키움용품',
+  };
   return (
     <Styled.Wrapper>
       {/* home header 호출하니 이미지 호출이 안되는 문제가 있어서 임시로 비워둡니다! */}
       <Category />
-      <Styled.Title>키움용품</Styled.Title>
+      <Styled.Title>{currentPage[category]}</Styled.Title>
       <Styled.ContentWrapper>
         <Styled.PickWrapper>
           <Styled.PickTitle>MD's PICK</Styled.PickTitle>
