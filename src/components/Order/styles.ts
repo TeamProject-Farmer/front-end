@@ -67,7 +67,7 @@ const Styled = {
         : field === 'shippingMsg'
         ? '0 154px'
         : field === 'product'
-        ? '0 37px;'
+        ? '29px 60px;'
         : '0 25px'};
     display: flex;
     flex-direction: column;

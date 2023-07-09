@@ -7,7 +7,7 @@ import Styled from '../styles';
 
 const Delivery = () => {
   return (
-    <div>
+    <>
       {/* 주문정보 */}
       <InputGroup title="주문정보">
         <InputField label="주문자" field="name" required={true} />
@@ -26,7 +26,7 @@ const Delivery = () => {
           <CheckBoxInput label="기본 배송지로 저장" />
         </Styled.InnerPaddingWrapper>
       </InputGroup>
-    </div>
+    </>
   );
 };
 

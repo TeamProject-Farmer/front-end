@@ -13,13 +13,14 @@ import Button from './Button';
 import { IInputFieldProps } from 'src/types/order/types';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { postcodeScriptUrl } from 'react-daum-postcode/lib/loadPostcode';
-
+import { formatAddress } from 'src/utils/order/getAddressfromDaumPostcode';
 const InputField = ({
   label,
   required,
   field,
   placeholder,
 }: IInputFieldProps) => {
+  //reack-hook-form
   const {
     register,
     formState: { errors },
@@ -30,15 +31,8 @@ const InputField = ({
     mode: 'onChange',
   });
 
-  //전화번호 입력시 자동으로 하이픈 생성
-  const watchMobileInput = watch('mobile');
-
-  useEffect(() => {
-    setValue('mobile', formatPhoneNumber(watchMobileInput));
-  }, [watchMobileInput]);
-
   // input 유효성 검사
-  const useFormValidation = (fieldName: TFieldName, value?: TValidate) => {
+  const validateInput = (fieldName: TFieldName, value?: TValidate) => {
     const validation = register(fieldName, {
       required: requiredErrorMsg,
       validate: value,
@@ -46,35 +40,29 @@ const InputField = ({
     return validation;
   };
 
-  const nameValid = useFormValidation('name', validateName);
-  const mobileValid = useFormValidation('mobile', validateMobile);
-  const postCodeValid = useFormValidation('postCode');
-  const basicAddressValid = useFormValidation('basicAddress');
-  const detailAddressValid = useFormValidation('detailAddress');
+  const nameValid = validateInput('name', validateName);
+  const mobileValid = validateInput('mobile', validateMobile);
+  const postCodeValid = validateInput('postCode');
+  const basicAddressValid = validateInput('basicAddress');
+  const detailAddressValid = validateInput('detailAddress');
 
-  // 카카오 postcode 기능
-  const open = useDaumPostcodePopup(postcodeScriptUrl);
+  //전화번호 입력시 자동으로 하이픈 생성
+  const watchMobileInput = watch('mobile');
 
+  useEffect(() => {
+    setValue('mobile', formatPhoneNumber(watchMobileInput));
+  }, [watchMobileInput]);
+
+  //주소 입력
   const handleComplete = (data: DaumPostcodeData) => {
-    let fullAddress = data.address;
-    let extraAddress = '';
-
-    if (data.addressType === 'R') {
-      if (data.bname !== '') {
-        extraAddress += data.bname;
-      }
-      if (data.buildingName !== '') {
-        extraAddress +=
-          extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName;
-      }
-      fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
-    }
+    const fullAddress = formatAddress(data);
     setValue('postCode', data.zonecode);
     setValue('basicAddress', fullAddress);
     clearErrors('postCode');
     clearErrors('basicAddress');
   };
 
+  const open = useDaumPostcodePopup(postcodeScriptUrl);
   const handleClick = () => {
     open({
       onComplete: handleComplete,

@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import theme from '@styles/theme';
 
 const ProductList = ({ productList }) => {
   return (
@@ -29,10 +30,10 @@ const Styled = {
     flex-direction: column;
   `,
   ProductWrapper: styled.div`
-    width: 847px;
+    width: 500px;
     height: 130px;
     border-radius: 8px;
-    background-color: #f0f0f0;
+    border: 1px solid ${theme.colors.green1};
     display: flex;
     gap: 20px;
     padding: 20px;
