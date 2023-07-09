@@ -34,9 +34,7 @@ const InputField = ({
   const watchMobileInput = watch('mobile');
 
   useEffect(() => {
-    setTimeout(() => {
-      setValue('mobile', formatPhoneNumber(watchMobileInput));
-    }, 0.00001);
+    setValue('mobile', formatPhoneNumber(watchMobileInput));
   }, [watchMobileInput]);
 
   // input 유효성 검사
@@ -91,11 +89,9 @@ const InputField = ({
     useState<boolean>(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    if (event.target.value === '직접 입력') {
-      setShowShippingMsgInput(true);
-    } else {
-      setShowShippingMsgInput(false);
-    }
+    event.target.value === '직접 입력'
+      ? setShowShippingMsgInput(true)
+      : setShowShippingMsgInput(false);
   };
 
   return (
@@ -106,82 +102,90 @@ const InputField = ({
           {required && <Styled.AstBox>*</Styled.AstBox>}
         </Styled.Label>
       )}
-      {field === 'mobile' ? (
-        <Styled.FlexGapWrapper>
-          <Styled.Dropdown isMobile={true}>
-            {mobileOptions.map((number, index) => (
-              <Styled.Option key={index} value={number}>
-                {number}
-              </Styled.Option>
-            ))}
-          </Styled.Dropdown>
-          -
-          <Styled.Input type="text" {...mobileValid} width={360} />
-          <Styled.ErrorMsg>{errors?.mobile?.message}</Styled.ErrorMsg>
-        </Styled.FlexGapWrapper>
-      ) : field === 'address' ? (
-        <Styled.FlexColumnWrapper>
-          <Styled.FlexWrapper>
-            <Styled.Input
-              {...postCodeValid}
-              readOnly
-              placeholder="우편번호"
-              width={250}
-            />
-            <Button onClick={handleClick} text="주소검색" />
-          </Styled.FlexWrapper>
-          <Styled.Input {...basicAddressValid} placeholder="기본주소" />
-          <Styled.Input {...detailAddressValid} placeholder="상세주소" />
-          <Styled.ErrorMsg>
-            {errors?.postCode?.message ||
-              errors?.basicAddress?.message ||
-              errors?.detailAddress?.message}
-          </Styled.ErrorMsg>
-        </Styled.FlexColumnWrapper>
-      ) : field === 'coupon' ? (
-        <Styled.FlexColumnWrapper>
-          <Styled.FlexWrapper>
-            <Styled.Input width={660} />
-            <Button text="전액사용" />
-          </Styled.FlexWrapper>
-          <Styled.Explanation>
-            1회 구매시 적립금 최소 사용금액은 2,000원입니다.
-          </Styled.Explanation>
-        </Styled.FlexColumnWrapper>
-      ) : field === 'point' ? (
-        <Styled.FlexColumnWrapper>
-          <Styled.FlexWrapper>
-            <Styled.Input width={660} />
-            <Button text="쿠폰적용" />
-          </Styled.FlexWrapper>
-          <Styled.FlexGapWrapper>
-            <Styled.Explanation>
-              적립금과 쿠폰은 중복사용이 불가합니다.
-            </Styled.Explanation>
-            <Styled.Explanation>
-              일부 할인 상품에 한하여 쿠폰 사용이 제한될 수 있습니다.
-            </Styled.Explanation>
-          </Styled.FlexGapWrapper>
-        </Styled.FlexColumnWrapper>
-      ) : field === 'card' || field === 'instalment' ? (
-        <Styled.Input width={844} placeholder={placeholder} />
-      ) : field === 'shippingMsg' ? (
-        <Styled.FlexColumnWrapper>
-          <Styled.Dropdown onChange={handleChange}>
-            {shippingMsgOptions.map((msg, index) => (
-              <Styled.Option key={index} value={msg}>
-                {msg}
-              </Styled.Option>
-            ))}
-          </Styled.Dropdown>
-          {showShippingMsgInput && <Styled.Input width={750} />}
-        </Styled.FlexColumnWrapper>
-      ) : (
-        <Styled.FlexGapWrapper>
-          <Styled.Input type="text" {...nameValid} />
-          <Styled.ErrorMsg>{errors?.name?.message}</Styled.ErrorMsg>
-        </Styled.FlexGapWrapper>
-      )}
+      {
+        {
+          name: (
+            <Styled.FlexGapWrapper>
+              <Styled.Input type="text" {...nameValid} />
+              <Styled.ErrorMsg>{errors?.name?.message}</Styled.ErrorMsg>
+            </Styled.FlexGapWrapper>
+          ),
+          mobile: (
+            <Styled.FlexGapWrapper>
+              <Styled.Dropdown isMobile={true}>
+                {mobileOptions.map((number, index) => (
+                  <Styled.Option key={index} value={number}>
+                    {number}
+                  </Styled.Option>
+                ))}
+              </Styled.Dropdown>
+              -
+              <Styled.Input type="text" {...mobileValid} width={360} />
+              <Styled.ErrorMsg>{errors?.mobile?.message}</Styled.ErrorMsg>
+            </Styled.FlexGapWrapper>
+          ),
+          address: (
+            <Styled.FlexColumnWrapper>
+              <Styled.FlexWrapper>
+                <Styled.Input
+                  {...postCodeValid}
+                  readOnly
+                  placeholder="우편번호"
+                  width={250}
+                />
+                <Button onClick={handleClick} text="주소검색" />
+              </Styled.FlexWrapper>
+              <Styled.Input {...basicAddressValid} placeholder="기본주소" />
+              <Styled.Input {...detailAddressValid} placeholder="상세주소" />
+              <Styled.ErrorMsg>
+                {errors?.postCode?.message ||
+                  errors?.basicAddress?.message ||
+                  errors?.detailAddress?.message}
+              </Styled.ErrorMsg>
+            </Styled.FlexColumnWrapper>
+          ),
+          coupon: (
+            <Styled.FlexColumnWrapper>
+              <Styled.FlexWrapper>
+                <Styled.Input width={660} />
+                <Button text="전액사용" />
+              </Styled.FlexWrapper>
+              <Styled.Explanation>
+                1회 구매시 적립금 최소 사용금액은 2,000원입니다.
+              </Styled.Explanation>
+            </Styled.FlexColumnWrapper>
+          ),
+          point: (
+            <Styled.FlexColumnWrapper>
+              <Styled.FlexWrapper>
+                <Styled.Input width={660} />
+                <Button text="쿠폰적용" />
+              </Styled.FlexWrapper>
+              <Styled.FlexGapWrapper>
+                <Styled.Explanation>
+                  적립금과 쿠폰은 중복사용이 불가합니다.
+                </Styled.Explanation>
+                <Styled.Explanation>
+                  일부 할인 상품에 한하여 쿠폰 사용이 제한될 수 있습니다.
+                </Styled.Explanation>
+              </Styled.FlexGapWrapper>
+            </Styled.FlexColumnWrapper>
+          ),
+          card: <Styled.Input width={844} placeholder={placeholder} />,
+          shippingMsg: (
+            <Styled.FlexColumnWrapper>
+              <Styled.Dropdown onChange={handleChange}>
+                {shippingMsgOptions.map((msg, index) => (
+                  <Styled.Option key={index} value={msg}>
+                    {msg}
+                  </Styled.Option>
+                ))}
+              </Styled.Dropdown>
+              {showShippingMsgInput && <Styled.Input width={750} />}
+            </Styled.FlexColumnWrapper>
+          ),
+        }[field]
+      }
     </Styled.InputWrapper>
   );
 };
