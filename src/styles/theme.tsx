@@ -16,6 +16,10 @@ const theme: Theme = {
     loginGreen: '#8AC22B',
     borderGray: '#ABABAB',
   },
+  size: {
+    mainWidth: '1200px',
+    shopDetailWidth: '692px',
+  },
 };
 
 export default theme;
