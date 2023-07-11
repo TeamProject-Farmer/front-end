@@ -1,21 +1,39 @@
+import { UseFormRegisterReturn } from 'react-hook-form';
+import { FieldError } from 'react-hook-form';
+
+export type TFieldName =
+  | 'name'
+  | 'mobile'
+  | 'postCode'
+  | 'basicAddress'
+  | 'detailAddress'
+  | 'checked';
+
+export type TValidate = (
+  value: any,
+) => boolean | string | Promise<boolean | string>;
+
 export interface IInputFieldProps {
   label?: string;
-  required?: boolean;
   field: string;
-  width?: number;
   placeholder?: string;
-  checkBoxLabel?: string;
+  required?: boolean;
+  inputProps?: UseFormRegisterReturn;
+  //수정
+  error?: any;
+  // error?: string | null;
 }
 
 export interface ICheckBoxInputProps {
   label: string;
-  smallBox?: boolean; 
+  smallBox?: boolean;
 }
 
 export interface IButtonProps {
   text: string;
   bgColor?: string;
   color?: string;
+  onClick?: () => void;
 }
 
 export interface InputGroupProps {
@@ -38,4 +56,12 @@ export interface IOrderedProduct {
 export interface PayMethod {
   id: string;
   title: string;
+}
+
+export interface DaumPostcodeData {
+  address: string;
+  addressType: string;
+  bname: string;
+  buildingName: string;
+  zonecode: string;
 }

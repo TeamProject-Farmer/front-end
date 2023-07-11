@@ -3,7 +3,7 @@ import theme from '@styles/theme';
 
 const Styled = {
   Wrapper: styled.div`
-    width: 1920px;
+    width: 100%;
     height: 400px;
     padding: 0 370px;
     display: flex;
@@ -11,9 +11,20 @@ const Styled = {
     border-top: 4px solid ${theme.colors.green1};
   `,
   InfoWrapper: styled.div`
+    position: relative;
     margin-left: 118px;
     display: flex;
     gap: 217px;
+    ::before {
+      content: '';
+      position: absolute;
+      display: 'block';
+      background-color: #2854302b;
+      width: 3px;
+      height: 315px;
+      top: -90px;
+      left: -60px;
+    }
   `,
   Info: styled.div`
     display: flex;

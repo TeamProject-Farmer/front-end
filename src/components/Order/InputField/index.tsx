@@ -1,132 +1,181 @@
-import {useState} from 'react'
+import { useState, useEffect, useRef } from 'react';
 import Styled from './styles';
 import { useForm } from 'react-hook-form';
-import { emailOptions } from 'src/utils/register/emailListUtil';
+import { mobileOptions, shippingMsgOptions } from 'src/utils/order/optionList';
+import { formatPhoneNumber } from 'src/utils/order/formatPhoneNumber';
+import { TFieldName, TValidate, DaumPostcodeData } from 'src/types/order/types';
 import {
-  FieldName,
-  IAuthForm,
-  Validate,
-} from 'src/types/register/types';
-import {
-  requiredErrorMessage,
-} from 'src/utils/register/formUtil';
+  requiredErrorMsg,
+  validateName,
+  validateMobile,
+} from 'src/utils/order/formValidation';
 import Button from './Button';
-import {IInputFieldProps} from 'src/types/order/types'
-import Icon from '@components/Common/Icon';
-
-const InputField = ({label, required, field, width, placeholder}: IInputFieldProps) => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-   // react-hook-form
-   const {
+import { IInputFieldProps } from 'src/types/order/types';
+import { useDaumPostcodePopup } from 'react-daum-postcode';
+import { postcodeScriptUrl } from 'react-daum-postcode/lib/loadPostcode';
+import { formatAddress } from 'src/utils/order/getAddressfromDaumPostcode';
+const InputField = ({
+  label,
+  required,
+  field,
+  placeholder,
+}: IInputFieldProps) => {
+  //reack-hook-form
+  const {
     register,
     formState: { errors },
     setValue,
-    trigger,
-  } = useForm<IAuthForm>({
+    watch,
+    clearErrors,
+  } = useForm({
     mode: 'onChange',
   });
 
-  const handleOptionClick = (email: string) => {
-    email === '직접입력'
-      ? setValue('selectedEmail', '')
-      : setValue('selectedEmail', email);
-    setIsDropdownOpen(false);
-    trigger('selectedEmail');
-  };
-
-  // form validation hook
-  const useFormValidation = (fieldName: FieldName, value?: Validate) => {
+  // input 유효성 검사
+  const validateInput = (fieldName: TFieldName, value?: TValidate) => {
     const validation = register(fieldName, {
-      required: requiredErrorMessage,
+      required: requiredErrorMsg,
       validate: value,
     });
-
     return validation;
   };
 
-  const selectedEmail = useFormValidation('selectedEmail');
+  const nameValid = validateInput('name', validateName);
+  const mobileValid = validateInput('mobile', validateMobile);
+  const postCodeValid = validateInput('postCode');
+  const basicAddressValid = validateInput('basicAddress');
+  const detailAddressValid = validateInput('detailAddress');
+
+  //전화번호 입력시 자동으로 하이픈 생성
+  const watchMobileInput = watch('mobile');
+
+  useEffect(() => {
+    setValue('mobile', formatPhoneNumber(watchMobileInput));
+  }, [watchMobileInput]);
+
+  //주소 입력
+  const handleComplete = (data: DaumPostcodeData) => {
+    const fullAddress = formatAddress(data);
+    setValue('postCode', data.zonecode);
+    setValue('basicAddress', fullAddress);
+    clearErrors('postCode');
+    clearErrors('basicAddress');
+  };
+
+  const open = useDaumPostcodePopup(postcodeScriptUrl);
+  const handleClick = () => {
+    open({
+      onComplete: handleComplete,
+      height: 500,
+      top: (window.innerHeight - 500) / 2,
+      left: (window.innerWidth - 500) / 2,
+    });
+  };
+
+  //배송 메시지 직접 입력
+  const [showShippingMsgInput, setShowShippingMsgInput] =
+    useState<boolean>(false);
+
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    event.target.value === '직접 입력'
+      ? setShowShippingMsgInput(true)
+      : setShowShippingMsgInput(false);
+  };
 
   return (
     <Styled.InputWrapper field={field}>
-      {label && 
+      {label && (
         <Styled.Label>
           {label}
           {required && <Styled.AstBox>*</Styled.AstBox>}
         </Styled.Label>
-      }
-      {field === 'email' ? (
-        <Styled.EmailWrapper>
-          <Styled.Input width={width} />
-          <Styled.EmailAt>@</Styled.EmailAt>
-          <Styled.EmailOptionWrapper>
-            <Styled.Input
-              {...selectedEmail}
-              placeholder="선택해주세요"
-            />
-            <Styled.IconWrapper onClick={() => setIsDropdownOpen(prev => !prev)}>
-              <Icon name="dropDown" width={15} height={13} />
-            </Styled.IconWrapper>
-            {isDropdownOpen && (
-              <Styled.Dropdown>
-                {emailOptions.map((email, index) => (
-                  <Styled.Option
-                    key={index}
-                    onClick={() => handleOptionClick(email)}
-                  >
-                    {email}
+      )}
+      {
+        {
+          name: (
+            <Styled.FlexGapWrapper>
+              <Styled.Input type="text" {...nameValid} />
+              <Styled.ErrorMsg>{errors?.name?.message}</Styled.ErrorMsg>
+            </Styled.FlexGapWrapper>
+          ),
+          mobile: (
+            <Styled.FlexGapWrapper>
+              <Styled.Dropdown isMobile={true}>
+                {mobileOptions.map((number, index) => (
+                  <Styled.Option key={index} value={number}>
+                    {number}
                   </Styled.Option>
                 ))}
               </Styled.Dropdown>
-            )}
-          </Styled.EmailOptionWrapper>
-        </Styled.EmailWrapper>
-      ) : field === 'phone' ? (
-        <Styled.FlexGapWrapper>
-          <Styled.Input />
-        </Styled.FlexGapWrapper>
-      ) : field === 'address' ? (
-        <Styled.FlexColumnWrapper>
-          <Styled.FlexWrapper>
-            <Styled.Input placeholder="우편번호" width={250} />
-            <Button text="주소검색" />
-          </Styled.FlexWrapper>
-          <Styled.Input placeholder="기본주소" />
-          <Styled.Input placeholder="상세주소" />
-        </Styled.FlexColumnWrapper>
-      ) : field === 'coupon' ? (
-        <Styled.FlexColumnWrapper>
-          <Styled.FlexWrapper>
-            <Styled.Input width={660} />
-            <Button text="전액사용" />
-          </Styled.FlexWrapper>
-          <Styled.Explanation>1회 구매시 적립금 최소 사용금액은 2,000원입니다.</Styled.Explanation>
-          </Styled.FlexColumnWrapper>
-      ) : field === 'point' ? (
-        <Styled.FlexColumnWrapper>
-          <Styled.FlexWrapper>
-            <Styled.Input width={660} />
-            <Button text="쿠폰적용" />
-          </Styled.FlexWrapper>
-          <Styled.FlexGapWrapper>
-            <Styled.Explanation>적립금과 쿠폰은 중복사용이 불가합니다.</Styled.Explanation>
-            <Styled.Explanation>일부 할인 상품에 한하여 쿠폰 사용이 제한될 수 있습니다.</Styled.Explanation>
-          </Styled.FlexGapWrapper>
-        </Styled.FlexColumnWrapper>
-      )
-      : field === 'card' || field === 'instalment' ? (
-        <Styled.Input width={844} placeholder={placeholder} />
-      ) :
-      field === 'shippingMsg' ? (
-        <Styled.Input width={750} placeholder={placeholder}/>
-      ) :
-      (
-        <Styled.Input />
-      )}
+              -
+              <Styled.Input type="text" {...mobileValid} width={360} />
+              <Styled.ErrorMsg>{errors?.mobile?.message}</Styled.ErrorMsg>
+            </Styled.FlexGapWrapper>
+          ),
+          address: (
+            <Styled.FlexColumnWrapper>
+              <Styled.FlexWrapper>
+                <Styled.Input
+                  {...postCodeValid}
+                  readOnly
+                  placeholder="우편번호"
+                  width={250}
+                />
+                <Button onClick={handleClick} text="주소검색" />
+              </Styled.FlexWrapper>
+              <Styled.Input {...basicAddressValid} placeholder="기본주소" />
+              <Styled.Input {...detailAddressValid} placeholder="상세주소" />
+              <Styled.ErrorMsg>
+                {errors?.postCode?.message ||
+                  errors?.basicAddress?.message ||
+                  errors?.detailAddress?.message}
+              </Styled.ErrorMsg>
+            </Styled.FlexColumnWrapper>
+          ),
+          coupon: (
+            <Styled.FlexColumnWrapper>
+              <Styled.FlexWrapper>
+                <Styled.Input width={660} />
+                <Button text="전액사용" />
+              </Styled.FlexWrapper>
+              <Styled.Explanation>
+                1회 구매시 적립금 최소 사용금액은 2,000원입니다.
+              </Styled.Explanation>
+            </Styled.FlexColumnWrapper>
+          ),
+          point: (
+            <Styled.FlexColumnWrapper>
+              <Styled.FlexWrapper>
+                <Styled.Input width={660} />
+                <Button text="쿠폰적용" />
+              </Styled.FlexWrapper>
+              <Styled.FlexGapWrapper>
+                <Styled.Explanation>
+                  적립금과 쿠폰은 중복사용이 불가합니다.
+                </Styled.Explanation>
+                <Styled.Explanation>
+                  일부 할인 상품에 한하여 쿠폰 사용이 제한될 수 있습니다.
+                </Styled.Explanation>
+              </Styled.FlexGapWrapper>
+            </Styled.FlexColumnWrapper>
+          ),
+          card: <Styled.Input width={844} placeholder={placeholder} />,
+          shippingMsg: (
+            <Styled.FlexColumnWrapper>
+              <Styled.Dropdown onChange={handleChange}>
+                {shippingMsgOptions.map((msg, index) => (
+                  <Styled.Option key={index} value={msg}>
+                    {msg}
+                  </Styled.Option>
+                ))}
+              </Styled.Dropdown>
+              {showShippingMsgInput && <Styled.Input width={750} />}
+            </Styled.FlexColumnWrapper>
+          ),
+        }[field]
+      }
     </Styled.InputWrapper>
   );
-}
+};
 
-export default InputField
-
-
+export default InputField;
