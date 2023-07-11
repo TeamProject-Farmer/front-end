@@ -8,12 +8,12 @@ const ListCheck = () => {
   return (
     <Styled.CheckWrapper>
       <Styled.ListText>구매목록</Styled.ListText>
-      <Styled.CheckButton>주문내역 조회</Styled.CheckButton>
+      {/* 디자인 다시 나오는중 */}
+      {/* <Styled.CheckButton>주문내역 조회</Styled.CheckButton> */}
       <Styled.InfoText>
         기본적으로 최근 3개월간의 자료가 조회되며, 기간 검색시 지난 주문내역을
         조회하실 수 있습니다.
       </Styled.InfoText>
-
       <Styled.Checkbox>
         {timeIntervals.map(interval => (
           <Styled.InfoText key={interval}>{interval}</Styled.InfoText>
