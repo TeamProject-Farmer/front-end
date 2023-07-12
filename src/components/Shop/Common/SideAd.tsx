@@ -44,10 +44,7 @@ const Styled = {
     justify-content: center;
     text-align: center;
     font-size: 15px;
-    font-family: Inter;
-    font-style: normal;
     font-weight: 400;
-    line-height: normal;
     text-transform: uppercase;
   `,
   CloseIcon: styled(close)`

@@ -54,10 +54,7 @@ const Styled = {
       & > span {
         color: #000;
         font-size: 25px;
-        font-family: Inter;
-        font-style: normal;
         font-weight: 500;
-        line-height: normal;
       }
       & > span:last-child {
         font-weight: 700;

@@ -10,8 +10,6 @@ const Styled = {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    font-family: Inter;
-    font-style: normal;
     align-items: center;
   `,
   Title: styled.div`

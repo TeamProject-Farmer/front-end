@@ -108,9 +108,6 @@ const Styled = {
     background-color: ${theme.colors.white};
     position: relative;
     color: ${theme.colors.black};
-    font-family: Inter;
-    font-style: normal;
-    line-height: normal;
   `,
   NumberBox: styled.div`
     position: absolute;

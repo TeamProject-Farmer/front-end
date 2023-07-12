@@ -147,9 +147,6 @@ const Styled = {
 
     color: ${theme.colors.black};
     text-align: center;
-    font-family: Inter;
-    font-style: normal;
-    line-height: normal;
   `,
   Title: styled.div`
     height: 130px;
