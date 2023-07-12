@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import styled from '@emotion/styled';
 import Plant from '../../Common/Product';
 
@@ -35,10 +35,10 @@ const SearchContent = () => {
         />
       ))}
     </Styled.Wrapper>
-  )
-}
+  );
+};
 
-export default SearchContent
+export default SearchContent;
 
 const Styled = {
   Wrapper: styled.div`
@@ -46,5 +46,5 @@ const Styled = {
     grid-template-columns: repeat(4, 1fr);
     gap: 37px;
     padding-bottom: 130px;
-  `
-}
+  `,
+};
