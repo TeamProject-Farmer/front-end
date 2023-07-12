@@ -31,7 +31,7 @@ export default Layout;
 
 const Styled = {
   Wrapper: styled.div`
-    width: 1920px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import Item from '../Common/Item';
@@ -88,23 +89,25 @@ const ShopDetail = () => {
           <Styled.PickTitle>MD's PICK</Styled.PickTitle>
           <Styled.PickItemWrapper>
             {TempList.map(i => (
-              <Item
-                image={i.image}
-                contentTitle={i.contentTitle}
-                totalPrice={i.totalPrice}
-                reviewScore={i.reviewScore}
-                totalReview={i.totalReview}
-                imageSize={215}
-                totalWidth={216}
-                totalHeight={311}
-                titleSize={16}
-                exceptPercent={true}
-                priceSize={16}
-                reviewSize={12}
-                isSpecialPrice={false}
-                paddingTop={6}
-                contentPadding={1}
-              ></Item>
+              <Link href={`/shop/${currentPage[category]}/detail/1`}>
+                <Item
+                  image={i.image}
+                  contentTitle={i.contentTitle}
+                  totalPrice={i.totalPrice}
+                  reviewScore={i.reviewScore}
+                  totalReview={i.totalReview}
+                  imageSize={215}
+                  totalWidth={216}
+                  totalHeight={311}
+                  titleSize={16}
+                  exceptPercent={true}
+                  priceSize={16}
+                  reviewSize={12}
+                  isSpecialPrice={false}
+                  paddingTop={6}
+                  contentPadding={1}
+                ></Item>
+              </Link>
             ))}
           </Styled.PickItemWrapper>
         </Styled.PickWrapper>
@@ -113,24 +116,26 @@ const ShopDetail = () => {
           <SideAd top={0} />
           {/* 추후 api 연동 */}
           {TempList.map(i => (
-            <Item
-              image={i.image}
-              contentTitle={i.contentTitle}
-              totalPrice={i.totalPrice}
-              pricePercent={i.pricePercent}
-              reviewScore={i.reviewScore}
-              totalReview={i.totalReview}
-              imageSize={232.5}
-              totalWidth={252.7}
-              totalHeight={333.3}
-              titleSize={16}
-              exceptPercent={false}
-              priceSize={16}
-              reviewSize={12}
-              paddingTop={6}
-              contentPadding={1}
-              isSpecialPrice={true}
-            ></Item>
+            <Link href={`/shop/${currentPage[category]}/detail/1`}>
+              <Item
+                image={i.image}
+                contentTitle={i.contentTitle}
+                totalPrice={i.totalPrice}
+                pricePercent={i.pricePercent}
+                reviewScore={i.reviewScore}
+                totalReview={i.totalReview}
+                imageSize={232.5}
+                totalWidth={252.7}
+                totalHeight={333.3}
+                titleSize={16}
+                exceptPercent={false}
+                priceSize={16}
+                reviewSize={12}
+                paddingTop={6}
+                contentPadding={1}
+                isSpecialPrice={true}
+              ></Item>
+            </Link>
           ))}
         </Styled.OrderItemWrapper>
       </Styled.ContentWrapper>

@@ -100,7 +100,7 @@ const Styled = {
     justify-content: center;
   `,
   VerticalLine: styled.div`
-    width: 100vw;
+    width: 98.9vw;
     max-width: 100%;
     height: 2px;
     background-color: #585858;
