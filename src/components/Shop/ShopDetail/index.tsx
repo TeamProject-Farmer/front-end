@@ -197,11 +197,11 @@ const Styled = {
     flex-wrap: wrap;
     align-content: flex-start;
     margin: 70px 0;
-    & > div {
+    & > a > div {
       margin-bottom: 74px;
       margin-right: 63px;
     }
-    & > div:nth-child(4n + 1) {
+    & > a:nth-child(4n + 1) > div {
       margin-right: 0;
     }
   `,

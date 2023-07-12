@@ -19,7 +19,7 @@ const OrderBar = (props: Props) => {
 };
 const Styled = {
   OrderWrapper: styled.div`
-    width: 99vw;
+    width: 98.9vw;
     max-width: 100%;
     height: 60px;
     /* 디자인처럼 색이 잘 보이려면 3px로 바꿔야할 것 같음 */

@@ -16,7 +16,7 @@ const Product = ({
       <Styled.Content>
         <Styled.Title>{title}</Styled.Title>
         <Styled.PriceBox>
-          <Styled.Discount>{discount}</Styled.Discount>
+          <Styled.Discount>{discount}%</Styled.Discount>
           <Styled.Price>{price}</Styled.Price>
         </Styled.PriceBox>
         <Styled.ReviewBox>
