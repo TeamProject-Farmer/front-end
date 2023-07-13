@@ -10,6 +10,7 @@ const Styled = {
   `,
   Label: styled.label`
     font-size: 16px;
+    font-weight: 500;
     width: 95px;
   `,
   AstBox: styled.span`

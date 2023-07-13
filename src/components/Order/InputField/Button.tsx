@@ -22,5 +22,6 @@ const Styled = {
     justify-content: center;
     height: 40px;
     padding: 0 16px;
+    transform: translateX(-5px);
   `,
 };

@@ -53,5 +53,6 @@ const Styled = {
   `,
   GroupTitle: styled.p`
     font-size: 20px;
+    font-weight: 500;
   `,
 };

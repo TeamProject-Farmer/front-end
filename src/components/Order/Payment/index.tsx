@@ -19,7 +19,7 @@ const Payment = () => {
         </Styled.InnerMarginWrapper>
       </InputGroup>
       {/* 적립금/쿠폰 */}
-      <InputGroup title="적립금/쿠폰" before="none">
+      <InputGroup title="결제금액" before="none">
         <Styled.FlexColumnWrapper>
           <Styled.FlexWrapper>
             <Styled.InfoTitle>주문상품</Styled.InfoTitle>
