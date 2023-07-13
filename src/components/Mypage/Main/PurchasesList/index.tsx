@@ -27,7 +27,6 @@ const PurchasesList = () => {
       review: '리뷰 쓰기',
     },
     // 추후 API 로 불러올 임시 데이터 (맥북 기준 5개까지 리스팅 가능)
-    // 반응형 적용되야 할듯..
     // 타입 선언 전
   ];
 
@@ -39,7 +38,7 @@ const PurchasesList = () => {
           <Styled.More onClick={() => route.push('/mypage/purchases')} />
         </Styled.HeaderDiv>
         <Styled.ListWrapper>
-          {/* 6개까지 가능해서 일단 slice 메서드 적용 */}
+          {/* 5개까지 가능해서 일단 slice 메서드 적용 */}
           {purchases.slice(0, 6).map((purchase, index) => (
             <Styled.ListDiv key={index}>
               {/* 임시 div -> 받아온 img 데이터 렌더링 예상 */}
