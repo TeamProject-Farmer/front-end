@@ -10,25 +10,35 @@ import { persistor, wrapper } from 'store';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import IconLoader from '@components/Common/IconLoader';
+import type { ReactElement, ReactNode } from 'react';
+import type { NextPage } from 'next';
+
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
 
 const queryClient = new QueryClient();
 
-function App({ Component, pageProps, ...rest }: AppProps) {
+function App({ Component, pageProps, ...rest }: AppPropsWithLayout) {
+  const getLayout = Component.getLayout ?? (page => page);
+
   const { store } = wrapper.useWrappedStore(rest);
-  return (
+  return getLayout(
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <IconLoader/>
-          <Layout>
-            {globalStyles}
-            <ThemeProvider theme={theme}>
-              <Component {...pageProps} />
-            </ThemeProvider>
-          </Layout>
+          <IconLoader />
+          {globalStyles}
+          <ThemeProvider theme={theme}>
+            <Component {...pageProps} />
+          </ThemeProvider>
         </PersistGate>
       </Provider>
-    </QueryClientProvider>
+    </QueryClientProvider>,
   );
 }
 

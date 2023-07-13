@@ -16,12 +16,12 @@ const Plant = ({
   return (
     <Styled.Wrapper>
       <Styled.RankingBox>{rank}</Styled.RankingBox>
-        <Image
-          src='/assets/images/home/plant.png'
-          alt='plant image'
-          width={160}
-          height={201}
-        />
+      <Image
+        src="/assets/images/home/plant.png"
+        alt="plant image"
+        width={160}
+        height={201}
+      />
       <Styled.Title>{title}</Styled.Title>
       <Styled.Content>
         <Styled.flexBox>
@@ -33,7 +33,7 @@ const Plant = ({
             <Icon name="star" width={16} height={15} />
             {star}
           </Styled.Star>
-          </Styled.flexBox>
+        </Styled.flexBox>
         <Styled.EventBox>
           <Styled.SpecialPrice>특가</Styled.SpecialPrice>
           <Styled.FreeShipping>무료배송</Styled.FreeShipping>
@@ -55,7 +55,7 @@ const Styled = {
     justify-content: center;
     width: 310px;
     height: 392px;
-    background-color: #ECF9E9;
+    background-color: #ecf9e9;
     /* box-shadow: 0px 0px 16px 8px rgba(215, 215, 215, 0.25); */
     border-radius: 10px;
   `,
@@ -71,7 +71,7 @@ const Styled = {
     font-size: 20px;
     font-weight: 700;
     color: #fff;
-    background-color: #47AC3A;
+    background-color: #47ac3a;
   `,
   Content: styled.div`
     width: 310px;
@@ -94,7 +94,7 @@ const Styled = {
     gap: 10px;
   `,
   Discount: styled.p`
-    color: #5f8d4e;
+    color: #59b941;
     font-size: 18px;
     font-weight: 700;
   `,
@@ -120,7 +120,7 @@ const Styled = {
     margin-top: 3px;
   `,
   SpecialPrice: styled.p`
-    background-color: #a4be7b;
+    background-color: ${theme.colors.pointGreen};
     border-radius: 4px;
     padding: 5px 8px;
     font-size: 12px;
@@ -130,7 +130,7 @@ const Styled = {
     justify-content: center;
   `,
   FreeShipping: styled.p`
-    background-color: ${theme.colors.lightGray};
+    border: 1px solid ${theme.colors.pointGreen};
     border-radius: 4px;
     padding: 5px 10px;
     font-size: 10px;

@@ -1,5 +1,5 @@
-import styled from '@emotion/styled'
-import theme from '@styles/theme'
+import styled from '@emotion/styled';
+import theme from '@styles/theme';
 
 const Styled = {
   Wrapper: styled.div`
@@ -24,10 +24,10 @@ const Styled = {
     margin-top: 15px;
     padding: 18px 20px;
   `,
-  FlexWrapper: styled.div<{agreement?: boolean}>`
+  FlexWrapper: styled.div<{ agreement?: boolean }>`
     display: flex;
     align-items: flex-start;
-    gap: ${({agreement}) => agreement ? '160px' : '48px'};
+    gap: ${({ agreement }) => (agreement ? '160px' : '48px')};
   `,
   FlexColumnWrapper: styled.div`
     position: relative;
@@ -35,15 +35,15 @@ const Styled = {
     flex-direction: column;
     gap: 15px;
     ::before {
-        content: '';
-        position: absolute;
-        display: 'block';
-        background-color: #fff;
-        width: 3px;
-        height: 104px;
-        top: 0;
-        right: -114px;
-      }
+      content: '';
+      position: absolute;
+      display: 'block';
+      background-color: #fff;
+      width: 3px;
+      height: 104px;
+      top: 0;
+      right: -114px;
+    }
   `,
   InfoTitle: styled.div`
     font-size: 16px;
@@ -54,25 +54,24 @@ const Styled = {
     font-weight: 600;
   `,
   RedFont: styled.span`
-    color: #FF0505;
+    color: #ff0505;
   `,
   AgreementWrapper: styled.div`
     background-color: ${theme.colors.green4};
     padding: 27px 60px;
   `,
-  InnerPaddingWrapper: styled.div<{field: string}>`
+  InnerPaddingWrapper: styled.div<{ field: string }>`
     padding: ${({ field }) =>
       field === 'payment'
         ? '0 60px'
         : field === 'shippingMsg'
         ? '0 154px'
         : field === 'product'
-        ? '0 37px;'
-        : '0 25px'
-      };
+        ? '29px 60px;'
+        : '0 25px'};
     display: flex;
     flex-direction: column;
-    gap: ${({field}) => field === 'agreement' ? '14px' : '19px'};
+    gap: ${({ field }) => (field === 'agreement' ? '14px' : '19px')};
   `,
   PayWrapper: styled.div`
     height: 250px;
@@ -83,7 +82,7 @@ const Styled = {
   PayNow: styled.div`
     background-color: ${theme.colors.green1};
     border-radius: 5px;
-    color: #FFF;
+    color: #fff;
     font-size: 25px;
     font-weight: 700;
     width: 252px;
@@ -92,6 +91,6 @@ const Styled = {
     align-items: center;
     justify-content: center;
   `,
-}
+};
 
 export default Styled;
