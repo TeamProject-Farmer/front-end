@@ -7,7 +7,6 @@ import PaymentList from '../List/PaymentList';
 const Payment = () => {
   return (
     <div>
-      {/* 적립금/쿠폰 */}
       <InputGroup title="적립금/쿠폰">
         <InputField label="적립금" field="point" />
         <InputField label="쿠폰" field="coupon" />
@@ -18,7 +17,6 @@ const Payment = () => {
           </Styled.DiscountedPrice>
         </Styled.InnerMarginWrapper>
       </InputGroup>
-      {/* 적립금/쿠폰 */}
       <InputGroup title="결제금액" before="none">
         <Styled.FlexColumnWrapper>
           <Styled.FlexWrapper>

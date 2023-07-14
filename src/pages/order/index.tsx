@@ -20,7 +20,7 @@ const OrderPage: NextPageWithLayout = () => {
   return (
     <>
       <Styled.Wrapper>
-        {/* 주문정보, 배송지 */}
+        {/* 배송지 */}
         <Delivery />
         {/* 주문상품 */}
         <InputGroup title="주문상품">
@@ -28,7 +28,7 @@ const OrderPage: NextPageWithLayout = () => {
             <ProductList productList={productList} />
           </Styled.InnerPaddingWrapper>
         </InputGroup>
-        {/* 적립금 쿠폰 */}
+        {/* 적립금/쿠폰, 결제금액 */}
         <Payment />
         {/* 약관동의 */}
         <Agreement />
