@@ -26,13 +26,13 @@ const Styled = {
     border-top: 2px solid ${theme.colors.green1};
     border-bottom: 2px solid ${theme.colors.green1};
     & > div {
-      width: ${theme.size.mainWidth};
+      width: ${theme.size.shopDetailWrapper};
       height: inherit;
       display: flex;
       align-items: center;
       margin: 0 auto;
       & > div {
-        padding-right: 113px;
+        padding-right: 95px;
         font-size: 16px;
         font-weight: 500;
       }

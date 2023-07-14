@@ -11,7 +11,6 @@ import SimilarProducts from './SimilarProducts';
 const ContentWrapper = () => {
   return (
     <Styled.Wrapper>
-      
       <Styled.ContentWrapper>
         <SideAd />
         <Styled.ExceptOption>
@@ -32,7 +31,7 @@ const Styled = {
   Wrapper: styled.div`
     display: flex;
     flex-direction: column;
-    width: ${theme.size.mainWidth};
+    width: ${theme.size.shopDetailWrapper};
     margin: 0 auto;
     
   `,
