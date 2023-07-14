@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import OrderBar from '@components/Shop/Common/OrderBar';
 import SideAd from '@components/Shop/Common/SideAd';
 import OptionBox from './OptionBox';
 import DetailImage from './DetailImage';
@@ -10,16 +9,9 @@ import Notice from './Notice';
 import SimilarProducts from './SimilarProducts';
 
 const ContentWrapper = () => {
-  const tempOptions: string[] = [
-    '상품',
-    '리뷰 766',
-    '상품문의 177',
-    '배송/환불',
-    '비슷한상품',
-  ];
   return (
     <Styled.Wrapper>
-      <OrderBar optionList={tempOptions} />
+      
       <Styled.ContentWrapper>
         <SideAd />
         <Styled.ExceptOption>
