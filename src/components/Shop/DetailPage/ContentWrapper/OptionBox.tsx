@@ -12,7 +12,6 @@ const OptionBox = () => {
     { id: 2, option: '03. 피쉬본 단품+심플화분+영양제', price: '3,000' },
     { id: 3, option: '04. 피쉬본 선물 세트(화분+영양제+포장)', price: '5,000' },
   ];
-  
   return (
     <Styled.Wrapper>
       <Styled.Upper>
@@ -20,7 +19,7 @@ const OptionBox = () => {
           <Styled.Label>상품을 선택하세요.</Styled.Label>
           <Styled.SelectOptions show={isShowOptions}>
             {tempList.map(item => (
-              <Styled.Option key={item.id} onClick={()=> setSelectList([...selectList, {id: item.id, option:item.option, price:item.price}])}>
+              <Styled.Option key={item.id} onClick={()=> setSelectList([...selectList.filter(i=>i.id != item.id), {id: item.id, option:item.option, price:item.price}])}>
                 <div>
                   <ColorOption>{item.option}</ColorOption>
                   <div>+{item.price}원</div>
@@ -29,7 +28,6 @@ const OptionBox = () => {
             ))}
           </Styled.SelectOptions>
         </Styled.SelectBox>
-        {/* 이 부분 오버플로우에 대한 설정도 알려주셨으면 좋겠음*/}
         {selectList.map((item) => <Styled.SelectedOption key={item.id}><div>{item.option}</div><div>+{item.price}원</div></Styled.SelectedOption>)}
       </Styled.Upper>
       <Styled.Lower>
