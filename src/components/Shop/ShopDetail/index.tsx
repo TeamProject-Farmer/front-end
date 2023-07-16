@@ -31,13 +31,17 @@ const ShopDetail = () => {
             ))}
           </Styled.PickItemWrapper>
         </Styled.PickWrapper>
-        <OrderBar optionList={OrderOptions} />
+        <OrderBar optionList={OrderOptions}/>
         <Styled.OrderItemWrapper>
           <SideAd top={0} />
           {/* 추후 api 연동 */}
           {TempProduct.map(i => (
             <Link href={`/shop/${CurrentPage[category]}/detail/1`}>
               <Product key={i.id} image={i.image} title={i.contentTitle} discount={i.percent} price={i.totalPrice} star={i.reviewScore} review={i.totalReview} specialPrice={true} freeShipping={true}></Product>
+            </Link>
+          ))}
+          {TempProduct.map(i => (
+            <Link href={`/shop/${CurrentPage[category]}/detail/1`}>
               <Product key={i.id} image={i.image} title={i.contentTitle} discount={i.percent} price={i.totalPrice} star={i.reviewScore} review={i.totalReview} specialPrice={true} freeShipping={true}></Product>
             </Link>
           ))}
@@ -53,7 +57,6 @@ const Styled = {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
     color: ${theme.colors.black};
     text-align: center;
   `,
@@ -96,7 +99,7 @@ const Styled = {
   OrderItemWrapper: styled.div`
     position: relative;
     width: ${theme.size.mainWidth};
-    height: 1562px;
+    height: 1062px;
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;

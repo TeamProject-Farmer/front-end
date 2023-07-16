@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import theme from '@styles/theme';
 import Category from '../Common/Category';
 import Panel from './Panel';
 import PreviewPhoto from './PreviewPhoto';
@@ -18,7 +19,7 @@ const DetailPage = () => {
       <Category />
       <Panel />
       <PreviewPhoto />
-      <OrderBar optionList={tempOptions} />
+      <OrderBar optionList={tempOptions} width={theme.size.shopDetailWrapper}/>
       <ContentWrapper />
     </Styled.Wrapper>
   );

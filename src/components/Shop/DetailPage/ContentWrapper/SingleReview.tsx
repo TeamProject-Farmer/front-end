@@ -67,6 +67,7 @@ const Styled = {
   `,
   ReviewImage: styled.div`
     margin-top: 19px;
+    /* margin-top: 10px; */
     margin-bottom: 26px;
     border-radius: 5px;
   `,
