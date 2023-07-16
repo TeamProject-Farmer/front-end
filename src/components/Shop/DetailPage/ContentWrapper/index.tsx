@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import OrderBar from '@components/Shop/Common/OrderBar';
 import SideAd from '@components/Shop/Common/SideAd';
 import OptionBox from './OptionBox';
 import DetailImage from './DetailImage';
@@ -10,16 +9,8 @@ import Notice from './Notice';
 import SimilarProducts from './SimilarProducts';
 
 const ContentWrapper = () => {
-  const tempOptions: string[] = [
-    '상품',
-    '리뷰 766',
-    '상품문의 177',
-    '배송/환불',
-    '비슷한상품',
-  ];
   return (
     <Styled.Wrapper>
-      <OrderBar optionList={tempOptions} />
       <Styled.ContentWrapper>
         <SideAd />
         <Styled.ExceptOption>
@@ -40,7 +31,7 @@ const Styled = {
   Wrapper: styled.div`
     display: flex;
     flex-direction: column;
-    width: ${theme.size.mainWidth};
+    width: ${theme.size.shopDetailWrapper};
     margin: 0 auto;
     
   `,
@@ -48,7 +39,7 @@ const Styled = {
     margin-top: 58px;
     display: flex;
     margin-bottom: 187px;
-    height: 5315px;
+    height: calc(5315 - 180)px;
     position: relative;
   `,
   ExceptOption: styled.div`
