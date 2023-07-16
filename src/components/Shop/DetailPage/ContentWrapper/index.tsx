@@ -39,7 +39,7 @@ const Styled = {
     margin-top: 58px;
     display: flex;
     margin-bottom: 187px;
-    height: 5315px;
+    height: calc(5315 - 180)px;
     position: relative;
   `,
   ExceptOption: styled.div`

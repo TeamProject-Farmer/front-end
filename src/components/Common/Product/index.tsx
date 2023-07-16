@@ -1,18 +1,21 @@
-import Styled from './styles'
+import Styled from './styles';
 import Icon from '../Icon';
 
-const Product = ({
-  title,
-  discount,
-  price,
-  star,
-  review,
-  specialPrice,
-  freeShipping,
-}) => {
+interface ProductProps {
+  image: string;
+  title: string;
+  discount: number;
+  price: number | string;
+  star: number;
+  review: number | string;
+  specialPrice: boolean;
+  freeShipping: boolean;
+}
+const Product = (props: ProductProps) => {
+  const {image, title, discount, price, star, review, specialPrice, freeShipping} = props;
   return (
     <Styled.Wrapper>
-      <Styled.ImgBox/>
+      <Styled.ImgBox>{image}</Styled.ImgBox>
       <Styled.Content>
         <Styled.Title>{title}</Styled.Title>
         <Styled.PriceBox>
@@ -37,4 +40,3 @@ const Product = ({
 };
 
 export default Product;
-
