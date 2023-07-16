@@ -39,7 +39,6 @@ const SingleReview = (props: Props) => {
 const Styled = {
   SingleReview: styled.div`
     border-bottom: 1px solid ${theme.colors.green1};
-    /* 사이즈가 좀 다르게 나온 것 같아서 다시 확인해 봐야할 것 같음 디자인 상은 400px*/
     /* height: 400px; */
     height: fit-content;
     display: flex;

@@ -1,21 +1,12 @@
 import Styled from './styles';
 import Icon from '../Icon';
+import { ProductProps } from '../type';
 
-interface ProductProps {
-  image?: string;
-  title: string;
-  discount: number;
-  price: number | string;
-  star: number;
-  review: number | string;
-  specialPrice: boolean;
-  freeShipping: boolean;
-}
 const Product = (props: ProductProps) => {
   const {image, title, discount, price, star, review, specialPrice, freeShipping} = props;
   return (
     <Styled.Wrapper>
-      <Styled.ImgBox>{image}</Styled.ImgBox>
+      <Styled.ImgBox>{image?image:'이미지'}</Styled.ImgBox>
       <Styled.Content>
         <Styled.Title>{title}</Styled.Title>
         <Styled.PriceBox>
