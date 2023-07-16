@@ -2,7 +2,7 @@ import Styled from './styles';
 import Icon from '../Icon';
 
 interface ProductProps {
-  image: string;
+  image?: string;
   title: string;
   discount: number;
   price: number | string;

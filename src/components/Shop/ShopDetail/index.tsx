@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { current } from '@reduxjs/toolkit';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import Item from '../Common/Item';
 import OrderBar from '../Common/OrderBar';
 import SideAd from '../Common/SideAd';
 import Category from '../Common/Category';
