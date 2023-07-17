@@ -8,5 +8,5 @@ export const getJoin = async ({ email, password, nickname }: RegisterData) => {
   formData.append('password', password);
   formData.append('nickname', nickname);
 
-  return request.post('/member/join/membership', formData);
+  return request.post('/main/join/membership', formData);
 };
