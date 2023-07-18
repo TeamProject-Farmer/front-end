@@ -7,7 +7,7 @@ import { Styled } from '../../styles';
 const navbarStyles = css`
   display: flex;
   align-items: center;
-  justify-content: flex-start; // 디자이너 분들 컨펌 못받으면 다시 수정
+  justify-content: flex-start;
   margin-top: 15px;
   padding: 0 200px;
 `;
@@ -28,7 +28,7 @@ const Navbar = () => {
           const isActive = router.pathname === item.link;
           return (
             <Link key={item.title} href={item.link}>
-              <a css={navbarItemStyles(isActive)}>{item.title}</a>
+              <span css={navbarItemStyles(isActive)}>{item.title}</span>
             </Link>
           );
         })}
