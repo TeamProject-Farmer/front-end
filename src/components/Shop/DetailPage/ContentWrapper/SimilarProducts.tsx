@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import leftArrow from '@assets/images/shop/similarLArrow.svg';
 import rightArrow from '@assets/images/shop/similarRArrow.svg';
-import Product from '@components/Common/Product';
+import SmallProduct from '@components/Shop/Common/SmallProduct';
 
 const SimilarProducts = () => {
   const TempList = [
@@ -39,7 +39,7 @@ const SimilarProducts = () => {
       <Styled.Title>비슷한 상품</Styled.Title>
       <Styled.ItemWrapper>
         {TempList.map(i => (
-          <Product key={i.id} image={i.image} title={i.contentTitle} discount={i.percent} price={i.totalPrice} star={i.reviewScore} review={i.totalReview} specialPrice={true} freeShipping={true}></Product>
+          <SmallProduct key={i.id} image={i.image} title={i.contentTitle} discount={i.percent} price={i.totalPrice} star={i.reviewScore} review={i.totalReview} specialPrice={true} freeShipping={true}></SmallProduct>
         ))}
       </Styled.ItemWrapper>
       <Styled.ButtonWrapper>

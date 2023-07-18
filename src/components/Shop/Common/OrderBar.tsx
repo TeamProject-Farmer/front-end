@@ -1,13 +1,8 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
+import { BarProps } from '../type';
 
-interface Props {
-  optionList: string[];
-  //나중에 onClick관련으로 넣어줘야할 것 같음
-  width?: string;
-}
-
-const OrderBar = (props: Props) => {
+const OrderBar = (props: BarProps) => {
   const { optionList, width } = props;
   return (
     <Styled.OrderWrapper>

@@ -5,6 +5,7 @@ import VerticalLine from '@components/Shop/Common/VerticalLine';
 import tempStar1 from '@assets/images/shop/tempStars1.svg';
 import tempStar2 from '@assets/images/shop/tempStars2.svg';
 
+
 interface Props {
   id: number | string;
   src: string;
