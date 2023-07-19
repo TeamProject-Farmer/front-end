@@ -1,3 +1,26 @@
+export interface IPlantProps {
+  productId: number;
+  productName: string;
+  discountRate: number;
+  price: number;
+  averageStarRating: number;
+  reviewCount: number;
+}
+
+export interface IReviewProps {
+  memberNickName: string;
+  imgUrl: string;
+  content: string;
+  likeCount: number;
+  fiveStarRating: number;
+}
+
+export type TCategoryProps = {
+  categoryId: number;
+  categoryName: string;
+  imgUrl: string;
+};
+
 export interface IBtnProps {
   content: string;
   color?: string;

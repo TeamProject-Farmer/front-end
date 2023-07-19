@@ -12,6 +12,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import IconLoader from '@components/Common/IconLoader';
 import type { ReactElement, ReactNode } from 'react';
 import type { NextPage } from 'next';
+import { TCategoryProps } from 'src/types/home/types';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;

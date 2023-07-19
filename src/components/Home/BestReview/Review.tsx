@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import Icon from '@components/Common/Icon';
 
-const Review = ({ userName, star, like, title, content }) => {
+const Review = ({ userName, star, like, content }) => {
   const countStar = () => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
@@ -10,7 +10,7 @@ const Review = ({ userName, star, like, title, content }) => {
       stars.push(<Icon key={i} name={iconSrc} width={30} height={28} />);
     }
     return stars;
-  }
+  };
 
   // const countStar = () => {
   //   return Array(5).fill().map((_, index) => {
@@ -30,11 +30,11 @@ const Review = ({ userName, star, like, title, content }) => {
         <Styled.StarBox>
           <Styled.Star>{countStar()}</Styled.Star>
           <Styled.Like>
-            <Icon name="thumbsUp" width={28} height={30}/>
+            <Icon name="thumbsUp" width={28} height={30} />
             <Styled.LikeQty>{like}</Styled.LikeQty>
           </Styled.Like>
         </Styled.StarBox>
-        <Styled.Title>{title}</Styled.Title>
+        {/* <Styled.Title>{title}</Styled.Title> */}
         <Styled.Content>{content}</Styled.Content>
       </Styled.ContentBox>
     </Styled.Wrapper>

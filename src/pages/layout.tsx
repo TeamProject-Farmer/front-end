@@ -7,12 +7,12 @@ import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'] });
 
-type Props = {
+type LayoutProps = {
   children?: ReactNode;
   title?: string;
 };
 
-const Layout = ({ children, title = 'Farmer FE' }: Props) => (
+const Layout = ({ children, title = 'Farmer FE' }: LayoutProps) => (
   <div className={inter.className}>
     <Head>
       <title>{title}</title>

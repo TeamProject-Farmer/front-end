@@ -4,18 +4,18 @@ import theme from '@styles/theme';
 import Image from 'next/image';
 
 const Plant = ({
-  rank,
+  // rank,
   title,
   discount,
   price,
   star,
   review,
-  specialPrice,
-  freeShipping,
+  // specialPrice,
+  // freeShipping,
 }) => {
   return (
     <Styled.Wrapper>
-      <Styled.RankingBox>{rank}</Styled.RankingBox>
+      <Styled.RankingBox>1</Styled.RankingBox>
       <Image
         src="/assets/images/home/plant.png"
         alt="plant image"

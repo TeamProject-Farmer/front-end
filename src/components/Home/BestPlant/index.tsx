@@ -1,6 +1,8 @@
 import Styled from './styles';
 import Title from '../Common/Title';
 import Plant from './Plant';
+import { useState, useEffect } from 'react';
+import { IPlantProps } from 'src/types/home/types';
 
 const plants = [];
 
@@ -21,24 +23,38 @@ for (let id = 1; id <= 12; id++) {
 }
 
 const BestPlant = () => {
+  const [plants, setPlants] = useState([]);
+  useEffect(() => {
+    fetch('http://3.39.150.186:8080/api/main/product/best-product')
+      .then(res => res.json())
+      .then(data => {
+        setPlants(data);
+      });
+  }, []);
+
   return (
     <Styled.Wrapper>
       <Title title="베스트 식물" />
-      <Styled.Descrip>이번 달 가장 인기가 많았던 식물을 확인해보세요.</Styled.Descrip>
+      <Styled.Descrip>
+        이번 달 가장 인기가 많았던 식물을 확인해보세요.
+      </Styled.Descrip>
       <Styled.Plants>
-        {plants.map(plant => (
-          <Plant
-            key={plant.id}
-            rank={plant.rank}
-            title={plant.title}
-            discount={plant.discount}
-            price={plant.price}
-            star={plant.star}
-            review={plant.review}
-            specialPrice={plant.specialPrice}
-            freeShipping={plant.freeShipping}
-          />
-        ))}
+        {plants &&
+          plants?.map(
+            (plant): IPlantProps => (
+              <Plant
+                key={plant.productId}
+                // rank={plant.rank}
+                title={plant.productName}
+                discount={plant.discountRate}
+                price={plant.price}
+                star={plant.averageStarRating}
+                review={plant.reviewCount}
+                // specialPrice={plant.specialPrice}
+                // freeShipping={plant.freeShipping}
+              />
+            ),
+          )}
       </Styled.Plants>
     </Styled.Wrapper>
   );
