@@ -2,35 +2,40 @@ import { request } from './base';
 
 //category
 export const getProductCategory = async () => {
-  const response = await request.get('/api/main/product-category');
-  return response.data;
+  return request({
+    url: '/api/main/product-category',
+  });
 };
 
 //shop by size
 export const getShopBySize = async (size: string) => {
-  const response = await request.get('/api/main/product/shop-by-size', {
+  return request({
+    url: '/api/main/product/shop-by-size',
     params: {
       size: size,
     },
   });
-  return response.data;
 };
 
 //best plant
 export const getBestProduct = async () => {
-  const response = await request.get('/api/main/product/best-product');
-  return response.data;
+  return request({
+    url: '/api/main/product/best-product',
+  });
 };
 
 //best review
 export const getBestReview = async () => {
-  const response = await request.get('/api/main/review');
-  return response.data;
+  return request({
+    url: '/api/main/review',
+  });
 };
 
 //news
 export const getNews = async () => {
-  const response = await request.get('/api/main/news');
-  console.log(response.data);
-  return response.data;
+  const response = await request({
+    url: '/api/main/news',
+  });
+  console.log(response);
+  return response;
 };
