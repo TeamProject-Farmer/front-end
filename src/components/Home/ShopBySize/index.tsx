@@ -12,9 +12,9 @@ const category = [
 const ShopPrev = () => {
   const [hoveredSize, setHoveredSize] = useState(null);
 
-  const handleMouseEnter = id => {
+  const handleMouseEnter = (id: string) => {
     setHoveredSize(id);
-    getShopBySize('s');
+    getShopBySize(id);
   };
 
   const handleMouseLeave = () => {
