@@ -1,6 +1,6 @@
 import Styled from './styles';
 import Icon from '../Icon';
-import Logo from '@assets/images/home/logo.svg';
+import Image from 'next/image';
 import FirstBuyEvent from './FirstBuyEvent';
 
 const Header = () => {
@@ -9,7 +9,12 @@ const Header = () => {
       <FirstBuyEvent />
       <Styled.Header>
         <Icon name="menu" width={32} height={32} />
-        <Logo />
+        <Image
+          alt="headerLogo"
+          src="/assets/images/home/headerLogo.png"
+          width={150}
+          height={33.6}
+        />
         <Styled.Utils>
           <li>
             <Icon name="myPage" width={32} height={32} />

@@ -5,7 +5,6 @@ import BestPlant from '@components/Home/BestPlant';
 import BestReview from '@components/Home/BestReview';
 import News from '@components/Home/News';
 import Layout from './layout';
-import type { NextPageWithLayout } from './_app';
 import { ReactElement } from 'react';
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next';
 import {
@@ -20,18 +19,14 @@ type IndexPageProps = {
   category: ICategory[];
   bestPlant: IPlant[];
   bestReview: IReview[];
-  news: INews;
+  // news: INews;
 };
 
-export const getServerSideProps = async () => {
-  const category = await getProductCategory();
-  const bestPlant = await getBestProduct();
-  const bestReview = await getBestReview();
-  // const news = await getNews();
-  return { props: { category, bestPlant, bestReview } };
-};
-
-const IndexPage = ({ category, bestPlant, bestReview }) => {
+const IndexPage = ({
+  category,
+  bestPlant,
+  bestReview,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   console.log(category);
   return (
     <>
@@ -47,6 +42,16 @@ const IndexPage = ({ category, bestPlant, bestReview }) => {
 
 IndexPage.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
+};
+
+export const getServerSideProps: GetServerSideProps<
+  IndexPageProps
+> = async () => {
+  const category = await getProductCategory();
+  const bestPlant = await getBestProduct();
+  const bestReview = await getBestReview();
+  // const news = await getNews();
+  return { props: { category, bestPlant, bestReview } };
 };
 
 export default IndexPage;
