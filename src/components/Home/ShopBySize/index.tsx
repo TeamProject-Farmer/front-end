@@ -14,7 +14,7 @@ const ShopPrev = () => {
 
   const handleMouseEnter = id => {
     setHoveredSize(id);
-    getShopBySize(id);
+    getShopBySize('s');
   };
 
   const handleMouseLeave = () => {

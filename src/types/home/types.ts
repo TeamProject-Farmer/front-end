@@ -1,4 +1,10 @@
-export interface IPlantProps {
+export interface INews {
+  subject: 'string';
+  content: 'string';
+  imgUrl: 'string';
+}
+
+export interface IPlant {
   productId?: number;
   ranking?: number;
   productName: string;
@@ -8,7 +14,7 @@ export interface IPlantProps {
   reviewCount?: number;
 }
 
-export interface IReviewProps {
+export interface IReview {
   memberNickName: string;
   imgUrl: string;
   content: string;
@@ -16,11 +22,11 @@ export interface IReviewProps {
   fiveStarRating: number;
 }
 
-export type TCategoryProps = {
+export interface ICategory {
   categoryId: number;
   categoryName: string;
   imgUrl: string;
-};
+}
 
 export interface IBtnProps {
   content: string;
