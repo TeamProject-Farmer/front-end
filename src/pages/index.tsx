@@ -7,31 +7,34 @@ import News from '@components/Home/News';
 import Layout from './layout';
 import type { NextPageWithLayout } from './_app';
 import { ReactElement } from 'react';
-import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next';
-import { getProductCategory, getShopBySize } from 'src/apis/home/home';
-import { TCategoryProps } from 'src/types/home/types';
+import { getProductCategory, getBestProduct } from 'src/apis/home/home';
+import { TCategoryProps, IPlantProps } from 'src/types/home/types';
 
 type IndexPageProps = {
   category: TCategoryProps[];
+  bestPlant: IPlantProps[];
 };
 
 export const getServerSideProps: GetServerSideProps<{
   category: TCategoryProps[];
+  bestPlant: IPlantProps[];
 }> = async () => {
   const category = await getProductCategory();
-  return { props: { category } };
+  const bestPlant = await getBestProduct();
+  return { props: { category, bestPlant } };
 };
 
 const IndexPage: NextPageWithLayout<IndexPageProps> = ({
   category,
+  bestPlant,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
     <>
       <Slider />
       <Category category={category} />
       <ShopPrev />
-      <BestPlant />
+      <BestPlant bestPlant={bestPlant} />
       <BestReview />
       <News />
     </>

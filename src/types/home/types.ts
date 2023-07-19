@@ -1,10 +1,11 @@
 export interface IPlantProps {
-  productId: number;
+  productId?: number;
+  ranking?: number;
   productName: string;
   discountRate: number;
   price: number;
   averageStarRating: number;
-  reviewCount: number;
+  reviewCount?: number;
 }
 
 export interface IReviewProps {

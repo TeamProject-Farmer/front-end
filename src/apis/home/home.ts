@@ -20,3 +20,10 @@ export const getShopBySize = async (size: string) => {
   console.log(response.data);
   return response.data;
 };
+
+//best plant
+export const getBestProduct = async () => {
+  const response = await axios.get(`${API_URL}/api/main/product/best-product`);
+  console.log(response.data);
+  return response.data;
+};
