@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import More from '@assets/images/mypage/more.svg';
+import Button from '@components/Home/Common/Button';
 
 export const Styled = {
   Container: styled.div`
@@ -186,11 +187,12 @@ export const Styled = {
   Checkbox: styled.div`
     display: flex;
     height: 6rem;
+    border-radius: 12px;
     flex-direction: row;
     justify-content: space-evenly;
     background-color: #f4f4f4;
     align-items: center;
-    margin-top: 2.5rem;
+    margin-top: 0.9rem;
   `,
   SearchInput: styled.input`
     background-color: ${theme.colors.white};
@@ -218,6 +220,11 @@ export const Styled = {
     font-weight: 500;
     color: ${props => props.color};
   `,
+  ListSpan: styled.span`
+    font-size: 12px;
+    font-weight: 300;
+    color: #5b5b5b;
+  `,
   FlexRow: styled.div`
     display: grid;
     grid-template-columns: 2fr 2fr 2fr 1fr 1fr 1.5fr;
@@ -227,6 +234,25 @@ export const Styled = {
     border-bottom: 1px solid ${theme.colors.black};
     padding-top: 1rem;
     padding-bottom: 1rem;
+  `,
+  FlexCartRow: styled.div`
+    display: grid;
+    background-color: ${theme.colors.green3};
+    grid-template-columns: 0.5fr 2fr 2fr 1fr 1fr 1.5fr;
+    justify-items: center;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  `,
+  CartRow: styled.div`
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 2fr 1fr 1fr 1.5fr;
+    justify-items: center;
+    align-items: center;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    /* margin-bottom: 2rem; */
+    border-bottom: 1px solid ${theme.colors.borderGray};
   `,
   FlexRowCenter: styled.div`
     display: grid;
@@ -243,6 +269,72 @@ export const Styled = {
     width: 150px;
     height: 150px;
   `,
+  QuantityContainer: styled.div`
+    display: flex;
+    border-color: #b9b9b9;
+    border-radius: 6px;
+    border-width: 1px;
+    padding: 8px;
+    align-items: center;
+  `,
+  QuantityButton: styled.button`
+    font-size: 23px;
+    color: #454545;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background-color: transparent;
+    cursor: pointer;
+  `,
+  QuantityText: styled.span`
+    margin: 0 14px;
+    font-size: 15px;
+    color: ${theme.colors.black};
+  `,
+  CartCommonButton: styled.button<{
+    backgroundColor: string;
+    padding: string;
+    width: string;
+  }>`
+    background-color: ${props => props.backgroundColor};
+    padding: ${props => props.padding}rem;
+    width: ${props => props.width}px;
+    border-radius: 40px;
+    align-items: center;
+  `,
+  ButtonText: styled.h1<{ size: string; color: string; weight: string }>`
+    font-size: ${props => props.size}px;
+    color: ${props => props.color};
+    font-weight: ${props => props.weight};
+  `,
+  CartOrderBox: styled.div`
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: flex-end;
+    background-color: ${theme.colors.cartButtonGray};
+    padding: 1.7rem;
+    margin-top: 3.5rem;
+    margin-bottom: 2rem;
+    border-radius: 42px;
+  `,
+  ButtonWrapper: styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 6rem;
+  `,
+  OrderText: styled.h1`
+    font-size: 15px;
+    font-weight: 300;
+    color: ${theme.colors.black};
+    span {
+      font-weight: 500;
+      font-size: 19px;
+    }
+  `,
   ProductInfoWrapper: styled.div``,
   ProductName: styled.h1`
     /* Add styles for ProductName */
@@ -251,15 +343,14 @@ export const Styled = {
     /* Add styles for ProductDetails */
   `,
   ProductButton: styled.button`
-    background-color: ${theme.colors.lightGray};
+    background-color: ${theme.colors.green4};
     color: ${theme.colors.black};
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 17px;
+    font-weight: 300;
     height: 35px;
-    padding: 0 20px;
+    padding: 0 15px;
     margin-top: 1rem;
   `,
-
   // MyPlants
   MyPlantsButton: styled.button<{ size?: string }>`
     margin-right: ${props => props.size}rem;

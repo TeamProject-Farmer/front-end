@@ -6,5 +6,5 @@ export const getLogin = async ({ email, password }: LoginUserProps) => {
   formData.append('email', email);
   formData.append('password', password);
 
-  return request.post('/member/login', formData);
+  return request.post('/main/login', formData);
 };

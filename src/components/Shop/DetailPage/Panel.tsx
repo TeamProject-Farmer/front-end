@@ -143,9 +143,6 @@ const Styled = {
   ContentWrapper: styled.div`
     width: 548px;
     color: ${theme.colors.black};
-    font-family: Inter;
-    font-style: normal;
-    line-height: normal;
     & > div {
       margin-bottom: 8px;
     }

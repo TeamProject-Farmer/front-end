@@ -57,6 +57,7 @@ const makeStore = () =>
   });
 
 const store = makeStore();
+export default store;
 
 export const wrapper = createWrapper<Store<RootState>>(() => store);
 

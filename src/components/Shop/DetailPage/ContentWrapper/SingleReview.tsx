@@ -20,24 +20,6 @@ const SingleReview = (props: Props) => {
         <div>·</div>
         <div>파머 구매</div>
       </div>
-      <Styled.EachStars>
-        <div>
-          <div>내구성</div>
-          <Styled.ReviewSvg2 />
-        </div>
-        <div>
-          <div>가격</div>
-          <Styled.ReviewSvg2 />
-        </div>
-        <div>
-          <div>디자인</div>
-          <Styled.ReviewSvg2 />
-        </div>
-        <div>
-          <div> 배송</div>
-          <Styled.ReviewSvg2 />
-        </div>
-      </Styled.EachStars>
       <Styled.ShoppingOption>
         <VerticalLine height={35} />
         <div>
@@ -57,7 +39,6 @@ const SingleReview = (props: Props) => {
 const Styled = {
   SingleReview: styled.div`
     border-bottom: 1px solid ${theme.colors.green1};
-    /* 사이즈가 좀 다르게 나온 것 같아서 다시 확인해 봐야할 것 같음 디자인 상은 400px*/
     /* height: 400px; */
     height: fit-content;
     display: flex;
@@ -74,27 +55,10 @@ const Styled = {
       margin-right: 2px;
     }
   `,
-  EachStars: styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    width: 240px;
-    height: fit-content;
-    box-sizing: content-box;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0;
-    margin-top: 13px;
-    & > div {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-  `,
   ReviewSvg1: styled(tempStar1)``,
   ReviewSvg2: styled(tempStar2)``,
   ShoppingOption: styled.div`
     margin-top: 21px;
-    margin-bottom: 19px;
     display: flex;
     gap: 9px;
     font-size: 14px;
@@ -102,6 +66,7 @@ const Styled = {
   `,
   ReviewImage: styled.div`
     margin-top: 19px;
+    /* margin-top: 10px; */
     margin-bottom: 26px;
     border-radius: 5px;
   `,
