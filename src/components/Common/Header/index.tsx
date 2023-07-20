@@ -8,7 +8,6 @@ import { RootState } from 'store';
 
 const Header = () => {
   const isLoggedIn = useSelector((state: RootState) => state.isLoggedIn);
-  console.log(isLoggedIn);
   return (
     <Styled.Wrapper>
       <FirstBuyEvent />

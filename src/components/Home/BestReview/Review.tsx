@@ -40,7 +40,6 @@ const Review = ({
             <Styled.LikeQty>{likeCount}</Styled.LikeQty>
           </Styled.Like>
         </Styled.StarBox>
-        {/* <Styled.Title>{title}</Styled.Title> */}
         <Styled.Content>{content}</Styled.Content>
       </Styled.ContentBox>
     </Styled.Wrapper>
@@ -106,10 +105,6 @@ const Styled = {
     color: #fff;
     background-color: ${theme.colors.pointGreen};
     font-size: 12px;
-  `,
-  Title: styled.p`
-    font-weight: 600;
-    font-size: 16px;
   `,
   Content: styled.p`
     font-weight: 500;
