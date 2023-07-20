@@ -25,13 +25,12 @@ const Review = () => {
       </Styled.OptionBox>
       <Styled.TotalLike>
         <div>
-          
           <TotalStarGauge star={4.7}/>
           <div>4.7</div>
         </div>
         <VerticalLine height={100.5} />
         <div>
-          {/* 데이터가 어떻게 넘어올지 모르겠어서 우선은 이미지로 넣어뒀습니다! */}
+          
           <Image
             alt="temp"
             src="/assets/images/shop/tempTotal.jpg"
@@ -58,7 +57,6 @@ const Review = () => {
       {tempList.map(item => (
         <SingleReview id={item.id} src={item.src} />
       ))}
-      {/* 백엔드에서 데이터 어떻게 들어오는지 보고 결정해야할 것 같음 */}
       <Styled.PaginationBox>페이지네이션 들어갈 부분</Styled.PaginationBox>
     </Styled.Wrapper>
   );
