@@ -1,3 +1,11 @@
+export interface IndexPageProps {
+  banner: IBanner[];
+  category: ICategory[];
+  bestPlant: IPlant[];
+  bestReview: IReview[];
+  // news: INews;
+}
+
 export interface IBanner {
   name: string;
   linkUrl: string;

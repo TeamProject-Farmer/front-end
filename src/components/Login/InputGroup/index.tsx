@@ -7,6 +7,7 @@ import { getLogin } from 'src/apis/login/login';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { setUser } from 'store/reducers/userSlice';
+import { setIsLoggedIn } from 'store/reducers/loginSlice';
 
 const InputGroup = () => {
   const router = useRouter();
@@ -32,6 +33,7 @@ const InputGroup = () => {
       console.log(res.data);
       const userData = res.data;
       dispatch(setUser(userData));
+      dispatch(setIsLoggedIn());
       router.push('/');
     } catch (err) {
       setErrorText(err.response.data);

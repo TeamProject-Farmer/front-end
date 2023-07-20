@@ -14,21 +14,7 @@ import {
   getBestReview,
   getNews,
 } from 'src/apis/home/home';
-import {
-  IBanner,
-  ICategory,
-  IPlant,
-  IReview,
-  INews,
-} from 'src/types/home/types';
-
-type IndexPageProps = {
-  banner: IBanner[];
-  category: ICategory[];
-  bestPlant: IPlant[];
-  bestReview: IReview[];
-  // news: INews;
-};
+import { IndexPageProps } from 'src/types/home/types';
 
 const IndexPage = ({
   banner,
@@ -48,7 +34,7 @@ const IndexPage = ({
   );
 };
 
-IndexPage.getLayout = function getLayout(page: ReactElement) {
+IndexPage.getLayout = (page: ReactElement) => {
   return <Layout>{page}</Layout>;
 };
 

@@ -12,20 +12,22 @@ type LayoutProps = {
   title?: string;
 };
 
-const Layout = ({ children, title = 'Farmer FE' }: LayoutProps) => (
-  <div className={inter.className}>
-    <Head>
-      <title>{title}</title>
-      <meta charSet="utf-8" />
-      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-    </Head>
-    <Styled.Wrapper>
-      <Header />
-      {children}
-      <Footer />
-    </Styled.Wrapper>
-  </div>
-);
+const Layout = ({ children, title = 'Farmer FE' }: LayoutProps) => {
+  return (
+    <div className={inter.className}>
+      <Head>
+        <title>{title}</title>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <Styled.Wrapper>
+        <Header />
+        {children}
+        <Footer />
+      </Styled.Wrapper>
+    </div>
+  );
+};
 
 export default Layout;
 
