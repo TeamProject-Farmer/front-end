@@ -1,10 +1,7 @@
 import Styled from './styles';
 import { useEffect, useState } from 'react';
 
-interface Props {
-  star: number;
-}
-const TotalStarGauge = ({ star }: Props) => {
+const TotalStarGauge = ({ star }: {star: number}) => {
   const starIndex = ['first', 'second', 'third', 'fourth', 'last'];
   const [ratesResArr, setRatesResArr] = useState([0, 0, 0, 0, 0]);
 
