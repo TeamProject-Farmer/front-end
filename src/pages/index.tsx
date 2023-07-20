@@ -8,14 +8,22 @@ import Layout from './layout';
 import { ReactElement } from 'react';
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next';
 import {
+  getMainBanner,
   getProductCategory,
   getBestProduct,
   getBestReview,
   getNews,
 } from 'src/apis/home/home';
-import { ICategory, IPlant, IReview, INews } from 'src/types/home/types';
+import {
+  IBanner,
+  ICategory,
+  IPlant,
+  IReview,
+  INews,
+} from 'src/types/home/types';
 
 type IndexPageProps = {
+  banner: IBanner[];
   category: ICategory[];
   bestPlant: IPlant[];
   bestReview: IReview[];
@@ -23,14 +31,14 @@ type IndexPageProps = {
 };
 
 const IndexPage = ({
+  banner,
   category,
   bestPlant,
   bestReview,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  console.log(category);
   return (
     <>
-      <Slider />
+      <Slider banner={banner} />
       <Category category={category} />
       <ShopPrev />
       <BestPlant bestPlant={bestPlant} />
@@ -47,11 +55,12 @@ IndexPage.getLayout = function getLayout(page: ReactElement) {
 export const getServerSideProps: GetServerSideProps<
   IndexPageProps
 > = async () => {
+  const banner = await getMainBanner();
   const category = await getProductCategory();
   const bestPlant = await getBestProduct();
   const bestReview = await getBestReview();
   // const news = await getNews();
-  return { props: { category, bestPlant, bestReview } };
+  return { props: { banner, category, bestPlant, bestReview } };
 };
 
 export default IndexPage;

@@ -1,5 +1,12 @@
 import { request } from './base';
 
+//main banner
+export const getMainBanner = async () => {
+  return request({
+    url: '/api/main/banner',
+  });
+};
+
 //category
 export const getProductCategory = async () => {
   return request({

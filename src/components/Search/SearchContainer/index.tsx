@@ -3,27 +3,26 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import Icon from '@components/Common/Icon';
 import Keyword from '../Keyword';
-import { IKeyword } from 'src/types/search/types';
 
-const recentKeywordList: IKeyword = {
-  title: '최근 검색 키워드',
-  content: ['다육이', '피쉬본'],
-};
-const popularKeywordList: IKeyword = {
-  title: '실시간 인기 키워드',
-  content: ['다육이', '다육이', '다육이'],
-};
+const popularContent: string[] = ['다육이', '선인장', '블루베리'];
 
-const SearchContainer = () => {
+const SearchContainer = ({
+  handleChange,
+  handleClick,
+  searchWord,
+  recentSearchWord,
+}) => {
   return (
     <Styled.Wrapper>
-      <Styled.IconWrapper>
+      <Styled.IconWrapper onClick={handleClick}>
         <Icon name="search" width={26} height={25} />
       </Styled.IconWrapper>
-      <Styled.Input type="search" />
+      <Styled.Input type="search" onChange={handleChange} value={searchWord} />
       <Styled.KeywordWrapper>
-        <Keyword keywordList={recentKeywordList} />
-        <Keyword keywordList={popularKeywordList} />
+        {recentSearchWord.length !== 0 && (
+          <Keyword title="최근 검색 키워드" wordList={recentSearchWord} />
+        )}
+        <Keyword title="실시간 인기 키워드" wordList={popularContent} />
       </Styled.KeywordWrapper>
     </Styled.Wrapper>
   );
@@ -55,5 +54,6 @@ const Styled = {
     height: 58px;
     border-radius: 29px;
     background-color: ${theme.colors.green4};
+    padding-left: 55px;
   `,
 };

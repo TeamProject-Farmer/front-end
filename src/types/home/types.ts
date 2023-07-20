@@ -1,7 +1,13 @@
+export interface IBanner {
+  name: string;
+  linkUrl: string;
+  imgUrl: string;
+}
+
 export interface INews {
-  subject: 'string';
-  content: 'string';
-  imgUrl: 'string';
+  subject: string;
+  content: string;
+  imgUrl: string;
 }
 
 export interface IPlant {
