@@ -3,10 +3,9 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import VerticalLine from '@components/Shop/Common/VerticalLine';
 import photo from '@assets/images/shop/photoIcon.svg';
-import totalStars from '@assets/images/shop/tempReviewStars.svg';
 import downArrow from '@assets/images/shop/downArrow1.svg';
-
 import SingleReview from './SingleReview';
+import TotalStarGauge from '@components/Shop/Common/gauge/TotalStarGauge';
 
 const Review = () => {
   const tempList = [
@@ -26,7 +25,8 @@ const Review = () => {
       </Styled.OptionBox>
       <Styled.TotalLike>
         <div>
-          <Styled.TotalStars />
+          
+          <TotalStarGauge star={4.7}/>
           <div>4.7</div>
         </div>
         <VerticalLine height={100.5} />
@@ -130,7 +130,6 @@ const Styled = {
       width: 240px;
     }
   `,
-  TotalStars: styled(totalStars)``,
   ReviewTitle: styled.div`
     height: 58px;
     display: flex;
