@@ -3,7 +3,6 @@ import React from 'react';
 import { ThemeProvider } from '@emotion/react';
 import { AppProps } from 'next/app';
 import theme from '../styles/theme';
-import Layout from './layout';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { globalStyles } from '@styles/globalStyle';
 import { persistor, wrapper } from 'store';
