@@ -23,8 +23,18 @@ const handleErrorResponse = error => {
 export const request = async (config: AxiosRequestConfig) => {
   try {
     const response = await apiInstance(config);
-    console.log(response.data);
+    console.log(response);
     return response.data;
+  } catch (err) {
+    handleErrorResponse(err);
+  }
+};
+
+export const request2 = async (config: AxiosRequestConfig) => {
+  try {
+    const response = apiInstance(config);
+    console.log(response);
+    return response;
   } catch (err) {
     handleErrorResponse(err);
   }

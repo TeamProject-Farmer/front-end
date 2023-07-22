@@ -9,6 +9,7 @@ import { ReactElement } from 'react';
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next';
 import {
   getMainBanner,
+  getMainBanner2,
   getProductCategory,
   getBestProduct,
   getBestReview,
@@ -22,7 +23,10 @@ const IndexPage = ({
   bestPlant,
   bestReview,
   news,
+  test,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  console.log('banner', banner);
+  console.log('test', test);
   return (
     <>
       <Slider banner={banner} />
@@ -47,7 +51,8 @@ export const getServerSideProps: GetServerSideProps<
   const bestPlant = await getBestProduct();
   const bestReview = await getBestReview();
   const news = await getNews();
-  return { props: { banner, category, bestPlant, bestReview, news } };
+  const test = await getMainBanner();
+  return { props: { banner, category, bestPlant, bestReview, news, test } };
 };
 
 export default IndexPage;
