@@ -7,6 +7,7 @@ export interface IndexPageProps {
 }
 
 export interface IBanner {
+  id: number;
   name: string;
   linkUrl: string;
   imgUrl: string;

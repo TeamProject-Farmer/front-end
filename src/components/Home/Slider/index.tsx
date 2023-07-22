@@ -10,12 +10,12 @@ const sliderContents = [
 ];
 
 const Slider = ({ banner }) => {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(1);
 
   useEffect(() => {
     const sliderInterval = setInterval(() => {
       setActiveIndex(prevIndex =>
-        prevIndex === sliderContents.length - 1 ? 0 : prevIndex + 1,
+        prevIndex === sliderContents.length - 1 ? 1 : prevIndex + 1,
       );
     }, 3000);
     return () => clearInterval(sliderInterval);
@@ -23,13 +23,10 @@ const Slider = ({ banner }) => {
 
   return (
     <Styled.Wrapper>
-      <SliderContent
-        sliderContents={sliderContents}
-        activeIndex={activeIndex}
-      />
+      <SliderContent sliderContents={banner} activeIndex={activeIndex} />
       <Indicator
         activeIndex={activeIndex}
-        sliderContents={sliderContents}
+        sliderContents={banner}
         onclick={(clickedIndex: number) => setActiveIndex(clickedIndex)}
       />
     </Styled.Wrapper>

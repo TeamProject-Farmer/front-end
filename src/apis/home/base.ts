@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
-// const API_URL = 'https://www.farmer-back.store';
-export const API_URL = 'http://3.39.150.186:8080';
+const API_URL = 'https://www.farmer-back.store/api';
+// export const API_URL = 'http://3.39.150.186:8080';
 
 const axiosConfig: AxiosRequestConfig = {
   baseURL: API_URL,

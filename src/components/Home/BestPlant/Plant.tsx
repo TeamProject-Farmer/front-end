@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import Icon from '@components/Common/Icon';
 import theme from '@styles/theme';
 import Image from 'next/image';
-import { IPlantProps } from 'src/types/home/types';
+import { IPlant } from 'src/types/home/types';
 
 const Plant = ({
   ranking,
@@ -10,7 +10,7 @@ const Plant = ({
   discountRate,
   price,
   averageStarRating,
-}: IPlantProps) => {
+}: IPlant) => {
   return (
     <Styled.Wrapper>
       <Styled.RankingBox>{ranking}</Styled.RankingBox>

@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
+import Link from 'next/link';
 import { IBanner } from 'src/types/home/types';
 
 const SliderContent = ({ sliderContents, activeIndex }) => {
@@ -28,27 +29,30 @@ const SliderContent = ({ sliderContents, activeIndex }) => {
   return (
     <>
       <AnimatePresence initial={false}>
-        {sliderContents.map(content =>
-          activeIndex === content.id ? (
-            <Styled.Content
-              key={content.id}
-              id={content.id}
-              variants={imgVariants}
-              initial="initial"
-              animate="start"
-              exit="end"
-            >
-              <Styled.ContentBox>
-                <Styled.Slogan>Let's be a</Styled.Slogan>
-                <Styled.Slogan>Farmer!</Styled.Slogan>
-                <Styled.Description>
-                  사무공간, 생활공간을 그린 친화적으로
-                </Styled.Description>
-                <Styled.ShopBtn>&gt; Shop Now</Styled.ShopBtn>
-              </Styled.ContentBox>
-            </Styled.Content>
-          ) : null,
-        )}
+        {sliderContents &&
+          sliderContents?.map((content: IBanner) =>
+            activeIndex === content.id ? (
+              <Styled.Content
+                key={content.id}
+                variants={imgVariants}
+                imgUrl={content.imgUrl}
+                initial="initial"
+                animate="start"
+                exit="end"
+              >
+                <Link href={content.linkUrl}>
+                  <Styled.ContentBox>
+                    <Styled.Slogan>Let's be a</Styled.Slogan>
+                    <Styled.Slogan>Farmer!</Styled.Slogan>
+                    <Styled.Description>
+                      사무공간, 생활공간을 그린 친화적으로
+                    </Styled.Description>
+                    <Styled.ShopBtn>&gt; Shop Now</Styled.ShopBtn>
+                  </Styled.ContentBox>
+                </Link>
+              </Styled.Content>
+            ) : null,
+          )}
       </AnimatePresence>
     </>
   );
@@ -57,12 +61,11 @@ const SliderContent = ({ sliderContents, activeIndex }) => {
 export default SliderContent;
 
 const Styled = {
-  Content: styled(motion.div)`
+  Content: styled(motion.div)<{ imgUrl: string }>`
     position: absolute;
     width: 100%;
     height: 100%;
-    /* background-image: url('/assets/images/home/bannerBg${props =>
-      props.id}.png'); */
+    background-image: url(imgUrl);
     background-size: 100% auto;
   `,
   ContentBox: styled.div`
