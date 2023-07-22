@@ -66,7 +66,7 @@ export const Styled = {
     margin-left: 3.5rem;
   `,
   NameText: styled.h1`
-    font-size: 25px;
+    font-size: 20px; // 한줄 초과로 인한 폰트사이즈 자체 수정
     font-weight: 500;
     color: ${theme.colors.black};
     span {
@@ -452,5 +452,11 @@ export const Styled = {
     justify-content: flex-start;
     align-items: center;
     margin-bottom: 1rem;
+  `,
+  ErrorText: styled.h1`
+    font-size: 12px;
+    font-weight: 500;
+    color: #fd6666;
+    margin-left: 1rem;
   `,
 };

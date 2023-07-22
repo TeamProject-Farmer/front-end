@@ -1,18 +1,22 @@
 import React from 'react';
 import Profile from '@assets/images/mypage/profile.svg';
-import Call from '@assets/images/mypage/call.svg';
 import Mail from '@assets/images/mypage/mail.svg';
 import { Styled } from '../../styles';
 import { useRouter } from 'next/router';
 import { IconText } from './Icon';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store';
+
+const selectUser = (state: RootState) => state.user;
 
 const MyProfile = () => {
   const route = useRouter();
 
-  // 쿠폰, 포인트 데이터 배열 생성 (임시)
+  const user = useSelector(selectUser);
+
   const data = [
-    { label: 'Point', value: '1,000' },
-    { label: '쿠폰', value: '0' },
+    { label: 'Point', value: user.point },
+    { label: '쿠폰', value: user.memberCoupon },
   ];
 
   return (
@@ -32,14 +36,13 @@ const MyProfile = () => {
             {/* 프로필 왼쪽 */}
             <Styled.InfoWrapper>
               <Styled.NameText>
-                <span>파머</span>님 안녕하세요.
+                <span>{user.nickname}</span>님 안녕하세요.
               </Styled.NameText>
               <Styled.AccumulatedAmountText>
-                누적 구매금액: <span>0</span>원
+                누적 구매금액: <span>{user.cumulativeAmount}</span>원
               </Styled.AccumulatedAmountText>
 
-              <IconText icon={<Call />} text="+82 10 0***-0***" />
-              <IconText icon={<Mail />} text="이메일@이메일.com" />
+              <IconText icon={<Mail />} text={user.email} />
             </Styled.InfoWrapper>
           </Styled.ProfileTextWrapper>
 
