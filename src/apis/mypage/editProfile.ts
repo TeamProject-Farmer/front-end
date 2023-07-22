@@ -7,5 +7,5 @@ export const getEdit = async ({ password, nickname }: ProfileEditProps) => {
   formData.append('password', password);
   formData.append('nickname', nickname);
 
-  return request.post('/member/mypage/profile', formData);
+  return await request.post('/member/mypage/profile', formData);
 };
