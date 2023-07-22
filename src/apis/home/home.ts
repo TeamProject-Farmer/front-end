@@ -1,14 +1,8 @@
-import { request, request2 } from './base';
+import { request } from './base';
 
 //main banner
 export const getMainBanner = async () => {
   return request({
-    url: '/main/banner',
-  });
-};
-
-export const getMainBanner2 = async () => {
-  return await request2({
     url: '/main/banner',
   });
 };

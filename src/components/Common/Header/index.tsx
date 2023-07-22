@@ -23,6 +23,7 @@ const Header = () => {
         </Link>
 
         <Styled.Utils>
+          {isLoggedIn && <Icon name="logout" width={36} height={32} />}
           <li>
             <Link href={isLoggedIn ? '/mypage' : '/login'}>
               <Icon name="myPage" width={32} height={32} />

@@ -4,7 +4,6 @@ export interface IndexPageProps {
   bestPlant: IPlant[];
   bestReview: IReview[];
   news: INews;
-  test: any;
 }
 
 export interface IBanner {

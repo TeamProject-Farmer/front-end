@@ -3,7 +3,6 @@ import Image from 'next/image';
 
 const News = ({ news }) => {
   const { subject, content, imgUrl } = news;
-  console.log(news);
   return (
     <Styled.Wrapper>
       <Styled.Title>farmer news</Styled.Title>
