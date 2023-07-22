@@ -3,7 +3,7 @@ export interface IndexPageProps {
   category: ICategory[];
   bestPlant: IPlant[];
   bestReview: IReview[];
-  // news: INews;
+  news: INews;
 }
 
 export interface IBanner {

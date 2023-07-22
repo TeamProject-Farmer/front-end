@@ -40,9 +40,7 @@ export const getBestReview = async () => {
 
 //news
 export const getNews = async () => {
-  const response = await request({
+  return request({
     url: '/main/news',
   });
-  console.log(response);
-  return response;
 };

@@ -21,6 +21,7 @@ const IndexPage = ({
   category,
   bestPlant,
   bestReview,
+  news,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
     <>
@@ -29,7 +30,7 @@ const IndexPage = ({
       <ShopPrev />
       <BestPlant bestPlant={bestPlant} />
       <BestReview bestReview={bestReview} />
-      {/* <News news={news} /> */}
+      <News news={news} />
     </>
   );
 };
@@ -45,8 +46,8 @@ export const getServerSideProps: GetServerSideProps<
   const category = await getProductCategory();
   const bestPlant = await getBestProduct();
   const bestReview = await getBestReview();
-  // const news = await getNews();
-  return { props: { banner, category, bestPlant, bestReview } };
+  const news = await getNews();
+  return { props: { banner, category, bestPlant, bestReview, news } };
 };
 
 export default IndexPage;

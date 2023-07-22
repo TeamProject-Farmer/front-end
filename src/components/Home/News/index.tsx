@@ -2,7 +2,7 @@ import Styled from './styles';
 import Image from 'next/image';
 
 const News = ({ news }) => {
-  // const { subject, content, imgUrl } = news;
+  const { subject, content, imgUrl } = news;
   console.log(news);
   return (
     <Styled.Wrapper>
@@ -15,8 +15,8 @@ const News = ({ news }) => {
         {/* <Image src={news.imgUrl} alt="news image" width={553} height={600} /> */}
       </Styled.ImgBox>
       <Styled.ContentBox>
-        {/* <Styled.ContentTitle>{news.subject}</Styled.ContentTitle> */}
-        {/* <Styled.Content>{news.content}</Styled.Content> */}
+        <Styled.ContentTitle>{news.subject}</Styled.ContentTitle>
+        <Styled.Content>{news.content}</Styled.Content>
       </Styled.ContentBox>
     </Styled.Wrapper>
   );
