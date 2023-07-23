@@ -4,7 +4,7 @@ import theme from '@styles/theme';
 import secret from '@assets/images/shop/secretIcon.svg';
 import VerticalLine from '@components/Shop/Common/VerticalLine';
 import OnOffButton from './OnOffButton';
-
+import MiniModal from '@components/Common/MiniModal';
 
 const Inquiry = () => {
   const tempList = [
@@ -49,10 +49,25 @@ const Inquiry = () => {
       content: '문의 내용 입니다.',
     },
   ];
-  const [modalOpen, setModalOpen] = useState<number>(0);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const openModal = () => {
+    setModalOpen(true);
+    console.log('open');
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+    console.log('close');
+  };
   return (
     <Styled.Wrapper>
       <Styled.Container>
+        {modalOpen === true ? (
+          <MiniModal
+            modalType="inquiry"
+            modalName="문의하기"
+            modalClose={closeModal}
+          />
+        ) : null}
         <Styled.Title>
           <div>
             <div>문의</div>
@@ -61,7 +76,9 @@ const Inquiry = () => {
           <Styled.MyInQuiry>
             <span>내 문의글 보기</span>
             <OnOffButton />
-            <Styled.OpenModalButton>문의하기</Styled.OpenModalButton>
+            <Styled.OpenModalButton onClick={openModal}>
+              문의하기
+            </Styled.OpenModalButton>
           </Styled.MyInQuiry>
         </Styled.Title>
         {tempList.map(item => (
@@ -129,7 +146,6 @@ const Styled = {
     }
   `,
   MyInQuiry: styled.div`
-
     & > span {
       font-size: 16px;
       font-weight: 500;
