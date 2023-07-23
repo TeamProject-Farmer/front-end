@@ -19,7 +19,7 @@ const theme: Theme = {
   },
   size: {
     mainWidth: '1200px',
-    shopDetailWidth: '694px',
+    shopDetailWidth: '692px',
     shopDetailWrapper: '1077px',
   },
 };

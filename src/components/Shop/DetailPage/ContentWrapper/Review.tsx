@@ -15,7 +15,7 @@ const Review = () => {
     { id: 2, src: '/assets/images/shop/tempImage8.svg' },
   ];
   //5점부터 넣어줘야함!
-  const tempArr = [14,0,1,1,0];
+  const tempArr = [14, 0, 1, 1, 0];
   return (
     <Styled.Wrapper>
       <Styled.Title>
@@ -34,12 +34,6 @@ const Review = () => {
         <VerticalLine height={100.5} />
         <div>
           <EachStarGauge arr={tempArr}></EachStarGauge>
-          {/* <Image
-            alt="temp"
-            src="/assets/images/shop/tempTotal.jpg"
-            width={240}
-            height={100}
-          ></Image> */}
         </div>
       </Styled.TotalLike>
       <Styled.ReviewTitle>

@@ -1,7 +1,10 @@
+import { useState } from 'react';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import secret from '@assets/images/shop/secretIcon.svg';
 import VerticalLine from '@components/Shop/Common/VerticalLine';
+import OnOffButton from './OnOffButton';
+
 
 const Inquiry = () => {
   const tempList = [
@@ -46,45 +49,52 @@ const Inquiry = () => {
       content: '문의 내용 입니다.',
     },
   ];
-
+  const [modalOpen, setModalOpen] = useState<number>(0);
   return (
     <Styled.Wrapper>
       <Styled.Container>
-      <Styled.Title>
-        <div>문의</div>
-        <div>177</div>
-      </Styled.Title>
-      {tempList.map(item => (
-        <Styled.Single key={item.id}>
+        <Styled.Title>
           <div>
-            <div>구매</div>
-            <VerticalLine height={13.5} />
-            <div>상품</div>
-            <VerticalLine height={13.5} />
-            <div>미답변</div>
+            <div>문의</div>
+            <div>177</div>
           </div>
-          <div>
-            <div>{item.userName}</div>
-            <VerticalLine height={15} />
-            <div>{item.time}</div>
-          </div>
-          {item.isSecret ? (
-            <Styled.Question>
-              <div>Q</div>
-              <Styled.SecretIcon />
-              <div>비밀글입니다.</div>
-            </Styled.Question>
-          ) : (
-            <Styled.OpenQuestion>
-              <div>Q</div>
-              <div>
-                <div>{item.option}</div>
-                <div>{item.content}</div>
-              </div>
-            </Styled.OpenQuestion>
-          )}
-        </Styled.Single>
-      ))}
+          <Styled.MyInQuiry>
+            <span>내 문의글 보기</span>
+            <OnOffButton />
+            <Styled.OpenModalButton>문의하기</Styled.OpenModalButton>
+          </Styled.MyInQuiry>
+        </Styled.Title>
+        {tempList.map(item => (
+          <Styled.Single key={item.id}>
+            <div>
+              <div>구매</div>
+              <VerticalLine height={13.5} />
+              <div>상품</div>
+              <VerticalLine height={13.5} />
+              <div>미답변</div>
+            </div>
+            <div>
+              <div>{item.userName}</div>
+              <VerticalLine height={15} />
+              <div>{item.time}</div>
+            </div>
+            {item.isSecret ? (
+              <Styled.Question>
+                <div>Q</div>
+                <Styled.SecretIcon />
+                <div>비밀글입니다.</div>
+              </Styled.Question>
+            ) : (
+              <Styled.OpenQuestion>
+                <div>Q</div>
+                <div>
+                  <div>{item.option}</div>
+                  <div>{item.content}</div>
+                </div>
+              </Styled.OpenQuestion>
+            )}
+          </Styled.Single>
+        ))}
       </Styled.Container>
       {/* 백엔드에서 데이터 어떻게 들어오는지 보고 결정해야할 것 같음 */}
       <div>페이지네이션 들어갈 부분</div>
@@ -100,18 +110,45 @@ const Styled = {
     margin-bottom: 80px;
   `,
   Container: styled.div`
-  border-bottom: 1px solid ${theme.colors.green1};
-  margin-bottom: 33px;
+    border-bottom: 1px solid ${theme.colors.green1};
+    margin-bottom: 33px;
   `,
   Title: styled.div`
     font-size: 20px;
     font-weight: 700;
     margin-bottom: 25px;
     display: flex;
-    & > div:last-child {
+    justify-content: space-between;
+    & > div {
+      display: flex;
+      align-items: center;
+    }
+    & > div:first-child > div:last-child {
       color: #47ac3a;
       margin-left: 6px;
     }
+  `,
+  MyInQuiry: styled.div`
+
+    & > span {
+      font-size: 16px;
+      font-weight: 500;
+      color: ${theme.colors.pointGreen};
+      margin-right: 10px;
+    }
+  `,
+  OpenModalButton: styled.button`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 25px;
+    width: 95px;
+    height: 32px;
+    border-radius: 5px;
+    background-color: ${theme.colors.pointGreen};
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
   `,
   Single: styled.div`
     display: flex;
