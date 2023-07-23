@@ -8,7 +8,7 @@ const Styled = {
     z-index: 1;
     position: fixed;
     //우선 가운데에 뜨게 설정해둠 추후 상의 후 변경 예정
-    top: 25%;
+    top: 17%;
     left: 40%;
     width: 486px;
     height: fit-content;

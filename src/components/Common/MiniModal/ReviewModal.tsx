@@ -1,6 +1,6 @@
 import Styled from './styles';
 import { useState } from 'react';
-import Star from './star';
+import Star from './ReviewStar';
 
 const ReviewModal = () => {
   let [inputCount, setInputCount] = useState(0);
