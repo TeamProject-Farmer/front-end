@@ -40,10 +40,10 @@ const Styled = {
     border: none;
     background-color: transparent;
     position: absolute;
-    width: 17px;
-    height: 17px;
-    right: 18px;
-    top: 19px;
+    width: 25px;
+    height: 56px;
+    right: 10px;
+    top: 0;
   `,
   ContentWrapper: styled.div`
     padding: 30px 25px;
@@ -104,7 +104,7 @@ const Styled = {
     background-color: #fff;
     color: ${theme.colors.green1};
   `,
-  InquiryWrapper: styled.div`
+  CommonWrapper: styled.div`
     display: flex;
     flex-direction: column;
   `,
@@ -120,7 +120,7 @@ const Styled = {
       font-weight: 500;
     }
   `,
-  
+
   InquiryOptionBox: styled.div`
     width: 360px;
     height: 44px;
@@ -191,6 +191,78 @@ const Styled = {
     & > input:checked {
       border: 5px solid ${theme.colors.pointGreen};
     }
+  `,
+
+  ReviewMyOption: styled.div`
+    display: flex;
+    padding-bottom: 25.5px;
+    border-bottom: 1px solid ${theme.colors.green1};
+  `,
+  MyOptionImg: styled.div`
+    width: 77px;
+    height: 77px;
+    background-color: #d9d9d9;
+  `,
+  MyOptionListBox: styled.div`
+    margin-left: 22px;
+    display: flex;
+    flex-direction: column;
+    height: 77px;
+    justify-content: center;
+    gap: 5px;
+    & > span:first-child {
+      color: ${theme.colors.black};
+      font-size: 16px;
+      font-weight: 500;
+    }
+    & > span:last-child {
+      color: #606367;
+      font-size: 16px;
+      font-weight: 500;
+    }
+  `,
+  ReviewStarWrapper: styled.div`
+    padding: 25px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-bottom: 1px solid ${theme.colors.green1};
+    align-items: center;
+  `,
+  ReviewEachStar: styled.button`
+    margin: 0 4px;
+  `,
+  ReviewContentWrapper: styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 13.5px;
+    padding: 25px 0;
+  `,
+  ReviewContentText: styled.div`
+    color: ${theme.colors.black};
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: 'Inter';
+  `,
+  ReviewTextWrapper: styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  `,
+  AddPhotoButtn: styled.button`
+    width: 436px;
+    height: 60px;
+    border: none;
+    border-radius: 5px;
+    background-color: ${theme.colors.green1};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
   `,
 };
 

@@ -63,7 +63,7 @@ const Inquiry = () => {
       <Styled.Container>
         {modalOpen === true ? (
           <MiniModal
-            modalType="inquiry"
+            modalType="review"
             modalName="문의하기"
             modalClose={closeModal}
           />
