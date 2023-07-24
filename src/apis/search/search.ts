@@ -1,4 +1,4 @@
-import { request } from './../home/base';
+import request from '../base';
 
 //최근 검색 항목
 export const postSearch = async (
@@ -6,7 +6,7 @@ export const postSearch = async (
   memberEmail?: string,
   sortSearchCond?: string,
 ) => {
-  return request({
+  const response = await request({
     method: 'post',
     url: '/api/main/search',
     params: {
@@ -15,4 +15,5 @@ export const postSearch = async (
       sortSearchCond: sortSearchCond,
     },
   });
+  return response.data;
 };
