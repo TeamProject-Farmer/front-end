@@ -26,7 +26,7 @@ const ShopDetail = () => {
           <Styled.PickItemWrapper>
             {ShortTempProduct.map(i => (
               <Link href={`/shop/${CurrentPage[category]}/detail/1`}>
-                <Product key={i.id} image={i.image} title={i.contentTitle} discount={i.percent} price={i.totalPrice} star={i.reviewScore} review={i.totalReview} specialPrice={true} freeShipping={true}></Product>
+                <Product key={i.id} thumbnailImg={i.image} name={i.contentTitle} discountRate={i.percent} price={i.totalPrice} averageStarRating={i.reviewScore} reviewCount={i.totalReview}></Product>
               </Link>
             ))}
           </Styled.PickItemWrapper>
@@ -37,7 +37,7 @@ const ShopDetail = () => {
           {/* 추후 api 연동 */}
           {TempProduct.map(i => (
             <Link href={`/shop/${CurrentPage[category]}/detail/1`}>
-              <Product key={i.id} image={i.image} title={i.contentTitle} discount={i.percent} price={i.totalPrice} star={i.reviewScore} review={i.totalReview} specialPrice={true} freeShipping={true}></Product>
+              <Product key={i.id} thumbnailImg={i.image} name={i.contentTitle} discountRate={i.percent} price={i.totalPrice} averageStarRating={i.reviewScore} reviewCount={i.totalReview}></Product>
             </Link>
           ))}
         </Styled.OrderItemWrapper>

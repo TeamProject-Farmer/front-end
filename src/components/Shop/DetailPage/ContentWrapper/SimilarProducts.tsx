@@ -39,7 +39,7 @@ const SimilarProducts = () => {
       <Styled.Title>비슷한 상품</Styled.Title>
       <Styled.ItemWrapper>
         {TempList.map(i => (
-          <SmallProduct key={i.id} image={i.image} title={i.contentTitle} discount={i.percent} price={i.totalPrice} star={i.reviewScore} review={i.totalReview} specialPrice={true} freeShipping={true}></SmallProduct>
+          <SmallProduct key={i.id} thumbnailImg={i.image} name={i.contentTitle} discountRate={i.percent} price={i.totalPrice} averageStarRating={i.reviewScore} reviewCount={i.totalReview}></SmallProduct>
         ))}
       </Styled.ItemWrapper>
       <Styled.ButtonWrapper>

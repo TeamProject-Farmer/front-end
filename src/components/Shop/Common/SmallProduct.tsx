@@ -1,29 +1,36 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import Icon from '@components/Common/Icon'
+import Icon from '@components/Common/Icon';
 import { ProductProps } from '@components/Common/type';
 
 const SmallProduct = (props: ProductProps) => {
-  const {image, title, discount, price, star, review, specialPrice, freeShipping} = props;
+  const {
+    thumbnailImg,
+    name,
+    price,
+    discountRate,
+    reviewCount,
+    averageStarRating,
+  } = props;
   return (
     <Styled.Wrapper>
-      <Styled.ImgBox>{image?image:'이미지'}</Styled.ImgBox>
+      <Styled.ImgBox>{thumbnailImg}</Styled.ImgBox>
       <Styled.Content>
-        <Styled.Title>{title}</Styled.Title>
+        <Styled.Title>{name}</Styled.Title>
         <Styled.PriceBox>
-          <Styled.Discount>{discount}%</Styled.Discount>
+          <Styled.Discount>{discountRate}%</Styled.Discount>
           <Styled.Price>{price}</Styled.Price>
         </Styled.PriceBox>
         <Styled.ReviewBox>
           <Styled.Star>
             <Icon name="star" width={16} height={15} />
-            {star}
+            {averageStarRating}
           </Styled.Star>
-          <Styled.Review>리뷰 {review}</Styled.Review>
+          <Styled.Review>리뷰 {reviewCount}</Styled.Review>
         </Styled.ReviewBox>
         <Styled.EventBox>
-          {specialPrice && <Styled.SpecialPrice>특가상품</Styled.SpecialPrice>}
-          {freeShipping && <Styled.FreeShipping>무료배송</Styled.FreeShipping>}
+          {discountRate && <Styled.SpecialPrice>특가상품</Styled.SpecialPrice>}
+          {<Styled.FreeShipping>무료배송</Styled.FreeShipping>}
         </Styled.EventBox>
         <Styled.Title />
       </Styled.Content>
@@ -36,7 +43,6 @@ const Styled = {
     width: 216px;
     border: 1px solid #000;
     line-height: 1;
-
   `,
   ImgBox: styled.div`
     position: relative;
@@ -64,7 +70,7 @@ const Styled = {
     gap: 10px;
   `,
   Discount: styled.p`
-    color: #62C655;
+    color: #62c655;
     font-size: 14px;
     font-weight: 700;
   `,
@@ -96,12 +102,12 @@ const Styled = {
     margin-top: 3px;
     & > p {
       border-radius: 4px;
-    padding: 3px 5px;
-    font-size: 8px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+      padding: 3px 5px;
+      font-size: 8px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   `,
   SpecialPrice: styled.p`

@@ -21,14 +21,12 @@ const ProductWrapper = () => {
         <Link href={`/shop/${CurrentPage[category]}/detail/1`}>
           <Product
             key={i.id}
-            image={i.image}
-            title={i.contentTitle}
-            discount={i.percent}
+            thumbnailImg={i.image}
+            name={i.contentTitle}
+            discountRate={i.percent}
             price={i.totalPrice}
-            star={i.reviewScore}
-            review={i.totalReview}
-            specialPrice={true}
-            freeShipping={true}
+            averageStarRating={i.reviewScore}
+            reviewCount={i.totalReview}
           ></Product>
         </Link>
       ))}
