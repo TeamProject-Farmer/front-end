@@ -24,15 +24,14 @@ const SearchContent = () => {
     <Styled.Wrapper>
       {plants.map(plant => (
         <Plant
-          key={plant.id}
-          title={plant.title}
-          discount={plant.discount}
-          price={plant.price}
-          star={plant.star}
-          review={plant.review}
-          specialPrice={plant.specialPrice}
-          freeShipping={plant.freeShipping}
-        />
+        key={plant.id}
+        thumbnailImg={plant.thumbnailImg}
+        name={plant.name}
+        discountRate={plant.discountRate}
+        price={plant.price}
+        averageStarRating={plant.averageStarRating}
+        reviewCount={plant.reviewCount}
+      />
       ))}
     </Styled.Wrapper>
   );
