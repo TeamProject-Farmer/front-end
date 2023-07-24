@@ -1,4 +1,6 @@
 import React from 'react';
+const preserveAspectRatio =
+  '[xMinYMin/xMidYMin/xMaxYMin/xMinYMid/xMidYMid/xMaxYMid/xMinYMax/xMidYMax/xMaxYMax] [meet/slice/none]';
 
 const IconLoader = () => {
   return (
@@ -8,6 +10,7 @@ const IconLoader = () => {
       xmlns="http://www.w3.org/2000/symbol"
       xmlnsXlink="http://www.w3.org/1999/xlink"
       style={{ display: 'none' }}
+      preserveAspectRatio="xMinYMin meet"
     >
       <defs id="defs">
         <symbol id="closeBtn" width="26" height="26" viewBox="0 0 26 26">
@@ -394,6 +397,20 @@ const IconLoader = () => {
             strokeWidth="3"
             strokeLinecap="round"
             strokeLinejoin="round"
+          />
+        </symbol>
+        <symbol
+          id="logout"
+          width="36"
+          height="32"
+          viewBox="0 0 36 32"
+          fill="none"
+        >
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M0 1.67164C0 0.74842 0.732625 0 1.63636 0H24.0442C24.948 0 25.6806 0.74842 25.6806 1.67164V11.0289C25.6806 11.9522 24.948 12.7006 24.0442 12.7006C23.1405 12.7006 22.4079 11.9522 22.4079 11.0289V3.34328H3.27273V28.6567H22.4079V20.9711C22.4079 20.0478 23.1405 19.2994 24.0442 19.2994C24.948 19.2994 25.6806 20.0478 25.6806 20.9711V30.3284C25.6806 31.2516 24.948 32 24.0442 32H1.63636C0.732625 32 0 31.2516 0 30.3284V1.67164ZM28.1773 9.86452C28.8068 9.20212 29.8428 9.18646 30.4912 9.82955L35.5035 14.8006C35.8209 15.1154 36 15.5481 36 16C36 16.4519 35.8209 16.8846 35.5035 17.1994L30.4912 22.1704C29.8428 22.8135 28.8068 22.7979 28.1773 22.1355C27.5478 21.4731 27.5631 20.4148 28.2115 19.7717L30.329 17.6716H19.0319C18.1282 17.6716 17.3956 16.9232 17.3956 16C17.3956 15.0768 18.1282 14.3284 19.0319 14.3284H30.329L28.2115 12.2283C27.5631 11.5852 27.5478 10.5269 28.1773 9.86452Z"
+            fill="#285430"
           />
         </symbol>
       </defs>

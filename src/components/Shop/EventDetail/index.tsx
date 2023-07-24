@@ -1,68 +1,19 @@
 import styled from '@emotion/styled';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import theme from '@styles/theme';
-import Item from '../Common/Item';
 import SideAd from '../Common/SideAd';
 import Category from '../Common/Category';
 import Product from '@components/Common/Product';
+import { ShortTempProduct, CurrentPage } from '../type';
 
 const EventDetail = () => {
-  //임시로 넣은 리스트입니다.
-  const TempList = [
-    {
-      id: 1,
-      image: '이미지',
-      contentTitle: '상품명',
-      pricePercent: 20,
-      totalPrice: '10,000',
-      reviewScore: 4.8,
-      totalReview: '1,105',
-    },
-    {
-      id: 2,
-      image: '이미지',
-      contentTitle: '상품명',
-      pricePercent: 20,
-      totalPrice: '10,000',
-      reviewScore: 4.8,
-      totalReview: '1,105',
-    },
-    {
-      id: 3,
-      image: '이미지',
-      contentTitle: '상품명',
-      pricePercent: 20,
-      totalPrice: '10,000',
-      reviewScore: 4.8,
-      totalReview: '1,105',
-    },
-    {
-      id: 4,
-      image: '이미지',
-      contentTitle: '상품명',
-      pricePercent: 20,
-      totalPrice: '10,000',
-      reviewScore: 4.8,
-      totalReview: '1,105',
-    },
-    {
-      id: 5,
-      image: '이미지',
-      contentTitle: '상품명',
-      pricePercent: 20,
-      totalPrice: '10,000',
-      reviewScore: 4.8,
-      totalReview: '1,105',
-    },
-    {
-      id: 6,
-      image: '이미지',
-      contentTitle: '상품명',
-      pricePercent: 20,
-      totalPrice: '10,000',
-      reviewScore: 4.8,
-      totalReview: '1,105',
-    },
-  ];
+  const router = useRouter();
+  const menu = router.query.category;
+  let category: string;
+  if (menu) {
+    category = menu.toString();
+  }
   return (
     <Styled.Wrapper>
       <Category />
@@ -72,20 +23,33 @@ const EventDetail = () => {
         <SideAd />
         <Styled.ImageWrapper />
         <Styled.ItemWrapper>
-          {TempList.map(i => (
-            <Product 
-            key={i.id}
-            // image={i.image}
-            title={i.contentTitle}
-            discount={i.pricePercent}
-            price={i.totalPrice}
-            star={i.reviewScore}
-            review={i.totalReview}
-            specialPrice={true}
-            freeShipping={true}
-            />
+          {/* 추후 api 연동 */}
+          {ShortTempProduct.map(i => (
+            <Link href={`/shop/${CurrentPage[category]}/detail/1`}>
+              <Product
+                key={i.id}
+                thumbnailImg={i.image}
+                name={i.contentTitle}
+                discountRate={i.percent}
+                price={i.totalPrice}
+                averageStarRating={i.reviewScore}
+                reviewCount={i.totalReview}
+              ></Product>
+            </Link>
           ))}
-          {/*sticky 속성 때문에 최대 아이템 개수를 정해야할 것 같음 */}
+          {ShortTempProduct.map(i => (
+            <Link href={`/shop/${CurrentPage[category]}/detail/1`}>
+              <Product
+                key={i.id}
+                thumbnailImg={i.image}
+                name={i.contentTitle}
+                discountRate={i.percent}
+                price={i.totalPrice}
+                averageStarRating={i.reviewScore}
+                reviewCount={i.totalReview}
+              ></Product>
+            </Link>
+          ))}
         </Styled.ItemWrapper>
       </Styled.ContentWrapper>
     </Styled.Wrapper>
@@ -100,7 +64,7 @@ const Styled = {
     justify-content: center;
   `,
   VerticalLine: styled.div`
-    width: 100vw;
+    width: 98.9vw;
     max-width: 100%;
     height: 2px;
     background-color: #585858;
@@ -126,11 +90,11 @@ const Styled = {
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
-    & > div {
-      margin-right: 26px;
-      margin-bottom: 25px;
+    & > a > div {
+      margin-right: 22.56px;
+      margin-bottom: 21.76px;
     }
-    & > div:nth-child(4n) {
+    & > a:nth-child(4n) > div {
       margin-right: 0;
     }
   `,

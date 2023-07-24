@@ -3,7 +3,6 @@ import React from 'react';
 import { ThemeProvider } from '@emotion/react';
 import { AppProps } from 'next/app';
 import theme from '../styles/theme';
-import Layout from './layout';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { globalStyles } from '@styles/globalStyle';
 import { persistor, wrapper } from 'store';
@@ -27,18 +26,18 @@ function App({ Component, pageProps, ...rest }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? (page => page);
 
   const { store } = wrapper.useWrappedStore(rest);
-  return getLayout(
+  return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <IconLoader />
           {globalStyles}
           <ThemeProvider theme={theme}>
-            <Component {...pageProps} />
+            {getLayout(<Component {...pageProps} />)}
           </ThemeProvider>
         </PersistGate>
       </Provider>
-    </QueryClientProvider>,
+    </QueryClientProvider>
   );
 }
 

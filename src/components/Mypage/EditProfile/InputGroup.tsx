@@ -1,29 +1,62 @@
 import React from 'react';
 import { Styled } from '../styles';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store';
+import { ProfileEditComponentProps } from 'src/types/mypage/types';
+import {
+  validateNickname,
+  validatePassword,
+} from 'src/utils/register/formUtil';
+import { passwordText, socialDisabled } from 'src/utils/mypage/editForm';
+const selectUser = (state: RootState) => state.user;
 
-// 임시 input data(아마 이메일은 받아올듯)
-const inputGroupData = [
-  { label: '이메일', readOnly: true, value: 'example@example.com 변경 불가능' },
-  {
-    label: '닉네임',
-    edit: true,
-    placeholder: '변경하실 닉네임을 입력해주세요.',
-  },
-  {
-    label: '비밀번호',
-    edit: true,
-    placeholder: '변경하실 비밀번호를 입력해주세요.',
-  },
-  {
-    label: '비밀번호 확인',
-    edit: true,
-    placeholder: '입력하신 비밀번호를 확인해주세요.',
-  },
-];
+const InputGroup = ({
+  nickname,
+  setNickname,
+  password,
+  setPassword,
+  passwordConfirm,
+  setPasswordConfirm,
+  duplicate,
+}: ProfileEditComponentProps) => {
+  const user = useSelector(selectUser);
 
-// 이메일과 store에서 가져오고
-// 닉네임과 패스워드는 빈값으로 두기 => 사용자가 처음부터 직접 입력
-const InputGroup = () => {
+  const inputGroupData = [
+    { label: '이메일', readOnly: true, value: `${user.email} 변경 불가능` },
+    {
+      label: '닉네임',
+      edit: true,
+      onchange: setNickname,
+      placeholder: '변경하실 닉네임을 입력해주세요.',
+      value: nickname,
+      errorText: duplicate
+        ? '중복된 닉네임입니다.'
+        : validateNickname(nickname),
+    },
+    {
+      label: '비밀번호',
+      readOnly: user.socialId ? true : false,
+      edit: user.socialId ? false : true,
+      type: 'password',
+      onchange: setPassword,
+      value: password,
+      placeholder: user.socialId ? socialDisabled : passwordText,
+      errorText: validatePassword(password),
+    },
+    {
+      label: '비밀번호 확인',
+      readOnly: user.socialId ? true : false,
+      edit: user.socialId ? false : true,
+      type: 'password',
+      value: passwordConfirm,
+      onchange: setPasswordConfirm,
+      placeholder: user.socialId ? socialDisabled : passwordText,
+      errorText:
+        password !== passwordConfirm &&
+        '입력하신 비밀번호가 일치하지 않습니다.',
+    },
+  ];
+
   return (
     <Styled.InputGroup>
       {inputGroupData.map((data, index) => (
@@ -35,9 +68,14 @@ const InputGroup = () => {
           <Styled.Input
             edit={data.edit}
             readOnly={data.readOnly}
+            type={data.type}
             placeholder={data.placeholder}
+            onChange={e => data.onchange(e.target.value)}
             value={data.value}
           />
+          <Styled.ErrorText>
+            {data.value.length > 0 && data.errorText}
+          </Styled.ErrorText>
         </Styled.InputWrapper>
       ))}
     </Styled.InputGroup>

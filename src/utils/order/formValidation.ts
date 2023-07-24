@@ -2,7 +2,7 @@ export const requiredErrorMsg = '필수 항목입니다.';
 
 export const validateName = (value: string) => {
   if (value.length < 2) {
-    return '두글자 이상 입력해주세요.';
+    return '두 글자 이상 입력해 주세요.';
   }
   return true;
 };

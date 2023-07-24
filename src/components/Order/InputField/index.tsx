@@ -95,7 +95,9 @@ const InputField = ({
           name: (
             <Styled.FlexGapWrapper>
               <Styled.Input type="text" {...nameValid} />
-              <Styled.ErrorMsg>{errors?.name?.message}</Styled.ErrorMsg>
+              {errors?.name && (
+                <Styled.ErrorMsg>* {errors?.name?.message}</Styled.ErrorMsg>
+              )}
             </Styled.FlexGapWrapper>
           ),
           mobile: (
@@ -109,7 +111,9 @@ const InputField = ({
               </Styled.Dropdown>
               -
               <Styled.Input type="text" {...mobileValid} width={360} />
-              <Styled.ErrorMsg>{errors?.mobile?.message}</Styled.ErrorMsg>
+              {errors?.mobile && (
+                <Styled.ErrorMsg>* {errors?.mobile?.message}</Styled.ErrorMsg>
+              )}
             </Styled.FlexGapWrapper>
           ),
           address: (
@@ -125,11 +129,16 @@ const InputField = ({
               </Styled.FlexWrapper>
               <Styled.Input {...basicAddressValid} placeholder="기본주소" />
               <Styled.Input {...detailAddressValid} placeholder="상세주소" />
-              <Styled.ErrorMsg>
-                {errors?.postCode?.message ||
-                  errors?.basicAddress?.message ||
-                  errors?.detailAddress?.message}
-              </Styled.ErrorMsg>
+              {errors?.postCode ||
+                errors?.basicAddress ||
+                (errors?.detailAddress && (
+                  <Styled.ErrorMsg>
+                    *{' '}
+                    {errors?.postCode?.message ||
+                      errors?.basicAddress?.message ||
+                      errors?.detailAddress?.message}
+                  </Styled.ErrorMsg>
+                ))}
             </Styled.FlexColumnWrapper>
           ),
           coupon: (

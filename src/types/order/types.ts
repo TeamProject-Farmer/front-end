@@ -26,6 +26,7 @@ export interface IInputFieldProps {
 
 export interface ICheckBoxInputProps {
   label: string;
+  field?: string;
   smallBox?: boolean;
 }
 
