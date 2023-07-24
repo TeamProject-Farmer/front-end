@@ -26,23 +26,43 @@ const ShopDetail = () => {
           <Styled.PickItemWrapper>
             {TempProduct.map(i => (
               <Link href={`/shop/${CurrentPage[category]}/detail/1`}>
-                <Product key={i.id} image={i.image} title={i.contentTitle} discount={i.percent} price={i.totalPrice} star={i.reviewScore} review={i.totalReview} specialPrice={true} freeShipping={true}></Product>
+                {/* <Product key={i.id} image={i.image} title={i.contentTitle} discount={i.percent} price={i.totalPrice} star={i.reviewScore} review={i.totalReview} specialPrice={true} freeShipping={true}></Product> */}
               </Link>
             ))}
           </Styled.PickItemWrapper>
         </Styled.PickWrapper>
-        <OrderBar optionList={OrderOptions}/>
+        <OrderBar optionList={OrderOptions} />
         <Styled.OrderItemWrapper>
           <SideAd top={0} />
           {/* 추후 api 연동 */}
           {TempProduct.map(i => (
             <Link href={`/shop/${CurrentPage[category]}/detail/1`}>
-              <Product key={i.id} image={i.image} title={i.contentTitle} discount={i.percent} price={i.totalPrice} star={i.reviewScore} review={i.totalReview} specialPrice={true} freeShipping={true}></Product>
+              {/* <Product
+                key={i.id}
+                image={i.image}
+                title={i.contentTitle}
+                discount={i.percent}
+                price={i.totalPrice}
+                star={i.reviewScore}
+                review={i.totalReview}
+                specialPrice={true}
+                freeShipping={true}
+              ></Product> */}
             </Link>
           ))}
           {TempProduct.map(i => (
             <Link href={`/shop/${CurrentPage[category]}/detail/1`}>
-              <Product key={i.id} image={i.image} title={i.contentTitle} discount={i.percent} price={i.totalPrice} star={i.reviewScore} review={i.totalReview} specialPrice={true} freeShipping={true}></Product>
+              {/* <Product
+                key={i.id}
+                image={i.image}
+                title={i.contentTitle}
+                discount={i.percent}
+                price={i.totalPrice}
+                star={i.reviewScore}
+                review={i.totalReview}
+                specialPrice={true}
+                freeShipping={true}
+              ></Product> */}
             </Link>
           ))}
         </Styled.OrderItemWrapper>

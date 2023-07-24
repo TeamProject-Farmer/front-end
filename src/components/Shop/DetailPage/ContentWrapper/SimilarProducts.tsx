@@ -3,24 +3,25 @@ import theme from '@styles/theme';
 import leftArrow from '@assets/images/shop/similarLArrow.svg';
 import rightArrow from '@assets/images/shop/similarRArrow.svg';
 import Product from '@components/Common/Product';
+import { ProductProps } from '@components/Common/type';
 
 const SimilarProducts = () => {
   const TempList = [
     {
       id: 1,
-      image: '이미지',
+      thumbnailImg: '이미지',
       contentTitle: '상품명',
       percent: 20,
-      totalPrice: '10,000',
+      totalPrice: 10000,
       reviewScore: 4.8,
       totalReview: '1,105',
     },
     {
       id: 2,
-      image: '이미지',
+      thumbnailImg: '이미지',
       contentTitle: '상품명',
       percent: 20,
-      totalPrice: '10,000',
+      totalPrice: 10000,
       reviewScore: 4.8,
       totalReview: '1,105',
     },
@@ -29,7 +30,7 @@ const SimilarProducts = () => {
       image: '이미지',
       contentTitle: '상품명',
       percent: 20,
-      totalPrice: '10,000',
+      totalPrice: 10000,
       reviewScore: 4.8,
       totalReview: '1,105',
     },
@@ -38,7 +39,7 @@ const SimilarProducts = () => {
     <Styled.Wrapper>
       <Styled.Title>비슷한 상품</Styled.Title>
       <Styled.ItemWrapper>
-        {TempList.map(i => (
+        {/* {TempList.map(i => (
           <Product
             key={i.id}
             image={i.image}
@@ -50,7 +51,7 @@ const SimilarProducts = () => {
             specialPrice={true}
             freeShipping={true}
           ></Product>
-        ))}
+        ))} */}
       </Styled.ItemWrapper>
       <Styled.ButtonWrapper>
         <button>
