@@ -2,12 +2,14 @@ import request from '../base';
 
 //main banner
 export const getMainBanner = async () => {
-  return await request.get('/main/banner');
+  const response = await request.get('/main/banner');
+  return response.data;
 };
 
 //category
 export const getProductCategory = async () => {
-  return await request.get('/main/product-category');
+  const response = await request.get('/main/product-category');
+  return response.data;
 };
 
 //shop by size
@@ -18,20 +20,23 @@ export const getShopBySize = async (size: string) => {
       size: size,
     },
   });
-  return response;
+  return response.data;
 };
 
 //best plant
 export const getBestProduct = async () => {
-  return await request.get('/main/product/best-product');
+  const response = await request.get('/main/product/best-product');
+  return response.data;
 };
 
 //best review
 export const getBestReview = async () => {
-  return await request.get('/main/review');
+  const response = await request.get('/main/review');
+  return response.data;
 };
 
 //news
 export const getNews = async () => {
-  return await request.get('/main/news');
+  const response = await request.get('/main/news');
+  return response.data;
 };
