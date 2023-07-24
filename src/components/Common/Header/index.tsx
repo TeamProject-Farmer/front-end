@@ -3,8 +3,11 @@ import Icon from '../Icon';
 import Image from 'next/image';
 import FirstBuyEvent from './FirstBuyEvent';
 import Link from 'next/link';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store';
 
 const Header = () => {
+  const isLoggedIn = useSelector((state: RootState) => state.user.email !== '');
   return (
     <Styled.Wrapper>
       <FirstBuyEvent />
@@ -20,11 +23,11 @@ const Header = () => {
         </Link>
 
         <Styled.Utils>
-          {/* <Icon name="logout" width={36} height={32} /> */}
+          {isLoggedIn && <Icon name="logout" width={36} height={32} />}
           <li>
-            {/* <Link href={isLoggedIn ? '/mypage' : '/login'}>
+            <Link href={isLoggedIn ? '/mypage' : '/login'}>
               <Icon name="myPage" width={32} height={32} />
-            </Link> */}
+            </Link>
           </li>
           <li>
             <Link href="/search">
