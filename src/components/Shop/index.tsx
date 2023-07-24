@@ -8,7 +8,9 @@ const Shop = () => {
   return (
     <Styled.Wrapper>
       <Styled.EventWrapper>
-        <Styled.NormalEvent>사이즈별</Styled.NormalEvent>
+        <Link href="/shop/bysize">
+          <Styled.NormalEvent>사이즈별</Styled.NormalEvent>
+        </Link>
         <Styled.SmallEvent>
           <div>
             <span>{Add1}</span>

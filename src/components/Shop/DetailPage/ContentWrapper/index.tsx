@@ -46,6 +46,7 @@ const Styled = {
     display: flex;
     flex-direction: column;
     position: relative;
+    width: 694px;
   `,
   BackButton: styled.button`
   display: flex;

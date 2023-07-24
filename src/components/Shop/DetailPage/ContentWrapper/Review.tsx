@@ -3,10 +3,10 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import VerticalLine from '@components/Shop/Common/VerticalLine';
 import photo from '@assets/images/shop/photoIcon.svg';
-import totalStars from '@assets/images/shop/tempReviewStars.svg';
 import downArrow from '@assets/images/shop/downArrow1.svg';
-
 import SingleReview from './SingleReview';
+import TotalStarGauge from '@components/Shop/Common/gauge/TotalStarGauge';
+import EachStarGauge from '@components/Shop/Common/gauge/EachStarGauge';
 
 const Review = () => {
   const tempList = [
@@ -14,6 +14,8 @@ const Review = () => {
     { id: 1, src: '/assets/images/shop/tempImage7.svg' },
     { id: 2, src: '/assets/images/shop/tempImage8.svg' },
   ];
+  //5점부터 넣어줘야함!
+  const tempArr = [14, 0, 1, 1, 0];
   return (
     <Styled.Wrapper>
       <Styled.Title>
@@ -26,18 +28,12 @@ const Review = () => {
       </Styled.OptionBox>
       <Styled.TotalLike>
         <div>
-          <Styled.TotalStars />
+          <TotalStarGauge star={4.7} />
           <div>4.7</div>
         </div>
         <VerticalLine height={100.5} />
         <div>
-          {/* 데이터가 어떻게 넘어올지 모르겠어서 우선은 이미지로 넣어뒀습니다! */}
-          <Image
-            alt="temp"
-            src="/assets/images/shop/tempTotal.jpg"
-            width={240}
-            height={100}
-          ></Image>
+          <EachStarGauge arr={tempArr}></EachStarGauge>
         </div>
       </Styled.TotalLike>
       <Styled.ReviewTitle>
@@ -58,7 +54,6 @@ const Review = () => {
       {tempList.map(item => (
         <SingleReview id={item.id} src={item.src} />
       ))}
-      {/* 백엔드에서 데이터 어떻게 들어오는지 보고 결정해야할 것 같음 */}
       <Styled.PaginationBox>페이지네이션 들어갈 부분</Styled.PaginationBox>
     </Styled.Wrapper>
   );
@@ -130,7 +125,6 @@ const Styled = {
       width: 240px;
     }
   `,
-  TotalStars: styled(totalStars)``,
   ReviewTitle: styled.div`
     height: 58px;
     display: flex;
