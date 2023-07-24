@@ -39,9 +39,7 @@ IndexPage.getLayout = (page: ReactElement) => {
   return <Layout>{page}</Layout>;
 };
 
-export const getServerSideProps: GetServerSideProps<
-  IndexPageProps
-> = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const banner = await getMainBanner();
   const category = await getProductCategory();
   const bestPlant = await getBestProduct();
