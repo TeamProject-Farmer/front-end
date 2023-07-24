@@ -2,8 +2,7 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import leftArrow from '@assets/images/shop/similarLArrow.svg';
 import rightArrow from '@assets/images/shop/similarRArrow.svg';
-import Product from '@components/Common/Product';
-import { ProductProps } from '@components/Common/type';
+import SmallProduct from '@components/Shop/Common/SmallProduct';
 
 const SimilarProducts = () => {
   const TempList = [
@@ -14,7 +13,7 @@ const SimilarProducts = () => {
       percent: 20,
       totalPrice: 10000,
       reviewScore: 4.8,
-      totalReview: '1,105',
+      totalReview: 1105,
     },
     {
       id: 2,
@@ -23,7 +22,7 @@ const SimilarProducts = () => {
       percent: 20,
       totalPrice: 10000,
       reviewScore: 4.8,
-      totalReview: '1,105',
+      totalReview: 1105,
     },
     {
       id: 3,
@@ -32,26 +31,24 @@ const SimilarProducts = () => {
       percent: 20,
       totalPrice: 10000,
       reviewScore: 4.8,
-      totalReview: '1,105',
+      totalReview: 1105,
     },
   ];
   return (
     <Styled.Wrapper>
       <Styled.Title>비슷한 상품</Styled.Title>
       <Styled.ItemWrapper>
-        {/* {TempList.map(i => (
-          <Product
+        {TempList.map(i => (
+          <SmallProduct
             key={i.id}
-            image={i.image}
-            title={i.contentTitle}
-            discount={i.percent}
+            thumbnailImg={i.image}
+            name={i.contentTitle}
+            discountRate={i.percent}
             price={i.totalPrice}
-            star={i.reviewScore}
-            review={i.totalReview}
-            specialPrice={true}
-            freeShipping={true}
-          ></Product>
-        ))} */}
+            averageStarRating={i.reviewScore}
+            reviewCount={i.totalReview}
+          ></SmallProduct>
+        ))}
       </Styled.ItemWrapper>
       <Styled.ButtonWrapper>
         <button>
