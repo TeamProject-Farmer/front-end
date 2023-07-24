@@ -15,16 +15,17 @@ const InquiryModal = () => {
         <Styled.InquiryOptionBox onClick={() => setShowOptions(prev => !prev)}>
           <Styled.InquiryLabel>{currentOption}</Styled.InquiryLabel>
           <Styled.InquiryOptions show={isShowOptions}>
-            <Styled.InquiryOption onClick={() => setCurrentOption('배송')}>
-              배송
+            <Styled.InquiryOption onClick={() => setCurrentOption('상품상세문의')}>
+            상품상세문의
             </Styled.InquiryOption>
-            <Styled.InquiryOption onClick={() => setCurrentOption('재입고')}>
-              재입고
+            <Styled.InquiryOption onClick={() => setCurrentOption('교환문의')}>
+            교환문의
             </Styled.InquiryOption>
-            <Styled.InquiryOption
-              onClick={() => setCurrentOption('상품상세문의')}
-            >
-              상품상세문의
+            <Styled.InquiryOption onClick={() => setCurrentOption('환불문의')}>
+              환불문의
+            </Styled.InquiryOption>
+            <Styled.InquiryOption onClick={() => setCurrentOption('배송문의')}>
+            배송문의
             </Styled.InquiryOption>
           </Styled.InquiryOptions>
         </Styled.InquiryOptionBox>
