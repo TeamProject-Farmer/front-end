@@ -1,5 +1,5 @@
 import Styled from './styles';
-import Title from '../Common/Title';
+import Title from '../../Home/Common/Title';
 import Plant from './Plant';
 import { ICategory } from 'src/types/home/types';
 

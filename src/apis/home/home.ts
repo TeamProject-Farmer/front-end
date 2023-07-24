@@ -6,12 +6,6 @@ export const getMainBanner = async () => {
   return response.data;
 };
 
-//category
-export const getProductCategory = async () => {
-  const response = await request.get('/main/product-category');
-  return response.data;
-};
-
 //shop by size
 export const getShopBySize = async (size: string) => {
   const response = await request({

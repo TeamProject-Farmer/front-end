@@ -20,11 +20,11 @@ import {
 } from 'redux-persist';
 import { UserState } from 'src/types/redux/types';
 import userSlice from './reducers/userSlice';
-import loginSlice from './reducers/loginSlice';
+import bannerSlice from './reducers/bannerSlice';
 
 export interface RootState {
   user: UserState;
-  isLoggedIn: boolean;
+  banner: boolean;
 }
 
 const persistConfig: PersistConfig<RootState> = {
@@ -39,7 +39,7 @@ const rootReducer = (
   if (action.type === HYDRATE) return { ...state, ...action.payload };
   const combinedReducer = combineReducers({
     user: userSlice,
-    isLoggedIn: loginSlice,
+    banner: bannerSlice,
   });
   return combinedReducer(state, action);
 };

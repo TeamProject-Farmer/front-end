@@ -1,5 +1,5 @@
 import Slider from '@components/Home/Slider';
-import Category from '@components/Home/Category';
+import Category from '@components/Common/Category';
 import ShopPrev from '@components/Home/ShopBySize';
 import BestPlant from '@components/Home/BestPlant';
 import BestReview from '@components/Home/BestReview';
@@ -9,11 +9,11 @@ import { ReactElement } from 'react';
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next';
 import {
   getMainBanner,
-  getProductCategory,
   getBestProduct,
   getBestReview,
   getNews,
 } from 'src/apis/home/home';
+import { getProductCategory } from 'src/apis/common/category';
 import { IndexPageProps } from 'src/types/home/types';
 
 const IndexPage = ({
@@ -39,7 +39,9 @@ IndexPage.getLayout = (page: ReactElement) => {
   return <Layout>{page}</Layout>;
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps<
+  IndexPageProps
+> = async () => {
   const banner = await getMainBanner();
   const category = await getProductCategory();
   const bestPlant = await getBestProduct();
