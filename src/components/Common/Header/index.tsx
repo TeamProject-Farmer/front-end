@@ -1,24 +1,43 @@
 import Styled from './styles';
 import Icon from '../Icon';
-import Logo from '@assets/images/home/logo.svg';
+import Image from 'next/image';
 import FirstBuyEvent from './FirstBuyEvent';
+import Link from 'next/link';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store';
 
 const Header = () => {
+  const isLoggedIn = useSelector((state: RootState) => state.user.email !== '');
   return (
     <Styled.Wrapper>
       <FirstBuyEvent />
       <Styled.Header>
         <Icon name="menu" width={32} height={32} />
-        <Logo />
+        <Link href="/">
+          <Image
+            alt="headerLogo"
+            src="/assets/images/home/headerLogo.png"
+            width={150}
+            height={33.6}
+          />
+        </Link>
+
         <Styled.Utils>
+          {isLoggedIn && <Icon name="logout" width={36} height={32} />}
           <li>
-            <Icon name="myPage" width={32} height={32} />
+            <Link href={isLoggedIn ? '/mypage' : '/login'}>
+              <Icon name="myPage" width={32} height={32} />
+            </Link>
           </li>
           <li>
-            <Icon name="search" width={30} height={30} />
+            <Link href="/search">
+              <Icon name="search" width={30} height={30} />
+            </Link>
           </li>
           <li>
-            <Icon name="cart" width={33} height={30} />
+            <Link href="/mypage/cart">
+              <Icon name="cart" width={33} height={30} />
+            </Link>
           </li>
         </Styled.Utils>
       </Styled.Header>

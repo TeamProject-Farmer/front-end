@@ -1,19 +1,15 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
+import { ISortOption } from 'src/types/search/types';
 
-const sortingOptions: string[] = [
-  '신상품순',
-  '리뷰많은순',
-  '낮은가격순',
-  '높은가격순',
-];
-
-const SearchUtils = () => {
+const SearchUtils = ({ sortingOptions, handleSort }) => {
   return (
     <Styled.Wrapper>
-      {sortingOptions?.map((option, index) => (
-        <div key={index}>{option}</div>
+      {sortingOptions?.map((option: ISortOption) => (
+        <div onClick={() => handleSort(option.param)} key={option.param}>
+          {option.title}
+        </div>
       ))}
     </Styled.Wrapper>
   );

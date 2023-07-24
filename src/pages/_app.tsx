@@ -26,18 +26,18 @@ function App({ Component, pageProps, ...rest }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? (page => page);
 
   const { store } = wrapper.useWrappedStore(rest);
-  return getLayout(
+  return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <IconLoader />
           {globalStyles}
           <ThemeProvider theme={theme}>
-            <Component {...pageProps} />
+            {getLayout(<Component {...pageProps} />)}
           </ThemeProvider>
         </PersistGate>
       </Provider>
-    </QueryClientProvider>,
+    </QueryClientProvider>
   );
 }
 

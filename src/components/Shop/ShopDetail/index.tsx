@@ -7,7 +7,12 @@ import OrderBar from '../Common/OrderBar';
 import SideAd from '../Common/SideAd';
 import Category from '../Common/Category';
 import Product from '@components/Common/Product';
-import { TempProduct, OrderOptions, CurrentPage, ShortTempProduct } from '../type';
+import {
+  TempProduct,
+  OrderOptions,
+  CurrentPage,
+  ShortTempProduct,
+} from '../type';
 
 const ShopDetail = () => {
   const router = useRouter();
@@ -26,18 +31,47 @@ const ShopDetail = () => {
           <Styled.PickItemWrapper>
             {ShortTempProduct.map(i => (
               <Link href={`/shop/${CurrentPage[category]}/detail/1`}>
-                <Product key={i.id} thumbnailImg={i.image} name={i.contentTitle} discountRate={i.percent} price={i.totalPrice} averageStarRating={i.reviewScore} reviewCount={i.totalReview}></Product>
+                <Product
+                  key={i.id}
+                  thumbnailImg={i.image}
+                  name={i.contentTitle}
+                  discountRate={i.percent}
+                  price={i.totalPrice}
+                  averageStarRating={i.reviewScore}
+                  reviewCount={i.totalReview}
+                ></Product>
               </Link>
             ))}
           </Styled.PickItemWrapper>
         </Styled.PickWrapper>
-        <OrderBar optionList={OrderOptions}/>
+        <OrderBar optionList={OrderOptions} />
         <Styled.OrderItemWrapper>
           <SideAd top={0} />
           {/* 추후 api 연동 */}
           {TempProduct.map(i => (
             <Link href={`/shop/${CurrentPage[category]}/detail/1`}>
-              <Product key={i.id} thumbnailImg={i.image} name={i.contentTitle} discountRate={i.percent} price={i.totalPrice} averageStarRating={i.reviewScore} reviewCount={i.totalReview}></Product>
+              <Product
+                key={i.id}
+                thumbnailImg={i.image}
+                name={i.contentTitle}
+                discountRate={i.percent}
+                price={i.totalPrice}
+                averageStarRating={i.reviewScore}
+                reviewCount={i.totalReview}
+              ></Product>
+            </Link>
+          ))}
+          {TempProduct.map(i => (
+            <Link href={`/shop/${CurrentPage[category]}/detail/1`}>
+              <Product
+                key={i.id}
+                thumbnailImg={i.image}
+                name={i.contentTitle}
+                discountRate={i.percent}
+                price={i.totalPrice}
+                averageStarRating={i.reviewScore}
+                reviewCount={i.totalReview}
+              ></Product>
             </Link>
           ))}
         </Styled.OrderItemWrapper>

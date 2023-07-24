@@ -1,25 +1,24 @@
-import styled from '@emotion/styled'
-import theme from '@styles/theme'
+import styled from '@emotion/styled';
+import theme from '@styles/theme';
+import { IBanner } from 'src/types/home/types';
 
-const Indicator = ({activeIndex, sliderContents, onclick}) => {
+const Indicator = ({ activeIndex, sliderContents, onclick }) => {
   return (
     <Style.Indicator>
-      {
-        sliderContents.map((content) => (
-          <Style.List 
-            key={content.id}
-            selected={content.id === activeIndex ? true: false}
-            onClick={() => onclick(content.id)}
-          >
-            {content.title}
-          </Style.List>
-        ))
-      }
+      {sliderContents.map((content: IBanner) => (
+        <Style.List
+          key={content.id}
+          selected={content.id === activeIndex ? true : false}
+          onClick={() => onclick(content.id)}
+        >
+          {content.name}
+        </Style.List>
+      ))}
     </Style.Indicator>
-  )
-}
+  );
+};
 
-export default Indicator
+export default Indicator;
 
 const Style = {
   Indicator: styled.ul`
@@ -31,11 +30,11 @@ const Style = {
     align-items: center;
     gap: 154px;
   `,
-  List: styled.li<{selected: boolean}>`
+  List: styled.li<{ selected: boolean }>`
     position: relative;
     font-size: 20px;
-    font-weight: ${({selected}) => (selected? '700' : '400')};
-    color: ${({selected}) => (selected? theme.colors.green1 : '#000')};
+    font-weight: ${({ selected }) => (selected ? '700' : '400')};
+    color: ${({ selected }) => (selected ? theme.colors.green1 : '#000')};
     :not(:last-child)::before {
       content: '';
       position: absolute;
@@ -46,5 +45,5 @@ const Style = {
       top: 50%;
       left: 120%;
     }
-  `
-}
+  `,
+};

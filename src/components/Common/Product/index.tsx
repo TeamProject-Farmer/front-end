@@ -29,7 +29,6 @@ const Product = (props: ProductProps) => {
         </Styled.ReviewBox>
         <Styled.EventBox>
           {discountRate && <Styled.SpecialPrice>특가상품</Styled.SpecialPrice>}
-          {/* {freeShipping && <Styled.FreeShipping>무료배송</Styled.FreeShipping>} */}
         </Styled.EventBox>
         <Styled.Title />
       </Styled.Content>

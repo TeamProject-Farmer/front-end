@@ -8,7 +8,7 @@ const SimilarProducts = () => {
   const TempList = [
     {
       id: 1,
-      image: '이미지',
+      thumbnailImg: '이미지',
       contentTitle: '상품명',
       percent: 20,
       totalPrice: 10000,
@@ -17,7 +17,7 @@ const SimilarProducts = () => {
     },
     {
       id: 2,
-      image: '이미지',
+      thumbnailImg: '이미지',
       contentTitle: '상품명',
       percent: 20,
       totalPrice: 10000,
@@ -39,7 +39,15 @@ const SimilarProducts = () => {
       <Styled.Title>비슷한 상품</Styled.Title>
       <Styled.ItemWrapper>
         {TempList.map(i => (
-          <SmallProduct key={i.id} thumbnailImg={i.image} name={i.contentTitle} discountRate={i.percent} price={i.totalPrice} averageStarRating={i.reviewScore} reviewCount={i.totalReview}></SmallProduct>
+          <SmallProduct
+            key={i.id}
+            thumbnailImg={i.image}
+            name={i.contentTitle}
+            discountRate={i.percent}
+            price={i.totalPrice}
+            averageStarRating={i.reviewScore}
+            reviewCount={i.totalReview}
+          ></SmallProduct>
         ))}
       </Styled.ItemWrapper>
       <Styled.ButtonWrapper>
@@ -56,9 +64,9 @@ const SimilarProducts = () => {
 
 const Styled = {
   Wrapper: styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 100px;
   `,
   Title: styled.div`
     font-size: 20px;

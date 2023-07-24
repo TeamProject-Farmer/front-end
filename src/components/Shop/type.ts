@@ -37,7 +37,6 @@ export const ShortTempProduct = [
   },
 ];
 
-
 export const TempProduct = [
   {
     id: 1,
@@ -74,7 +73,8 @@ export const TempProduct = [
     totalPrice: 10000,
     reviewScore: 4.8,
     totalReview: 1105,
-  },{
+  },
+  {
     id: 5,
     image: '이미지',
     contentTitle: '상품명',

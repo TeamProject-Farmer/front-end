@@ -10,6 +10,7 @@ const Styled = {
   `,
   Label: styled.label`
     font-size: 16px;
+    font-weight: 500;
     width: 95px;
   `,
   AstBox: styled.span`
@@ -70,7 +71,7 @@ const Styled = {
     border-radius: 5px;
     background-color: #f0f0f0;
   `,
-  ErrorMsg: styled.p`
+  ErrorMsg: styled.div`
     color: #f00;
     font-size: 14px;
   `,
