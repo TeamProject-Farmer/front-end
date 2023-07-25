@@ -18,6 +18,7 @@ const Layout = ({ children, title = 'Farmer FE' }: Props) => (
       <title>{title}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
     </Head>
     <Styled.Wrapper>
       <Header />
