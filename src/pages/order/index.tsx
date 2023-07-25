@@ -16,7 +16,34 @@ const productList: IOrderedProduct[] = [
   { id: '1', title: '상품명', count: 1, price: 12900 },
 ];
 
+const data = {
+  pg: 'html5_inicis', // PG사
+  pay_method: 'card', // 결제수단
+  merchant_uid: `mid_${new Date().getTime()}`, // 주문번호
+  amount: 1000, // 결제금액
+  name: '먹태깡', // 주문명
+  buyer_name: '이민혀', // 구매자 이름
+  buyer_tel: '01012341234', // 구매자 전화번호
+  buyer_email: 'example@example', // 구매자 이메일
+  buyer_addr: '신사동 661-16', // 구매자 주소
+  buyer_postcode: '06018', // 구매자 우편번호
+};
+
 const OrderPage: NextPageWithLayout = () => {
+  const callback = (response: any) => {
+    const { success, merchant_uid, error_msg } = response;
+
+    if (success) {
+      alert('결제 성공');
+    } else {
+      alert(`결제 실패: ${error_msg}`);
+    }
+  };
+  const clickPay = () => {
+    const { IMP } = window;
+    IMP.init(process.env.NEXT_PUBLIC_IMP_UID);
+    IMP.request_pay(data, callback);
+  };
   return (
     <>
       <Styled.Wrapper>
@@ -34,7 +61,7 @@ const OrderPage: NextPageWithLayout = () => {
         <Agreement />
       </Styled.Wrapper>
       <Styled.PayWrapper>
-        <Styled.PayNow>결제하기</Styled.PayNow>
+        <Styled.PayNow onClick={clickPay}>결제하기</Styled.PayNow>
       </Styled.PayWrapper>
     </>
   );
