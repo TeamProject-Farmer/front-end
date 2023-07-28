@@ -17,7 +17,7 @@ const productList: IOrderedProduct[] = [
 ];
 
 const data = {
-  pg: 'html5_inicis', // PG사
+  pa: 'TC0ONETIME',
   pay_method: 'card', // 결제수단
   merchant_uid: `mid_${new Date().getTime()}`, // 주문번호
   amount: 1000, // 결제금액
@@ -31,6 +31,7 @@ const data = {
 
 const OrderPage: NextPageWithLayout = () => {
   const callback = (response: any) => {
+    console.log(response);
     const { success, merchant_uid, error_msg } = response;
 
     if (success) {

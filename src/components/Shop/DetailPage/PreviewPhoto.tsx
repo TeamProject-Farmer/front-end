@@ -39,9 +39,6 @@ const Styled = {
   Wrapper: styled.div`
     display: flex;
     flex-direction: column;
-    font-family: Inter;
-    font-style: normal;
-    line-height: normal;
     font-weight: 600;
     font-size: 25px;
     width: ${theme.size.mainWidth};

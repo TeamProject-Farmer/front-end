@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { IKeywordProps } from 'src/types/search/types';
 
-const Keyword = ({ keywordList }) => {
-  const { title, content } = keywordList;
+const Keyword = ({ title, wordList }: IKeywordProps) => {
   return (
     <Styled.FlexWrapper>
       <Styled.Title>{title}</Styled.Title>
       <Styled.FlexWrapper>
-        {content?.map(word => (
-          <Styled.Keyword>{word}</Styled.Keyword>
+        {wordList?.map((word: string, index: number) => (
+          <Styled.Keyword key={index}>{word}</Styled.Keyword>
         ))}
       </Styled.FlexWrapper>
     </Styled.FlexWrapper>

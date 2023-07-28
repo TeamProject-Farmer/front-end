@@ -1,37 +1,37 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import Item from '@components/Shop/Common/Item';
 import leftArrow from '@assets/images/shop/similarLArrow.svg';
 import rightArrow from '@assets/images/shop/similarRArrow.svg';
+import SmallProduct from '@components/Shop/Common/SmallProduct';
 
 const SimilarProducts = () => {
   const TempList = [
     {
       id: 1,
-      image: '이미지',
+      thumbnailImg: '이미지',
       contentTitle: '상품명',
-      pricePercent: 20,
-      totalPrice: '10,000',
+      percent: 20,
+      totalPrice: 10000,
       reviewScore: 4.8,
-      totalReview: '1,105',
+      totalReview: 1105,
     },
     {
       id: 2,
-      image: '이미지',
+      thumbnailImg: '이미지',
       contentTitle: '상품명',
-      pricePercent: 20,
-      totalPrice: '10,000',
+      percent: 20,
+      totalPrice: 10000,
       reviewScore: 4.8,
-      totalReview: '1,105',
+      totalReview: 1105,
     },
     {
       id: 3,
       image: '이미지',
       contentTitle: '상품명',
-      pricePercent: 20,
-      totalPrice: '10,000',
+      percent: 20,
+      totalPrice: 10000,
       reviewScore: 4.8,
-      totalReview: '1,105',
+      totalReview: 1105,
     },
   ];
   return (
@@ -39,18 +39,15 @@ const SimilarProducts = () => {
       <Styled.Title>비슷한 상품</Styled.Title>
       <Styled.ItemWrapper>
         {TempList.map(i => (
-          <Item
-            number={i.id}
-            image={i.image}
-            contentTitle={i.contentTitle}
-            pricePercent={i.pricePercent}
-            totalPrice={i.totalPrice}
-            reviewScore={i.reviewScore}
-            totalReview={i.totalReview}
-            isSpecialPrice={true}
-            totalWidth={220}
-            totalHeight={313}
-          ></Item>
+          <SmallProduct
+            key={i.id}
+            thumbnailImg={i.image}
+            name={i.contentTitle}
+            discountRate={i.percent}
+            price={i.totalPrice}
+            averageStarRating={i.reviewScore}
+            reviewCount={i.totalReview}
+          ></SmallProduct>
         ))}
       </Styled.ItemWrapper>
       <Styled.ButtonWrapper>
@@ -67,9 +64,9 @@ const SimilarProducts = () => {
 
 const Styled = {
   Wrapper: styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 100px;
   `,
   Title: styled.div`
     font-size: 20px;

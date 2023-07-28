@@ -13,7 +13,7 @@ const SocialLogin = ({ provider }: { provider: string }) => {
   const socialLogin = async () => {
     try {
       const response = await request(
-        `/member/login/oauth/${provider}?code=${code}`,
+        `/main/login/oauth/${provider}?code=${code}`,
       );
       dispatch(setUser(response.data));
 

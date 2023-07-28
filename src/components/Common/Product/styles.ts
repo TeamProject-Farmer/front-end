@@ -3,29 +3,35 @@ import theme from '@styles/theme';
 
 const Styled = {
   Wrapper: styled.div`
-    width: 280px;
+    width: 282.727px;
     border: 1px solid #000;
   `,
   ImgBox: styled.div`
     position: relative;
-    height: 271px;
+    height: 279.515px;
     background-color: ${theme.colors.lightGray};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: 700;
   `,
   Content: styled.div`
     display: flex;
     flex-direction: column;
     gap: 4.5px;
-    padding: 13px;
+    padding: 13.46px 18.92px;
   `,
   Title: styled.p`
     font-size: 16px;
+    text-align: left;
   `,
   PriceBox: styled.div`
     display: flex;
     gap: 10px;
   `,
   Discount: styled.p`
-    color: #33b822;
+    color: #62C655;
     font-size: 16px;
     font-weight: 700;
   `,

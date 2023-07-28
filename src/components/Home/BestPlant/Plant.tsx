@@ -2,36 +2,34 @@ import styled from '@emotion/styled';
 import Icon from '@components/Common/Icon';
 import theme from '@styles/theme';
 import Image from 'next/image';
+import { IPlant } from 'src/types/home/types';
 
 const Plant = ({
-  rank,
-  title,
-  discount,
+  ranking,
+  productName,
+  discountRate,
   price,
-  star,
-  review,
-  specialPrice,
-  freeShipping,
-}) => {
+  averageStarRating,
+}: IPlant) => {
   return (
     <Styled.Wrapper>
-      <Styled.RankingBox>{rank}</Styled.RankingBox>
+      <Styled.RankingBox>{ranking}</Styled.RankingBox>
       <Image
         src="/assets/images/home/plant.png"
         alt="plant image"
         width={160}
         height={201}
       />
-      <Styled.Title>{title}</Styled.Title>
+      <Styled.Title>{productName}</Styled.Title>
       <Styled.Content>
         <Styled.flexBox>
           <Styled.PriceBox>
-            <Styled.Discount>{discount}</Styled.Discount>
+            <Styled.Discount>{discountRate}</Styled.Discount>
             <Styled.Price>{price}</Styled.Price>
           </Styled.PriceBox>
           <Styled.Star>
             <Icon name="star" width={16} height={15} />
-            {star}
+            {averageStarRating}
           </Styled.Star>
         </Styled.flexBox>
         <Styled.EventBox>

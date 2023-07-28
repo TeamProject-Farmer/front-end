@@ -1,6 +1,6 @@
+import Link from 'next/link';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import Footer from '@components/Common/Footer';
 
 const Shop = () => {
   const Add1: string = '식물 키우기 어려우시죠?';
@@ -8,16 +8,19 @@ const Shop = () => {
   return (
     <Styled.Wrapper>
       <Styled.EventWrapper>
+        <Link href="/shop/bysize">
+          <Styled.NormalEvent>사이즈별</Styled.NormalEvent>
+        </Link>
         <Styled.SmallEvent>
           <div>
             <span>{Add1}</span>
             <span>{Add2}</span>
           </div>
         </Styled.SmallEvent>
-        <Styled.NormalEvent>이벤트 페이지</Styled.NormalEvent>
-        <Styled.NormalEvent>이벤트 페이지</Styled.NormalEvent>
+        <Link href="/shop/event/1">
+          <Styled.NormalEvent>이벤트 페이지</Styled.NormalEvent>
+        </Link>
       </Styled.EventWrapper>
-      <Footer />
     </Styled.Wrapper>
   );
 };
@@ -35,19 +38,17 @@ const Styled = {
     padding: 45px 363px;
     display: flex;
     flex-direction: column;
-    border-top: 1px solid  ${theme.colors.black};
-    & > div {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 20px;
-      background: #d9d9d9;
-      margin: 25px 0;
-    }
+    border-top: 1px solid ${theme.colors.black};
   `,
   SmallEvent: styled.div`
     height: 226px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    background: #d9d9d9;
+    margin: 25px 0;
     & > div {
       display: flex;
       flex-direction: column;
@@ -55,10 +56,7 @@ const Styled = {
       & > span {
         color: #000;
         font-size: 25px;
-        font-family: Inter;
-        font-style: normal;
         font-weight: 500;
-        line-height: normal;
       }
       & > span:last-child {
         font-weight: 700;
@@ -69,6 +67,13 @@ const Styled = {
     height: 330px;
     font-size: 64px;
     font-weight: 700;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    background: #d9d9d9;
+    margin: 25px 0;
   `,
 };
 

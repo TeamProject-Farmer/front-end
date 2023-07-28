@@ -7,12 +7,12 @@ import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'] });
 
-type Props = {
+type LayoutProps = {
   children?: ReactNode;
   title?: string;
 };
 
-const Layout = ({ children, title = 'Farmer FE' }: Props) => (
+const Layout = ({ children, title = 'Farmer FE' }: LayoutProps) => (
   <div className={inter.className}>
     <Head>
       <title>{title}</title>
@@ -32,7 +32,7 @@ export default Layout;
 
 const Styled = {
   Wrapper: styled.div`
-    width: 1920px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -22,7 +22,7 @@ export const OrderItem = ({ order }: { order: OrderProps }) => {
           text={order.productDescription}
         />
         {/* 상세 클릭시 주문 상세보기 이동 */}
-        <Styled.ProductButton>제품상세확인</Styled.ProductButton>
+        <Styled.ProductButton>주문 상세보기</Styled.ProductButton>
       </Styled.ProductInfoWrapper>
       <OrderInfoText
         size="20"

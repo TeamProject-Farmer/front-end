@@ -12,7 +12,6 @@ const OptionBox = () => {
     { id: 2, option: '03. 피쉬본 단품+심플화분+영양제', price: '3,000' },
     { id: 3, option: '04. 피쉬본 선물 세트(화분+영양제+포장)', price: '5,000' },
   ];
-  
   return (
     <Styled.Wrapper>
       <Styled.Upper>
@@ -20,7 +19,15 @@ const OptionBox = () => {
           <Styled.Label>상품을 선택하세요.</Styled.Label>
           <Styled.SelectOptions show={isShowOptions}>
             {tempList.map(item => (
-              <Styled.Option key={item.id} onClick={()=> setSelectList([...selectList, {id: item.id, option:item.option, price:item.price}])}>
+              <Styled.Option
+                key={item.id}
+                onClick={() =>
+                  setSelectList([
+                    ...selectList.filter(i => i.id != item.id),
+                    { id: item.id, option: item.option, price: item.price },
+                  ])
+                }
+              >
                 <div>
                   <ColorOption>{item.option}</ColorOption>
                   <div>+{item.price}원</div>
@@ -29,8 +36,12 @@ const OptionBox = () => {
             ))}
           </Styled.SelectOptions>
         </Styled.SelectBox>
-        {/* 이 부분 오버플로우에 대한 설정도 알려주셨으면 좋겠음*/}
-        {selectList.map((item) => <Styled.SelectedOption key={item.id}><div>{item.option}</div><div>+{item.price}원</div></Styled.SelectedOption>)}
+        {selectList.map(item => (
+          <Styled.SelectedOption key={item.id}>
+            <div>{item.option}</div>
+            <div>+{item.price}원</div>
+          </Styled.SelectedOption>
+        ))}
       </Styled.Upper>
       <Styled.Lower>
         <Styled.TotalPrice>
@@ -38,9 +49,6 @@ const OptionBox = () => {
           <div>0원</div>
         </Styled.TotalPrice>
         <Styled.Buttons>
-          <button>
-            <Styled.HeartIcon />
-          </button>
           <button>장바구니</button>
           <button>바로구매</button>
         </Styled.Buttons>
@@ -54,7 +62,7 @@ const Styled = {
   Wrapper: styled.div`
     width: 302px;
     height: 720px;
-    margin-left: 85px;
+    margin-left: 69px;
     cursor: pointer;
   `,
   Upper: styled.div`
@@ -84,9 +92,12 @@ const Styled = {
     }
   `,
   Label: styled.label`
-    font-size: 14px;
     margin-left: 4px;
     text-align: center;
+    color: #59b941;
+    font-size: 16px;
+    font-weight: 500;
+    
   `,
   SelectOptions: styled.ul<{ show: boolean }>`
     position: absolute;
@@ -108,22 +119,30 @@ const Styled = {
     }
   `,
   Option: styled.li`
-    height: 66px;
-    font-size: 14px;
+    height: fit-content;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 19px;
     padding: 6px 8px;
     transition: background-color 0.2s ease-in;
     display: flex;
     justify-content: center;
-    padding: 10px 16px;
+    padding: 15px 14px 0 14px;
     & > div {
+      height: fit-content;
       width: 271px;
       border-bottom: 1px solid #a6a6a6;
       display: flex;
       flex-direction: column;
     }
+    & > div > div:first-child {
+      margin-bottom: 5px;
+    }
     & > div > div:last-child {
       color: #727272;
       font-size: 12px;
+      line-height: 15px;
+      margin-bottom: 15px;
     }
     &:hover ${ColorOption} {
       color: #33b822;
@@ -168,20 +187,17 @@ const Styled = {
       justify-content: center;
       font-size: 16px;
       border-radius: 5px;
-      width: 116px;
+      width: 145px;
       height: 53px;
     }
     & > button:first-child {
-      width: 53px;
-      border: 1px solid ${theme.colors.black};
-    }
-    & > button:nth-child(2) {
-      color: #47ac3a;
-      border: 1px solid #47ac3a;
+      color: ${theme.colors.green1};
+      border: 1px solid ${theme.colors.green1};
+      
     }
     & > button:last-child {
       color: ${theme.colors.white};
-      background-color: #47ac3a;
+      background-color: ${theme.colors.green1};
     }
   `,
   HeartIcon: styled(heart)``,
