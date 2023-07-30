@@ -394,25 +394,44 @@ export const Styled = {
   `,
 
   // 쿠폰 페이지
-  CouponWrapper: styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-left: 2.5rem;
-    margin-right: 2.5rem;
-    margin-top: 2rem;
-  `,
   Coupon: styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    border-bottom: 1px solid ${theme.colors.gray};
+    margin-left: 2.5rem;
   `,
   CouponText: styled.h1`
     font-size: 16px;
     font-weight: 400;
     color: ${theme.colors.black};
-    margin-top: 0.8rem;
+  `,
+  CouponBox: styled.div`
+    height: 500px;
+    border-radius: 20px;
+    margin-bottom: 8rem;
+  `,
+  CouponHeader: styled.div`
+    display: flex;
+    margin-top: 2.5rem;
+    margin-left: 2.5rem;
+    justify-content: space-between;
+    background-color: ${theme.colors.green3};
+    padding: 1.5rem;
+  `,
+  HeaderLabel: styled.h1`
+    font-size: 15px;
+    margin-right: 6.3rem;
+    margin-left: 7.3rem;
+    color: ${theme.colors.white};
+    font-weight: 600;
+  `,
+  CouponTextWrapper: styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 4.5rem;
+    margin-right: 4.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
   `,
 
   // 프로필 수정
