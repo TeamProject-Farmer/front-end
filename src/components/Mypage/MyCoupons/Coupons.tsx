@@ -3,7 +3,6 @@ import { Styled } from '../styles';
 import { CouponProps } from 'src/types/mypage/types';
 
 const Coupons = ({ index, code, title, validity }: CouponProps) => {
-  console.log(index);
   return (
     <Styled.Coupon key={index}>
       <Styled.CouponTextWrapper>
