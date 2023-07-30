@@ -23,3 +23,19 @@ export interface ProfileEditComponentProps extends ProfileEditProps {
   setPasswordConfirm: Dispatch<SetStateAction<string>>;
   duplicate: boolean;
 }
+
+// coupon
+export interface CouponProps {
+  index: number;
+  code: string;
+  title: string;
+  validity: string;
+}
+
+export interface CouponArrayProps {
+  couponId: number;
+  endDateTime: string;
+  name: string;
+  serialNumber: string;
+  startDateTime: string;
+}
