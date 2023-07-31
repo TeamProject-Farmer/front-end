@@ -3,46 +3,48 @@ import Styled from '../../components/Order/styles';
 import Layout from '@pages/layout';
 import NestedLayout from '@components/Order/NestedLayout';
 import Delivery from '@components/Order/Delivery';
-import Payment from '@components/Order/Payment';
 import InputGroup from '@components/Order/InputGroup';
-import CheckBoxInput from '@components/Order/InputField/CheckBoxInput';
 import ProductList from '@components/Order/List/ProductList';
 import Agreement from '@components/Order/Agreement';
 import { IOrderedProduct } from 'src/types/order/types';
 import type { NextPageWithLayout } from '@pages/_app';
 import { ReactElement } from 'react';
+import Payment from '@components/Order/Payment';
 
 const productList: IOrderedProduct[] = [
   { id: '1', title: '상품명', count: 1, price: 12900 },
 ];
 
-const data = {
-  pa: 'TC0ONETIME',
-  pay_method: 'card', // 결제수단
-  merchant_uid: `mid_${new Date().getTime()}`, // 주문번호
-  amount: 1000, // 결제금액
-  name: '먹태깡', // 주문명
-  buyer_name: '이민혀', // 구매자 이름
-  buyer_tel: '01012341234', // 구매자 전화번호
-  buyer_email: 'example@example', // 구매자 이메일
-  buyer_addr: '신사동 661-16', // 구매자 주소
-  buyer_postcode: '06018', // 구매자 우편번호
-};
-
 const OrderPage: NextPageWithLayout = () => {
-  const callback = (response: any) => {
-    console.log(response);
-    const { success, merchant_uid, error_msg } = response;
-
-    if (success) {
-      alert('결제 성공');
-    } else {
-      alert(`결제 실패: ${error_msg}`);
-    }
-  };
   const clickPay = () => {
     const { IMP } = window;
     IMP.init(process.env.NEXT_PUBLIC_IMP_UID);
+
+    const data = {
+      pg: 'html5_inicis',
+      // pg: 'kakaopay',
+      pay_method: 'card',
+      merchant_uid: 'ORD20180131-0000011',
+      name: '노르웨이 회전 의자',
+      amount: 100,
+      buyer_email: 'gildong@gmail.com',
+      buyer_name: '홍길동',
+      buyer_tel: '010-4242-4242',
+      buyer_addr: '서울특별시 강남구 신사동',
+      buyer_postcode: '01181',
+    };
+
+    const callback = (response: any) => {
+      console.log(response);
+      const { success, merchant_uid, error_msg } = response;
+
+      if (success) {
+        alert('결제 성공');
+      } else {
+        alert(`결제 실패: ${error_msg}`);
+      }
+    };
+
     IMP.request_pay(data, callback);
   };
   return (

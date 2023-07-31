@@ -14,7 +14,7 @@ import { IInputFieldProps } from 'src/types/order/types';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { postcodeScriptUrl } from 'react-daum-postcode/lib/loadPostcode';
 import { formatAddress } from 'src/utils/order/getAddressfromDaumPostcode';
-import { getMemberCoupon } from 'src/apis/order/order';
+
 const InputField = ({
   label,
   required,
@@ -82,13 +82,6 @@ const InputField = ({
       ? setShowShippingMsgInput(true)
       : setShowShippingMsgInput(false);
   };
-
-  const getCoupon = async () => {
-    const coupon = await getMemberCoupon();
-    console.log(coupon);
-  };
-
-  getCoupon();
 
   return (
     <Styled.InputWrapper field={field}>

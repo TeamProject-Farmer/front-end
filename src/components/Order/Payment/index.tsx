@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Styled from '../styles';
 import InputField from '../InputField';
 import InputGroup from '../InputGroup';
 import PaymentList from '../List/PaymentList';
+import { getMemberCoupon } from 'src/apis/order/order';
 
 const Payment = () => {
+  const [coupon, setCoupon] = useState();
+  useEffect(() => {
+    getMemberCoupon().then(res => setCoupon(res));
+  }, []);
+  console.log('coupon', coupon);
   return (
     <div>
       <InputGroup title="적립금/쿠폰">
