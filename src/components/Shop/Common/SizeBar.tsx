@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import { BarProps } from '../type';
+import { OptionBarProps } from 'src/types/shop/types';
 
-const SizeBar = (props: BarProps) => {
+const SizeBar = (props: OptionBarProps) => {
   const { optionList } = props;
   return (
     <Styled.Wrapper>

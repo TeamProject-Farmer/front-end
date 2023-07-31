@@ -1,15 +1,8 @@
 import { Dispatch, SetStateAction } from 'react';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import { productSortOptions } from 'src/types/shop/types';
+import { productSortOptions, OptionBarProps } from 'src/types/shop/types';
 import { ISortOption } from 'src/types/search/types';
-
-interface OptionBarProps {
-  optionList: string[];
-  width?: string;
-  setProductOption: Dispatch<SetStateAction<string>>;
-  productOption: string;
-}
 
 const OrderBar = (props: OptionBarProps) => {
   const { optionList, width, setProductOption, productOption } = props;

@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from 'react';
 import { ISortOption } from 'src/types/search/types';
 
 export interface ProductAPI {
@@ -15,3 +16,10 @@ export const productSortOptions: ISortOption[] = [
   { title: '낮은가격순', param: 'LOW' },
   { title: '높은가격순', param: 'HIGH' },
 ];
+
+export interface OptionBarProps {
+  optionList: string[];
+  width?: string;
+  setProductOption?: Dispatch<SetStateAction<string>>;
+  productOption?: string;
+}
