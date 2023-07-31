@@ -14,6 +14,11 @@ import {
   ShortTempProduct,
 } from '../type';
 
+import { useEffect, useState } from 'react';
+import { getProductList } from 'src/apis/shop/product';
+import { ShopDetailPageProps } from 'src/types/shop/types';
+
+// const ShopDetail = ({productList}) => {
 const ShopDetail = () => {
   const router = useRouter();
   const menu = router.query.category;
@@ -21,8 +26,32 @@ const ShopDetail = () => {
   if (menu) {
     category = menu.toString();
   }
+  const [productList, setProductList] = useState([]);
+  const [categoryId, setCategoryId] = useState([]);
+  const [totalPages, setTotalPages] = useState([]);
+
+  const handleProductList = async () => {
+    const response = await getProductList('NEWS', 5);
+    setProductList(response.content);
+    setTotalPages(response.totalPages);
+    console.log('response.data')
+    console.log(response)
+  };
+  const handleMDPickList = async () => {
+    const response = await getProductList('NEWS', 5);
+    setProductList(response.content);
+    setTotalPages(response.totalPages);
+    console.log('response.data')
+    console.log(response)
+  };
+  useEffect(() => {
+    handleProductList();
+  }, [])
+  // console.log('productList')
+  // console.log(productList)
   return (
     <Styled.Wrapper>
+      
       <Category />
       <Styled.Title>{CurrentPage[category]}</Styled.Title>
       <Styled.ContentWrapper>
@@ -48,37 +77,27 @@ const ShopDetail = () => {
         <Styled.OrderItemWrapper>
           <SideAd top={0} />
           {/* 추후 api 연동 */}
-          {TempProduct.map(i => (
-            <Link href={`/shop/${CurrentPage[category]}/detail/1`}>
+          {productList.map(i => (
+            <Link href={`/shop/${CurrentPage[category]}/detail/${i.productId}`}>
               <Product
-                key={i.id}
-                thumbnailImg={i.image}
-                name={i.contentTitle}
-                discountRate={i.percent}
-                price={i.totalPrice}
-                averageStarRating={i.reviewScore}
-                reviewCount={i.totalReview}
+                key={i.productId}
+                thumbnailImg='이미지'
+                name={i.productName}
+                discountRate={i.discountRate}
+                price={i.price}
+                averageStarRating={i.averageStarRating}
+                reviewCount={i.reviewCount}
               ></Product>
             </Link>
           ))}
-          {TempProduct.map(i => (
-            <Link href={`/shop/${CurrentPage[category]}/detail/1`}>
-              <Product
-                key={i.id}
-                thumbnailImg={i.image}
-                name={i.contentTitle}
-                discountRate={i.percent}
-                price={i.totalPrice}
-                averageStarRating={i.reviewScore}
-                reviewCount={i.totalReview}
-              ></Product>
-            </Link>
-          ))}
+          
         </Styled.OrderItemWrapper>
       </Styled.ContentWrapper>
     </Styled.Wrapper>
   );
 };
+
+
 
 const Styled = {
   Wrapper: styled.div`
