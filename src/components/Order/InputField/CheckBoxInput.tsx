@@ -2,10 +2,16 @@ import styled from '@emotion/styled';
 import { ICheckBoxInputProps } from 'src/types/order/types';
 import { css } from '@emotion/react';
 
-const CheckBoxInput = ({ label, field, smallBox }: ICheckBoxInputProps) => {
+const CheckBoxInput = ({
+  label,
+  field,
+  smallBox,
+  checked,
+  onChange,
+}: ICheckBoxInputProps) => {
   return (
     <Styled.Wrapper>
-      <input type="checkbox" />
+      <input type="checkbox" checked={checked} onChange={onChange} />
       <Styled.Label smallBox={smallBox}>{label}</Styled.Label>
     </Styled.Wrapper>
   );

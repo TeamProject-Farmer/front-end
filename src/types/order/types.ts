@@ -28,6 +28,8 @@ export interface ICheckBoxInputProps {
   label: string;
   field?: string;
   smallBox?: boolean;
+  checked?: boolean;
+  onChange?: () => void;
 }
 
 export interface IButtonProps {
