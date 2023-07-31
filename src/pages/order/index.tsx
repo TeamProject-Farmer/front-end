@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Styled from '../../components/Order/styles';
 import Layout from '@pages/layout';
 import NestedLayout from '@components/Order/NestedLayout';
@@ -16,6 +16,10 @@ const productList: IOrderedProduct[] = [
 ];
 
 const OrderPage: NextPageWithLayout = () => {
+  const [payNowDisabled, setPayNowDisabled] = useState(true);
+
+  useEffect(() => {}, [payNowDisabled]);
+
   const clickPay = () => {
     const { IMP } = window;
     IMP.init(process.env.NEXT_PUBLIC_IMP_UID);
@@ -61,10 +65,12 @@ const OrderPage: NextPageWithLayout = () => {
         {/* 적립금/쿠폰, 결제금액 */}
         <Payment />
         {/* 약관동의 */}
-        <Agreement />
+        <Agreement setPayNowDisabled={setPayNowDisabled} />
       </Styled.Wrapper>
       <Styled.PayWrapper>
-        <Styled.PayNow onClick={clickPay}>결제하기</Styled.PayNow>
+        <Styled.PayNow onClick={clickPay} disabled={payNowDisabled}>
+          결제하기
+        </Styled.PayNow>
       </Styled.PayWrapper>
     </>
   );

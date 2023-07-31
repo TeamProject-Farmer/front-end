@@ -79,7 +79,7 @@ const Styled = {
     justify-content: center;
     align-items: center;
   `,
-  PayNow: styled.div`
+  PayNow: styled.button`
     background-color: ${theme.colors.green1};
     border-radius: 5px;
     color: #fff;
@@ -90,6 +90,9 @@ const Styled = {
     display: flex;
     align-items: center;
     justify-content: center;
+    :disabled {
+      background-color: ${theme.colors.gray};
+    }
   `,
   RadioWrapper: styled.div`
     display: flex;

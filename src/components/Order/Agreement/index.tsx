@@ -1,31 +1,24 @@
 import React from 'react';
 import Styled from '../styles';
 import CheckBoxInput from '../InputField/CheckBoxInput';
-import { useState } from 'react';
+import useCheckBox from 'src/hooks/order/useCheckBox';
 
-const Agreement = () => {
-  const [isAllChecked, setAllChecked] = useState(false);
-  const [checkedState, setCheckedState] = useState(new Array(2).fill(false));
+const Agreement = ({ setPayNowDisabled }) => {
+  const {
+    isAllChecked,
+    checkedState,
+    handleAllCheck,
+    handleMonoCheck,
+    paymentChecked,
+    handlePaymentCheck,
+  } = useCheckBox();
 
-  const handleAllCheck = () => {
-    setAllChecked(prev => !prev);
-    let clearAllCheck = new Array(2).fill(!isAllChecked);
-    setCheckedState(clearAllCheck);
-  };
+  if (isAllChecked && paymentChecked) {
+    setPayNowDisabled(false);
+  } else {
+    setPayNowDisabled(true);
+  }
 
-  const handleMonoCheck = (position: number) => {
-    const updatedCheckedState = checkedState.map((input, index) =>
-      index === position ? !input : input,
-    );
-    setCheckedState(updatedCheckedState);
-    const checkedLength = updatedCheckedState.reduce((sum, currentState) => {
-      if (currentState === true) {
-        return sum + 1;
-      }
-      return sum;
-    }, 0);
-    setAllChecked(checkedLength === updatedCheckedState.length);
-  };
   return (
     <Styled.AgreementWrapper>
       <Styled.FlexWrapper agreement={true}>
@@ -49,7 +42,11 @@ const Agreement = () => {
             />
           </Styled.InnerPaddingWrapper>
         </Styled.FlexColumnWrapper>
-        <CheckBoxInput label="결제대행 서비스 이용약관 동의 (필수)" />
+        <CheckBoxInput
+          label="결제대행 서비스 이용약관 동의 (필수)"
+          checked={paymentChecked}
+          onChange={handlePaymentCheck}
+        />
       </Styled.FlexWrapper>
     </Styled.AgreementWrapper>
   );
