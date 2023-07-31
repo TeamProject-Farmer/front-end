@@ -24,5 +24,4 @@ export const getProductList = async (orderType: string, id: number) => {
 export const getMDPickList = async () => {
   const response = await request.get('/main/product/md-pick');
   return response.data;
-  
 };

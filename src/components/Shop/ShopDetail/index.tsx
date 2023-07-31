@@ -15,7 +15,7 @@ import {
 } from '../type';
 
 import { useEffect, useState } from 'react';
-import { getProductList } from 'src/apis/shop/product';
+import { getProductList, getMDPickList } from 'src/apis/shop/product';
 import { ShopDetailPageProps } from 'src/types/shop/types';
 
 // const ShopDetail = ({productList}) => {
@@ -27,6 +27,7 @@ const ShopDetail = () => {
     category = menu.toString();
   }
   const [productList, setProductList] = useState([]);
+  const [MDPickList, setMDPickList] = useState([]);
   const [categoryId, setCategoryId] = useState([]);
   const [totalPages, setTotalPages] = useState([]);
 
@@ -34,21 +35,16 @@ const ShopDetail = () => {
     const response = await getProductList('NEWS', 5);
     setProductList(response.content);
     setTotalPages(response.totalPages);
-    console.log('response.data')
-    console.log(response)
   };
   const handleMDPickList = async () => {
-    const response = await getProductList('NEWS', 5);
-    setProductList(response.content);
-    setTotalPages(response.totalPages);
-    console.log('response.data')
-    console.log(response)
+    const response = await getMDPickList();
+    setMDPickList(response);
   };
   useEffect(() => {
     handleProductList();
+    handleMDPickList();
   }, [])
-  // console.log('productList')
-  // console.log(productList)
+  console.log(MDPickList)
   return (
     <Styled.Wrapper>
       
@@ -58,16 +54,16 @@ const ShopDetail = () => {
         <Styled.PickWrapper>
           <Styled.PickTitle>MD's PICK</Styled.PickTitle>
           <Styled.PickItemWrapper>
-            {ShortTempProduct.map(i => (
-              <Link href={`/shop/${CurrentPage[category]}/detail/1`}>
+            {MDPickList && MDPickList.map(i => (
+              <Link href={`/shop/${CurrentPage[category]}/detail/${i.productID}`}>
                 <Product
-                  key={i.id}
-                  thumbnailImg={i.image}
-                  name={i.contentTitle}
-                  discountRate={i.percent}
-                  price={i.totalPrice}
-                  averageStarRating={i.reviewScore}
-                  reviewCount={i.totalReview}
+                  key={i.productId}
+                  thumbnailImg='이미지'
+                  name={i.productName}
+                  discountRate={i.discountRate}
+                  price={i.price}
+                  averageStarRating={i.averageStarRating}
+                  reviewCount={i.reviewCount}
                 ></Product>
               </Link>
             ))}
@@ -77,7 +73,7 @@ const ShopDetail = () => {
         <Styled.OrderItemWrapper>
           <SideAd top={0} />
           {/* 추후 api 연동 */}
-          {productList.map(i => (
+          {productList && productList.map(i => (
             <Link href={`/shop/${CurrentPage[category]}/detail/${i.productId}`}>
               <Product
                 key={i.productId}
