@@ -1,5 +1,6 @@
-import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { current } from '@reduxjs/toolkit';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
@@ -8,17 +9,11 @@ import SideAd from '../Common/SideAd';
 import Category from '../Common/Category';
 import Product from '@components/Common/Product';
 import {
-  TempProduct,
   OrderOptions,
   CurrentPage,
-  ShortTempProduct,
 } from '../type';
-
-import { useEffect, useState } from 'react';
 import { getProductList, getMDPickList } from 'src/apis/shop/product';
-import { ShopDetailPageProps } from 'src/types/shop/types';
 
-// const ShopDetail = ({productList}) => {
 const ShopDetail = () => {
   const router = useRouter();
   const menu = router.query.category;
@@ -28,11 +23,12 @@ const ShopDetail = () => {
   }
   const [productList, setProductList] = useState([]);
   const [MDPickList, setMDPickList] = useState([]);
-  const [categoryId, setCategoryId] = useState([]);
-  const [totalPages, setTotalPages] = useState([]);
+  const [categoryId, setCategoryId] = useState<number>();
+  const [productOption, setProductOption] = useState<string>('NEWS');
+  const [totalPages, setTotalPages] = useState<number>();
 
   const handleProductList = async () => {
-    const response = await getProductList('NEWS', 5);
+    const response = await getProductList(productOption, 5);
     setProductList(response.content);
     setTotalPages(response.totalPages);
   };
@@ -43,11 +39,10 @@ const ShopDetail = () => {
   useEffect(() => {
     handleProductList();
     handleMDPickList();
-  }, [])
-  console.log(MDPickList)
+  }, [productOption])
+
   return (
     <Styled.Wrapper>
-      
       <Category />
       <Styled.Title>{CurrentPage[category]}</Styled.Title>
       <Styled.ContentWrapper>
@@ -69,7 +64,7 @@ const ShopDetail = () => {
             ))}
           </Styled.PickItemWrapper>
         </Styled.PickWrapper>
-        <OrderBar optionList={OrderOptions} />
+        <OrderBar optionList={OrderOptions} setProductOption={setProductOption} productOption={productOption}/>
         <Styled.OrderItemWrapper>
           <SideAd top={0} />
           {/* 추후 api 연동 */}
