@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Styled from '../styles';
 import InputField from '../InputField';
 import InputGroup from '../InputGroup';
@@ -10,12 +10,13 @@ const Payment = () => {
   useEffect(() => {
     getMemberCoupon().then(res => setCoupon(res));
   }, []);
-  console.log('coupon', coupon);
+  const couponOptions = useMemo(() => coupon, [coupon]);
+
   return (
     <div>
       <InputGroup title="적립금/쿠폰">
         <InputField label="적립금" field="point" />
-        <InputField label="쿠폰" field="coupon" />
+        <InputField label="쿠폰" field="coupon" couponOptions={couponOptions} />
         <Styled.InnerMarginWrapper>
           <Styled.DiscountedPrice>
             <Styled.Title>적용금액</Styled.Title>

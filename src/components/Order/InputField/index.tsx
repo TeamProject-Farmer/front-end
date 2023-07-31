@@ -20,6 +20,7 @@ const InputField = ({
   required,
   field,
   placeholder,
+  couponOptions,
 }: IInputFieldProps) => {
   //reack-hook-form
   const {
@@ -103,7 +104,7 @@ const InputField = ({
           ),
           mobile: (
             <Styled.FlexGapWrapper>
-              <Styled.Dropdown isMobile={true}>
+              <Styled.Dropdown field="mobile">
                 {mobileOptions.map((number, index) => (
                   <Styled.Option key={index} value={number}>
                     {number}
@@ -145,7 +146,14 @@ const InputField = ({
           coupon: (
             <Styled.FlexColumnWrapper>
               <Styled.FlexWrapper>
-                <Styled.Input width={660} />
+                <Styled.Dropdown field="coupon" onChange={handleChange}>
+                  {couponOptions &&
+                    couponOptions.map((coupon, index) => (
+                      <Styled.Option key={index} value={coupon.name}>
+                        {coupon.name}
+                      </Styled.Option>
+                    ))}
+                </Styled.Dropdown>
                 <Button text="전액사용" />
               </Styled.FlexWrapper>
               <Styled.Explanation>
@@ -172,7 +180,7 @@ const InputField = ({
           card: <Styled.Input width={844} placeholder={placeholder} />,
           shippingMsg: (
             <Styled.FlexColumnWrapper>
-              <Styled.Dropdown onChange={handleChange}>
+              <Styled.Dropdown field="shippingMsg" onChange={handleChange}>
                 {shippingMsgOptions.map((msg, index) => (
                   <Styled.Option key={index} value={msg}>
                     {msg}

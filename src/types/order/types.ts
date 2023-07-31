@@ -13,15 +13,22 @@ export type TValidate = (
   value: any,
 ) => boolean | string | Promise<boolean | string>;
 
+export interface ICoupon {
+  couponId: number;
+  serialNumber: string;
+  name: string;
+  startDateTime: string;
+  endDateTime: string;
+}
+
 export interface IInputFieldProps {
   label?: string;
   field: string;
   placeholder?: string;
   required?: boolean;
   inputProps?: UseFormRegisterReturn;
-  //수정
-  error?: any;
-  // error?: string | null;
+  error?: string | null;
+  couponOptions?: ICoupon[];
 }
 
 export interface ICheckBoxInputProps {
