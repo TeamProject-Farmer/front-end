@@ -19,7 +19,7 @@ const SearchContainer = ({
       </Styled.IconWrapper>
       <Styled.Input type="search" onChange={handleChange} value={searchWord} />
       <Styled.KeywordWrapper>
-        {recentSearchWord.length !== 0 && (
+        {recentSearchWord !== null && recentSearchWord.length !== 0 && (
           <Keyword title="최근 검색 키워드" wordList={recentSearchWord} />
         )}
         <Keyword title="실시간 인기 키워드" wordList={popularContent} />
