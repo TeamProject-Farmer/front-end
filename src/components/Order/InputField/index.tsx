@@ -21,6 +21,12 @@ const InputField = ({
   field,
   placeholder,
   couponOptions,
+  usedPoint,
+  handleSelectedCoupon,
+  handlePointChange,
+  disabledPointBtn,
+  disabledCouponBtn,
+  getDiscountedPrice,
 }: IInputFieldProps) => {
   //reack-hook-form
   const {
@@ -146,15 +152,23 @@ const InputField = ({
           coupon: (
             <Styled.FlexColumnWrapper>
               <Styled.FlexWrapper>
-                <Styled.Dropdown field="coupon" onChange={handleChange}>
+                <Styled.Dropdown field="coupon" onChange={handleSelectedCoupon}>
+                  <option value={0}>쿠폰을 선택해주세요</option>
                   {couponOptions &&
-                    couponOptions.map((coupon, index) => (
-                      <Styled.Option key={index} value={coupon.name}>
+                    couponOptions.map(coupon => (
+                      <Styled.Option
+                        key={coupon.couponId}
+                        value={coupon.couponId}
+                      >
                         {coupon.name}
                       </Styled.Option>
                     ))}
                 </Styled.Dropdown>
-                <Button text="전액사용" />
+                <Button
+                  text="쿠폰적용"
+                  onClick={getDiscountedPrice}
+                  disabled={disabledCouponBtn}
+                />
               </Styled.FlexWrapper>
               <Styled.Explanation>
                 1회 구매시 적립금 최소 사용금액은 2,000원입니다.
@@ -164,13 +178,24 @@ const InputField = ({
           point: (
             <Styled.FlexColumnWrapper>
               <Styled.FlexWrapper>
-                <Styled.Input width={660} />
-                <Button text="쿠폰적용" />
+                <Styled.Input
+                  width={660}
+                  value={usedPoint}
+                  onChange={handlePointChange}
+                  disabled={disabledPointBtn}
+                />
+                <Button
+                  text="전액사용"
+                  disabled={disabledPointBtn}
+                  onClick={getDiscountedPrice}
+                />
               </Styled.FlexWrapper>
               <Styled.FlexGapWrapper>
-                <Styled.Explanation>
-                  적립금과 쿠폰은 중복사용이 불가합니다.
-                </Styled.Explanation>
+                {disabledPointBtn && (
+                  <Styled.Explanation>
+                    적립금과 쿠폰은 중복사용이 불가합니다.
+                  </Styled.Explanation>
+                )}
                 <Styled.Explanation>
                   일부 할인 상품에 한하여 쿠폰 사용이 제한될 수 있습니다.
                 </Styled.Explanation>

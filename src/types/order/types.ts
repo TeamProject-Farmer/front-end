@@ -15,10 +15,11 @@ export type TValidate = (
 
 export interface ICoupon {
   couponId: number;
-  serialNumber: string;
+  benefits: string;
   name: string;
-  startDateTime: string;
-  endDateTime: string;
+  couponPolicy: string;
+  fixedPrice: number;
+  rateAmount: number;
 }
 
 export interface IInputFieldProps {
@@ -29,6 +30,13 @@ export interface IInputFieldProps {
   inputProps?: UseFormRegisterReturn;
   error?: string | null;
   couponOptions?: ICoupon[];
+  // 타입 수정
+  usedPoint?: number;
+  handleSelectedCoupon?: (event) => void;
+  handlePointChange?: (event) => void;
+  disabledPointBtn?: boolean;
+  disabledCouponBtn?: boolean;
+  getDiscountedPrice?: () => void;
 }
 
 export interface ICheckBoxInputProps {
@@ -44,6 +52,7 @@ export interface IButtonProps {
   bgColor?: string;
   color?: string;
   onClick?: () => void;
+  disabled?: boolean;
 }
 
 export interface InputGroupProps {

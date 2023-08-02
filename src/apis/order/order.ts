@@ -1,9 +1,15 @@
 import request from '../base';
 
 export const getMemberCoupon = async () => {
-  const response = await request.get('/member/coupon');
-  // console.log(response);
+  const response = await request.get('/member/coupon/use');
+  console.log(response);
   return response.data;
+};
+
+export const postMemberPoint = async () => {
+  const response = await request.post('/member/point');
+  console.log(response.data.point);
+  return response.data.point;
 };
 
 export const getMemberOrderAddress = async () => {
