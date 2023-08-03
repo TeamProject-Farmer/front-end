@@ -191,11 +191,9 @@ const InputField = ({
                 />
               </Styled.FlexWrapper>
               <Styled.FlexGapWrapper>
-                {disabledPointBtn && (
-                  <Styled.Explanation>
-                    적립금과 쿠폰은 중복사용이 불가합니다.
-                  </Styled.Explanation>
-                )}
+                <Styled.Explanation>
+                  적립금과 쿠폰은 중복사용이 불가합니다.
+                </Styled.Explanation>
                 <Styled.Explanation>
                   일부 할인 상품에 한하여 쿠폰 사용이 제한될 수 있습니다.
                 </Styled.Explanation>

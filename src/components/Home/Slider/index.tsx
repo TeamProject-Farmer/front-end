@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import styled from '@emotion/styled';
 import SliderContent from './SliderContent';
 import Indicator from './Indicator';
