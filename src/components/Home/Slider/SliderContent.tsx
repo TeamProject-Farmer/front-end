@@ -29,13 +29,14 @@ const SliderContent = ({ sliderContents, activeIndex }) => {
   return (
     <>
       <AnimatePresence initial={false}>
+        {/* <img src={sliderContents[0].linkUrl} /> */}
         {sliderContents &&
           sliderContents?.map((content: IBanner) =>
             activeIndex === content.id ? (
               <Styled.Content
                 key={content.id}
                 variants={imgVariants}
-                imgUrl={content.imgUrl}
+                imgUrl={content.linkUrl}
                 initial="initial"
                 animate="start"
                 exit="end"
@@ -65,7 +66,7 @@ const Styled = {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-image: url(imgUrl);
+    background-image: url(${({ imgUrl }) => imgUrl});
     background-size: 100% auto;
   `,
   ContentBox: styled.div`
