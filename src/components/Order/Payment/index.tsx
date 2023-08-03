@@ -26,6 +26,10 @@ const Payment = () => {
     discountedPrice,
   } = useDiscount();
 
+  const finalPrice = isNaN(productData.price - discountedPrice)
+    ? productData.price
+    : productData.price - discountedPrice;
+
   return (
     <div>
       <InputGroup title="적립금/쿠폰">
@@ -71,7 +75,7 @@ const Payment = () => {
           <Styled.InnerMarginWrapper>
             <Styled.DiscountedPrice>
               <Styled.Title>최종 결제 금액</Styled.Title>
-              <Styled.Title>15400원</Styled.Title>
+              <Styled.Title>{finalPrice}원</Styled.Title>
             </Styled.DiscountedPrice>
           </Styled.InnerMarginWrapper>
         </Styled.FlexColumnWrapper>

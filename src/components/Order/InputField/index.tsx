@@ -54,14 +54,14 @@ const InputField = ({
   const basicAddressValid = validateInput('basicAddress');
   const detailAddressValid = validateInput('detailAddress');
 
-  //전화번호 입력시 자동으로 하이픈 생성
+  // 전화번호 입력시 자동으로 하이픈 생성
   const watchMobileInput = watch('mobile');
 
   useEffect(() => {
     setValue('mobile', formatPhoneNumber(watchMobileInput));
   }, [watchMobileInput]);
 
-  //주소 입력
+  // 주소 입력
   const handleComplete = (data: DaumPostcodeData) => {
     const fullAddress = formatAddress(data);
     setValue('postCode', data.zonecode);
@@ -80,7 +80,7 @@ const InputField = ({
     });
   };
 
-  //배송 메시지 직접 입력
+  // 배송 메시지 직접 입력
   const [showShippingMsgInput, setShowShippingMsgInput] =
     useState<boolean>(false);
 
@@ -178,12 +178,14 @@ const InputField = ({
           point: (
             <Styled.FlexColumnWrapper>
               <Styled.FlexWrapper>
-                <Styled.Input
-                  width={660}
-                  value={usedPoint}
-                  onChange={handlePointChange}
-                  disabled={disabledPointBtn}
-                />
+                {usedPoint && (
+                  <Styled.Input
+                    width={660}
+                    value={usedPoint}
+                    onChange={handlePointChange}
+                    disabled={disabledPointBtn}
+                  />
+                )}
                 <Button
                   text="전액사용"
                   disabled={disabledPointBtn}

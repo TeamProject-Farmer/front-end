@@ -1,9 +1,9 @@
-import React from 'react';
 import Styled from '../styles';
 import CheckBoxInput from '../InputField/CheckBoxInput';
 import useCheckBox from 'src/hooks/order/useCheckBox';
+import { useEffect } from 'react';
 
-const Agreement = ({ setPayNowDisabled }) => {
+const Agreement = ({ handleAgreementChange }) => {
   const {
     isAllChecked,
     checkedState,
@@ -13,11 +13,9 @@ const Agreement = ({ setPayNowDisabled }) => {
     handlePaymentCheck,
   } = useCheckBox();
 
-  if (isAllChecked && paymentChecked) {
-    setPayNowDisabled(false);
-  } else {
-    setPayNowDisabled(true);
-  }
+  useEffect(() => {
+    handleAgreementChange(isAllChecked, paymentChecked);
+  }, [isAllChecked, paymentChecked]);
 
   return (
     <Styled.AgreementWrapper>

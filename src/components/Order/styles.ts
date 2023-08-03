@@ -90,9 +90,6 @@ const Styled = {
     display: flex;
     align-items: center;
     justify-content: center;
-    :disabled {
-      background-color: ${theme.colors.gray};
-    }
   `,
   RadioWrapper: styled.div`
     display: flex;

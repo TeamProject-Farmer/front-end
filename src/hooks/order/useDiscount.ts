@@ -20,7 +20,7 @@ const useDiscount = () => {
 
   // 쿠폰이 선택되었을 때
   const [selectedCouponId, setSelectedCouponId] = useState<number>();
-  const [selectedCoupon, setSelectedCoupon] = useState<ICoupon>();
+  const [selectedCoupon, setSelectedCoupon] = useState<ICoupon | null>();
   const [disabledCouponBtn, setDisabledCouponBtn] = useState(false);
   const [disabledPointBtn, setDisabledPointBtn] = useState(false);
 

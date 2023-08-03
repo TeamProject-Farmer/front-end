@@ -1,10 +1,8 @@
 import styled from '@emotion/styled';
 import { ICheckBoxInputProps } from 'src/types/order/types';
-import { css } from '@emotion/react';
 
 const CheckBoxInput = ({
   label,
-  field,
   smallBox,
   checked,
   onChange,
@@ -18,14 +16,6 @@ const CheckBoxInput = ({
 };
 
 export default CheckBoxInput;
-
-const shippingMsgCheckBox = css`
-  appearance: none;
-  width: 22px;
-  height: 22px;
-  border-radius: 3px;
-  background-color: #d9d9d9;
-`;
 
 const Styled = {
   Wrapper: styled.div`

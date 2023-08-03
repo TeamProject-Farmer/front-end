@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import InputGroup from '../InputGroup';
 import InputField from '../InputField';
 import CheckBoxInput from '../InputField/CheckBoxInput';

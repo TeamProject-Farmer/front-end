@@ -4,6 +4,7 @@ import Header from '@components/Common/Header';
 import Footer from '@components/Common/Footer';
 import styled from '@emotion/styled';
 import { Inter } from 'next/font/google';
+import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -18,7 +19,7 @@ const Layout = ({ children, title = 'Farmer FE' }: LayoutProps) => (
       <title>{title}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+      <Script src="https://cdn.iamport.kr/v1/iamport.js"></Script>
     </Head>
     <Styled.Wrapper>
       <Header />
