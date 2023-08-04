@@ -4,6 +4,7 @@ import Plant from './Plant';
 import { IPlant } from 'src/types/home/types';
 
 const BestPlant = ({ bestPlant }) => {
+  console.log('bestplant', bestPlant);
   return (
     <Styled.Wrapper>
       <Title title="베스트 식물" />
@@ -20,6 +21,7 @@ const BestPlant = ({ bestPlant }) => {
               discountRate={plant.discountRate}
               price={plant.price}
               averageStarRating={plant.averageStarRating}
+              imgUrl={plant.imgUrl}
             />
           ))}
       </Styled.Plants>

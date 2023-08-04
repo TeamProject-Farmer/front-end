@@ -10,16 +10,14 @@ const Plant = ({
   discountRate,
   price,
   averageStarRating,
+  imgUrl,
 }: IPlant) => {
   return (
     <Styled.Wrapper>
       <Styled.RankingBox>{ranking}</Styled.RankingBox>
-      <Image
-        src="/assets/images/home/plant.png"
-        alt="plant image"
-        width={160}
-        height={201}
-      />
+      <Styled.ImgBox>
+        <img src={imgUrl} alt="plant image" />
+      </Styled.ImgBox>
       <Styled.Title>{productName}</Styled.Title>
       <Styled.Content>
         <Styled.flexBox>
@@ -71,17 +69,28 @@ const Styled = {
     color: #fff;
     background-color: #47ac3a;
   `,
+  ImgBox: styled.div`
+    margin-top: 60px;
+    width: 160px;
+    height: 201px;
+    overflow: hidden;
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  `,
+  Title: styled.p`
+    font-size: 25px;
+    font-weight: 600;
+    margin-top: 18px;
+  `,
   Content: styled.div`
     width: 310px;
     display: flex;
     flex-direction: column;
     padding: 30px 40px 0;
     gap: 4.5px;
-  `,
-  Title: styled.p`
-    font-size: 25px;
-    font-weight: 600;
-    margin-top: 18px;
   `,
   flexBox: styled.div`
     display: flex;
