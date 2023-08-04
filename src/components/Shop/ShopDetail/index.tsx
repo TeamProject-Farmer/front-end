@@ -6,13 +6,15 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import OrderBar from '../Common/OrderBar';
 import SideAd from '../Common/SideAd';
-import Category from '../Common/Category';
+import Category from '@components/Common/Category';
 import Product from '@components/Common/Product';
 import {
   OrderOptions,
   CurrentPage,
 } from '../type';
-import { getProductList, getMDPickList } from 'src/apis/shop/product';
+import { getProductList } from 'src/apis/shop/product';
+import { getProductCategory } from 'src/apis/common/category';
+import MDPick from './MDPick';
 
 const ShopDetail = () => {
   const router = useRouter();
@@ -22,57 +24,44 @@ const ShopDetail = () => {
     category = menu.toString();
   }
   const [productList, setProductList] = useState([]);
-  const [MDPickList, setMDPickList] = useState([]);
   const [categoryId, setCategoryId] = useState<number>();
   const [productOption, setProductOption] = useState<string>('NEWS');
   const [totalPages, setTotalPages] = useState<number>();
-
+  const [categoryList, setCategoryList] = useState([]);
+  
+  
   const handleProductList = async () => {
     const response = await getProductList(productOption, 5);
     setProductList(response.content);
     setTotalPages(response.totalPages);
+    console.log(productList);
   };
-  const handleMDPickList = async () => {
-    const response = await getMDPickList();
-    setMDPickList(response);
+  console.log(productList);
+  const handleCategoryList = async () => {
+    const response = await getProductCategory();
+    setCategoryList(response);
   };
   useEffect(() => {
     handleProductList();
-    handleMDPickList();
   }, [productOption])
+  useEffect(() => {
+    handleCategoryList();
+  }, [])
 
   return (
     <Styled.Wrapper>
-      <Category />
+      <Category  category={categoryList}/>
       <Styled.Title>{CurrentPage[category]}</Styled.Title>
       <Styled.ContentWrapper>
-        <Styled.PickWrapper>
-          <Styled.PickTitle>MD's PICK</Styled.PickTitle>
-          <Styled.PickItemWrapper>
-            {MDPickList && MDPickList.map(i => (
-              <Link href={`/shop/${CurrentPage[category]}/detail/${i.productID}`}>
-                <Product
-                  key={i.productId}
-                  thumbnailImg='이미지'
-                  name={i.productName}
-                  discountRate={i.discountRate}
-                  price={i.price}
-                  averageStarRating={i.averageStarRating}
-                  reviewCount={i.reviewCount}
-                ></Product>
-              </Link>
-            ))}
-          </Styled.PickItemWrapper>
-        </Styled.PickWrapper>
+        <MDPick />
         <OrderBar optionList={OrderOptions} setProductOption={setProductOption} productOption={productOption}/>
         <Styled.OrderItemWrapper>
           <SideAd top={0} />
-          {/* 추후 api 연동 */}
           {productList && productList.map(i => (
             <Link href={`/shop/${CurrentPage[category]}/detail/${i.productId}`}>
               <Product
                 key={i.productId}
-                thumbnailImg='이미지'
+                thumbnailImg={i.imgUrl}
                 name={i.productName}
                 discountRate={i.discountRate}
                 price={i.price}
@@ -115,30 +104,10 @@ const Styled = {
     margin-top: 110px;
     align-items: center;
   `,
-  PickWrapper: styled.div`
-    margin-top: 88px;
-    margin-bottom: 65px;
-    display: flex;
-    flex-direction: column;
-    width: ${theme.size.mainWidth};
-  `,
-  PickTitle: styled.div`
-    text-align: left;
-    font-size: 30px;
-    font-weight: 700;
-    margin-bottom: 17.76px;
-  `,
-  PickItemWrapper: styled.div`
-    margin: 0 auto;
-    width: ${theme.size.mainWidth};
-    height: fit-content;
-    display: flex;
-    justify-content: space-between;
-  `,
   OrderItemWrapper: styled.div`
     position: relative;
     width: ${theme.size.mainWidth};
-    height: 1062px;
+    height: 2032px;
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;

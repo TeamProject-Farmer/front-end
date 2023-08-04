@@ -1,5 +1,6 @@
 import Styled from './styles';
 import Icon from '../Icon';
+import Image from 'next/image';
 import { ProductProps } from '../type';
 
 const Product = (props: ProductProps) => {
@@ -13,7 +14,17 @@ const Product = (props: ProductProps) => {
   } = props;
   return (
     <Styled.Wrapper>
-      <Styled.ImgBox>{thumbnailImg}</Styled.ImgBox>
+      <Styled.ImgBox>
+      <Image
+          src={thumbnailImg}
+          alt={name}
+          // width={279.5}
+          // height={280.2}
+          layout='fill'
+          style={{ objectFit: 'cover' }}
+          loading="lazy"
+        />
+      </Styled.ImgBox>
       <Styled.Content>
         <Styled.Title>{name}</Styled.Title>
         <Styled.PriceBox>

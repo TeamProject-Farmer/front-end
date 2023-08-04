@@ -38,7 +38,7 @@ const Styled = {
   Wrapper: styled.div`
     position: relative;
     width: ${theme.size.mainWidth};
-    height: 1062px;
+    height: 2032px;
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;

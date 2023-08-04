@@ -22,6 +22,11 @@ export const getProductList = async (orderType: string, id: number) => {
 
 //MD PICK 리스트
 export const getMDPickList = async () => {
-  const response = await request.get('/main/product/md-pick');
+  const response = await request({
+    url: '/main/product/md-pick',
+    params: {
+      division: 'MD_PICK',
+    },
+  });
   return response.data;
 };

@@ -15,6 +15,7 @@ const Styled = {
     justify-content: center;
     font-size: 30px;
     font-weight: 700;
+    overflow: hidden;
   `,
   Content: styled.div`
     display: flex;
