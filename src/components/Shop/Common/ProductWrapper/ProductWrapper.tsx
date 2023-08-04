@@ -2,9 +2,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import SideAd from '../Common/SideAd';
+import SideAd from '../SideAd';
 import Product from '@components/Common/Product';
-import { TempProduct, CurrentPage } from '../type';
+import { TempProduct } from '../../type';
 
 const ProductWrapper = () => {
   const router = useRouter();
@@ -18,7 +18,7 @@ const ProductWrapper = () => {
     <Styled.Wrapper>
       <SideAd top={0} />
       {TempProduct.map(i => (
-        <Link href={`/shop/${CurrentPage[category]}/detail/1`}>
+        <Link href={`/shop/${category}/detail/1`}>
           <Product
             key={i.id}
             thumbnailImg={i.image}

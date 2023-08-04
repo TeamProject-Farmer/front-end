@@ -121,6 +121,15 @@ export const OrderOptions: string[] = [
 
 export const SizeOptions: string[] = ['Small', 'Medium', 'Large'];
 
+export const CateId = {
+  다육이: 1,
+  선인장 : 2,
+  스킨답서스: 3,
+  야자목: 4,
+  호접란: 5,
+  키움용품: 6,
+};
+
 export const CurrentPage = {
   fleshy: '다육이',
   cactus: '선인장',

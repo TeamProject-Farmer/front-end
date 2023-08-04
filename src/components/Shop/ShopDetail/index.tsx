@@ -10,7 +10,7 @@ import Category from '@components/Common/Category';
 import Product from '@components/Common/Product';
 import {
   OrderOptions,
-  CurrentPage,
+  CateId,
 } from '../type';
 import { getProductList } from 'src/apis/shop/product';
 import { getProductCategory } from 'src/apis/common/category';
@@ -23,42 +23,45 @@ const ShopDetail = () => {
   if (menu) {
     category = menu.toString();
   }
+  
   const [productList, setProductList] = useState([]);
-  const [categoryId, setCategoryId] = useState<number>();
+  const [categoryId, setCategoryId] = useState<number>(1);
   const [productOption, setProductOption] = useState<string>('NEWS');
   const [totalPages, setTotalPages] = useState<number>();
   const [categoryList, setCategoryList] = useState([]);
-  
-  
+
   const handleProductList = async () => {
-    const response = await getProductList(productOption, 5);
+    const response = await getProductList(productOption, categoryId);
     setProductList(response.content);
     setTotalPages(response.totalPages);
-    console.log(productList);
   };
-  console.log(productList);
   const handleCategoryList = async () => {
     const response = await getProductCategory();
     setCategoryList(response);
   };
-  useEffect(() => {
-    handleProductList();
-  }, [productOption])
+
   useEffect(() => {
     handleCategoryList();
   }, [])
-
+  useEffect(() => {
+    handleProductList();
+  }, [productOption, categoryId])
+  useEffect(() => {
+    category&&setCategoryId((CateId[category]))
+    console.log(categoryId)
+  }, [category, categoryList])
+  
   return (
     <Styled.Wrapper>
       <Category  category={categoryList}/>
-      <Styled.Title>{CurrentPage[category]}</Styled.Title>
+      <Styled.Title>{category}</Styled.Title>
       <Styled.ContentWrapper>
         <MDPick />
         <OrderBar optionList={OrderOptions} setProductOption={setProductOption} productOption={productOption}/>
         <Styled.OrderItemWrapper>
           <SideAd top={0} />
           {productList && productList.map(i => (
-            <Link href={`/shop/${CurrentPage[category]}/detail/${i.productId}`}>
+            <Link href={`/shop/${category}/detail/${i.productId}`}>
               <Product
                 key={i.productId}
                 thumbnailImg={i.imgUrl}
@@ -70,7 +73,6 @@ const ShopDetail = () => {
               ></Product>
             </Link>
           ))}
-          
         </Styled.OrderItemWrapper>
       </Styled.ContentWrapper>
     </Styled.Wrapper>

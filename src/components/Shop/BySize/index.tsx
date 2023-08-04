@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import SizeBar from '../Common/SizeBar';
 import OrderBar from '../Common/OrderBar';
-import ProductWrapper from '../Common/ProductWrapper';
+import ProductWrapper from '../Common/ProductWrapper/ProductWrapper';
 import { SizeOptions, OrderOptions } from '../type';
 
 const BySize = () => {

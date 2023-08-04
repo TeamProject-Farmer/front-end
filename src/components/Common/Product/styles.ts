@@ -9,6 +9,7 @@ const Styled = {
   ImgBox: styled.div`
     position: relative;
     height: 279.515px;
+    width: auto;
     background-color: ${theme.colors.lightGray};
     display: flex;
     align-items: center;
@@ -16,6 +17,11 @@ const Styled = {
     font-size: 30px;
     font-weight: 700;
     overflow: hidden;
+    .imageStyle {
+      width: auto;
+      height: auto;
+      object-fit: cover;
+    }
   `,
   Content: styled.div`
     display: flex;
