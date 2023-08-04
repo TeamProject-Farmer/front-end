@@ -49,7 +49,6 @@ const WrapperStyles = css`
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border: 1px solid red;
   box-sizing: border-box;
   border-radius: 10px;
 `;
@@ -72,13 +71,13 @@ const Styled = {
     width: 310px;
     height: 392px;
     background-color: #ecf9e9;
-
     .slick-current & {
       width: 417px;
       height: 527px;
       background-color: #fff;
       box-shadow: 0px 0px 16px 8px rgba(215, 215, 215, 0.25);
     }
+    overflow: visible;
   `,
   RankingBox: styled.p`
     ${RankingBoxStyles}

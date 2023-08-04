@@ -8,7 +8,6 @@ const BestPlant = ({ bestPlant }) => {
   const settings = {
     className: 'center',
     centerMode: true,
-    centerPadding: '50px',
     dots: false,
     infinite: true,
     speed: 500,

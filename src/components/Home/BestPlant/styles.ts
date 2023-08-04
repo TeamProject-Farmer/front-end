@@ -19,11 +19,18 @@ const Styled = {
   Plants: styled(Slider)`
     /* position: relative; */
     width: 100%;
-    height: 665px;
+    height: 800px;
     background-color: pink;
     display: flex;
+    /* align-items: flex-end; */
     margin: 50px 0;
-    gap: 37px;
+
+    .slick-track {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: center;
+    }
     .slick-arrow {
       width: 50px;
       height: 50px;
