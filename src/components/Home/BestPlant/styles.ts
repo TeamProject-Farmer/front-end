@@ -11,19 +11,17 @@ const Styled = {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-top: 181px;
   `,
   Descrip: styled.p`
     font-size: 15px;
     color: #717171;
   `,
   Plants: styled(Slider)`
-    /* position: relative; */
     width: 100%;
-    height: 800px;
     background-color: pink;
-    display: flex;
-    /* align-items: flex-end; */
-    margin: 50px 0;
+    margin-top: 85px;
+    position: relative;
 
     .slick-track {
       display: flex;
@@ -38,8 +36,7 @@ const Styled = {
       background-color: red;
     }
     .slick-prev {
-      position: absolute;
-      bottom: 0px;
+      transform: translate(820px, 316px);
     }
   `,
 };

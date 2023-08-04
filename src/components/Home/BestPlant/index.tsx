@@ -4,9 +4,8 @@ import Plant from './Plant';
 import { IPlant } from 'src/types/home/types';
 
 const BestPlant = ({ bestPlant }) => {
-  console.log('bestplant', bestPlant);
+  // console.log('bestplant', bestPlant);
   const settings = {
-    className: 'center',
     centerMode: true,
     dots: false,
     infinite: true,
