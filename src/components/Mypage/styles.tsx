@@ -254,6 +254,15 @@ export const Styled = {
     /* margin-bottom: 2rem; */
     border-bottom: 1px solid ${theme.colors.borderGray};
   `,
+  CartListRow: styled.div`
+    width: 100px;
+    height: 100px;
+    background-color: '#D9D9D9';
+  `,
+  CartCheckBox: styled.input`
+    width: '16px';
+    height: '16px';
+  `,
   FlexRowCenter: styled.div`
     display: grid;
     grid-template-columns: 2fr 2fr 2fr 1fr 1fr 1.5fr;
