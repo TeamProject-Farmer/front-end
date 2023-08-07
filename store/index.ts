@@ -18,9 +18,14 @@ import {
   REGISTER,
   REHYDRATE,
 } from 'redux-persist';
-import { RootState } from 'src/types/redux/types';
 import userSlice from './reducers/userSlice';
 import cartIndexSlice from './reducers/cartSlice';
+import { CartState, UserState } from 'src/types/redux/types';
+
+export interface RootState {
+  user: UserState;
+  cartIndex: CartState;
+}
 
 const persistConfig: PersistConfig<RootState> = {
   key: 'root',
