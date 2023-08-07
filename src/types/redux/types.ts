@@ -1,8 +1,3 @@
-export interface RootState {
-  user: UserState;
-  cartIndex: CartState;
-}
-
 export interface UserState {
   socialId: string;
   email: string;
