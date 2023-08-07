@@ -1,3 +1,8 @@
+export interface RootState {
+  user: UserState;
+  cartIndex: CartState;
+}
+
 export interface UserState {
   socialId: string;
   email: string;
@@ -9,4 +14,9 @@ export interface UserState {
   memberCoupon: number;
   accessToken: string;
   refreshToken: string;
+}
+
+export interface CartState {
+  idArray: number[];
+  allChecked: boolean;
 }
