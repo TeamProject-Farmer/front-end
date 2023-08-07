@@ -7,7 +7,7 @@ import {
   validatePassword,
 } from 'src/utils/register/formUtil';
 import { passwordText, socialDisabled } from 'src/utils/mypage/editForm';
-import { RootState } from 'src/types/redux/types';
+import { RootState } from 'store';
 const selectUser = (state: RootState) => state.user;
 
 const InputGroup = ({
