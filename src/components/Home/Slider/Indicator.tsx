@@ -24,7 +24,7 @@ const Style = {
   Indicator: styled.ul`
     position: absolute;
     left: 705px;
-    bottom: 80px;
+    bottom: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -34,12 +34,12 @@ const Style = {
     position: relative;
     font-size: 20px;
     font-weight: ${({ selected }) => (selected ? '700' : '400')};
-    color: ${({ selected }) => (selected ? theme.colors.green1 : '#000')};
+    color: ${({ selected }) => (selected ? '#FFB800' : '#fff')};
     :not(:last-child)::before {
       content: '';
       position: absolute;
       display: block;
-      background-color: #000;
+      background-color: #fff;
       width: 125px;
       height: 2px;
       top: 50%;

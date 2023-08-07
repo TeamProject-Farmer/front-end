@@ -18,20 +18,13 @@ const Review = ({
     return stars;
   };
 
-  // const countStar = () => {
-  //   return Array(5).fill().map((_, index) => {
-  //     const iconSrc = index < star ? 'star' : 'emptyStar';
-  //     return <Icon key={index} name={iconSrc} width={30} height={28} />;
-  //   });
-  // }
-
   return (
     <Styled.Wrapper>
       <Styled.UserBox>
         <Styled.UserName>{memberNickName}</Styled.UserName>
         <Icon name="moreBtn" width={25} height={25} />
       </Styled.UserBox>
-      <Styled.ImgBox />
+      <Styled.ImgBox src={imgUrl} alt="리뷰 이미지" />
       <Styled.ContentBox>
         <Styled.StarBox>
           <Styled.Star>{countStar()}</Styled.Star>
@@ -70,7 +63,7 @@ const Styled = {
     font-weight: 500;
   `,
   MoreBtn: styled.p``,
-  ImgBox: styled.div`
+  ImgBox: styled.img`
     width: 266px;
     height: 266px;
     background-color: ${theme.colors.lightGray};

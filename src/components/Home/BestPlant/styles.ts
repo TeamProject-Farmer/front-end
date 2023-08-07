@@ -19,24 +19,47 @@ const Styled = {
   `,
   Plants: styled(Slider)`
     width: 100%;
-    background-color: pink;
     margin-top: 85px;
     position: relative;
 
     .slick-track {
+      padding: 20px;
       display: flex;
-      flex-direction: row;
-      flex-wrap: nowrap;
       align-items: center;
     }
     .slick-arrow {
-      width: 50px;
-      height: 50px;
+      width: 55px;
+      height: 55px;
       border-radius: 50%;
-      background-color: red;
+      border: 1px solid #285430;
     }
     .slick-prev {
-      transform: translate(820px, 316px);
+      position: relative;
+      top: 712px;
+      left: 900px;
+      ::before {
+        content: url('./assets/images/home/bestPlantPrevBtn.svg');
+        font-size: 40px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: 'block';
+        color: #285430;
+      }
+    }
+    .slick-next {
+      position: relative;
+      top: 90px;
+      left: 1000px;
+      ::before {
+        content: url('./assets/images/home/bestPlantNextBtn.svg');
+        font-size: 40px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: 'block';
+        color: #285430;
+      }
     }
   `,
 };

@@ -41,14 +41,14 @@ const SliderContent = ({ sliderContents, activeIndex }) => {
                 exit="end"
               >
                 <Link href={content.linkUrl}>
-                  <Styled.ContentBox>
+                  {/* <Styled.ContentBox>
                     <Styled.Slogan>Let's be a</Styled.Slogan>
                     <Styled.Slogan>Farmer!</Styled.Slogan>
                     <Styled.Description>
                       사무공간, 생활공간을 그린 친화적으로
                     </Styled.Description>
                     <Styled.ShopBtn>&gt; Shop Now</Styled.ShopBtn>
-                  </Styled.ContentBox>
+                  </Styled.ContentBox> */}
                 </Link>
               </Styled.Content>
             ) : null,
@@ -65,8 +65,9 @@ const Styled = {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-image: url(imgUrl);
-    background-size: 100% auto;
+    background-image: url(${({ imgUrl }) => imgUrl});
+    background-size: 100%;
+    background-repeat: no-repeat;
   `,
   ContentBox: styled.div`
     display: flex;
