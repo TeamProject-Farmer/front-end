@@ -8,14 +8,20 @@ import Inquiry from './Inquiry';
 import Notice from './Notice';
 import SimilarProducts from './SimilarProducts';
 
-const ContentWrapper = () => {
+interface Props {
+  reviewStarArray: number[];
+}
+
+const ContentWrapper = (props: Props) => {
+  const {reviewStarArray} = props;
+  
   return (
     <Styled.Wrapper>
       <Styled.ContentWrapper>
         <SideAd />
         <Styled.ExceptOption>
           <DetailImage />
-          <Review />
+          <Review reviewStarArray={reviewStarArray}/>
           <Inquiry />
           <Notice />
           <SimilarProducts />

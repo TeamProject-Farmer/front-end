@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
+import TotalStarGauge from '@components/Shop/Common/gauge/TotalStarGauge';
+
 import share from '@assets/images/shop/shareIcon.svg';
 import star from '@assets/images/shop/panelFilledStar.svg';
 import blank from '@assets/images/shop/blankStar.svg';
@@ -8,7 +10,12 @@ import boxIcon from '@assets/images/shop/boxIcon.svg';
 import down from '@assets/images/shop/downloadIcon.svg';
 import arrow from '@assets/images/shop/optionArrow.svg';
 
-const Panel = () => {
+interface Props {
+  productName: string;
+  totalStar: number;
+}
+const Panel = (props: Props) => {
+  const { productName, totalStar } = props;
   let like: number = 4;
   const filledStar = <Styled.Star />;
   const blankStar = <Styled.BlankStar />;
@@ -32,13 +39,16 @@ const Panel = () => {
         <Styled.ImageBox></Styled.ImageBox>
         <Styled.ContentWrapper>
           <Styled.TitleWrapper>
-            <div>기획전 이름</div>
-            {/* 하트는 위시리스트 뺀다고 해서 그냥 뺐습니다. */}
+            <div>{productName}</div>
             <Styled.ShareButton></Styled.ShareButton>
           </Styled.TitleWrapper>
           <Styled.Review>
-            <Styled.StarWrapper>{stars}</Styled.StarWrapper>
-            <div>1,956개 리뷰</div>
+            {/* <Styled.StarWrapper>{stars}</Styled.StarWrapper> */}
+            <Styled.StarWrapper>
+              <TotalStarGauge star={4.7} />
+            </Styled.StarWrapper>
+
+            <div>{totalStar}개의 리뷰</div>
           </Styled.Review>
           <Styled.PriceWrapper>
             <Styled.OriginPrice>
@@ -171,11 +181,14 @@ const Styled = {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-right: 15px;
     & > img {
       width: 19px;
       height: 19.43px;
     }
-    margin-right: 9px;
+    & > * > span {
+      margin-right: 0px !important;
+    }
   `,
   Star: styled(star)``,
   BlankStar: styled(blank)``,
@@ -367,12 +380,12 @@ const Styled = {
     }
   `,
   ButtonWrapper: styled.div`
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
     & > button {
       display: flex;
       width: 270px;
-    height: 60px;
+      height: 60px;
       justify-content: center;
       align-items: center;
       border-radius: 5px;
@@ -385,7 +398,7 @@ const Styled = {
     }
     & > button:last-child {
       color: ${theme.colors.green1};
-      background-color: #ECF9E9;
+      background-color: #ecf9e9;
     }
   `,
 };

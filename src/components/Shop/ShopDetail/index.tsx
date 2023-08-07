@@ -8,10 +8,7 @@ import OrderBar from '../Common/OrderBar';
 import SideAd from '../Common/SideAd';
 import Category from '@components/Common/Category';
 import Product from '@components/Common/Product';
-import {
-  OrderOptions,
-  CateId,
-} from '../type';
+import { CateId, productSortOptions } from 'src/types/shop/types';
 import { getProductList } from 'src/apis/shop/product';
 import { getProductCategory } from 'src/apis/common/category';
 import MDPick from './MDPick';
@@ -47,7 +44,7 @@ const ShopDetail = () => {
     handleProductList();
   }, [productOption, categoryId])
   useEffect(() => {
-    category&&setCategoryId((CateId[category]))
+    category && setCategoryId((CateId[category]))
     console.log(categoryId)
   }, [category, categoryList])
   
@@ -57,7 +54,7 @@ const ShopDetail = () => {
       <Styled.Title>{category}</Styled.Title>
       <Styled.ContentWrapper>
         <MDPick />
-        <OrderBar optionList={OrderOptions} setProductOption={setProductOption} productOption={productOption}/>
+        <OrderBar optionList={productSortOptions} setProductOption={setProductOption} productOption={productOption}/>
         <Styled.OrderItemWrapper>
           <SideAd top={0} />
           {productList && productList.map(i => (

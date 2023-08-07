@@ -3,13 +3,13 @@ import theme from '@styles/theme';
 import SizeBar from '../Common/SizeBar';
 import OrderBar from '../Common/OrderBar';
 import ProductWrapper from '../Common/ProductWrapper/ProductWrapper';
-import { SizeOptions, OrderOptions } from '../type';
+import { sizeSortOptions, productSortOptions } from 'src/types/shop/types';
 
 const BySize = () => {
   return (
     <Styled.Wrapper>
-      <SizeBar optionList={SizeOptions} />
-      <OrderBar optionList={OrderOptions} />
+      <SizeBar optionList={sizeSortOptions} />
+      <OrderBar optionList={productSortOptions} />
       <Styled.ContentWrapper>
         <ProductWrapper />
       </Styled.ContentWrapper>

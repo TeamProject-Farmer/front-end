@@ -24,7 +24,7 @@ const EventDetail = () => {
         <Styled.ImageWrapper />
         <Styled.ItemWrapper>
           {/* 추후 api 연동 */}
-          {ShortTempProduct.map(i => (
+          {/* {ShortTempProduct.map(i => (
             <Link href={`/shop/${CurrentPage[category]}/detail/1`}>
               <Product
                 key={i.id}
@@ -49,7 +49,7 @@ const EventDetail = () => {
                 reviewCount={i.totalReview}
               ></Product>
             </Link>
-          ))}
+          ))} */}
         </Styled.ItemWrapper>
       </Styled.ContentWrapper>
     </Styled.Wrapper>

@@ -1,41 +1,48 @@
-import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
+import Link from 'next/link';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import SideAd from '../SideAd';
+import OrderBar from '../OrderBar';
 import Product from '@components/Common/Product';
-import { TempProduct } from '../../type';
+import { productSortOptions } from 'src/types/shop/types';
 
-const ProductWrapper = () => {
+const ProductWrapper = (productList: any) => {
   const router = useRouter();
   const menu = router.query.category;
   let category: string;
   if (menu) {
     category = menu.toString();
   }
+  const [productOption, setProductOption] = useState<string>('NEWS');
+  const [totalPages, setTotalPages] = useState<number>();
 
   return (
-    <Styled.Wrapper>
-      <SideAd top={0} />
-      {TempProduct.map(i => (
-        <Link href={`/shop/${category}/detail/1`}>
-          <Product
-            key={i.id}
-            thumbnailImg={i.image}
-            name={i.contentTitle}
-            discountRate={i.percent}
-            price={i.totalPrice}
-            averageStarRating={i.reviewScore}
-            reviewCount={i.totalReview}
-          ></Product>
-        </Link>
-      ))}
-    </Styled.Wrapper>
+    <>
+    <OrderBar optionList={productSortOptions} setProductOption={setProductOption} productOption={productOption}/>
+        <Styled.OrderItemWrapper>
+          <SideAd top={0} />
+          {productList && productList.map(i => (
+            <Link href={`/shop/${category}/detail/${i.productId}`}>
+              <Product
+                key={i.productId}
+                thumbnailImg={i.imgUrl}
+                name={i.productName}
+                discountRate={i.discountRate}
+                price={i.price}
+                averageStarRating={i.averageStarRating}
+                reviewCount={i.reviewCount}
+              ></Product>
+            </Link>
+          ))}
+        </Styled.OrderItemWrapper>
+    </>
   );
 };
 
 const Styled = {
-  Wrapper: styled.div`
+  OrderItemWrapper: styled.div`
     position: relative;
     width: ${theme.size.mainWidth};
     height: 2032px;

@@ -10,7 +10,7 @@ const OrderBar = (props: OptionBarProps) => {
   return (
     <Styled.OrderWrapper>
       <Styled.InnerWrapper width={width}>
-        {productSortOptions?.map((item: ISortOption) => (
+        {optionList?.map((item: ISortOption) => (
           <Styled.InnerBox
             onClick={() => setProductOption(item.param)}
             key={item.param}

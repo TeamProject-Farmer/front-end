@@ -3,8 +3,22 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import leftArrow from '@assets/images/shop/previewLeftArrow.svg';
 import rightArrow from '@assets/images/shop/previewRightArrow.svg';
+import { getReviewImage } from 'src/apis/shop/review';
+import { useState, useEffect } from 'react';
 
-const PreviewPhoto = () => {
+const PreviewPhoto = ({productId}: {productId: number}) => {
+  const [imageList, setImageList] = useState([]);
+
+  const handleReviewImage = async () => {
+    const response = await getReviewImage(productId);
+    setImageList(response);
+  };
+  useEffect(() => {
+    handleReviewImage();
+  }, [])
+
+  console.log('imageList')
+  console.log(imageList)
   const postUrl = '/assets/images/shop';
   const tempImage = [
     { id: 0, url: `${postUrl}/tempImage1.svg` },
@@ -19,11 +33,11 @@ const PreviewPhoto = () => {
       <Styled.ImageWrapper>
         <Styled.LeftArrow />
         <Styled.ImageBox>
-          {tempImage.map((item, index) => (
+          {imageList.map((item, index) => (
             <Image
               key={index}
               alt="Preview"
-              src={item.url}
+              src={item}
               width={229}
               height={229}
             ></Image>

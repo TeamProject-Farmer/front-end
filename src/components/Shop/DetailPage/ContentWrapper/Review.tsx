@@ -7,15 +7,22 @@ import downArrow from '@assets/images/shop/downArrow1.svg';
 import SingleReview from './SingleReview';
 import TotalStarGauge from '@components/Shop/Common/gauge/TotalStarGauge';
 import EachStarGauge from '@components/Shop/Common/gauge/EachStarGauge';
+import { getReviewStar } from 'src/apis/shop/review';
 
-const Review = () => {
+interface Props {
+  reviewStarArray: number[];
+}
+
+const Review = (props: Props) => {
+  const {reviewStarArray} = props;
+
   const tempList = [
     { id: 0, src: '/assets/images/shop/tempImage6.svg' },
     { id: 1, src: '/assets/images/shop/tempImage7.svg' },
     { id: 2, src: '/assets/images/shop/tempImage8.svg' },
   ];
-  //5점부터 넣어줘야함!
-  const tempArr = [14, 0, 1, 1, 0];
+
+
   return (
     <Styled.Wrapper>
       <Styled.Title>
@@ -33,7 +40,7 @@ const Review = () => {
         </div>
         <VerticalLine height={100.5} />
         <div>
-          <EachStarGauge arr={tempArr}></EachStarGauge>
+          <EachStarGauge arr={reviewStarArray}></EachStarGauge>
         </div>
       </Styled.TotalLike>
       <Styled.ReviewTitle>

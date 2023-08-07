@@ -112,23 +112,9 @@ export const TempProduct = [
   },
 ];
 
-export const OrderOptions: string[] = [
-  '신상품순',
-  '리뷰많은순',
-  '낮은가격순',
-  '높은가격순',
-];
 
-export const SizeOptions: string[] = ['Small', 'Medium', 'Large'];
 
-export const CateId = {
-  다육이: 1,
-  선인장 : 2,
-  스킨답서스: 3,
-  야자목: 4,
-  호접란: 5,
-  키움용품: 6,
-};
+
 
 export const CurrentPage = {
   fleshy: '다육이',
