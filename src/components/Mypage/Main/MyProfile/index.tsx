@@ -5,7 +5,7 @@ import { Styled } from '../../styles';
 import { useRouter } from 'next/router';
 import { IconText } from './Icon';
 import { useSelector } from 'react-redux';
-import { RootState } from 'store';
+import { RootState } from 'src/types/redux/types';
 
 const selectUser = (state: RootState) => state.user;
 

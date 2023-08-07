@@ -1,13 +1,13 @@
 import React from 'react';
 import { Styled } from '../styles';
 import { useSelector } from 'react-redux';
-import { RootState } from 'store';
 import { ProfileEditComponentProps } from 'src/types/mypage/types';
 import {
   validateNickname,
   validatePassword,
 } from 'src/utils/register/formUtil';
 import { passwordText, socialDisabled } from 'src/utils/mypage/editForm';
+import { RootState } from 'src/types/redux/types';
 const selectUser = (state: RootState) => state.user;
 
 const InputGroup = ({
