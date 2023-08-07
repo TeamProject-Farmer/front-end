@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { current } from '@reduxjs/toolkit';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import OrderBar from '../Common/OrderBar';

@@ -13,12 +13,13 @@ export const getProductList = async (orderType: string, id: number) => {
 
 //MD PICK 리스트
 export const getMDPickList = async () => {
-  const response = await request({
-    url: '/main/product/md-pick',
-    params: {
-      division: 'MD_PICK',
-    },
-  });
+  const response = await request({url: '/main/product/md-pick?division=MD_PICK'});
+  return response.data;
+};
+
+//SHOP BY SIZE 상품
+export const getShopBySize = async (size: string) => {
+  const response = await request({url: `/main/product/shop-by-size?size=${size}`});
   return response.data;
 };
 
