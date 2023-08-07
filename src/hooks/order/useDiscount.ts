@@ -36,17 +36,15 @@ const useDiscount = () => {
   };
 
   useEffect(() => {
-    const selectedOption =
-      coupon && coupon?.find(coupon => coupon.couponId === selectedCouponId);
-    if (selectedOption) {
-      setSelectedCoupon(selectedOption);
-      setDisabledPointBtn(true);
-      setDisabledCouponBtn(false);
-    } else {
-      setSelectedCoupon(null);
-      setDisabledPointBtn(false);
-    }
-  }, [selectedCouponId]);
+    if (!coupon) return;
+
+    const selectedOption = coupon.find(
+      coupon => coupon.couponId === selectedCouponId,
+    );
+    setSelectedCoupon(selectedOption || null);
+    setDisabledPointBtn(selectedOption ? true : false);
+    setDisabledCouponBtn(selectedOption ? false : true);
+  }, [selectedCouponId, coupon]);
 
   // 적립금을 적용할 때
   const handlePointChange = event => {

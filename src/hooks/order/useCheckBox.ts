@@ -12,18 +12,17 @@ const useCheckBox = () => {
   };
 
   const handleMonoCheck = (position: number) => {
-    const updatedCheckedState = checkedState.map((input, index) =>
-      index === position ? !input : input,
-    );
-    setCheckedState(updatedCheckedState);
-    const checkedLength = updatedCheckedState.reduce((sum, currentState) => {
-      if (currentState === true) {
-        return sum + 1;
-      }
-      return sum;
-    }, 0);
-    setAllChecked(checkedLength === updatedCheckedState.length);
+    setCheckedState(prevCheckedState => {
+      const updatedCheckedState = [...prevCheckedState];
+      updatedCheckedState[position] = !updatedCheckedState[position];
+
+      const checkedLength = updatedCheckedState.filter(Boolean).length;
+      setAllChecked(checkedLength === updatedCheckedState.length);
+
+      return updatedCheckedState;
+    });
   };
+
   // 결제대행 체크 여부 확인
   const [paymentChecked, setPaymentChecked] = useState(false);
 
