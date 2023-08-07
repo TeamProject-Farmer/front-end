@@ -28,3 +28,10 @@ export const getDetail = async (productId: number) => {
   const response = await request({url: `/main/product/detail/${productId}`});
   return response.data;
 };
+
+//기획전 상품 리스트
+///main/product/plan-products?division=PLAN
+export const getEventProduct = async () => {
+  const response = await request({url: '/main/product/plan-products?division=PLAN'});
+  return response.data;
+};

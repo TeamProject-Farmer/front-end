@@ -1,11 +1,13 @@
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import theme from '@styles/theme';
 import SideAd from '../Common/SideAd';
 import Category from '../Common/Category';
 import Product from '@components/Common/Product';
-import { ShortTempProduct, CurrentPage } from '../type';
+import { getEventProduct } from 'src/apis/shop/product';
+
 
 const EventDetail = () => {
   const router = useRouter();
@@ -14,42 +16,37 @@ const EventDetail = () => {
   if (menu) {
     category = menu.toString();
   }
+  
+  const [productList, setProductList] = useState([]);
+
+  const handleCategoryList = async () => {
+    const response = await getEventProduct();
+    setProductList(response);
+  };
+  useEffect(() => {
+    handleCategoryList();
+  }, [])
   return (
     <Styled.Wrapper>
       <Category />
       <Styled.VerticalLine />
-      {/* 데이터가 어떻게 넘어오냐에 따라 다를 것 같음 */}
       <Styled.ContentWrapper>
         <SideAd />
         <Styled.ImageWrapper />
         <Styled.ItemWrapper>
-          {/* 추후 api 연동 */}
-          {/* {ShortTempProduct.map(i => (
-            <Link href={`/shop/${CurrentPage[category]}/detail/1`}>
+        {productList && productList.map(i => (
+            <Link href={`/shop/${category}/detail/${i.productId}`}>
               <Product
-                key={i.id}
-                thumbnailImg={i.image}
-                name={i.contentTitle}
-                discountRate={i.percent}
-                price={i.totalPrice}
-                averageStarRating={i.reviewScore}
-                reviewCount={i.totalReview}
+                key={i.productId}
+                thumbnailImg={i.imgUrl}
+                name={i.productName}
+                discountRate={i.discountRate}
+                price={i.price}
+                averageStarRating={i.averageStarRating}
+                reviewCount={i.reviewCount}
               ></Product>
             </Link>
           ))}
-          {ShortTempProduct.map(i => (
-            <Link href={`/shop/${CurrentPage[category]}/detail/1`}>
-              <Product
-                key={i.id}
-                thumbnailImg={i.image}
-                name={i.contentTitle}
-                discountRate={i.percent}
-                price={i.totalPrice}
-                averageStarRating={i.reviewScore}
-                reviewCount={i.totalReview}
-              ></Product>
-            </Link>
-          ))} */}
         </Styled.ItemWrapper>
       </Styled.ContentWrapper>
     </Styled.Wrapper>
