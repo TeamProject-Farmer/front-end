@@ -11,11 +11,11 @@ const News = ({ news }) => {
           <Styled.ImgTitle>관련 뉴스</Styled.ImgTitle>
           <Styled.ShopBtn>&gt; Shop Now</Styled.ShopBtn>
         </Styled.FlexBox>
-        {/* <Image src={news.imgUrl} alt="news image" width={553} height={600} /> */}
+        <Image src={imgUrl} alt="news image" width={553} height={600} />
       </Styled.ImgBox>
       <Styled.ContentBox>
-        <Styled.ContentTitle>{news.subject}</Styled.ContentTitle>
-        <Styled.Content>{news.content}</Styled.Content>
+        <Styled.ContentTitle>{subject}</Styled.ContentTitle>
+        <Styled.Content>{content}</Styled.Content>
       </Styled.ContentBox>
     </Styled.Wrapper>
   );

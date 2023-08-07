@@ -7,7 +7,7 @@ const Plant = ({ name, src }) => {
     <Styled.Wrapper>
       <Link href={`/shop/${name}`}>
         <Image
-          src={`/assets/images/home/${src}.png`}
+          src={src}
           alt={name}
           width={169}
           height={212}

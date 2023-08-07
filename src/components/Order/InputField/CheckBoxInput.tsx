@@ -1,25 +1,21 @@
 import styled from '@emotion/styled';
 import { ICheckBoxInputProps } from 'src/types/order/types';
-import { css } from '@emotion/react';
 
-const CheckBoxInput = ({ label, field, smallBox }: ICheckBoxInputProps) => {
+const CheckBoxInput = ({
+  label,
+  smallBox,
+  checked,
+  onChange,
+}: ICheckBoxInputProps) => {
   return (
     <Styled.Wrapper>
-      <input type="checkbox" />
+      <input type="checkbox" checked={checked} onChange={onChange} />
       <Styled.Label smallBox={smallBox}>{label}</Styled.Label>
     </Styled.Wrapper>
   );
 };
 
 export default CheckBoxInput;
-
-const shippingMsgCheckBox = css`
-  appearance: none;
-  width: 22px;
-  height: 22px;
-  border-radius: 3px;
-  background-color: #d9d9d9;
-`;
 
 const Styled = {
   Wrapper: styled.div`

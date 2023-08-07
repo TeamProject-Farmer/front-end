@@ -16,7 +16,7 @@ const SearchPage: NextPageWithLayout = () => {
   const [searchWord, setSearchWord] = useState<string>('');
   const [searchResult, setSearchResult] = useState();
   const [recentSearchWord, setRecentSearchWord] = useState<string[]>([]);
-  const email = useSelector((state: RootState) => state.user.email);
+  const memberEmail = useSelector((state: RootState) => state.user.email);
 
   //검색 input value값 관리
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,19 +25,17 @@ const SearchPage: NextPageWithLayout = () => {
 
   //검색 버튼 클릭 시
   const handleSearchResult = async () => {
-    const response = await postSearch(searchWord, email);
-    console.log(searchWord);
-    console.log(response);
+    const response = await postSearch(searchWord, memberEmail);
     const searchContent = response.searchProduct.content;
-    if (email !== undefined) {
+    if (memberEmail !== undefined) {
       setRecentSearchWord(response.memberSearchWord);
     }
     setSearchResult(searchContent);
   };
 
   //검색 결과 정렬
-  const handleSort = async (param: string) => {
-    const response = await postSearch(searchWord, email, param);
+  const handleSort = async (sortSearchCond: string) => {
+    const response = await postSearch(searchWord, memberEmail, sortSearchCond);
     setSearchResult(response.searchProduct.content);
   };
 
