@@ -18,12 +18,9 @@ import {
   REGISTER,
   REHYDRATE,
 } from 'redux-persist';
-import { UserState } from 'src/types/redux/types';
+import { RootState } from 'src/types/redux/types';
 import userSlice from './reducers/userSlice';
-
-export interface RootState {
-  user: UserState;
-}
+import cartIndexSlice from './reducers/cartSlice';
 
 const persistConfig: PersistConfig<RootState> = {
   key: 'root',
@@ -37,6 +34,7 @@ const rootReducer = (
   if (action.type === HYDRATE) return { ...state, ...action.payload };
   const combinedReducer = combineReducers({
     user: userSlice,
+    cartIndex: cartIndexSlice,
   });
   return combinedReducer(state, action);
 };
