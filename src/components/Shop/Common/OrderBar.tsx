@@ -1,7 +1,6 @@
-import { Dispatch, SetStateAction } from 'react';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import { productSortOptions, OptionBarProps } from 'src/types/shop/types';
+import { OptionBarProps } from 'src/types/shop/types';
 import { ISortOption } from 'src/types/search/types';
 
 const OrderBar = (props: OptionBarProps) => {

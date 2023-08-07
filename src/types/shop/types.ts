@@ -3,6 +3,7 @@ import { ISortOption } from 'src/types/search/types';
 
 export interface ProductAPI {
   productId: number;
+  imgUrl: string;
   productName: string;
   discountRate: number;
   price: number;
@@ -26,9 +27,9 @@ export const detailLinkOptions: ISortOption[] = [
 ];
 
 export const sizeSortOptions: ISortOption[] = [
-  { title: 'Small', param: 'Small' },
-  { title: 'Medium', param: 'Medium' },
-  { title: 'Large', param: 'Large' },
+  { title: 'Small', param: 'S' },
+  { title: 'Medium', param: 'M' },
+  { title: 'Large', param: 'L' },
 ];
 
 export interface OptionBarProps {

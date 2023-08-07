@@ -1,17 +1,23 @@
+import { useState } from 'react';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import SizeBar from '../Common/SizeBar';
-import OrderBar from '../Common/OrderBar';
-import ProductWrapper from '../Common/ProductWrapper/ProductWrapper';
 import { sizeSortOptions, productSortOptions } from 'src/types/shop/types';
+import ProductWrapper from '../Common/ProductWrapper/ProductWrapper';
+import OrderBar from '../Common/OrderBar';
+import SizeBar from '../Common/SizeBar';
+import { getShopBySize } from 'src/apis/shop/product';
+import { ShortTempProduct } from '../type';
 
 const BySize = () => {
+  const [sizetOption, setSizeOption] = useState<string>('S');
+  const [productOption, setProductOption] = useState<string>('NEWS');
+  const [productList, setProductList] = useState([]);
+
   return (
     <Styled.Wrapper>
-      <SizeBar optionList={sizeSortOptions} />
-      <OrderBar optionList={productSortOptions} />
+      <SizeBar optionList={sizeSortOptions} setProductOption={setSizeOption} productOption={sizetOption} />
       <Styled.ContentWrapper>
-        <ProductWrapper />
+        <ProductWrapper productList={ShortTempProduct}/>
       </Styled.ContentWrapper>
     </Styled.Wrapper>
   );
