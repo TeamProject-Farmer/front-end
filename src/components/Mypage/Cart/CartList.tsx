@@ -4,10 +4,10 @@ import { cartLabels } from 'src/utils/mypage/orderTimeList';
 import theme from '@styles/theme';
 import CartItems from './CartItems';
 import { CartListProps } from 'src/types/mypage/types';
-import { RootState } from 'store';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { toggleAllChecked } from 'store/reducers/cartIndexSlice';
+import { setChecked } from 'store/reducers/cartSlice';
+import { RootState } from 'store';
 const cartSelector = (state: RootState) => state.cartIndex;
 
 const CartList = ({ cartListArray }: { cartListArray: CartListProps[] }) => {
@@ -22,7 +22,7 @@ const CartList = ({ cartListArray }: { cartListArray: CartListProps[] }) => {
       <Styled.FlexCartRow>
         <Styled.CartCheckBox
           checked={selector.allChecked || false}
-          onChange={() => dispatch(toggleAllChecked())}
+          onChange={() => dispatch(setChecked(!selector.allChecked))}
           type="checkbox"
         />
         {cartLabels.map((text, index) => (
