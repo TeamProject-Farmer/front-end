@@ -1,12 +1,13 @@
 import request from '../base';
 
+
 //상품별 리뷰 출력
-export const getReview = async (productId: number) => {
+export const getReview = async (productId: number, sortOption: string) => {
   const response = await request({
     url: `/main/review/${productId}?page=0&direction=ASC&size=3`,
     params: {
       //추후 추가
-      // sorOrderCond: ,
+      sorOrderCond: sortOption,
       // reviewCond: ,
     },
   });

@@ -26,17 +26,19 @@ const DetailPage = () => {
   const [detailList, setDetailList] = useState({ name: 'temp' });
   const [reviewList, setReviewList] = useState();
   const [reviewStar, setReviewStar] = useState({});
-  const [reviewStarArray, setReviewStarArray] = useState([]);
+  const [reviewStarArray, setReviewStarArray] = useState<number[]>([]);
+  const [reviewTotalStar, setReviewTotalStar] = useState<number>();
 
   const handleDetailData = async () => {
     const response = await getDetail(productId);
     setDetailList(response);
   };
   const handleReviewData = async () => {
-    const response = await getReview(productId);
+    const response = await getReview(productId, 'best');
     const responseReview = await getReviewStar(productId);
     setReviewList(response);
     setReviewStar(responseReview);
+    setReviewTotalStar(responseReview.averageStarRating)
     setReviewStarArray([
       responseReview.fiveStar,
       responseReview.fourStar,
@@ -67,7 +69,7 @@ const DetailPage = () => {
         optionList={detailLinkOptions}
         width={theme.size.shopDetailWrapper}
       />
-      <ContentWrapper reviewStarArray={reviewStarArray}/>
+      <ContentWrapper reviewStarArray={reviewStarArray} reviewTotalStar={reviewTotalStar}/>
     </Styled.Wrapper>
   );
 };

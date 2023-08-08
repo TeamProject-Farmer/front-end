@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import VerticalLine from '@components/Shop/Common/VerticalLine';
@@ -7,27 +7,43 @@ import downArrow from '@assets/images/shop/downArrow1.svg';
 import SingleReview from './SingleReview';
 import TotalStarGauge from '@components/Shop/Common/gauge/TotalStarGauge';
 import EachStarGauge from '@components/Shop/Common/gauge/EachStarGauge';
-import { getReviewStar } from 'src/apis/shop/review';
+import { getReview, getReviewStar } from 'src/apis/shop/review';
 
 interface Props {
   reviewStarArray: number[];
+  reviewTotalStar: number;
 }
 
 const Review = (props: Props) => {
-  const {reviewStarArray} = props;
+  const { reviewStarArray, reviewTotalStar } = props;
+  let productId = 75;
+  const [reviewList, setReviewList] = useState([]);
+  const [reviewContent, setReviewContent] = useState([]);
+  const [totalElement, setTotalElement] = useState(0);
+  const [sortOption, setSortOption] = useState('best');
 
+  const handleReviewData = async () => {
+    const response = await getReview(productId, sortOption);
+    setReviewList(response);
+    setReviewContent(response.content)
+    setTotalElement(response.totalElements)
+  };
+  useEffect(() => {
+    handleReviewData();
+  }, [])
+  console.log('reviewListreviewList');
+  console.log(reviewList);
   const tempList = [
     { id: 0, src: '/assets/images/shop/tempImage6.svg' },
     { id: 1, src: '/assets/images/shop/tempImage7.svg' },
     { id: 2, src: '/assets/images/shop/tempImage8.svg' },
   ];
 
-
   return (
     <Styled.Wrapper>
       <Styled.Title>
         <div>리뷰</div>
-        <div>766</div>
+        <div>{totalElement}</div>
       </Styled.Title>
       <Styled.OptionBox>
         전체
@@ -35,8 +51,8 @@ const Review = (props: Props) => {
       </Styled.OptionBox>
       <Styled.TotalLike>
         <div>
-          <TotalStarGauge star={4.7} />
-          <div>4.7</div>
+          <TotalStarGauge star={reviewTotalStar} />
+          <div>{reviewTotalStar}</div>
         </div>
         <VerticalLine height={100.5} />
         <div>
@@ -58,8 +74,8 @@ const Review = (props: Props) => {
           <Styled.DownArrow />
         </div>
       </Styled.ReviewTitle>
-      {tempList.map(item => (
-        <SingleReview id={item.id} src={item.src} />
+      {reviewContent?.map((item, index) => (
+        <SingleReview id={index} src={item.imgUrl} />
       ))}
       <Styled.PaginationBox>페이지네이션 들어갈 부분</Styled.PaginationBox>
     </Styled.Wrapper>

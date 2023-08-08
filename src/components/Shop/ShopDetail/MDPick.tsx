@@ -22,7 +22,7 @@ const MDPick = () => {
       <Styled.PickItemWrapper>
         {MDPickList &&
           MDPickList.map(i => (
-            <Link href={`/detail/${i.productID}`}>
+            <Link href={`/shop/MDPick/detail/${i.productId}`}>
               <Product
                 key={i.productId}
                 thumbnailImg={i.imgUrl}

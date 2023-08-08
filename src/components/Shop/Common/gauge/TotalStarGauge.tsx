@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 const TotalStarGauge = ({ star }: {star: number}) => {
   const starIndex = ['first', 'second', 'third', 'fourth', 'last'];
   const [ratesResArr, setRatesResArr] = useState([0, 0, 0, 0, 0]);
-
+  //모든 정수 넣을 수 있도록 변경 해야 할 것 같음
   const calcStarRates = () => {
     let tempStarRatesArr = [0, 0, 0, 0, 0];
     let tempStar = star;

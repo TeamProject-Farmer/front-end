@@ -10,10 +10,11 @@ import SimilarProducts from './SimilarProducts';
 
 interface Props {
   reviewStarArray: number[];
+  reviewTotalStar: number;
 }
 
 const ContentWrapper = (props: Props) => {
-  const {reviewStarArray} = props;
+  const {reviewStarArray, reviewTotalStar} = props;
   
   return (
     <Styled.Wrapper>
@@ -21,7 +22,7 @@ const ContentWrapper = (props: Props) => {
         <SideAd />
         <Styled.ExceptOption>
           <DetailImage />
-          <Review reviewStarArray={reviewStarArray}/>
+          <Review reviewStarArray={reviewStarArray} reviewTotalStar={reviewTotalStar}/>
           <Inquiry />
           <Notice />
           <SimilarProducts />
