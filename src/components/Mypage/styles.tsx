@@ -18,6 +18,7 @@ export const Styled = {
   BoxWrapper: styled.div<{ margin?: string }>`
     margin-left: 12.5rem;
     margin-right: 12.5rem;
+    margin-bottom: 2rem;
     justify-content: center;
     margin-top: 25px;
     margin-bottom: ${props => props.margin}rem;
