@@ -8,13 +8,13 @@ import SingleReview from './SingleReview';
 import TotalStarGauge from '@components/Shop/Common/gauge/TotalStarGauge';
 import EachStarGauge from '@components/Shop/Common/gauge/EachStarGauge';
 import { getReview, getReviewStar } from 'src/apis/shop/review';
-// import {  useSelector } from 'react-redux';
-// import { idSelector } from 'src/types/shop/types';
+import { useSelector } from 'react-redux';
+import { idSelector } from 'src/types/shop/types';
+import { SingleReviewProps } from 'src/types/shop/types';
 
 const Review = () => {
-  // const productId = useSelector(idSelector);
-  let productId = 8;
-  const [reviewList, setReviewList] = useState([]);
+  const productId = useSelector(idSelector);
+  const [reviewList, setReviewList] = useState<SingleReviewProps[]>([]);
   const [reviewContent, setReviewContent] = useState([]);
   const [reviewStar, setReviewStar] = useState({});
   const [reviewTotalStar, setReviewTotalStar] = useState<number>();
@@ -27,20 +27,20 @@ const Review = () => {
     const responseReview = await getReviewStar(productId);
     setReviewList(response);
     setReviewStar(responseReview);
-    setReviewTotalStar(responseReview.averageStarRating)
+    setReviewTotalStar(responseReview.averageStarRating);
     setReviewStarArray([
       responseReview.fiveStar,
       responseReview.fourStar,
       responseReview.threeStar,
       responseReview.twoStar,
-      responseReview.oneStar
+      responseReview.oneStar,
     ]);
-    setReviewContent(response.content)
-    setTotalElement(response.totalElements)
+    setReviewContent(response.content);
+    setTotalElement(response.totalElements);
   };
   useEffect(() => {
     handleReviewData();
-  }, [])
+  }, []);
 
   return (
     <Styled.Wrapper>
@@ -77,8 +77,8 @@ const Review = () => {
           <Styled.DownArrow />
         </div>
       </Styled.ReviewTitle>
-      {reviewContent?.map((item) => (
-        <SingleReview key={item.createdDate}  src={item.imgUrl} />
+      {reviewContent?.map((item: SingleReviewProps) => (
+        <SingleReview key={item.createdDate} dataList={item} />
       ))}
       <Styled.PaginationBox></Styled.PaginationBox>
     </Styled.Wrapper>

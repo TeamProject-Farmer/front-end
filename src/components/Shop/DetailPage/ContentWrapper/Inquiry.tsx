@@ -1,63 +1,49 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { idSelector } from 'src/types/shop/types';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import secret from '@assets/images/shop/secretIcon.svg';
 import VerticalLine from '@components/Shop/Common/VerticalLine';
 import OnOffButton from './OnOffButton';
 import MiniModal from '@components/Common/MiniModal';
+import { getQnAList } from 'src/apis/shop/qna';
+import { QnAProps } from 'src/types/shop/types';
 
 const Inquiry = () => {
-  const tempList = [
-    {
-      id: 1,
-      isSecret: false,
-      userName: '유저5**',
-      time: '2023년 04월 30일 10시 29분',
-      option: '상품 01',
-      content: '문의 내용 입니다.',
-    },
-    {
-      id: 2,
-      isSecret: true,
-      userName: '유저2**',
-      time: '2023년 04월 29일 21시 35분',
-      option: '상품 01',
-      content: '문의 내용 입니다.',
-    },
-    {
-      id: 3,
-      isSecret: true,
-      userName: '유저2**',
-      time: '2023년 04월 29일 21시 35분',
-      option: '상품 01',
-      content: '문의 내용 입니다.',
-    },
-    {
-      id: 4,
-      isSecret: true,
-      userName: '유저2**',
-      time: '2023년 04월 29일 21시 35분',
-      option: '상품 01',
-      content: '문의 내용 입니다.',
-    },
-    {
-      id: 5,
-      isSecret: true,
-      userName: '유저2**',
-      time: '2023년 04월 29일 21시 35분',
-      option: '상품 01',
-      content: '문의 내용 입니다.',
-    },
-  ];
+  const productId = useSelector(idSelector);
+  const [detailList, setDetailList] = useState([]);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const openModal = () => {
     setModalOpen(true);
-    console.log('open');
   };
   const closeModal = () => {
     setModalOpen(false);
-    console.log('close');
   };
+
+  const handleQnAList = async () => {
+    const response = await getQnAList();
+    setDetailList(response.content);
+  };
+  useEffect(() => {
+    handleQnAList()
+  }, [])
+  console.log('QnA----------detailList');
+  console.log(detailList);
+
+  const handleNickname = (str: string) =>{
+      let originStr = str;
+      let maskingStr ='';
+      let strLength = originStr.length;
+      
+      if(strLength < 3){
+        maskingStr = originStr.replace(/(?<=.{1})./gi, "*");
+      }else {
+        maskingStr = originStr.replace(/(?<=.{2})./gi, "*");
+      }
+      return maskingStr;
+  }
+
   return (
     <Styled.Wrapper>
       <Styled.Container>
@@ -71,7 +57,7 @@ const Inquiry = () => {
         <Styled.Title>
           <div>
             <div>문의</div>
-            <div>177</div>
+            <div>{detailList.length}</div>
           </div>
           <Styled.MyInQuiry>
             <span>내 문의글 보기</span>
@@ -81,8 +67,8 @@ const Inquiry = () => {
             </Styled.OpenModalButton>
           </Styled.MyInQuiry>
         </Styled.Title>
-        {tempList.map(item => (
-          <Styled.Single key={item.id}>
+        {detailList.map(item => (
+          <Styled.Single key={item.qnaId}>
             <div>
               <div>구매</div>
               <VerticalLine height={13.5} />
@@ -91,11 +77,11 @@ const Inquiry = () => {
               <div>미답변</div>
             </div>
             <div>
-              <div>{item.userName}</div>
+              <div>{handleNickname(item.memberName)}</div>
               <VerticalLine height={15} />
-              <div>{item.time}</div>
+              <div>{item.qcreatedDate}</div>
             </div>
-            {item.isSecret ? (
+            {item.secretQuestion == 'SECRET' ? (
               <Styled.Question>
                 <div>Q</div>
                 <Styled.SecretIcon />

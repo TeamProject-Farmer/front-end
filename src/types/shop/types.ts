@@ -15,7 +15,7 @@ export interface ProductAPI {
 }
 
 export interface ReviewAPI {
-  memberNickname : string;
+  memberNickname: string;
   fiveStarRating: number;
   createdDate: string;
   productName: string;
@@ -55,7 +55,7 @@ export interface OptionBarProps {
 
 export const CateId = {
   다육이: 1,
-  선인장 : 2,
+  선인장: 2,
   스킨답서스: 3,
   야자목: 4,
   호접란: 5,
@@ -80,4 +80,28 @@ export interface PanelProps {
   detailImg3: string;
   detailImg4: string;
   detailImg5: string;
+}
+
+export interface SingleReviewProps {
+  content: string;
+  createdDate: string;
+  fiveStarRating: number;
+  imgUrl: string;
+  likeCount: number;
+  memberNickname: string;
+  optionName: string;
+  productName: string;
+}
+
+export type secretQuestion = 'GENERAL' | 'SECRET';
+
+export interface QnAProps {
+  qnaId: number;
+  memberName: string;
+  productName: string;
+  subject: string;
+  content: string;
+  answer: boolean;
+  secretQuestion: secretQuestion;
+  qcreatedDate: '2023-08-08T09:40:54.47001';
 }

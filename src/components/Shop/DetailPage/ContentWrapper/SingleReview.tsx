@@ -3,35 +3,52 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import VerticalLine from '@components/Shop/Common/VerticalLine';
 import tempStar1 from '@assets/images/shop/tempStars1.svg';
+// import TotalStarGauge from '@components/Shop/Common/gauge/TotalStarGauge';
 import tempStar2 from '@assets/images/shop/tempStars2.svg';
-
-
-interface Props {
-  src: string;
+import { SingleReviewProps } from 'src/types/shop/types';
+type Props= {
+  dataList: SingleReviewProps
 }
-const SingleReview = (props: Props) => {
-  const { src } = props;
+const SingleReview = ({ dataList }: Props) => {
+  const {
+    content,
+    createdDate,
+    fiveStarRating,
+    imgUrl,
+    likeCount,
+    memberNickname,
+    optionName,
+    productName,
+  } = dataList;
+
   return (
     <Styled.SingleReview>
-      <div>유저이름</div>
+      <div></div>
       <div>
+        {/* 이 부분에 별점 들어갈 예정 */}
         <Styled.ReviewSvg1 />
-        <div>2023.04.17</div>
+        {/* <TotalStarGauge star={fiveStarRating}/> */}
+        <div>{createdDate.slice(0, 10)}</div>
         <div>·</div>
-        <div>파머 구매</div>
+        <div>{memberNickname} 구매</div>
       </div>
       <Styled.ShoppingOption>
         <VerticalLine height={35} />
         <div>
-          <div>공기정화식물 01</div>
-          <div>선택 01</div>
+          <div>{productName}</div>
+          <div>{optionName}</div>
         </div>
       </Styled.ShoppingOption>
       <Styled.ReviewImage>
-        <Image alt="reviewImage" src={src} width={112} height={112}></Image>
+        <Image
+          alt="reviewImage"
+          src={imgUrl}
+          width={112}
+          height={112}
+        ></Image>
       </Styled.ReviewImage>
-      <div>리뷰 내용이 들어감</div>
-      <Styled.RecomendBtn>도움이 돼요</Styled.RecomendBtn>
+      <div>{content}</div>
+      <Styled.RecomendBtn>도움이 돼요 &nbsp; {likeCount}</Styled.RecomendBtn>
     </Styled.SingleReview>
   );
 };
@@ -73,7 +90,7 @@ const Styled = {
   RecomendBtn: styled.button`
     margin-top: 23px;
     margin-bottom: 17px;
-    width: 112px;
+    width: 130px;
     height: 31px;
     border-radius: 5px;
     border: none;

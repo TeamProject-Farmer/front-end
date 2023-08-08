@@ -11,20 +11,28 @@ import boxIcon from '@assets/images/shop/boxIcon.svg';
 import down from '@assets/images/shop/downloadIcon.svg';
 import arrow from '@assets/images/shop/optionArrow.svg';
 import { getDetail } from 'src/apis/shop/product';
+import { getReview } from 'src/apis/shop/review';
 import { useSelector } from 'react-redux';
 import { idSelector, PanelProps } from 'src/types/shop/types';
 
 const Panel = () => {
   const productId = useSelector(idSelector);
-  const [detailList, setDetailList] = useState<PanelProps>();
-
+  const [detailList, setDetailList] = useState({});
+  // const [detailList, setDetailList] = useState<PanelProps>({}); 이렇게 하면 오류 남
+  const [totalStar, setTotalStar] = useState(0);
 
   const handleDetailData = async () => {
     const response: PanelProps = await getDetail(productId);
     setDetailList(response);
   };
+  const handleReviewData = async () => {
+    const response = await getReview(productId, 'best');
+    setTotalStar(response.totalElements);
+  };
+
   useEffect(() => {
     handleDetailData();
+    handleReviewData();
   }, []);
 
   let like: number = 4;
@@ -48,6 +56,7 @@ const Panel = () => {
     <Styled.Wrapper>
       <Styled.InnerBox>
         <Styled.ImageBox>
+          {/* 이 부분 수정 필요 */}
           <Image
             src={detailList.thumbnailImg}
             alt="temp"
@@ -67,7 +76,7 @@ const Panel = () => {
               <TotalStarGauge star={4.7} />
             </Styled.StarWrapper>
 
-            <div>totalStar개의 리뷰</div>
+            <div>{totalStar}개의 리뷰</div>
           </Styled.Review>
           <Styled.PriceWrapper>
             <Styled.OriginPrice>
@@ -124,8 +133,8 @@ const Panel = () => {
             <div>옵션</div>
             <Styled.OptionArrow />
             <Styled.Select>
-              {tempOptionList.map(item => (
-                <Styled.Options key={item.id}>
+              {tempOptionList.map((item, index) => (
+                <Styled.Options key={index}>
                   <div>
                     {item.id}. {item.menu}
                   </div>

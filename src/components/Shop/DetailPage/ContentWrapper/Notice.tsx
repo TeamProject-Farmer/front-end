@@ -26,25 +26,25 @@ const Notice = () => {
       <Styled.Title>배송</Styled.Title>
       <Styled.Container>
         {shipList.map(item => (
-          <>
-            <Styled.Box key={item.id}>
+          <div key={item.id}>
+            <Styled.Box>
               <div>{item.title}</div>
               <div>{item.content}</div>
             </Styled.Box>
             <Styled.Line />
-          </>
+          </div>
         ))}
       </Styled.Container>
       <Styled.Title>교환/환불</Styled.Title>
       <Styled.Container>
         {exchangeList.map(item => (
-          <>
-            <Styled.Box key={item.id}>
+          <div key={item.id}>
+            <Styled.Box >
               <div>{item.title}</div>
               <div>{item.content}</div>
             </Styled.Box>
             <Styled.Line />
-          </>
+          </div>
         ))}
       </Styled.Container>
     </Styled.Wrapper>
