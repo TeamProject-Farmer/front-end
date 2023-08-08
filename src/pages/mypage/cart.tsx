@@ -5,6 +5,7 @@ import Layout from '@components/Mypage/Layout/layout';
 import { useQuery } from 'react-query';
 import { getCartList } from 'src/apis/mypage/cart';
 import { CartListProps } from 'src/types/mypage/types';
+import NoneCartList from '@components/Mypage/Cart/NoneCartList';
 
 const index = () => {
   const { data: cartListArray } = useQuery<CartListProps[]>(
@@ -14,9 +15,15 @@ const index = () => {
 
   return (
     <Layout>
-      <CartList cartListArray={cartListArray} />
+      {cartListArray?.length === 0 ? (
+        <NoneCartList />
+      ) : (
+        <>
+          <CartList cartListArray={cartListArray} />
 
-      <OrderCartList cartListArray={cartListArray} />
+          <OrderCartList cartListArray={cartListArray} />
+        </>
+      )}
     </Layout>
   );
 };
