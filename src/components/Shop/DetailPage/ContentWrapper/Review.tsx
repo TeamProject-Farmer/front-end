@@ -8,36 +8,39 @@ import SingleReview from './SingleReview';
 import TotalStarGauge from '@components/Shop/Common/gauge/TotalStarGauge';
 import EachStarGauge from '@components/Shop/Common/gauge/EachStarGauge';
 import { getReview, getReviewStar } from 'src/apis/shop/review';
+// import {  useSelector } from 'react-redux';
+// import { idSelector } from 'src/types/shop/types';
 
-interface Props {
-  reviewStarArray: number[];
-  reviewTotalStar: number;
-}
-
-const Review = (props: Props) => {
-  const { reviewStarArray, reviewTotalStar } = props;
-  let productId = 75;
+const Review = () => {
+  // const productId = useSelector(idSelector);
+  let productId = 8;
   const [reviewList, setReviewList] = useState([]);
   const [reviewContent, setReviewContent] = useState([]);
+  const [reviewStar, setReviewStar] = useState({});
+  const [reviewTotalStar, setReviewTotalStar] = useState<number>();
+  const [reviewStarArray, setReviewStarArray] = useState<number[]>([]);
   const [totalElement, setTotalElement] = useState(0);
   const [sortOption, setSortOption] = useState('best');
 
   const handleReviewData = async () => {
     const response = await getReview(productId, sortOption);
+    const responseReview = await getReviewStar(productId);
     setReviewList(response);
+    setReviewStar(responseReview);
+    setReviewTotalStar(responseReview.averageStarRating)
+    setReviewStarArray([
+      responseReview.fiveStar,
+      responseReview.fourStar,
+      responseReview.threeStar,
+      responseReview.twoStar,
+      responseReview.oneStar
+    ]);
     setReviewContent(response.content)
     setTotalElement(response.totalElements)
   };
   useEffect(() => {
     handleReviewData();
   }, [])
-  console.log('reviewListreviewList');
-  console.log(reviewList);
-  const tempList = [
-    { id: 0, src: '/assets/images/shop/tempImage6.svg' },
-    { id: 1, src: '/assets/images/shop/tempImage7.svg' },
-    { id: 2, src: '/assets/images/shop/tempImage8.svg' },
-  ];
 
   return (
     <Styled.Wrapper>
@@ -74,10 +77,10 @@ const Review = (props: Props) => {
           <Styled.DownArrow />
         </div>
       </Styled.ReviewTitle>
-      {reviewContent?.map((item, index) => (
-        <SingleReview id={index} src={item.imgUrl} />
+      {reviewContent?.map((item) => (
+        <SingleReview key={item.createdDate}  src={item.imgUrl} />
       ))}
-      <Styled.PaginationBox>페이지네이션 들어갈 부분</Styled.PaginationBox>
+      <Styled.PaginationBox></Styled.PaginationBox>
     </Styled.Wrapper>
   );
 };

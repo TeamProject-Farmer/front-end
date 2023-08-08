@@ -1,7 +1,8 @@
+import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import TotalStarGauge from '@components/Shop/Common/gauge/TotalStarGauge';
-
 import share from '@assets/images/shop/shareIcon.svg';
 import star from '@assets/images/shop/panelFilledStar.svg';
 import blank from '@assets/images/shop/blankStar.svg';
@@ -9,13 +10,23 @@ import checkIcon from '@assets/images/shop/checkIcon.svg';
 import boxIcon from '@assets/images/shop/boxIcon.svg';
 import down from '@assets/images/shop/downloadIcon.svg';
 import arrow from '@assets/images/shop/optionArrow.svg';
+import { getDetail } from 'src/apis/shop/product';
+import { useSelector } from 'react-redux';
+import { idSelector, PanelProps } from 'src/types/shop/types';
 
-interface Props {
-  productName: string;
-  totalStar: number;
-}
-const Panel = (props: Props) => {
-  const { productName, totalStar } = props;
+const Panel = () => {
+  const productId = useSelector(idSelector);
+  const [detailList, setDetailList] = useState<PanelProps>();
+
+
+  const handleDetailData = async () => {
+    const response: PanelProps = await getDetail(productId);
+    setDetailList(response);
+  };
+  useEffect(() => {
+    handleDetailData();
+  }, []);
+
   let like: number = 4;
   const filledStar = <Styled.Star />;
   const blankStar = <Styled.BlankStar />;
@@ -36,10 +47,18 @@ const Panel = (props: Props) => {
   return (
     <Styled.Wrapper>
       <Styled.InnerBox>
-        <Styled.ImageBox></Styled.ImageBox>
+        <Styled.ImageBox>
+          <Image
+            src={detailList.thumbnailImg}
+            alt="temp"
+            className="imageStyle"
+            width={548.55}
+            height={547.55}
+          ></Image>
+        </Styled.ImageBox>
         <Styled.ContentWrapper>
           <Styled.TitleWrapper>
-            <div>{productName}</div>
+            <div>{detailList.name}</div>
             <Styled.ShareButton></Styled.ShareButton>
           </Styled.TitleWrapper>
           <Styled.Review>
@@ -48,16 +67,16 @@ const Panel = (props: Props) => {
               <TotalStarGauge star={4.7} />
             </Styled.StarWrapper>
 
-            <div>{totalStar}개의 리뷰</div>
+            <div>totalStar개의 리뷰</div>
           </Styled.Review>
           <Styled.PriceWrapper>
             <Styled.OriginPrice>
-              <div>61%</div>
-              <div>59,900</div>
+              <div>{detailList.discountRate}%</div>
+              <div>{detailList.price}</div>
             </Styled.OriginPrice>
             <Styled.CurrentPrice>
               <div>
-                <div>22,900~</div>
+                <div>{detailList.price}~</div>
                 <button>특가</button>
               </div>
               <button>
@@ -105,8 +124,8 @@ const Panel = (props: Props) => {
             <div>옵션</div>
             <Styled.OptionArrow />
             <Styled.Select>
-              {tempOptionList.map((item, index) => (
-                <Styled.Options key={index}>
+              {tempOptionList.map(item => (
+                <Styled.Options key={item.id}>
                   <div>
                     {item.id}. {item.menu}
                   </div>
@@ -149,6 +168,12 @@ const Styled = {
     border-radius: 15px;
     background-color: ${theme.colors.lightGray};
     margin-right: 56px;
+    overflow: hidden;
+    .imageStyle {
+      width: auto;
+      height: auto;
+      object-fit: cover;
+    }
   `,
   ContentWrapper: styled.div`
     width: 548px;

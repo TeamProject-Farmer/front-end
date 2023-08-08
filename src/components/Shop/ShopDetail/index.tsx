@@ -36,6 +36,7 @@ const ShopDetail = () => {
     setCategoryList(response);
   };
 
+
   useEffect(() => {
     handleCategoryList();
   }, [])
@@ -45,7 +46,7 @@ const ShopDetail = () => {
   useEffect(() => {
     category && setCategoryId((CateId[category]))
     console.log(categoryId)
-  }, [category, categoryList])
+  }, [category])
   
   return (
     <Styled.Wrapper>
@@ -60,13 +61,14 @@ const ShopDetail = () => {
             <Link href={`/shop/${category}/detail/${i.productId}`}>
               <Product
                 key={i.productId}
+                id={i.productId}
                 thumbnailImg={i.imgUrl}
                 name={i.productName}
                 discountRate={i.discountRate}
                 price={i.price}
                 averageStarRating={i.averageStarRating}
                 reviewCount={i.reviewCount}
-              ></Product>
+              />
             </Link>
           ))}
         </Styled.OrderItemWrapper>

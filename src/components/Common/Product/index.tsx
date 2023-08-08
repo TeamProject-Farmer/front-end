@@ -2,11 +2,16 @@ import Styled from './styles';
 import Icon from '../Icon';
 import Image from 'next/image';
 import { ProductProps } from '../type';
+import { useDispatch, useSelector } from 'react-redux';
+import { setProductId } from 'store/reducers/productIdSlice';
+import { idSelector } from 'src/types/shop/types';
 
 const Product = (props: ProductProps) => {
-  const {thumbnailImg, name, price, discountRate, reviewCount, averageStarRating} = props;
+  const {id, thumbnailImg, name, price, discountRate, reviewCount, averageStarRating} = props;
+  const dispatch = useDispatch();
+
   return (
-    <Styled.Wrapper>
+    <Styled.Wrapper onClick={()=> dispatch(setProductId(id))}>
       <Styled.ImgBox>
         <Image
           className='imageStyle'

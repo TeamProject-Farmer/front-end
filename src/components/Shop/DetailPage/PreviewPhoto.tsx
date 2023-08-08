@@ -5,10 +5,14 @@ import leftArrow from '@assets/images/shop/previewLeftArrow.svg';
 import rightArrow from '@assets/images/shop/previewRightArrow.svg';
 import { getReviewImage } from 'src/apis/shop/review';
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+// import { RootState } from 'store';
+// export const idSelector = (state: RootState) => state.productId;
 
-const PreviewPhoto = ({productId}: {productId: number}) => {
+const PreviewPhoto = () => {
   const [imageList, setImageList] = useState([]);
-
+  // const productId = useSelector(idSelector);
+  let productId = 8;
   const handleReviewImage = async () => {
     const response = await getReviewImage(productId);
     setImageList(response);
@@ -17,16 +21,6 @@ const PreviewPhoto = ({productId}: {productId: number}) => {
     handleReviewImage();
   }, [])
 
-  console.log('imageList')
-  console.log(imageList)
-  const postUrl = '/assets/images/shop';
-  const tempImage = [
-    { id: 0, url: `${postUrl}/tempImage1.svg` },
-    { id: 1, url: `${postUrl}/tempImage2.svg` },
-    { id: 2, url: `${postUrl}/tempImage3.svg` },
-    { id: 3, url: `${postUrl}/tempImage4.svg` },
-    { id: 4, url: `${postUrl}/tempImage5.svg` },
-  ];
   return (
     <Styled.Wrapper>
       <div>사진 리뷰 보기</div>

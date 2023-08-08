@@ -1,5 +1,8 @@
 import { Dispatch, SetStateAction } from 'react';
 import { ISortOption } from 'src/types/search/types';
+import { RootState } from 'store';
+
+export const idSelector = (state: RootState) => state.productId;
 
 export interface ProductAPI {
   productId: number;
@@ -9,6 +12,17 @@ export interface ProductAPI {
   price: number;
   averageStarRating: number;
   reviewCount?: number;
+}
+
+export interface ReviewAPI {
+  memberNickname : string;
+  fiveStarRating: number;
+  createdDate: string;
+  productName: string;
+  optionName: string;
+  imgUrl: string;
+  likeCount: number;
+  content: string;
 }
 
 export const productSortOptions: ISortOption[] = [
@@ -47,3 +61,23 @@ export const CateId = {
   호접란: 5,
   키움용품: 6,
 };
+
+export interface PanelProps {
+  id: number;
+  categoryId: number;
+  categoryName: string;
+  name: string;
+  stockQuantity: number;
+  price: number;
+  sellQuantity: number;
+  discountRate: number;
+  options: string[];
+  thumbnailImg: string;
+  size: string;
+  description: string;
+  detailImg1: string;
+  detailImg2: string;
+  detailImg3: string;
+  detailImg4: string;
+  detailImg5: string;
+}

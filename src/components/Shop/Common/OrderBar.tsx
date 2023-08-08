@@ -12,7 +12,7 @@ const OrderBar = (props: OptionBarProps) => {
         {optionList?.map((item: ISortOption) => (
           <Styled.InnerBox
             onClick={() => setProductOption(item.param)}
-            key={item.param}
+            key={item.title}
             isClicked={item.param === productOption}
           >
             {item.title}

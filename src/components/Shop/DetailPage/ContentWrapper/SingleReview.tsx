@@ -7,13 +7,12 @@ import tempStar2 from '@assets/images/shop/tempStars2.svg';
 
 
 interface Props {
-  id: number | string;
   src: string;
 }
 const SingleReview = (props: Props) => {
-  const { id, src } = props;
+  const { src } = props;
   return (
-    <Styled.SingleReview key={id}>
+    <Styled.SingleReview>
       <div>유저이름</div>
       <div>
         <Styled.ReviewSvg1 />
