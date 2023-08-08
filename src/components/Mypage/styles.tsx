@@ -184,6 +184,14 @@ export const Styled = {
     margin-left: 12.5rem;
     margin-right: 12.5rem;
   `,
+  NoneListWrapper: styled.div`
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    display: flex;
+    gap: 2rem;
+    height: 35rem;
+  `,
   Checkbox: styled.div`
     display: flex;
     height: 6rem;
