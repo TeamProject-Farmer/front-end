@@ -14,7 +14,7 @@ const PurchasesList = () => {
     getPurchase,
   );
 
-  return (
+  return purchaseArray?.length === 0 ? null : (
     <Styled.BoxWrapper margin="8">
       <Styled.TextBox>
         <Styled.HeaderDiv>
@@ -37,8 +37,6 @@ const PurchasesList = () => {
                 {purchase.productName}
                 {index}
               </Styled.Title>
-              {/* 클릭시 리뷰 작성 페이지로 route 구현 하는건지? */}
-              {/* <Styled.ReviewText>{purchase.review}</Styled.ReviewText> */}
             </Styled.ListDiv>
           ))}
         </Styled.ListWrapper>
