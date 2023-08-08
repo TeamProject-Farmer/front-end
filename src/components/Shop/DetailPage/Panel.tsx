@@ -17,12 +17,11 @@ import { idSelector, PanelProps } from 'src/types/shop/types';
 
 const Panel = () => {
   const productId = useSelector(idSelector);
-  const [detailList, setDetailList] = useState({});
-  // const [detailList, setDetailList] = useState<PanelProps>({}); 이렇게 하면 오류 남
+  const [detailList, setDetailList] = useState<PanelProps>();
   const [totalStar, setTotalStar] = useState(0);
 
   const handleDetailData = async () => {
-    const response: PanelProps = await getDetail(productId);
+    const response = await getDetail(productId);
     setDetailList(response);
   };
   const handleReviewData = async () => {
@@ -34,7 +33,7 @@ const Panel = () => {
     handleDetailData();
     handleReviewData();
   }, []);
-
+  
   let like: number = 4;
   const filledStar = <Styled.Star />;
   const blankStar = <Styled.BlankStar />;
@@ -56,7 +55,6 @@ const Panel = () => {
     <Styled.Wrapper>
       <Styled.InnerBox>
         <Styled.ImageBox>
-          {/* 이 부분 수정 필요 */}
           <Image
             src={detailList.thumbnailImg}
             alt="temp"
