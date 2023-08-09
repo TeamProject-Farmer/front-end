@@ -1,7 +1,7 @@
 import Styled from '../styles';
 import InputField from '../InputField';
 import InputGroup from '../InputGroup';
-import PaymentList from '../List/PaymentList';
+import PaymentList from '../PayMethod/PayMethodList';
 import useDiscount from 'src/hooks/order/useDiscount';
 
 //상품 데이터
@@ -14,7 +14,7 @@ const productData = {
   reviewCount: null,
 };
 
-const Payment = () => {
+const Payment = ({ setTotalAmount }) => {
   const {
     coupon,
     usedPoint,
@@ -24,14 +24,11 @@ const Payment = () => {
     disabledCouponBtn,
     getDiscountedPrice,
     discountedPrice,
-  } = useDiscount();
-
-  const finalPrice = isNaN(productData.price - discountedPrice)
-    ? productData.price
-    : productData.price - discountedPrice;
+    getFinalPrice,
+  } = useDiscount(setTotalAmount);
 
   return (
-    <div>
+    <>
       <InputGroup title="적립금/쿠폰">
         <InputField
           label="적립금"
@@ -75,20 +72,12 @@ const Payment = () => {
           <Styled.InnerMarginWrapper>
             <Styled.DiscountedPrice>
               <Styled.Title>최종 결제 금액</Styled.Title>
-              <Styled.Title>{finalPrice}원</Styled.Title>
+              <Styled.Title>{getFinalPrice(productData.price)}원</Styled.Title>
             </Styled.DiscountedPrice>
           </Styled.InnerMarginWrapper>
         </Styled.FlexColumnWrapper>
       </InputGroup>
-      {/* 결제수단 */}
-      <InputGroup title="결제수단" before="none">
-        <Styled.InnerPaddingWrapper field="payment">
-          <PaymentList />
-          {/* <InputField field="card" placeholder="카드를 선택해주세요." />
-          <InputField field="card" placeholder="일시불" /> */}
-        </Styled.InnerPaddingWrapper>
-      </InputGroup>
-    </div>
+    </>
   );
 };
 

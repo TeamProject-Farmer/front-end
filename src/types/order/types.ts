@@ -180,3 +180,8 @@ export interface IOrderInfo {
   buyer_addr: string;
   buyer_postcode: string;
 }
+
+export interface ISelectedMethod {
+  pg: string;
+  method: string;
+}

@@ -6,7 +6,8 @@ import Delivery from '@components/Order/Delivery';
 import InputGroup from '@components/Order/InputGroup';
 import ProductList from '@components/Order/List/ProductList';
 import Agreement from '@components/Order/Agreement';
-import { IOrderedProduct } from 'src/types/order/types';
+import PayMethod from '@components/Order/PayMethod';
+import { IOrderedProduct, ISelectedMethod } from 'src/types/order/types';
 import type { NextPageWithLayout } from '@pages/_app';
 import { ReactElement } from 'react';
 import Payment from '@components/Order/Payment';
@@ -16,12 +17,17 @@ const productList: IOrderedProduct[] = [
 ];
 
 const OrderPage: NextPageWithLayout = () => {
-  const [deliveryInfo, setDeliveryInfo] = useState();
-  const [payNowDisabled, setPayNowDisabled] = useState(true);
-  // const { handleSubmit } = useOrderForm();
-  // console.log(handleSubmit);
-  //
-
+  // 최종 주문 금액
+  const [totalAmount, setTotalAmount] = useState<number>();
+  // 약관동의
+  const [payNowDisabled, setPayNowDisabled] = useState<boolean>(true);
+  // 결제 방식
+  const [selectedMethod, setSelectedMethod] = useState<ISelectedMethod>({
+    pg: 'INIpayTest',
+    method: 'card',
+  });
+  console.log(selectedMethod);
+  //react hook form
   const { handleSubmit, setValue, trigger, control } = useForm();
   const onSubmit = data => {
     console.log('제출되었습니다');
@@ -35,15 +41,6 @@ const OrderPage: NextPageWithLayout = () => {
     } else {
       setPayNowDisabled(true);
     }
-  };
-
-  // 주문자 주소 정보
-  const handleDeliveryInfo = (address, shippingMsg) => {
-    setDeliveryInfo(address);
-  };
-
-  const handleClick = () => {
-    console.log('click');
   };
 
   const clickPay = () => {
@@ -95,7 +92,12 @@ const OrderPage: NextPageWithLayout = () => {
           </Styled.InnerPaddingWrapper>
         </InputGroup>
         {/* 적립금/쿠폰, 결제금액 */}
-        <Payment />
+        <Payment setTotalAmount={setTotalAmount} />
+        {/* 결제 수단 */}
+        <PayMethod
+          selectedMethod={selectedMethod}
+          setSelectedMethod={setSelectedMethod}
+        />
         {/* 약관동의 */}
         <Agreement handleAgreementChange={handleAgreementChange} />
       </Styled.Wrapper>

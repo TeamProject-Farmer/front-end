@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { getMemberCoupon } from 'src/apis/order/order';
 import { postMemberPoint } from 'src/apis/order/order';
 import { ICoupon } from 'src/types/order/types';
 
-const useDiscount = () => {
+const useDiscount = (setTotalAmount: Dispatch<SetStateAction<number>>) => {
   const [coupon, setCoupon] = useState<ICoupon[]>();
   const [point, setPoint] = useState<number>();
   const [usedPoint, setUsedPoint] = useState<number>();
@@ -47,7 +47,7 @@ const useDiscount = () => {
   }, [selectedCouponId, coupon]);
 
   // 적립금을 적용할 때
-  const handlePointChange = event => {
+  const handlePointChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const typedPoint = Number(event.target.value);
     setUsedPoint(typedPoint);
     if (typedPoint > point) {
@@ -77,6 +77,15 @@ const useDiscount = () => {
       setDiscountedPrice(price);
     }
   };
+
+  //최종 가격 계산
+  const getFinalPrice = (productPrice: number) => {
+    const finalPrice = isNaN(productPrice - discountedPrice)
+      ? productPrice
+      : productPrice - discountedPrice;
+    setTotalAmount(finalPrice);
+    return finalPrice;
+  };
   return {
     coupon,
     usedPoint,
@@ -86,6 +95,7 @@ const useDiscount = () => {
     disabledCouponBtn,
     getDiscountedPrice,
     discountedPrice,
+    getFinalPrice,
   };
 };
 

@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import { PayMethod } from 'src/types/order/types';
 
-const payMethodList: PayMethod[] = [
+const payMethod: PayMethod[] = [
   { title: '카드', pg: 'INIpayTest', method: 'card' },
   { title: '계좌이체', pg: 'INIBillTst', method: 'trans' },
   { title: '가상계좌', pg: 'TC0ONETIME', method: 'vbank' },
@@ -11,20 +11,22 @@ const payMethodList: PayMethod[] = [
   { title: '핸드폰', pg: 'A010002002', method: 'phone' },
 ];
 
-const PaymentList = () => {
-  const [clicked, setClicked] = useState<string>('');
-
+const payMethodList = ({ selectedMethod, setSelectedMethod }) => {
   return (
     <Styled.Wrapper>
-      {payMethodList &&
-        payMethodList.map(ele => {
-          const { method, title } = ele;
-          const isClicked = clicked === method;
+      {payMethod &&
+        payMethod.map(ele => {
+          const { method, title, pg } = ele;
+          const isClicked = selectedMethod.method === method;
           return (
             <Styled.List
               key={method}
               onClick={() => {
-                setClicked(method);
+                setSelectedMethod(prev => ({
+                  ...prev,
+                  pg: pg,
+                  method: method,
+                }));
               }}
               isClicked={isClicked}
             >
@@ -37,7 +39,7 @@ const PaymentList = () => {
   );
 };
 
-export default PaymentList;
+export default payMethodList;
 
 const Styled = {
   Wrapper: styled.ul`

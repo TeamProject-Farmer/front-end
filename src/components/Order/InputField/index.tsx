@@ -204,14 +204,12 @@ const InputField = ({
           point: (
             <Styled.FlexColumnWrapper>
               <Styled.FlexWrapper>
-                {usedPoint && (
-                  <Styled.Input
-                    width={660}
-                    value={usedPoint}
-                    onChange={handlePoint}
-                    disabled={disabledPointBtn}
-                  />
-                )}
+                <Styled.Input
+                  width={660}
+                  value={usedPoint}
+                  onChange={handlePoint}
+                  disabled={disabledPointBtn}
+                />
                 <Button
                   text="전액사용"
                   disabled={disabledPointBtn}
