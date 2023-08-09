@@ -1,5 +1,4 @@
 export const formatPhoneNumber = (phoneNumber: string): string => {
-  console.log('phoneNumber', phoneNumber);
   const number = phoneNumber?.trim().replace(/[^0-9]/g, '');
 
   if (number?.length >= 3 && number?.length <= 6) {

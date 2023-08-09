@@ -8,8 +8,6 @@ export const validateName = (value: string) => {
 };
 
 export const validateMobile = (value: string) => {
-  console.log('value', value);
-  console.log(value.length);
   if (
     !/^(010|011|016|017|018|019)-[0-9]{3,4}-[0-9]{4}/.test(value)
     // || value.length > 13

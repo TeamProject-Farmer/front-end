@@ -185,3 +185,11 @@ export interface ISelectedMethod {
   pg: string;
   method: string;
 }
+
+export interface IDeliveryInfo {
+  name: string;
+  postCode: string;
+  basicAddress: string;
+  detailAddress: string;
+  mobile: string;
+}

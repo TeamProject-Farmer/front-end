@@ -7,7 +7,11 @@ import InputGroup from '@components/Order/InputGroup';
 import ProductList from '@components/Order/List/ProductList';
 import Agreement from '@components/Order/Agreement';
 import PayMethod from '@components/Order/PayMethod';
-import { IOrderedProduct, ISelectedMethod } from 'src/types/order/types';
+import {
+  IOrderedProduct,
+  ISelectedMethod,
+  IDeliveryInfo,
+} from 'src/types/order/types';
 import type { NextPageWithLayout } from '@pages/_app';
 import { ReactElement } from 'react';
 import Payment from '@components/Order/Payment';
@@ -22,17 +26,11 @@ const OrderPage: NextPageWithLayout = () => {
   // 약관동의
   const [payNowDisabled, setPayNowDisabled] = useState<boolean>(true);
   // 결제 방식
-  const [selectedMethod, setSelectedMethod] = useState<ISelectedMethod>({
-    pg: 'INIpayTest',
-    method: 'card',
-  });
-  console.log(selectedMethod);
+  const [selectedMethod, setSelectedMethod] = useState<ISelectedMethod>();
+  //배송 정보
+  const [deliveryInfo, setDeliveryInfo] = useState<IDeliveryInfo>();
   //react hook form
   const { handleSubmit, setValue, trigger, control } = useForm();
-  const onSubmit = data => {
-    console.log('제출되었습니다');
-    console.log(data);
-  };
 
   // 약관동의
   const handleAgreementChange = (isAllChecked, paymentChecked) => {
@@ -43,28 +41,28 @@ const OrderPage: NextPageWithLayout = () => {
     }
   };
 
-  const clickPay = () => {
+  const onSubmit = submitData => {
+    console.log('제출되었습니다');
+    setDeliveryInfo(submitData);
     if (payNowDisabled) {
       alert('주문 내용 확인 및 결제에 동의하셔야 구매가 가능합니다.');
       return;
     }
 
     const { IMP } = window;
-    console.log(IMP);
     IMP.init(process.env.NEXT_PUBLIC_IMP_UID);
 
     const data = {
-      pg: 'html5_inicis',
-      // pg: 'kakaopay',
-      pay_method: 'trans',
+      pg: selectedMethod.pg,
+      pay_method: selectedMethod.method,
       merchant_uid: 'ORD20180131-0000014',
       name: '노르웨이 회전 의자',
-      amount: 100,
+      amount: totalAmount,
       buyer_email: 'gildong@gmail.com',
-      buyer_name: '홍길동',
-      buyer_tel: '010-4242-4242',
-      buyer_addr: '서울특별시 강남구 신사동',
-      buyer_postcode: '01181',
+      buyer_name: deliveryInfo.name,
+      buyer_tel: deliveryInfo.mobile,
+      buyer_addr: deliveryInfo.basicAddress + deliveryInfo.detailAddress,
+      buyer_postcode: deliveryInfo.postCode,
     };
 
     const callback = (response: any) => {

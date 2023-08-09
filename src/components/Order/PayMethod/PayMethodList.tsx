@@ -17,7 +17,7 @@ const payMethodList = ({ selectedMethod, setSelectedMethod }) => {
       {payMethod &&
         payMethod.map(ele => {
           const { method, title, pg } = ele;
-          const isClicked = selectedMethod.method === method;
+          const isClicked = selectedMethod?.method === method;
           return (
             <Styled.List
               key={method}

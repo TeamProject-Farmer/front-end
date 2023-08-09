@@ -4,7 +4,6 @@ import Review from './Review';
 import { IReview } from 'src/types/home/types';
 
 const BestReview = ({ bestReview }) => {
-  console.log(bestReview);
   return (
     <Styled.Wrapper>
       <Styled.ReviewContainer>
