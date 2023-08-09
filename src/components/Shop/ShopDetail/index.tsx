@@ -55,7 +55,7 @@ const ShopDetail = () => {
                 key={i.productId}
                 id={i.productId}
                 thumbnailImg={i.imgUrl}
-                name={i.productName}햐
+                name={i.productName}
                 discountRate={i.discountRate}
                 price={i.price}
                 averageStarRating={i.averageStarRating}

@@ -17,14 +17,22 @@ import { idSelector, PanelProps } from 'src/types/shop/types';
 
 const Panel = () => {
   const productId = useSelector(idSelector);
-  const [detailList, setDetailList] = useState({});
+  // const [detailList, setDetailList] = useState({});
+  const [thumbnailImg, setThumbnailImg] = useState<string>();
+  const [name,setName] = useState<string>();
+  const [discountRate,setDiscountRate] = useState<number>();
+  const [price,setPrice] = useState<number>();
+
   // const [detailList, setDetailList] = useState<PanelProps>();
   // const [detailList, setDetailList] = useState<PanelProps>({}); 이렇게 하면 오류 남
   const [totalStar, setTotalStar] = useState(0);
 
   const handleDetailData = async () => {
     const response = await getDetail(productId);
-    setDetailList(response);
+    setThumbnailImg(response.thumbnailImg);
+    setName(response.name);
+    setDiscountRate(response.discountRate);
+    setPrice(response.price);
   };
   const handleReviewData = async () => {
     const response = await getReview(productId, 'best');
@@ -35,7 +43,6 @@ const Panel = () => {
     handleDetailData();
     handleReviewData();
   }, []);
-  
 
   let like: number = 4;
   const filledStar = <Styled.Star />;
@@ -60,7 +67,7 @@ const Panel = () => {
         <Styled.ImageBox>
           {/* 이 부분 수정 필요 */}
           <Image
-            src={detailList.thumbnailImg}
+            src={thumbnailImg}
             alt="temp"
             className="imageStyle"
             width={548.55}
@@ -69,7 +76,7 @@ const Panel = () => {
         </Styled.ImageBox>
         <Styled.ContentWrapper>
           <Styled.TitleWrapper>
-            <div>{detailList.name}</div>
+            <div>{name}</div>
             <Styled.ShareButton></Styled.ShareButton>
           </Styled.TitleWrapper>
           <Styled.Review>
@@ -82,12 +89,12 @@ const Panel = () => {
           </Styled.Review>
           <Styled.PriceWrapper>
             <Styled.OriginPrice>
-              <div>{detailList.discountRate}%</div>
-              <div>{detailList.price}</div>
+              <div>{discountRate}%</div>
+              <div>{price}</div>
             </Styled.OriginPrice>
             <Styled.CurrentPrice>
               <div>
-                <div>{detailList.price}~</div>
+                <div>{price}~</div>
                 <button>특가</button>
               </div>
               <button>
