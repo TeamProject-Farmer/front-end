@@ -22,11 +22,14 @@ import { UserState } from 'src/types/redux/types';
 import userSlice from './reducers/userSlice';
 import bannerSlice from './reducers/bannerSlice';
 import productIdSlice from './reducers/productIdSlice';
+import categorySlice from './reducers/categorySlice';
+import { categoryReduxType } from 'src/types/shop/types';
 
 export interface RootState {
   user: UserState;
   banner: boolean;
   productId: number;
+  categoryId: categoryReduxType;
 }
 
 const persistConfig: PersistConfig<RootState> = {
@@ -43,6 +46,7 @@ const rootReducer = (
     user: userSlice,
     banner: bannerSlice,
     productId: productIdSlice,
+    categoryId: categorySlice,
   });
   return combinedReducer(state, action);
 };

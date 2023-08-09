@@ -6,13 +6,15 @@ import theme from '@styles/theme';
 import secret from '@assets/images/shop/secretIcon.svg';
 import VerticalLine from '@components/Shop/Common/VerticalLine';
 import OnOffButton from './OnOffButton';
-import MiniModal from '@components/Common/MiniModal';
-import { getQnAList } from 'src/apis/shop/qna';
+// import MiniModal from '@components/Common/MiniModal';
+import QnAModal from '@components/Common/MiniModal/QnAModal';
+import { getQnAList, getMyQnA } from 'src/apis/shop/qna';
 import { QnAProps } from 'src/types/shop/types';
 
 const Inquiry = () => {
   const productId = useSelector(idSelector);
   const [detailList, setDetailList] = useState([]);
+  const [myDetailList, setMyDetailList] = useState([]);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const openModal = () => {
     setModalOpen(true);
@@ -23,14 +25,15 @@ const Inquiry = () => {
 
   const handleQnAList = async () => {
     const response = await getQnAList();
+    // const mine = await getMyQnA();
     setDetailList(response.content);
+    // setMyDetailList(mine.content)
+    // "message": "토큰을 다시 확인해주세요",
+    //토큰값이 없어서 생기는 에러가 뜨면 로그인이나 회원가입을 하게 분기처리 해주면 될 것 같습니다.
   };
   useEffect(() => {
     handleQnAList()
   }, [])
-  console.log('QnA----------detailList');
-  console.log(detailList);
-
   const handleNickname = (str: string) =>{
       let originStr = str;
       let maskingStr ='';
@@ -48,10 +51,10 @@ const Inquiry = () => {
     <Styled.Wrapper>
       <Styled.Container>
         {modalOpen === true ? (
-          <MiniModal
-            modalType="inquiry"
+          <QnAModal
             modalName="문의하기"
             modalClose={closeModal}
+            setModalOpen={setModalOpen}
           />
         ) : null}
         <Styled.Title>

@@ -62,24 +62,29 @@ export const CateId = {
   키움용품: 6,
 };
 
-export interface PanelProps {
-  id: number;
-  categoryId: number;
-  categoryName: string;
+export interface categoryReduxType {
   name: string;
-  stockQuantity: number;
-  price: number;
-  sellQuantity: number;
-  discountRate: number;
-  options: string[];
-  thumbnailImg: string;
-  size: string;
-  description: string;
-  detailImg1: string;
-  detailImg2: string;
-  detailImg3: string;
-  detailImg4: string;
-  detailImg5: string;
+  id: number;
+}
+
+export interface PanelProps {
+  id?: number;
+  categoryId?: number;
+  categoryName?: string;
+  name?: string;
+  stockQuantity?: number;
+  price?: number;
+  sellQuantity?: number;
+  discountRate?: number;
+  options?: string[];
+  thumbnailImg?: string;
+  size?: string;
+  description?: string;
+  detailImg1?: string;
+  detailImg2?: string;
+  detailImg3?: string;
+  detailImg4?: string;
+  detailImg5?: string;
 }
 
 export interface SingleReviewProps {
@@ -104,4 +109,12 @@ export interface QnAProps {
   answer: boolean;
   secretQuestion: secretQuestion;
   qcreatedDate: '2023-08-08T09:40:54.47001';
+}
+
+export interface QnAEditProps {
+  productId: number;
+  subject: string;
+  content: string;
+  secretQuestion: secretQuestion;
+  qcreatedDateTime: string;
 }

@@ -1,13 +1,31 @@
 import Styled from './styles';
 import { useState } from 'react';
+import { getQnAEdit } from 'src/apis/shop/qna';
+import { useSelector } from 'react-redux';
+import { idSelector } from 'src/types/shop/types';
 
 const InquiryModal = () => {
-  const [isShowOptions, setShowOptions] = useState(false);
-  const [currentOption, setCurrentOption] = useState('선택해주세요');
-  let [inputCount, setInputCount] = useState(0);
+  let now = new Date().toString;
+  const productId = useSelector(idSelector);
+  const [isShowOptions, setShowOptions] = useState<boolean>(false);
+  const [currentOption, setCurrentOption] = useState<string>('선택해주세요');
+  const [isSecret, setIsSecret] = useState<boolean>(false);
+  let [inputCount, setInputCount] = useState<number>(0);
+  const [getText, setGetText] = useState<string>('');
   const handleText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setGetText(e.target.value)
     setInputCount(e.target.value.length);
   };
+  const handleInquiryEdit = async() => {
+    try {
+      // const response = await getQnAEdit({productId, 'productId', getText ,'GENERAL',now});
+      const response = await getQnAEdit();
+    } catch (err) {
+      // if () {
+        
+      // }
+    }
+  }
   return (
     <Styled.CommonWrapper>
       <Styled.InquiryOptionWrapper>
@@ -39,7 +57,7 @@ const InquiryModal = () => {
           ></textarea>
           <div>{inputCount}/1,000</div>
         </Styled.TextBox>
-        <Styled.SecretCheck>
+        <Styled.SecretCheck onClick={()=> setIsSecret(!isSecret)}>
           <input type="checkbox"></input>
           <span>비공개</span>
         </Styled.SecretCheck>

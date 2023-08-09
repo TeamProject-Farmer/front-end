@@ -17,13 +17,17 @@ import { idSelector, PanelProps } from 'src/types/shop/types';
 
 const Panel = () => {
   const productId = useSelector(idSelector);
-  const [detailList, setDetailList] = useState<PanelProps>();
+  const [detailList, setDetailList] = useState({});
+  // const [detailList, setDetailList] = useState<PanelProps>();
+  // const [detailList, setDetailList] = useState<PanelProps>({}); 이렇게 하면 오류 남
   const [totalStar, setTotalStar] = useState(0);
 
   const handleDetailData = async () => {
     const response = await getDetail(productId);
     setDetailList(response);
   };
+  console.log('detailList')
+  console.log(detailList)
   const handleReviewData = async () => {
     const response = await getReview(productId, 'best');
     setTotalStar(response.totalElements);
@@ -34,6 +38,7 @@ const Panel = () => {
     handleReviewData();
   }, []);
   
+
   let like: number = 4;
   const filledStar = <Styled.Star />;
   const blankStar = <Styled.BlankStar />;
@@ -55,6 +60,7 @@ const Panel = () => {
     <Styled.Wrapper>
       <Styled.InnerBox>
         <Styled.ImageBox>
+          {/* 이 부분 수정 필요 */}
           <Image
             src={detailList.thumbnailImg}
             alt="temp"
@@ -69,7 +75,7 @@ const Panel = () => {
             <Styled.ShareButton></Styled.ShareButton>
           </Styled.TitleWrapper>
           <Styled.Review>
-            {/* <Styled.StarWrapper>{stars}</Styled.StarWrapper> */}
+            <Styled.StarWrapper>{stars}</Styled.StarWrapper>
             <Styled.StarWrapper>
               <TotalStarGauge star={4.7} />
             </Styled.StarWrapper>
