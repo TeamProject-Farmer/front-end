@@ -4,12 +4,11 @@ import theme from '@styles/theme';
 import { PayMethod } from 'src/types/order/types';
 
 const payMethodList: PayMethod[] = [
-  { id: 'card', title: '카드' },
-  { id: 'account', title: '계좌이체' },
-  { id: 'kakao', title: '카카오페이' },
-  { id: 'toss', title: '토스페이' },
-  { id: 'payco', title: '페이코' },
-  { id: 'mobile', title: '핸드폰' },
+  { title: '카드', pg: 'INIpayTest', method: 'card' },
+  { title: '계좌이체', pg: 'INIBillTst', method: 'trans' },
+  { title: '가상계좌', pg: 'TC0ONETIME', method: 'vbank' },
+  { title: '카카오페이', pg: 'TC0ONETIME', method: 'kakaopay' },
+  { title: '핸드폰', pg: 'A010002002', method: 'phone' },
 ];
 
 const PaymentList = () => {
@@ -19,13 +18,13 @@ const PaymentList = () => {
     <Styled.Wrapper>
       {payMethodList &&
         payMethodList.map(ele => {
-          const { id, title } = ele;
-          const isClicked = clicked === id;
+          const { method, title } = ele;
+          const isClicked = clicked === method;
           return (
             <Styled.List
-              key={id}
+              key={method}
               onClick={() => {
-                setClicked(id);
+                setClicked(method);
               }}
               isClicked={isClicked}
             >

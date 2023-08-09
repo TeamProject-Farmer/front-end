@@ -30,13 +30,17 @@ export interface IInputFieldProps {
   inputProps?: UseFormRegisterReturn;
   error?: string | null;
   couponOptions?: ICoupon[];
-  // 타입 수정
   usedPoint?: number;
   handleSelectedCoupon?: (event) => void;
-  handlePointChange?: (event) => void;
+  handlePoint?: (event) => void;
   disabledPointBtn?: boolean;
   disabledCouponBtn?: boolean;
   getDiscountedPrice?: () => void;
+  // 타입 수정
+  handleInput?: any;
+  control?: any;
+  setValue?: any;
+  trigger?: any;
 }
 
 export interface ICheckBoxInputProps {
@@ -73,8 +77,9 @@ export interface IOrderedProduct {
 }
 
 export interface PayMethod {
-  id: string;
   title: string;
+  pg: string;
+  method: string;
 }
 
 export interface DaumPostcodeData {
@@ -161,4 +166,17 @@ declare global {
   interface Window {
     IMP?: Iamport;
   }
+}
+
+export interface IOrderInfo {
+  pg: string;
+  pay_method: string;
+  merchant_uid: string;
+  name: string;
+  amount: number;
+  buyer_email: string;
+  buyer_name: string;
+  buyer_tel: string;
+  buyer_addr: string;
+  buyer_postcode: string;
 }

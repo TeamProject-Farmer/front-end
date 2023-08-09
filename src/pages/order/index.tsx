@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Styled from '../../components/Order/styles';
 import Layout from '@pages/layout';
 import NestedLayout from '@components/Order/NestedLayout';
@@ -10,13 +10,25 @@ import { IOrderedProduct } from 'src/types/order/types';
 import type { NextPageWithLayout } from '@pages/_app';
 import { ReactElement } from 'react';
 import Payment from '@components/Order/Payment';
-
+import { useForm } from 'react-hook-form';
 const productList: IOrderedProduct[] = [
   { id: '1', title: '상품명', count: 1, price: 12900 },
 ];
 
 const OrderPage: NextPageWithLayout = () => {
+  const [deliveryInfo, setDeliveryInfo] = useState();
   const [payNowDisabled, setPayNowDisabled] = useState(true);
+  // const { handleSubmit } = useOrderForm();
+  // console.log(handleSubmit);
+  //
+
+  const { handleSubmit, setValue, trigger, control } = useForm();
+  const onSubmit = data => {
+    console.log('제출되었습니다');
+    console.log(data);
+  };
+
+  // 약관동의
   const handleAgreementChange = (isAllChecked, paymentChecked) => {
     if (isAllChecked && paymentChecked) {
       setPayNowDisabled(false);
@@ -25,19 +37,30 @@ const OrderPage: NextPageWithLayout = () => {
     }
   };
 
+  // 주문자 주소 정보
+  const handleDeliveryInfo = (address, shippingMsg) => {
+    setDeliveryInfo(address);
+  };
+
+  const handleClick = () => {
+    console.log('click');
+  };
+
   const clickPay = () => {
     if (payNowDisabled) {
       alert('주문 내용 확인 및 결제에 동의하셔야 구매가 가능합니다.');
       return;
     }
+
     const { IMP } = window;
+    console.log(IMP);
     IMP.init(process.env.NEXT_PUBLIC_IMP_UID);
 
     const data = {
       pg: 'html5_inicis',
       // pg: 'kakaopay',
-      pay_method: 'card',
-      merchant_uid: 'ORD20180131-0000011',
+      pay_method: 'trans',
+      merchant_uid: 'ORD20180131-0000014',
       name: '노르웨이 회전 의자',
       amount: 100,
       buyer_email: 'gildong@gmail.com',
@@ -61,10 +84,10 @@ const OrderPage: NextPageWithLayout = () => {
     IMP.request_pay(data, callback);
   };
   return (
-    <>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Styled.Wrapper>
         {/* 배송지 */}
-        <Delivery />
+        <Delivery control={control} setValue={setValue} trigger={trigger} />
         {/* 주문상품 */}
         <InputGroup title="주문상품">
           <Styled.InnerPaddingWrapper field="product">
@@ -77,9 +100,9 @@ const OrderPage: NextPageWithLayout = () => {
         <Agreement handleAgreementChange={handleAgreementChange} />
       </Styled.Wrapper>
       <Styled.PayWrapper>
-        <Styled.PayNow onClick={clickPay}>결제하기</Styled.PayNow>
+        <Styled.PayNow type="submit">결제하기</Styled.PayNow>
       </Styled.PayWrapper>
-    </>
+    </form>
   );
 };
 

@@ -37,7 +37,7 @@ const Payment = () => {
           label="적립금"
           field="point"
           usedPoint={usedPoint}
-          handlePointChange={handlePointChange}
+          handlePoint={handlePointChange}
           disabledPointBtn={disabledPointBtn}
           getDiscountedPrice={() => getDiscountedPrice(productData.price)}
         />
@@ -84,8 +84,8 @@ const Payment = () => {
       <InputGroup title="결제수단" before="none">
         <Styled.InnerPaddingWrapper field="payment">
           <PaymentList />
-          <InputField field="card" placeholder="카드를 선택해주세요." />
-          <InputField field="card" placeholder="일시불" />
+          {/* <InputField field="card" placeholder="카드를 선택해주세요." />
+          <InputField field="card" placeholder="일시불" /> */}
         </Styled.InnerPaddingWrapper>
       </InputGroup>
     </div>
