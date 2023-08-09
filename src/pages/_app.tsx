@@ -11,6 +11,8 @@ import { PersistGate } from 'redux-persist/integration/react';
 import IconLoader from '@components/Common/IconLoader';
 import type { ReactElement, ReactNode } from 'react';
 import type { NextPage } from 'next';
+import 'react-datepicker/dist/react-datepicker.css';
+import '@components/Mypage/Purchases/Calendar/react-datepicker.css';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
