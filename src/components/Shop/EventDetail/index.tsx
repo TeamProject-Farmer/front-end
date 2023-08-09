@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import Link from 'next/link';
 import theme from '@styles/theme';
@@ -8,23 +7,15 @@ import Category from '../Common/Category';
 import Product from '@components/Common/Product';
 import { getEventProduct } from 'src/apis/shop/product';
 
-
 const EventDetail = () => {
-  const router = useRouter();
-  const menu = router.query.category;
-  let category: string;
-  if (menu) {
-    category = menu.toString();
-  }
-  
   const [productList, setProductList] = useState([]);
 
-  const handleCategoryList = async () => {
+  const handleEventProductList = async () => {
     const response = await getEventProduct();
     setProductList(response);
   };
   useEffect(() => {
-    handleCategoryList();
+    handleEventProductList();
   }, [])
   return (
     <Styled.Wrapper>
@@ -35,7 +26,7 @@ const EventDetail = () => {
         <Styled.ImageWrapper />
         <Styled.ItemWrapper>
         {productList && productList.map(i => (
-            <Link href={`/shop/${category}/detail/${i.productId}`}>
+            <Link href={`/shop/event/detail/${i.productId}`}>
               <Product
                 key={i.productId}
                 thumbnailImg={i.imgUrl}

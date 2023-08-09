@@ -43,7 +43,7 @@ const Panel = () => {
     handleDetailData();
     handleReviewData();
   }, []);
-
+  console.log(thumbnailImg)
   let like: number = 4;
   const filledStar = <Styled.Star />;
   const blankStar = <Styled.BlankStar />;
@@ -80,11 +80,10 @@ const Panel = () => {
             <Styled.ShareButton></Styled.ShareButton>
           </Styled.TitleWrapper>
           <Styled.Review>
-            <Styled.StarWrapper>{stars}</Styled.StarWrapper>
+            {/* <Styled.StarWrapper>{stars}</Styled.StarWrapper> */}
             <Styled.StarWrapper>
-              <TotalStarGauge star={4.7} />
+              <TotalStarGauge star={totalStar} />
             </Styled.StarWrapper>
-
             <div>{totalStar}개의 리뷰</div>
           </Styled.Review>
           <Styled.PriceWrapper>

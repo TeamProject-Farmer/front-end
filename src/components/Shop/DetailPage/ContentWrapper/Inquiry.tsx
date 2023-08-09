@@ -24,16 +24,16 @@ const Inquiry = () => {
   };
 
   const handleQnAList = async () => {
-    const response = await getQnAList();
+    const response = await getQnAList(productId);
     // const mine = await getMyQnA();
     setDetailList(response.content);
     // setMyDetailList(mine.content)
     // "message": "토큰을 다시 확인해주세요",
-    //토큰값이 없어서 생기는 에러가 뜨면 로그인이나 회원가입을 하게 분기처리 해주면 될 것 같습니다.
+    // 토큰값이 없어서 생기는 에러가 뜨면 로그인이나 회원가입을 하게 분기처리 해주면 될 것 같습니다.
   };
   useEffect(() => {
-    handleQnAList()
-  }, [])
+    handleQnAList();
+  }, [productId])
   const handleNickname = (str: string) =>{
       let originStr = str;
       let maskingStr ='';
@@ -46,7 +46,9 @@ const Inquiry = () => {
       }
       return maskingStr;
   }
-
+  console.log('inquiryPage productId: '+ productId)
+  console.log('inquiryPage detailList')
+  console.log(detailList)
   return (
     <Styled.Wrapper>
       <Styled.Container>
@@ -103,7 +105,7 @@ const Inquiry = () => {
         ))}
       </Styled.Container>
       {/* 백엔드에서 데이터 어떻게 들어오는지 보고 결정해야할 것 같음 */}
-      <div>페이지네이션 들어갈 부분</div>
+      {/* <div>페이지네이션 들어갈 부분</div> */}
     </Styled.Wrapper>
   );
 };

@@ -2,6 +2,7 @@ import request from '../base';
 
 //상품 전체 리스트
 export const getProductList = async (orderType: string, id: number) => {
+  if(id == undefined) id = 1;
   const response = await request({
     url: `/main/product/${id}?page=0&size=16`,
     params: {

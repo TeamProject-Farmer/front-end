@@ -1,6 +1,7 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import OrderBar from '../Common/OrderBar';
@@ -8,12 +9,11 @@ import SideAd from '../Common/SideAd';
 // import Category from '@components/Common/Category';
 import Category from '../Common/Category';
 import Product from '@components/Common/Product';
-import { useSelector } from 'react-redux';
 import { categprySelector } from 'src/types/shop/types';
-import { CateId, productSortOptions } from 'src/types/shop/types';
+import { productSortOptions } from 'src/types/shop/types';
 import { getProductList } from 'src/apis/shop/product';
 import { getProductCategory } from 'src/apis/common/category';
-
+import { setProductId } from 'store/reducers/productIdSlice';
 import MDPick from './MDPick';
 
 const ShopDetail = () => { 
@@ -21,25 +21,18 @@ const ShopDetail = () => {
   const [productList, setProductList] = useState([]);
   const [productOption, setProductOption] = useState<string>('NEWS');
   const [totalPages, setTotalPages] = useState<number>();
-  const [categoryList, setCategoryList] = useState([]);
 
   const handleProductList = async () => {
     const response = await getProductList(productOption, categoryId.id);
     setProductList(response.content);
     setTotalPages(response.totalPages);
   };
-  const handleCategoryList = async () => {
-    const response = await getProductCategory();
-    setCategoryList(response);
-  };
-
-  useEffect(() => {
-    handleCategoryList();
-  }, [])
   useEffect(() => {
     handleProductList();
   }, [productOption, categoryId])
   
+  console.log('shopdetail--------categoryId')
+  console.log(categoryId)
   return (
     <Styled.Wrapper>
       <Category />

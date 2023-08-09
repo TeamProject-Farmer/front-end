@@ -1,8 +1,8 @@
+import { useDispatch } from 'react-redux';
+import Image from 'next/image';
 import Styled from './styles';
 import Icon from '../Icon';
-import Image from 'next/image';
 import { ProductProps } from '../type';
-import { useDispatch } from 'react-redux';
 import { setProductId } from 'store/reducers/productIdSlice';
 
 const Product = (props: ProductProps) => {

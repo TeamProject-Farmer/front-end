@@ -1,5 +1,6 @@
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 // import Category from '@components/Common/Category';
@@ -8,46 +9,25 @@ import Panel from './Panel';
 import PreviewPhoto from './PreviewPhoto';
 import OrderBar from '@components/Shop/Common/OrderBar';
 import ContentWrapper from './ContentWrapper';
-import { getDetail } from 'src/apis/shop/product';
-import { getReview, getReviewStar } from 'src/apis/shop/review';
 import { detailLinkOptions } from 'src/types/shop/types';
-import { CateId } from 'src/types/shop/types';
-import { getProductCategory } from 'src/apis/common/category';
-import { useDispatch, useSelector } from 'react-redux';
 import { setProductId } from 'store/reducers/productIdSlice';
-import { idSelector } from 'src/types/shop/types';
 
 const DetailPage = () => {
   const dispatch = useDispatch();
-  const productId = useSelector(idSelector);
-  let totalReview: number = 0;
-  const [detailList, setDetailList] = useState({  });
-  const [categoryId, setCategoryId] = useState<number>(1);
-  const [categoryList, setCategoryList] = useState([]);
-  
-  const handleDetailData = async () => {
-    const response = await getDetail(productId);
-    setDetailList(response);
-  };
-  const handleDispatch = () => {
-    dispatch(setProductId(productId));
+  const router = useRouter();
+  const menu = router.query.detail;
+  let id: number;
+  if (menu) {
+    id = Number(menu);
   }
-  const handleCategoryList = async () => {
-    const response = await getProductCategory();
-    setCategoryList(response);
-  };
-  // useEffect(() => {
-  //   category && setCategoryId((CateId[category]))
-  //   console.log(categoryId)
-  // }, [category])
 
+  const handleDispatch = () => {
+    id == undefined ? "": dispatch(setProductId(id));
+  }
   useEffect(() => {
-    handleDetailData();
     handleDispatch();
-  }, []);
-
-
-
+  }, [id]);
+  
   return (
     <Styled.Wrapper>
       <Category/>

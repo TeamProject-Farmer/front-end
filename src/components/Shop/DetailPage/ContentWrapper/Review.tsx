@@ -38,9 +38,12 @@ const Review = () => {
     setReviewContent(response.content);
     setTotalElement(response.totalElements);
   };
+  console.log('reviewPage productId: '+productId)
+  console.log('reviewPage reviewList')
+  console.log(reviewList)
   useEffect(() => {
     handleReviewData();
-  }, []);
+  }, [productId]);
 
   return (
     <Styled.Wrapper>
