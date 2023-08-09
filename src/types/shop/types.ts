@@ -3,6 +3,7 @@ import { ISortOption } from 'src/types/search/types';
 import { RootState } from 'store';
 
 export const idSelector = (state: RootState) => state.productId;
+export const categprySelector = (state: RootState) => state.categoryId;
 
 export interface ProductAPI {
   productId: number;

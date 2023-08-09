@@ -5,29 +5,26 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import OrderBar from '../Common/OrderBar';
 import SideAd from '../Common/SideAd';
-import Category from '@components/Common/Category';
+// import Category from '@components/Common/Category';
+import Category from '../Common/Category';
 import Product from '@components/Common/Product';
+import { useSelector } from 'react-redux';
+import { categprySelector } from 'src/types/shop/types';
 import { CateId, productSortOptions } from 'src/types/shop/types';
 import { getProductList } from 'src/apis/shop/product';
 import { getProductCategory } from 'src/apis/common/category';
+
 import MDPick from './MDPick';
 
-const ShopDetail = () => {
-  const router = useRouter();
-  const menu = router.query.category;
-  let category: string;
-  if (menu) {
-    category = menu.toString();
-  }
-  
+const ShopDetail = () => { 
+  const categoryId = useSelector(categprySelector);
   const [productList, setProductList] = useState([]);
-  const [categoryId, setCategoryId] = useState<number>(1);
   const [productOption, setProductOption] = useState<string>('NEWS');
   const [totalPages, setTotalPages] = useState<number>();
   const [categoryList, setCategoryList] = useState([]);
 
   const handleProductList = async () => {
-    const response = await getProductList(productOption, categoryId);
+    const response = await getProductList(productOption, categoryId.id);
     setProductList(response.content);
     setTotalPages(response.totalPages);
   };
@@ -36,34 +33,29 @@ const ShopDetail = () => {
     setCategoryList(response);
   };
 
-
   useEffect(() => {
     handleCategoryList();
   }, [])
   useEffect(() => {
     handleProductList();
   }, [productOption, categoryId])
-  useEffect(() => {
-    category && setCategoryId((CateId[category]))
-    console.log(categoryId)
-  }, [category])
   
   return (
     <Styled.Wrapper>
-      <Category  category={categoryList}/>
-      <Styled.Title>{category}</Styled.Title>
+      <Category />
+      <Styled.Title>{categoryId.name}</Styled.Title>
       <Styled.ContentWrapper>
         <MDPick />
         <OrderBar optionList={productSortOptions} setProductOption={setProductOption} productOption={productOption}/>
         <Styled.OrderItemWrapper>
           <SideAd top={0} />
           {productList && productList.map(i => (
-            <Link href={`/shop/${category}/detail/${i.productId}`}>
+            <Link href={`/shop/${categoryId.name}/detail/${i.productId}`}>
               <Product
                 key={i.productId}
                 id={i.productId}
                 thumbnailImg={i.imgUrl}
-                name={i.productName}
+                name={i.productName}햐
                 discountRate={i.discountRate}
                 price={i.price}
                 averageStarRating={i.averageStarRating}

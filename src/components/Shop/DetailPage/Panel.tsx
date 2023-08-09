@@ -26,8 +26,6 @@ const Panel = () => {
     const response = await getDetail(productId);
     setDetailList(response);
   };
-  console.log('detailList')
-  console.log(detailList)
   const handleReviewData = async () => {
     const response = await getReview(productId, 'best');
     setTotalStar(response.totalElements);

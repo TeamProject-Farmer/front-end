@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import Styled from './styles';
+import { useDispatch } from 'react-redux';
+import { setCategoryId } from 'store/reducers/categorySlice';
 
 interface Props {
   name: string;
@@ -7,9 +9,12 @@ interface Props {
 }
 const Plant = (props: Props) => {
   const { name, src } = props;
+  const dispatch = useDispatch();
   
   return (
-    <Styled.PlantWrapper>
+    <Styled.PlantWrapper
+      onClick={()=> dispatch(setCategoryId(name))}
+      >
       <Image
         src={src}
         alt={name}

@@ -1,17 +1,21 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { categoryState } from 'src/types/redux/types';;
 import { CateId } from 'src/types/shop/types';
+
+const initialState: categoryState = {
+  name: '다육이',
+  id: 1,
+}
 
 const categorySlice = createSlice({
   name: 'categoryId',
-  initialState: {
-    name: '다육이',
-    id: 1
-  },
+  initialState,
   reducers: {
-    setCategoryId: (state, action: { payload: string}) => {
-      state.name = action.payload;
-      state.id = CateId[action.payload];
-      return state;
+    setCategoryId: (state, action: PayloadAction<string>) => {
+      return {
+        name: action.payload,
+        id: CateId[action.payload],
+      }
     },
     
   }
