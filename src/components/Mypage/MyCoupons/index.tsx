@@ -18,21 +18,23 @@ const Row = () => {
         <Styled.HeaderDiv>
           <Styled.HeaderText>나의 쿠폰</Styled.HeaderText>
         </Styled.HeaderDiv>
-
         <CouponHeader />
-
-        {couponArray?.map(coupon => (
-          <Coupons
-            key={coupon.couponId}
-            index={coupon.couponId}
-            title={coupon.name}
-            code={coupon.serialNumber}
-            validity={`${coupon.startDateTime.slice(
-              0,
-              10,
-            )} ~ ${coupon.endDateTime.slice(0, 10)}`}
-          />
-        ))}
+        {couponArray ? (
+          couponArray.map(coupon => (
+            <Coupons
+              key={coupon.couponId}
+              index={coupon.couponId}
+              title={coupon.name}
+              code={coupon.serialNumber}
+              validity={`${coupon.startDateTime.slice(
+                0,
+                10,
+              )} ~ ${coupon.endDateTime.slice(0, 10)}`}
+            />
+          ))
+        ) : (
+          <Styled.NoneText>보유중인 쿠폰이 없습니다.</Styled.NoneText>
+        )}
       </Styled.CouponBox>
     </Styled.BoxWrapper>
   );
