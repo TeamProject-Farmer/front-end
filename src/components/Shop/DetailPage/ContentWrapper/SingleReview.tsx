@@ -5,6 +5,7 @@ import VerticalLine from '@components/Shop/Common/VerticalLine';
 import tempStar1 from '@assets/images/shop/tempStars1.svg';
 // import TotalStarGauge from '@components/Shop/Common/gauge/TotalStarGauge';
 import tempStar2 from '@assets/images/shop/tempStars2.svg';
+import { postReviewLike } from 'src/apis/shop/review';
 import { SingleReviewProps } from 'src/types/shop/types';
 type Props= {
   dataList: SingleReviewProps
@@ -19,8 +20,11 @@ const SingleReview = ({ dataList }: Props) => {
     memberNickname,
     optionName,
     productName,
+    reviewId
   } = dataList;
-
+  const handleReviewLike = async (reviewId: number) => {
+    const response = await postReviewLike(reviewId);
+  };
   return (
     <Styled.SingleReview>
       <div></div>
@@ -48,7 +52,7 @@ const SingleReview = ({ dataList }: Props) => {
         ></Image>
       </Styled.ReviewImage>
       <div>{content}</div>
-      <Styled.RecomendBtn>도움이 돼요 &nbsp; {likeCount}</Styled.RecomendBtn>
+      <Styled.RecomendBtn onClick={()=>handleReviewLike(reviewId)}>도움이 돼요 &nbsp; {likeCount}</Styled.RecomendBtn>
     </Styled.SingleReview>
   );
 };

@@ -5,6 +5,7 @@ import VerticalLine from '@components/Shop/Common/VerticalLine';
 import photo from '@assets/images/shop/photoIcon.svg';
 import downArrow from '@assets/images/shop/downArrow1.svg';
 import SingleReview from './SingleReview';
+import Pagination from './Pagination';
 import TotalStarGauge from '@components/Shop/Common/gauge/TotalStarGauge';
 import EachStarGauge from '@components/Shop/Common/gauge/EachStarGauge';
 import { getReview, getReviewStar } from 'src/apis/shop/review';
@@ -21,28 +22,46 @@ const Review = () => {
   const [reviewStarArray, setReviewStarArray] = useState<number[]>([]);
   const [totalElement, setTotalElement] = useState(0);
   const [sortOption, setSortOption] = useState('best');
+  const [totalIndex, setTotalIndex] = useState(1);
+  const [currentIndex, setCurrentIndex] = useState<number>(1);
+  const [errorMessage, setErrorMessage] = useState<boolean>(false);
+  const [reviewClick, setReviewClick] = useState<boolean>(false);
 
   const handleReviewData = async () => {
     const response = await getReview(productId, sortOption);
-    const responseReview = await getReviewStar(productId);
     setReviewList(response);
-    setReviewStar(responseReview);
-    setReviewTotalStar(responseReview.averageStarRating);
-    setReviewStarArray([
-      responseReview.fiveStar,
-      responseReview.fourStar,
-      responseReview.threeStar,
-      responseReview.twoStar,
-      responseReview.oneStar,
-    ]);
     setReviewContent(response.content);
     setTotalElement(response.totalElements);
+    setTotalIndex(response.totalPages);
   };
-  console.log('reviewPage productId: '+productId)
-  console.log('reviewPage reviewList')
-  console.log(reviewList)
+  const handleReviewStar = async () => {
+    try {
+      const response = await getReviewStar(productId);
+      setReviewStar(response);
+      setReviewTotalStar(response.averageStarRating);
+      setReviewStarArray([
+        response.fiveStar,
+        response.fourStar,
+        response.threeStar,
+        response.twoStar,
+        response.oneStar,
+      ]);
+    } catch (err) {
+      console.log('Register err : ', err.response);
+      setErrorMessage(err.response.data.message == '해당 상품에 대한 리뷰가 존재하지 않습니다.');
+    }
+  };
+  console.log('reviewPage productId: ' + productId);
+  console.log('reviewPage reviewList');
+  console.log(reviewList);
+
+  
   useEffect(() => {
     handleReviewData();
+    console.log('리뷰 리셋!')
+  }, [productId, currentIndex, reviewClick]);
+  useEffect(() => {
+    handleReviewStar();
   }, [productId]);
 
   return (
@@ -58,11 +77,18 @@ const Review = () => {
       <Styled.TotalLike>
         <div>
           <TotalStarGauge star={reviewTotalStar} />
-          <div>{reviewTotalStar}</div>
+          <div>
+            {errorMessage
+              ? 0
+              : reviewTotalStar}
+          </div>
         </div>
         <VerticalLine height={100.5} />
         <div>
-          <EachStarGauge arr={reviewStarArray}></EachStarGauge>
+        {errorMessage
+              ? <Styled.NoData>No Review</Styled.NoData>
+              : <EachStarGauge arr={reviewStarArray}></EachStarGauge>}
+          
         </div>
       </Styled.TotalLike>
       <Styled.ReviewTitle>
@@ -80,10 +106,24 @@ const Review = () => {
           <Styled.DownArrow />
         </div>
       </Styled.ReviewTitle>
-      {reviewContent?.map((item: SingleReviewProps) => (
-        <SingleReview key={item.createdDate} dataList={item} />
-      ))}
-      <Styled.PaginationBox></Styled.PaginationBox>
+      {errorMessage ? (
+        <Styled.ErrorMessage>해당 상품에 대한 리뷰가 존재하지 않습니다.</Styled.ErrorMessage>
+      ) : (
+        <>
+          {reviewContent?.map((item: SingleReviewProps, index) => (
+            <div onClick={()=>setReviewClick(!reviewClick)} key={index}>
+              <SingleReview dataList={item}/>
+            </div>
+            
+          ))}
+        </>
+      )}
+      {/* <Styled.PaginationBox></Styled.PaginationBox> */}
+      <Pagination
+        currentIndex={currentIndex}
+        setCurrentIndex={setCurrentIndex}
+        totalIndex={totalIndex}
+      />
     </Styled.Wrapper>
   );
 };
@@ -187,6 +227,23 @@ const Styled = {
     }
   `,
   PhotoIcon: styled(photo)``,
+  NoData: styled.div`
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+    color: ${theme.colors.lightGray};
+  `,
+  ErrorMessage: styled.div`
+    width: 100%;
+    height: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 100px;
+    font-size: 25px;
+    font-weight: 600;
+    color: ${theme.colors.lightGray};
+  `,
   PaginationBox: styled.div`
     margin-top: 33px;
   `,
