@@ -23,8 +23,10 @@
     "react-hook-form": "^7.44.3",
     "react-query": "^3.39.3",
     "react-redux": "^8.1.1",
+    "react-slick": "^0.29.0",
     "redux": "^4.2.1",
-    "redux-persist": "^6.0.0"
+    "redux-persist": "^6.0.0",
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.0.1",
