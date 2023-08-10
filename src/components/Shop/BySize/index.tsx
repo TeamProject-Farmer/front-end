@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
-import theme from '@styles/theme';
-import { sizeSortOptions, productSortOptions } from 'src/types/shop/types';
-import ProductWrapper from '../Common/ProductWrapper/ProductWrapper';
 import SizeBar from '../Common/SizeBar';
+import ProductWrapper from '../Common/ProductWrapper/ProductWrapper';
 import { getShopBySize } from 'src/apis/shop/product';
-import { ShortTempProduct } from '../type';
+import { sizeSortOptions } from 'src/types/shop/types';
 
 const BySize = () => {
   const [sizeOption, setSizeOption] = useState<string>('S');

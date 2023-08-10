@@ -1,32 +1,33 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { useSelector } from 'react-redux';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import TotalStarGauge from '@components/Shop/Common/gauge/TotalStarGauge';
+import OptionBox from './ContentWrapper/OptionBox';
 import share from '@assets/images/shop/shareIcon.svg';
 import star from '@assets/images/shop/panelFilledStar.svg';
 import blank from '@assets/images/shop/blankStar.svg';
 import checkIcon from '@assets/images/shop/checkIcon.svg';
 import boxIcon from '@assets/images/shop/boxIcon.svg';
 import down from '@assets/images/shop/downloadIcon.svg';
-import arrow from '@assets/images/shop/optionArrow.svg';
 import { getDetail } from 'src/apis/shop/product';
 import { getReview, getReviewStar } from 'src/apis/shop/review';
-import { useSelector } from 'react-redux';
 import { idSelector } from 'src/types/shop/types';
+
 
 const Panel = () => {
   const productId = useSelector(idSelector);
   const [thumbnailImg, setThumbnailImg] = useState<string>();
-  const [name,setName] = useState<string>();
-  const [discountRate,setDiscountRate] = useState<number>();
-  const [price,setPrice] = useState<string>();
+  const [name, setName] = useState<string>();
+  const [discountRate, setDiscountRate] = useState<number>();
+  const [price, setPrice] = useState<string>();
   const [totalStar, setTotalStar] = useState(0);
   const [options, setOptions] = useState([]);
 
   const handleDetailData = async () => {
     const response = await getDetail(productId);
-    setOptions(response.options)
+    setOptions(response.options);
     setName(response.name);
     setThumbnailImg(response.thumbnailImg);
     setDiscountRate(response.discountRate);
@@ -36,13 +37,20 @@ const Panel = () => {
     const response = await getReview(productId, 'best');
     setTotalStar(response.totalElements);
   };
+  if (options.length == 0) {
+    setOptions([{ id: 0, optionName: '단일 옵션입니다.', optionPrice: 0 }]);
+  }
   const handleReviewStar = async () => {
     try {
       const response = await getReviewStar(productId);
       setTotalStar(response.averageStarRating);
     } catch (err) {
       console.log('Register err : ', err.response);
-      if(err.response.data.message == '해당 상품에 대한 리뷰가 존재하지 않습니다.') setTotalStar(0)
+      if (
+        err.response.data.message ==
+        '해당 상품에 대한 리뷰가 존재하지 않습니다.'
+      )
+        setTotalStar(0);
     }
   };
 
@@ -51,21 +59,23 @@ const Panel = () => {
     handleReviewData();
     handleReviewStar();
   }, []);
-  console.log('panelPage----options')
-  console.log(options)
+  console.log('panelPage----options');
+  console.log(options);
   return (
     <Styled.Wrapper>
       <Styled.InnerBox>
         <Styled.ImageBox>
           {/* 이 부분 수정 필요 */}
-          {thumbnailImg && <Image
-            src={thumbnailImg}
-            alt="Thumbnail-Imgage"
-            className="imageStyle"
-            width={548.55}
-            height={547.55}
-            priority={true}
-          ></Image>}
+          {thumbnailImg && (
+            <Image
+              src={thumbnailImg}
+              alt="Thumbnail-Imgage"
+              className="imageStyle"
+              width={548.55}
+              height={547.55}
+              priority={true}
+            ></Image>
+          )}
         </Styled.ImageBox>
         <Styled.ContentWrapper>
           <Styled.TitleWrapper>
@@ -75,7 +85,7 @@ const Panel = () => {
           <Styled.Review>
             {/* <Styled.StarWrapper>{stars}</Styled.StarWrapper> */}
             <Styled.StarWrapper>
-              <TotalStarGauge star={totalStar} size={20} color='#FFB800'/>
+              <TotalStarGauge star={totalStar} size={20} color="#FFB800" />
             </Styled.StarWrapper>
             <div>{totalStar}개의 리뷰</div>
           </Styled.Review>
@@ -132,17 +142,7 @@ const Panel = () => {
           <Styled.VerticalLine />
           <Styled.OptionWrapper>
             <div>옵션</div>
-            <Styled.OptionArrow />
-            <Styled.Select>
-              {options?.map((item, index) => (
-                <Styled.Options key={item.id}>
-                  <div>
-                    {index}. {item.optionName}
-                  </div>
-                  <div>+{item.optionPrice}원</div>
-                </Styled.Options>
-              ))}
-            </Styled.Select>
+            <OptionBox isPanel={true} />
           </Styled.OptionWrapper>
           <Styled.TotalPriceWrapper>
             <div>주문금액</div>
@@ -375,31 +375,12 @@ const Styled = {
     align-items: center;
     justify-content: space-between;
     & > div {
-      margin-top: 15px;
+      padding-top: 30px;
+      height: 100%;
+      display: flex;
+      align-items: center;
     }
     position: relative;
-  `,
-  //css 부분을 좀 더 커스텀하기 위해서는 div로 하거나 라이브러리를 사용해야할 것 같은데
-  //아직 정확하게 나온 디자인이 없어서 우선은 임시로 select로 해놨습니다.
-
-  Select: styled.select`
-    width: 433px;
-    height: 50px;
-    border-radius: 5px;
-    border: 1px solid ${theme.colors.black};
-    background-color: ${theme.colors.white};
-    margin-top: 15px;
-    appearance: none;
-    /* 이 부분은 아직 디자인 나온게 없어서 임시로 설정해뒀습니다. */
-    font-size: 16px;
-    font-weight: 500;
-    padding-left: 15px;
-  `,
-  Options: styled.option``,
-  OptionArrow: styled(arrow)`
-    position: absolute;
-    top: 50%;
-    right: 17px;
   `,
   TotalPriceWrapper: styled.div`
     display: flex;

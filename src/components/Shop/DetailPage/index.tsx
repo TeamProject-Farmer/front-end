@@ -20,7 +20,7 @@ const DetailPage = () => {
   if (menu) {
     id = Number(menu);
   }
-
+  
   const handleDispatch = () => {
     id == undefined ? "": dispatch(setProductId(id));
   }
