@@ -10,6 +10,7 @@ import { getRemoveCartList } from 'src/apis/mypage/cart';
 import { setOrderProduct } from 'store/reducers/orderProductSlice';
 import CartOrderBox from './CartOrderBox';
 import CartButtonBox from './CartButtonBox';
+import { useRouter } from 'next/router';
 const cartSelector = (state: RootState) => state.cartIndex;
 
 const OrderCartList = ({
@@ -19,6 +20,7 @@ const OrderCartList = ({
 }) => {
   const queryClient = useQueryClient();
   const dispatch = useDispatch();
+  const router = useRouter();
   const selector = useSelector(cartSelector);
 
   // CartListArray의 모든 객체의 total price 값을 합산
@@ -58,7 +60,7 @@ const OrderCartList = ({
       : dispatch(setOrderProduct(cartListArray));
 
     dispatch(clearCartIndex());
-    // 주문 페이지 이동
+    router.push('/order');
   };
 
   return (
