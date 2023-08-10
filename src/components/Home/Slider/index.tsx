@@ -4,6 +4,7 @@ import SliderContent from './SliderContent';
 import Indicator from './Indicator';
 
 const Slider = ({ banner }) => {
+  // console.log('banner', banner);
   const [activeIndex, setActiveIndex] = useState(1);
 
   useEffect(() => {
@@ -33,6 +34,6 @@ const Styled = {
   Wrapper: styled.div`
     position: relative;
     width: 1920px;
-    height: 876px;
+    height: 801px;
   `,
 };
