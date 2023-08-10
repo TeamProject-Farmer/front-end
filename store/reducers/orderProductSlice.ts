@@ -4,7 +4,7 @@ import { CartListProps } from 'src/types/mypage/types';
 const initialState: CartListProps[] = [];
 
 const orderProductSlice = createSlice({
-  name: 'cartIndex',
+  name: 'orderProduct',
   initialState,
   reducers: {
     setOrderProduct: (state, action: PayloadAction<CartListProps[]>) => {
