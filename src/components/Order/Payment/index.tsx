@@ -2,7 +2,7 @@ import Styled from '../styles';
 import InputField from '../InputField';
 import InputGroup from '../InputGroup';
 import useDiscount from 'src/hooks/order/useDiscount';
-
+import { useEffect } from 'react';
 //상품 데이터
 const productData = {
   productId: 1,
@@ -13,7 +13,7 @@ const productData = {
   reviewCount: null,
 };
 
-const Payment = ({ setTotalAmount }) => {
+const Payment = ({ getTotalAmount }) => {
   const {
     coupon,
     usedPoint,
@@ -22,10 +22,14 @@ const Payment = ({ setTotalAmount }) => {
     disabledPointBtn,
     disabledCouponBtn,
     discountedPrice,
-    getFinalPrice,
+    finalPrice,
     calculateDiscountedCouponPrice,
     calculateDiscountedPointPrice,
-  } = useDiscount(setTotalAmount, 40000);
+  } = useDiscount(40000);
+
+  useEffect(() => {
+    getTotalAmount(finalPrice);
+  }, [finalPrice]);
 
   return (
     <>
@@ -74,7 +78,7 @@ const Payment = ({ setTotalAmount }) => {
           <Styled.InnerMarginWrapper>
             <Styled.DiscountedPrice>
               <Styled.Title>최종 결제 금액</Styled.Title>
-              <Styled.Title>{getFinalPrice(productData.price)}원</Styled.Title>
+              <Styled.Title>{finalPrice}원</Styled.Title>
             </Styled.DiscountedPrice>
           </Styled.InnerMarginWrapper>
         </Styled.FlexColumnWrapper>

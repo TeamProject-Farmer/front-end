@@ -1,5 +1,10 @@
 import { UseFormRegisterReturn } from 'react-hook-form';
-import { FieldError } from 'react-hook-form';
+import {
+  UseFormSetValue,
+  UseFormTrigger,
+  FieldValues,
+  Control,
+} from 'react-hook-form';
 
 export type TFieldName =
   | 'name'
@@ -31,17 +36,14 @@ export interface IInputFieldProps {
   error?: string | null;
   couponOptions?: ICoupon[];
   usedPoint?: number;
-  handleSelectedCoupon?: (event) => void;
-  handlePoint?: (event) => void;
+  handleSelectedCoupon?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  handlePoint?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   disabledPointBtn?: boolean;
   disabledCouponBtn?: boolean;
   getDiscountedPrice?: () => void;
-  // 타입 수정
-  handleInput?: any;
-  control?: any;
-  setValue?: any;
-  trigger?: any;
-  point?: number;
+  control?: Control<FieldValues>;
+  setValue?: UseFormSetValue<FieldValues>;
+  trigger?: UseFormTrigger<FieldValues>;
 }
 
 export interface ICheckBoxInputProps {

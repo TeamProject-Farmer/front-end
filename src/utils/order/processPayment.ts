@@ -1,0 +1,41 @@
+import { ISelectedMethod, IDeliveryInfo } from 'src/types/order/types';
+import generateOrderNumber from './generateOrderNumber';
+
+const processPayment = (
+  totalAmount: number,
+  selectedMethod: ISelectedMethod,
+  deliveryInfo: IDeliveryInfo,
+) => {
+  const { pg, method } = selectedMethod;
+  const { name, mobile, basicAddress, detailAddress, postCode } = deliveryInfo;
+
+  const orderedData = {
+    pg: pg,
+    pay_method: method,
+    merchant_uid: generateOrderNumber(),
+    name: '노르웨이 회전 의자',
+    amount: totalAmount,
+    buyer_name: name,
+    buyer_tel: mobile,
+    buyer_addr: basicAddress + detailAddress,
+    buyer_postcode: postCode,
+  };
+
+  const { IMP } = window;
+  IMP.init(process.env.NEXT_PUBLIC_IMP_UID);
+
+  const callback = (response: any) => {
+    console.log(response);
+    const { success, error_msg, imp_uid } = response;
+
+    if (success) {
+      alert('결제 성공');
+    } else {
+      alert(`결제 실패: ${error_msg}`);
+    }
+  };
+
+  IMP.request_pay(orderedData, callback);
+};
+
+export default processPayment;

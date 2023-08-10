@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Styled from './styles';
 import { Controller } from 'react-hook-form';
 import { shippingMsgOptions } from 'src/utils/order/optionList';
@@ -8,7 +8,6 @@ import {
   requiredErrorMsg,
   validateName,
   validateMobile,
-  validatePoint,
 } from 'src/utils/order/formValidation';
 import Button from './Button';
 import { IInputFieldProps } from 'src/types/order/types';
@@ -31,7 +30,6 @@ const InputField = ({
   control,
   setValue,
   trigger,
-  point,
 }: IInputFieldProps) => {
   // 배송 메시지 직접 입력
   const [showShippingMsgInput, setShowShippingMsgInput] =
@@ -90,7 +88,11 @@ const InputField = ({
                 }}
                 render={({ field, fieldState }) => (
                   <>
-                    <Styled.Input type="text" {...field} value={field.value} />
+                    <Styled.Input
+                      type="text"
+                      {...field}
+                      value={field.value ? field.value : ''}
+                    />
                     {errorMessage(fieldState)}
                   </>
                 )}
@@ -111,8 +113,9 @@ const InputField = ({
                     <Styled.Input
                       type="text"
                       {...field}
-                      defaultValue="010-"
-                      value={formatPhoneNumber(field.value)}
+                      value={
+                        field.value ? formatPhoneNumber(field.value) : '010-'
+                      }
                       onChange={(
                         event: React.ChangeEvent<HTMLInputElement>,
                       ) => {
@@ -139,6 +142,7 @@ const InputField = ({
                     <Styled.FlexWrapper>
                       <Styled.Input
                         {...field}
+                        value={field.value ? field.value : ''}
                         readOnly
                         placeholder="우편번호"
                         width={250}
@@ -155,7 +159,11 @@ const InputField = ({
                 rules={{ required: requiredErrorMsg }}
                 render={({ field, fieldState }) => (
                   <>
-                    <Styled.Input {...field} placeholder="기본주소" />
+                    <Styled.Input
+                      {...field}
+                      value={field.value ? field.value : ''}
+                      placeholder="기본주소"
+                    />
                     {errorMessage(fieldState)}
                   </>
                 )}
@@ -168,7 +176,7 @@ const InputField = ({
                   <>
                     <Styled.Input
                       {...field}
-                      value={field.value}
+                      value={field.value ? field.value : ''}
                       placeholder="상세주소"
                     />
                     {errorMessage(fieldState)}

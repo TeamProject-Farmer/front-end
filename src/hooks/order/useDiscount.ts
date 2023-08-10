@@ -1,12 +1,9 @@
-import { useState, useEffect, Dispatch, SetStateAction } from 'react';
+import { useState, useEffect } from 'react';
 import { getMemberCoupon } from 'src/apis/order/order';
 import { getMemberPoint } from 'src/apis/order/order';
 import { ICoupon } from 'src/types/order/types';
 
-const useDiscount = (
-  setTotalAmount: Dispatch<SetStateAction<number>>,
-  price: number,
-) => {
+const useDiscount = (orderedPrice: number) => {
   const [coupon, setCoupon] = useState<ICoupon[]>();
   const [point, setPoint] = useState<number>();
   const [usedPoint, setUsedPoint] = useState<number>();
@@ -26,18 +23,7 @@ const useDiscount = (
   const [selectedCoupon, setSelectedCoupon] = useState<ICoupon | null>();
   const [disabledCouponBtn, setDisabledCouponBtn] = useState(false);
   const [disabledPointBtn, setDisabledPointBtn] = useState(false);
-
-  const handleSelectedCoupon = (
-    event: React.ChangeEvent<HTMLOptionElement>,
-  ) => {
-    const selectedValue = Number(event.target.value);
-    setSelectedCouponId(selectedValue);
-    getDiscountedPrice();
-    // 쿠폰을 선택하지 않았을 때
-    if (selectedValue === 0) {
-      setDisabledPointBtn(false);
-    }
-  };
+  const [discountedPrice, setDiscountedPrice] = useState<number>(0);
 
   useEffect(() => {
     if (!coupon) return;
@@ -45,12 +31,23 @@ const useDiscount = (
     const selectedOption = coupon.find(
       coupon => coupon.couponId === selectedCouponId,
     );
+    if (discountedPrice) {
+      setDisabledPointBtn(false);
+      setDisabledCouponBtn(false);
+    }
     setSelectedCoupon(selectedOption || null);
     setDisabledPointBtn(selectedOption ? true : false);
-    setDisabledCouponBtn(selectedOption ? false : true);
   }, [selectedCouponId, coupon]);
 
-  // 적립금을 적용할 때
+  // 쿠폰 선택할 때
+  const handleSelectedCoupon = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    const selectedValue = Number(event.target.value);
+    setSelectedCouponId(selectedValue);
+  };
+
+  // 적립금을 입력할 때
   const handlePointChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const typedPoint = Number(event.target.value);
     setUsedPoint(typedPoint);
@@ -61,17 +58,6 @@ const useDiscount = (
   };
 
   // 최종 할인된 가격 계산
-  const [discountedPrice, setDiscountedPrice] = useState<number>();
-
-  const getDiscountedPrice = () => {
-    if (selectedCoupon !== null) {
-      setDisabledCouponBtn(false);
-    } else {
-      // setDiscountedPrice(usedPoint);
-      setDisabledCouponBtn(true);
-    }
-  };
-
   const calculateDiscountedCouponPrice = (fullPrice: number) => {
     if (selectedCoupon === null) {
       setDiscountedPrice(0);
@@ -83,6 +69,10 @@ const useDiscount = (
       setDiscountedPrice(price);
     }
   };
+
+  useEffect(() => {
+    calculateDiscountedCouponPrice(orderedPrice);
+  }, [selectedCoupon]);
 
   const calculateDiscountedPointPrice = () => {
     let updatedDiscountedPrice = null;
@@ -97,23 +87,16 @@ const useDiscount = (
       updatedDiscountedPrice = point;
     } else if (usedPoint >= 2000 && usedPoint <= point) {
       updatedDiscountedPrice = usedPoint;
+      setDisabledCouponBtn(true);
     }
 
     setDiscountedPrice(updatedDiscountedPrice);
   };
 
-  useEffect(() => {
-    calculateDiscountedCouponPrice(price);
-  }, [selectedCoupon]);
-
   //최종 가격 계산
-  const getFinalPrice = (productPrice: number) => {
-    const finalPrice = isNaN(productPrice - discountedPrice)
-      ? productPrice
-      : productPrice - discountedPrice;
-    // setTotalAmount(finalPrice);
-    return finalPrice;
-  };
+  const finalPrice = isNaN(orderedPrice - discountedPrice)
+    ? orderedPrice
+    : orderedPrice - discountedPrice;
   return {
     coupon,
     usedPoint,
@@ -121,9 +104,8 @@ const useDiscount = (
     handleSelectedCoupon,
     disabledPointBtn,
     disabledCouponBtn,
-    getDiscountedPrice,
     discountedPrice,
-    getFinalPrice,
+    finalPrice,
     calculateDiscountedCouponPrice,
     calculateDiscountedPointPrice,
   };
