@@ -73,10 +73,15 @@ export interface ILayoutProps {
 }
 
 export interface IOrderedProduct {
-  id: string;
-  title: string;
+  cartId?: number;
+  productId: number;
+  imgUrl: string;
+  productName: string;
+  optionId: number;
+  optionName: string;
   count: number;
-  price: number;
+  productPrice: number;
+  totalPrice: number;
 }
 
 export interface PayMethod {

@@ -2,18 +2,19 @@ import { ISelectedMethod, IDeliveryInfo } from 'src/types/order/types';
 import generateOrderNumber from './generateOrderNumber';
 
 const processPayment = (
+  productName: string,
   totalAmount: number,
-  selectedMethod: ISelectedMethod,
+  payment: ISelectedMethod,
   deliveryInfo: IDeliveryInfo,
 ) => {
-  const { pg, method } = selectedMethod;
+  const { pg, method } = payment;
   const { name, mobile, basicAddress, detailAddress, postCode } = deliveryInfo;
 
   const orderedData = {
     pg: pg,
     pay_method: method,
     merchant_uid: generateOrderNumber(),
-    name: '노르웨이 회전 의자',
+    name: productName,
     amount: totalAmount,
     buyer_name: name,
     buyer_tel: mobile,

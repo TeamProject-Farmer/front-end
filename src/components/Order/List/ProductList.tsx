@@ -1,19 +1,20 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
+import { IOrderedProduct } from '../../../types/order/types';
 
 const ProductList = ({ productList }) => {
   return (
     <Styled.Wrapper>
       {productList &&
-        productList.map(ele => {
-          const { id, title, count, price } = ele;
+        productList.map((ele: IOrderedProduct) => {
+          const { productId, productName, count, productPrice } = ele;
           return (
-            <Styled.ProductWrapper key={id}>
+            <Styled.ProductWrapper key={productId}>
               <Styled.ImgBox />
               <Styled.ContentWrapper>
-                <Styled.FontBlack>상품명 : {title}</Styled.FontBlack>
+                <Styled.FontBlack>상품명 : {productName}</Styled.FontBlack>
                 <Styled.FontGray>수량 : {count}</Styled.FontGray>
-                <Styled.FontBlack>{price}</Styled.FontBlack>
+                <Styled.FontBlack>{productPrice}</Styled.FontBlack>
               </Styled.ContentWrapper>
             </Styled.ProductWrapper>
           );

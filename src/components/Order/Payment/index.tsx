@@ -3,17 +3,8 @@ import InputField from '../InputField';
 import InputGroup from '../InputGroup';
 import useDiscount from 'src/hooks/order/useDiscount';
 import { useEffect } from 'react';
-//상품 데이터
-const productData = {
-  productId: 1,
-  productName: '리돕스',
-  discountRate: 0,
-  price: 40000,
-  averageStarRating: 0.0,
-  reviewCount: null,
-};
 
-const Payment = ({ getTotalAmount }) => {
+const Payment = ({ totalPrice, getTotalAmount }) => {
   const {
     coupon,
     usedPoint,
@@ -25,7 +16,7 @@ const Payment = ({ getTotalAmount }) => {
     finalPrice,
     calculateDiscountedCouponPrice,
     calculateDiscountedPointPrice,
-  } = useDiscount(40000);
+  } = useDiscount(totalPrice);
 
   useEffect(() => {
     getTotalAmount(finalPrice);
@@ -48,9 +39,7 @@ const Payment = ({ getTotalAmount }) => {
           couponOptions={coupon}
           handleSelectedCoupon={handleSelectedCoupon}
           disabledCouponBtn={disabledCouponBtn}
-          getDiscountedPrice={() =>
-            calculateDiscountedCouponPrice(productData.price)
-          }
+          getDiscountedPrice={() => calculateDiscountedCouponPrice(totalPrice)}
         />
         <Styled.InnerMarginWrapper>
           <Styled.DiscountedPrice>
@@ -63,7 +52,7 @@ const Payment = ({ getTotalAmount }) => {
         <Styled.FlexColumnWrapper>
           <Styled.FlexWrapper>
             <Styled.InfoTitle>주문상품</Styled.InfoTitle>
-            <Styled.InfoContent>{productData.price}원</Styled.InfoContent>
+            <Styled.InfoContent>{totalPrice}원</Styled.InfoContent>
           </Styled.FlexWrapper>
           <Styled.FlexWrapper>
             <Styled.InfoTitle>배송비</Styled.InfoTitle>
