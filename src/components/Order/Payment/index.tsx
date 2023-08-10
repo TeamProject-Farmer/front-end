@@ -1,7 +1,6 @@
 import Styled from '../styles';
 import InputField from '../InputField';
 import InputGroup from '../InputGroup';
-import PaymentList from '../PayMethod/PayMethodList';
 import useDiscount from 'src/hooks/order/useDiscount';
 
 //상품 데이터
@@ -25,7 +24,8 @@ const Payment = ({ setTotalAmount }) => {
     getDiscountedPrice,
     discountedPrice,
     getFinalPrice,
-  } = useDiscount(setTotalAmount);
+    calculateDiscountedPrice,
+  } = useDiscount(setTotalAmount, 40000);
 
   return (
     <>
@@ -36,7 +36,7 @@ const Payment = ({ setTotalAmount }) => {
           usedPoint={usedPoint}
           handlePoint={handlePointChange}
           disabledPointBtn={disabledPointBtn}
-          getDiscountedPrice={() => getDiscountedPrice(productData.price)}
+          getDiscountedPrice={() => calculateDiscountedPrice(productData.price)}
         />
         <InputField
           label="쿠폰"
@@ -44,7 +44,7 @@ const Payment = ({ setTotalAmount }) => {
           couponOptions={coupon}
           handleSelectedCoupon={handleSelectedCoupon}
           disabledCouponBtn={disabledCouponBtn}
-          getDiscountedPrice={() => getDiscountedPrice(productData.price)}
+          getDiscountedPrice={() => calculateDiscountedPrice(productData.price)}
         />
         <Styled.InnerMarginWrapper>
           <Styled.DiscountedPrice>

@@ -76,6 +76,7 @@ const Styled = {
     gap: 17px;
   `,
   Explanation: styled.p`
+    flex-grow: 0;
     padding: 6px 12px;
     font-size: 16px;
     border-radius: 5px;

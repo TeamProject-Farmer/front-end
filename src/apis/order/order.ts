@@ -6,13 +6,22 @@ export const getMemberCoupon = async () => {
   return response.data;
 };
 
-export const postMemberPoint = async () => {
+export const getMemberPoint = async () => {
   const response = await request.post('/member/point');
-  // console.log(response.data.point);
+  // console.log('point', response.data.point);
   return response.data.point;
 };
 
 export const getMemberOrderAddress = async () => {
   const response = await request.get('/member/orders/address');
   return response.data;
+};
+
+export const postVerifyIamport = async data => {
+  const response = await request.post(
+    `/main/verify/${process.env.NEXT_PUBLIC_IMP_UID}`,
+    { data },
+  );
+  console.log('verify', response);
+  return response;
 };

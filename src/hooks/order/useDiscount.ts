@@ -1,16 +1,19 @@
 import { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { getMemberCoupon } from 'src/apis/order/order';
-import { postMemberPoint } from 'src/apis/order/order';
+import { getMemberPoint } from 'src/apis/order/order';
 import { ICoupon } from 'src/types/order/types';
 
-const useDiscount = (setTotalAmount: Dispatch<SetStateAction<number>>) => {
+const useDiscount = (
+  setTotalAmount: Dispatch<SetStateAction<number>>,
+  price: number,
+) => {
   const [coupon, setCoupon] = useState<ICoupon[]>();
   const [point, setPoint] = useState<number>();
   const [usedPoint, setUsedPoint] = useState<number>();
 
   useEffect(() => {
     // 적립금 데이터 불러오기
-    postMemberPoint().then(res => {
+    getMemberPoint().then(res => {
       setPoint(res);
       setUsedPoint(res);
     });
@@ -19,7 +22,7 @@ const useDiscount = (setTotalAmount: Dispatch<SetStateAction<number>>) => {
   }, []);
 
   // 쿠폰이 선택되었을 때
-  const [selectedCouponId, setSelectedCouponId] = useState<number>();
+  const [selectedCouponId, setSelectedCouponId] = useState<number>(0);
   const [selectedCoupon, setSelectedCoupon] = useState<ICoupon | null>();
   const [disabledCouponBtn, setDisabledCouponBtn] = useState(false);
   const [disabledPointBtn, setDisabledPointBtn] = useState(false);
@@ -29,6 +32,7 @@ const useDiscount = (setTotalAmount: Dispatch<SetStateAction<number>>) => {
   ) => {
     const selectedValue = Number(event.target.value);
     setSelectedCouponId(selectedValue);
+    getDiscountedPrice();
     // 쿠폰을 선택하지 않았을 때
     if (selectedValue === 0) {
       setDisabledPointBtn(false);
@@ -50,9 +54,7 @@ const useDiscount = (setTotalAmount: Dispatch<SetStateAction<number>>) => {
   const handlePointChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const typedPoint = Number(event.target.value);
     setUsedPoint(typedPoint);
-    if (typedPoint > point) {
-      alert('최대로 사용할 수 있는 적립금을 초과하였습니다.');
-    }
+
     if (selectedCouponId === 0) {
       setDisabledPointBtn(false);
     }
@@ -61,29 +63,61 @@ const useDiscount = (setTotalAmount: Dispatch<SetStateAction<number>>) => {
   // 최종 할인된 가격 계산
   const [discountedPrice, setDiscountedPrice] = useState<number>();
 
-  const getDiscountedPrice = (fullPrice: number) => {
+  const getDiscountedPrice = () => {
+    console.log(usedPoint);
+
     if (selectedCoupon !== null) {
       setDisabledCouponBtn(false);
-    }
-    if (selectedCoupon === null && usedPoint) {
+    } else {
       setDiscountedPrice(usedPoint);
       setDisabledCouponBtn(true);
     }
+    // if (selectedCoupon === null && usedPoint) {
+    //   setDiscountedPrice(usedPoint);
+    //   setDisabledCouponBtn(true);
+    // }
+    // if (selectedCoupon && selectedCoupon.couponPolicy === 'FIXED') {
+    //   setDiscountedPrice(selectedCoupon.fixedPrice);
+    // }
+    // if (selectedCoupon && selectedCoupon.couponPolicy === 'RATE') {
+    //   const price = fullPrice * (selectedCoupon.rateAmount / 100);
+    //   setDiscountedPrice(price);
+    // }
+  };
+
+  const calculateDiscountedPrice = (fullPrice: number) => {
+    console.log(usedPoint);
+    if (usedPoint > point) {
+      alert('최대로 사용할 수 있는 적립금을 초과하였습니다.');
+      return;
+    }
+    if (usedPoint < 2000) {
+      alert('적립금 최소 사용금액은 2000원입니다.');
+      return;
+    }
+    if (selectedCoupon === null && usedPoint !== 0) {
+      setDiscountedPrice(usedPoint);
+    }
     if (selectedCoupon && selectedCoupon.couponPolicy === 'FIXED') {
       setDiscountedPrice(selectedCoupon.fixedPrice);
-    }
-    if (selectedCoupon && selectedCoupon.couponPolicy === 'RATE') {
+    } else if (selectedCoupon && selectedCoupon.couponPolicy === 'RATE') {
       const price = fullPrice * (selectedCoupon.rateAmount / 100);
       setDiscountedPrice(price);
     }
   };
+
+  useEffect(() => {
+    if (selectedCoupon !== null) {
+      calculateDiscountedPrice(price);
+    }
+  }, [selectedCoupon]);
 
   //최종 가격 계산
   const getFinalPrice = (productPrice: number) => {
     const finalPrice = isNaN(productPrice - discountedPrice)
       ? productPrice
       : productPrice - discountedPrice;
-    setTotalAmount(finalPrice);
+    // setTotalAmount(finalPrice);
     return finalPrice;
   };
   return {
@@ -96,6 +130,7 @@ const useDiscount = (setTotalAmount: Dispatch<SetStateAction<number>>) => {
     getDiscountedPrice,
     discountedPrice,
     getFinalPrice,
+    calculateDiscountedPrice,
   };
 };
 
