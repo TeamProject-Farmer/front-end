@@ -72,7 +72,7 @@ const Inquiry = () => {
             </Styled.OpenModalButton>
           </Styled.MyInQuiry>
         </Styled.Title>
-        {detailList.map(item => (
+        {detailList.length == 0 ? <Styled.ErrorMessage>해당 상품에 대한 문의가 존재하지 않습니다.</Styled.ErrorMessage> : <>{detailList.map(item => (
           <Styled.Single key={item.qnaId}>
             <div>
               <div>구매</div>
@@ -102,7 +102,8 @@ const Inquiry = () => {
               </Styled.OpenQuestion>
             )}
           </Styled.Single>
-        ))}
+        ))}</>}
+        
       </Styled.Container>
       {/* 백엔드에서 데이터 어떻게 들어오는지 보고 결정해야할 것 같음 */}
       {/* <div>페이지네이션 들어갈 부분</div> */}
@@ -194,6 +195,17 @@ const Styled = {
     font-weight: 700;
     align-items: center;
     margin-bottom: 26px;
+  `,
+  ErrorMessage: styled.div`
+    width: 100%;
+    height: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 70px;
+    font-size: 25px;
+    font-weight: 600;
+    color: ${theme.colors.gray};
   `,
   SecretIcon: styled(secret)``,
 };
