@@ -14,11 +14,19 @@ import { IInputFieldProps } from 'src/types/order/types';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { postcodeScriptUrl } from 'react-daum-postcode/lib/loadPostcode';
 import { formatAddress } from 'src/utils/order/getAddressfromDaumPostcode';
+
 const InputField = ({
   label,
   required,
   field,
   placeholder,
+  couponOptions,
+  usedPoint,
+  handleSelectedCoupon,
+  handlePointChange,
+  disabledPointBtn,
+  disabledCouponBtn,
+  getDiscountedPrice,
 }: IInputFieldProps) => {
   //reack-hook-form
   const {
@@ -46,14 +54,14 @@ const InputField = ({
   const basicAddressValid = validateInput('basicAddress');
   const detailAddressValid = validateInput('detailAddress');
 
-  //전화번호 입력시 자동으로 하이픈 생성
+  // 전화번호 입력시 자동으로 하이픈 생성
   const watchMobileInput = watch('mobile');
 
   useEffect(() => {
     setValue('mobile', formatPhoneNumber(watchMobileInput));
   }, [watchMobileInput]);
 
-  //주소 입력
+  // 주소 입력
   const handleComplete = (data: DaumPostcodeData) => {
     const fullAddress = formatAddress(data);
     setValue('postCode', data.zonecode);
@@ -72,7 +80,7 @@ const InputField = ({
     });
   };
 
-  //배송 메시지 직접 입력
+  // 배송 메시지 직접 입력
   const [showShippingMsgInput, setShowShippingMsgInput] =
     useState<boolean>(false);
 
@@ -95,12 +103,14 @@ const InputField = ({
           name: (
             <Styled.FlexGapWrapper>
               <Styled.Input type="text" {...nameValid} />
-              <Styled.ErrorMsg>{errors?.name?.message}</Styled.ErrorMsg>
+              {errors?.name && (
+                <Styled.ErrorMsg>* {errors?.name?.message}</Styled.ErrorMsg>
+              )}
             </Styled.FlexGapWrapper>
           ),
           mobile: (
             <Styled.FlexGapWrapper>
-              <Styled.Dropdown isMobile={true}>
+              <Styled.Dropdown field="mobile">
                 {mobileOptions.map((number, index) => (
                   <Styled.Option key={index} value={number}>
                     {number}
@@ -109,7 +119,9 @@ const InputField = ({
               </Styled.Dropdown>
               -
               <Styled.Input type="text" {...mobileValid} width={360} />
-              <Styled.ErrorMsg>{errors?.mobile?.message}</Styled.ErrorMsg>
+              {errors?.mobile && (
+                <Styled.ErrorMsg>* {errors?.mobile?.message}</Styled.ErrorMsg>
+              )}
             </Styled.FlexGapWrapper>
           ),
           address: (
@@ -125,18 +137,38 @@ const InputField = ({
               </Styled.FlexWrapper>
               <Styled.Input {...basicAddressValid} placeholder="기본주소" />
               <Styled.Input {...detailAddressValid} placeholder="상세주소" />
-              <Styled.ErrorMsg>
-                {errors?.postCode?.message ||
-                  errors?.basicAddress?.message ||
-                  errors?.detailAddress?.message}
-              </Styled.ErrorMsg>
+              {errors?.postCode ||
+                errors?.basicAddress ||
+                (errors?.detailAddress && (
+                  <Styled.ErrorMsg>
+                    *{' '}
+                    {errors?.postCode?.message ||
+                      errors?.basicAddress?.message ||
+                      errors?.detailAddress?.message}
+                  </Styled.ErrorMsg>
+                ))}
             </Styled.FlexColumnWrapper>
           ),
           coupon: (
             <Styled.FlexColumnWrapper>
               <Styled.FlexWrapper>
-                <Styled.Input width={660} />
-                <Button text="전액사용" />
+                <Styled.Dropdown field="coupon" onChange={handleSelectedCoupon}>
+                  <option value={0}>쿠폰을 선택해주세요</option>
+                  {couponOptions &&
+                    couponOptions.map(coupon => (
+                      <Styled.Option
+                        key={coupon.couponId}
+                        value={coupon.couponId}
+                      >
+                        {coupon.name}
+                      </Styled.Option>
+                    ))}
+                </Styled.Dropdown>
+                <Button
+                  text="쿠폰적용"
+                  onClick={getDiscountedPrice}
+                  disabled={disabledCouponBtn}
+                />
               </Styled.FlexWrapper>
               <Styled.Explanation>
                 1회 구매시 적립금 최소 사용금액은 2,000원입니다.
@@ -146,8 +178,19 @@ const InputField = ({
           point: (
             <Styled.FlexColumnWrapper>
               <Styled.FlexWrapper>
-                <Styled.Input width={660} />
-                <Button text="쿠폰적용" />
+                {usedPoint && (
+                  <Styled.Input
+                    width={660}
+                    value={usedPoint}
+                    onChange={handlePointChange}
+                    disabled={disabledPointBtn}
+                  />
+                )}
+                <Button
+                  text="전액사용"
+                  disabled={disabledPointBtn}
+                  onClick={getDiscountedPrice}
+                />
               </Styled.FlexWrapper>
               <Styled.FlexGapWrapper>
                 <Styled.Explanation>
@@ -162,7 +205,7 @@ const InputField = ({
           card: <Styled.Input width={844} placeholder={placeholder} />,
           shippingMsg: (
             <Styled.FlexColumnWrapper>
-              <Styled.Dropdown onChange={handleChange}>
+              <Styled.Dropdown field="shippingMsg" onChange={handleChange}>
                 {shippingMsgOptions.map((msg, index) => (
                   <Styled.Option key={index} value={msg}>
                     {msg}

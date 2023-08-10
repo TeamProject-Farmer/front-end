@@ -4,20 +4,22 @@ import Header from '@components/Common/Header';
 import Footer from '@components/Common/Footer';
 import styled from '@emotion/styled';
 import { Inter } from 'next/font/google';
+import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'] });
 
-type Props = {
+type LayoutProps = {
   children?: ReactNode;
   title?: string;
 };
 
-const Layout = ({ children, title = 'Farmer FE' }: Props) => (
+const Layout = ({ children, title = 'Farmer FE' }: LayoutProps) => (
   <div className={inter.className}>
     <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      <Script src="https://cdn.iamport.kr/v1/iamport.js"></Script>
     </Head>
     <Styled.Wrapper>
       <Header />

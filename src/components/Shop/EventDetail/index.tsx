@@ -5,7 +5,7 @@ import theme from '@styles/theme';
 import SideAd from '../Common/SideAd';
 import Category from '../Common/Category';
 import Product from '@components/Common/Product';
-import { TempProduct, CurrentPage } from '../type';
+import { ShortTempProduct, CurrentPage } from '../type';
 
 const EventDetail = () => {
   const router = useRouter();
@@ -24,14 +24,30 @@ const EventDetail = () => {
         <Styled.ImageWrapper />
         <Styled.ItemWrapper>
           {/* 추후 api 연동 */}
-          {TempProduct.map(i => (
+          {ShortTempProduct.map(i => (
             <Link href={`/shop/${CurrentPage[category]}/detail/1`}>
-              <Product key={i.id} image={i.image} title={i.contentTitle} discount={i.percent} price={i.totalPrice} star={i.reviewScore} review={i.totalReview} specialPrice={true} freeShipping={true}></Product>
+              <Product
+                key={i.id}
+                thumbnailImg={i.image}
+                name={i.contentTitle}
+                discountRate={i.percent}
+                price={i.totalPrice}
+                averageStarRating={i.reviewScore}
+                reviewCount={i.totalReview}
+              ></Product>
             </Link>
           ))}
-          {TempProduct.map(i => (
+          {ShortTempProduct.map(i => (
             <Link href={`/shop/${CurrentPage[category]}/detail/1`}>
-              <Product key={i.id} image={i.image} title={i.contentTitle} discount={i.percent} price={i.totalPrice} star={i.reviewScore} review={i.totalReview} specialPrice={true} freeShipping={true}></Product>
+              <Product
+                key={i.id}
+                thumbnailImg={i.image}
+                name={i.contentTitle}
+                discountRate={i.percent}
+                price={i.totalPrice}
+                averageStarRating={i.reviewScore}
+                reviewCount={i.totalReview}
+              ></Product>
             </Link>
           ))}
         </Styled.ItemWrapper>

@@ -1,17 +1,20 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Plant = ({ name, src }) => {
   return (
     <Styled.Wrapper>
-      <Image
-        src={`/assets/images/home/${src}.png`}
-        alt={name}
-        width={169}
-        height={212}
-        style={{ objectFit: 'contain' }}
-      />
-      <Styled.Name>{name}</Styled.Name>
+      <Link href={`/shop/${name}`}>
+        <Image
+          src={src}
+          alt={name}
+          width={169}
+          height={212}
+          style={{ objectFit: 'contain' }}
+        />
+        <Styled.Name>{name}</Styled.Name>
+      </Link>
     </Styled.Wrapper>
   );
 };

@@ -65,9 +65,9 @@ const Styled = {
       field === 'payment'
         ? '0 60px'
         : field === 'shippingMsg'
-        ? '0 154px'
+        ? '0 95px'
         : field === 'product'
-        ? '29px 60px;'
+        ? '29px 95px;'
         : '0 25px'};
     display: flex;
     flex-direction: column;
@@ -79,17 +79,35 @@ const Styled = {
     justify-content: center;
     align-items: center;
   `,
-  PayNow: styled.div`
+  PayNow: styled.button`
     background-color: ${theme.colors.green1};
     border-radius: 5px;
     color: #fff;
     font-size: 25px;
-    font-weight: 700;
+    font-weight: 400;
     width: 252px;
     height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
+  `,
+  RadioWrapper: styled.div`
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    input {
+      appearance: none;
+      border: 5px solid #ddd;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+    }
+    input:checked {
+      border: 0.4em solid ${theme.colors.pointGreen};
+    }
+    label {
+      font-size: 16px;
+    }
   `,
 };
 

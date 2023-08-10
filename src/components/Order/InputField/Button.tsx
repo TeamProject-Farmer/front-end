@@ -1,18 +1,24 @@
 import styled from '@emotion/styled';
 import { IButtonProps } from 'src/types/order/types';
+import theme from '@styles/theme';
 
-const Button = ({ text, bgColor, color, onClick }: IButtonProps) => {
+const Button = ({ text, bgColor, color, onClick, disabled }: IButtonProps) => {
   return (
-    <Styled.Wrapper onClick={onClick} bgColor={bgColor} color={color}>
+    <Styled.Button
+      onClick={onClick}
+      bgColor={bgColor}
+      color={color}
+      disabled={disabled}
+    >
       {text}
-    </Styled.Wrapper>
+    </Styled.Button>
   );
 };
 
 export default Button;
 
 const Styled = {
-  Wrapper: styled.div<{ bgColor: string; color: string }>`
+  Button: styled.button<{ bgColor: string; color: string }>`
     background-color: ${({ bgColor }) => (bgColor ? bgColor : '#fff')};
     border-radius: 4px;
     border: 1px solid ${({ bgColor }) => (bgColor ? bgColor : '#000')};
@@ -22,5 +28,11 @@ const Styled = {
     justify-content: center;
     height: 40px;
     padding: 0 16px;
+    transform: translateX(-5px);
+    :disabled {
+      color: ${theme.colors.gray};
+      background-color: #f0f0f0;
+      border: 1px solid #ababab;
+    }
   `,
 };

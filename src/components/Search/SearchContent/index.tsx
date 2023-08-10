@@ -1,39 +1,24 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Plant from '../../Common/Product';
+import { ProductProps } from '../../Common/type';
 
-const plants = [];
-
-for (let id = 1; id <= 7; id++) {
-  const newPlant = {
-    id: id,
-    title: '상품명',
-    discount: '20%',
-    price: '10,000',
-    star: '4.8',
-    review: '1,105',
-    specialPrice: true,
-    freeShipping: true,
-  };
-
-  plants.push(newPlant);
-}
-
-const SearchContent = () => {
+const SearchContent = ({ searchResult }) => {
   return (
     <Styled.Wrapper>
-      {plants.map(plant => (
-        <Plant
-          key={plant.id}
-          title={plant.title}
-          discount={plant.discount}
-          price={plant.price}
-          star={plant.star}
-          review={plant.review}
-          specialPrice={plant.specialPrice}
-          freeShipping={plant.freeShipping}
-        />
-      ))}
+      {/* 검색결과가 존재하지 않을 때, 로딩 추가 */}
+      {searchResult &&
+        searchResult?.map((plant: ProductProps, index: number) => (
+          <Plant
+            key={index}
+            thumbnailImg={plant.thumbnailImg}
+            name={plant.name}
+            discountRate={plant.discountRate}
+            price={plant.price}
+            averageStarRating={plant.averageStarRating}
+            reviewCount={plant.reviewCount}
+          />
+        ))}
     </Styled.Wrapper>
   );
 };
