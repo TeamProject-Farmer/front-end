@@ -27,6 +27,7 @@ export interface IPlant {
   price: number;
   averageStarRating: number;
   reviewCount?: number;
+  imgUrl: string;
 }
 
 export interface IReview {

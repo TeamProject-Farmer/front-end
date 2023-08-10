@@ -1,6 +1,6 @@
 import Styled from './styles';
 import Icon from '@components/Common/Icon';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { getShopBySize } from 'src/apis/home/home';
 
 const category = [
@@ -10,16 +10,21 @@ const category = [
 ];
 
 const ShopPrev = () => {
-  const [hoveredSize, setHoveredSize] = useState(null);
+  const [hoveredSize, setHoveredSize] = useState('S');
+  const [sizeImg, setSizeImg] = useState<string>();
 
   const handleMouseEnter = (id: string) => {
     setHoveredSize(id);
-    getShopBySize(id);
+    // getShopBySize(id);
   };
 
-  const handleMouseLeave = () => {
-    setHoveredSize(null);
-  };
+  // const handleMouseLeave = () => {
+  //   setHoveredSize(null);
+  // };
+
+  useEffect(() => {
+    getShopBySize(hoveredSize).then(res => setSizeImg(res.imgLink));
+  }, [hoveredSize]);
 
   return (
     <Styled.Wrapper>
@@ -31,7 +36,7 @@ const ShopPrev = () => {
               <Styled.List
                 key={size.id}
                 onMouseEnter={() => handleMouseEnter(size.id)}
-                onMouseLeave={handleMouseLeave}
+                // onMouseLeave={handleMouseLeave}
               >
                 {hoveredSize === size.id ? (
                   <Icon name={size.hover} width={46} height={46} />

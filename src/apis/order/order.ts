@@ -17,11 +17,10 @@ export const getMemberOrderAddress = async () => {
   return response.data;
 };
 
-export const postVerifyIamport = async data => {
-  const response = await request.post(
-    `/main/verify/${process.env.NEXT_PUBLIC_IMP_UID}`,
-    { data },
-  );
-  console.log('verify', response);
-  return response;
+export const postVerifyIamport = async (uid: string, orderedData) => {
+  const response = await request.post(`/main/verifyIamport/${uid}`, {
+    orderedData,
+  });
+  // console.log('verify', response.data.response);
+  return response.data.response;
 };
