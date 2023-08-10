@@ -1,32 +1,72 @@
 import { Styled } from '@components/Mypage/styles';
-import React from 'react';
-import Search from '@assets/images/mypage/search.svg';
-import Option from '@assets/images/mypage/option.svg';
-import { timeIntervals } from 'src/utils/mypage/orderTimeList';
+import React, { Dispatch, SetStateAction, useState } from 'react';
+import { getPurchaseList } from 'src/apis/mypage/purchase';
+import OrderStatus from '../OrderStatus';
+import SearchOption from '../SearchOption';
+import Calendar from '../Calendar';
 
-const ListCheck = () => {
+const ListCheck = ({
+  setPurchaseList,
+}: {
+  setPurchaseList: Dispatch<SetStateAction<[]>>;
+}) => {
+  const [selectedDateRange, setSelectedDateRange] = useState<
+    [Date | null, Date | null]
+  >([null, null]);
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [orderStatus, setOrderStatus] = useState('ALL');
+
+  // 구매목록 조회
+  const handleSearchList = async () => {
+    try {
+      if (startDate > endDate) {
+        alert('정확한 날짜를 입력해주세요.');
+        return; // Alert를 발생시킨 후 함수 실행 중단
+      }
+
+      const res = await getPurchaseList({
+        startDate,
+        endDate,
+        orderStatus,
+      });
+      console.log(res.data);
+      setPurchaseList(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <Styled.CheckWrapper>
       <Styled.ListText>구매목록</Styled.ListText>
-      {/* 디자인 다시 나오는중 */}
-      {/* <Styled.CheckButton>주문내역 조회</Styled.CheckButton> */}
       <Styled.InfoText>
-        기본적으로 최근 3개월간의 자료가 조회되며, 기간 검색시 지난 주문내역을
-        조회하실 수 있습니다.
+        기간 검색과 처리 상태 검색을 이용해 지난 주문내역을 조회하실 수
+        있습니다.
       </Styled.InfoText>
+
       <Styled.Checkbox>
-        {timeIntervals.map(interval => (
-          <Styled.InfoText key={interval}>{interval}</Styled.InfoText>
-        ))}
-        <Styled.IconWrapper>
-          <Styled.SearchInput placeholder="23-02-06 ~ 23-05-07" />
-          <Search className="relative cursor-pointer right-8" />
-        </Styled.IconWrapper>
-        <Styled.IconWrapper>
-          {/* 클릭시 리스트 옵션 나와야할듯 */}
-          <Styled.SearchInput placeholder="전체 주문처리상태" />
-          <Option className="relative cursor-pointer right-10" />
-        </Styled.IconWrapper>
+        {/* 기간 옵션 검색 */}
+        <SearchOption
+          setEndDate={setEndDate}
+          setStartDate={setStartDate}
+          setSelectedDateRange={setSelectedDateRange}
+        />
+
+        {/* 기간 검색 */}
+        <Calendar
+          setEndDate={setEndDate}
+          setSelectedDateRange={setSelectedDateRange}
+          setStartDate={setStartDate}
+          handleSearchList={handleSearchList}
+          selectedDateRange={selectedDateRange}
+        />
+
+        {/* 주문 처리 상태 검색 */}
+        <OrderStatus
+          setOrderStatus={setOrderStatus}
+          orderStatus={orderStatus}
+        />
       </Styled.Checkbox>
     </Styled.CheckWrapper>
   );
