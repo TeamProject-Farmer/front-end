@@ -71,17 +71,14 @@ const CartItems = ({ cartListArray }: { cartListArray: CartListProps[] }) => {
             onChange={() => handleCheckboxClick(item.cartId)}
             type="checkbox"
           />
-
           <Image
             src={item.imgUrl}
             priority
             alt="식물 사진"
             width={100}
             height={100}
-            // aspect ratio error fix
-            style={{ width: 'auto', height: 'auto' }}
+            style={{ width: '100px', height: '100px' }}
           />
-
           <Styled.ListInfoText size="18" color={theme.colors.black}>
             {item.productName} <br />
             <Styled.ListSpan>{item.optionName}</Styled.ListSpan>
