@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import More from '@assets/images/mypage/more.svg';
-import Button from '@components/Home/Common/Button';
+import OptionButton from '@assets/images/mypage/option.svg';
 
 export const Styled = {
   Container: styled.div`
@@ -177,6 +177,7 @@ export const Styled = {
     margin-bottom: 1.5rem;
   `,
   InfoText: styled.h1`
+    cursor: pointer;
     font-size: 16px;
     font-weight: 500;
     color: ${theme.colors.mypageGray};
@@ -203,20 +204,30 @@ export const Styled = {
     align-items: center;
     margin-top: 0.9rem;
   `,
-  SearchInput: styled.input`
+  SearchInput: styled.select`
     background-color: ${theme.colors.white};
-    padding: 0 40px;
+    cursor: pointer;
+    padding: 0 60px;
     height: 2.3rem;
     font-size: 16px;
-    font-weight: 500;
-    color: ${theme.colors.black};
+    font-weight: 400;
+    color: ${theme.colors.mypageGray};
+    text-align: center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  `,
+  OPtionIcon: styled(OptionButton)`
+    margin-left: -40px;
+    align-self: center;
+    cursor: pointer;
+    pointer-events: none;
   `,
   IconWrapper: styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
   `,
-
   TitleText: styled.h1`
     font-size: 20px;
     font-weight: 700;
@@ -224,9 +235,17 @@ export const Styled = {
     margin-top: 2.5rem;
     margin-bottom: 1rem;
   `,
+  NoneText: styled.h1`
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    color: ${theme.colors.mypageGray};
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+  `,
   ListInfoText: styled.h1<{ size?: string; color?: string }>`
     font-size: ${props => props.size}px;
-    font-weight: 500;
+    font-weight: 400;
     color: ${props => props.color};
   `,
   ListSpan: styled.span`
@@ -495,5 +514,13 @@ export const Styled = {
     font-weight: 500;
     color: #fd6666;
     margin-left: 1rem;
+  `,
+
+  // calendar
+  Box: styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: ${theme.colors.white};
   `,
 };
