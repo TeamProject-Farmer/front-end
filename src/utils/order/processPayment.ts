@@ -22,7 +22,6 @@ const processPayment = (
     buyer_addr: basicAddress + detailAddress,
     buyer_postcode: postCode,
   };
-
   const { IMP } = window;
   IMP.init(process.env.NEXT_PUBLIC_IMP_UID);
 
