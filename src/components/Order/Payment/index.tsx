@@ -21,7 +21,6 @@ const Payment = ({ setTotalAmount }) => {
     handleSelectedCoupon,
     disabledPointBtn,
     disabledCouponBtn,
-    getDiscountedPrice,
     discountedPrice,
     getFinalPrice,
     calculateDiscountedPrice,

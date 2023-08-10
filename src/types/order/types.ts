@@ -41,6 +41,7 @@ export interface IInputFieldProps {
   control?: any;
   setValue?: any;
   trigger?: any;
+  point?: number;
 }
 
 export interface ICheckBoxInputProps {

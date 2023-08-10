@@ -106,11 +106,11 @@ const useDiscount = (
     }
   };
 
-  useEffect(() => {
-    if (selectedCoupon !== null) {
-      calculateDiscountedPrice(price);
-    }
-  }, [selectedCoupon]);
+  // useEffect(() => {
+  //   if (selectedCoupon !== null) {
+  //     calculateDiscountedPrice(price);
+  //   }
+  // }, [selectedCoupon]);
 
   //최종 가격 계산
   const getFinalPrice = (productPrice: number) => {

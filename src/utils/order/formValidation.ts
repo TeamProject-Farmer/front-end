@@ -16,3 +16,13 @@ export const validateMobile = (value: string) => {
   }
   return true;
 };
+
+export const validatePoint = (point: number, usedPoint: number) => {
+  if (usedPoint > point) {
+    return alert('최대로 사용할 수 있는 적립금을 초과하였습니다.');
+  }
+  if (usedPoint < 2000) {
+    return alert('적립금 최소 사용금액은 2000원입니다.');
+  }
+  return true;
+};

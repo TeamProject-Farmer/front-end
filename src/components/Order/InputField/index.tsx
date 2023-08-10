@@ -8,6 +8,7 @@ import {
   requiredErrorMsg,
   validateName,
   validateMobile,
+  validatePoint,
 } from 'src/utils/order/formValidation';
 import Button from './Button';
 import { IInputFieldProps } from 'src/types/order/types';
@@ -30,6 +31,7 @@ const InputField = ({
   control,
   setValue,
   trigger,
+  point,
 }: IInputFieldProps) => {
   // 배송 메시지 직접 입력
   const [showShippingMsgInput, setShowShippingMsgInput] =
