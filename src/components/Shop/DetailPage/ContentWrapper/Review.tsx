@@ -76,6 +76,7 @@ const Review = () => {
       </Styled.OptionBox>
       <Styled.TotalLike>
         <div>
+          
           <TotalStarGauge star={reviewTotalStar} />
           <div>
             {errorMessage

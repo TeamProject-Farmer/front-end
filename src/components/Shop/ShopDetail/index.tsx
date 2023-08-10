@@ -33,6 +33,7 @@ const ShopDetail = () => {
   
   console.log('shopdetail--------categoryId')
   console.log(categoryId)
+  console.log(productList)
   return (
     <Styled.Wrapper>
       <Category />

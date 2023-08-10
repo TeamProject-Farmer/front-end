@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import { sizeSortOptions, productSortOptions } from 'src/types/shop/types';
@@ -8,14 +8,45 @@ import { getShopBySize } from 'src/apis/shop/product';
 import { ShortTempProduct } from '../type';
 
 const BySize = () => {
-  const [sizetOption, setSizeOption] = useState<string>('S');
+  const [sizeOption, setSizeOption] = useState<string>('S');
+  const [orderType, setOrderType] = useState<string>('NEWS');
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [productList, setProductList] = useState([]);
+  const [totalPages, setTotalPages] = useState(0);
 
+  const handleDetailData = async () => {
+    const response = await getShopBySize({
+      sizeOption,
+      orderType,
+      currentIndex,
+    });
+    setProductList(response.content);
+    setTotalPages(response.totalPages);
+  };
+  useEffect(() => {
+    handleDetailData();
+  }, [currentIndex]);
+  useEffect(() => {
+    setCurrentIndex(0);
+    if(currentIndex == 0) handleDetailData();
+  }, [sizeOption, orderType])
   return (
     <Styled.Wrapper>
-      <SizeBar optionList={sizeSortOptions} setProductOption={setSizeOption} productOption={sizetOption} />
+      <SizeBar
+        optionList={sizeSortOptions}
+        setProductOption={setSizeOption}
+        productOption={sizeOption}
+      />
       <Styled.ContentWrapper>
-        <ProductWrapper productList={ShortTempProduct}/>
+        <ProductWrapper
+          productList={productList}
+          setProductOption={setOrderType}
+          productOption={orderType}
+          currentIndex={currentIndex}
+          setCurrentIndex={setCurrentIndex}
+          totalIndex={totalPages}
+          isExceptional={true}
+        />
       </Styled.ContentWrapper>
     </Styled.Wrapper>
   );

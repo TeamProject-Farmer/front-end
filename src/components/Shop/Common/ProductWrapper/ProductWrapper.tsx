@@ -6,23 +6,35 @@ import theme from '@styles/theme';
 import SideAd from '../SideAd';
 import OrderBar from '../OrderBar';
 import Product from '@components/Common/Product';
+import Pagination from '@components/Shop/DetailPage/ContentWrapper/Pagination';
 import { productSortOptions } from 'src/types/shop/types';
 import { ProductAPI } from 'src/types/shop/types';
 
 interface Props {
-  productList: any;
+  productList: any[];
+  setProductOption: React.Dispatch<React.SetStateAction<string>>;
+  productOption: string;
+  currentIndex: number;
+  setCurrentIndex: React.Dispatch<React.SetStateAction<number>>;
+  totalIndex: number;
+  isExceptional?: boolean;
 }
 const ProductWrapper = (props: Props) => {
-  const { productList } = props;
+  const {
+    productList,
+    setProductOption,
+    productOption,
+    currentIndex,
+    setCurrentIndex,
+    totalIndex,
+    isExceptional,
+  } = props;
   const router = useRouter();
   const menu = router.query.category;
   let category: string;
   if (menu) {
     category = menu.toString();
   }
-  const [productOption, setProductOption] = useState<string>('NEWS');
-  const [totalPages, setTotalPages] = useState<number>();
-
   return (
     <Styled.Wrapper>
       <OrderBar
@@ -45,15 +57,19 @@ const ProductWrapper = (props: Props) => {
             ></Product>
           </Link>
         ))}
+        <Pagination
+          currentIndex={currentIndex}
+          setCurrentIndex={setCurrentIndex}
+          totalIndex={totalIndex}
+          isExceptional={isExceptional}
+        />
       </Styled.OrderItemWrapper>
     </Styled.Wrapper>
   );
 };
 
 const Styled = {
-  Wrapper : styled.div`
-   
-  `,
+  Wrapper: styled.div``,
   OrderItemWrapper: styled.div`
     position: relative;
     width: ${theme.size.mainWidth};

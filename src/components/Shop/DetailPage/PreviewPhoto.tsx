@@ -1,13 +1,12 @@
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import Image from 'next/image';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import leftArrow from '@assets/images/shop/previewLeftArrow.svg';
 import rightArrow from '@assets/images/shop/previewRightArrow.svg';
 import { getReviewImage } from 'src/apis/shop/review';
-import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from 'store';
-export const idSelector = (state: RootState) => state.productId;
+import { idSelector } from 'src/types/shop/types';
 
 const PreviewPhoto = () => {
   const productId = useSelector(idSelector);

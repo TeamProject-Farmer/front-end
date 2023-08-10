@@ -47,6 +47,7 @@ export const sizeSortOptions: ISortOption[] = [
   { title: 'Large', param: 'L' },
 ];
 
+
 export interface OptionBarProps {
   optionList: ISortOption[];
   width?: string;
@@ -97,6 +98,7 @@ export interface SingleReviewProps {
   memberNickname: string;
   optionName: string;
   productName: string;
+  reviewId: number;
 }
 
 export type secretQuestion = 'GENERAL' | 'SECRET';

@@ -11,68 +11,61 @@ import boxIcon from '@assets/images/shop/boxIcon.svg';
 import down from '@assets/images/shop/downloadIcon.svg';
 import arrow from '@assets/images/shop/optionArrow.svg';
 import { getDetail } from 'src/apis/shop/product';
-import { getReview } from 'src/apis/shop/review';
+import { getReview, getReviewStar } from 'src/apis/shop/review';
 import { useSelector } from 'react-redux';
-import { idSelector, PanelProps } from 'src/types/shop/types';
+import { idSelector } from 'src/types/shop/types';
 
 const Panel = () => {
   const productId = useSelector(idSelector);
-  // const [detailList, setDetailList] = useState({});
   const [thumbnailImg, setThumbnailImg] = useState<string>();
   const [name,setName] = useState<string>();
   const [discountRate,setDiscountRate] = useState<number>();
-  const [price,setPrice] = useState<number>();
-
-  // const [detailList, setDetailList] = useState<PanelProps>();
-  // const [detailList, setDetailList] = useState<PanelProps>({}); 이렇게 하면 오류 남
+  const [price,setPrice] = useState<string>();
   const [totalStar, setTotalStar] = useState(0);
+  const [options, setOptions] = useState([]);
 
   const handleDetailData = async () => {
     const response = await getDetail(productId);
-    setThumbnailImg(response.thumbnailImg);
+    setOptions(response.options)
     setName(response.name);
+    setThumbnailImg(response.thumbnailImg);
     setDiscountRate(response.discountRate);
-    setPrice(response.price);
+    setPrice(response.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
   };
   const handleReviewData = async () => {
     const response = await getReview(productId, 'best');
     setTotalStar(response.totalElements);
   };
+  const handleReviewStar = async () => {
+    try {
+      const response = await getReviewStar(productId);
+      setTotalStar(response.averageStarRating);
+    } catch (err) {
+      console.log('Register err : ', err.response);
+      if(err.response.data.message == '해당 상품에 대한 리뷰가 존재하지 않습니다.') setTotalStar(0)
+    }
+  };
 
   useEffect(() => {
     handleDetailData();
     handleReviewData();
+    handleReviewStar();
   }, []);
-  console.log(thumbnailImg)
-  let like: number = 4;
-  const filledStar = <Styled.Star />;
-  const blankStar = <Styled.BlankStar />;
-  const maxStars = 5;
-  let stars = (
-    <Styled.StarWrapper>
-      {Array.from({ length: maxStars }, (_, index) =>
-        index < like ? filledStar : blankStar,
-      )}
-    </Styled.StarWrapper>
-  );
-  const tempOptionList = [
-    { id: '01', price: '0', menu: '피쉬본 단품' },
-    { id: '02', price: '1,500', menu: '피쉬본 단품+심플화분' },
-    { id: '03', price: '3,000', menu: '피쉬본 단품+심플화분+영양제' },
-    { id: '04', price: '5,000', menu: '피쉬본 선물세트(화분+영양제+포장)' },
-  ];
+  console.log('panelPage----options')
+  console.log(options)
   return (
     <Styled.Wrapper>
       <Styled.InnerBox>
         <Styled.ImageBox>
           {/* 이 부분 수정 필요 */}
-          <Image
+          {thumbnailImg && <Image
             src={thumbnailImg}
-            alt="temp"
+            alt="Thumbnail-Imgage"
             className="imageStyle"
             width={548.55}
             height={547.55}
-          ></Image>
+            priority={true}
+          ></Image>}
         </Styled.ImageBox>
         <Styled.ContentWrapper>
           <Styled.TitleWrapper>
@@ -82,7 +75,7 @@ const Panel = () => {
           <Styled.Review>
             {/* <Styled.StarWrapper>{stars}</Styled.StarWrapper> */}
             <Styled.StarWrapper>
-              <TotalStarGauge star={totalStar} />
+              <TotalStarGauge star={totalStar} size={20} color='#FFB800'/>
             </Styled.StarWrapper>
             <div>{totalStar}개의 리뷰</div>
           </Styled.Review>
@@ -114,7 +107,7 @@ const Panel = () => {
               <Styled.EachShipTitle>배송</Styled.EachShipTitle>
               <Styled.EachShipContent>
                 <Styled.ShipCommonBox>
-                  <div>3000원</div>
+                  <div>3,000원</div>
                   <div>선결제</div>
                 </Styled.ShipCommonBox>
                 <div>일반택배</div>
@@ -141,12 +134,12 @@ const Panel = () => {
             <div>옵션</div>
             <Styled.OptionArrow />
             <Styled.Select>
-              {tempOptionList.map((item, index) => (
-                <Styled.Options key={index}>
+              {options?.map((item, index) => (
+                <Styled.Options key={item.id}>
                   <div>
-                    {item.id}. {item.menu}
+                    {index}. {item.optionName}
                   </div>
-                  <div>+{item.price}원</div>
+                  <div>+{item.optionPrice}원</div>
                 </Styled.Options>
               ))}
             </Styled.Select>
@@ -187,8 +180,8 @@ const Styled = {
     margin-right: 56px;
     overflow: hidden;
     .imageStyle {
-      width: auto;
-      height: auto;
+      width: 548.55px;
+      height: 547.55px;
       object-fit: cover;
     }
   `,
@@ -212,9 +205,11 @@ const Styled = {
   `,
   Review: styled.div`
     display: flex;
+    align-items: center;
     & > div:last-child {
       font-size: 12px;
       font-weight: 600;
+      padding-top: 5px;
     }
   `,
   StarWrapper: styled.div`
@@ -246,6 +241,7 @@ const Styled = {
     font-weight: 400;
     color: #585858;
     & > div:last-child {
+      margin-left: 8px;
       text-decoration: line-through;
       color: #b3b3b3;
     }

@@ -16,7 +16,7 @@ const EventDetail = () => {
   };
   useEffect(() => {
     handleEventProductList();
-  }, [])
+  }, []);
   return (
     <Styled.Wrapper>
       <Category />
@@ -25,19 +25,22 @@ const EventDetail = () => {
         <SideAd />
         <Styled.ImageWrapper />
         <Styled.ItemWrapper>
-        {productList && productList.map(i => (
-            <Link href={`/shop/event/detail/${i.productId}`}>
-              <Product
-                key={i.productId}
-                thumbnailImg={i.imgUrl}
-                name={i.productName}
-                discountRate={i.discountRate}
-                price={i.price}
-                averageStarRating={i.averageStarRating}
-                reviewCount={i.reviewCount}
-              ></Product>
-            </Link>
-          ))}
+          {productList &&
+            productList.map(i => (
+              <div key={i.productId}>
+                <Link href={`/shop/event/detail/${i.productId}`}>
+                  <Product
+                    id={i.productId}
+                    thumbnailImg={i.imgUrl}
+                    name={i.productName}
+                    discountRate={i.discountRate}
+                    price={i.price}
+                    averageStarRating={i.averageStarRating}
+                    reviewCount={i.reviewCount}
+                  ></Product>
+                </Link>
+              </div>
+            ))}
         </Styled.ItemWrapper>
       </Styled.ContentWrapper>
     </Styled.Wrapper>
@@ -78,11 +81,11 @@ const Styled = {
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
-    & > a > div {
+    & > div > a > div {
       margin-right: 22.56px;
       margin-bottom: 21.76px;
     }
-    & > a:nth-child(4n) > div {
+    & > div:nth-of-type(4n) > a > div {
       margin-right: 0;
     }
   `,

@@ -2,9 +2,7 @@ import Image from 'next/image';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import VerticalLine from '@components/Shop/Common/VerticalLine';
-import tempStar1 from '@assets/images/shop/tempStars1.svg';
-// import TotalStarGauge from '@components/Shop/Common/gauge/TotalStarGauge';
-import tempStar2 from '@assets/images/shop/tempStars2.svg';
+import TotalStarGauge from '@components/Shop/Common/gauge/TotalStarGauge';
 import { postReviewLike } from 'src/apis/shop/review';
 import { SingleReviewProps } from 'src/types/shop/types';
 type Props= {
@@ -29,10 +27,8 @@ const SingleReview = ({ dataList }: Props) => {
     <Styled.SingleReview>
       <div></div>
       <div>
-        {/* 이 부분에 별점 들어갈 예정 */}
-        <Styled.ReviewSvg1 />
-        {/* <TotalStarGauge star={fiveStarRating}/> */}
-        <div>{createdDate.slice(0, 10)}</div>
+        <TotalStarGauge star={fiveStarRating} size={16}/>
+        <Styled.ReviewDate>{createdDate.slice(0, 10)}</Styled.ReviewDate>
         <div>·</div>
         <div>{memberNickname} 구매</div>
       </div>
@@ -72,12 +68,10 @@ const Styled = {
       align-items: center;
       gap: 5px;
     }
-    & > div > svg {
-      margin-right: 2px;
-    }
   `,
-  ReviewSvg1: styled(tempStar1)``,
-  ReviewSvg2: styled(tempStar2)``,
+  ReviewDate: styled.div`
+    margin-left: 7px;
+  `,
   ShoppingOption: styled.div`
     margin-top: 21px;
     display: flex;

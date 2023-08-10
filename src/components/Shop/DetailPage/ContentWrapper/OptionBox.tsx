@@ -1,36 +1,43 @@
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { idSelector } from 'src/types/shop/types';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import heart from '@assets/images/shop/optionBoxHeart.svg';
-import { useState } from 'react';
+import { getDetail } from 'src/apis/shop/product';
+
 
 const OptionBox = () => {
+  const productId = useSelector(idSelector);
   const [isShowOptions, setShowOptions] = useState(false);
   const [selectList, setSelectList] = useState([]);
-  const tempList = [
-    { id: 0, option: '01. 피쉬본 단품', price: '0' },
-    { id: 1, option: '02. 피쉬본 단품+심플화분', price: '1,500' },
-    { id: 2, option: '03. 피쉬본 단품+심플화분+영양제', price: '3,000' },
-    { id: 3, option: '04. 피쉬본 선물 세트(화분+영양제+포장)', price: '5,000' },
-  ];
+  const [options, setOptions] = useState([]);
+  const handleDetailData = async () => {
+    const response = await getDetail(productId);
+    setOptions(response.options)
+  };
+  useEffect(() => {
+    handleDetailData();
+  }, [])
   return (
     <Styled.Wrapper>
       <Styled.Upper>
         <Styled.SelectBox onClick={() => setShowOptions(prev => !prev)}>
           <Styled.Label>상품을 선택하세요.</Styled.Label>
           <Styled.SelectOptions show={isShowOptions}>
-            {tempList.map(item => (
+            {options?.map(item => (
               <Styled.Option
                 key={item.id}
                 onClick={() =>
                   setSelectList([
                     ...selectList.filter(i => i.id != item.id),
-                    { id: item.id, option: item.option, price: item.price },
+                    { id: item.id, option: item.optionName, price: item.optionPrice },
                   ])
                 }
               >
                 <div>
-                  <ColorOption>{item.option}</ColorOption>
-                  <div>+{item.price}원</div>
+                  <ColorOption>{item.optionName}</ColorOption>
+                  <div>+{item.optionPrice}원</div>
                 </div>
               </Styled.Option>
             ))}

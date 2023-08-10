@@ -6,7 +6,7 @@ import DetailImage from './DetailImage';
 import Review from './Review';
 import Inquiry from './Inquiry';
 import Notice from './Notice';
-import SimilarProducts from './SimilarProducts';
+// import SimilarProducts from './SimilarProducts';
 
 
 const ContentWrapper = () => {
@@ -19,8 +19,8 @@ const ContentWrapper = () => {
           <Review />
           <Inquiry />
           <Notice />
-          <SimilarProducts />
-          <Styled.BackButton>뒤로가기</Styled.BackButton>
+          {/* <SimilarProducts /> */}
+          {/* <Styled.BackButton>뒤로가기</Styled.BackButton> */}
         </Styled.ExceptOption>
         <OptionBox />
       </Styled.ContentWrapper>
@@ -40,7 +40,8 @@ const Styled = {
     margin-top: 58px;
     display: flex;
     margin-bottom: 187px;
-    height: calc(5315 - 180)px;
+    /* height: 4635px; */
+    height: 4535px;
     position: relative;
   `,
   ExceptOption: styled.div`
