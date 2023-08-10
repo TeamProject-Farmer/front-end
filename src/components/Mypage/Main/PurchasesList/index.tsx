@@ -28,15 +28,11 @@ const PurchasesList = () => {
               <Image
                 src={purchase.imgUrl}
                 alt="식물 사진"
-                width={100}
-                height={100}
-                // aspect ratio error fix
-                style={{ width: 'auto', height: 'auto' }}
+                width={170}
+                height={170}
+                style={{ width: '170px', height: '170px' }}
               />
-              <Styled.Title>
-                {purchase.productName}
-                {index}
-              </Styled.Title>
+              <Styled.Title>{purchase.productName}</Styled.Title>
             </Styled.ListDiv>
           ))}
         </Styled.ListWrapper>
