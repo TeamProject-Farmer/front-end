@@ -64,39 +64,17 @@ const useDiscount = (
   const [discountedPrice, setDiscountedPrice] = useState<number>();
 
   const getDiscountedPrice = () => {
-    console.log(usedPoint);
-
     if (selectedCoupon !== null) {
       setDisabledCouponBtn(false);
     } else {
-      setDiscountedPrice(usedPoint);
+      // setDiscountedPrice(usedPoint);
       setDisabledCouponBtn(true);
     }
-    // if (selectedCoupon === null && usedPoint) {
-    //   setDiscountedPrice(usedPoint);
-    //   setDisabledCouponBtn(true);
-    // }
-    // if (selectedCoupon && selectedCoupon.couponPolicy === 'FIXED') {
-    //   setDiscountedPrice(selectedCoupon.fixedPrice);
-    // }
-    // if (selectedCoupon && selectedCoupon.couponPolicy === 'RATE') {
-    //   const price = fullPrice * (selectedCoupon.rateAmount / 100);
-    //   setDiscountedPrice(price);
-    // }
   };
 
-  const calculateDiscountedPrice = (fullPrice: number) => {
-    console.log(usedPoint);
-    if (usedPoint > point) {
-      alert('최대로 사용할 수 있는 적립금을 초과하였습니다.');
-      return;
-    }
-    if (usedPoint < 2000) {
-      alert('적립금 최소 사용금액은 2000원입니다.');
-      return;
-    }
-    if (selectedCoupon === null && usedPoint !== 0) {
-      setDiscountedPrice(usedPoint);
+  const calculateDiscountedCouponPrice = (fullPrice: number) => {
+    if (selectedCoupon === null) {
+      setDiscountedPrice(0);
     }
     if (selectedCoupon && selectedCoupon.couponPolicy === 'FIXED') {
       setDiscountedPrice(selectedCoupon.fixedPrice);
@@ -106,11 +84,27 @@ const useDiscount = (
     }
   };
 
-  // useEffect(() => {
-  //   if (selectedCoupon !== null) {
-  //     calculateDiscountedPrice(price);
-  //   }
-  // }, [selectedCoupon]);
+  const calculateDiscountedPointPrice = () => {
+    let updatedDiscountedPrice = null;
+
+    if (usedPoint > point) {
+      alert('최대로 사용할 수 있는 적립금을 초과하였습니다.');
+      setUsedPoint(point);
+      updatedDiscountedPrice = point;
+    } else if (usedPoint < 2000) {
+      alert('적립금 최소 사용금액은 2000원입니다.');
+      setUsedPoint(point);
+      updatedDiscountedPrice = point;
+    } else if (usedPoint >= 2000 && usedPoint <= point) {
+      updatedDiscountedPrice = usedPoint;
+    }
+
+    setDiscountedPrice(updatedDiscountedPrice);
+  };
+
+  useEffect(() => {
+    calculateDiscountedCouponPrice(price);
+  }, [selectedCoupon]);
 
   //최종 가격 계산
   const getFinalPrice = (productPrice: number) => {
@@ -130,7 +124,8 @@ const useDiscount = (
     getDiscountedPrice,
     discountedPrice,
     getFinalPrice,
-    calculateDiscountedPrice,
+    calculateDiscountedCouponPrice,
+    calculateDiscountedPointPrice,
   };
 };
 

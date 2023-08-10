@@ -23,7 +23,8 @@ const Payment = ({ setTotalAmount }) => {
     disabledCouponBtn,
     discountedPrice,
     getFinalPrice,
-    calculateDiscountedPrice,
+    calculateDiscountedCouponPrice,
+    calculateDiscountedPointPrice,
   } = useDiscount(setTotalAmount, 40000);
 
   return (
@@ -35,7 +36,7 @@ const Payment = ({ setTotalAmount }) => {
           usedPoint={usedPoint}
           handlePoint={handlePointChange}
           disabledPointBtn={disabledPointBtn}
-          getDiscountedPrice={() => calculateDiscountedPrice(productData.price)}
+          getDiscountedPrice={calculateDiscountedPointPrice}
         />
         <InputField
           label="쿠폰"
@@ -43,7 +44,9 @@ const Payment = ({ setTotalAmount }) => {
           couponOptions={coupon}
           handleSelectedCoupon={handleSelectedCoupon}
           disabledCouponBtn={disabledCouponBtn}
-          getDiscountedPrice={() => calculateDiscountedPrice(productData.price)}
+          getDiscountedPrice={() =>
+            calculateDiscountedCouponPrice(productData.price)
+          }
         />
         <Styled.InnerMarginWrapper>
           <Styled.DiscountedPrice>
