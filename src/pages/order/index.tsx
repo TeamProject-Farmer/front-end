@@ -24,7 +24,7 @@ const productList: IOrderedProduct[] = [
     optionName: 'string',
     count: 0,
     productPrice: 0,
-    totalPrice: 0,
+    totalPrice: 1000,
   },
 ];
 
