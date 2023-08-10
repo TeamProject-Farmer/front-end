@@ -1,14 +1,17 @@
 import React from 'react';
 import { Styled } from '../styles';
 import theme from '@styles/theme';
+import { useRouter } from 'next/router';
 
 const NoneCartList = () => {
+  const router = useRouter();
+
   return (
     <Styled.NoneListWrapper>
       <Styled.ListText>장바구니 목록이 비어있습니다.</Styled.ListText>
 
       <Styled.CartCommonButton
-        onClick={() => console.log('쇼핑 페이지로')}
+        onClick={() => router.push('/shop')}
         backgroundColor={theme.colors.green1}
         padding="0.7"
         width="125"
