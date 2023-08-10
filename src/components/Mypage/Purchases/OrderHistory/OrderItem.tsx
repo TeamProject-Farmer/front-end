@@ -4,8 +4,15 @@ import { Styled } from '@components/Mypage/styles';
 import OrderInfoText from './OrderInfoText';
 import { OrderListProps } from 'src/types/mypage/types';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 export const OrderItem = ({ order }: { order: OrderListProps }) => {
+  const router = useRouter();
+
+  const handleProductIntoPage = () => {
+    router.push(`/shop/category/detail/${order.productId}`);
+  };
+
   return (
     <Styled.FlexRowCenter>
       <OrderInfoText
@@ -33,8 +40,9 @@ export const OrderItem = ({ order }: { order: OrderListProps }) => {
           color={theme.colors.mypageGray}
           text={`[옵션] ${order.optionName}`}
         />
-        {/* 상세보기 페이지로 이동 */}
-        <Styled.ProductButton>상품 상세보기</Styled.ProductButton>
+        <Styled.ProductButton onClick={handleProductIntoPage}>
+          상품 상세보기
+        </Styled.ProductButton>
       </Styled.ProductInfoWrapper>
       <OrderInfoText
         size="20"
