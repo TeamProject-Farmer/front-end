@@ -32,25 +32,19 @@ const SliderContent = ({ sliderContents, activeIndex }) => {
         {sliderContents &&
           sliderContents?.map((content: IBanner) =>
             activeIndex === content.id ? (
-              <Styled.Content
-                key={content.id}
-                variants={imgVariants}
-                imgUrl={content.imgUrl}
-                initial="initial"
-                animate="start"
-                exit="end"
-              >
-                <Link href={content.linkUrl}>
-                  <Styled.ContentBox>
-                    <Styled.Slogan>Let's be a</Styled.Slogan>
-                    <Styled.Slogan>Farmer!</Styled.Slogan>
-                    <Styled.Description>
-                      사무공간, 생활공간을 그린 친화적으로
-                    </Styled.Description>
+              <Link key={content.id} href={content.linkUrl}>
+                <Styled.Content
+                  variants={imgVariants}
+                  imgurl={content.imgUrl}
+                  initial="initial"
+                  animate="start"
+                  exit="end"
+                >
+                  {content.id === 1 && (
                     <Styled.ShopBtn>&gt; Shop Now</Styled.ShopBtn>
-                  </Styled.ContentBox>
-                </Link>
-              </Styled.Content>
+                  )}
+                </Styled.Content>
+              </Link>
             ) : null,
           )}
       </AnimatePresence>
@@ -61,40 +55,22 @@ const SliderContent = ({ sliderContents, activeIndex }) => {
 export default SliderContent;
 
 const Styled = {
-  Content: styled(motion.div)<{ imgUrl: string }>`
+  Content: styled(motion.div)<{ imgurl: string }>`
     position: absolute;
     width: 100%;
     height: 100%;
-    background-image: url(imgUrl);
-    background-size: 100% auto;
-  `,
-  ContentBox: styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 670px;
-    height: 610px;
-    padding: 120px 100px;
-    position: absolute;
-    top: 118px;
-    left: 388px;
-  `,
-  Slogan: styled.p`
-    font-size: 90px;
-    color: #fff;
-  `,
-  Description: styled.p`
-    font-size: 30px;
-    color: ${theme.colors.green1};
+    background-image: url(${({ imgurl }) => imgurl});
+    background-size: 100%;
+    background-repeat: no-repeat;
   `,
   ShopBtn: styled.p`
-    margin-top: 30px;
-    flex-shrink: 0;
+    position: absolute;
+    top: 488px;
+    left: 584px;
     border-radius: 10px;
     width: 114px;
     height: 40px;
-    font-size: 20px;
-    background-color: #47ac3a;
+    background-color: ${theme.colors.green1};
     color: #fff;
     display: flex;
     align-items: center;

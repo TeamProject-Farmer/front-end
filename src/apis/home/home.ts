@@ -14,6 +14,7 @@ export const getShopBySize = async (size: string) => {
       size: size,
     },
   });
+  console.log(response.data);
   return response.data;
 };
 

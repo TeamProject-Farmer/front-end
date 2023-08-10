@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import { useState } from 'react';
 import Icon from '../Icon';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'store';

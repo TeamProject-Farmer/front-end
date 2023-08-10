@@ -79,7 +79,7 @@ const Styled = {
     justify-content: center;
     align-items: center;
   `,
-  PayNow: styled.div`
+  PayNow: styled.button`
     background-color: ${theme.colors.green1};
     border-radius: 5px;
     color: #fff;

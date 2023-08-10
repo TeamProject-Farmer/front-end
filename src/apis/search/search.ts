@@ -6,14 +6,12 @@ export const postSearch = async (
   memberEmail?: string,
   sortSearchCond?: string,
 ) => {
-  const response = await request({
-    method: 'post',
-    url: '/api/main/search',
-    params: {
-      searchWord: searchWord,
-      memberEmail: memberEmail,
-      sortSearchCond: sortSearchCond,
+  const response = await request.post(
+    '/main/search',
+    {},
+    {
+      params: { searchWord, memberEmail, sortSearchCond },
     },
-  });
+  );
   return response.data;
 };

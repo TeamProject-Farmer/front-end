@@ -4,15 +4,16 @@ import Review from './Review';
 import { IReview } from 'src/types/home/types';
 
 const BestReview = ({ bestReview }) => {
+  // console.log('bestReview', bestReview);
   return (
     <Styled.Wrapper>
       <Styled.ReviewContainer>
         <Title title="베스트 리뷰" color="#285430" />
         <Styled.Reviews>
           {bestReview &&
-            bestReview?.map((review: IReview) => (
+            bestReview?.map((review: IReview, index) => (
               <Review
-                key={review.memberNickName}
+                key={index}
                 memberNickName={review.memberNickName}
                 imgUrl={review.imgUrl}
                 fiveStarRating={review.fiveStarRating}
