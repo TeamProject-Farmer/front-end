@@ -17,7 +17,6 @@ const CartList = ({ cartListArray }: { cartListArray: CartListProps[] }) => {
   return (
     <Styled.CheckWrapper>
       <Styled.ListText>장바구니 목록</Styled.ListText>
-
       {/* 리스트 상단 */}
       <Styled.FlexCartRow>
         <Styled.CartCheckBox
@@ -31,9 +30,10 @@ const CartList = ({ cartListArray }: { cartListArray: CartListProps[] }) => {
           </Styled.ListInfoText>
         ))}
       </Styled.FlexCartRow>
-
+      {/* 장바구니 아이템 */}
       <CartItems cartListArray={cartListArray} />
 
+      {/* 페이지 하단부 버튼 */}
       <Styled.CartCommonButton
         onClick={() => console.log('쇼핑 페이지로')}
         backgroundColor={theme.colors.cartButtonGray}
