@@ -6,16 +6,12 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import OrderBar from '../Common/OrderBar';
 import SideAd from '../Common/SideAd';
-// import Category from '@components/Common/Category';
 import Category from '../Common/Category';
 import Product from '@components/Common/Product';
 import { categprySelector } from 'src/types/shop/types';
-import { productSortOptions } from 'src/types/shop/types';
 import { getProductList } from 'src/apis/shop/product';
-import { getProductCategory } from 'src/apis/common/category';
-import { setProductId } from 'store/reducers/productIdSlice';
 import MDPick from './MDPick';
-import Pagination from '../DetailPage/ContentWrapper/Pagination';
+import ProductWrapper from '../Common/ProductWrapper/ProductWrapper';
 
 const ShopDetail = () => {
   const categoryId = useSelector(categprySelector);
@@ -40,46 +36,13 @@ const ShopDetail = () => {
     setCurrentIndex(0);
     if(currentIndex == 0) handleProductList();
   }, [ productOption])
-  console.log('shopdetail--------categoryId');
-  console.log(categoryId);
-  console.log(productList);
   return (
     <Styled.Wrapper>
       <Category />
       <Styled.Title>{categoryId.name}</Styled.Title>
       <Styled.ContentWrapper>
         <MDPick />
-        <OrderBar
-          optionList={productSortOptions}
-          setProductOption={setProductOption}
-          productOption={productOption}
-        />
-        <Styled.OrderItemWrapper>
-          <SideAd top={0} />
-          {productList &&
-            productList.map(i => (
-              <div key={i.productId}>
-                <Link href={`/shop/${categoryId.name}/detail/${i.productId}`}>
-                  <Product
-                    id={i.productId}
-                    thumbnailImg={i.imgUrl}
-                    name={i.productName}
-                    discountRate={i.discountRate}
-                    price={i.price}
-                    averageStarRating={i.averageStarRating}
-                    reviewCount={i.reviewCount}
-                  />
-                </Link>
-              </div>
-            ))}
-          <Pagination
-            currentIndex={currentIndex}
-            setCurrentIndex={setCurrentIndex}
-            totalIndex={totalPages}
-            isExceptional={true}
-          />
-        </Styled.OrderItemWrapper>
-        {/* <ProductWrapper
+        <ProductWrapper
           productList={productList}
           setProductOption={setProductOption}
           productOption={productOption}
@@ -87,7 +50,7 @@ const ShopDetail = () => {
           setCurrentIndex={setCurrentIndex}
           totalIndex={totalPages}
           isExceptional={true}
-        /> */}
+        />
       </Styled.ContentWrapper>
     </Styled.Wrapper>
   );
@@ -117,22 +80,6 @@ const Styled = {
     flex-direction: column;
     margin-top: 110px;
     align-items: center;
-  `,
-  OrderItemWrapper: styled.div`
-    position: relative;
-    width: ${theme.size.mainWidth};
-    height: 2032px;
-    display: flex;
-    flex-wrap: wrap;
-    align-content: flex-start;
-    margin: 70px 0;
-    & > div > a > div {
-      margin-bottom: 20.47px;
-      margin-right: 20.27px;
-    }
-    & > div:nth-child(4n + 1) > a > div {
-      margin-right: 0;
-    }
   `,
 };
 export default ShopDetail;
