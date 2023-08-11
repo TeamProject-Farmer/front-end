@@ -38,8 +38,9 @@ const Review = () => {
     );
     setReviewContent(response.content);
     setTotalElement(response.totalElements);
-    //임의로 이렇게 처리해뒀는데 추후 totalPages 부분을 수정해야 근본적 문제가 해결 될 것 같습니다..!
-    if(0 < response.numberOfElements && response.numberOfElements< 3) {
+    //filter되도 totalElements는 일정하게 나오기 떄문에 pagenation 값이 변경될 수 없음...! 
+    //totalPages 부분을 수정해야 근본적 문제가 해결 될 것 같습니다..!
+    if(currentIndex == 1 && 0 < response.numberOfElements && response.numberOfElements < 3) {
       setTotalIndex(1);
     }else setTotalIndex(response.totalPages);
   };
@@ -69,6 +70,9 @@ const Review = () => {
   useEffect(() => {
     handleReviewStar();
   }, [productId]);
+  useEffect(() => {
+    setCurrentIndex(1);
+  }, [starOption])
 
   return (
     <Styled.Wrapper>
