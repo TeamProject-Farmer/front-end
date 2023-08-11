@@ -15,7 +15,6 @@ import { SingleReviewProps } from 'src/types/shop/types';
 
 const Review = () => {
   const productId = useSelector(idSelector);
-  const [reviewList, setReviewList] = useState<SingleReviewProps[]>([]);
   const [reviewContent, setReviewContent] = useState([]);
   const [reviewStar, setReviewStar] = useState({});
   const [reviewTotalStar, setReviewTotalStar] = useState<number>();
@@ -26,14 +25,25 @@ const Review = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(1);
   const [errorMessage, setErrorMessage] = useState<boolean>(false);
   const [reviewClick, setReviewClick] = useState<boolean>(false);
+  const [starOption, setStarOption] = useState<number | null>(null);
+  const [popStarOption, setPopStarOption] = useState<boolean>(false);
 
   const handleReviewData = async () => {
-    const response = await getReview(productId, sortOption);
-    setReviewList(response);
+    //like 버튼 눌렀을 때 바로바로 데이터가 안들어오는 것 같다.
+    const response = await getReview(
+      productId,
+      currentIndex,
+      sortOption,
+      starOption,
+    );
     setReviewContent(response.content);
     setTotalElement(response.totalElements);
-    setTotalIndex(response.totalPages);
+    //임의로 이렇게 처리해뒀는데 추후 totalPages 부분을 수정해야 근본적 문제가 해결 될 것 같습니다..!
+    if(0 < response.numberOfElements && response.numberOfElements< 3) {
+      setTotalIndex(1);
+    }else setTotalIndex(response.totalPages);
   };
+  
   const handleReviewStar = async () => {
     try {
       const response = await getReviewStar(productId);
@@ -47,19 +57,15 @@ const Review = () => {
         response.oneStar,
       ]);
     } catch (err) {
-      console.log('Register err : ', err.response);
-      setErrorMessage(err.response.data.message == '해당 상품에 대한 리뷰가 존재하지 않습니다.');
+      setErrorMessage(
+        err.response.data.message ==
+          '해당 상품에 대한 리뷰가 존재하지 않습니다.',
+      );
     }
   };
-  console.log('reviewPage productId: ' + productId);
-  console.log('reviewPage reviewList');
-  console.log(reviewList);
-
-  
   useEffect(() => {
     handleReviewData();
-    console.log('리뷰 리셋!')
-  }, [productId, currentIndex, reviewClick]);
+  }, [productId, currentIndex, reviewClick, sortOption, starOption]);
   useEffect(() => {
     handleReviewStar();
   }, [productId]);
@@ -76,50 +82,66 @@ const Review = () => {
       </Styled.OptionBox>
       <Styled.TotalLike>
         <div>
-          
           <TotalStarGauge star={reviewTotalStar} />
-          <div>
-            {errorMessage
-              ? 0
-              : reviewTotalStar}
-          </div>
+          <div>{errorMessage ? 0 : reviewTotalStar}</div>
         </div>
         <VerticalLine height={100.5} />
         <div>
-        {errorMessage
-              ? <Styled.NoData>No Review</Styled.NoData>
-              : <EachStarGauge arr={reviewStarArray}></EachStarGauge>}
-          
+          {errorMessage ? (
+            <Styled.NoData>No Review</Styled.NoData>
+          ) : (
+            <EachStarGauge arr={reviewStarArray}></EachStarGauge>
+          )}
         </div>
       </Styled.TotalLike>
       <Styled.ReviewTitle>
         <div>
-          <div>베스트순</div>
-          <div>최신순</div>
+          <Styled.BestSort
+            onClick={() => setSortOption('best')}
+            className="best"
+            sortOption={sortOption}
+          >
+            베스트순
+          </Styled.BestSort>
+          <Styled.RecentSort
+            onClick={() => setSortOption('recent')}
+            className="recent"
+            sortOption={sortOption}
+          >
+            최신순
+          </Styled.RecentSort>
           <VerticalLine height={22} />
           <Styled.PhotoReviewBtn>
             <Styled.PhotoIcon />
             <div>사진리뷰</div>
           </Styled.PhotoReviewBtn>
         </div>
-        <div>
+        <Styled.StarOptionWrapper  onClick={()=>setPopStarOption(!popStarOption)}>
           별점
           <Styled.DownArrow />
-        </div>
+          <Styled.StarOptions popStarOption={popStarOption}>
+            <Styled.EachStarOption onClick={()=>{setStarOption(null);setPopStarOption(false);}}>전체</Styled.EachStarOption>
+            <Styled.EachStarOption onClick={()=>{setStarOption(5);setPopStarOption(false);}}>5점</Styled.EachStarOption>
+            <Styled.EachStarOption onClick={()=>{setStarOption(4);setPopStarOption(false); }}>4점</Styled.EachStarOption>
+            <Styled.EachStarOption onClick={()=>{setStarOption(3);setPopStarOption(false);}}>3점</Styled.EachStarOption>
+            <Styled.EachStarOption onClick={()=>{setStarOption(2);setPopStarOption(false);}}>2점</Styled.EachStarOption>
+            <Styled.EachStarOption onClick={()=>{setStarOption(1);setPopStarOption(false);}}>1점</Styled.EachStarOption>
+          </Styled.StarOptions>
+        </Styled.StarOptionWrapper>
       </Styled.ReviewTitle>
       {errorMessage ? (
-        <Styled.ErrorMessage>해당 상품에 대한 리뷰가 존재하지 않습니다.</Styled.ErrorMessage>
+        <Styled.ErrorMessage>
+          해당 상품에 대한 리뷰가 존재하지 않습니다.
+        </Styled.ErrorMessage>
       ) : (
         <>
           {reviewContent?.map((item: SingleReviewProps, index) => (
-            <div onClick={()=>setReviewClick(!reviewClick)} key={index}>
-              <SingleReview dataList={item}/>
+            <div onClick={() => setReviewClick(!reviewClick)} key={index}>
+              <SingleReview dataList={item} />
             </div>
-            
           ))}
         </>
       )}
-      {/* <Styled.PaginationBox></Styled.PaginationBox> */}
       <Pagination
         currentIndex={currentIndex}
         setCurrentIndex={setCurrentIndex}
@@ -204,21 +226,52 @@ const Styled = {
     border-bottom: 1px solid ${theme.colors.green1};
     font-size: 14px;
     font-weight: 700;
-    & > div:last-child {
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      width: 63px;
-      height: 34px;
-      border-radius: 5px;
-      background-color: #ecf9e9;
-      color: ${theme.colors.green1};
-    }
+    cursor: pointer;
     & > div {
       display: flex;
     }
     & > div > div {
       margin-right: 11px;
+    }
+  `,
+  BestSort: styled.div<{ sortOption: string }>`
+    color: ${props => (props.sortOption == 'best' ? '#59B941' : '')};
+  `,
+  RecentSort: styled.div<{ sortOption: string }>`
+    color: ${props => (props.sortOption == 'recent' ? '#59B941' : '')};
+  `,
+  StarOptionWrapper: styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 63px;
+    height: 34px;
+    border-radius: 5px;
+    background-color: #ecf9e9;
+    color: ${theme.colors.green1};
+    position: relative;
+  `,
+  StarOptions: styled.div<{popStarOption: boolean}>`
+    height: fit-content;
+    width: 63px;
+    border-radius: 5px;
+    background-color: #fafbf9;
+    color: ${theme.colors.green1};
+    border: 1px solid #ccdcc9;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    display: ${props => props.popStarOption ? 'flex' : 'none'};
+    flex-direction: column;
+  `,
+  EachStarOption: styled.div`
+    width: 100%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover {
+      background-color: #ecf9e9;
     }
   `,
   PhotoReviewBtn: styled.div`
