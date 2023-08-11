@@ -20,7 +20,8 @@ const PreviewPhoto = () => {
 
   const handleArrow = (move: number) => {
     let nextIndex = currentIndex + move;
-    if (nextIndex <= 0 && nextIndex > - Math.ceil(filtered.length/5)) setCurrentIndex(nextIndex);
+    if (nextIndex <= 0 && nextIndex > -Math.ceil(filtered.length / 5))
+      setCurrentIndex(nextIndex);
   };
   useEffect(() => {
     handleReviewImage();
@@ -29,26 +30,34 @@ const PreviewPhoto = () => {
     <Styled.Wrapper>
       <Styled.Title>사진 리뷰 보기</Styled.Title>
       <Styled.ImageWrapper>
-        <Styled.LeftArrow onClick={() => handleArrow( 1)} />
+        <Styled.LeftArrow onClick={() => handleArrow(1)} />
         <Styled.ImageBox>
-          <Styled.ImageSlider currentIndex={currentIndex}>
-            {filtered.map((item, index) =>
-              item == null ? (
-                <></>
-              ) : (
-                <Styled.prevImageBox>
-                  <Image
-                    key={index}
-                    alt="Preview"
-                    src={item}
-                    className="prevImage"
-                    width={229}
-                    height={229}
-                  />
-                </Styled.prevImageBox>
-              ),
-            )}
-          </Styled.ImageSlider>
+          {filtered.length == 0 ? (
+            <Styled.ErrorMessage>
+              해당 상품은 사진 리뷰가 없습니다.
+            </Styled.ErrorMessage>
+          ) : (
+            <>
+              <Styled.ImageSlider currentIndex={currentIndex}>
+                {filtered.map((item, index) =>
+                  item == null ? (
+                    <></>
+                  ) : (
+                    <Styled.prevImageBox>
+                      <Image
+                        key={index}
+                        alt="Preview"
+                        src={item}
+                        className="prevImage"
+                        width={229}
+                        height={229}
+                      />
+                    </Styled.prevImageBox>
+                  ),
+                )}
+              </Styled.ImageSlider>
+            </>
+          )}
         </Styled.ImageBox>
         <Styled.RightArrow onClick={() => handleArrow(-1)} />
       </Styled.ImageWrapper>
@@ -118,6 +127,16 @@ const Styled = {
     position: absolute;
     top: 60px;
     right: -130px;
+  `,
+  ErrorMessage: styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 600;
+    color: ${theme.colors.gray};
   `,
 };
 
