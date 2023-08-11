@@ -1,16 +1,17 @@
 import request from '../base';
 
 //상품별 리뷰 출력
-export const getReview = async (productId: number, sortOption: string) => {
+export const getReview = async (productId: number, currentIndex:number, sortOption: string|null, starOption:number|null) => {
   if (productId == undefined) productId = 1;
   const response = await request({
-    url: `/main/review/${productId}?page=1&direction=ASC&size=3`,
+    url: `/main/review/${productId}?page=${currentIndex}&direction=ASC&size=3`,
     params: {
-      //추후 추가
-      sorOrderCond: sortOption,
-      // reviewCond: ,
+      sortOrderCond: sortOption,
+      reviewCond: starOption,
     },
   });
+  console.log('reviewAPIPage----------response')
+  console.log(response.data.content)
   return response.data;
 };
 

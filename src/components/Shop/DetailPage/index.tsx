@@ -3,26 +3,34 @@ import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-// import Category from '@components/Common/Category';
+import { setProductId } from 'store/reducers/productIdSlice';
+import { setCategoryId } from 'store/reducers/categorySlice';
+import { detailLinkOptions } from 'src/types/shop/types';
 import Category from '../Common/Category';
 import Panel from './Panel';
 import PreviewPhoto from './PreviewPhoto';
 import OrderBar from '@components/Shop/Common/OrderBar';
 import ContentWrapper from './ContentWrapper';
-import { detailLinkOptions } from 'src/types/shop/types';
-import { setProductId } from 'store/reducers/productIdSlice';
+
 
 const DetailPage = () => {
+  const [selectList, setSelectList] = useState([]);
   const dispatch = useDispatch();
   const router = useRouter();
   const menu = router.query.detail;
+  const cate = router.query.category;
   let id: number;
+  let cateId: string;
   if (menu) {
     id = Number(menu);
+    cateId = cate.toString();
   }
   
   const handleDispatch = () => {
-    id == undefined ? "": dispatch(setProductId(id));
+    if(id != undefined){
+      dispatch(setCategoryId(cateId));
+      dispatch(setProductId(id));
+    }
   }
   useEffect(() => {
     handleDispatch();
@@ -31,13 +39,13 @@ const DetailPage = () => {
   return (
     <Styled.Wrapper>
       <Category/>
-      <Panel />
+      <Panel setSelectList={setSelectList} selectList={selectList}/>
       <PreviewPhoto />
       <OrderBar
         optionList={detailLinkOptions}
         width={theme.size.shopDetailWrapper}
       />
-      <ContentWrapper/>
+      <ContentWrapper setSelectList={setSelectList} selectList={selectList}/>
     </Styled.Wrapper>
   );
 };

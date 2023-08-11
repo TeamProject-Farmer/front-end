@@ -8,8 +8,13 @@ import Inquiry from './Inquiry';
 import Notice from './Notice';
 // import SimilarProducts from './SimilarProducts';
 
-
-const ContentWrapper = () => {
+interface Props {
+  isPanel?: boolean;
+  selectList: any[];
+  setSelectList:  React.Dispatch<React.SetStateAction<any[]>>;
+}
+const ContentWrapper = (props: Props) => {
+  const { selectList, setSelectList } = props;
   return (
     <Styled.Wrapper>
       <Styled.ContentWrapper>
@@ -22,7 +27,7 @@ const ContentWrapper = () => {
           {/* <SimilarProducts /> */}
           {/* <Styled.BackButton>뒤로가기</Styled.BackButton> */}
         </Styled.ExceptOption>
-        <OptionBox />
+        <OptionBox setSelectList={setSelectList} selectList={selectList}/>
       </Styled.ContentWrapper>
     </Styled.Wrapper>
   );

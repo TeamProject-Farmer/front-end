@@ -6,15 +6,13 @@ import theme from '@styles/theme';
 import heart from '@assets/images/shop/optionBoxHeart.svg';
 import arrow from '@assets/images/shop/optionArrow.svg';
 import { getDetail } from 'src/apis/shop/product';
+import { OptionBoxProps } from 'src/types/shop/types';
 
-interface Props {
-  isPanel?: boolean;
-}
 
-const OptionBox = (props: Props) => {
-  const { isPanel } = props;
+const OptionBox = (props: OptionBoxProps) => {
+  const { isPanel, selectList, setSelectList } = props;
   const productId = useSelector(idSelector);
-  const [selectList, setSelectList] = useState([]);
+  // const [selectList, setSelectList] = useState([]);
   const [isShowOptions, setShowOptions] = useState(false);
   const [options, setOptions] = useState([]);
   const handleDetailData = async () => {

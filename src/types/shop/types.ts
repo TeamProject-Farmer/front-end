@@ -121,3 +121,9 @@ export interface QnAEditProps {
   secretQuestion: secretQuestion;
   qcreatedDateTime: string;
 }
+
+export interface OptionBoxProps {
+  isPanel?: boolean;
+  selectList: any[];
+  setSelectList:  React.Dispatch<React.SetStateAction<any[]>>;
+}

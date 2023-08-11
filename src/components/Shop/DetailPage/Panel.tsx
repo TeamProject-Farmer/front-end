@@ -1,8 +1,11 @@
+import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { useSelector } from 'react-redux';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
+import { getDetail } from 'src/apis/shop/product';
+import { getReview, getReviewStar } from 'src/apis/shop/review';
+import { idSelector } from 'src/types/shop/types';
 import TotalStarGauge from '@components/Shop/Common/gauge/TotalStarGauge';
 import OptionBox from './ContentWrapper/OptionBox';
 import share from '@assets/images/shop/shareIcon.svg';
@@ -11,12 +14,15 @@ import blank from '@assets/images/shop/blankStar.svg';
 import checkIcon from '@assets/images/shop/checkIcon.svg';
 import boxIcon from '@assets/images/shop/boxIcon.svg';
 import down from '@assets/images/shop/downloadIcon.svg';
-import { getDetail } from 'src/apis/shop/product';
-import { getReview, getReviewStar } from 'src/apis/shop/review';
-import { idSelector } from 'src/types/shop/types';
 
+interface Props {
+  isPanel?: boolean;
+  selectList: any[];
+  setSelectList:  React.Dispatch<React.SetStateAction<any[]>>;
+}
+const Panel = (props: Props) => {
+  const { selectList, setSelectList } = props;
 
-const Panel = () => {
   const productId = useSelector(idSelector);
   const [thumbnailImg, setThumbnailImg] = useState<string>();
   const [name, setName] = useState<string>();
@@ -34,7 +40,7 @@ const Panel = () => {
     setPrice(response.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
   };
   const handleReviewData = async () => {
-    const response = await getReview(productId, 'best');
+    const response = await getReview(productId, 0, 'best', null);
     setTotalStar(response.totalElements);
   };
   if (options.length == 0) {
@@ -142,7 +148,7 @@ const Panel = () => {
           <Styled.VerticalLine />
           <Styled.OptionWrapper>
             <div>옵션</div>
-            <OptionBox isPanel={true} />
+            <OptionBox isPanel={true} setSelectList={setSelectList} selectList={selectList}/>
           </Styled.OptionWrapper>
           <Styled.TotalPriceWrapper>
             <div>주문금액</div>
