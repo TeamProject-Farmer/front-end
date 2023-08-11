@@ -10,3 +10,8 @@ export interface UserState {
   accessToken: string;
   refreshToken: string;
 }
+
+export interface CartState {
+  idArray: number[];
+  allChecked: boolean;
+}

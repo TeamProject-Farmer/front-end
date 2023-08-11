@@ -1,15 +1,6 @@
 import React from 'react';
 import { Styled } from '../styles';
-
-export interface CartButtonProps {
-  backgroundColor: string;
-  padding: string;
-  width: string;
-  size: string;
-  color: string;
-  weight: string;
-  label: string;
-}
+import { CartButtonProps } from 'src/types/mypage/types';
 
 const CartButtonComponent = ({
   backgroundColor,
@@ -19,6 +10,7 @@ const CartButtonComponent = ({
   color,
   weight,
   label,
+  onClick,
 }: CartButtonProps) => {
   return (
     <Styled.CartCommonButton
@@ -26,6 +18,7 @@ const CartButtonComponent = ({
       padding={padding}
       width={width}
       style={{ marginRight: '0.5rem' }}
+      onClick={onClick}
     >
       <Styled.ButtonText size={size} color={color} weight={weight}>
         {label}

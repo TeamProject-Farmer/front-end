@@ -18,14 +18,19 @@ import {
   REGISTER,
   REHYDRATE,
 } from 'redux-persist';
-import { UserState } from 'src/types/redux/types';
 import userSlice from './reducers/userSlice';
+import cartIndexSlice from './reducers/cartSlice';
+import { CartState, UserState } from 'src/types/redux/types';
+import { CartListProps } from 'src/types/mypage/types';
+import orderProductSlice from './reducers/orderProductSlice';
 import { IOrderInfo } from 'src/types/order/types';
 import bannerSlice from './reducers/bannerSlice';
 import orderSlice from './reducers/orderSlice';
 
 export interface RootState {
   user: UserState;
+  cartIndex: CartState;
+  orderProduct: CartListProps[];
   banner: boolean;
   orderInfo: IOrderInfo;
 }
@@ -42,6 +47,8 @@ const rootReducer = (
   if (action.type === HYDRATE) return { ...state, ...action.payload };
   const combinedReducer = combineReducers({
     user: userSlice,
+    cartIndex: cartIndexSlice,
+    orderProduct: orderProductSlice,
     banner: bannerSlice,
     orderInfo: orderSlice,
   });
