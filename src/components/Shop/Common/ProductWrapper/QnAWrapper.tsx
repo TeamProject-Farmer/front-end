@@ -32,7 +32,6 @@ const QnAWrapper = (props: Props) => {
     setDetailOpen(false);
   };
   const handleDetailData = async () => {
-    console.log('개별 데이터 호출!!!');
     try {
       const response = await getDetailQnA(qnaId);
       setDetailSubject(response.subject);
@@ -42,6 +41,7 @@ const QnAWrapper = (props: Props) => {
       setAcreatedDate(response.acreatedDate);
       if (response.qcreatedDate) setIsSecret(false);  
     } catch (err) {
+      //내가 쓴 글도 비밀글이라고 뜨는데 이 부분에 대해 논의해봐야할 것 같음
       if (err.response.data.message == '비밀글 입니다') {
         setIsSecret(true);
       }
