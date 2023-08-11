@@ -7,7 +7,6 @@ import { getProductCategory } from 'src/apis/common/category';
 import { ICategory } from 'src/types/home/types';
 import Plant from './Plant';
 
-
 const Category = () => {
   const dispatch = useDispatch();
   const [categoryList, setCategoryList] = useState([]);
@@ -21,6 +20,7 @@ const Category = () => {
   useEffect(() => {
     handleCategoryList();
   }, []);
+
   return (
     <Styled.Wrapper>
       <Styled.Title>카테고리</Styled.Title>

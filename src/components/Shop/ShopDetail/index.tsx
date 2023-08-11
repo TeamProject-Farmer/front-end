@@ -1,15 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
+import {  useSelector } from 'react-redux';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import OrderBar from '../Common/OrderBar';
-import SideAd from '../Common/SideAd';
-import Category from '../Common/Category';
-import Product from '@components/Common/Product';
 import { categprySelector } from 'src/types/shop/types';
 import { getProductList } from 'src/apis/shop/product';
+import Category from '../Common/Category';
 import MDPick from './MDPick';
 import ProductWrapper from '../Common/ProductWrapper/ProductWrapper';
 
