@@ -2,15 +2,20 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import { useState } from 'react';
 
-const OnOffButton = () => {
-  const [toggle, setToggle] = useState(false);
-  const clickedToggle = () => {
-    setToggle(prev => !prev);
+interface Props {
+  myButton: boolean;
+  setMyButton: React.Dispatch<React.SetStateAction<boolean>>;
+}
+const OnOffButton = (props: Props) => {
+  const {myButton, setMyButton} = props;
+
+  const clickedmyButton = () => {
+    setMyButton(prev => !prev);
   };
   return (
-    <Styled.Wrapper onClick={clickedToggle} toggle={toggle}>
-      <Styled.Pointer toggle={toggle} />
-      {toggle ? (
+    <Styled.Wrapper onClick={clickedmyButton} myButton={myButton}>
+      <Styled.Pointer myButton={myButton} />
+      {myButton ? (
         <Styled.PointerOn>ON</Styled.PointerOn>
       ) : (
         <Styled.PointerOff>OFF</Styled.PointerOff>
@@ -20,21 +25,21 @@ const OnOffButton = () => {
 };
 
 const Styled = {
-  Wrapper: styled.button<{ toggle: boolean }>`
+  Wrapper: styled.button<{ myButton: boolean }>`
     width: 75px;
     height: 30px;
     border-radius: 16px;
     border: none;
     cursor: pointer;
     background-color: ${props =>
-      !props.toggle ? '#e7ece6' : `${theme.colors.pointGreen}`};
+      !props.myButton ? '#e7ece6' : `${theme.colors.pointGreen}`};
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     transition: all 0.5s ease-in-out;
   `,
-  Pointer: styled.div<{ toggle: boolean }>`
+  Pointer: styled.div<{ myButton: boolean }>`
     background-color: white;
     width: 36px;
     height: 36px;
@@ -44,8 +49,8 @@ const Styled = {
     position: absolute;
     left: 0;
     transition: all 0.5s ease-in-out;
-    transform: ${props => (props.toggle ? 'translate(39px, 0)' : '')};
-    transition: ${props => (props.toggle ? 'all 0.5s ease-in-out' : '')};
+    transform: ${props => (props.myButton ? 'translate(39px, 0)' : '')};
+    transition: ${props => (props.myButton ? 'all 0.5s ease-in-out' : '')};
   `,
   PointerOff: styled.span`
     width: 55px;

@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { idSelector } from 'src/types/shop/types';
 
 const InquiryModal = () => {
+  //이 페이지는 삭제 예정입니다!
   let now = new Date().toString;
   const productId = useSelector(idSelector);
   const [isShowOptions, setShowOptions] = useState<boolean>(false);
@@ -16,16 +17,6 @@ const InquiryModal = () => {
     setGetText(e.target.value)
     setInputCount(e.target.value.length);
   };
-  const handleInquiryEdit = async() => {
-    try {
-      // const response = await getQnAEdit({productId, 'productId', getText ,'GENERAL',now});
-      const response = await getQnAEdit();
-    } catch (err) {
-      // if () {
-        
-      // }
-    }
-  }
   return (
     <Styled.CommonWrapper>
       <Styled.InquiryOptionWrapper>
@@ -57,7 +48,7 @@ const InquiryModal = () => {
           ></textarea>
           <div>{inputCount}/1,000</div>
         </Styled.TextBox>
-        <Styled.SecretCheck onClick={()=> setIsSecret(!isSecret)}>
+        <Styled.SecretCheck onClick={()=> setIsSecret(!isSecret)} isSecret={isSecret}>
           <input type="checkbox"></input>
           <span>비공개</span>
         </Styled.SecretCheck>

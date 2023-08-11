@@ -115,8 +115,8 @@ export interface QnAProps {
 }
 
 export interface QnAEditProps {
-  productId: number;
-  subject: string;
+  productId: string ;
+  currentOption: string;
   content: string;
   secretQuestion: secretQuestion;
   qcreatedDateTime: string;
