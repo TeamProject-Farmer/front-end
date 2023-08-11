@@ -24,7 +24,7 @@ const productList: IOrderedProduct[] = [
     optionName: 'string',
     count: 0,
     productPrice: 0,
-    totalPrice: 1000,
+    totalPrice: 10000,
   },
 ];
 
@@ -45,12 +45,7 @@ const OrderPage: NextPageWithLayout = () => {
       alert('주문 내용 확인 및 결제에 동의하셔야 구매가 가능합니다.');
       return;
     }
-    processPayment(
-      productList[0].productName,
-      totalAmount,
-      selectedMethod,
-      deliveryInfo,
-    );
+    processPayment(productList, totalAmount, selectedMethod, deliveryInfo);
   };
 
   return (

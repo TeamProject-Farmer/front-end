@@ -75,21 +75,19 @@ const useDiscount = (orderedPrice: number) => {
   }, [selectedCoupon]);
 
   const calculateDiscountedPointPrice = () => {
-    let updatedDiscountedPrice = null;
+    let updatedDiscountedPrice = usedPoint;
 
     if (usedPoint > point) {
       alert('최대로 사용할 수 있는 적립금을 초과하였습니다.');
-      setUsedPoint(point);
       updatedDiscountedPrice = point;
     } else if (usedPoint < 2000) {
       alert('적립금 최소 사용금액은 2000원입니다.');
-      setUsedPoint(point);
       updatedDiscountedPrice = point;
-    } else if (usedPoint >= 2000 && usedPoint <= point) {
-      updatedDiscountedPrice = usedPoint;
+    } else if (coupon !== null) {
       setDisabledCouponBtn(true);
     }
 
+    setUsedPoint(updatedDiscountedPrice);
     setDiscountedPrice(updatedDiscountedPrice);
   };
 

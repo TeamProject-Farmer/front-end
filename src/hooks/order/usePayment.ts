@@ -17,11 +17,9 @@ const usePayment = () => {
     isAllChecked: boolean,
     paymentChecked: boolean,
   ) => {
-    if (isAllChecked && paymentChecked) {
-      setPayNowDisabled(false);
-    } else {
-      setPayNowDisabled(true);
-    }
+    isAllChecked && paymentChecked
+      ? setPayNowDisabled(false)
+      : setPayNowDisabled(true);
   };
 
   return {
