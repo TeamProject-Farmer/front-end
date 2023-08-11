@@ -1,6 +1,6 @@
 import React from 'react';
 import { Styled } from '@components/Mypage/styles';
-import { formatDate } from 'src/hooks/fotmatDate';
+import { formatDate } from 'src/hooks/formatDate';
 import { SearchOptionProps } from 'src/types/mypage/types';
 import { timeIntervals } from 'src/utils/mypage/orderTimeList';
 

@@ -2,9 +2,9 @@ import React from 'react';
 import DatePicker from 'react-datepicker';
 import { ko } from 'date-fns/locale';
 import Search from '@assets/images/mypage/search.svg';
-import { formatDate } from 'src/hooks/fotmatDate';
 import { CalendarProps } from 'src/types/mypage/types';
 import { Styled } from '@components/Mypage/styles';
+import { useFormatDate } from 'src/hooks/formatDate';
 
 const Calendar = ({
   selectedDateRange,
@@ -18,8 +18,8 @@ const Calendar = ({
     setSelectedDateRange(dates);
     const [start, end] = dates;
 
-    setStartDate(formatDate(start));
-    setEndDate(formatDate(end));
+    setStartDate(useFormatDate(start));
+    setEndDate(useFormatDate(end));
   };
 
   return (
