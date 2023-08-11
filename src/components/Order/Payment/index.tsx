@@ -1,20 +1,10 @@
 import Styled from '../styles';
 import InputField from '../InputField';
 import InputGroup from '../InputGroup';
-import PaymentList from '../List/PaymentList';
 import useDiscount from 'src/hooks/order/useDiscount';
+import { useEffect } from 'react';
 
-//상품 데이터
-const productData = {
-  productId: 1,
-  productName: '리돕스',
-  discountRate: 0,
-  price: 40000,
-  averageStarRating: 0.0,
-  reviewCount: null,
-};
-
-const Payment = () => {
+const Payment = ({ totalPrice, getTotalAmount }) => {
   const {
     coupon,
     usedPoint,
@@ -22,24 +12,26 @@ const Payment = () => {
     handleSelectedCoupon,
     disabledPointBtn,
     disabledCouponBtn,
-    getDiscountedPrice,
     discountedPrice,
-  } = useDiscount();
+    finalPrice,
+    calculateDiscountedCouponPrice,
+    calculateDiscountedPointPrice,
+  } = useDiscount(totalPrice);
 
-  const finalPrice = isNaN(productData.price - discountedPrice)
-    ? productData.price
-    : productData.price - discountedPrice;
+  useEffect(() => {
+    getTotalAmount(finalPrice);
+  }, [finalPrice]);
 
   return (
-    <div>
+    <>
       <InputGroup title="적립금/쿠폰">
         <InputField
           label="적립금"
           field="point"
           usedPoint={usedPoint}
-          handlePointChange={handlePointChange}
+          handlePoint={handlePointChange}
           disabledPointBtn={disabledPointBtn}
-          getDiscountedPrice={() => getDiscountedPrice(productData.price)}
+          getDiscountedPrice={calculateDiscountedPointPrice}
         />
         <InputField
           label="쿠폰"
@@ -47,7 +39,7 @@ const Payment = () => {
           couponOptions={coupon}
           handleSelectedCoupon={handleSelectedCoupon}
           disabledCouponBtn={disabledCouponBtn}
-          getDiscountedPrice={() => getDiscountedPrice(productData.price)}
+          getDiscountedPrice={() => calculateDiscountedCouponPrice(totalPrice)}
         />
         <Styled.InnerMarginWrapper>
           <Styled.DiscountedPrice>
@@ -60,7 +52,7 @@ const Payment = () => {
         <Styled.FlexColumnWrapper>
           <Styled.FlexWrapper>
             <Styled.InfoTitle>주문상품</Styled.InfoTitle>
-            <Styled.InfoContent>{productData.price}원</Styled.InfoContent>
+            <Styled.InfoContent>{totalPrice}원</Styled.InfoContent>
           </Styled.FlexWrapper>
           <Styled.FlexWrapper>
             <Styled.InfoTitle>배송비</Styled.InfoTitle>
@@ -80,15 +72,7 @@ const Payment = () => {
           </Styled.InnerMarginWrapper>
         </Styled.FlexColumnWrapper>
       </InputGroup>
-      {/* 결제수단 */}
-      <InputGroup title="결제수단" before="none">
-        <Styled.InnerPaddingWrapper field="payment">
-          <PaymentList />
-          <InputField field="card" placeholder="카드를 선택해주세요." />
-          <InputField field="card" placeholder="일시불" />
-        </Styled.InnerPaddingWrapper>
-      </InputGroup>
-    </div>
+    </>
   );
 };
 

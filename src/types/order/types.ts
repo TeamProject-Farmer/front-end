@@ -1,5 +1,10 @@
 import { UseFormRegisterReturn } from 'react-hook-form';
-import { FieldError } from 'react-hook-form';
+import {
+  UseFormSetValue,
+  UseFormTrigger,
+  FieldValues,
+  Control,
+} from 'react-hook-form';
 
 export type TFieldName =
   | 'name'
@@ -30,13 +35,15 @@ export interface IInputFieldProps {
   inputProps?: UseFormRegisterReturn;
   error?: string | null;
   couponOptions?: ICoupon[];
-  // 타입 수정
   usedPoint?: number;
-  handleSelectedCoupon?: (event) => void;
-  handlePointChange?: (event) => void;
+  handleSelectedCoupon?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  handlePoint?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   disabledPointBtn?: boolean;
   disabledCouponBtn?: boolean;
   getDiscountedPrice?: () => void;
+  control?: Control<FieldValues>;
+  setValue?: UseFormSetValue<FieldValues>;
+  trigger?: UseFormTrigger<FieldValues>;
 }
 
 export interface ICheckBoxInputProps {
@@ -66,15 +73,21 @@ export interface ILayoutProps {
 }
 
 export interface IOrderedProduct {
-  id: string;
-  title: string;
+  cartId?: number;
+  productId: number;
+  imgUrl: string;
+  productName: string;
+  optionId: number;
+  optionName: string;
   count: number;
-  price: number;
+  productPrice: number;
+  totalPrice: number;
 }
 
 export interface PayMethod {
-  id: string;
   title: string;
+  pg: string;
+  method: string;
 }
 
 export interface DaumPostcodeData {
@@ -161,4 +174,30 @@ declare global {
   interface Window {
     IMP?: Iamport;
   }
+}
+
+export interface IOrderInfo {
+  pg: string;
+  pay_method: string;
+  merchant_uid: string;
+  name: string;
+  amount: number;
+  buyer_email: string;
+  buyer_name: string;
+  buyer_tel: string;
+  buyer_addr: string;
+  buyer_postcode: string;
+}
+
+export interface ISelectedMethod {
+  pg: string;
+  method: string;
+}
+
+export interface IDeliveryInfo {
+  name: string;
+  postCode: string;
+  basicAddress: string;
+  detailAddress: string;
+  mobile: string;
 }

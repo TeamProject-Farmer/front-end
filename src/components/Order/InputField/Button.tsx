@@ -5,6 +5,7 @@ import theme from '@styles/theme';
 const Button = ({ text, bgColor, color, onClick, disabled }: IButtonProps) => {
   return (
     <Styled.Button
+      type="button"
       onClick={onClick}
       bgColor={bgColor}
       color={color}

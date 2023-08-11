@@ -1,12 +1,4 @@
-export const mobileOptions = [
-  '선택',
-  '010',
-  '011',
-  '016',
-  '017',
-  '018',
-  '019'
-]
+export const mobileOptions = ['010', '011', '016', '017', '018', '019'];
 
 export const shippingMsgOptions = [
   '-- 메시지 선택 (선택사항) --',
@@ -15,5 +7,5 @@ export const shippingMsgOptions = [
   '부재 시 집 앞에 놔주세요.',
   '배송 전 연락 바랍니다.',
   '파손의 위험이 있는 상품입니다. 배송 시 주의해주세요.',
-  '직접 입력'
-]
+  '직접 입력',
+];
