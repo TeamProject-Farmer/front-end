@@ -17,8 +17,9 @@ const CartOrderBox = ({
         <span>{handleTotalPrice()}</span>원
       </Styled.OrderText>
       <Plus />
+      {/* 배송비 2500원 고정 */}
       <Styled.OrderText>
-        배송비 <span>0</span>원
+        배송비 <span>2,500</span>원
       </Styled.OrderText>
       <Equals />
       <Styled.OrderText>합계</Styled.OrderText>
