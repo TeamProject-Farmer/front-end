@@ -39,9 +39,7 @@ const Inquiry = () => {
   useEffect(() => {
     handleQnAList();
   }, [productId, currentIndex, modalOpen]);
-  console.log('inquiryPage productId: ' + productId);
-  console.log('inquiryPage detailList');
-  console.log(detailList);
+
   return (
     <Styled.Wrapper>
       <Styled.Container>

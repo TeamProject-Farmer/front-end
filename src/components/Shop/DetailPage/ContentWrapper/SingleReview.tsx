@@ -42,6 +42,7 @@ const SingleReview = ({ dataList }: Props) => {
       <Styled.ReviewImage>
         <Image
           alt="reviewImage"
+          className='imageStyle'
           src={imgUrl}
           width={112}
           height={112}
@@ -84,6 +85,13 @@ const Styled = {
     margin-top: 10px;
     margin-bottom: 26px;
     border-radius: 5px;
+    overflow: hidden;
+    .imageStyle {
+      width: 112px;
+      height: 112px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
   `,
   RecomendBtn: styled.button`
     margin-top: 23px;

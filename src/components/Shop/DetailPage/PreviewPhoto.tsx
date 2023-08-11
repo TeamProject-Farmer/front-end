@@ -43,16 +43,17 @@ const PreviewPhoto = () => {
                   item == null ? (
                     <></>
                   ) : (
-                    <Styled.prevImageBox>
-                      <Image
-                        key={index}
-                        alt="Preview"
-                        src={item}
-                        className="prevImage"
-                        width={229}
-                        height={229}
-                      />
-                    </Styled.prevImageBox>
+                    <div key={index}>
+                      <Styled.prevImageBox>
+                        <Image
+                          alt="Preview"
+                          src={item}
+                          className="prevImage"
+                          width={229}
+                          height={229}
+                        />
+                      </Styled.prevImageBox>
+                    </div>
                   ),
                 )}
               </Styled.ImageSlider>

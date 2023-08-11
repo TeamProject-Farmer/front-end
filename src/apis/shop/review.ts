@@ -10,8 +10,6 @@ export const getReview = async (productId: number, currentIndex:number, sortOpti
       reviewCond: starOption,
     },
   });
-  console.log('reviewAPIPage----------response')
-  console.log(response.data.content)
   return response.data;
 };
 

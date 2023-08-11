@@ -26,8 +26,6 @@ const OptionBox = (props: OptionBoxProps) => {
   if (options.length == 0) {
     setOptions([{ id: 0, optionName: '단일 옵션입니다.', optionPrice: 0 }]);
   }
-  console.log('optionBoxPage --------- selectList');
-  console.log(selectList);
   if (isPanel) {
     return (
       <Styled.PanelSelectBox>

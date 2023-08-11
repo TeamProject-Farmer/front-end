@@ -65,8 +65,6 @@ const Panel = (props: Props) => {
     handleReviewData();
     handleReviewStar();
   }, []);
-  console.log('panelPage----options');
-  console.log(options);
   return (
     <Styled.Wrapper>
       <Styled.InnerBox>
