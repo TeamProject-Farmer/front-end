@@ -20,11 +20,14 @@ import {
 } from 'redux-persist';
 import { UserState } from 'src/types/redux/types';
 import userSlice from './reducers/userSlice';
+import { IOrderInfo } from 'src/types/order/types';
 import bannerSlice from './reducers/bannerSlice';
+import orderSlice from './reducers/orderSlice';
 
 export interface RootState {
   user: UserState;
   banner: boolean;
+  orderInfo: IOrderInfo;
 }
 
 const persistConfig: PersistConfig<RootState> = {
@@ -40,6 +43,7 @@ const rootReducer = (
   const combinedReducer = combineReducers({
     user: userSlice,
     banner: bannerSlice,
+    orderInfo: orderSlice,
   });
   return combinedReducer(state, action);
 };

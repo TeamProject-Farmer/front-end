@@ -4,7 +4,6 @@ import Plant from './Plant';
 import { ICategory } from 'src/types/home/types';
 
 const Category = ({ category }) => {
-  console.log(category);
   return (
     <Styled.Wrapper>
       <Title title="카테고리" />

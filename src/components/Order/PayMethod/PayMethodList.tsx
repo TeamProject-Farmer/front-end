@@ -1,31 +1,23 @@
-import { useState } from 'react';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import { PayMethod } from 'src/types/order/types';
+import payMethod from 'src/utils/order/payMethod';
 
-const payMethodList: PayMethod[] = [
-  { id: 'card', title: '카드' },
-  { id: 'account', title: '계좌이체' },
-  { id: 'kakao', title: '카카오페이' },
-  { id: 'toss', title: '토스페이' },
-  { id: 'payco', title: '페이코' },
-  { id: 'mobile', title: '핸드폰' },
-];
-
-const PaymentList = () => {
-  const [clicked, setClicked] = useState<string>('');
-
+const payMethodList = ({ selectedMethod, setSelectedMethod }) => {
   return (
     <Styled.Wrapper>
-      {payMethodList &&
-        payMethodList.map(ele => {
-          const { id, title } = ele;
-          const isClicked = clicked === id;
+      {payMethod &&
+        payMethod.map(ele => {
+          const { method, title, pg } = ele;
+          const isClicked = selectedMethod?.method === method;
           return (
             <Styled.List
-              key={id}
+              key={method}
               onClick={() => {
-                setClicked(id);
+                setSelectedMethod(prev => ({
+                  ...prev,
+                  pg: pg,
+                  method: method,
+                }));
               }}
               isClicked={isClicked}
             >
@@ -38,7 +30,7 @@ const PaymentList = () => {
   );
 };
 
-export default PaymentList;
+export default payMethodList;
 
 const Styled = {
   Wrapper: styled.ul`

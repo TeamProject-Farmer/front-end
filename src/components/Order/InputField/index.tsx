@@ -1,9 +1,9 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import Styled from './styles';
-import { useForm } from 'react-hook-form';
-import { mobileOptions, shippingMsgOptions } from 'src/utils/order/optionList';
+import { Controller } from 'react-hook-form';
+import { shippingMsgOptions } from 'src/utils/order/optionList';
 import { formatPhoneNumber } from 'src/utils/order/formatPhoneNumber';
-import { TFieldName, TValidate, DaumPostcodeData } from 'src/types/order/types';
+import { DaumPostcodeData } from 'src/types/order/types';
 import {
   requiredErrorMsg,
   validateName,
@@ -23,55 +23,36 @@ const InputField = ({
   couponOptions,
   usedPoint,
   handleSelectedCoupon,
-  handlePointChange,
+  handlePoint,
   disabledPointBtn,
   disabledCouponBtn,
   getDiscountedPrice,
+  control,
+  setValue,
+  trigger,
 }: IInputFieldProps) => {
-  //reack-hook-form
-  const {
-    register,
-    formState: { errors },
-    setValue,
-    watch,
-    clearErrors,
-  } = useForm({
-    mode: 'onChange',
-  });
+  // 배송 메시지 직접 입력
+  const [showShippingMsgInput, setShowShippingMsgInput] =
+    useState<boolean>(false);
 
-  // input 유효성 검사
-  const validateInput = (fieldName: TFieldName, value?: TValidate) => {
-    const validation = register(fieldName, {
-      required: requiredErrorMsg,
-      validate: value,
-    });
-    return validation;
+  const handleShippingMsg = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    event.target.value === '직접 입력'
+      ? setShowShippingMsgInput(true)
+      : setShowShippingMsgInput(false);
   };
-
-  const nameValid = validateInput('name', validateName);
-  const mobileValid = validateInput('mobile', validateMobile);
-  const postCodeValid = validateInput('postCode');
-  const basicAddressValid = validateInput('basicAddress');
-  const detailAddressValid = validateInput('detailAddress');
-
-  // 전화번호 입력시 자동으로 하이픈 생성
-  const watchMobileInput = watch('mobile');
-
-  useEffect(() => {
-    setValue('mobile', formatPhoneNumber(watchMobileInput));
-  }, [watchMobileInput]);
 
   // 주소 입력
   const handleComplete = (data: DaumPostcodeData) => {
-    const fullAddress = formatAddress(data);
+    const addressData = formatAddress(data);
     setValue('postCode', data.zonecode);
-    setValue('basicAddress', fullAddress);
-    clearErrors('postCode');
-    clearErrors('basicAddress');
+    setValue('basicAddress', addressData);
+    trigger('postCode');
+    trigger('basicAddress');
   };
 
   const open = useDaumPostcodePopup(postcodeScriptUrl);
-  const handleClick = () => {
+
+  const handleDaumPost = () => {
     open({
       onComplete: handleComplete,
       height: 500,
@@ -80,15 +61,11 @@ const InputField = ({
     });
   };
 
-  // 배송 메시지 직접 입력
-  const [showShippingMsgInput, setShowShippingMsgInput] =
-    useState<boolean>(false);
-
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    event.target.value === '직접 입력'
-      ? setShowShippingMsgInput(true)
-      : setShowShippingMsgInput(false);
-  };
+  //에러 메시지
+  const errorMessage = fieldState =>
+    fieldState.error ? (
+      <Styled.ErrorMsg>* {fieldState.error.message}</Styled.ErrorMsg>
+    ) : null;
 
   return (
     <Styled.InputWrapper field={field}>
@@ -102,51 +79,110 @@ const InputField = ({
         {
           name: (
             <Styled.FlexGapWrapper>
-              <Styled.Input type="text" {...nameValid} />
-              {errors?.name && (
-                <Styled.ErrorMsg>* {errors?.name?.message}</Styled.ErrorMsg>
-              )}
+              <Controller
+                name="name"
+                control={control}
+                rules={{
+                  required: requiredErrorMsg,
+                  validate: value => validateName(value),
+                }}
+                render={({ field, fieldState }) => (
+                  <>
+                    <Styled.Input
+                      type="text"
+                      {...field}
+                      value={field.value ? field.value : ''}
+                    />
+                    {errorMessage(fieldState)}
+                  </>
+                )}
+              ></Controller>
             </Styled.FlexGapWrapper>
           ),
           mobile: (
             <Styled.FlexGapWrapper>
-              <Styled.Dropdown field="mobile">
-                {mobileOptions.map((number, index) => (
-                  <Styled.Option key={index} value={number}>
-                    {number}
-                  </Styled.Option>
-                ))}
-              </Styled.Dropdown>
-              -
-              <Styled.Input type="text" {...mobileValid} width={360} />
-              {errors?.mobile && (
-                <Styled.ErrorMsg>* {errors?.mobile?.message}</Styled.ErrorMsg>
-              )}
+              <Controller
+                name="mobile"
+                control={control}
+                rules={{
+                  required: requiredErrorMsg,
+                  validate: value => validateMobile(value),
+                }}
+                render={({ field, fieldState }) => (
+                  <>
+                    <Styled.Input
+                      type="text"
+                      {...field}
+                      value={
+                        field.value ? formatPhoneNumber(field.value) : '010-'
+                      }
+                      onChange={(
+                        event: React.ChangeEvent<HTMLInputElement>,
+                      ) => {
+                        const formattedValue = formatPhoneNumber(
+                          event.target.value,
+                        );
+                        field.onChange(formattedValue);
+                      }}
+                    />
+                    {errorMessage(fieldState)}
+                  </>
+                )}
+              ></Controller>
             </Styled.FlexGapWrapper>
           ),
           address: (
             <Styled.FlexColumnWrapper>
-              <Styled.FlexWrapper>
-                <Styled.Input
-                  {...postCodeValid}
-                  readOnly
-                  placeholder="우편번호"
-                  width={250}
-                />
-                <Button onClick={handleClick} text="주소검색" />
-              </Styled.FlexWrapper>
-              <Styled.Input {...basicAddressValid} placeholder="기본주소" />
-              <Styled.Input {...detailAddressValid} placeholder="상세주소" />
-              {errors?.postCode ||
-                errors?.basicAddress ||
-                (errors?.detailAddress && (
-                  <Styled.ErrorMsg>
-                    *{' '}
-                    {errors?.postCode?.message ||
-                      errors?.basicAddress?.message ||
-                      errors?.detailAddress?.message}
-                  </Styled.ErrorMsg>
-                ))}
+              <Controller
+                name="postCode"
+                control={control}
+                rules={{ required: requiredErrorMsg }}
+                render={({ field, fieldState }) => (
+                  <>
+                    <Styled.FlexWrapper>
+                      <Styled.Input
+                        {...field}
+                        value={field.value ? field.value : ''}
+                        readOnly
+                        placeholder="우편번호"
+                        width={250}
+                      />
+                      <Button onClick={handleDaumPost} text="주소검색" />
+                    </Styled.FlexWrapper>
+                    {errorMessage(fieldState)}
+                  </>
+                )}
+              ></Controller>
+              <Controller
+                name="basicAddress"
+                control={control}
+                rules={{ required: requiredErrorMsg }}
+                render={({ field, fieldState }) => (
+                  <>
+                    <Styled.Input
+                      {...field}
+                      value={field.value ? field.value : ''}
+                      placeholder="기본주소"
+                    />
+                    {errorMessage(fieldState)}
+                  </>
+                )}
+              ></Controller>
+              <Controller
+                name="detailAddress"
+                control={control}
+                rules={{ required: requiredErrorMsg }}
+                render={({ field, fieldState }) => (
+                  <>
+                    <Styled.Input
+                      {...field}
+                      value={field.value ? field.value : ''}
+                      placeholder="상세주소"
+                    />
+                    {errorMessage(fieldState)}
+                  </>
+                )}
+              ></Controller>
             </Styled.FlexColumnWrapper>
           ),
           coupon: (
@@ -159,38 +195,13 @@ const InputField = ({
                       <Styled.Option
                         key={coupon.couponId}
                         value={coupon.couponId}
+                        onChange={getDiscountedPrice}
                       >
                         {coupon.name}
                       </Styled.Option>
                     ))}
                 </Styled.Dropdown>
-                <Button
-                  text="쿠폰적용"
-                  onClick={getDiscountedPrice}
-                  disabled={disabledCouponBtn}
-                />
-              </Styled.FlexWrapper>
-              <Styled.Explanation>
-                1회 구매시 적립금 최소 사용금액은 2,000원입니다.
-              </Styled.Explanation>
-            </Styled.FlexColumnWrapper>
-          ),
-          point: (
-            <Styled.FlexColumnWrapper>
-              <Styled.FlexWrapper>
-                {usedPoint && (
-                  <Styled.Input
-                    width={660}
-                    value={usedPoint}
-                    onChange={handlePointChange}
-                    disabled={disabledPointBtn}
-                  />
-                )}
-                <Button
-                  text="전액사용"
-                  disabled={disabledPointBtn}
-                  onClick={getDiscountedPrice}
-                />
+                <Button text="쿠폰적용" disabled={disabledCouponBtn} />
               </Styled.FlexWrapper>
               <Styled.FlexGapWrapper>
                 <Styled.Explanation>
@@ -202,10 +213,32 @@ const InputField = ({
               </Styled.FlexGapWrapper>
             </Styled.FlexColumnWrapper>
           ),
+          point: (
+            <Styled.FlexColumnWrapper>
+              <Styled.FlexWrapper>
+                <Styled.Input
+                  width={660}
+                  value={usedPoint ? usedPoint : 0}
+                  onChange={handlePoint}
+                  disabled={disabledPointBtn}
+                />
+                <Button
+                  text="적용하기"
+                  disabled={disabledPointBtn}
+                  onClick={getDiscountedPrice}
+                />
+              </Styled.FlexWrapper>
+              <Styled.FlexGapWrapper>
+                <Styled.Explanation>
+                  1회 구매시 적립금 최소 사용금액은 2,000원입니다.
+                </Styled.Explanation>
+              </Styled.FlexGapWrapper>
+            </Styled.FlexColumnWrapper>
+          ),
           card: <Styled.Input width={844} placeholder={placeholder} />,
           shippingMsg: (
             <Styled.FlexColumnWrapper>
-              <Styled.Dropdown field="shippingMsg" onChange={handleChange}>
+              <Styled.Dropdown field="shippingMsg" onChange={handleShippingMsg}>
                 {shippingMsgOptions.map((msg, index) => (
                   <Styled.Option key={index} value={msg}>
                     {msg}
