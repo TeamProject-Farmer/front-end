@@ -27,8 +27,8 @@ const Row = () => {
     try {
       const response = await getEdit({ nickname, password });
 
-      const updatedNickname = response.data.nickname;
-      dispatch(setUserNickname(updatedNickname));
+      console.log(nickname);
+      dispatch(setUserNickname(nickname));
 
       console.log(response.data);
       router.push('/mypage');

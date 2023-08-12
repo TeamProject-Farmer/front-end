@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import More from '@assets/images/mypage/more.svg';
-import Button from '@components/Home/Common/Button';
+import OptionButton from '@assets/images/mypage/option.svg';
 
 export const Styled = {
   Container: styled.div`
@@ -18,6 +18,7 @@ export const Styled = {
   BoxWrapper: styled.div<{ margin?: string }>`
     margin-left: 12.5rem;
     margin-right: 12.5rem;
+    margin-bottom: 2rem;
     justify-content: center;
     margin-top: 25px;
     margin-bottom: ${props => props.margin}rem;
@@ -176,6 +177,7 @@ export const Styled = {
     margin-bottom: 1.5rem;
   `,
   InfoText: styled.h1`
+    cursor: pointer;
     font-size: 16px;
     font-weight: 500;
     color: ${theme.colors.mypageGray};
@@ -183,6 +185,14 @@ export const Styled = {
   CheckWrapper: styled.div`
     margin-left: 12.5rem;
     margin-right: 12.5rem;
+  `,
+  NoneListWrapper: styled.div`
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    display: flex;
+    gap: 2rem;
+    height: 35rem;
   `,
   Checkbox: styled.div`
     display: flex;
@@ -194,20 +204,30 @@ export const Styled = {
     align-items: center;
     margin-top: 0.9rem;
   `,
-  SearchInput: styled.input`
+  SearchInput: styled.select`
     background-color: ${theme.colors.white};
-    padding: 0 40px;
+    cursor: pointer;
+    padding: 0 60px;
     height: 2.3rem;
     font-size: 16px;
-    font-weight: 500;
-    color: ${theme.colors.black};
+    font-weight: 400;
+    color: ${theme.colors.mypageGray};
+    text-align: center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  `,
+  OPtionIcon: styled(OptionButton)`
+    margin-left: -40px;
+    align-self: center;
+    cursor: pointer;
+    pointer-events: none;
   `,
   IconWrapper: styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
   `,
-
   TitleText: styled.h1`
     font-size: 20px;
     font-weight: 700;
@@ -215,9 +235,17 @@ export const Styled = {
     margin-top: 2.5rem;
     margin-bottom: 1rem;
   `,
+  NoneText: styled.h1`
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    color: ${theme.colors.mypageGray};
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+  `,
   ListInfoText: styled.h1<{ size?: string; color?: string }>`
     font-size: ${props => props.size}px;
-    font-weight: 500;
+    font-weight: 400;
     color: ${props => props.color};
   `,
   ListSpan: styled.span`
@@ -253,6 +281,15 @@ export const Styled = {
     padding-bottom: 1.5rem;
     /* margin-bottom: 2rem; */
     border-bottom: 1px solid ${theme.colors.borderGray};
+  `,
+  CartListRow: styled.div`
+    width: 100px;
+    height: 100px;
+    background-color: '#D9D9D9';
+  `,
+  CartCheckBox: styled.input`
+    width: '16px';
+    height: '16px';
   `,
   FlexRowCenter: styled.div`
     display: grid;
@@ -394,25 +431,44 @@ export const Styled = {
   `,
 
   // 쿠폰 페이지
-  CouponWrapper: styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-left: 2.5rem;
-    margin-right: 2.5rem;
-    margin-top: 2rem;
-  `,
   Coupon: styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    border-bottom: 1px solid ${theme.colors.gray};
+    margin-left: 2.5rem;
   `,
   CouponText: styled.h1`
     font-size: 16px;
     font-weight: 400;
     color: ${theme.colors.black};
-    margin-top: 0.8rem;
+  `,
+  CouponBox: styled.div`
+    height: 500px;
+    border-radius: 20px;
+    margin-bottom: 8rem;
+  `,
+  CouponHeader: styled.div`
+    display: flex;
+    margin-top: 2.5rem;
+    margin-left: 2.5rem;
+    justify-content: space-between;
+    background-color: ${theme.colors.green3};
+    padding: 1.5rem;
+  `,
+  HeaderLabel: styled.h1`
+    font-size: 15px;
+    margin-right: 6.3rem;
+    margin-left: 7.3rem;
+    color: ${theme.colors.white};
+    font-weight: 600;
+  `,
+  CouponTextWrapper: styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 4.5rem;
+    margin-right: 4.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
   `,
 
   // 프로필 수정
@@ -458,5 +514,13 @@ export const Styled = {
     font-weight: 500;
     color: #fd6666;
     margin-left: 1rem;
+  `,
+
+  // calendar
+  Box: styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: ${theme.colors.white};
   `,
 };

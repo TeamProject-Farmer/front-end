@@ -11,6 +11,11 @@ export interface UserState {
   refreshToken: string;
 }
 
+export interface CartState {
+  idArray: number[];
+  allChecked: boolean;
+}
+
 export interface categoryState {
   name: string;
   id: number;
