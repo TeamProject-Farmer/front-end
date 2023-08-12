@@ -2,16 +2,10 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { idSelector } from 'src/types/shop/types';
 import { getQnAEdit } from 'src/apis/shop/qna';
-import { secretQuestion } from 'src/types/shop/types';
+import { secretQuestion, QnAModalProps } from 'src/types/shop/types';
 import Styled from './styles';
 
-interface Props {
-  modalName: string;
-  reviewItem?: string[];
-  modalClose: () => void;
-  setModalOpen?: React.Dispatch<React.SetStateAction<boolean>>;
-}
-const QnAModal = (props: Props) => {
+const QnAModal = (props: QnAModalProps) => {
   const { modalName, reviewItem, modalClose, setModalOpen } = props;
   const tempProductId = useSelector(idSelector);
   const close = modalClose;

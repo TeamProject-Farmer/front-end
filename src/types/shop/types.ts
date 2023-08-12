@@ -47,7 +47,6 @@ export const sizeSortOptions: ISortOption[] = [
   { title: 'Large', param: 'L' },
 ];
 
-
 export interface OptionBarProps {
   optionList: ISortOption[];
   width?: string;
@@ -115,7 +114,7 @@ export interface QnAProps {
 }
 
 export interface QnAEditProps {
-  productId: string ;
+  productId: string;
   currentOption: string;
   content: string;
   secretQuestion: secretQuestion;
@@ -125,5 +124,41 @@ export interface QnAEditProps {
 export interface OptionBoxProps {
   isPanel?: boolean;
   selectList: any[];
-  setSelectList:  React.Dispatch<React.SetStateAction<any[]>>;
+  setSelectList: React.Dispatch<React.SetStateAction<any[]>>;
+}
+
+//모달
+export interface DetailQnAModalProps {
+  qnaId: number;
+  subject: string;
+  detailClose: () => void;
+  setDetailOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+  content: string;
+  answer: string | null;
+  qcreatedDate: string;
+  acreatedDate: string;
+}
+
+export interface QnAModalProps {
+  modalName: string;
+  reviewItem?: string[];
+  modalClose: () => void;
+  setModalOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface ProductWrapperProps {
+  productList: any[];
+  setProductOption: React.Dispatch<React.SetStateAction<string>>;
+  productOption: string;
+  currentIndex: number;
+  setCurrentIndex: React.Dispatch<React.SetStateAction<number>>;
+  totalIndex: number;
+  isExceptional?: boolean;
+}
+
+export interface PaginationProps {
+  currentIndex: number;
+  setCurrentIndex: React.Dispatch<React.SetStateAction<number>>;
+  totalIndex: number;
+  isExceptional?: boolean;
 }

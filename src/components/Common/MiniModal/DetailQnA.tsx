@@ -1,18 +1,7 @@
-import { useState, useEffect } from 'react';
-import { getDetailQnA } from 'src/apis/shop/qna';
 import Styled from './styles';
+import { DetailQnAModalProps } from 'src/types/shop/types';
 
-interface Props {
-  qnaId: number;
-  subject: string;
-  detailClose: () => void;
-  setDetailOpen?: React.Dispatch<React.SetStateAction<boolean>>;
-  content: string;
-  answer: string | null;
-  qcreatedDate: string;
-  acreatedDate: string;
-}
-const DetailQnA = (props: Props) => {
+const DetailQnA = (props: DetailQnAModalProps) => {
   const {
     qnaId,
     subject,

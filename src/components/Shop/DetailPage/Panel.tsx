@@ -9,7 +9,6 @@ import { idSelector } from 'src/types/shop/types';
 import TotalStarGauge from '@components/Shop/Common/gauge/TotalStarGauge';
 import OptionBox from './ContentWrapper/OptionBox';
 import share from '@assets/images/shop/shareIcon.svg';
-import star from '@assets/images/shop/panelFilledStar.svg';
 import blank from '@assets/images/shop/blankStar.svg';
 import checkIcon from '@assets/images/shop/checkIcon.svg';
 import boxIcon from '@assets/images/shop/boxIcon.svg';
@@ -87,7 +86,6 @@ const Panel = (props: Props) => {
             <Styled.ShareButton></Styled.ShareButton>
           </Styled.TitleWrapper>
           <Styled.Review>
-            {/* <Styled.StarWrapper>{stars}</Styled.StarWrapper> */}
             <Styled.StarWrapper>
               <TotalStarGauge star={totalStar} size={20} color="#FFB800" />
             </Styled.StarWrapper>
@@ -231,7 +229,7 @@ const Styled = {
       margin-right: 0px !important;
     }
   `,
-  Star: styled(star)``,
+  
   BlankStar: styled(blank)``,
 
   PriceWrapper: styled.div`

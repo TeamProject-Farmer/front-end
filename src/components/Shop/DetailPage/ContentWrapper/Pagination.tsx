@@ -1,14 +1,9 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
+import { PaginationProps } from 'src/types/shop/types';
 import rightArrow from '@assets/images/shop/rightArrow.svg';
 
-interface Props {
-  currentIndex: number;
-  setCurrentIndex: React.Dispatch<React.SetStateAction<number>>;
-  totalIndex: number;
-  isExceptional?: boolean;
-}
-const Pagination = (props: Props) => {
+const Pagination = (props: PaginationProps) => {
   const { currentIndex, setCurrentIndex, totalIndex, isExceptional } = props;
   if(isExceptional){
     return (
@@ -17,7 +12,7 @@ const Pagination = (props: Props) => {
           <Styled.ArrowButton direct='left' onClick={()=>setCurrentIndex(0)}><Styled.LeftArrow /></Styled.ArrowButton>
           {(() => {
             const array = [];
-            for (let i = 1; i <= totalIndex; i++) array.push(<Styled.PageBox isActive={currentIndex+1 === i} onClick={()=>setCurrentIndex(i-1)}>{i}</Styled.PageBox>);
+            for (let i = 1; i <= totalIndex; i++) array.push(<Styled.PageBox key={i} isActive={currentIndex+1 === i} onClick={()=>setCurrentIndex(i-1)}>{i}</Styled.PageBox>);
             return array;
           })()}
           <Styled.ArrowButton direct='right' onClick={()=>setCurrentIndex(totalIndex-1)}><Styled.RightArrow /></Styled.ArrowButton>
@@ -32,7 +27,7 @@ const Pagination = (props: Props) => {
           <Styled.ArrowButton direct='left' onClick={()=>setCurrentIndex(1)}><Styled.LeftArrow /></Styled.ArrowButton>
           {(() => {
             const array = [];
-            for (let i = 1; i <= totalIndex; i++) array.push(<Styled.PageBox isActive={currentIndex === i} onClick={()=>setCurrentIndex(i)}>{i}</Styled.PageBox>);
+            for (let i = 1; i <= totalIndex; i++) array.push(<Styled.PageBox key={i} isActive={currentIndex === i} onClick={()=>setCurrentIndex(i)}>{i}</Styled.PageBox>);
             return array;
           })()}
           <Styled.ArrowButton direct='right' onClick={()=>setCurrentIndex(totalIndex)}><Styled.RightArrow /></Styled.ArrowButton>

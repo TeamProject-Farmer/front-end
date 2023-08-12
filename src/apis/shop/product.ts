@@ -1,8 +1,11 @@
 import request from '../base';
+import { productListProps, ShopBySizeProps } from 'src/types/shop/apiTypes';
 
 //상품 전체 리스트
-export const getProductList = async (productOption: string, categoryId: number, currentIndex:number) => {
+export const getProductList = async (props: productListProps) => {
+  let {productOption, categoryId, currentIndex} = props;
   if(categoryId == undefined) categoryId = 1;
+  
   const response = await request({
     url: `/main/product/${categoryId}?page=${currentIndex}&size=16`,
     params: {
@@ -18,39 +21,20 @@ export const getMDPickList = async () => {
   return response.data;
 };
 
-///main/product/shop-by-size/product-list?productSize=S&page=0&size=16&sort=string&orderCondition=NEWS
 //SHOP BY SIZE 상품
-interface Props {
-  sizeOption: string;
-  orderType: string;
-  currentIndex: number;
-}
-export const getShopBySize = async (props: Props) => {
+export const getShopBySize = async (props: ShopBySizeProps) => {
   const {sizeOption, orderType, currentIndex} = props;
   const response = await request({url: `main/product/shop-by-size/product-list?productSize=${sizeOption}&page=${currentIndex}&size=16&sort=string&orderCondition=${orderType}`});
-  // const response = await request({
-  //   url: `/main/shop-by-size/product-list`,
-  //   params: {
-  //     productSize: 'S',
-  //     pageable: {
-  //       page: 0,
-  //       size: 16,
-  //     },
-  //     orderCondition: 'NEWS'
-  //   },
-  // });
   return response.data;
 };
 
 //상품 세부 페이지
-// http://3.39.150.186:8080/api/main/product/detail/20
 export const getDetail = async (productId: number) => {
   const response = await request({url: `/main/product/detail/${productId}`});
   return response.data;
 };
 
 //기획전 상품 리스트
-///main/product/plan-products?division=PLAN
 export const getEventProduct = async () => {
   const response = await request({url: '/main/product/plan-products?division=PLAN'});
   return response.data;

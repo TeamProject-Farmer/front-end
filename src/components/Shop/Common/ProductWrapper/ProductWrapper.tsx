@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
 import Link from 'next/link';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
@@ -8,18 +7,9 @@ import OrderBar from '../OrderBar';
 import Product from '@components/Common/Product';
 import Pagination from '@components/Shop/DetailPage/ContentWrapper/Pagination';
 import { productSortOptions } from 'src/types/shop/types';
-import { ProductAPI } from 'src/types/shop/types';
+import { ProductAPI, ProductWrapperProps } from 'src/types/shop/types';
 
-interface Props {
-  productList: any[];
-  setProductOption: React.Dispatch<React.SetStateAction<string>>;
-  productOption: string;
-  currentIndex: number;
-  setCurrentIndex: React.Dispatch<React.SetStateAction<number>>;
-  totalIndex: number;
-  isExceptional?: boolean;
-}
-const ProductWrapper = (props: Props) => {
+const ProductWrapper = (props: ProductWrapperProps) => {
   const {
     productList,
     setProductOption,
@@ -45,17 +35,19 @@ const ProductWrapper = (props: Props) => {
       <Styled.OrderItemWrapper>
         <SideAd top={0} />
         {productList?.map((item: ProductAPI) => (
-          <Link href={`/shop/${category}/detail/${item.productId}`}>
-            <Product
-              key={item.productId}
-              thumbnailImg={item.imgUrl}
-              name={item.productName}
-              discountRate={item.discountRate}
-              price={item.price}
-              averageStarRating={item.averageStarRating}
-              reviewCount={item.reviewCount}
-            ></Product>
-          </Link>
+          <Styled.OrderItem key={item.productId}>
+            <Link href={`/shop/${category}/detail/${item.productId}`}>
+              <Product
+                id={item.productId}
+                thumbnailImg={item.imgUrl}
+                name={item.productName}
+                discountRate={item.discountRate}
+                price={item.price}
+                averageStarRating={item.averageStarRating}
+                reviewCount={item.reviewCount}
+              ></Product>
+            </Link>
+          </Styled.OrderItem>
         ))}
         <Pagination
           currentIndex={currentIndex}
@@ -78,13 +70,14 @@ const Styled = {
     flex-wrap: wrap;
     align-content: flex-start;
     margin: 70px auto;
-    & > a > div {
+    
+  `,
+  OrderItem: styled.div`
       margin-bottom: 20.47px;
       margin-right: 20.27px;
-    }
-    & > a:nth-child(4n + 1) > div {
-      margin-right: 0;
-    }
+  &:nth-child(4n + 1) {
+    margin-right: 0;
+  }
   `,
 };
 export default ProductWrapper;

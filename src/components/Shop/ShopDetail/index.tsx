@@ -9,17 +9,18 @@ import MDPick from './MDPick';
 import ProductWrapper from '../Common/ProductWrapper/ProductWrapper';
 
 const ShopDetail = () => {
-  const categoryId = useSelector(categprySelector);
+  const category = useSelector(categprySelector);
   const [productList, setProductList] = useState([]);
   const [productOption, setProductOption] = useState<string>('NEWS');
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>();
-
+  let categoryId:number = category.id;
+  
   const handleProductList = async () => {
-    const response = await getProductList(
+    const response = await getProductList({
       productOption,
-      categoryId.id,
-      currentIndex,
+      categoryId,
+      currentIndex}
     );
     setProductList(response.content);
     setTotalPages(response.totalPages);
@@ -34,7 +35,7 @@ const ShopDetail = () => {
   return (
     <Styled.Wrapper>
       <Category />
-      <Styled.Title>{categoryId.name}</Styled.Title>
+      <Styled.Title>{category.name}</Styled.Title>
       <Styled.ContentWrapper>
         <MDPick />
         <ProductWrapper
