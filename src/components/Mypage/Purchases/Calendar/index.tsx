@@ -1,7 +1,7 @@
 import React from 'react';
 import DatePicker from 'react-datepicker';
 import { ko } from 'date-fns/locale';
-import Search from '@assets/images/mypage/search.svg';
+import Search from '@assets/images/mypage/iconSearch.svg';
 import { CalendarProps } from 'src/types/mypage/types';
 import { Styled } from '@components/Mypage/styles';
 import { useFormatDate } from 'src/hooks/formatDate';
