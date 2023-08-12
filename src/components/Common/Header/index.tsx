@@ -5,9 +5,13 @@ import FirstBuyEvent from './FirstBuyEvent';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
+import { useDispatch } from 'react-redux';
+import { clearUser } from 'store/reducers/userSlice';
 
 const Header = () => {
-  const isLoggedIn = useSelector((state: RootState) => state.user.email !== '');
+  const isLogin = useSelector((state: RootState) => state.user.accessToken);
+  const dispatch = useDispatch();
+
   return (
     <Styled.Wrapper>
       <FirstBuyEvent />
@@ -23,9 +27,18 @@ const Header = () => {
         </Link>
 
         <Styled.Utils>
-          {isLoggedIn && <Icon name="logout" width={36} height={32} />}
+          {isLogin && (
+            <Link href={'/'}>
+              <Icon
+                onClick={() => dispatch(clearUser())}
+                name="logout"
+                width={36}
+                height={32}
+              />
+            </Link>
+          )}
           <li>
-            <Link href={isLoggedIn ? '/mypage' : '/login'}>
+            <Link href={isLogin ? '/mypage' : '/login'}>
               <Icon name="myPage" width={32} height={32} />
             </Link>
           </li>
