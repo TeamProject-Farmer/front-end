@@ -15,8 +15,7 @@ export const getQnAList = async (productId: number, currentIndex: number) => {
 //내가 쓴 문의사항
 export const getMyQnA = async () => {
   const response = await request.get(
-    '/member/qna/mine?page=0&size=5&direction=ASC',
-    { headers: { Authorization: `Bearer ${accessToken}` } },
+    '/member/qna/mine?page=0&size=5&direction=ASC'
   );
   return response.data;
 };
@@ -40,7 +39,5 @@ export const getQnAEdit = async (props: QnAEditProps) => {
   formData.append('secretQuestion', secretQuestion);
   formData.append('qcreatedDateTime', qcreatedDateTime);
 
-  return await request.post('/member/qna/write', formData, {
-    headers: { Authorization: `Bearer ${accessToken}` },
-  });
+  return await request.post('/member/qna/write', formData);
 };
