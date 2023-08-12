@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { categoryState } from 'src/types/redux/types';;
-import { CateId } from 'src/types/shop/types';
+import { CateId } from 'src/utils/shop/sortOption';
 
 const initialState: categoryState = {
   name: '다육이',

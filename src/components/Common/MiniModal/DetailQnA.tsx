@@ -1,7 +1,7 @@
 import Styled from './styles';
-import { DetailQnAModalProps } from 'src/types/shop/types';
+import { DetailQnAProps } from 'src/types/shop/types';
 
-const DetailQnA = (props: DetailQnAModalProps) => {
+const DetailQnA = (props: DetailQnAProps) => {
   const {
     qnaId,
     subject,

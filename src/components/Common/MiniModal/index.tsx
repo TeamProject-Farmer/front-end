@@ -1,6 +1,5 @@
 import Styled from './styles';
 import Icon from '../Icon';
-import InquiryModal from './InquiryModal';
 import ReviewModal from './ReviewModal';
 
 interface Props {
@@ -45,7 +44,7 @@ const MiniModal = (props: Props) => {
         {modalType == 'review' ? (
           <ReviewModal />
         ) : modalType == 'inquiry' ? (
-          <InquiryModal />
+          <></>
         ) : (
           <></>
         )}

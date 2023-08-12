@@ -1,24 +1,14 @@
 import { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
+import handleNickname from 'src/utils/shop/handleNickname';
 import {  getDetailQnA } from 'src/apis/shop/qna';
+import { QnAProps } from 'src/types/shop/types';
 import VerticalLine from '@components/Shop/Common/VerticalLine';
 import DetailQnA from '@components/Common/MiniModal/DetailQnA';
 import secret from '@assets/images/shop/secretIcon.svg';
 
-interface Props {
-  detailList: any[];
-}
-const QnAWrapper = (props: Props) => {
+const QnAWrapper = (props: {detailList: QnAProps[]}) => {
   const { detailList } = props;
-  const handleNickname = (str: string) => {
-    let originStr = str;
-    let maskingStr = '';
-    let strLength = originStr.length;
-    if (strLength < 3) maskingStr = originStr.replace(/(?<=.{1})./gi, '*');
-    else maskingStr = originStr.replace(/(?<=.{2})./gi, '*');
-
-    return maskingStr;
-  };
   const [qnaId, setQnaId] = useState<number>(0);
   const [subject, setDetailSubject] = useState<string>();
   const [content, setContent] = useState<string>();

@@ -5,6 +5,7 @@ import rightArrow from '@assets/images/shop/similarRArrow.svg';
 import SmallProduct from '@components/Shop/Common/SmallProduct';
 
 const SimilarProducts = () => {
+  //혹시 몰라서 우선 남겨놓았습니다.
   const TempList = [
     {
       id: 1,

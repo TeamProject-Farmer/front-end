@@ -1,7 +1,9 @@
 import request from '../base';
+import { getReviewProps } from 'src/types/shop/apiTypes';
 
 //상품별 리뷰 출력
-export const getReview = async (productId: number, currentIndex:number, sortOption: string|null, starOption:number|null) => {
+export const getReview = async (props: getReviewProps) => {
+  let {productId, currentIndex, sortOption, starOption} = props;
   if (productId == undefined) productId = 1;
   const response = await request({
     url: `/main/review/${productId}?page=${currentIndex}&direction=ASC&size=3`,

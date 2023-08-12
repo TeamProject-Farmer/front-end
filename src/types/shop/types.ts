@@ -26,27 +26,6 @@ export interface ReviewAPI {
   content: string;
 }
 
-export const productSortOptions: ISortOption[] = [
-  { title: '신상품순', param: 'NEWS' },
-  { title: '리뷰많은순', param: 'REVIEW' },
-  { title: '낮은가격순', param: 'LOW' },
-  { title: '높은가격순', param: 'HIGH' },
-];
-
-export const detailLinkOptions: ISortOption[] = [
-  { title: '상품', param: '' },
-  { title: '리뷰 766', param: '' },
-  { title: '상품문의 177', param: '' },
-  { title: '배송/환불', param: '' },
-  { title: '비슷한상품', param: '' },
-];
-
-export const sizeSortOptions: ISortOption[] = [
-  { title: 'Small', param: 'S' },
-  { title: 'Medium', param: 'M' },
-  { title: 'Large', param: 'L' },
-];
-
 export interface OptionBarProps {
   optionList: ISortOption[];
   width?: string;
@@ -54,21 +33,13 @@ export interface OptionBarProps {
   productOption?: string;
 }
 
-export const CateId = {
-  다육이: 1,
-  선인장: 2,
-  스킨답서스: 3,
-  야자목: 4,
-  호접란: 5,
-  키움용품: 6,
-};
 
 export interface categoryReduxType {
   name: string;
   id: number;
 }
 
-export interface PanelProps {
+export interface ProductListProps {
   id?: number;
   categoryId?: number;
   categoryName?: string;
@@ -86,6 +57,12 @@ export interface PanelProps {
   detailImg3?: string;
   detailImg4?: string;
   detailImg5?: string;
+}
+
+export interface StarOptionProps {
+  setPopStarOption: React.Dispatch<React.SetStateAction<boolean>>;
+  popStarOption: boolean;
+  setStarOption: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
 export interface SingleReviewProps {
@@ -110,25 +87,11 @@ export interface QnAProps {
   content: string;
   answer: boolean;
   secretQuestion: secretQuestion;
-  qcreatedDate: '2023-08-08T09:40:54.47001';
+  qcreatedDate: string;
 }
 
-export interface QnAEditProps {
-  productId: string;
-  currentOption: string;
-  content: string;
-  secretQuestion: secretQuestion;
-  qcreatedDateTime: string;
-}
-
-export interface OptionBoxProps {
-  isPanel?: boolean;
-  selectList: any[];
-  setSelectList: React.Dispatch<React.SetStateAction<any[]>>;
-}
-
-//모달
-export interface DetailQnAModalProps {
+//modal
+export interface DetailQnAProps {
   qnaId: number;
   subject: string;
   detailClose: () => void;
@@ -146,8 +109,9 @@ export interface QnAModalProps {
   setModalOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+//common
 export interface ProductWrapperProps {
-  productList: any[];
+  productList: ProductListProps[];
   setProductOption: React.Dispatch<React.SetStateAction<string>>;
   productOption: string;
   currentIndex: number;
@@ -161,4 +125,27 @@ export interface PaginationProps {
   setCurrentIndex: React.Dispatch<React.SetStateAction<number>>;
   totalIndex: number;
   isExceptional?: boolean;
+}
+
+export interface OptionBoxProps {
+  isPanel?: boolean;
+  selectList: selectListProps[];
+  setSelectList: React.Dispatch<React.SetStateAction<selectListProps[]>>;
+}
+
+export interface selectOptionProps {
+  id: number;
+  optionName: string;
+  optionPrice: number;
+}
+
+export interface selectListProps {
+  id: number;
+  optionName: string;
+  optionPrice: number;
+}
+
+export interface OnOffProps {
+  myButton: boolean;
+  setMyButton: React.Dispatch<React.SetStateAction<boolean>>;
 }

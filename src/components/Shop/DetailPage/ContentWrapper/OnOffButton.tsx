@@ -1,12 +1,8 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import { useState } from 'react';
+import { OnOffProps } from 'src/types/shop/types';
 
-interface Props {
-  myButton: boolean;
-  setMyButton: React.Dispatch<React.SetStateAction<boolean>>;
-}
-const OnOffButton = (props: Props) => {
+const OnOffButton = (props: OnOffProps) => {
   const {myButton, setMyButton} = props;
 
   const clickedmyButton = () => {

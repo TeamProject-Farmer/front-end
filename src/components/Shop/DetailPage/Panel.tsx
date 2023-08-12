@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import { getDetail } from 'src/apis/shop/product';
 import { getReview, getReviewStar } from 'src/apis/shop/review';
-import { idSelector } from 'src/types/shop/types';
+import { idSelector, selectOptionProps, OptionBoxProps } from 'src/types/shop/types';
 import TotalStarGauge from '@components/Shop/Common/gauge/TotalStarGauge';
 import OptionBox from './ContentWrapper/OptionBox';
 import share from '@assets/images/shop/shareIcon.svg';
@@ -14,13 +14,8 @@ import checkIcon from '@assets/images/shop/checkIcon.svg';
 import boxIcon from '@assets/images/shop/boxIcon.svg';
 import down from '@assets/images/shop/downloadIcon.svg';
 
-interface Props {
-  isPanel?: boolean;
-  selectList: any[];
-  setSelectList:  React.Dispatch<React.SetStateAction<any[]>>;
-}
-const Panel = (props: Props) => {
-  const { selectList, setSelectList } = props;
+const Panel = (props: OptionBoxProps) => {
+  const { isPanel, selectList, setSelectList } = props;
 
   const productId = useSelector(idSelector);
   const [thumbnailImg, setThumbnailImg] = useState<string>();
@@ -28,8 +23,7 @@ const Panel = (props: Props) => {
   const [discountRate, setDiscountRate] = useState<number>();
   const [price, setPrice] = useState<string>();
   const [totalStar, setTotalStar] = useState(0);
-  const [options, setOptions] = useState([]);
-
+  const [options, setOptions] = useState<selectOptionProps[]>([]);
   const handleDetailData = async () => {
     const response = await getDetail(productId);
     setOptions(response.options);
@@ -39,7 +33,7 @@ const Panel = (props: Props) => {
     setPrice(response.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
   };
   const handleReviewData = async () => {
-    const response = await getReview(productId, 0, 'best', null);
+    const response = await getReview({productId, currentIndex: 1, sortOption: null, starOption: null});
     setTotalStar(response.totalElements);
   };
   if (options.length == 0) {

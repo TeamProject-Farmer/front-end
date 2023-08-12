@@ -2,16 +2,18 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import { idSelector } from 'src/types/shop/types';
 import { getQnAList } from 'src/apis/shop/qna';
+import { idSelector } from 'src/types/shop/types';
+import { QnAProps } from 'src/types/shop/types';
 import OnOffButton from './OnOffButton';
 import QnAModal from '@components/Common/MiniModal/QnAModal';
 import QnAWrapper from '@components/Shop/Common/ProductWrapper/QnAWrapper';
 import MyQnA from './MyQnA';
 import Pagination from './Pagination';
+
 const Inquiry = () => {
   const productId = useSelector(idSelector);
-  const [detailList, setDetailList] = useState([]);
+  const [detailList, setDetailList] = useState<QnAProps[]>([]);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [myButton, setMyButton] = useState<boolean>(false);
   const [totalIndex, setTotalIndex] = useState(1);

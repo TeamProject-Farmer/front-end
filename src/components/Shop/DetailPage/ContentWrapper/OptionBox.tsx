@@ -6,18 +6,30 @@ import theme from '@styles/theme';
 import heart from '@assets/images/shop/optionBoxHeart.svg';
 import arrow from '@assets/images/shop/optionArrow.svg';
 import { getDetail } from 'src/apis/shop/product';
-import { OptionBoxProps } from 'src/types/shop/types';
-
+import {
+  OptionBoxProps,
+  selectOptionProps,
+  selectListProps,
+} from 'src/types/shop/types';
 
 const OptionBox = (props: OptionBoxProps) => {
   const { isPanel, selectList, setSelectList } = props;
   const productId = useSelector(idSelector);
-  // const [selectList, setSelectList] = useState([]);
   const [isShowOptions, setShowOptions] = useState(false);
-  const [options, setOptions] = useState([]);
+  const [options, setOptions] = useState<selectOptionProps[]>([]);
   const handleDetailData = async () => {
     const response = await getDetail(productId);
     setOptions(response.options);
+  };
+  const handleSelectList = (item: selectListProps) => {
+    setSelectList([
+      ...selectList.filter(i => i.id != item.id),
+      {
+        id: item.id,
+        optionName: item.optionName,
+        optionPrice: item.optionPrice,
+      },
+    ]);
   };
   useEffect(() => {
     handleDetailData();
@@ -36,16 +48,7 @@ const OptionBox = (props: OptionBoxProps) => {
             {options?.map(item => (
               <Styled.PanelOption
                 key={item.id}
-                onClick={() =>
-                  setSelectList([
-                    ...selectList.filter(i => i.id != item.id),
-                    {
-                      id: item.id,
-                      option: item.optionName,
-                      price: item.optionPrice,
-                    },
-                  ])
-                }
+                onClick={() => handleSelectList(item)}
               >
                 <div>
                   <ColorOption>{item.optionName}</ColorOption>
@@ -65,20 +68,8 @@ const OptionBox = (props: OptionBoxProps) => {
             <Styled.Label>상품을 선택하세요.</Styled.Label>
             <Styled.SelectOptions show={isShowOptions}>
               {options?.map(item => (
-                <Styled.Option
-                  key={item.id}
-                >
-                  <div
-                    onClick={() =>
-                      setSelectList([
-                        ...selectList.filter(i => i.id != item.id),
-                        {
-                          id: item.id,
-                          option: item.optionName,
-                          price: item.optionPrice,
-                        },
-                      ])
-                    }>
+                <Styled.Option key={item.id}>
+                  <div onClick={() => handleSelectList(item)}>
                     <ColorOption>{item.optionName}</ColorOption>
                     <div>+{item.optionPrice}원</div>
                   </div>
@@ -93,8 +84,8 @@ const OptionBox = (props: OptionBoxProps) => {
                 setSelectList(selectList.filter(i => i.id != item.id))
               }
             >
-              <div>{item.option}</div>
-              <div>+{item.price}원</div>
+              <div>{item.optionName}</div>
+              <div>+{item.optionPrice}원</div>
             </Styled.SelectedOption>
           ))}
         </Styled.Upper>

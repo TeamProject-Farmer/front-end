@@ -1,17 +1,20 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import VerticalLine from '@components/Shop/Common/VerticalLine';
-import photo from '@assets/images/shop/photoIcon.svg';
-import downArrow from '@assets/images/shop/downArrow1.svg';
-import SingleReview from './SingleReview';
-import Pagination from './Pagination';
-import TotalStarGauge from '@components/Shop/Common/gauge/TotalStarGauge';
-import EachStarGauge from '@components/Shop/Common/gauge/EachStarGauge';
 import { getReview, getReviewStar } from 'src/apis/shop/review';
-import { useSelector } from 'react-redux';
 import { idSelector } from 'src/types/shop/types';
 import { SingleReviewProps } from 'src/types/shop/types';
+import VerticalLine from '@components/Shop/Common/VerticalLine';
+import TotalStarGauge from '@components/Shop/Common/gauge/TotalStarGauge';
+import EachStarGauge from '@components/Shop/Common/gauge/EachStarGauge';
+import SingleReview from './SingleReview';
+import StarOption from './StarOption';
+import Pagination from './Pagination';
+import photo from '@assets/images/shop/photoIcon.svg';
+import downArrow from '@assets/images/shop/downArrow1.svg';
+
+
 
 const Review = () => {
   const productId = useSelector(idSelector);
@@ -30,21 +33,19 @@ const Review = () => {
 
   const handleReviewData = async () => {
     //like 버튼 눌렀을 때 바로바로 데이터가 안들어오는 것 같다.
-    const response = await getReview(
+    const response = await getReview({
       productId,
       currentIndex,
       sortOption,
       starOption,
-    );
+    });
     setReviewContent(response.content);
     setTotalElement(response.totalElements);
-    //filter되도 totalElements는 일정하게 나오기 떄문에 pagenation 값이 변경될 수 없음...! 
+    //filter되도 totalElements는 일정하게 나오기 떄문에 pagenation 값이 변경될 수 없음...!
     //totalPages 부분을 수정해야 근본적 문제가 해결 될 것 같습니다..!
-    if(currentIndex == 1 && 0 < response.numberOfElements && response.numberOfElements < 3) {
-      setTotalIndex(1);
-    }else setTotalIndex(response.totalPages);
+    setTotalIndex(response.totalPages);
   };
-  
+
   const handleReviewStar = async () => {
     try {
       const response = await getReviewStar(productId);
@@ -72,7 +73,7 @@ const Review = () => {
   }, [productId]);
   useEffect(() => {
     setCurrentIndex(1);
-  }, [starOption])
+  }, [starOption]);
 
   return (
     <Styled.Wrapper>
@@ -120,18 +121,7 @@ const Review = () => {
             <div>사진리뷰</div>
           </Styled.PhotoReviewBtn>
         </div>
-        <Styled.StarOptionWrapper  onClick={()=>setPopStarOption(!popStarOption)}>
-          별점
-          <Styled.DownArrow />
-          <Styled.StarOptions popStarOption={popStarOption}>
-            <Styled.EachStarOption onClick={()=>{setStarOption(null);setPopStarOption(false);}}>전체</Styled.EachStarOption>
-            <Styled.EachStarOption onClick={()=>{setStarOption(5);setPopStarOption(false);}}>5점</Styled.EachStarOption>
-            <Styled.EachStarOption onClick={()=>{setStarOption(4);setPopStarOption(false); }}>4점</Styled.EachStarOption>
-            <Styled.EachStarOption onClick={()=>{setStarOption(3);setPopStarOption(false);}}>3점</Styled.EachStarOption>
-            <Styled.EachStarOption onClick={()=>{setStarOption(2);setPopStarOption(false);}}>2점</Styled.EachStarOption>
-            <Styled.EachStarOption onClick={()=>{setStarOption(1);setPopStarOption(false);}}>1점</Styled.EachStarOption>
-          </Styled.StarOptions>
-        </Styled.StarOptionWrapper>
+        <StarOption setPopStarOption={setPopStarOption} popStarOption={popStarOption} setStarOption={setStarOption}/>
       </Styled.ReviewTitle>
       {errorMessage ? (
         <Styled.ErrorMessage>
@@ -244,40 +234,7 @@ const Styled = {
   RecentSort: styled.div<{ sortOption: string }>`
     color: ${props => (props.sortOption == 'recent' ? '#59B941' : '')};
   `,
-  StarOptionWrapper: styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    width: 63px;
-    height: 34px;
-    border-radius: 5px;
-    background-color: #ecf9e9;
-    color: ${theme.colors.green1};
-    position: relative;
-  `,
-  StarOptions: styled.div<{popStarOption: boolean}>`
-    height: fit-content;
-    width: 63px;
-    border-radius: 5px;
-    background-color: #fafbf9;
-    color: ${theme.colors.green1};
-    border: 1px solid #ccdcc9;
-    position: absolute;
-    top: 40px;
-    left: 0;
-    display: ${props => props.popStarOption ? 'flex' : 'none'};
-    flex-direction: column;
-  `,
-  EachStarOption: styled.div`
-    width: 100%;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    &:hover {
-      background-color: #ecf9e9;
-    }
-  `,
+  
   PhotoReviewBtn: styled.div`
     display: flex;
     & > div {

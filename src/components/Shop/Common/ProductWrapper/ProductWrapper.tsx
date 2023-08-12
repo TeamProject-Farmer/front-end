@@ -6,7 +6,7 @@ import SideAd from '../SideAd';
 import OrderBar from '../OrderBar';
 import Product from '@components/Common/Product';
 import Pagination from '@components/Shop/DetailPage/ContentWrapper/Pagination';
-import { productSortOptions } from 'src/types/shop/types';
+import { productSortOptions } from 'src/utils/shop/sortOption'; 
 import { ProductAPI, ProductWrapperProps } from 'src/types/shop/types';
 
 const ProductWrapper = (props: ProductWrapperProps) => {
@@ -20,11 +20,8 @@ const ProductWrapper = (props: ProductWrapperProps) => {
     isExceptional,
   } = props;
   const router = useRouter();
-  const menu = router.query.category;
-  let category: string;
-  if (menu) {
-    category = menu.toString();
-  }
+  const category = router.query.category?.toString() || '';
+  
   return (
     <Styled.Wrapper>
       <OrderBar

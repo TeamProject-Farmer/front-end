@@ -14,8 +14,8 @@ const QnAModal = (props: QnAModalProps) => {
   const [isSecret, setIsSecret] = useState<boolean>(false);
   const [secretQuestion, setSecretQuestion] =
     useState<secretQuestion>('GENERAL');
-  let [inputCount, setInputCount] = useState<number>(0);
-  let [content, setContent] = useState<string>();
+  const [inputCount, setInputCount] = useState<number>(0);
+  const [content, setContent] = useState<string>();
   const handleText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInputCount(e.target.value.length);
     setContent(e.target.value);
@@ -26,22 +26,16 @@ const QnAModal = (props: QnAModalProps) => {
   };
 
   const handleInquiryEdit = async () => {
-    let now = new Date();
-    let qcreatedDateTime: string = now.toString();
-    let productId = tempProductId.toString();
-    try {
-      const response = await getQnAEdit({
-        productId,
-        currentOption,
-        content,
-        secretQuestion,
-        qcreatedDateTime,
-      });
-    } catch (err) {}
+    const response = await getQnAEdit({
+      productId: tempProductId.toString(),
+      currentOption,
+      content,
+      secretQuestion,
+      qcreatedDateTime: new Date().toString(),
+    });
   };
   useEffect(() => {
-    if (isSecret) setSecretQuestion('SECRET');
-    else setSecretQuestion('GENERAL');
+    isSecret ? setSecretQuestion('SECRET') : setSecretQuestion('GENERAL');
   }, [isSecret]);
   return (
     <Styled.Wrapper>
@@ -92,7 +86,10 @@ const QnAModal = (props: QnAModalProps) => {
                 placeholder="문의하실 내용을 입력하세요."
                 maxLength={1000}
               ></textarea>
-              <div>{inputCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}/1,000</div>
+              <div>
+                {inputCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                /1,000
+              </div>
             </Styled.TextBox>
             <Styled.SecretCheck
               onClick={() => setIsSecret(!isSecret)}

@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import { setProductId } from 'store/reducers/productIdSlice';
 import { setCategoryId } from 'store/reducers/categorySlice';
-import { detailLinkOptions } from 'src/types/shop/types';
+import { detailLinkOptions } from 'src/utils/shop/sortOption';
 import Category from '../Common/Category';
 import Panel from './Panel';
 import PreviewPhoto from './PreviewPhoto';
@@ -17,24 +17,18 @@ const DetailPage = () => {
   const [selectList, setSelectList] = useState([]);
   const dispatch = useDispatch();
   const router = useRouter();
-  const menu = router.query.detail;
-  const cate = router.query.category;
-  let id: number;
-  let cateId: string;
-  if (menu) {
-    id = Number(menu);
-    cateId = cate.toString();
-  }
+  const productId = Number(router.query?.detail);
+  const cateId = router.query.category?.toString() || '';
   
   const handleDispatch = () => {
-    if(id != undefined){
+    if(productId != undefined){
+      dispatch(setProductId(productId));
       dispatch(setCategoryId(cateId));
-      dispatch(setProductId(id));
     }
   }
   useEffect(() => {
     handleDispatch();
-  }, [id]);
+  }, [productId]);
   
   return (
     <Styled.Wrapper>

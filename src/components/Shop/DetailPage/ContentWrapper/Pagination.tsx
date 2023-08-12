@@ -5,38 +5,26 @@ import rightArrow from '@assets/images/shop/rightArrow.svg';
 
 const Pagination = (props: PaginationProps) => {
   const { currentIndex, setCurrentIndex, totalIndex, isExceptional } = props;
-  if(isExceptional){
-    return (
-      <Styled.PaginationWrapper>
-        {totalIndex == 0? <></> : <Styled.PaginationContainer>
-          <Styled.ArrowButton direct='left' onClick={()=>setCurrentIndex(0)}><Styled.LeftArrow /></Styled.ArrowButton>
-          {(() => {
-            const array = [];
-            for (let i = 1; i <= totalIndex; i++) array.push(<Styled.PageBox key={i} isActive={currentIndex+1 === i} onClick={()=>setCurrentIndex(i-1)}>{i}</Styled.PageBox>);
-            return array;
-          })()}
-          <Styled.ArrowButton direct='right' onClick={()=>setCurrentIndex(totalIndex-1)}><Styled.RightArrow /></Styled.ArrowButton>
-        </Styled.PaginationContainer>}
-        
-      </Styled.PaginationWrapper>
-    );
-  }else {
-    return (
-      <Styled.PaginationWrapper>
-        {totalIndex == 0? <></> : <Styled.PaginationContainer>
-          <Styled.ArrowButton direct='left' onClick={()=>setCurrentIndex(1)}><Styled.LeftArrow /></Styled.ArrowButton>
-          {(() => {
-            const array = [];
-            for (let i = 1; i <= totalIndex; i++) array.push(<Styled.PageBox key={i} isActive={currentIndex === i} onClick={()=>setCurrentIndex(i)}>{i}</Styled.PageBox>);
-            return array;
-          })()}
-          <Styled.ArrowButton direct='right' onClick={()=>setCurrentIndex(totalIndex)}><Styled.RightArrow /></Styled.ArrowButton>
-        </Styled.PaginationContainer>}
-      </Styled.PaginationWrapper>
-      
-    );
-  }
+  const firstIndex = isExceptional ? 0 : 1;
+  const isActiveIndex = isExceptional ? currentIndex+1 : currentIndex;
+  const handleCurrentIndex = (i:number) => {return isExceptional ? i-1 : i;}
+  const lastIndex = isExceptional ? totalIndex-1 : totalIndex;
   
+  return (
+    <Styled.PaginationWrapper>
+      {totalIndex == 0? <></> : <Styled.PaginationContainer>
+        <Styled.ArrowButton direct='left' onClick={()=>setCurrentIndex(firstIndex)}><Styled.LeftArrow /></Styled.ArrowButton>
+        {(() => {
+          const array = [];
+          for (let i = 1; i <= totalIndex; i++) array.push(<Styled.PageBox key={i} isActive={isActiveIndex === i} onClick={()=>setCurrentIndex(handleCurrentIndex(i))}>{i}</Styled.PageBox>);
+          return array;
+        })()}
+        <Styled.ArrowButton direct='right' onClick={()=>setCurrentIndex(lastIndex)}><Styled.RightArrow /></Styled.ArrowButton>
+      </Styled.PaginationContainer>}
+      
+    </Styled.PaginationWrapper>
+  );
+
 };
 
 const Styled = {

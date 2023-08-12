@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import SizeBar from '../Common/SizeBar';
 import ProductWrapper from '../Common/ProductWrapper/ProductWrapper';
 import { getShopBySize } from 'src/apis/shop/product';
-import { sizeSortOptions } from 'src/types/shop/types';
+import { sizeSortOptions } from 'src/utils/shop/sortOption';
 
 const BySize = () => {
   const [sizeOption, setSizeOption] = useState<string>('S');

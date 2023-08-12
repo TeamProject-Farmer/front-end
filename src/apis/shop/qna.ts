@@ -1,5 +1,5 @@
 import request from '../base';
-import { QnAEditProps } from 'src/types/shop/types';
+import { QnAEditProps } from 'src/types/shop/apiTypes';
 import store from '../../../store/index';
 const accessToken = store.getState().user.accessToken;
 const email = store.getState().user.email;
@@ -29,14 +29,8 @@ export const getDetailQnA = async (qnaId: number) => {
   return response.data;
 };
 //QnA 작성
-export const getQnAEdit = async ({
-  productId,
-  currentOption,
-  content,
-  secretQuestion,
-  qcreatedDateTime,
-}: QnAEditProps) => {
-  // {productId,subject, content, secretQuestion, qcreatedDateTime}:QnAEditProps
+export const getQnAEdit = async (props: QnAEditProps) => {
+  const {productId, currentOption, content, secretQuestion, qcreatedDateTime} = props
   console.log('secretQuestion');
   console.log(secretQuestion);
   const formData = new FormData();
