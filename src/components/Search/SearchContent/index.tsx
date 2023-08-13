@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Plant from '../../Common/Product';
-import { ProductProps } from '../../Common/type';
+import { IProductProps } from 'src/types/common/types';
 
 const SearchContent = ({ searchedWord, searchResult }) => {
   return (
@@ -14,7 +14,7 @@ const SearchContent = ({ searchedWord, searchResult }) => {
       <Styled.Wrapper>
         {/* 로딩 추가 */}
         {searchResult &&
-          searchResult?.map((plant: ProductProps, index: number) => (
+          searchResult?.map((plant: IProductProps, index: number) => (
             <Plant
               key={index}
               thumbnailImg={plant.thumbnailImg}

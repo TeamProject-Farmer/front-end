@@ -29,6 +29,7 @@ const Styled = {
     align-items: center;
   `,
   Name: styled.p`
+    text-align: center;
     font-size: 20px;
     margin-top: 15px;
   `,

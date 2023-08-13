@@ -1,8 +1,8 @@
 import Styled from './styles';
 import Icon from '../Icon';
-import { ProductProps } from '../type';
+import { IProductProps } from 'src/types/common/types';
 
-const Product = (props: ProductProps) => {
+const Product = (props: IProductProps) => {
   const {
     thumbnailImg,
     name,
