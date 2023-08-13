@@ -14,11 +14,9 @@ const Header = () => {
       <Styled.Header>
         <Icon name="menu" width={32} height={32} />
         <Link href="/">
-          <Image
+          <Styled.Logo
             alt="headerLogo"
             src="/assets/images/home/headerLogo.png"
-            width={150}
-            height={33.6}
           />
         </Link>
 

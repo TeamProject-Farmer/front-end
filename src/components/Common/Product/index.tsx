@@ -13,7 +13,7 @@ const Product = (props: ProductProps) => {
   } = props;
   return (
     <Styled.Wrapper>
-      <Styled.ImgBox>{thumbnailImg}</Styled.ImgBox>
+      <Styled.Img src={thumbnailImg} alt={name} />
       <Styled.Content>
         <Styled.Title>{name}</Styled.Title>
         <Styled.PriceBox>

@@ -3,13 +3,18 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import { ISortOption } from 'src/types/search/types';
 
-const SearchUtils = ({ sortingOptions, handleSort }) => {
+const SearchUtils = ({ sortingOptions, sortOption, handleSort }) => {
+  console.log('sortingOptions', sortOption);
   return (
     <Styled.Wrapper>
       {sortingOptions?.map((option: ISortOption) => (
-        <div onClick={() => handleSort(option.param)} key={option.param}>
+        <Styled.Option
+          onClick={() => handleSort(option.param)}
+          clicked={sortOption === option.param}
+          key={option.param}
+        >
           {option.title}
-        </div>
+        </Styled.Option>
       ))}
     </Styled.Wrapper>
   );
@@ -28,5 +33,9 @@ const Styled = {
     justify-content: flex-start;
     align-items: center;
     gap: 111px;
+    cursor: pointer;
+  `,
+  Option: styled.p<{ clicked: boolean }>`
+    color: ${({ clicked }) => (clicked ? theme.colors.green2 : '#000 ')};
   `,
 };

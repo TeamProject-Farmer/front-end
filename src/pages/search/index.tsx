@@ -11,44 +11,61 @@ import { useSelector } from 'react-redux';
 import { RootState } from 'store';
 import { postSearch } from 'src/apis/search/search';
 import { sortingOptions } from 'src/utils/search/sortingOptions';
+import { current } from '@reduxjs/toolkit';
 
 const SearchPage: NextPageWithLayout = () => {
-  const [searchWord, setSearchWord] = useState<string>('');
+  const [inputValue, setInputValue] = useState<string>('');
+  const [searchedWord, setSearchedWord] = useState<string>('');
   const [searchResult, setSearchResult] = useState();
   const [recentSearchWord, setRecentSearchWord] = useState<string[]>([]);
+  const [sortOption, setSortOption] = useState<string>('');
   const memberEmail = useSelector((state: RootState) => state.user.email);
 
   //검색 input value값 관리
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchWord(event.target.value);
+    setInputValue(event.target.value);
+  };
+
+  const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.code === 'Enter') {
+      handleSearchResult();
+    }
   };
 
   //검색 버튼 클릭 시
   const handleSearchResult = async () => {
-    const response = await postSearch(searchWord, memberEmail);
+    const response = await postSearch(inputValue, memberEmail);
     const searchContent = response.searchProduct.content;
     if (memberEmail !== undefined) {
       setRecentSearchWord(response.memberSearchWord);
     }
+    setSearchedWord(inputValue);
     setSearchResult(searchContent);
+    setSortOption('new');
   };
 
   //검색 결과 정렬
   const handleSort = async (sortSearchCond: string) => {
-    const response = await postSearch(searchWord, memberEmail, sortSearchCond);
+    const response = await postSearch(inputValue, memberEmail, sortSearchCond);
+    setSortOption(sortSearchCond);
     setSearchResult(response.searchProduct.content);
   };
 
   return (
     <>
       <SearchContainer
+        handleKeyUp={handleKeyUp}
         handleChange={handleChange}
         handleClick={handleSearchResult}
-        searchWord={searchWord}
+        inputValue={inputValue}
         recentSearchWord={recentSearchWord}
       />
-      <SearchUtils sortingOptions={sortingOptions} handleSort={handleSort} />
-      <SearchContent searchResult={searchResult} />
+      <SearchUtils
+        sortingOptions={sortingOptions}
+        sortOption={sortOption}
+        handleSort={handleSort}
+      />
+      <SearchContent searchedWord={searchedWord} searchResult={searchResult} />
     </>
   );
 };
