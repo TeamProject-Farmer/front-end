@@ -40,6 +40,13 @@ function App({ Component, pageProps, ...rest }: AppPropsWithLayout) {
     if (router.pathname.startsWith('/mypage') && !token) {
       router.push('/');
     }
+
+    if (
+      (router.pathname.startsWith('/login') && token) ||
+      (router.pathname.startsWith('/register') && token)
+    ) {
+      router.push('/');
+    }
   }, []);
 
   return (
