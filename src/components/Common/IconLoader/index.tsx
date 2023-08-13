@@ -22,6 +22,15 @@ const IconLoader = () => {
             strokeLinejoin="round"
           />
         </symbol>
+        <symbol id="closeBtnG" width="26" height="26" viewBox="0 0 26 26">
+          <path
+            d="M25 1L1 25M1 1L25 25"
+            stroke="#285430"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </symbol>
         <symbol id="menu" width="32" height="23" viewBox="0 0 32 23">
           <path
             fillRule="evenodd"

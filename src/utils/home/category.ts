@@ -1,4 +1,4 @@
-const category = [
+export const sizeCategory = [
   {
     id: 'small',
     src: 'smallBtn',
@@ -18,5 +18,3 @@ const category = [
     bg: 'largeBg',
   },
 ];
-
-export default category;

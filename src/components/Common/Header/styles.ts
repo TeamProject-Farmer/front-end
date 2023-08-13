@@ -11,12 +11,12 @@ const Styled = {
     justify-content: space-between;
     align-items: center;
   `,
+  Menu: styled.div``,
   Logo: styled.img`
     width: 150px;
     height: 33.6px;
     flex-shrink: 0;
   `,
-
   Utils: styled.ul`
     display: flex;
     gap: 20px;

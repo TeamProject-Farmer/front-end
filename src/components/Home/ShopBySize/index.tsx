@@ -1,7 +1,7 @@
 import Styled from './styles';
 import Icon from '@components/Common/Icon';
 import { useState } from 'react';
-import category from 'src/utils/home/category';
+import { sizeCategory } from 'src/utils/home/category';
 import Link from 'next/link';
 
 const ShopPrev = () => {
@@ -24,8 +24,8 @@ const ShopPrev = () => {
       <Styled.ContentBox>
         <Styled.Title>shop by size</Styled.Title>
         <Styled.SizeBox>
-          {category &&
-            category?.map(size => (
+          {sizeCategory &&
+            sizeCategory?.map(size => (
               <Link href={`/shop/${size.id}`}>
                 <Styled.List
                   key={size.id}
