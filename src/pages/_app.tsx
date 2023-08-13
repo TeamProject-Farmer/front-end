@@ -1,5 +1,5 @@
 import 'tailwindcss/tailwind.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ThemeProvider } from '@emotion/react';
 import { AppProps } from 'next/app';
 import theme from '../styles/theme';
@@ -13,6 +13,7 @@ import type { ReactElement, ReactNode } from 'react';
 import type { NextPage } from 'next';
 import 'react-datepicker/dist/react-datepicker.css';
 import '@components/Mypage/Purchases/Calendar/react-datepicker.css';
+import { useRouter } from 'next/router';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -28,6 +29,19 @@ function App({ Component, pageProps, ...rest }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? (page => page);
 
   const { store } = wrapper.useWrappedStore(rest);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const state = store.getState();
+    const token = state.user.accessToken;
+
+    // 페이지에 1초 정도 로딩됐다가 리다이렉션 이슈
+    if (router.pathname.startsWith('/mypage') && !token) {
+      router.push('/');
+    }
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
