@@ -4,7 +4,7 @@ import Plant from './Plant';
 import { IPlant } from 'src/types/home/types';
 
 const BestPlant = ({ bestPlant }) => {
-  // console.log('bestplant', bestPlant);
+  console.log(bestPlant);
   const settings = {
     centerMode: true,
     dots: false,
@@ -25,6 +25,7 @@ const BestPlant = ({ bestPlant }) => {
           bestPlant?.map((plant: IPlant, index: number) => (
             <Plant
               key={plant.productId}
+              productId={plant.productId}
               ranking={index + 1}
               productName={plant.productName}
               discountRate={plant.discountRate}

@@ -28,6 +28,7 @@ export default FirstBuyEvent;
 const Styled = {
   Event: styled.div`
     position: relative;
+    width: 100%;
     height: 50px;
     background-color: ${theme.colors.green1};
     color: #ffffff;

@@ -4,7 +4,7 @@ import { keyframes } from '@emotion/react';
 
 const carousel = keyframes`
   0% { transform: translateX(0); }
-	100% { transform: translateX(calc(-309px * 5))}
+	100% { transform: translateX(calc(-309px * 10))}
 `;
 
 const Styled = {
