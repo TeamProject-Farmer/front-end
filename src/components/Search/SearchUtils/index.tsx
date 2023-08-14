@@ -4,7 +4,6 @@ import theme from '@styles/theme';
 import { ISortOption } from 'src/types/search/types';
 
 const SearchUtils = ({ sortingOptions, sortOption, handleSort }) => {
-  console.log('sortingOptions', sortOption);
   return (
     <Styled.Wrapper>
       {sortingOptions?.map((option: ISortOption) => (

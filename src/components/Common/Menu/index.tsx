@@ -12,10 +12,23 @@ const Menu = ({ setShowMenu }) => {
   useEffect(() => {
     getProductCategory().then(res => setCategory(res));
   }, []);
+  // 메뉴 닫기
   const handleClose = () => {
     setShowMenu(false);
   };
-  console.log(category);
+  // 스크롤 이벤트 발생시 메뉴 닫기
+  const handleScroll = () => {
+    handleClose();
+    window.removeEventListener('scroll', handleScroll);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <Styled.Wrapper>
       <Styled.ModalBg onClick={handleClose} />

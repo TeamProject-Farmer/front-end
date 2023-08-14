@@ -8,8 +8,6 @@ const ShopPrev = () => {
   const [hoveredSize, setHoveredSize] = useState<string>();
   const [sizeBg, setSizeBg] = useState<string>('smallBg');
 
-  console.log(sizeBg);
-
   const handleMouseEnter = (id: string, bg: string) => {
     setHoveredSize(id);
     setSizeBg(bg);
@@ -26,9 +24,8 @@ const ShopPrev = () => {
         <Styled.SizeBox>
           {sizeCategory &&
             sizeCategory?.map(size => (
-              <Link href={`/shop/${size.id}`}>
+              <Link key={size.id} href={`/shop/${size.id}`}>
                 <Styled.List
-                  key={size.id}
                   onMouseEnter={() => handleMouseEnter(size.id, size.bg)}
                   onMouseLeave={handleMouseLeave}
                 >

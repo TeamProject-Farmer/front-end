@@ -5,8 +5,8 @@ import { IReview } from 'src/types/home/types';
 import { useState } from 'react';
 
 const BestReview = ({ bestReview }) => {
+  console.log(bestReview);
   const [reviewList, setReviewList] = useState([...bestReview, ...bestReview]);
-  console.log(reviewList);
   return (
     <Styled.Wrapper>
       <Styled.ReviewContainer>

@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const News = ({ news }) => {
+  console.log(news);
   const { subject, content, imgUrl } = news;
   return (
     <Styled.Wrapper>

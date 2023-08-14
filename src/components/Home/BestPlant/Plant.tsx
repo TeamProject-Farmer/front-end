@@ -25,16 +25,14 @@ const Plant = ({
         <Styled.Content>
           <Styled.flexBox>
             <Styled.PriceBox>
-              <Styled.Discount>{discountRate}</Styled.Discount>
-              <Styled.Price>{price}</Styled.Price>
+              <Styled.Price>{price}원</Styled.Price>
+              <Styled.Discount>{discountRate}%</Styled.Discount>
+              <Styled.SpecialPrice>특가</Styled.SpecialPrice>
             </Styled.PriceBox>
             <Styled.Star>
               <Icon name="star" width={16} height={15} />
               {averageStarRating}
             </Styled.Star>
-          </Styled.flexBox>
-          <Styled.flexBox>
-            <Styled.SpecialPrice>특가</Styled.SpecialPrice>
           </Styled.flexBox>
         </Styled.Content>
       </Styled.Wrapper>
@@ -51,8 +49,6 @@ const WrapperStyles = css`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  box-sizing: border-box;
   border-radius: 10px;
 `;
 
@@ -123,7 +119,7 @@ const Styled = {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding: 31px 27px 21px 30px;
+    padding: 20px 27px 21px 30px;
     .slick-current & {
       width: 417px;
     }
