@@ -5,6 +5,7 @@ import OrderInfoText from './OrderInfoText';
 import { OrderListProps } from 'src/types/mypage/types';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { OptionArray } from 'src/utils/mypage/orderStatusData';
 
 export const OrderItem = ({ order }: { order: OrderListProps }) => {
   const router = useRouter();
@@ -57,7 +58,7 @@ export const OrderItem = ({ order }: { order: OrderListProps }) => {
       <OrderInfoText
         size="20"
         color={theme.colors.black}
-        text={order.orderStatus}
+        text={OptionArray[order.orderStatus]}
       />
     </Styled.FlexRowCenter>
   );
