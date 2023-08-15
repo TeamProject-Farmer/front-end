@@ -9,7 +9,9 @@ const NestedLayout = ({ children }: ILayoutProps) => {
   return (
     <Styled.Wrapper>
       <Styled.FlexWrapper>
-        <Styled.Title>주문/결제</Styled.Title>
+        <Styled.Title>
+          {asPath === '/order' ? '주문/결제' : '주문완료'}
+        </Styled.Title>
         <Styled.StateBox>
           <Styled.State colored={asPath === '/order'}>
             주문결제 &gt;{' '}
