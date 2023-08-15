@@ -13,13 +13,14 @@ type LayoutProps = {
   title?: string;
 };
 
-const Layout = ({ children, title = 'Farmer FE' }: LayoutProps) => (
+const Layout = ({ children, title = 'Farmer' }: LayoutProps) => (
   <div className={inter.className}>
     <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+      <link rel="icon" href="/favicon.ico" sizes="any" />
     </Head>
     <Styled.Wrapper>
       <Header />

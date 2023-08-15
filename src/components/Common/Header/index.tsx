@@ -1,6 +1,6 @@
 import Styled from './styles';
 import Icon from '../Icon';
-import FirstBuyEvent from './FirstBuyEvent';
+import EventBanner from './EventBanner';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
@@ -13,7 +13,7 @@ const Header = () => {
   return (
     <Styled.Wrapper>
       {showMenu && <Menu setShowMenu={setShowMenu} />}
-      <FirstBuyEvent />
+      <EventBanner />
       <Styled.Header>
         <Styled.Menu onClick={() => setShowMenu(true)}>
           <Icon name="menu" width={32} height={32} />
