@@ -24,7 +24,7 @@ export const postVerifyIamport = async (uid: string, orderedData) => {
 
 export const postOrders = async data => {
   const response = await request.post('/member/orders', {
-    data,
+    orderInfoDto: data,
   });
   console.log(response);
 };

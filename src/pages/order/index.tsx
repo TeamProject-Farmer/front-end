@@ -8,27 +8,19 @@ import Agreement from '@components/Order/Agreement';
 import PayMethod from '@components/Order/PayMethod';
 import { IOrderedProduct, IDeliveryInfo } from 'src/types/order/types';
 import type { NextPageWithLayout } from '@pages/_app';
-import { ReactElement } from 'react';
+import { ReactElement, useEffect } from 'react';
 import Payment from '@components/Order/Payment';
 import { useForm } from 'react-hook-form';
 import usePayment from 'src/hooks/order/usePayment';
 import processPayment from 'src/utils/order/processPayment';
-
-const productList: IOrderedProduct[] = [
-  {
-    cartId: 0,
-    productId: 0,
-    imgUrl: 'string',
-    productName: 'string',
-    optionId: 0,
-    optionName: 'string',
-    count: 0,
-    productPrice: 0,
-    totalPrice: 10000,
-  },
-];
+import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store';
+import getTotalPrice from 'src/utils/order/getTotalPrice';
 
 const OrderPage: NextPageWithLayout = () => {
+  const orderProduct = (state: RootState) => state.orderProduct;
+
   const {
     payNowDisabled,
     totalAmount,
@@ -39,6 +31,14 @@ const OrderPage: NextPageWithLayout = () => {
   } = usePayment();
   //react hook form
   const { handleSubmit, setValue, trigger, control } = useForm();
+
+  //개별 상품페이지에서 온 제품인지 장바구니 목록인지
+  const router = useRouter();
+  const fromCart = Object.keys(router.query).length === 0;
+
+  const productList = useSelector(orderProduct);
+  const totalPrice = getTotalPrice(productList);
+  console.log(productList);
 
   const onSubmit = (deliveryInfo: IDeliveryInfo) => {
     if (payNowDisabled) {
@@ -56,14 +56,11 @@ const OrderPage: NextPageWithLayout = () => {
         {/* 주문상품 */}
         <InputGroup title="주문상품">
           <Styled.InnerPaddingWrapper field="product">
-            <ProductList productList={productList} />
+            <ProductList productList={fromCart ? productList : {}} />
           </Styled.InnerPaddingWrapper>
         </InputGroup>
         {/* 적립금/쿠폰, 결제금액 */}
-        <Payment
-          totalPrice={productList[0].totalPrice}
-          getTotalAmount={getTotalAmount}
-        />
+        <Payment totalPrice={totalPrice} getTotalAmount={getTotalAmount} />
         {/* 결제 수단 */}
         <PayMethod
           selectedMethod={selectedMethod}

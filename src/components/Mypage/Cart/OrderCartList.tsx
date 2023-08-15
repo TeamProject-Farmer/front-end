@@ -60,6 +60,7 @@ const OrderCartList = ({
       : dispatch(setOrderProduct(cartListArray));
 
     dispatch(clearCartIndex());
+
     router.push('/order');
   };
 

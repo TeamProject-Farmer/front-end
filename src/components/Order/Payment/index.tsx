@@ -44,7 +44,7 @@ const Payment = ({ totalPrice, getTotalAmount }) => {
         <Styled.InnerMarginWrapper>
           <Styled.DiscountedPrice>
             <Styled.Title>적용금액</Styled.Title>
-            <Styled.Title>-0원</Styled.Title>
+            <Styled.Title>-{discountedPrice}원</Styled.Title>
           </Styled.DiscountedPrice>
         </Styled.InnerMarginWrapper>
       </InputGroup>
@@ -67,7 +67,7 @@ const Payment = ({ totalPrice, getTotalAmount }) => {
           <Styled.InnerMarginWrapper>
             <Styled.DiscountedPrice>
               <Styled.Title>최종 결제 금액</Styled.Title>
-              <Styled.Title>{finalPrice}원</Styled.Title>
+              <Styled.Title>{finalPrice + 2500}원</Styled.Title>
             </Styled.DiscountedPrice>
           </Styled.InnerMarginWrapper>
         </Styled.FlexColumnWrapper>

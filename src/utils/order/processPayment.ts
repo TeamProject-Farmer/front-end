@@ -17,6 +17,29 @@ const processPayment = (
   const { pg, method } = payment;
   const { name, mobile, basicAddress, detailAddress, postCode } = deliveryInfo;
   const { productId, optionId, count } = productList[0];
+
+  const data = {
+    product: [
+      { productId: 0, optionId: 0, count: 0 },
+      { productId: 0, optionId: 0, count: 0 },
+    ],
+    productId: 0,
+    optionId: 0,
+    count: 0,
+    username: 'string',
+    address: 'string',
+    zipcode: 'string',
+    addressDetail: 'string',
+    phoneNumber: 'string',
+    memo: 'OFFICE',
+    selfMemo: 'string',
+    defaultAddr: true,
+    orderNumber: 'string',
+    orderTotalPrice: 0,
+    totalQuantity: 0,
+    point: 0,
+    payMethod: 'string',
+  };
   const orderedData = {
     pg: pg,
     pay_method: method,
@@ -31,7 +54,7 @@ const processPayment = (
   const dbData = {
     productId: productId,
     optionId: optionId,
-    integerCount: count,
+    count: count,
     username: name,
     address: basicAddress,
     zipcode: postCode,
@@ -54,7 +77,7 @@ const processPayment = (
     const verifyRes = await postVerifyIamport(imp_uid, orderedData);
     if (verifyRes.amount === paid_amount) {
       alert('결제 성공');
-      // postOrders(dbData).then(res => console.log(res));
+      postOrders(dbData).then(res => console.log(res));
       return;
     } else {
       alert(`결제 실패: ${error_msg}`);
