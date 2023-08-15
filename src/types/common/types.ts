@@ -4,6 +4,7 @@ export interface IIconProps {
   name: IconName | string;
   width: number;
   height: number;
+  onClick?: () => void;
 }
 
 export interface IProductProps {

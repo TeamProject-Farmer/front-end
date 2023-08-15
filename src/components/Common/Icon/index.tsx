@@ -1,10 +1,11 @@
 import React from 'react';
 import { IIconProps } from 'src/types/common/types';
 
-const Icon = ({ name, width, height }: IIconProps) => {
+const Icon = ({ name, width, height, onClick }: IIconProps) => {
   return (
     <svg
-      style={{ pointerEvents: 'none' }}
+      onClick={onClick}
+      style={{ cursor: 'pointer' }}
       width={width.toString()}
       height={height.toString()}
       stroke="none"
