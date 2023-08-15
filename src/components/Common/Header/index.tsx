@@ -1,31 +1,31 @@
 import Styled from './styles';
 import Icon from '../Icon';
-import Image from 'next/image';
 import FirstBuyEvent from './FirstBuyEvent';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
 import { useDispatch } from 'react-redux';
 import { clearUser } from 'store/reducers/userSlice';
+import Menu from '../Menu';
+import { useState } from 'react';
 
 const Header = () => {
   const isLogin = useSelector((state: RootState) => state.user.accessToken);
   const dispatch = useDispatch();
-
   return (
     <Styled.Wrapper>
+      {showMenu && <Menu setShowMenu={setShowMenu} />}
       <FirstBuyEvent />
       <Styled.Header>
-        <Icon name="menu" width={32} height={32} />
+        <Styled.Menu onClick={() => setShowMenu(true)}>
+          <Icon name="menu" width={32} height={32} />
+        </Styled.Menu>
         <Link href="/">
-          <Image
+          <Styled.Logo
             alt="headerLogo"
             src="/assets/images/home/headerLogo.png"
-            width={150}
-            height={33.6}
           />
         </Link>
-
         <Styled.Utils>
           {isLogin && (
             <Link href={'/'}>

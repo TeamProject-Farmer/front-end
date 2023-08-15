@@ -6,3 +6,12 @@ export interface IIconProps {
   height: number;
   onClick?: () => void;
 }
+
+export interface IProductProps {
+  thumbnailImg: string;
+  name: string;
+  price: number;
+  discountRate: number;
+  reviewCount: number;
+  averageStarRating: number;
+}

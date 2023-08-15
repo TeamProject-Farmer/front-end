@@ -2,10 +2,11 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import Icon from '@components/Common/Icon';
 import theme from '@styles/theme';
-import Image from 'next/image';
 import { IPlant } from 'src/types/home/types';
+import Link from 'next/link';
 
 const Plant = ({
+  productId,
   ranking,
   productName,
   discountRate,
@@ -14,28 +15,28 @@ const Plant = ({
   imgUrl,
 }: IPlant) => {
   return (
-    <Styled.Wrapper>
-      <Styled.RankingBox>{ranking}</Styled.RankingBox>
-      <Styled.ImgBox>
-        <img src={imgUrl} alt="plant image" />
-      </Styled.ImgBox>
-      <Styled.Title>{productName}</Styled.Title>
-      <Styled.Content>
-        <Styled.flexBox>
-          <Styled.PriceBox>
-            <Styled.Discount>{discountRate}</Styled.Discount>
-            <Styled.Price>{price}</Styled.Price>
-          </Styled.PriceBox>
-          <Styled.Star>
-            <Icon name="star" width={16} height={15} />
-            {averageStarRating}
-          </Styled.Star>
-        </Styled.flexBox>
-        <Styled.flexBox>
-          <Styled.SpecialPrice>특가</Styled.SpecialPrice>
-        </Styled.flexBox>
-      </Styled.Content>
-    </Styled.Wrapper>
+    <Link href={`/shop/detail/${productId}`}>
+      <Styled.Wrapper>
+        <Styled.RankingBox>{ranking}</Styled.RankingBox>
+        <Styled.ImgBox>
+          <img src={imgUrl} alt="plant image" />
+        </Styled.ImgBox>
+        <Styled.Title>{productName}</Styled.Title>
+        <Styled.Content>
+          <Styled.flexBox>
+            <Styled.PriceBox>
+              <Styled.Price>{price}원</Styled.Price>
+              <Styled.Discount>{discountRate}%</Styled.Discount>
+              <Styled.SpecialPrice>특가</Styled.SpecialPrice>
+            </Styled.PriceBox>
+            <Styled.Star>
+              <Icon name="star" width={16} height={15} />
+              {averageStarRating}
+            </Styled.Star>
+          </Styled.flexBox>
+        </Styled.Content>
+      </Styled.Wrapper>
+    </Link>
   );
 };
 
@@ -48,8 +49,6 @@ const WrapperStyles = css`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  box-sizing: border-box;
   border-radius: 10px;
 `;
 
@@ -120,7 +119,7 @@ const Styled = {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding: 31px 27px 21px 30px;
+    padding: 20px 27px 21px 30px;
     .slick-current & {
       width: 417px;
     }

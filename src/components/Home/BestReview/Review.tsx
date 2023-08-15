@@ -2,17 +2,11 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import Icon from '@components/Common/Icon';
 
-const Review = ({
-  memberNickName,
-  imgUrl,
-  fiveStarRating,
-  likeCount,
-  content,
-}) => {
-  const countStar = () => {
+const Review = ({ memberNickName, imgUrl, likeCount, content }) => {
+  const countStar = (likeCount: number) => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
-      const iconSrc = i < fiveStarRating ? 'fullStar' : 'emptyStar';
+      const iconSrc = i < likeCount ? 'fullStar' : 'emptyStar';
       stars.push(<Icon key={i} name={iconSrc} width={30} height={28} />);
     }
     return stars;
@@ -28,7 +22,7 @@ const Review = ({
         <Styled.ImgBox src={imgUrl} alt="리뷰 이미지" />
         <Styled.ContentBox>
           <Styled.StarBox>
-            <Styled.Star>{countStar()}</Styled.Star>
+            <Styled.Star>{countStar(likeCount)}</Styled.Star>
             <Styled.Like>
               <Icon name="thumbsUp" width={28} height={30} />
               <Styled.LikeQty>{likeCount}</Styled.LikeQty>

@@ -19,6 +19,7 @@ export default Icon;
 
 export type IconName =
   | 'closeBtn'
+  | 'closeBtnG'
   | 'menu'
   | 'myPage'
   | 'search'

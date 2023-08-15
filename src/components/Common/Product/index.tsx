@@ -1,8 +1,8 @@
 import Styled from './styles';
 import Icon from '../Icon';
-import { ProductProps } from '../type';
+import { IProductProps } from 'src/types/common/types';
 
-const Product = (props: ProductProps) => {
+const Product = (props: IProductProps) => {
   const {
     thumbnailImg,
     name,
@@ -13,7 +13,7 @@ const Product = (props: ProductProps) => {
   } = props;
   return (
     <Styled.Wrapper>
-      <Styled.ImgBox>{thumbnailImg}</Styled.ImgBox>
+      <Styled.Img src={thumbnailImg} alt={name} />
       <Styled.Content>
         <Styled.Title>{name}</Styled.Title>
         <Styled.PriceBox>
