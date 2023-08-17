@@ -25,7 +25,7 @@ const Styled = {
   Wrapper: styled.div<{close: boolean, left:number, top: number}>`
     position: absolute;
     /* left: -210px; */
-    left: ${props => props.left ? `${props.left}px` : '-210px'};
+    left: ${props => props.left ? `${props.left}px` : '-225px'};
     margin-right: 36px;
     margin-left: 15px;
     width: fit-content;
