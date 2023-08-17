@@ -119,6 +119,7 @@ export interface ProductWrapperProps {
   setCurrentIndex: React.Dispatch<React.SetStateAction<number>>;
   totalIndex: number;
   isExceptional?: boolean;
+  pageElements: number;
 }
 
 export interface PaginationProps {

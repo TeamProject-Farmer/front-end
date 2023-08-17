@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import SideAd from '../SideAd';
@@ -7,6 +6,7 @@ import OrderBar from '../OrderBar';
 import Product from '@components/Common/Product';
 import Pagination from '@components/Shop/DetailPage/ContentWrapper/Pagination';
 import { productSortOptions } from 'src/utils/shop/sortOption';
+import { handleHeight } from 'src/utils/shop/handleHeight';
 import { ProductAPI, ProductWrapperProps } from 'src/types/shop/types';
 
 const ProductWrapper = (props: ProductWrapperProps) => {
@@ -18,10 +18,9 @@ const ProductWrapper = (props: ProductWrapperProps) => {
     setCurrentIndex,
     totalIndex,
     isExceptional,
+    pageElements
   } = props;
-
-    console.log('productList.length')
-    console.log(Math.ceil(productList.length/4) * 400 + 400)
+ 
   return (
     <Styled.Wrapper>
       <OrderBar
@@ -29,8 +28,8 @@ const ProductWrapper = (props: ProductWrapperProps) => {
         setProductOption={setProductOption}
         productOption={productOption}
       />
-      <Styled.OrderItemWrapper>
-        <SideAd top={0} />
+      <Styled.OrderItemWrapper height={handleHeight(pageElements)}>
+        <SideAd top={0}/>
         {productList?.map((item: ProductAPI) => (
           <Styled.OrderItem key={item.productId}>
             <Link href={`/shop/detail/${item.productId}`}>
@@ -59,10 +58,11 @@ const ProductWrapper = (props: ProductWrapperProps) => {
 
 const Styled = {
   Wrapper: styled.div``,
-  OrderItemWrapper: styled.div`
+  OrderItemWrapper: styled.div<{height: number}>`
     position: relative;
     width: ${theme.size.mainWidth};
-    height: 2032px;
+    /* height: 2032px; */
+    height: ${props => props.height? `${props.height}px`: '2032px'};
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;

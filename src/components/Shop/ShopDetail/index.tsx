@@ -16,8 +16,8 @@ const ShopDetail = () => {
   const [productOption, setProductOption] = useState<string>('NEWS');
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>();
+  const [pageElements, setPageElements] = useState<number>(16);
   let categoryId:number = category.id;
-
   const handleProductList = async () => {
     const response = await getProductList({
       productOption,
@@ -26,6 +26,7 @@ const ShopDetail = () => {
     );
     setProductList(response.content);
     setTotalPages(response.totalPages);
+    setPageElements(response.numberOfElements)
   };
 
   useEffect(() => {
@@ -51,6 +52,7 @@ const ShopDetail = () => {
           setCurrentIndex={setCurrentIndex}
           totalIndex={totalPages}
           isExceptional={true}
+          pageElements={pageElements}
         />
       </Styled.ContentWrapper>
     </Styled.Wrapper>
