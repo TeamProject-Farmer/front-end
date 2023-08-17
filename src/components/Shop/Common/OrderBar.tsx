@@ -25,10 +25,12 @@ const OrderBar = (props: OptionBarProps) => {
 const Styled = {
   OrderWrapper: styled.div`
     width: 98.9vw;
+    min-width: ${theme.size.shopDetailMinWidth};
     max-width: 100%;
     height: 60px;
     border-top: 2px solid ${theme.colors.green1};
     border-bottom: 2px solid ${theme.colors.green1};
+    padding-left: 240px;
     display: flex;
     justify-content: center;
     cursor: pointer;

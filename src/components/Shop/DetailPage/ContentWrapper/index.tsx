@@ -18,7 +18,7 @@ const ContentWrapper = (props: Props) => {
   return (
     <Styled.Wrapper>
       <Styled.ContentWrapper>
-        <SideAd />
+        <SideAd left={-160}/>
         <Styled.ExceptOption>
           <DetailImage />
           <Review />
@@ -45,7 +45,7 @@ const Styled = {
     margin-top: 58px;
     display: flex;
     margin-bottom: 187px;
-    /* height: 4635px; */
+    justify-content: center;
     height: 4535px;
     position: relative;
   `,
@@ -53,7 +53,7 @@ const Styled = {
     display: flex;
     flex-direction: column;
     position: relative;
-    width: 694px;
+    width: 740px;
   `,
   // BackButton: styled.button`
   // display: flex;

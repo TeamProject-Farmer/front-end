@@ -19,8 +19,8 @@ const theme: Theme = {
   },
   size: {
     mainWidth: '1200px',
-    shopDetailWidth: '692px',
-    shopDetailWrapper: '1077px',
+    shopDetailWidth: '740px',
+    shopDetailWrapper: '1330px',
     shopDetailMinWidth: '1400px',
   },
 };

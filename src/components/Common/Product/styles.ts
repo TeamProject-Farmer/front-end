@@ -23,11 +23,31 @@ const Styled = {
       object-fit: cover;
     }
   `,
+  ImgBox: styled.div`
+    position: relative;
+    height: 279.515px;
+    width: auto;
+    background-color: ${theme.colors.lightGray};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: 700;
+    overflow: hidden;
+    .imageStyle {
+      width: auto;
+      height: auto;
+      object-fit: cover;
+    }
+  `,
   Content: styled.div`
     display: flex;
     flex-direction: column;
     gap: 4.5px;
     padding: 13.46px 18.92px;
+    /* 특가 태그가 없는 경우 사이즈가 줄어드는데 그로 인해 상품 별 사이즈가 제각각이라 해결 필요함 */
+    min-height: 134px;
+    
   `,
   Title: styled.p`
     font-size: 16px;

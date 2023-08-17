@@ -27,7 +27,7 @@ import bannerSlice from './reducers/bannerSlice';
 import productIdSlice from './reducers/productIdSlice';
 import categorySlice from './reducers/categorySlice';
 import { categoryReduxType } from 'src/types/shop/types';
-import orderSlice from './reducers/orderSlice';
+// import orderSlice from './reducers/orderSlice';
 
 export interface RootState {
   user: UserState;
@@ -36,7 +36,7 @@ export interface RootState {
   banner: boolean;
   productId: number;
   categoryId: categoryReduxType;
-  orderInfo: IOrderInfo;
+  // orderInfo: IOrderInfo;
 }
 
 const persistConfig: PersistConfig<RootState> = {
@@ -56,7 +56,7 @@ const rootReducer = (
     banner: bannerSlice,
     productId: productIdSlice,
     categoryId: categorySlice,
-    orderInfo: orderSlice,
+    // orderInfo: orderSlice,
   });
   return combinedReducer(state, action);
 };
