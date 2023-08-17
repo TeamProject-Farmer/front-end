@@ -66,9 +66,11 @@ const OptionBox = (props: OptionBoxProps) => {
         <Styled.Upper>
           <Styled.SelectBox onClick={() => setShowOptions(prev => !prev)}>
             <Styled.Label>상품을 선택하세요.</Styled.Label>
-            <Styled.SelectOptions show={isShowOptions}>
+            
+          </Styled.SelectBox>
+          <Styled.SelectOptions show={isShowOptions}>
               {options?.map(item => (
-                <Styled.Option key={item.id}>
+                <Styled.Option key={item.id} onClick={() => setShowOptions(prev => !prev)}>
                   <div onClick={() => handleSelectList(item)}>
                     <ColorOption>{item.optionName}</ColorOption>
                     <div>+{item.optionPrice}원</div>
@@ -76,7 +78,6 @@ const OptionBox = (props: OptionBoxProps) => {
                 </Styled.Option>
               ))}
             </Styled.SelectOptions>
-          </Styled.SelectBox>
           {selectList?.map(item => (
             <Styled.SelectedOption
               key={item.id}
@@ -146,11 +147,9 @@ const Styled = {
     font-weight: 500;
   `,
   SelectOptions: styled.ul<{ show: boolean }>`
-    position: absolute;
-    list-style: none;
-    top: 74px;
-    left: 0;
-    width: 100%;
+    margin-top:  ${props => (props.show ? '10px' : '0')};
+    margin-bottom: ${props => (props.show ? '10px' : '0')};
+    width: 302px;
     overflow: hidden;
     height: fit-content;
     max-height: ${props => (props.show ? 'none' : '0')};
@@ -206,6 +205,7 @@ const Styled = {
     font-size: 16px;
     font-weight: 600;
     margin-top: 8px;
+    
   `,
   Lower: styled.div`
     height: 100px;
