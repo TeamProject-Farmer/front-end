@@ -46,7 +46,9 @@ const Styled = {
     display: flex;
     margin-bottom: 187px;
     justify-content: center;
-    height: 4535px;
+    /* height: 4535px; */
+    /* 하단의  컴포넌트가 삭제되었기 때문에 사이즈도 줄여놓았습니다.*/
+    height: 4130px;
     position: relative;
   `,
   ExceptOption: styled.div`
