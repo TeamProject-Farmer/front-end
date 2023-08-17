@@ -64,6 +64,7 @@ const Review = () => {
       );
     }
   };
+  
   useEffect(() => {
     handleReviewData();
   }, [productId, currentIndex, sortOption, starOption]);

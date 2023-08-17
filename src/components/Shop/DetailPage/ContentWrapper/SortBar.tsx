@@ -3,7 +3,7 @@ import theme from '@styles/theme';
 import { OptionBarProps } from 'src/types/shop/types';
 import { ISortOption } from 'src/types/search/types';
 
-const OrderBar = (props: OptionBarProps) => {
+const SortBar = (props: OptionBarProps) => {
   const { optionList, width, setProductOption, productOption } = props;
 
   return (
@@ -33,6 +33,7 @@ const Styled = {
     display: flex;
     justify-content: center;
     cursor: pointer;
+    padding-left: 240px;
   `,
   InnerWrapper: styled.div<{ width?: string }>`
     width: ${({ width }) => (width ? width : `${theme.size.mainWidth}`)};
@@ -47,4 +48,4 @@ const Styled = {
     color: ${({ isClicked }) => (isClicked ? `${theme.colors.pointGreen}` : '')};
   `,
 };
-export default OrderBar;
+export default SortBar;

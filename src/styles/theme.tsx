@@ -21,7 +21,7 @@ const theme: Theme = {
     mainWidth: '1200px',
     shopDetailWidth: '740px',
     shopDetailWrapper: '1330px',
-    shopDetailMinWidth: '1400px',
+    shopDetailMinWidth: '1300px',
   },
 };
 

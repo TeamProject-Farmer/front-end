@@ -9,7 +9,7 @@ import { detailLinkOptions } from 'src/utils/shop/sortOption';
 import Category from '../Common/Category';
 import Panel from './Panel';
 import PreviewPhoto from './PreviewPhoto';
-import OrderBar from '@components/Shop/Common/OrderBar';
+import SortBar from './ContentWrapper/SortBar';
 import ContentWrapper from './ContentWrapper';
 
 
@@ -35,7 +35,7 @@ const DetailPage = () => {
       <Category/>
       <Panel setSelectList={setSelectList} selectList={selectList}/>
       <PreviewPhoto />
-      <OrderBar
+      <SortBar
         optionList={detailLinkOptions}
         width={theme.size.shopDetailWrapper}
       />

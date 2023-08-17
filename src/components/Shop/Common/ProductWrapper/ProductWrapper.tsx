@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import SideAd from '../SideAd';
@@ -19,6 +20,8 @@ const ProductWrapper = (props: ProductWrapperProps) => {
     isExceptional,
   } = props;
 
+    console.log('productList.length')
+    console.log(Math.ceil(productList.length/4) * 400 + 400)
   return (
     <Styled.Wrapper>
       <OrderBar
