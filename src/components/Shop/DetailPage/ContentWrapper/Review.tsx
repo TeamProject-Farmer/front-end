@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { setTimeout } from 'timers';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import { getReview, getReviewStar } from 'src/apis/shop/review';
@@ -13,8 +14,6 @@ import StarOption from './StarOption';
 import Pagination from './Pagination';
 import photo from '@assets/images/shop/photoIcon.svg';
 import downArrow from '@assets/images/shop/downArrow1.svg';
-
-
 
 const Review = () => {
   const productId = useSelector(idSelector);
@@ -67,7 +66,10 @@ const Review = () => {
   };
   useEffect(() => {
     handleReviewData();
-  }, [productId, currentIndex, reviewClick, sortOption, starOption]);
+  }, [productId, currentIndex, sortOption, starOption]);
+  useEffect(() => {
+    setTimeout(()=>handleReviewData(), 10);
+  }, [reviewClick]);
   useEffect(() => {
     handleReviewStar();
   }, [productId]);
@@ -121,7 +123,11 @@ const Review = () => {
             <div>사진리뷰</div>
           </Styled.PhotoReviewBtn>
         </div>
-        <StarOption setPopStarOption={setPopStarOption} popStarOption={popStarOption} setStarOption={setStarOption}/>
+        <StarOption
+          setPopStarOption={setPopStarOption}
+          popStarOption={popStarOption}
+          setStarOption={setStarOption}
+        />
       </Styled.ReviewTitle>
       {errorMessage ? (
         <Styled.ErrorMessage>
@@ -234,7 +240,7 @@ const Styled = {
   RecentSort: styled.div<{ sortOption: string }>`
     color: ${props => (props.sortOption == 'recent' ? '#59B941' : '')};
   `,
-  
+
   PhotoReviewBtn: styled.div`
     display: flex;
     & > div {
