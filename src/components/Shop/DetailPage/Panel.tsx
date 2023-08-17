@@ -59,7 +59,7 @@ const Panel = (props: OptionBoxProps) => {
     handleDetailData();
     handleReviewData();
     handleReviewStar();
-  }, []);
+  }, [productId]);
   return (
     <Styled.Wrapper>
       <Styled.InnerBox>
