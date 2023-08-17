@@ -17,6 +17,7 @@ const OptionBox = (props: OptionBoxProps) => {
   const productId = useSelector(idSelector);
   const [isShowOptions, setShowOptions] = useState(false);
   const [options, setOptions] = useState<selectOptionProps[]>([]);
+  const [lastOption, setLastOption] = useState<string>('상품을 선택하세요.');
   const handleDetailData = async () => {
     const response = await getDetail(productId);
     setOptions(response.options);
@@ -31,19 +32,24 @@ const OptionBox = (props: OptionBoxProps) => {
       },
     ]);
   };
+  if (options.length <= 0) {
+    setOptions([{ id: 0, optionName: '단일 옵션입니다.', optionPrice: 0 }]);
+  }
+  useEffect(() => {
+    if (selectList.length <= 0) setLastOption('상품을 선택하세요.');
+    else setLastOption(selectList.at(-1).optionName);
+  }, [selectList]);
+  
   useEffect(() => {
     handleDetailData();
   }, []);
 
-  if (options.length == 0) {
-    setOptions([{ id: 0, optionName: '단일 옵션입니다.', optionPrice: 0 }]);
-  }
   if (isPanel) {
     return (
       <Styled.PanelSelectBox>
         <Styled.OptionArrow />
         <Styled.PanelSelect onClick={() => setShowOptions(prev => !prev)}>
-          <Styled.PanelLabel>상품을 선택하세요.</Styled.PanelLabel>
+          <Styled.PanelLabel>{lastOption}</Styled.PanelLabel>
           <Styled.PanelSelectOptions show={isShowOptions}>
             {options?.map(item => (
               <Styled.PanelOption
@@ -66,18 +72,20 @@ const OptionBox = (props: OptionBoxProps) => {
         <Styled.Upper>
           <Styled.SelectBox onClick={() => setShowOptions(prev => !prev)}>
             <Styled.Label>상품을 선택하세요.</Styled.Label>
-            
           </Styled.SelectBox>
           <Styled.SelectOptions show={isShowOptions}>
-              {options?.map(item => (
-                <Styled.Option key={item.id} onClick={() => setShowOptions(prev => !prev)}>
-                  <div onClick={() => handleSelectList(item)}>
-                    <ColorOption>{item.optionName}</ColorOption>
-                    <div>+{item.optionPrice}원</div>
-                  </div>
-                </Styled.Option>
-              ))}
-            </Styled.SelectOptions>
+            {options?.map(item => (
+              <Styled.Option
+                key={item.id}
+                onClick={() => setShowOptions(prev => !prev)}
+              >
+                <div onClick={() => handleSelectList(item)}>
+                  <ColorOption>{item.optionName}</ColorOption>
+                  <div>+{item.optionPrice}원</div>
+                </div>
+              </Styled.Option>
+            ))}
+          </Styled.SelectOptions>
           {selectList?.map(item => (
             <Styled.SelectedOption
               key={item.id}
@@ -147,7 +155,7 @@ const Styled = {
     font-weight: 500;
   `,
   SelectOptions: styled.ul<{ show: boolean }>`
-    margin-top:  ${props => (props.show ? '10px' : '0')};
+    margin-top: ${props => (props.show ? '10px' : '0')};
     margin-bottom: ${props => (props.show ? '10px' : '0')};
     width: 302px;
     overflow: hidden;
@@ -205,7 +213,6 @@ const Styled = {
     font-size: 16px;
     font-weight: 600;
     margin-top: 8px;
-    
   `,
   Lower: styled.div`
     height: 100px;
@@ -248,6 +255,7 @@ const Styled = {
   HeartIcon: styled(heart)``,
   PanelSelectBox: styled.div`
     position: relative;
+    cursor: pointer;
   `,
   OptionArrow: styled(arrow)`
     position: absolute;
