@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
+import theme from '@styles/theme';
 import SizeBar from '../Common/SizeBar';
 import ProductWrapper from '../Common/ProductWrapper/ProductWrapper';
 import { getShopBySize } from 'src/apis/shop/product';
@@ -24,10 +25,12 @@ const BySize = () => {
   useEffect(() => {
     handleDetailData();
   }, [currentIndex]);
+
   useEffect(() => {
     setCurrentIndex(0);
     if(currentIndex == 0) handleDetailData();
   }, [sizeOption, orderType])
+
   return (
     <Styled.Wrapper>
       <SizeBar
@@ -52,6 +55,7 @@ const BySize = () => {
 const Styled = {
   Wrapper: styled.div`
     width: 100%;
+    min-width: ${theme.size.shopDetailMinWidth};
     height: 60%;
     display: flex;
     flex-direction: column;

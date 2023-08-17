@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import {  useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import { categprySelector, ProductListProps } from 'src/types/shop/types';
@@ -10,6 +11,7 @@ import ProductWrapper from '../Common/ProductWrapper/ProductWrapper';
 
 const ShopDetail = () => {
   const category = useSelector(categprySelector);
+  const cateName = useRouter().query.category?.toString() || '';
   const [productList, setProductList] = useState<ProductListProps[]>([]);
   const [productOption, setProductOption] = useState<string>('NEWS');
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -34,11 +36,11 @@ const ShopDetail = () => {
     setCurrentIndex(0);
     if(currentIndex == 0) handleProductList();
   }, [ productOption])
-  
+
   return (
     <Styled.Wrapper>
       <Category />
-      <Styled.Title>{category.name}</Styled.Title>
+      <Styled.Title>{cateName}</Styled.Title>
       <Styled.ContentWrapper>
         <MDPick />
         <ProductWrapper
@@ -63,6 +65,7 @@ const Styled = {
     justify-content: center;
     color: ${theme.colors.black};
     text-align: center;
+    min-width: ${theme.size.shopDetailMinWidth};
   `,
   Title: styled.div`
     height: 130px;

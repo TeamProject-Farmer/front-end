@@ -50,6 +50,7 @@ const Styled = {
     flex-direction: column;
     width: 100vw;
     max-width: 100%;
+    min-width: ${theme.size.shopDetailMinWidth};
   `,
 };
 

@@ -29,6 +29,7 @@ const Styled = {
   Wrapper: styled.div`
     width: 100vw;
     max-width: 100%;
+    min-width: ${theme.size.shopDetailMinWidth};
     height: 100vh;
     max-height: 100%;
   `,

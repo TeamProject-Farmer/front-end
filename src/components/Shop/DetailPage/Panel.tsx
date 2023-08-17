@@ -33,7 +33,7 @@ const Panel = (props: OptionBoxProps) => {
     setDiscountRate(response.discountRate);
     setPrice(response.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
   };
-  
+
   const handleReviewData = async () => {
     const response = await getReview({productId, currentIndex: 1, sortOption: null, starOption: null});
     setTotalStar(response.totalElements);
@@ -164,6 +164,7 @@ const Styled = {
     border-bottom: 2px solid ${theme.colors.green1};
     align-items: center;
     justify-content: center;
+    min-width: ${theme.size.shopDetailMinWidth};
   `,
   InnerBox: styled.div`
     width: ${theme.size.mainWidth};

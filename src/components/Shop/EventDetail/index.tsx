@@ -53,6 +53,7 @@ const Styled = {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    min-width: ${theme.size.shopDetailMinWidth};
   `,
   VerticalLine: styled.div`
     width: 98.9vw;
