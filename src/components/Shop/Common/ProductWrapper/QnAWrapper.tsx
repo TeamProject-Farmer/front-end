@@ -9,6 +9,7 @@ import secret from '@assets/images/shop/secretIcon.svg';
 
 const QnAWrapper = (props: {detailList: QnAProps[]}) => {
   const { detailList } = props;
+
   const [qnaId, setQnaId] = useState<number>(0);
   const [subject, setDetailSubject] = useState<string>();
   const [content, setContent] = useState<string>();
@@ -31,7 +32,6 @@ const QnAWrapper = (props: {detailList: QnAProps[]}) => {
       setAcreatedDate(response.acreatedDate);
       if (response.qcreatedDate) setIsSecret(false);  
     } catch (err) {
-      //내가 쓴 글도 비밀글이라고 뜨는데 이 부분에 대해 논의해봐야할 것 같음
       if (err.response.data.message == '비밀글 입니다') {
         setIsSecret(true);
       }
