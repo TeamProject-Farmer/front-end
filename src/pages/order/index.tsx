@@ -38,9 +38,10 @@ const OrderPage: NextPageWithLayout = () => {
 
   const productList = useSelector(orderProduct);
   const totalPrice = getTotalPrice(productList);
-  console.log(productList);
+  // console.log(productList);
 
   const onSubmit = (deliveryInfo: IDeliveryInfo) => {
+    console.log(deliveryInfo);
     if (payNowDisabled) {
       alert('주문 내용 확인 및 결제에 동의하셔야 구매가 가능합니다.');
       return;
@@ -60,7 +61,11 @@ const OrderPage: NextPageWithLayout = () => {
           </Styled.InnerPaddingWrapper>
         </InputGroup>
         {/* 적립금/쿠폰, 결제금액 */}
-        <Payment totalPrice={totalPrice} getTotalAmount={getTotalAmount} />
+        <Payment
+          control={control}
+          totalPrice={totalPrice}
+          getTotalAmount={getTotalAmount}
+        />
         {/* 결제 수단 */}
         <PayMethod
           selectedMethod={selectedMethod}

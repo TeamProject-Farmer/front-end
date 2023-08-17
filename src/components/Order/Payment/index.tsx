@@ -4,7 +4,7 @@ import InputGroup from '../InputGroup';
 import useDiscount from 'src/hooks/order/useDiscount';
 import { useEffect } from 'react';
 
-const Payment = ({ totalPrice, getTotalAmount }) => {
+const Payment = ({ totalPrice, getTotalAmount, control }) => {
   const {
     coupon,
     usedPoint,
@@ -27,7 +27,7 @@ const Payment = ({ totalPrice, getTotalAmount }) => {
       <InputGroup title="적립금/쿠폰">
         <InputField
           label="적립금"
-          field="point"
+          caption="point"
           usedPoint={usedPoint}
           handlePoint={handlePointChange}
           disabledPointBtn={disabledPointBtn}
@@ -35,7 +35,7 @@ const Payment = ({ totalPrice, getTotalAmount }) => {
         />
         <InputField
           label="쿠폰"
-          field="coupon"
+          caption="coupon"
           couponOptions={coupon}
           handleSelectedCoupon={handleSelectedCoupon}
           disabledCouponBtn={disabledCouponBtn}

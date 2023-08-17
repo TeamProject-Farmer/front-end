@@ -19,7 +19,7 @@ const processPayment = (
   const { productId, optionId, count } = productList[0];
 
   const data = {
-    product: [
+    orderProduct: [
       { productId: 0, optionId: 0, count: 0 },
       { productId: 0, optionId: 0, count: 0 },
     ],
@@ -52,16 +52,14 @@ const processPayment = (
     buyer_postcode: postCode,
   };
   const dbData = {
-    productId: productId,
-    optionId: optionId,
-    count: count,
+    orderProduct: productList,
     username: name,
     address: basicAddress,
     zipcode: postCode,
     addressDetail: detailAddress,
     phoneNumber: mobile,
     memo: 'OFFICE',
-    selfMemo: 'string',
+    selfMemo: '',
     defaultAddr: true,
     orderNumber: orderNumber,
     orderTotalPrice: totalAmount,

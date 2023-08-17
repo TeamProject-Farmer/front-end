@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import Styled from './styles';
 import { Controller } from 'react-hook-form';
-import { shippingMsgOptions } from 'src/utils/order/optionList';
 import { formatPhoneNumber } from 'src/utils/order/formatPhoneNumber';
 import { DaumPostcodeData } from 'src/types/order/types';
 import {
@@ -14,11 +13,12 @@ import { IInputFieldProps } from 'src/types/order/types';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { postcodeScriptUrl } from 'react-daum-postcode/lib/loadPostcode';
 import { formatAddress } from 'src/utils/order/getAddressfromDaumPostcode';
+import { getDeliveryMemo } from 'src/apis/order/order';
 
 const InputField = ({
   label,
   required,
-  field,
+  caption,
   placeholder,
   couponOptions,
   usedPoint,
@@ -30,16 +30,28 @@ const InputField = ({
   control,
   setValue,
   trigger,
+  setShowShippingMsgInput,
 }: IInputFieldProps) => {
-  // 배송 메시지 직접 입력
-  const [showShippingMsgInput, setShowShippingMsgInput] =
-    useState<boolean>(false);
+  // type 옮기기
+  type TMsg = { type: string; text: string };
+  const [shippingMsgOptions, setShippingMsgOptions] = useState<TMsg[]>();
+  useEffect(() => {
+    getDeliveryMemo().then(res => setShippingMsgOptions(res));
+  }, []);
 
-  const handleShippingMsg = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    event.target.value === '직접 입력'
-      ? setShowShippingMsgInput(true)
-      : setShowShippingMsgInput(false);
-  };
+  useEffect(() => {}, []);
+
+  // 배송 메시지 직접 입력
+  // const [showShippingMsgInput, setShowShippingMsgInput] =
+  //   useState<boolean>(false);
+
+  // console.log(showShippingMsgInput);
+
+  // const handleShippingMsg = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  //   event.target.value === 'TEXT'
+  //     ? setShowShippingMsgInput(true)
+  //     : setShowShippingMsgInput(false);
+  // };
 
   // 주소 입력
   const handleComplete = (data: DaumPostcodeData) => {
@@ -68,7 +80,7 @@ const InputField = ({
     ) : null;
 
   return (
-    <Styled.InputWrapper field={field}>
+    <Styled.InputWrapper caption={caption}>
       {label && (
         <Styled.Label>
           {label}
@@ -188,7 +200,10 @@ const InputField = ({
           coupon: (
             <Styled.FlexColumnWrapper>
               <Styled.FlexWrapper>
-                <Styled.Dropdown field="coupon" onChange={handleSelectedCoupon}>
+                <Styled.Dropdown
+                  caption="coupon"
+                  onChange={handleSelectedCoupon}
+                >
                   <option value={0}>쿠폰을 선택해주세요</option>
                   {couponOptions &&
                     couponOptions.map(coupon => (
@@ -238,17 +253,49 @@ const InputField = ({
           card: <Styled.Input width={844} placeholder={placeholder} />,
           shippingMsg: (
             <Styled.FlexColumnWrapper>
-              <Styled.Dropdown field="shippingMsg" onChange={handleShippingMsg}>
-                {shippingMsgOptions.map((msg, index) => (
-                  <Styled.Option key={index} value={msg}>
-                    {msg}
-                  </Styled.Option>
-                ))}
-              </Styled.Dropdown>
-              {showShippingMsgInput && <Styled.Input width={750} />}
+              <Controller
+                name="memo"
+                control={control}
+                defaultValue="OFFICE"
+                render={({ field }) => (
+                  <Styled.Dropdown
+                    caption="shippingMsg"
+                    {...field}
+                    // value={shippingMsg}
+                    onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
+                      const value = event.target.value;
+                      value === 'TEXT'
+                        ? setShowShippingMsgInput(true)
+                        : setShowShippingMsgInput(false);
+
+                      field.onChange(value);
+                    }}
+                    // onChange={handleShippingMsg}
+                  >
+                    {shippingMsgOptions &&
+                      shippingMsgOptions.map(msg => (
+                        <Styled.Option key={msg.type} value={msg.type}>
+                          {msg.text}
+                        </Styled.Option>
+                      ))}
+                  </Styled.Dropdown>
+                )}
+              ></Controller>
             </Styled.FlexColumnWrapper>
           ),
-        }[field]
+          selfMsg: (
+            <Controller
+              name="selfMemo"
+              control={control}
+              render={({ field }) => (
+                <Styled.Input
+                  value={field.value ? field.value : ''}
+                  width={750}
+                />
+              )}
+            ></Controller>
+          ),
+        }[caption]
       }
     </Styled.InputWrapper>
   );

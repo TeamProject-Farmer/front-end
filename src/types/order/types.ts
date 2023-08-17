@@ -29,7 +29,7 @@ export interface ICoupon {
 
 export interface IInputFieldProps {
   label?: string;
-  field: string;
+  caption?: string;
   placeholder?: string;
   required?: boolean;
   inputProps?: UseFormRegisterReturn;
@@ -44,14 +44,16 @@ export interface IInputFieldProps {
   control?: Control<FieldValues>;
   setValue?: UseFormSetValue<FieldValues>;
   trigger?: UseFormTrigger<FieldValues>;
+  setShowShippingMsgInput?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface ICheckBoxInputProps {
   label: string;
-  field?: string;
+  caption?: string;
   smallBox?: boolean;
   checked?: boolean;
   onChange?: () => void;
+  control?: Control<FieldValues>;
 }
 
 export interface IButtonProps {
