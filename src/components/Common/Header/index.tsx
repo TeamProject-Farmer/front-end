@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Styled from './styles';
 import Icon from '../Icon';
 import Image from 'next/image';
@@ -7,6 +8,8 @@ import { useSelector } from 'react-redux';
 import { RootState } from 'store';
 
 const Header = () => {
+  const [showMenu, setShowMenu] = useState<boolean>(false);
+
   const isLoggedIn = useSelector((state: RootState) => state.user.email !== '');
   return (
     <Styled.Wrapper>
