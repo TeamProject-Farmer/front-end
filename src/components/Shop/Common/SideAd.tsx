@@ -4,13 +4,14 @@ import { useState } from 'react';
 import close from '@assets/images/shop/closeIcon.svg';
 interface Props {
   top?: number;
+  left?:number;
 }
 const SideAd = (props: Props) => {
-  const { top } = props;
+  const { top, left } = props;
   const [close, setClose] = useState<boolean>(false);
 
   return (
-    <Styled.Wrapper close={close}>
+    <Styled.Wrapper close={close} left={left} top={top}>
       <Styled.SideAd top={top}>
         <Styled.CloseIcon  onClick={()=>setClose(!close)}/>
         <Styled.Content>식물 키우기<br />많이 힘드시죠? <br /><br />내 반려 식물을<br />등록하고<br />관리해보세요.</Styled.Content>
@@ -21,17 +22,18 @@ const SideAd = (props: Props) => {
 };
 
 const Styled = {
-  Wrapper: styled.div<{close: boolean}>`
+  Wrapper: styled.div<{close: boolean, left:number, top: number}>`
     position: absolute;
-    left: -210px;
+    /* left: -210px; */
+    left: ${props => props.left ? `${props.left}px` : '-210px'};
     margin-right: 36px;
     margin-left: 15px;
     width: fit-content;
     height: inherit;
-    top: 0;
+    top: ${props => (props.top ? `${props.top}px` : '134px')};
     display: ${props => props.close ? 'none' : ''};
   `,
-  SideAd: styled.div<Props>`
+  SideAd: styled.div<{top: number}>`
     margin-top: 20px;
     position: sticky;
     top: ${props => (props.top ? `${props.top}px` : '134px')};
