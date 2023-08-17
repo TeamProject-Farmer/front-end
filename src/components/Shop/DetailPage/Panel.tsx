@@ -24,6 +24,7 @@ const Panel = (props: OptionBoxProps) => {
   const [price, setPrice] = useState<string>();
   const [totalStar, setTotalStar] = useState(0);
   const [options, setOptions] = useState<selectOptionProps[]>([]);
+
   const handleDetailData = async () => {
     const response = await getDetail(productId);
     setOptions(response.options);
@@ -32,6 +33,7 @@ const Panel = (props: OptionBoxProps) => {
     setDiscountRate(response.discountRate);
     setPrice(response.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
   };
+  
   const handleReviewData = async () => {
     const response = await getReview({productId, currentIndex: 1, sortOption: null, starOption: null});
     setTotalStar(response.totalElements);

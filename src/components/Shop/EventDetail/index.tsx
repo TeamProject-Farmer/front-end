@@ -28,7 +28,7 @@ const EventDetail = () => {
           {productList &&
             productList.map(i => (
               <div key={i.productId}>
-                <Link href={`/shop/event/detail/${i.productId}`}>
+                <Link href={`/shop/detail/${i.productId}`}>
                   <Product
                     id={i.productId}
                     thumbnailImg={i.imgUrl}

@@ -15,6 +15,7 @@ const ShopDetail = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>();
   let categoryId:number = category.id;
+
   const handleProductList = async () => {
     const response = await getProductList({
       productOption,
@@ -24,13 +25,16 @@ const ShopDetail = () => {
     setProductList(response.content);
     setTotalPages(response.totalPages);
   };
+
   useEffect(() => {
     handleProductList();
   }, [productOption, categoryId, currentIndex]);
+
   useEffect(() => {
     setCurrentIndex(0);
     if(currentIndex == 0) handleProductList();
   }, [ productOption])
+  
   return (
     <Styled.Wrapper>
       <Category />
