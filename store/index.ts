@@ -23,7 +23,6 @@ import cartIndexSlice from './reducers/cartSlice';
 import { CartState, UserState } from 'src/types/redux/types';
 import { CartListProps } from 'src/types/mypage/types';
 import orderProductSlice from './reducers/orderProductSlice';
-import { IOrderInfo } from 'src/types/order/types';
 import bannerSlice from './reducers/bannerSlice';
 import productIdSlice from './reducers/productIdSlice';
 import categorySlice from './reducers/categorySlice';

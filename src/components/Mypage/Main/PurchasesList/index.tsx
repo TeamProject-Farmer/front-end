@@ -24,12 +24,13 @@ const PurchasesList = () => {
         <Styled.ListWrapper>
           {/* slice 메서드로 렌더링 제한 */}
           {purchaseArray?.slice(0, 7).map((purchase, index) => (
-            <Styled.ListDiv key={purchase.productId}>
+            <Styled.ListDiv key={index}>
               <Image
                 src={purchase.imgUrl}
                 alt="식물 사진"
-                width={170}
-                height={170}
+                width="0"
+                height="0"
+                sizes="170px"
                 style={{ width: '170px', height: '170px' }}
               />
               <Styled.Title>{purchase.productName}</Styled.Title>

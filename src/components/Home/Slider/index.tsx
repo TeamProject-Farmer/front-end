@@ -4,7 +4,6 @@ import SliderContent from './SliderContent';
 import Indicator from './Indicator';
 
 const Slider = ({ banner }) => {
-  // console.log('banner', banner);
   const [activeIndex, setActiveIndex] = useState(1);
 
   useEffect(() => {

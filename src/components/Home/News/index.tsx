@@ -1,7 +1,9 @@
 import Styled from './styles';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const News = ({ news }) => {
+  console.log(news);
   const { subject, content, imgUrl } = news;
   return (
     <Styled.Wrapper>
@@ -9,7 +11,9 @@ const News = ({ news }) => {
       <Styled.ImgBox>
         <Styled.FlexBox>
           <Styled.ImgTitle>관련 뉴스</Styled.ImgTitle>
-          <Styled.ShopBtn>&gt; Shop Now</Styled.ShopBtn>
+          <Link href="/shop/다육이">
+            <Styled.ShopBtn>&gt; Shop Now</Styled.ShopBtn>
+          </Link>
         </Styled.FlexBox>
         <Image src={imgUrl} alt="news image" width={553} height={600} />
       </Styled.ImgBox>

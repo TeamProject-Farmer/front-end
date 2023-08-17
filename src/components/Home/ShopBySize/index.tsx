@@ -1,50 +1,42 @@
 import Styled from './styles';
 import Icon from '@components/Common/Icon';
-import { useState, useEffect } from 'react';
-import { getShopBySize } from 'src/apis/home/home';
-
-const category = [
-  { id: 'S', src: 'smallBtn', hover: 'smallBtn_w' },
-  { id: 'M', src: 'mediumBtn', hover: 'mediumBtn_w' },
-  { id: 'L', src: 'largeBtn', hover: 'largeBtn_w' },
-];
+import { useState } from 'react';
+import { sizeCategory } from 'src/utils/home/category';
+import Link from 'next/link';
 
 const ShopPrev = () => {
-  const [hoveredSize, setHoveredSize] = useState('S');
-  const [sizeImg, setSizeImg] = useState<string>();
+  const [hoveredSize, setHoveredSize] = useState<string>();
+  const [sizeBg, setSizeBg] = useState<string>('smallBg');
 
-  const handleMouseEnter = (id: string) => {
+  const handleMouseEnter = (id: string, bg: string) => {
     setHoveredSize(id);
-    // getShopBySize(id);
+    setSizeBg(bg);
   };
 
-  // const handleMouseLeave = () => {
-  //   setHoveredSize(null);
-  // };
-
-  useEffect(() => {
-    getShopBySize(hoveredSize).then(res => setSizeImg(res.imgLink));
-  }, [hoveredSize]);
+  const handleMouseLeave = () => {
+    setHoveredSize(null);
+  };
 
   return (
-    <Styled.Wrapper>
+    <Styled.Wrapper sizeBg={sizeBg}>
       <Styled.ContentBox>
         <Styled.Title>shop by size</Styled.Title>
         <Styled.SizeBox>
-          {category &&
-            category?.map(size => (
-              <Styled.List
-                key={size.id}
-                onMouseEnter={() => handleMouseEnter(size.id)}
-                // onMouseLeave={handleMouseLeave}
-              >
-                {hoveredSize === size.id ? (
-                  <Icon name={size.hover} width={46} height={46} />
-                ) : (
-                  <Icon name={size.src} width={46} height={46} />
-                )}
-                {size.id}
-              </Styled.List>
+          {sizeCategory &&
+            sizeCategory?.map(size => (
+              <Link key={size.id} href={`/shop/${size.id}`}>
+                <Styled.List
+                  onMouseEnter={() => handleMouseEnter(size.id, size.bg)}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  {hoveredSize === size.id ? (
+                    <Icon name={size.hover} width={46} height={46} />
+                  ) : (
+                    <Icon name={size.src} width={46} height={46} />
+                  )}
+                  {size.id}
+                </Styled.List>
+              </Link>
             ))}
         </Styled.SizeBox>
       </Styled.ContentBox>

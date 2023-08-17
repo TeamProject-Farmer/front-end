@@ -6,8 +6,8 @@ const Styled = {
     width: 282.727px;
     border: 1px solid #000;
   `,
-  ImgBox: styled.div`
-    position: relative;
+  Img: styled.img`
+    width: 100%;
     height: 279.515px;
     width: auto;
     background-color: ${theme.colors.lightGray};
@@ -38,7 +38,7 @@ const Styled = {
     gap: 10px;
   `,
   Discount: styled.p`
-    color: #62C655;
+    color: #62c655;
     font-size: 16px;
     font-weight: 700;
   `,

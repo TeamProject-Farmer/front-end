@@ -3,12 +3,19 @@ import theme from '@styles/theme';
 
 const Styled = {
   Wrapper: styled.div`
-    width: 100%;
+    width: 1920px;
     height: 400px;
     padding: 0 370px;
     display: flex;
     align-items: center;
     border-top: 4px solid ${theme.colors.green1};
+  `,
+  ShrinkWrapper: styled.div`
+    flex-shrink: 0;
+  `,
+  Logo: styled.img`
+    width: 176px;
+    height: 207px;
   `,
   InfoWrapper: styled.div`
     position: relative;
