@@ -4,6 +4,7 @@ import { RootState } from 'store';
 
 export const idSelector = (state: RootState) => state.productId;
 export const categprySelector = (state: RootState) => state.categoryId;
+export const userToken = (state: RootState) => state.user.email;
 
 export interface ProductAPI {
   productId: number;

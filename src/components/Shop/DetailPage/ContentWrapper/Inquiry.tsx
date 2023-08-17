@@ -1,18 +1,23 @@
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import { getQnAList } from 'src/apis/shop/qna';
 import { idSelector } from 'src/types/shop/types';
 import { QnAProps } from 'src/types/shop/types';
+import { userToken } from 'src/types/shop/types';
 import OnOffButton from './OnOffButton';
 import QnAModal from '@components/Common/MiniModal/QnAModal';
 import QnAWrapper from '@components/Shop/Common/ProductWrapper/QnAWrapper';
 import MyQnA from './MyQnA';
 import Pagination from './Pagination';
 
+
 const Inquiry = () => {
   const productId = useSelector(idSelector);
+  const token = useSelector(userToken);
+    const router = useRouter();
   const [detailList, setDetailList] = useState<QnAProps[]>([]);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [myButton, setMyButton] = useState<boolean>(false);
@@ -21,7 +26,9 @@ const Inquiry = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(1);
 
   const openModal = () => {
-    setModalOpen(true);
+    //토큰이 있는 경우만 문의하기 창이 열릴 수 있도록, 없으면 로그인 화면으로 이동 처리
+    if(token != '') setModalOpen(true);
+    else router.replace('/login')
   };
   const closeModal = () => {
     setModalOpen(false);
@@ -32,14 +39,13 @@ const Inquiry = () => {
     setDetailList(response.content);
     setTotalIndex(response.totalPages)
     setTotalElement(response.totalElements)
-
-    // "message": "토큰을 다시 확인해주세요",
-    // 로그인이 안돼 토큰값이 없어서 생기는 에러가 뜨면 로그인이나 회원가입을 하게 분기처리 해주면 될 것 같습니다.
   };
   
 
   useEffect(() => {
     handleQnAList();
+    console.log('InquiryPage-----token')
+    console.log(token)
   }, [productId, currentIndex, modalOpen]);
 
   return (
