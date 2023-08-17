@@ -1,15 +1,23 @@
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { getMyQnA } from 'src/apis/shop/qna';
 import QnAWrapper from '@components/Shop/Common/ProductWrapper/QnAWrapper';
 
 const MyQnA = () => {
   const [myDetailList, setMyDetailList] = useState([]);
+  const router = useRouter();
 
   const handleQnAList = async () => {
-    const mine = await getMyQnA();
-    setMyDetailList(mine.content)
-    // "message": "토큰을 다시 확인해주세요",
-    // 로그인이 안돼 토큰값이 없어서 생기는 에러가 뜨면 로그인이나 회원가입을 하게 분기처리 해주면 될 것 같습니다.
+    try {
+      const mine = await getMyQnA();
+      setMyDetailList(mine.content);
+    } catch(err) {
+      if(err.response.status == 500){
+        // "message": "토큰을 다시 확인해주세요" 이기 때문에 login 화면으로 route 처리함
+        router.replace('/login')
+      }
+    }
+    
   };
   useEffect(() => {
     handleQnAList();
