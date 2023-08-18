@@ -2,10 +2,12 @@ import styled from '@emotion/styled';
 
 const Styled = {
   Wrapper: styled.div`
-    width: 1920px;
+    width: 100vw;
+    /* max-width: 1920px; */
   `,
   Header: styled.header`
     padding: 0 400px;
+    width: 100vw;
     height: 80px;
     display: flex;
     justify-content: space-between;

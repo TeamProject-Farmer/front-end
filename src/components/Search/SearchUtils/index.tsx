@@ -23,7 +23,8 @@ export default SearchUtils;
 
 const Styled = {
   Wrapper: styled.div`
-    width: 1920px;
+    width: 100vw;
+    /* width: 1920px; */
     height: 59px;
     border-top: 2px solid ${theme.colors.green2};
     border-bottom: 2px solid ${theme.colors.green2};
