@@ -20,10 +20,11 @@ const SearchPage: NextPageWithLayout = () => {
   const [recentSearchWord, setRecentSearchWord] = useState<string[]>([]);
   const [sortOption, setSortOption] = useState<string>('');
   const memberEmail = useSelector((state: RootState) => state.user.email);
-  const { data: searchData } = useQuery([searchResult], () =>
-    getRecentSearch(memberEmail),
-  );
-  // console.log('data', searchData);
+  // api 수정될 예정
+  // const { data: searchData } = useQuery([searchResult], () =>
+  //   getRecentSearch(memberEmail),
+  // );
+
   useEffect(() => {
     if (memberEmail.length !== 0) {
       getRecentSearch(memberEmail).then(res =>
@@ -46,11 +47,7 @@ const SearchPage: NextPageWithLayout = () => {
   //검색 버튼 클릭 시
   const handleSearchResult = async () => {
     const response = await postSearch(inputValue, 'new');
-    console.log('response', response);
     const searchContent = response.searchProduct.content;
-    // if (memberEmail !== undefined) {
-    //   setRecentSearchWord(response.memberSearchWord);
-    // }
     setSearchedWord(inputValue);
     setSearchResult(searchContent);
     setSortOption('new');
