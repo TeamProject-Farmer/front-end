@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import Icon from '@components/Common/Icon';
 import theme from '@styles/theme';
-import { IPlant } from 'src/types/home/types';
+import { Plant } from 'src/types/home/types';
 import Link from 'next/link';
 
 const Plant = ({
@@ -13,7 +13,7 @@ const Plant = ({
   price,
   averageStarRating,
   imgUrl,
-}: IPlant) => {
+}: Plant) => {
   const specialPrice = discountRate !== 0;
   const discountedPrice = price * (1 - discountRate / 100);
   return (

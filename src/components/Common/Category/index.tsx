@@ -1,7 +1,7 @@
 import Styled from './styles';
 import Title from '../../Home/Common/Title';
 import Plant from './Plant';
-import { ICategory } from 'src/types/home/types';
+import { Category } from 'src/types/common/types';
 
 const Category = ({ category }) => {
   return (
@@ -9,7 +9,7 @@ const Category = ({ category }) => {
       <Title title="카테고리" />
       <Styled.Plants>
         {category &&
-          category?.map((ele: ICategory) => (
+          category?.map((ele: Category) => (
             <Plant
               key={ele.categoryId}
               name={ele.categoryName}
