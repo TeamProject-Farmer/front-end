@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import styled from '@emotion/styled';
-import { ILayoutProps } from '../../../types/order/types';
+import { LayoutProps } from '../../../types/common/types';
 import { useRouter } from 'next/router';
 
-const NestedLayout = ({ children }: ILayoutProps) => {
+const NestedLayout = ({ children }: LayoutProps) => {
   const { asPath } = useRouter();
 
   return (

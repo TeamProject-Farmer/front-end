@@ -1,7 +1,3 @@
-export interface ILayoutProps {
-  children: React.ReactNode;
-}
-
 export interface ISortOption {
   title: string;
   param: string;

@@ -5,14 +5,18 @@ import CheckBoxInput from '../InputField/CheckBoxInput';
 import Styled from '../styles';
 import { getMemberOrderAddress } from 'src/apis/order/order';
 
-const Delivery = ({ control, setValue, trigger }) => {
+const Delivery = ({ control, setValue, trigger, defaultAddress, onChange }) => {
   // 최근 배송지가 있는 경우에만 배송지 선택 라디오 버튼이 보이도록
   const [recentAddress, setRecentAddress] = useState<string>();
+  // 배송 메시지 직접 입력
   const [showShippingMsgInput, setShowShippingMsgInput] =
     useState<boolean>(false);
+  // 최근 배송 목록 불러오기
   useEffect(() => {
     getMemberOrderAddress().then(data => setRecentAddress(data));
   }, []);
+
+  console.log(recentAddress);
 
   return (
     <>
@@ -31,7 +35,7 @@ const Delivery = ({ control, setValue, trigger }) => {
         )}
         <InputField
           label="받는사람"
-          caption="name"
+          caption="username"
           required={true}
           control={control}
         />
@@ -45,26 +49,26 @@ const Delivery = ({ control, setValue, trigger }) => {
         />
         <InputField
           label="휴대전화"
-          caption="mobile"
+          caption="phoneNumber"
           required={true}
           control={control}
         />
       </InputGroup>
       <InputGroup title="" before="none">
-        <Styled.InnerPaddingWrapper field="shippingMsg">
+        <Styled.InnerPaddingWrapper caption="shippingMsg">
           <InputField
             control={control}
             setShowShippingMsgInput={setShowShippingMsgInput}
             caption="shippingMsg"
           />
-          <CheckBoxInput
-            control={control}
-            caption="shippingMsg"
-            label="기본 배송지로 저장"
-          />
           {showShippingMsgInput && (
             <InputField control={control} caption="selfMsg" />
           )}
+          <CheckBoxInput
+            label="기본 배송지로 저장"
+            checked={defaultAddress}
+            onChange={onChange}
+          />
         </Styled.InnerPaddingWrapper>
       </InputGroup>
     </>

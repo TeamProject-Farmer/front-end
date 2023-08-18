@@ -9,11 +9,12 @@ import {
   validateMobile,
 } from 'src/utils/order/formValidation';
 import Button from './Button';
-import { IInputFieldProps } from 'src/types/order/types';
+import { InputFieldProps } from 'src/types/order/types';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { postcodeScriptUrl } from 'react-daum-postcode/lib/loadPostcode';
 import { formatAddress } from 'src/utils/order/getAddressfromDaumPostcode';
 import { getDeliveryMemo } from 'src/apis/order/order';
+import { ControllerFieldState } from 'react-hook-form';
 
 const InputField = ({
   label,
@@ -31,7 +32,7 @@ const InputField = ({
   setValue,
   trigger,
   setShowShippingMsgInput,
-}: IInputFieldProps) => {
+}: InputFieldProps) => {
   // type 옮기기
   type TMsg = { type: string; text: string };
   const [shippingMsgOptions, setShippingMsgOptions] = useState<TMsg[]>();
@@ -41,25 +42,13 @@ const InputField = ({
 
   useEffect(() => {}, []);
 
-  // 배송 메시지 직접 입력
-  // const [showShippingMsgInput, setShowShippingMsgInput] =
-  //   useState<boolean>(false);
-
-  // console.log(showShippingMsgInput);
-
-  // const handleShippingMsg = (event: React.ChangeEvent<HTMLSelectElement>) => {
-  //   event.target.value === 'TEXT'
-  //     ? setShowShippingMsgInput(true)
-  //     : setShowShippingMsgInput(false);
-  // };
-
   // 주소 입력
   const handleComplete = (data: DaumPostcodeData) => {
     const addressData = formatAddress(data);
-    setValue('postCode', data.zonecode);
-    setValue('basicAddress', addressData);
-    trigger('postCode');
-    trigger('basicAddress');
+    setValue('zipcode', data.zonecode);
+    setValue('address', addressData);
+    trigger('zipcode');
+    trigger('address');
   };
 
   const open = useDaumPostcodePopup(postcodeScriptUrl);
@@ -74,7 +63,7 @@ const InputField = ({
   };
 
   //에러 메시지
-  const errorMessage = fieldState =>
+  const errorMessage = (fieldState: ControllerFieldState) =>
     fieldState.error ? (
       <Styled.ErrorMsg>* {fieldState.error.message}</Styled.ErrorMsg>
     ) : null;
@@ -89,10 +78,10 @@ const InputField = ({
       )}
       {
         {
-          name: (
+          username: (
             <Styled.FlexGapWrapper>
               <Controller
-                name="name"
+                name="username"
                 control={control}
                 rules={{
                   required: requiredErrorMsg,
@@ -111,10 +100,10 @@ const InputField = ({
               ></Controller>
             </Styled.FlexGapWrapper>
           ),
-          mobile: (
+          phoneNumber: (
             <Styled.FlexGapWrapper>
               <Controller
-                name="mobile"
+                name="phoneNumber"
                 control={control}
                 rules={{
                   required: requiredErrorMsg,
@@ -146,7 +135,7 @@ const InputField = ({
           address: (
             <Styled.FlexColumnWrapper>
               <Controller
-                name="postCode"
+                name="zipcode"
                 control={control}
                 rules={{ required: requiredErrorMsg }}
                 render={({ field, fieldState }) => (
@@ -166,7 +155,7 @@ const InputField = ({
                 )}
               ></Controller>
               <Controller
-                name="basicAddress"
+                name="address"
                 control={control}
                 rules={{ required: requiredErrorMsg }}
                 render={({ field, fieldState }) => (
@@ -181,7 +170,7 @@ const InputField = ({
                 )}
               ></Controller>
               <Controller
-                name="detailAddress"
+                name="addressDetail"
                 control={control}
                 rules={{ required: requiredErrorMsg }}
                 render={({ field, fieldState }) => (
@@ -261,7 +250,6 @@ const InputField = ({
                   <Styled.Dropdown
                     caption="shippingMsg"
                     {...field}
-                    // value={shippingMsg}
                     onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
                       const value = event.target.value;
                       value === 'TEXT'
@@ -270,7 +258,6 @@ const InputField = ({
 
                       field.onChange(value);
                     }}
-                    // onChange={handleShippingMsg}
                   >
                     {shippingMsgOptions &&
                       shippingMsgOptions.map(msg => (
@@ -287,12 +274,8 @@ const InputField = ({
             <Controller
               name="selfMemo"
               control={control}
-              render={({ field }) => (
-                <Styled.Input
-                  value={field.value ? field.value : ''}
-                  width={750}
-                />
-              )}
+              defaultValue=""
+              render={({ field }) => <Styled.Input {...field} width={750} />}
             ></Controller>
           ),
         }[caption]

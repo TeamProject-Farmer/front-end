@@ -1,14 +1,29 @@
 import styled from '@emotion/styled';
-import { ICheckBoxInputProps } from 'src/types/order/types';
+import { CheckBoxInputProps } from 'src/types/order/types';
+import { Controller } from 'react-hook-form';
 
 const CheckBoxInput = ({
   label,
   smallBox,
   checked,
   onChange,
-}: ICheckBoxInputProps) => {
+  control,
+}: CheckBoxInputProps) => {
   return (
     <Styled.Wrapper>
+      {/* <Controller
+        name="defaultAddr"
+        control={control}
+        defaultValue={false}
+        render={({ field }) => (
+          <input
+            type="checkbox"
+            checked={checked}
+            onChange={onChange}
+            value={field.value}
+          />
+        )}
+      ></Controller> */}
       <input type="checkbox" checked={checked} onChange={onChange} />
       <Styled.Label smallBox={smallBox}>{label}</Styled.Label>
     </Styled.Wrapper>
