@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import { ISortOption } from 'src/types/search/types';
+import { SortOption } from 'src/types/search/types';
 
 const SearchUtils = ({ sortingOptions, sortOption, handleSort }) => {
   return (
     <Styled.Wrapper>
-      {sortingOptions?.map((option: ISortOption) => (
+      {sortingOptions?.map((option: SortOption) => (
         <Styled.Option
           onClick={() => handleSort(option.param)}
           clicked={sortOption === option.param}

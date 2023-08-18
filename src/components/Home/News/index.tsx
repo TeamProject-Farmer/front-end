@@ -3,14 +3,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const News = ({ news }) => {
-  console.log(news);
   const { subject, content, imgUrl } = news;
   return (
     <Styled.Wrapper>
       <Styled.Title>farmer news</Styled.Title>
       <Styled.ImgBox>
         <Styled.FlexBox>
-          <Styled.ImgTitle>관련 뉴스</Styled.ImgTitle>
+          <Styled.ImgTitle>파머 소식</Styled.ImgTitle>
           <Link href="/shop/다육이">
             <Styled.ShopBtn>&gt; Shop Now</Styled.ShopBtn>
           </Link>
