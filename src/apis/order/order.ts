@@ -1,4 +1,5 @@
 import request from '../base';
+import { RequestPayParams, PostOrderData } from 'src/types/order/types';
 
 // 쿠폰 조회
 export const getMemberCoupon = async () => {
@@ -27,7 +28,10 @@ export const getMemberOrderAddress = async () => {
 };
 
 // 아임포트 결제 검증
-export const postVerifyIamport = async (uid: string, orderedData) => {
+export const postVerifyIamport = async (
+  uid: string,
+  orderedData: RequestPayParams,
+) => {
   const response = await request.post(`/main/verifyIamport/${uid}`, {
     orderedData,
   });
@@ -35,7 +39,7 @@ export const postVerifyIamport = async (uid: string, orderedData) => {
 };
 
 // DB 주문/결제 요청
-export const postOrders = async data => {
+export const postOrders = async (data: PostOrderData) => {
   console.log('data', data);
   const response = await request.post('/member/orders', { data });
   console.log(response);

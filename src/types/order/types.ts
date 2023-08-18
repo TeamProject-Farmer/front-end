@@ -106,6 +106,18 @@ export interface OrderedData {
   phoneNumber: string;
 }
 
+export interface PostOrderData extends OrderedData {
+  orderProduct: OrderProduct[];
+  memo: string;
+  selfMemo: string;
+  defaultAddr: boolean;
+  orderNumber: string;
+  orderTotalPrice: number;
+  totalQuantity: number;
+  point: number;
+  payMethod: string;
+}
+
 export interface DaumPostcodeData {
   address: string;
   addressType: string;

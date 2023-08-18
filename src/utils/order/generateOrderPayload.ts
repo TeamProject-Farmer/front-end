@@ -57,6 +57,7 @@ const generateOrderPayload = ({
     orderTotalPrice: totalAmount,
     totalQuantity: 1,
     payMethod: selectedMethod.method,
+    point: 0,
   };
 
   return { orderData, data };

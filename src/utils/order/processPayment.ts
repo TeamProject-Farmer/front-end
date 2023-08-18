@@ -1,6 +1,6 @@
 import { postVerifyIamport, postOrders } from 'src/apis/order/order';
 import generateOrderPayload from './generateOrderPayload';
-import { OrderPayload } from 'src/types/order/types';
+import { OrderPayload, RequestPayResponse } from 'src/types/order/types';
 
 const processPayment = ({
   defaultAddr,
@@ -20,7 +20,7 @@ const processPayment = ({
     deliveryInfo,
   });
 
-  const callback = async response => {
+  const callback = async (response: RequestPayResponse) => {
     // 타입 지정
     console.log(response);
     const { paid_amount, error_msg, imp_uid } = response;

@@ -8,33 +8,43 @@ import NestedLayout from '@components/Order/NestedLayout';
 import Link from 'next/link';
 
 const orderResultPage: NextPageWithLayout = () => {
+  const resultData = {
+    name: '지원',
+    phoneNumber: '010-1234-5678',
+    address: '서울시 어쩌고 1234',
+    paymentPrice: 48000,
+    orderedDate: '2023-08-17T03:38:57.5952357',
+    orderNumber: '123456',
+  };
+  const { name, phoneNumber, address, paymentPrice, orderedDate, orderNumber } =
+    resultData;
   return (
     <Styled.Wrapper>
       <Styled.Message>
         <span>주문이 완료</span>되었습니다. 감사합니다!
       </Styled.Message>
       <Styled.OrderData>
-        <li>주문일 2027.07.13</li>
-        <li>주문번호 12345678</li>
+        <li>주문일 {orderedDate}</li>
+        <li>주문번호 {orderNumber}</li>
       </Styled.OrderData>
       <Styled.FlexColumnWrapper>
         <Styled.Title>받는사람 정보</Styled.Title>
         <Styled.GridWrapper>
           <Styled.content>이름</Styled.content>
-          <Styled.content>이마크</Styled.content>
+          <Styled.content>{name}</Styled.content>
         </Styled.GridWrapper>
         <Styled.GridWrapper>
           <Styled.content>휴대폰</Styled.content>
-          <Styled.content>010-1234-5678</Styled.content>
+          <Styled.content>{phoneNumber}</Styled.content>
         </Styled.GridWrapper>
         <Styled.GridWrapper>
           <Styled.content>배송주소</Styled.content>
-          <Styled.content>서울특별시 어짜고 저짜고</Styled.content>
+          <Styled.content>{address}</Styled.content>
         </Styled.GridWrapper>
       </Styled.FlexColumnWrapper>
       <Styled.FlexWrapper>
         <Styled.Title>결제금액</Styled.Title>
-        <Styled.Price>23500원</Styled.Price>
+        <Styled.Price>{paymentPrice}원</Styled.Price>
       </Styled.FlexWrapper>
       <Styled.ShopBtn>
         <Link href="/shop">계속 쇼핑하기</Link>
