@@ -2,7 +2,6 @@ import { Category } from '../common/types';
 
 export interface IndexPageProps {
   banner: Banner[];
-  category: Category[];
   bestPlant: Plant[];
   bestReview: Review[];
   news: News;

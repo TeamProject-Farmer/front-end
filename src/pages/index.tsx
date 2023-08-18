@@ -13,12 +13,10 @@ import {
   getBestReview,
   getNews,
 } from 'src/apis/home/home';
-import { getProductCategory } from 'src/apis/common/category';
 import { IndexPageProps } from 'src/types/home/types';
 
 const IndexPage = ({
   banner,
-  category,
   bestPlant,
   bestReview,
   news,
@@ -26,7 +24,7 @@ const IndexPage = ({
   return (
     <>
       <Slider banner={banner} />
-      <Category category={category} />
+      <Category />
       <ShopPrev />
       <BestPlant bestPlant={bestPlant} />
       <BestReview bestReview={bestReview} />
@@ -43,11 +41,10 @@ export const getServerSideProps: GetServerSideProps<
   IndexPageProps
 > = async () => {
   const banner = await getMainBanner();
-  const category = await getProductCategory();
   const bestPlant = await getBestProduct();
   const bestReview = await getBestReview();
   const news = await getNews();
-  return { props: { banner, category, bestPlant, bestReview, news } };
+  return { props: { banner, bestPlant, bestReview, news } };
 };
 
 export default IndexPage;
