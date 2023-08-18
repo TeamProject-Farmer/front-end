@@ -11,7 +11,7 @@ const useDiscount = (orderedPrice: number) => {
   useEffect(() => {
     // 적립금 데이터 불러오기
     getMemberPoint().then(res => {
-      console.log('point', res);
+      // console.log('point', res);
       setPoint(res);
       setUsedPoint(res);
     });

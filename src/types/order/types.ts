@@ -18,10 +18,16 @@ export interface Coupon {
 export interface InputFieldProps {
   label?: string;
   caption?: string;
-  placeholder?: string;
-  required?: boolean;
-  inputProps?: UseFormRegisterReturn;
-  error?: string | null;
+  control?: Control<FieldValues>;
+  setValue?: UseFormSetValue<FieldValues>;
+  trigger?: UseFormTrigger<FieldValues>;
+  setShowShippingMsgInput?: React.Dispatch<React.SetStateAction<boolean>>;
+  defaultValue?: string | string[];
+}
+
+export interface PaymentInputProps {
+  label?: string;
+  caption?: string;
   couponOptions?: Coupon[];
   usedPoint?: number;
   handleSelectedCoupon?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -29,10 +35,6 @@ export interface InputFieldProps {
   disabledPointBtn?: boolean;
   disabledCouponBtn?: boolean;
   getDiscountedPrice?: () => void;
-  control?: Control<FieldValues>;
-  setValue?: UseFormSetValue<FieldValues>;
-  trigger?: UseFormTrigger<FieldValues>;
-  setShowShippingMsgInput?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface CheckBoxInputProps {
@@ -89,6 +91,19 @@ export interface PayMethod {
   title?: string;
   pg: string;
   method: string;
+}
+
+export interface ShippingMsg {
+  type: string;
+  text: string;
+}
+
+export interface OrderedData {
+  username: string;
+  zipcode: string;
+  address: string;
+  addressDetail: string;
+  phoneNumber: string;
 }
 
 export interface DaumPostcodeData {
