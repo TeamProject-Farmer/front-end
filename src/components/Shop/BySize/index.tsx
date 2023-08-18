@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import SizeBar from '../Common/SizeBar';
@@ -7,6 +8,7 @@ import { getShopBySize } from 'src/apis/shop/product';
 import { sizeSortOptions } from 'src/utils/shop/sortOption';
 
 const BySize = () => {
+  const size = useRouter().query.size?.toString().toUpperCase() || '';
   const [sizeOption, setSizeOption] = useState<string>('S');
   const [orderType, setOrderType] = useState<string>('NEWS');
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -28,8 +30,9 @@ const BySize = () => {
 
   useEffect(() => {
     setCurrentIndex(0);
-    if(currentIndex == 0) handleDetailData();
-  }, [sizeOption, orderType])
+    if(size) setSizeOption(size);
+    if (currentIndex == 0) handleDetailData();
+  }, [sizeOption, orderType, size]);
 
   return (
     <Styled.Wrapper>
@@ -52,6 +55,7 @@ const BySize = () => {
     </Styled.Wrapper>
   );
 };
+
 const Styled = {
   Wrapper: styled.div`
     width: 100%;
