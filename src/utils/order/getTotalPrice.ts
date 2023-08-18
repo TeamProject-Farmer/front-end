@@ -1,6 +1,6 @@
-import { IOrderedProduct } from '../../types/order/types';
+import { CartItem } from '../../types/order/types';
 
-const getTotalPrice = (productList: IOrderedProduct[]) => {
+const getTotalPrice = (productList: CartItem[]) => {
   let total = 0;
 
   for (const product of productList) {
