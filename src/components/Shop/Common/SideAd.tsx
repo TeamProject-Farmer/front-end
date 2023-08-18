@@ -30,7 +30,7 @@ const Styled = {
     margin-left: 15px;
     width: fit-content;
     height: inherit;
-    top: ${props => (props.top ? `${props.top}px` : '134px')};
+    top: ${props => (props.top ? `${props.top}px` : '0px')};
     display: ${props => props.close ? 'none' : ''};
   `,
   SideAd: styled.div<{top: number}>`

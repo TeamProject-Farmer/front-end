@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import { getDetail } from 'src/apis/shop/product';
@@ -16,7 +17,8 @@ import down from '@assets/images/shop/downloadIcon.svg';
 
 const Panel = (props: OptionBoxProps) => {
   const { isPanel, selectList, setSelectList } = props;
-
+  
+  const router = useRouter();
   const productId = useSelector(idSelector);
   const [thumbnailImg, setThumbnailImg] = useState<string>();
   const [name, setName] = useState<string>();
@@ -59,7 +61,7 @@ const Panel = (props: OptionBoxProps) => {
     handleDetailData();
     handleReviewData();
     handleReviewStar();
-  }, [productId]);
+  }, [productId, router]);
   return (
     <Styled.Wrapper>
       <Styled.InnerBox>
