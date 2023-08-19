@@ -37,7 +37,8 @@ function App({ Component, pageProps, ...rest }: AppPropsWithLayout) {
     const token = state.user.accessToken;
 
     // 페이지에 1초 정도 로딩됐다가 리다이렉션 이슈
-    if (router.pathname.startsWith('/mypage') && !token) {
+    if (router.pathname.startsWith('/mypage') && token.length === 0) {
+      alert('로그인 후 이용 가능한 서비스입니다');
       router.push('/');
     }
 
@@ -47,7 +48,7 @@ function App({ Component, pageProps, ...rest }: AppPropsWithLayout) {
     ) {
       router.push('/');
     }
-  }, []);
+  }, [router.pathname]);
 
   return (
     <QueryClientProvider client={queryClient}>

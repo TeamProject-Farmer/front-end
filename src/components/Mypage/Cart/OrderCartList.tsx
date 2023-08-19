@@ -7,7 +7,7 @@ import { useQueryClient } from 'react-query';
 import { useDispatch } from 'react-redux';
 import { RootState } from 'store';
 import { getRemoveCartList } from 'src/apis/mypage/cart';
-import { setOrderProduct } from 'store/reducers/orderProductSlice';
+import { setSelectedCart } from 'store/reducers/selectedCartSlice';
 import CartOrderBox from './CartOrderBox';
 import CartButtonBox from './CartButtonBox';
 import { useRouter } from 'next/router';
@@ -56,10 +56,11 @@ const OrderCartList = ({
   // 선택된 상품들을 store 저장 후 주문 페이지로 route
   const handlePlaceOrder = (selectedItems: CartListProps[] | undefined) => {
     selectedItems
-      ? dispatch(setOrderProduct(selectedItems))
-      : dispatch(setOrderProduct(cartListArray));
+      ? dispatch(setSelectedCart(selectedItems))
+      : dispatch(setSelectedCart(cartListArray));
 
     dispatch(clearCartIndex());
+
     router.push('/order');
   };
 

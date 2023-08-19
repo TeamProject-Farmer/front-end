@@ -1,15 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from '@emotion/styled';
-import { ILayoutProps } from '../../../types/order/types';
+import { LayoutProps } from '../../../types/common/types';
+import { useRouter } from 'next/router';
 
-const NestedLayout = ({ children }: ILayoutProps) => {
+const NestedLayout = ({ children }: LayoutProps) => {
+  const { asPath } = useRouter();
+
   return (
     <Styled.Wrapper>
       <Styled.FlexWrapper>
-        <Styled.Title>주문/결제</Styled.Title>
+        <Styled.Title>
+          {asPath === '/order' ? '주문/결제' : '주문완료'}
+        </Styled.Title>
         <Styled.StateBox>
-          <Styled.State color="#59B941">주문결제 &gt; </Styled.State>
-          <Styled.State>주문완료</Styled.State>
+          <Styled.State colored={asPath === '/order'}>
+            주문결제 &gt;{' '}
+          </Styled.State>
+          <Styled.State colored={asPath === '/order/result'}>
+            주문완료
+          </Styled.State>
         </Styled.StateBox>
       </Styled.FlexWrapper>
       {children}
@@ -40,7 +49,7 @@ const Styled = {
     display: flex;
     gap: 10px;
   `,
-  State: styled.div<{ color?: string }>`
-    color: ${({ color }) => (color ? color : '#000')};
+  State: styled.div<{ colored: boolean }>`
+    color: ${({ colored }) => (colored ? '#59B941' : '#000')};
   `,
 };

@@ -1,5 +1,15 @@
 import { IconName } from '@components/Common/Icon';
 
+export interface LayoutProps {
+  children: React.ReactNode;
+}
+
+export interface Category {
+  categoryId: number;
+  categoryName: string;
+  imgUrl: string;
+}
+
 export interface IIconProps {
   name: IconName | string;
   width: number;

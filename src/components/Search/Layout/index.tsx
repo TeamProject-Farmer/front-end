@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { ILayoutProps } from 'src/types/search/types';
+import { LayoutProps } from 'src/types/common/types';
 
-const NestedLayout = ({ children }: ILayoutProps) => {
+const NestedLayout = ({ children }: LayoutProps) => {
   return <Styled.Wrapper>{children}</Styled.Wrapper>;
 };
 

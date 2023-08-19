@@ -1,16 +1,17 @@
 import { useState, useEffect } from 'react';
 import { getMemberCoupon } from 'src/apis/order/order';
 import { getMemberPoint } from 'src/apis/order/order';
-import { ICoupon } from 'src/types/order/types';
+import { Coupon } from 'src/types/order/types';
 
 const useDiscount = (orderedPrice: number) => {
-  const [coupon, setCoupon] = useState<ICoupon[]>();
+  const [coupon, setCoupon] = useState<Coupon[]>();
   const [point, setPoint] = useState<number>();
   const [usedPoint, setUsedPoint] = useState<number>();
 
   useEffect(() => {
     // 적립금 데이터 불러오기
     getMemberPoint().then(res => {
+      // console.log('point', res);
       setPoint(res);
       setUsedPoint(res);
     });
@@ -20,7 +21,7 @@ const useDiscount = (orderedPrice: number) => {
 
   // 쿠폰이 선택되었을 때
   const [selectedCouponId, setSelectedCouponId] = useState<number>(0);
-  const [selectedCoupon, setSelectedCoupon] = useState<ICoupon | null>();
+  const [selectedCoupon, setSelectedCoupon] = useState<Coupon | null>();
   const [disabledCouponBtn, setDisabledCouponBtn] = useState(false);
   const [disabledPointBtn, setDisabledPointBtn] = useState(false);
   const [discountedPrice, setDiscountedPrice] = useState<number>(0);

@@ -1,16 +1,16 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import { IOrderedProduct } from '../../../types/order/types';
+import { CartItem } from '../../../types/order/types';
 
 const ProductList = ({ productList }) => {
   return (
     <Styled.Wrapper>
       {productList &&
-        productList.map((ele: IOrderedProduct) => {
-          const { productId, productName, count, productPrice } = ele;
+        productList.map((ele: CartItem) => {
+          const { productId, productName, count, productPrice, imgUrl } = ele;
           return (
             <Styled.ProductWrapper key={productId}>
-              <Styled.ImgBox />
+              <Styled.ImgBox src={imgUrl} alt={productName} />
               <Styled.ContentWrapper>
                 <Styled.FontBlack>상품명 : {productName}</Styled.FontBlack>
                 <Styled.FontGray>수량 : {count}</Styled.FontGray>
@@ -29,6 +29,7 @@ const Styled = {
   Wrapper: styled.div`
     display: flex;
     flex-direction: column;
+    gap: 20px;
   `,
   ProductWrapper: styled.div`
     width: 500px;
@@ -39,7 +40,7 @@ const Styled = {
     gap: 20px;
     padding: 20px;
   `,
-  ImgBox: styled.div`
+  ImgBox: styled.img`
     width: 90px;
     height: 90px;
     background-color: #d9d9d9;

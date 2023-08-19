@@ -1,11 +1,10 @@
 import Styled from './styles';
 import Title from '../Common/Title';
 import Review from './Review';
-import { IReview } from 'src/types/home/types';
+import { Review as IReview } from 'src/types/home/types';
 import { useState } from 'react';
 
 const BestReview = ({ bestReview }) => {
-  console.log(bestReview);
   const [reviewList, setReviewList] = useState([...bestReview, ...bestReview]);
   return (
     <Styled.Wrapper>

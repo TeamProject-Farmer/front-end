@@ -3,12 +3,12 @@ import Styled from './styles';
 import { useState } from 'react';
 import { getProductCategory } from 'src/apis/common/category';
 import { sizeCategory } from 'src/utils/home/category';
-import { ICategory } from 'src/types/home/types';
+import { Category } from 'src/types/common/types';
 import Link from 'next/link';
 import Icon from '../Icon';
 
 const Menu = ({ setShowMenu }) => {
-  const [category, setCategory] = useState<ICategory[]>();
+  const [category, setCategory] = useState<Category[]>();
   useEffect(() => {
     getProductCategory().then(res => setCategory(res));
   }, []);
