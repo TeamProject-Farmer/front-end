@@ -10,6 +10,7 @@ import Menu from '../Menu';
 import { useState } from 'react';
 
 const Header = () => {
+  const [showMenu, setShowMenu] = useState<boolean>(false);
   const isLogin = useSelector((state: RootState) => state.user.accessToken);
   const dispatch = useDispatch();
   return (
