@@ -3,6 +3,7 @@ import Profile from '@assets/images/mypage/profile.svg';
 import Mail from '@assets/images/mypage/mail.svg';
 import { Styled } from '../../styles';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { IconText } from './Icon';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
@@ -19,6 +20,25 @@ const MyProfile = () => {
     { label: '쿠폰', value: user.memberCoupon },
   ];
 
+  //링크를 넣기 위해 추가한 부분
+  const handleComponents = (item: { label: string; value: number }) => {
+    if (item.label === '쿠폰') {
+      return (
+        <Link href="/mypage/mycoupons">
+          <Styled.SubText>{item.label}</Styled.SubText>
+          <Styled.NumberText>{item.value}</Styled.NumberText>
+        </Link>
+      );
+    } else {
+      return (
+        <>
+          <Styled.SubText>{item.label}</Styled.SubText>
+          <Styled.NumberText>{item.value}</Styled.NumberText>
+        </>
+      );
+    }
+  };
+  //
   return (
     <Styled.BoxWrapper>
       <Styled.TextBox>
@@ -46,12 +66,11 @@ const MyProfile = () => {
             </Styled.InfoWrapper>
           </Styled.ProfileTextWrapper>
 
-          {/* 쿠폰, 포인트 */}
+          {/* 쿠폰, 포인트 <- 이 부분 변경됨*/}
           <Styled.FlexDiv>
             {data.map((item, index) => (
               <Styled.Line key={index}>
-                <Styled.SubText>{item.label}</Styled.SubText>
-                <Styled.NumberText>{item.value}</Styled.NumberText>
+                <>{handleComponents(item)}</>
               </Styled.Line>
             ))}
           </Styled.FlexDiv>
