@@ -16,27 +16,28 @@ const SearchOption = ({
 
     switch (interval) {
       case '1주일':
-        end = new Date(today + 7 * 24 * 60 * 60 * 1000);
+        start = new Date(today - 7 * 24 * 60 * 60 * 1000);
+        end = new Date(today);
         break;
       case '1개월':
         end = new Date(today);
-        end.setMonth(end.getMonth() + 1);
+        start.setMonth(start.getMonth() - 1);
         break;
       case '3개월':
         end = new Date(today);
-        end.setMonth(end.getMonth() + 3);
+        start.setMonth(start.getMonth() - 3);
         break;
       case '6개월':
         end = new Date(today);
-        end.setMonth(end.getMonth() + 6);
+        start.setMonth(start.getMonth() - 6);
         break;
       default:
         end = new Date(today);
     }
 
     setSelectedDateRange([start, end]);
-    setStartDate(useFormatDate(start));
-    setEndDate(useFormatDate(end));
+    setStartDate(useFormatDate(end));
+    setEndDate(useFormatDate(start));
   };
 
   return (
