@@ -243,7 +243,11 @@ export const Styled = {
     color: ${theme.colors.mypageGray};
     /* margin-top: 2.5rem;
     margin-bottom: 2.5rem; */
-    margin: 10rem;
+    height: 500px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     
   `,
   ListInfoText: styled.h1<{ size?: string; color?: string }>`
