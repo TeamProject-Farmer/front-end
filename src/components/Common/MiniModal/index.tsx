@@ -9,11 +9,9 @@ interface Props {
   modalClose: () => void;
 }
 const MiniModal = (props: Props) => {
+  //이 부분 코드 새로 수정해서 추후 사용할 것 같습니다.
   const { modalType, modalName, reviewItem, modalClose } = props;
-  
-
   const close = modalClose;
-
 
   return (
     <Styled.Wrapper>
