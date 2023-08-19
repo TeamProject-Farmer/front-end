@@ -1,18 +1,21 @@
 export const sizeCategory = [
   {
-    id: 'small',
+    id: 's',
+    title: 'small',
     src: 'smallBtn',
     hover: 'smallBtn_w',
     bg: 'smallBg',
   },
   {
-    id: 'medium',
+    id: 'm',
+    title: 'medium',
     src: 'mediumBtn',
     hover: 'mediumBtn_w',
     bg: 'mediumBg',
   },
   {
-    id: 'large',
+    id: 'l',
+    title: 'large',
     src: 'largeBtn',
     hover: 'largeBtn_w',
     bg: 'largeBg',

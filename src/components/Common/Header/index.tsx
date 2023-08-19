@@ -22,10 +22,9 @@ const Header = () => {
           <Icon name="menu" width={32} height={32} />
         </Styled.Menu>
         <Link href="/">
-          <Styled.Logo
-            alt="headerLogo"
-            src="/assets/images/home/headerLogo.png"
-          />
+          <Styled.Logo>
+            <img alt="headerLogo" src="/assets/images/home/headerLogo.png" />
+          </Styled.Logo>
         </Link>
         <Styled.Utils>
           {isLogin && (

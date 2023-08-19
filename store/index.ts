@@ -24,12 +24,15 @@ import { CartState, UserState } from 'src/types/redux/types';
 import { CartListProps } from 'src/types/mypage/types';
 import selectedCartSlice from './reducers/selectedCartSlice';
 import bannerSlice from './reducers/bannerSlice';
+import { Category } from 'src/types/common/types';
+import categorySlice from './reducers/categorySlice';
 
 export interface RootState {
   user: UserState;
   cartIndex: CartState;
   selectedCart: CartListProps[];
   banner: boolean;
+  category: Category[];
 }
 
 const persistConfig: PersistConfig<RootState> = {
@@ -47,6 +50,7 @@ const rootReducer = (
     cartIndex: cartIndexSlice,
     selectedCart: selectedCartSlice,
     banner: bannerSlice,
+    category: categorySlice,
   });
   return combinedReducer(state, action);
 };

@@ -3,21 +3,23 @@ import styled from '@emotion/styled';
 const Styled = {
   Wrapper: styled.div`
     width: 100vw;
-    /* max-width: 1920px; */
+    max-width: 100%;
   `,
   Header: styled.header`
     padding: 0 400px;
     width: 100vw;
     height: 80px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
   `,
-  Menu: styled.div``,
-  Logo: styled.img`
+  Menu: styled.div`
+    margin-right: 484px;
+  `,
+  Logo: styled.div`
     width: 150px;
     height: 33.6px;
-    flex-shrink: 0;
+    flex-shrink: 1;
+    margin-right: 395px;
   `,
   Utils: styled.ul`
     display: flex;

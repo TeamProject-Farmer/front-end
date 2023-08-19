@@ -4,7 +4,7 @@ import theme from '@styles/theme';
 const Styled = {
   Wrapper: styled.div`
     width: 100vw;
-    /* max-width: 1920px; */
+    max-width: 100%ㄴ;
     height: 400px;
     padding: 0 370px;
     display: flex;
