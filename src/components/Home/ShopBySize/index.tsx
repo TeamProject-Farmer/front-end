@@ -24,7 +24,7 @@ const ShopPrev = () => {
         <Styled.SizeBox>
           {sizeCategory &&
             sizeCategory?.map(size => (
-              <Link key={size.id} href={`/shop/${size.id}`}>
+              <Link key={size.id} href={`/shop/bysize/${size.id}`}>
                 <Styled.List
                   onMouseEnter={() => handleMouseEnter(size.id, size.bg)}
                   onMouseLeave={handleMouseLeave}

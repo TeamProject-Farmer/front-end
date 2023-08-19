@@ -1,13 +1,13 @@
-import { ISortOption } from 'src/types/search/types'; //지원님 코드 머지 시 이 부분 수정 필요
+import { SortOption } from 'src/types/search/types'; //지원님 코드 머지 시 이 부분 수정 필요
 
-export const productSortOptions: ISortOption[] = [
+export const productSortOptions: SortOption[] = [
   { title: '신상품순', param: 'NEWS' },
   { title: '리뷰많은순', param: 'REVIEW' },
   { title: '낮은가격순', param: 'LOW' },
   { title: '높은가격순', param: 'HIGH' },
 ];
 
-export const detailLinkOptions: ISortOption[] = [
+export const detailLinkOptions: SortOption[] = [
   { title: '상품', param: '' },
   { title: '리뷰 766', param: '' },
   { title: '상품문의 177', param: '' },
@@ -15,7 +15,7 @@ export const detailLinkOptions: ISortOption[] = [
   { title: '비슷한상품', param: '' },
 ];
 
-export const sizeSortOptions: ISortOption[] = [
+export const sizeSortOptions: SortOption[] = [
   { title: 'Small', param: 'S' },
   { title: 'Medium', param: 'M' },
   { title: 'Large', param: 'L' },

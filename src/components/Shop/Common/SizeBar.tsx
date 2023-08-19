@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import { OptionBarProps } from 'src/types/shop/types';
-import { ISortOption } from 'src/types/search/types';
+import { SortOption } from 'src/types/search/types';
 
 const SizeBar = (props: OptionBarProps) => {
   const { optionList, width, setProductOption, productOption } = props;
@@ -14,7 +14,7 @@ const SizeBar = (props: OptionBarProps) => {
   return (
     <Styled.Wrapper>
       <Styled.InnerWrapper>
-        {optionList?.map((item: ISortOption) => (
+        {optionList?.map((item: SortOption) => (
           <Styled.InnerBox
             onClick={() => handleClick(item.param)}
             key={item.param}

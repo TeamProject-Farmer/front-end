@@ -1,10 +1,9 @@
 import Styled from './styles';
 import Title from '../Common/Title';
 import Plant from './Plant';
-import { IPlant } from 'src/types/home/types';
+import { Plant as IPlant } from 'src/types/home/types';
 
 const BestPlant = ({ bestPlant }) => {
-  console.log(bestPlant);
   const settings = {
     centerMode: true,
     dots: false,

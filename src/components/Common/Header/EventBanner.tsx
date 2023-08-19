@@ -4,26 +4,29 @@ import Icon from '../Icon';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'store';
 import { setIsBannerClosed } from 'store/reducers/bannerSlice';
+import Link from 'next/link';
 
-const FirstBuyEvent = () => {
+const EventBanner = () => {
   const isOpened = useSelector((state: RootState) => state.banner);
   const dispatch = useDispatch();
 
   return (
     <>
       {isOpened && (
-        <Styled.Event>
-          첫 구매라면 누구나 최대 2만원 할인받기
-          <Styled.CloseBtn onClick={() => dispatch(setIsBannerClosed())}>
-            <Icon name="closeBtn" width={26} height={26} />
-          </Styled.CloseBtn>
-        </Styled.Event>
+        <Link href="/register">
+          <Styled.Event>
+            회원가입 후 최대 2만원 할인 받기
+            <Styled.CloseBtn onClick={() => dispatch(setIsBannerClosed())}>
+              <Icon name="closeBtn" width={26} height={26} />
+            </Styled.CloseBtn>
+          </Styled.Event>
+        </Link>
       )}
     </>
   );
 };
 
-export default FirstBuyEvent;
+export default EventBanner;
 
 const Styled = {
   Event: styled.div`

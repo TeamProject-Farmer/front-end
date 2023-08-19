@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import Link from 'next/link';
-import { IBanner } from 'src/types/home/types';
+import { Banner } from 'src/types/home/types';
 
 const SliderContent = ({ sliderContents, activeIndex }) => {
   const imgVariants = {
@@ -30,7 +30,7 @@ const SliderContent = ({ sliderContents, activeIndex }) => {
     <>
       <AnimatePresence initial={false}>
         {sliderContents &&
-          sliderContents?.map((content: IBanner) =>
+          sliderContents?.map((content: Banner) =>
             activeIndex === content.id ? (
               <Link key={content.id} href={content.linkUrl}>
                 <Styled.Content

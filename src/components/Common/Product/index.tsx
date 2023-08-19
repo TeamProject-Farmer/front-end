@@ -1,4 +1,3 @@
-import { useDispatch } from 'react-redux';
 import Image from 'next/image';
 import Styled from './styles';
 import Icon from '../Icon';
@@ -6,7 +5,6 @@ import { ProductProps } from '../type';
 
 const Product = (props: ProductProps) => {
   const { thumbnailImg, name, price, discountRate, reviewCount, averageStarRating} = props;
-  const dispatch = useDispatch();
 
   return (
     <Styled.Wrapper>

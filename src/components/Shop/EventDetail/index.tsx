@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import Link from 'next/link';
 import theme from '@styles/theme';
 import SideAd from '../Common/SideAd';
-import Category from '../Common/Category';
+import Category from '@components/Common/Category';
 import Product from '@components/Common/Product';
 import { getEventProduct } from 'src/apis/shop/product';
 

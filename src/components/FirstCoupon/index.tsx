@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import Category from '@components/Shop/Common/Category';
+import Category from '@components/Common/Category';
 import SideAd from '@components/Shop/Common/SideAd';
 import arrow from '@assets/images/shop/arrow79.svg';
 

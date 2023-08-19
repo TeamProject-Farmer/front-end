@@ -6,7 +6,7 @@ import PayMethodList from './PayMethodList';
 const PayMethod = ({ selectedMethod, setSelectedMethod }) => {
   return (
     <InputGroup title="결제수단" before="none">
-      <Styled.InnerPaddingWrapper field="payment">
+      <Styled.InnerPaddingWrapper caption="payment">
         <PayMethodList
           selectedMethod={selectedMethod}
           setSelectedMethod={setSelectedMethod}

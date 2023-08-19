@@ -1,13 +1,9 @@
-export interface ILayoutProps {
-  children: React.ReactNode;
-}
-
-export interface ISortOption {
+export interface SortOption {
   title: string;
   param: string;
 }
 
-export interface IKeywordProps {
+export interface KeywordProps {
   title: string;
   wordList: string[];
 }

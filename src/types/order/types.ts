@@ -6,19 +6,7 @@ import {
   Control,
 } from 'react-hook-form';
 
-export type TFieldName =
-  | 'name'
-  | 'mobile'
-  | 'postCode'
-  | 'basicAddress'
-  | 'detailAddress'
-  | 'checked';
-
-export type TValidate = (
-  value: any,
-) => boolean | string | Promise<boolean | string>;
-
-export interface ICoupon {
+export interface Coupon {
   couponId: number;
   benefits: string;
   name: string;
@@ -27,34 +15,38 @@ export interface ICoupon {
   rateAmount: number;
 }
 
-export interface IInputFieldProps {
+export interface InputFieldProps {
   label?: string;
-  field: string;
-  placeholder?: string;
-  required?: boolean;
-  inputProps?: UseFormRegisterReturn;
-  error?: string | null;
-  couponOptions?: ICoupon[];
+  caption?: string;
+  control?: Control<FieldValues>;
+  setValue?: UseFormSetValue<FieldValues>;
+  trigger?: UseFormTrigger<FieldValues>;
+  setShowShippingMsgInput?: React.Dispatch<React.SetStateAction<boolean>>;
+  defaultValue?: string | string[];
+}
+
+export interface PaymentInputProps {
+  label?: string;
+  caption?: string;
+  couponOptions?: Coupon[];
   usedPoint?: number;
   handleSelectedCoupon?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   handlePoint?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   disabledPointBtn?: boolean;
   disabledCouponBtn?: boolean;
   getDiscountedPrice?: () => void;
-  control?: Control<FieldValues>;
-  setValue?: UseFormSetValue<FieldValues>;
-  trigger?: UseFormTrigger<FieldValues>;
 }
 
-export interface ICheckBoxInputProps {
+export interface CheckBoxInputProps {
   label: string;
-  field?: string;
+  caption?: string;
   smallBox?: boolean;
   checked?: boolean;
   onChange?: () => void;
+  control?: Control<FieldValues>;
 }
 
-export interface IButtonProps {
+export interface ButtonProps {
   text: string;
   bgColor?: string;
   color?: string;
@@ -68,11 +60,7 @@ export interface InputGroupProps {
   children: React.ReactNode;
 }
 
-export interface ILayoutProps {
-  children: React.ReactNode;
-}
-
-export interface IOrderedProduct {
+export interface CartItem {
   cartId?: number;
   productId: number;
   imgUrl: string;
@@ -84,10 +72,50 @@ export interface IOrderedProduct {
   totalPrice: number;
 }
 
+export interface OrderPayload {
+  defaultAddr: boolean;
+  productList: CartItem[];
+  selectedMethod: PayMethod;
+  totalAmount: number;
+  deliveryInfo: DeliveryInfo;
+}
+
+export interface OrderProduct {
+  productId: number;
+  optionId: number;
+  count: number;
+  orderPrice: number;
+}
+
 export interface PayMethod {
-  title: string;
+  title?: string;
   pg: string;
   method: string;
+}
+
+export interface ShippingMsg {
+  type: string;
+  text: string;
+}
+
+export interface OrderedData {
+  username: string;
+  zipcode: string;
+  address: string;
+  addressDetail: string;
+  phoneNumber: string;
+}
+
+export interface PostOrderData extends OrderedData {
+  orderProduct: OrderProduct[];
+  memo: string;
+  selfMemo: string;
+  defaultAddr: boolean;
+  orderNumber: string;
+  orderTotalPrice: number;
+  totalQuantity: number;
+  point: number;
+  payMethod: string;
 }
 
 export interface DaumPostcodeData {
@@ -176,7 +204,7 @@ declare global {
   }
 }
 
-export interface IOrderInfo {
+export interface OrderInfo {
   pg: string;
   pay_method: string;
   merchant_uid: string;
@@ -189,15 +217,17 @@ export interface IOrderInfo {
   buyer_postcode: string;
 }
 
-export interface ISelectedMethod {
-  pg: string;
-  method: string;
-}
-
-export interface IDeliveryInfo {
-  name: string;
-  postCode: string;
-  basicAddress: string;
-  detailAddress: string;
-  mobile: string;
+export interface DeliveryInfo {
+  username: string;
+  address: string;
+  zipcode: string;
+  addressDetail: string;
+  phoneNumber: string;
+  memo: string;
+  selfMemo: string;
+  // name: string;
+  // postCode: string;
+  // basicAddress: string;
+  // detailAddress: string;
+  // mobile: string;
 }

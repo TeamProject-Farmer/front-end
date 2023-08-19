@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import { detailLinkOptions } from 'src/utils/shop/sortOption';
-import Category from '../Common/Category';
+import Category from '@components/Common/Category';
 import Panel from './Panel';
 import PreviewPhoto from './PreviewPhoto';
 import SortBar from './ContentWrapper/SortBar';

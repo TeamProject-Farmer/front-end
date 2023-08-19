@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import { OptionBarProps } from 'src/types/shop/types';
-import { ISortOption } from 'src/types/search/types';
+import { SortOption } from 'src/types/search/types';
 
 const SortBar = (props: OptionBarProps) => {
   const { optionList, width, setProductOption, productOption } = props;
@@ -9,7 +9,7 @@ const SortBar = (props: OptionBarProps) => {
   return (
     <Styled.OrderWrapper>
       <Styled.InnerWrapper width={width}>
-        {optionList?.map((item: ISortOption) => (
+        {optionList?.map((item: SortOption) => (
           <Styled.InnerBox
             onClick={() => setProductOption(item.param)}
             key={item.title}

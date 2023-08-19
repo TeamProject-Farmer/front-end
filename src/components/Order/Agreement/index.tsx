@@ -27,7 +27,7 @@ const Agreement = ({ handleAgreementChange }) => {
             checked={isAllChecked}
             onChange={handleAllCheck}
           />
-          <Styled.InnerPaddingWrapper field="agreement">
+          <Styled.InnerPaddingWrapper caption="agreement">
             <CheckBoxInput
               label="개인정보 제 3자 제공"
               checked={checkedState[0]}

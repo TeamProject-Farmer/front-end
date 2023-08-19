@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import { IBanner } from 'src/types/home/types';
+import { Banner } from 'src/types/home/types';
 
 const Indicator = ({ activeIndex, sliderContents, onclick }) => {
   return (
     <Style.Indicator>
-      {sliderContents.map((content: IBanner) => (
+      {sliderContents.map((content: Banner) => (
         <Style.List
           key={content.id}
           selected={content.id === activeIndex ? true : false}

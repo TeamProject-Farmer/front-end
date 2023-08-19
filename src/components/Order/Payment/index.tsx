@@ -1,10 +1,10 @@
 import Styled from '../styles';
-import InputField from '../InputField';
+import PaymentInput from '../InputField/PaymentInput';
 import InputGroup from '../InputGroup';
 import useDiscount from 'src/hooks/order/useDiscount';
 import { useEffect } from 'react';
 
-const Payment = ({ totalPrice, getTotalAmount }) => {
+const Payment = ({ totalPrice, getTotalAmount, control }) => {
   const {
     coupon,
     usedPoint,
@@ -25,17 +25,17 @@ const Payment = ({ totalPrice, getTotalAmount }) => {
   return (
     <>
       <InputGroup title="적립금/쿠폰">
-        <InputField
+        <PaymentInput
           label="적립금"
-          field="point"
+          caption="point"
           usedPoint={usedPoint}
           handlePoint={handlePointChange}
           disabledPointBtn={disabledPointBtn}
           getDiscountedPrice={calculateDiscountedPointPrice}
         />
-        <InputField
+        <PaymentInput
           label="쿠폰"
-          field="coupon"
+          caption="coupon"
           couponOptions={coupon}
           handleSelectedCoupon={handleSelectedCoupon}
           disabledCouponBtn={disabledCouponBtn}
@@ -44,7 +44,7 @@ const Payment = ({ totalPrice, getTotalAmount }) => {
         <Styled.InnerMarginWrapper>
           <Styled.DiscountedPrice>
             <Styled.Title>적용금액</Styled.Title>
-            <Styled.Title>-0원</Styled.Title>
+            <Styled.Title>-{discountedPrice}원</Styled.Title>
           </Styled.DiscountedPrice>
         </Styled.InnerMarginWrapper>
       </InputGroup>
@@ -67,7 +67,7 @@ const Payment = ({ totalPrice, getTotalAmount }) => {
           <Styled.InnerMarginWrapper>
             <Styled.DiscountedPrice>
               <Styled.Title>최종 결제 금액</Styled.Title>
-              <Styled.Title>{finalPrice}원</Styled.Title>
+              <Styled.Title>{finalPrice + 2500}원</Styled.Title>
             </Styled.DiscountedPrice>
           </Styled.InnerMarginWrapper>
         </Styled.FlexColumnWrapper>

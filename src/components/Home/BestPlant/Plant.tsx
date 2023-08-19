@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import Icon from '@components/Common/Icon';
 import theme from '@styles/theme';
-import { IPlant } from 'src/types/home/types';
+import { Plant } from 'src/types/home/types';
 import Link from 'next/link';
 
 const Plant = ({
@@ -13,7 +13,9 @@ const Plant = ({
   price,
   averageStarRating,
   imgUrl,
-}: IPlant) => {
+}: Plant) => {
+  const specialPrice = discountRate !== 0;
+  const discountedPrice = price * (1 - discountRate / 100);
   return (
     <Link href={`/shop/detail/${productId}`}>
       <Styled.Wrapper>
@@ -25,9 +27,13 @@ const Plant = ({
         <Styled.Content>
           <Styled.flexBox>
             <Styled.PriceBox>
-              <Styled.Price>{price}원</Styled.Price>
-              <Styled.Discount>{discountRate}%</Styled.Discount>
-              <Styled.SpecialPrice>특가</Styled.SpecialPrice>
+              <Styled.Price>
+                {specialPrice ? discountedPrice : price}원
+              </Styled.Price>
+              {specialPrice && (
+                <Styled.Discount>{discountRate}%</Styled.Discount>
+              )}
+              {specialPrice && <Styled.SpecialPrice>특가</Styled.SpecialPrice>}
             </Styled.PriceBox>
             <Styled.Star>
               <Icon name="star" width={16} height={15} />
@@ -119,7 +125,7 @@ const Styled = {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding: 20px 27px 21px 30px;
+    padding: 20px 40px 21px 45px;
     .slick-current & {
       width: 417px;
     }
@@ -131,8 +137,6 @@ const Styled = {
   PriceBox: styled.div`
     display: flex;
     gap: 10px;
-    .slick-current & {
-    }
   `,
   Discount: styled.p`
     color: #59b941;
@@ -147,6 +151,9 @@ const Styled = {
     font-weight: 600;
     .slick-current & {
       font-size: 17px;
+    }
+    span {
+      text-decoration-line: line-through;
     }
   `,
   Star: styled.p`

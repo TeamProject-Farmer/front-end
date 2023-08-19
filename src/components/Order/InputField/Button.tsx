@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
-import { IButtonProps } from 'src/types/order/types';
+import { ButtonProps } from 'src/types/order/types';
 import theme from '@styles/theme';
 
-const Button = ({ text, bgColor, color, onClick, disabled }: IButtonProps) => {
+const Button = ({ text, bgColor, color, onClick, disabled }: ButtonProps) => {
   return (
     <Styled.Button
       type="button"

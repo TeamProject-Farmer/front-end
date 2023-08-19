@@ -10,6 +10,7 @@ const SearchContainer = ({
   handleClick,
   inputValue,
   recentSearchWord,
+  isLoggedin,
 }) => {
   return (
     <Styled.Wrapper>
@@ -23,7 +24,7 @@ const SearchContainer = ({
         value={inputValue}
       />
       <Styled.KeywordWrapper>
-        {recentSearchWord !== null && recentSearchWord.length !== 0 && (
+        {isLoggedin && (
           <Keyword title="최근 검색 키워드" wordList={recentSearchWord} />
         )}
       </Styled.KeywordWrapper>

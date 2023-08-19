@@ -38,7 +38,7 @@ const Panel = (props: OptionBoxProps) => {
       const response = await getDetail(productId);
       setOptions(response.options);
       setName(response.name);
-      setThumbnailImg(response.thumbnailImg);
+      if(response.thumbnailImg) setThumbnailImg(response.thumbnailImg);
       setDiscountRate(response.discountRate);
       setPrice(handlePrice(response.price));
     } catch (err) {
@@ -74,8 +74,7 @@ const Panel = (props: OptionBoxProps) => {
     handleReviewData();
     handleReviewStar();
   }, [productId, router]);
-  console.log('name');
-  console.log(name);
+
   return (
     <>
       {noProduct ? (

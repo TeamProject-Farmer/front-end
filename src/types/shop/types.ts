@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
-import { ISortOption } from 'src/types/search/types';
+import { SortOption } from 'src/types/search/types';
 import { RootState } from 'store';
 
 export const userToken = (state: RootState) => state.user.email;
@@ -26,7 +26,7 @@ export interface ReviewAPI {
 }
 
 export interface OptionBarProps {
-  optionList: ISortOption[];
+  optionList: SortOption[];
   width?: string;
   setProductOption?: Dispatch<SetStateAction<string>>;
   productOption?: string;

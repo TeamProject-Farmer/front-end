@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { IKeywordProps } from 'src/types/search/types';
+import { KeywordProps } from 'src/types/search/types';
 
-const Keyword = ({ title, wordList }: IKeywordProps) => {
+const Keyword = ({ title, wordList }: KeywordProps) => {
   return (
     <Styled.FlexWrapper>
       <Styled.Title>{title}</Styled.Title>
