@@ -1,22 +1,17 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import Styled from './styles';
-import { setCategoryId } from 'store/reducers/categorySlice';
 import { getProductCategory } from 'src/apis/common/category';
 import { ICategory } from 'src/types/home/types';
 import Plant from './Plant';
 
 const Category = () => {
-  const dispatch = useDispatch();
+  //공통인 부분 사용되면 삭제될 예정입니다.
   const [categoryList, setCategoryList] = useState([]);
   const handleCategoryList = async () => {
     const response = await getProductCategory();
     setCategoryList(response);
   };
-  const handleDispatch = (id: string) => {
-    dispatch(setCategoryId(id));
-  }
   useEffect(() => {
     handleCategoryList();
   }, []);
@@ -27,7 +22,7 @@ const Category = () => {
       <Styled.Plants>
         {categoryList &&
           categoryList?.map((plant: ICategory) => (
-            <div key={plant.categoryId} onClick={()=>handleDispatch(plant.categoryName)}>
+            <div key={plant.categoryId}>
               <Link href={`/shop/${plant.categoryName}`} >
                 <Plant name={plant.categoryName} src={plant.imgUrl} />
               </Link>

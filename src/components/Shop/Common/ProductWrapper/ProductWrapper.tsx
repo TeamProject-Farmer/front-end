@@ -34,7 +34,6 @@ const ProductWrapper = (props: ProductWrapperProps) => {
           <Styled.OrderItem key={item.productId}>
             <Link href={`/shop/detail/${item.productId}`}>
               <Product
-                id={item.productId}
                 thumbnailImg={item.imgUrl}
                 name={item.productName}
                 discountRate={item.discountRate}

@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { idSelector } from 'src/types/shop/types';
+import { useRouter } from 'next/router';
 import { getQnAEdit } from 'src/apis/shop/qna';
 import { secretQuestion, QnAModalProps } from 'src/types/shop/types';
 import Styled from './styles';
 
 const QnAModal = (props: QnAModalProps) => {
   const { modalName, reviewItem, modalClose, setModalOpen } = props;
-  const tempProductId = useSelector(idSelector);
+  const router = useRouter();
+  const tempProductId = Number(router.query?.detail) || 1;
   const close = modalClose;
   const [isShowOptions, setShowOptions] = useState<boolean>(false);
   const [currentOption, setCurrentOption] = useState<string>('선택해주세요');

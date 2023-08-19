@@ -24,8 +24,6 @@ import { CartState, UserState } from 'src/types/redux/types';
 import { CartListProps } from 'src/types/mypage/types';
 import orderProductSlice from './reducers/orderProductSlice';
 import bannerSlice from './reducers/bannerSlice';
-import productIdSlice from './reducers/productIdSlice';
-import categorySlice from './reducers/categorySlice';
 import { categoryReduxType } from 'src/types/shop/types';
 // import orderSlice from './reducers/orderSlice';
 
@@ -34,8 +32,6 @@ export interface RootState {
   cartIndex: CartState;
   orderProduct: CartListProps[];
   banner: boolean;
-  productId: number;
-  categoryId: categoryReduxType;
   // orderInfo: IOrderInfo;
 }
 
@@ -54,8 +50,6 @@ const rootReducer = (
     cartIndex: cartIndexSlice,
     orderProduct: orderProductSlice,
     banner: bannerSlice,
-    productId: productIdSlice,
-    categoryId: categorySlice,
     // orderInfo: orderSlice,
   });
   return combinedReducer(state, action);

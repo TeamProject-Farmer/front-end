@@ -2,8 +2,6 @@ import { Dispatch, SetStateAction } from 'react';
 import { ISortOption } from 'src/types/search/types';
 import { RootState } from 'store';
 
-export const idSelector = (state: RootState) => state.productId;
-export const categprySelector = (state: RootState) => state.categoryId;
 export const userToken = (state: RootState) => state.user.email;
 
 export interface ProductAPI {
@@ -39,6 +37,7 @@ export interface categoryReduxType {
   name: string;
   id: number;
 }
+
 
 export interface ProductListProps {
   id?: number;
@@ -128,6 +127,7 @@ export interface PaginationProps {
   totalIndex: number;
   isExceptional?: boolean;
 }
+
 
 export interface OptionBoxProps {
   isPanel?: boolean;

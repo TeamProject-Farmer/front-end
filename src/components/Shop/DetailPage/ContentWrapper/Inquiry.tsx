@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import { getQnAList } from 'src/apis/shop/qna';
-import { idSelector } from 'src/types/shop/types';
 import { QnAProps } from 'src/types/shop/types';
 import { userToken } from 'src/types/shop/types';
 import OnOffButton from './OnOffButton';
@@ -15,9 +14,9 @@ import Pagination from './Pagination';
 
 
 const Inquiry = () => {
-  const productId = useSelector(idSelector);
+  const router = useRouter();
+  const productId = Number(router.query?.detail) || 1;
   const token = useSelector(userToken);
-    const router = useRouter();
   const [detailList, setDetailList] = useState<QnAProps[]>([]);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [myButton, setMyButton] = useState<boolean>(false);
@@ -41,11 +40,8 @@ const Inquiry = () => {
     setTotalElement(response.totalElements)
   };
   
-
   useEffect(() => {
     handleQnAList();
-    console.log('InquiryPage-----token')
-    console.log(token)
   }, [productId, currentIndex, modalOpen]);
 
   return (

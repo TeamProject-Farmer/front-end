@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
+import { OptionBoxProps } from 'src/types/shop/types';
 import SideAd from '@components/Shop/Common/SideAd';
 import OptionBox from './OptionBox';
 import DetailImage from './DetailImage';
@@ -8,12 +9,8 @@ import Inquiry from './Inquiry';
 import Notice from './Notice';
 // import SimilarProducts from './SimilarProducts';
 
-interface Props {
-  isPanel?: boolean;
-  selectList: any[];
-  setSelectList:  React.Dispatch<React.SetStateAction<any[]>>;
-}
-const ContentWrapper = (props: Props) => {
+
+const ContentWrapper = (props: OptionBoxProps) => {
   const { selectList, setSelectList } = props;
   return (
     <Styled.Wrapper>

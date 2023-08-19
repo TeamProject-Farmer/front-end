@@ -17,7 +17,7 @@ const MyQnA = () => {
         router.replace('/login')
       }
     }
-    
+
   };
   useEffect(() => {
     handleQnAList();

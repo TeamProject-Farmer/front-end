@@ -1,10 +1,7 @@
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import { setProductId } from 'store/reducers/productIdSlice';
-import { setCategoryId } from 'store/reducers/categorySlice';
 import { detailLinkOptions } from 'src/utils/shop/sortOption';
 import Category from '../Common/Category';
 import Panel from './Panel';
@@ -15,20 +12,7 @@ import ContentWrapper from './ContentWrapper';
 
 const DetailPage = () => {
   const [selectList, setSelectList] = useState([]);
-  const dispatch = useDispatch();
   const router = useRouter();
-  const productId = Number(router.query?.detail);
-  const cateId = router.query.category?.toString() || '';
-  
-  const handleDispatch = () => {
-    if(productId != undefined){
-      dispatch(setProductId(productId));
-      dispatch(setCategoryId(cateId));
-    }
-  }
-  useEffect(() => {
-    handleDispatch();
-  }, [productId]);
   
   return (
     <Styled.Wrapper>

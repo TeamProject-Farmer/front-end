@@ -1,5 +1,4 @@
 export interface ProductProps {
-  id?: number;
   thumbnailImg: string;
   name: string;
   price: number;

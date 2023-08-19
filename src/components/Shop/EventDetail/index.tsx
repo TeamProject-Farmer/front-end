@@ -30,7 +30,6 @@ const EventDetail = () => {
               <div key={i.productId}>
                 <Link href={`/shop/detail/${i.productId}`}>
                   <Product
-                    id={i.productId}
                     thumbnailImg={i.imgUrl}
                     name={i.productName}
                     discountRate={i.discountRate}

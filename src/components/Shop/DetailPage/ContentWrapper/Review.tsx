@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
 import { setTimeout } from 'timers';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import { getReview, getReviewStar } from 'src/apis/shop/review';
-import { idSelector } from 'src/types/shop/types';
 import { SingleReviewProps } from 'src/types/shop/types';
 import VerticalLine from '@components/Shop/Common/VerticalLine';
 import TotalStarGauge from '@components/Shop/Common/gauge/TotalStarGauge';
@@ -16,7 +16,8 @@ import photo from '@assets/images/shop/photoIcon.svg';
 import downArrow from '@assets/images/shop/downArrow1.svg';
 
 const Review = () => {
-  const productId = useSelector(idSelector);
+  const router = useRouter();
+  const productId = Number(router.query?.detail) || 1;
   const [reviewContent, setReviewContent] = useState([]);
   const [reviewStar, setReviewStar] = useState({});
   const [reviewTotalStar, setReviewTotalStar] = useState<number>();

@@ -1,23 +1,23 @@
 import { useEffect, useState } from 'react';
-import {  useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import { categprySelector, ProductListProps } from 'src/types/shop/types';
+import { ProductListProps } from 'src/types/shop/types';
+import { CateId } from 'src/utils/shop/sortOption';
 import { getProductList } from 'src/apis/shop/product';
 import Category from '../Common/Category';
 import MDPick from './MDPick';
 import ProductWrapper from '../Common/ProductWrapper/ProductWrapper';
 
 const ShopDetail = () => {
-  const category = useSelector(categprySelector);
-  const cateName = useRouter().query.category?.toString() || '';
+  const categoryName = useRouter().query.category?.toString() || '';
+  const categoryId = CateId[categoryName];
   const [productList, setProductList] = useState<ProductListProps[]>([]);
   const [productOption, setProductOption] = useState<string>('NEWS');
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>();
   const [pageElements, setPageElements] = useState<number>(16);
-  let categoryId:number = category.id;
+
   const handleProductList = async () => {
     const response = await getProductList({
       productOption,
@@ -26,7 +26,7 @@ const ShopDetail = () => {
     );
     setProductList(response.content);
     setTotalPages(response.totalPages);
-    setPageElements(response.numberOfElements)
+    setPageElements(response.numberOfElements);
   };
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const ShopDetail = () => {
   return (
     <Styled.Wrapper>
       <Category />
-      <Styled.Title>{cateName}</Styled.Title>
+      <Styled.Title>{categoryName}</Styled.Title>
       <Styled.ContentWrapper>
         <MDPick />
         <ProductWrapper

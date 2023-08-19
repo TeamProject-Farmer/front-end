@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
+import { getReviewImage } from 'src/apis/shop/review';
 import leftArrow from '@assets/images/shop/previewLeftArrow.svg';
 import rightArrow from '@assets/images/shop/previewRightArrow.svg';
-import { getReviewImage } from 'src/apis/shop/review';
-import { idSelector } from 'src/types/shop/types';
+
 
 const PreviewPhoto = () => {
-  const productId = useSelector(idSelector);
+  const router = useRouter();
+  const productId = Number(router.query?.detail) || 1;
   const [imageList, setImageList] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const handleReviewImage = async () => {

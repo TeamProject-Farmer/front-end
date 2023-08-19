@@ -6,7 +6,12 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import { getDetail } from 'src/apis/shop/product';
 import { getReview, getReviewStar } from 'src/apis/shop/review';
-import { idSelector, selectOptionProps, OptionBoxProps } from 'src/types/shop/types';
+import {
+  selectOptionProps,
+  OptionBoxProps,
+} from 'src/types/shop/types';
+import handlePrice from 'src/utils/shop/handlePrice';
+import NoProduct from './ContentWrapper/NoProduct';
 import TotalStarGauge from '@components/Shop/Common/gauge/TotalStarGauge';
 import OptionBox from './ContentWrapper/OptionBox';
 import share from '@assets/images/shop/shareIcon.svg';
@@ -17,32 +22,40 @@ import down from '@assets/images/shop/downloadIcon.svg';
 
 const Panel = (props: OptionBoxProps) => {
   const { isPanel, selectList, setSelectList } = props;
-  
+
   const router = useRouter();
-  const productId = useSelector(idSelector);
+  const productId = Number(router.query?.detail) || 1;
   const [thumbnailImg, setThumbnailImg] = useState<string>();
   const [name, setName] = useState<string>();
   const [discountRate, setDiscountRate] = useState<number>();
   const [price, setPrice] = useState<string>();
   const [totalStar, setTotalStar] = useState(0);
   const [options, setOptions] = useState<selectOptionProps[]>([]);
-
+  const [noProduct, setNoProduct] = useState<boolean>(false);
+  
   const handleDetailData = async () => {
-    const response = await getDetail(productId);
-    setOptions(response.options);
-    setName(response.name);
-    setThumbnailImg(response.thumbnailImg);
-    setDiscountRate(response.discountRate);
-    setPrice(response.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+    try {
+      const response = await getDetail(productId);
+      setOptions(response.options);
+      setName(response.name);
+      setThumbnailImg(response.thumbnailImg);
+      setDiscountRate(response.discountRate);
+      setPrice(handlePrice(response.price));
+    } catch (err) {
+      if (err.response.data.message === '해당 상품이 존재하지 않습니다.')
+        setNoProduct(true);
+    }
   };
-
   const handleReviewData = async () => {
-    const response = await getReview({productId, currentIndex: 1, sortOption: null, starOption: null});
+    const response = await getReview({
+      productId,
+      currentIndex: 1,
+      sortOption: null,
+      starOption: null,
+    });
     setTotalStar(response.totalElements);
   };
-  if (options.length == 0) {
-    setOptions([{ id: 0, optionName: '단일 옵션입니다.', optionPrice: 0 }]);
-  }
+
   const handleReviewStar = async () => {
     try {
       const response = await getReviewStar(productId);
@@ -56,105 +69,115 @@ const Panel = (props: OptionBoxProps) => {
         setTotalStar(0);
     }
   };
-
   useEffect(() => {
     handleDetailData();
     handleReviewData();
     handleReviewStar();
   }, [productId, router]);
+  console.log('name');
+  console.log(name);
   return (
-    <Styled.Wrapper>
-      <Styled.InnerBox>
-        <Styled.ImageBox>
-          {/* 이 부분 수정 필요 */}
-          {thumbnailImg && (
-            <Image
-              src={thumbnailImg}
-              alt="Thumbnail-Imgage"
-              className="imageStyle"
-              width={548.55}
-              height={547.55}
-              priority={true}
-            ></Image>
-          )}
-        </Styled.ImageBox>
-        <Styled.ContentWrapper>
-          <Styled.TitleWrapper>
-            <div>{name}</div>
-            <Styled.ShareButton></Styled.ShareButton>
-          </Styled.TitleWrapper>
-          <Styled.Review>
-            <Styled.StarWrapper>
-              <TotalStarGauge star={totalStar} size={20} color="#FFB800" />
-            </Styled.StarWrapper>
-            <div>{totalStar}개의 리뷰</div>
-          </Styled.Review>
-          <Styled.PriceWrapper>
-            <Styled.OriginPrice>
-              <div>{discountRate}%</div>
-              <div>{price}</div>
-            </Styled.OriginPrice>
-            <Styled.CurrentPrice>
-              <div>
-                <div>{price}~</div>
-                <button>특가</button>
-              </div>
-              <button>
-                쿠폰받기
-                <Styled.DownLoadIcon />
-              </button>
-            </Styled.CurrentPrice>
-          </Styled.PriceWrapper>
-          <Styled.ShipmentWrapper>
-            <Styled.EachShip>
-              <Styled.EachShipTitle>혜택</Styled.EachShipTitle>
-              <Styled.ShipCommonBox>
-                <div>23P</div>
-                <div>적립</div>
-              </Styled.ShipCommonBox>
-            </Styled.EachShip>
-            <Styled.EachShip>
-              <Styled.EachShipTitle>배송</Styled.EachShipTitle>
-              <Styled.EachShipContent>
-                <Styled.ShipCommonBox>
-                  <div>3,000원</div>
-                  <div>선결제</div>
-                </Styled.ShipCommonBox>
-                <div>일반택배</div>
-                <Styled.ShipCheck>
+    <>
+      {noProduct ? (
+        <NoProduct />
+      ) : (
+        <Styled.Wrapper>
+          <Styled.InnerBox>
+            <Styled.ImageBox>
+              {thumbnailImg && (
+                <Image
+                  src={thumbnailImg}
+                  alt="Thumbnail-Imgage"
+                  className="imageStyle"
+                  width={548.55}
+                  height={547.55}
+                  priority={true}
+                ></Image>
+              )}
+            </Styled.ImageBox>
+            <Styled.ContentWrapper>
+              <Styled.TitleWrapper>
+                <div>{name}</div>
+                <Styled.ShareButton></Styled.ShareButton>
+              </Styled.TitleWrapper>
+              <Styled.Review>
+                <Styled.StarWrapper>
+                  <TotalStarGauge star={totalStar} size={20} color="#FFB800" />
+                </Styled.StarWrapper>
+                <div>{totalStar}개의 리뷰</div>
+              </Styled.Review>
+              <Styled.PriceWrapper>
+                <Styled.OriginPrice>
+                  <div>{discountRate}%</div>
+                  <div>{price}</div>
+                </Styled.OriginPrice>
+                <Styled.CurrentPrice>
                   <div>
-                    <Styled.CheckIcon />
-                    <div>지역별 차등 배송비</div>
+                    <div>{price}~</div>
+                    <button>특가</button>
                   </div>
-                  <div>
-                    <Styled.CheckIcon />
-                    <div>제주도/도서산간 지역 3,000원</div>
-                  </div>
-                </Styled.ShipCheck>
-                <Styled.ExpectShip>
-                  <Styled.BoxIcon />
-                  <div>4/26(수)</div>
-                  <div>도착 예정</div>
-                </Styled.ExpectShip>
-              </Styled.EachShipContent>
-            </Styled.EachShip>
-          </Styled.ShipmentWrapper>
-          <Styled.VerticalLine />
-          <Styled.OptionWrapper>
-            <div>옵션</div>
-            <OptionBox isPanel={true} setSelectList={setSelectList} selectList={selectList}/>
-          </Styled.OptionWrapper>
-          <Styled.TotalPriceWrapper>
-            <div>주문금액</div>
-            <div>0원</div>
-          </Styled.TotalPriceWrapper>
-          <Styled.ButtonWrapper>
-            <button>구매하기</button>
-            <button>장바구니</button>
-          </Styled.ButtonWrapper>
-        </Styled.ContentWrapper>
-      </Styled.InnerBox>
-    </Styled.Wrapper>
+                  <button>
+                    쿠폰받기
+                    <Styled.DownLoadIcon />
+                  </button>
+                </Styled.CurrentPrice>
+              </Styled.PriceWrapper>
+              <Styled.ShipmentWrapper>
+                <Styled.EachShip>
+                  <Styled.EachShipTitle>혜택</Styled.EachShipTitle>
+                  <Styled.ShipCommonBox>
+                    <div>23P</div>
+                    <div>적립</div>
+                  </Styled.ShipCommonBox>
+                </Styled.EachShip>
+                <Styled.EachShip>
+                  <Styled.EachShipTitle>배송</Styled.EachShipTitle>
+                  <Styled.EachShipContent>
+                    <Styled.ShipCommonBox>
+                      <div>3,000원</div>
+                      <div>선결제</div>
+                    </Styled.ShipCommonBox>
+                    <div>일반택배</div>
+                    <Styled.ShipCheck>
+                      <div>
+                        <Styled.CheckIcon />
+                        <div>지역별 차등 배송비</div>
+                      </div>
+                      <div>
+                        <Styled.CheckIcon />
+                        <div>제주도/도서산간 지역 3,000원</div>
+                      </div>
+                    </Styled.ShipCheck>
+                    <Styled.ExpectShip>
+                      <Styled.BoxIcon />
+                      <div>4/26(수)</div>
+                      <div>도착 예정</div>
+                    </Styled.ExpectShip>
+                  </Styled.EachShipContent>
+                </Styled.EachShip>
+              </Styled.ShipmentWrapper>
+              <Styled.VerticalLine />
+              <Styled.OptionWrapper>
+                <div>옵션</div>
+                <OptionBox
+                  isPanel={true}
+                  setSelectList={setSelectList}
+                  selectList={selectList}
+                />
+              </Styled.OptionWrapper>
+              <Styled.TotalPriceWrapper>
+                <div>주문금액</div>
+                <div>0원</div>
+              </Styled.TotalPriceWrapper>
+              <Styled.ButtonWrapper>
+                <button>구매하기</button>
+                <button>장바구니</button>
+              </Styled.ButtonWrapper>
+            </Styled.ContentWrapper>
+          </Styled.InnerBox>
+        </Styled.Wrapper>
+      )}
+    </>
   );
 };
 const Styled = {
@@ -228,7 +251,7 @@ const Styled = {
       margin-right: 0px !important;
     }
   `,
-  
+
   BlankStar: styled(blank)``,
 
   PriceWrapper: styled.div`

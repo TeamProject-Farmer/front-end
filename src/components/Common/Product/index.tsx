@@ -3,14 +3,13 @@ import Image from 'next/image';
 import Styled from './styles';
 import Icon from '../Icon';
 import { ProductProps } from '../type';
-import { setProductId } from 'store/reducers/productIdSlice';
 
 const Product = (props: ProductProps) => {
-  const {id, thumbnailImg, name, price, discountRate, reviewCount, averageStarRating} = props;
+  const { thumbnailImg, name, price, discountRate, reviewCount, averageStarRating} = props;
   const dispatch = useDispatch();
 
   return (
-    <Styled.Wrapper onClick={()=> dispatch(setProductId(id))}>
+    <Styled.Wrapper>
       <Styled.ImgBox>
         <Image
           className='imageStyle'

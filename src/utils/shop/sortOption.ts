@@ -1,4 +1,4 @@
-import { ISortOption } from 'src/types/search/types';
+import { ISortOption } from 'src/types/search/types'; //지원님 코드 머지 시 이 부분 수정 필요
 
 export const productSortOptions: ISortOption[] = [
   { title: '신상품순', param: 'NEWS' },
@@ -21,8 +21,6 @@ export const sizeSortOptions: ISortOption[] = [
   { title: 'Large', param: 'L' },
 ];
 
-//리팩토링 할 때 카테고리 관련 redux는 state 값을 number나 string 하나로만 하고
-//코드 전반에서 이 부분을 활용해서 해도 될 것 같음.
 export const CateId = {
   다육이: 1,
   선인장: 2,

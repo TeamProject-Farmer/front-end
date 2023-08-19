@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { idSelector } from 'src/types/shop/types';
+import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import heart from '@assets/images/shop/optionBoxHeart.svg';
@@ -14,13 +13,18 @@ import {
 
 const OptionBox = (props: OptionBoxProps) => {
   const { isPanel, selectList, setSelectList } = props;
-  const productId = useSelector(idSelector);
+
+  const router = useRouter();
+  const productId = Number(router.query?.detail) || 1;
   const [isShowOptions, setShowOptions] = useState(false);
   const [options, setOptions] = useState<selectOptionProps[]>([]);
   const [lastOption, setLastOption] = useState<string>('상품을 선택하세요.');
+  
   const handleDetailData = async () => {
     const response = await getDetail(productId);
     setOptions(response.options);
+    console.log('OptionBoxPage----response')
+    console.log(response.options)
   };
   const handleSelectList = (item: selectListProps) => {
     setSelectList([
@@ -42,7 +46,7 @@ const OptionBox = (props: OptionBoxProps) => {
   
   useEffect(() => {
     handleDetailData();
-  }, []);
+  }, [router]);
 
   if (isPanel) {
     return (
