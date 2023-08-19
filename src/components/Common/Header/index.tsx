@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Styled from './styles';
 import Icon from '../Icon';
 import EventBanner from './EventBanner';
@@ -7,7 +8,6 @@ import { RootState } from 'store';
 import { useDispatch } from 'react-redux';
 import { clearUser } from 'store/reducers/userSlice';
 import Menu from '../Menu';
-import { useState } from 'react';
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState<boolean>(false);

@@ -110,6 +110,7 @@ export const Styled = {
   `,
   FlexDiv: styled.div`
     display: flex;
+    cursor: pointer;
   `,
 
   // 문구 배너
@@ -240,8 +241,14 @@ export const Styled = {
     font-weight: 700;
     text-align: center;
     color: ${theme.colors.mypageGray};
-    margin-top: 2.5rem;
-    margin-bottom: 2.5rem;
+    /* margin-top: 2.5rem;
+    margin-bottom: 2.5rem; */
+    height: 500px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
   `,
   ListInfoText: styled.h1<{ size?: string; color?: string }>`
     font-size: ${props => props.size}px;
@@ -522,5 +529,18 @@ export const Styled = {
     justify-content: center;
     align-items: center;
     background-color: ${theme.colors.white};
+  `,
+
+  //새로 추가된 부분
+  EmptyCart: styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;;
+    width: 100%;
+    height: 150px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #606367;
+    padding-top: 50px;
   `,
 };

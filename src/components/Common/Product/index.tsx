@@ -1,19 +1,23 @@
+import Image from 'next/image';
 import Styled from './styles';
 import Icon from '../Icon';
-import { IProductProps } from 'src/types/common/types';
+import { ProductProps } from '../type';
 
-const Product = (props: IProductProps) => {
-  const {
-    thumbnailImg,
-    name,
-    price,
-    discountRate,
-    reviewCount,
-    averageStarRating,
-  } = props;
+const Product = (props: ProductProps) => {
+  const { thumbnailImg, name, price, discountRate, reviewCount, averageStarRating} = props;
+
   return (
     <Styled.Wrapper>
-      <Styled.Img src={thumbnailImg} alt={name} />
+      <Styled.ImgBox>
+        <Image
+          className='imageStyle'
+          src={thumbnailImg}
+          alt={name}
+          fill={true}
+          sizes='100%, 100%'
+          priority={true}
+        />
+      </Styled.ImgBox>
       <Styled.Content>
         <Styled.Title>{name}</Styled.Title>
         <Styled.PriceBox>
@@ -28,7 +32,7 @@ const Product = (props: IProductProps) => {
           <Styled.Review>리뷰 {reviewCount}</Styled.Review>
         </Styled.ReviewBox>
         <Styled.EventBox>
-          {discountRate && <Styled.SpecialPrice>특가상품</Styled.SpecialPrice>}
+          {discountRate ? <Styled.SpecialPrice>특가상품</Styled.SpecialPrice> : <></>}
         </Styled.EventBox>
         <Styled.Title />
       </Styled.Content>

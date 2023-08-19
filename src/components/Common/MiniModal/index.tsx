@@ -1,6 +1,5 @@
 import Styled from './styles';
 import Icon from '../Icon';
-import InquiryModal from './InquiryModal';
 import ReviewModal from './ReviewModal';
 
 interface Props {
@@ -10,11 +9,9 @@ interface Props {
   modalClose: () => void;
 }
 const MiniModal = (props: Props) => {
+  //이 부분 코드 새로 수정해서 추후 사용할 것 같습니다.
   const { modalType, modalName, reviewItem, modalClose } = props;
-  
-
   const close = modalClose;
-
 
   return (
     <Styled.Wrapper>
@@ -45,7 +42,7 @@ const MiniModal = (props: Props) => {
         {modalType == 'review' ? (
           <ReviewModal />
         ) : modalType == 'inquiry' ? (
-          <InquiryModal />
+          <></>
         ) : (
           <></>
         )}
