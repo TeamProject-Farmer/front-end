@@ -4,7 +4,7 @@ import InputGroup from '../InputGroup';
 import useDiscount from 'src/hooks/order/useDiscount';
 import { useEffect } from 'react';
 
-const Payment = ({ totalPrice, getTotalAmount, control }) => {
+const Payment = ({ totalPrice, getTotalAmount }) => {
   const {
     coupon,
     usedPoint,

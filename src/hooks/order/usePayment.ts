@@ -10,7 +10,8 @@ const usePayment = () => {
   const [payNowDisabled, setPayNowDisabled] = useState<boolean>(false);
   // 결제 방식
   const [selectedMethod, setSelectedMethod] = useState<PayMethod>();
-
+  // 결제 완료
+  const [paySuccess, setPaySuccess] = useState<boolean>();
   const getTotalAmount = (amount: number) => {
     setTotalAmount(amount);
   };
@@ -37,6 +38,7 @@ const usePayment = () => {
     handleAgreementChange,
     defaultAddr,
     handleDefaultAdd,
+    setPaySuccess,
   };
 };
 

@@ -40,7 +40,6 @@ export const postVerifyIamport = async (
 
 // DB 주문/결제 요청
 export const postOrders = async (data: PostOrderData) => {
-  console.log('data', data);
-  const response = await request.post('/member/orders', { data });
-  console.log(response);
+  const response = await request.post('/member/orders', data);
+  return response.data;
 };

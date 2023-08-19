@@ -6,9 +6,11 @@ import { ReactElement } from 'react';
 import Layout from '@pages/layout';
 import NestedLayout from '@components/Order/NestedLayout';
 import Link from 'next/link';
+import { ResultData } from 'src/types/order/types';
+import { useRouter } from 'next/router';
 
 const orderResultPage: NextPageWithLayout = () => {
-  const resultData = {
+  const resultData: ResultData = {
     name: '지원',
     phoneNumber: '010-1234-5678',
     address: '서울시 어쩌고 1234',
@@ -16,8 +18,10 @@ const orderResultPage: NextPageWithLayout = () => {
     orderedDate: '2023-08-17T03:38:57.5952357',
     orderNumber: '123456',
   };
+  const { query } = useRouter();
+  console.log(query);
   const { name, phoneNumber, address, paymentPrice, orderedDate, orderNumber } =
-    resultData;
+    query;
   return (
     <Styled.Wrapper>
       <Styled.Message>

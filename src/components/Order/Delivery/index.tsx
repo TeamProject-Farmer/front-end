@@ -1,7 +1,6 @@
 import { useEffect, useState, useMemo } from 'react';
 import InputGroup from '../InputGroup';
 import InputField from '../InputField';
-import CheckBoxInput from '../InputField/CheckBoxInput';
 import Styled from '../styles';
 import { getMemberOrderAddress } from 'src/apis/order/order';
 import { OrderedData } from 'src/types/order/types';
@@ -92,11 +91,12 @@ const Delivery = ({ control, setValue, trigger, defaultAddress, onChange }) => {
           {showShippingMsgInput && (
             <InputField control={control} caption="selfMsg" />
           )}
-          <CheckBoxInput
+          <InputField control={control} caption="defaultAddr" />
+          {/* <CheckBoxInput
             label="기본 배송지로 저장"
             checked={defaultAddress}
             onChange={onChange}
-          />
+          /> */}
         </Styled.InnerPaddingWrapper>
       </InputGroup>
     </>

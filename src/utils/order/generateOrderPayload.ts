@@ -1,7 +1,7 @@
 import generateOrderNumber from 'src/utils/order/generateOrderNumber';
 import { OrderPayload } from 'src/types/order/types';
+
 const generateOrderPayload = ({
-  defaultAddr,
   productList,
   selectedMethod,
   totalAmount,
@@ -26,6 +26,7 @@ const generateOrderPayload = ({
     phoneNumber,
     memo,
     selfMemo,
+    defaultAddr,
   } = deliveryInfo;
 
   const orderData = {
@@ -35,8 +36,8 @@ const generateOrderPayload = ({
     name:
       productList.length === 1
         ? productList[0].productName
-        : `${productList[0].productName} 외 ${productList.length}개의 상품ㄴ`,
-    amount: totalAmount,
+        : `${productList[0].productName} 외 ${productList.length}개의 상품`,
+    amount: totalAmount + 2500,
     buyer_name: username,
     buyer_tel: phoneNumber,
     buyer_addr: address + addressDetail,
@@ -54,7 +55,7 @@ const generateOrderPayload = ({
     selfMemo: memo !== 'text' ? '' : selfMemo,
     defaultAddr,
     orderNumber,
-    orderTotalPrice: totalAmount,
+    orderTotalPrice: totalAmount + 2500,
     totalQuantity: 1,
     payMethod: selectedMethod.method,
     point: 0,
