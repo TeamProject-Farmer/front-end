@@ -12,26 +12,20 @@ import { RootState } from 'store';
 import { postSearch, getRecentSearch } from 'src/apis/search/search';
 import { sortingOptions } from 'src/utils/search/sortingOptions';
 import { useQuery } from 'react-query';
+import { ProductProps } from 'src/types/common/types';
 
 const SearchPage: NextPageWithLayout = () => {
   const [inputValue, setInputValue] = useState<string>('');
   const [searchedWord, setSearchedWord] = useState<string>('');
-  const [searchResult, setSearchResult] = useState<string>();
-  const [recentSearchWord, setRecentSearchWord] = useState<string[]>([]);
+  const [searchResult, setSearchResult] = useState<ProductProps[]>();
   const [sortOption, setSortOption] = useState<string>('');
   const memberEmail = useSelector((state: RootState) => state.user.email);
-  // api 수정될 예정
-  // const { data: searchData } = useQuery([searchResult], () =>
-  //   getRecentSearch(memberEmail),
-  // );
 
-  useEffect(() => {
-    if (memberEmail.length !== 0) {
-      getRecentSearch(memberEmail).then(res =>
-        setRecentSearchWord(res.memberSearchWord),
-      );
-    }
-  }, []);
+  const { data: recentSearchWord } = useQuery([searchResult], () =>
+    getRecentSearch(),
+  );
+
+  console.log(recentSearchWord);
 
   //검색 input value값 관리
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,18 +40,18 @@ const SearchPage: NextPageWithLayout = () => {
 
   //검색 버튼 클릭 시
   const handleSearchResult = async () => {
-    const response = await postSearch(inputValue, 'new');
-    const searchContent = response.searchProduct.content;
+    const response = await postSearch(inputValue, 'new', memberEmail);
+    setSearchResult(response);
+    // const searchContent = response.searchProduct.content;
     setSearchedWord(inputValue);
-    setSearchResult(searchContent);
     setSortOption('new');
   };
 
   //검색 결과 정렬
   const handleSort = async (sortSearchCond: string) => {
-    const response = await postSearch(inputValue, sortSearchCond);
+    const response = await postSearch(inputValue, sortSearchCond, memberEmail);
     setSortOption(sortSearchCond);
-    setSearchResult(response.searchProduct.content);
+    setSearchResult(response);
   };
 
   return (

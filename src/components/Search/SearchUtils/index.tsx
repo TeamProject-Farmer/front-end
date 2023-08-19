@@ -36,6 +36,7 @@ const Styled = {
     cursor: pointer;
   `,
   Option: styled.p<{ clicked: boolean }>`
+    min-width: 75px;
     color: ${({ clicked }) => (clicked ? theme.colors.green2 : '#000 ')};
   `,
 };
