@@ -1,15 +1,19 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
+import { useState } from 'react';
 import close from '@assets/images/shop/closeIcon.svg';
 interface Props {
   top?: number;
+  left?:number;
 }
 const SideAd = (props: Props) => {
-  const { top } = props;
+  const { top, left } = props;
+  const [close, setClose] = useState<boolean>(false);
+
   return (
-    <Styled.Wrapper>
+    <Styled.Wrapper close={close} left={left} top={top}>
       <Styled.SideAd top={top}>
-        <Styled.CloseIcon></Styled.CloseIcon>
+        <Styled.CloseIcon  onClick={()=>setClose(!close)}/>
         <Styled.Content>식물 키우기<br />많이 힘드시죠? <br /><br />내 반려 식물을<br />등록하고<br />관리해보세요.</Styled.Content>
         <Styled.footer>CLICK</Styled.footer>
       </Styled.SideAd>
@@ -18,23 +22,22 @@ const SideAd = (props: Props) => {
 };
 
 const Styled = {
-  Wrapper: styled.div`
+  Wrapper: styled.div<{close: boolean, left:number, top: number}>`
     position: absolute;
-    left: -210px;
+    /* left: -210px; */
+    left: ${props => props.left ? `${props.left}px` : '-225px'};
     margin-right: 36px;
     margin-left: 15px;
     width: fit-content;
     height: inherit;
-    top: 0;
+    top: ${props => (props.top ? `${props.top}px` : '0px')};
+    display: ${props => props.close ? 'none' : ''};
   `,
-  SideAd: styled.div<Props>`
-    //일단 임의로 fixed로 설정해둠 나중에 위치 관련해서 수정 필요할 것 같음
+  SideAd: styled.div<{top: number}>`
     margin-top: 20px;
     position: sticky;
-    /* 만약 위치를 고정해도 된다면 굳이 props로 받지 않아도 될 것 같음 */
     top: ${props => (props.top ? `${props.top}px` : '134px')};
     border-radius: 18px;
-    //디자인 상 width는 114px인데 다 안들어가서 임의로 161px로 늘림
     width: 161px;
     height: 279px;
     border-radius: 19px;

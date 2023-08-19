@@ -1,55 +1,45 @@
+import { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import theme from '@styles/theme';
 import SideAd from '../Common/SideAd';
-import Category from '../Common/Category';
+import Category from '@components/Common/Category';
 import Product from '@components/Common/Product';
-import { ShortTempProduct, CurrentPage } from '../type';
+import { getEventProduct } from 'src/apis/shop/product';
 
 const EventDetail = () => {
-  const router = useRouter();
-  const menu = router.query.category;
-  let category: string;
-  if (menu) {
-    category = menu.toString();
-  }
+  const [productList, setProductList] = useState([]);
+
+  const handleEventProductList = async () => {
+    const response = await getEventProduct();
+    setProductList(response);
+  };
+  useEffect(() => {
+    handleEventProductList();
+  }, []);
   return (
     <Styled.Wrapper>
       <Category />
       <Styled.VerticalLine />
-      {/* 데이터가 어떻게 넘어오냐에 따라 다를 것 같음 */}
       <Styled.ContentWrapper>
         <SideAd />
         <Styled.ImageWrapper />
         <Styled.ItemWrapper>
-          {/* 추후 api 연동 */}
-          {ShortTempProduct.map(i => (
-            <Link href={`/shop/${CurrentPage[category]}/detail/1`}>
-              <Product
-                key={i.id}
-                thumbnailImg={i.image}
-                name={i.contentTitle}
-                discountRate={i.percent}
-                price={i.totalPrice}
-                averageStarRating={i.reviewScore}
-                reviewCount={i.totalReview}
-              ></Product>
-            </Link>
-          ))}
-          {ShortTempProduct.map(i => (
-            <Link href={`/shop/${CurrentPage[category]}/detail/1`}>
-              <Product
-                key={i.id}
-                thumbnailImg={i.image}
-                name={i.contentTitle}
-                discountRate={i.percent}
-                price={i.totalPrice}
-                averageStarRating={i.reviewScore}
-                reviewCount={i.totalReview}
-              ></Product>
-            </Link>
-          ))}
+          {productList &&
+            productList.map(i => (
+              <div key={i.productId}>
+                <Link href={`/shop/detail/${i.productId}`}>
+                  <Product
+                    thumbnailImg={i.imgUrl}
+                    name={i.productName}
+                    discountRate={i.discountRate}
+                    price={i.price}
+                    averageStarRating={i.averageStarRating}
+                    reviewCount={i.reviewCount}
+                  ></Product>
+                </Link>
+              </div>
+            ))}
         </Styled.ItemWrapper>
       </Styled.ContentWrapper>
     </Styled.Wrapper>
@@ -62,6 +52,7 @@ const Styled = {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    min-width: ${theme.size.shopDetailMinWidth};
   `,
   VerticalLine: styled.div`
     width: 98.9vw;
@@ -90,11 +81,11 @@ const Styled = {
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
-    & > a > div {
+    & > div > a > div {
       margin-right: 22.56px;
       margin-bottom: 21.76px;
     }
-    & > a:nth-child(4n) > div {
+    & > div:nth-of-type(4n) > a > div {
       margin-right: 0;
     }
   `,

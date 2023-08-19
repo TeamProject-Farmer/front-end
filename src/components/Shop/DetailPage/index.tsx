@@ -1,26 +1,29 @@
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import Category from '../Common/Category';
+import { detailLinkOptions } from 'src/utils/shop/sortOption';
+import Category from '@components/Common/Category';
 import Panel from './Panel';
 import PreviewPhoto from './PreviewPhoto';
-import OrderBar from '@components/Shop/Common/OrderBar';
+import SortBar from './ContentWrapper/SortBar';
 import ContentWrapper from './ContentWrapper';
 
+
 const DetailPage = () => {
-  const tempOptions: string[] = [
-    '상품',
-    '리뷰 766',
-    '상품문의 177',
-    '배송/환불',
-    '비슷한상품',
-  ];
+  const [selectList, setSelectList] = useState([]);
+  const router = useRouter();
+  
   return (
     <Styled.Wrapper>
-      <Category />
-      <Panel />
+      <Category/>
+      <Panel setSelectList={setSelectList} selectList={selectList}/>
       <PreviewPhoto />
-      <OrderBar optionList={tempOptions} width={theme.size.shopDetailWrapper}/>
-      <ContentWrapper />
+      <SortBar
+        optionList={detailLinkOptions}
+        width={theme.size.shopDetailWrapper}
+      />
+      <ContentWrapper setSelectList={setSelectList} selectList={selectList}/>
     </Styled.Wrapper>
   );
 };
@@ -31,6 +34,7 @@ const Styled = {
     flex-direction: column;
     width: 100vw;
     max-width: 100%;
+    min-width: ${theme.size.shopDetailMinWidth};
   `,
 };
 

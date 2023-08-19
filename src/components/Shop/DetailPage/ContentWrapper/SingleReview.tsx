@@ -2,37 +2,54 @@ import Image from 'next/image';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import VerticalLine from '@components/Shop/Common/VerticalLine';
-import tempStar1 from '@assets/images/shop/tempStars1.svg';
-import tempStar2 from '@assets/images/shop/tempStars2.svg';
-
-
-interface Props {
-  id: number | string;
-  src: string;
+import TotalStarGauge from '@components/Shop/Common/gauge/TotalStarGauge';
+import { postReviewLike } from 'src/apis/shop/review';
+import { SingleReviewProps } from 'src/types/shop/types';
+type Props= {
+  dataList: SingleReviewProps
 }
-const SingleReview = (props: Props) => {
-  const { id, src } = props;
+const SingleReview = ({ dataList }: Props) => {
+  const {
+    content,
+    createdDate,
+    fiveStarRating,
+    imgUrl,
+    likeCount,
+    memberNickname,
+    optionName,
+    productName,
+    reviewId
+  } = dataList;
+  const handleReviewLike = async (reviewId: number) => {
+    const response = await postReviewLike(reviewId);
+  };
   return (
-    <Styled.SingleReview key={id}>
-      <div>유저이름</div>
+    <Styled.SingleReview>
+      <div></div>
       <div>
-        <Styled.ReviewSvg1 />
-        <div>2023.04.17</div>
+        <TotalStarGauge star={fiveStarRating} size={16}/>
+        <Styled.ReviewDate>{createdDate.slice(0, 10)}</Styled.ReviewDate>
         <div>·</div>
-        <div>파머 구매</div>
+        <div>{memberNickname} 구매</div>
       </div>
       <Styled.ShoppingOption>
         <VerticalLine height={35} />
         <div>
-          <div>공기정화식물 01</div>
-          <div>선택 01</div>
+          <div>{productName}</div>
+          <div>{optionName}</div>
         </div>
       </Styled.ShoppingOption>
       <Styled.ReviewImage>
-        <Image alt="reviewImage" src={src} width={112} height={112}></Image>
+        <Image
+          alt="reviewImage"
+          className='imageStyle'
+          src={imgUrl}
+          width={112}
+          height={112}
+        ></Image>
       </Styled.ReviewImage>
-      <div>리뷰 내용이 들어감</div>
-      <Styled.RecomendBtn>도움이 돼요</Styled.RecomendBtn>
+      <div>{content}</div>
+      <Styled.RecomendBtn onClick={()=>handleReviewLike(reviewId)}>도움이 돼요 &nbsp; {likeCount}</Styled.RecomendBtn>
     </Styled.SingleReview>
   );
 };
@@ -52,12 +69,10 @@ const Styled = {
       align-items: center;
       gap: 5px;
     }
-    & > div > svg {
-      margin-right: 2px;
-    }
   `,
-  ReviewSvg1: styled(tempStar1)``,
-  ReviewSvg2: styled(tempStar2)``,
+  ReviewDate: styled.div`
+    margin-left: 7px;
+  `,
   ShoppingOption: styled.div`
     margin-top: 21px;
     display: flex;
@@ -70,11 +85,18 @@ const Styled = {
     margin-top: 10px;
     margin-bottom: 26px;
     border-radius: 5px;
+    overflow: hidden;
+    .imageStyle {
+      width: 112px;
+      height: 112px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
   `,
   RecomendBtn: styled.button`
     margin-top: 23px;
     margin-bottom: 17px;
-    width: 112px;
+    width: 130px;
     height: 31px;
     border-radius: 5px;
     border: none;
