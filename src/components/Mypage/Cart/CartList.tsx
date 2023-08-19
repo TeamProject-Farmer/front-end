@@ -6,11 +6,13 @@ import CartItems from './CartItems';
 import { CartListProps } from 'src/types/mypage/types';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
 import { setChecked } from 'store/reducers/cartSlice';
 import { RootState } from 'store';
 const cartSelector = (state: RootState) => state.cartIndex;
 
 const CartList = ({ cartListArray }: { cartListArray: CartListProps[] }) => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const selector = useSelector(cartSelector);
   return (
@@ -39,7 +41,7 @@ const CartList = ({ cartListArray }: { cartListArray: CartListProps[] }) => {
         padding="0.7"
         width="125"
       >
-        <Styled.ButtonText size="14" color={theme.colors.black} weight="300">
+        <Styled.ButtonText size="14" color={theme.colors.black} weight="300" onClick={()=>router.push('/shop/다육이')}>
           쇼핑 계속하기
         </Styled.ButtonText>
       </Styled.CartCommonButton>
