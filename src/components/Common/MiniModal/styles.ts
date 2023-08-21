@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { current } from '@reduxjs/toolkit';
 import theme from '@styles/theme';
 import { Abel } from 'next/font/google';
+import closeBtnIcon from '@assets/images/common/modalClose.svg';
 
 const Styled = {
   Wrapper: styled.div`
@@ -23,7 +24,7 @@ const Styled = {
   Header: styled.div`
     width: 100%;
     height: 56px;
-    background-color: #285430;
+    background-color: ${theme.colors.green1};
     position: relative;
     display: flex;
     align-items: center;
@@ -45,10 +46,27 @@ const Styled = {
     right: 10px;
     top: 0;
   `,
+  CloseBtnIcon: styled(closeBtnIcon)``,
   ContentWrapper: styled.div`
     padding: 30px 25px;
     display: flex;
     flex-direction: column;
+  `,
+  DetailContentWrapper: styled.div`
+    padding: 30px 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    & > div:first-of-type {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+    & > div:first-of-type > div {
+      color: ${theme.colors.green1};
+      font-size: 16px;
+      font-weight: 500;
+    }
   `,
   TextBox: styled.div`
     width: 436px;
@@ -95,11 +113,13 @@ const Styled = {
     }
   `,
   ConfirmButton: styled.button`
+    flex-grow: 1;
     border: none;
     background-color: ${theme.colors.pointGreen};
     color: #fff;
   `,
   CancelButton: styled.button`
+    flex-grow: 1;
     border: 1px solid ${theme.colors.green1};
     background-color: #fff;
     color: ${theme.colors.green1};
@@ -175,7 +195,7 @@ const Styled = {
     flex-direction: column;
     gap: 12px;
   `,
-  SecretCheck: styled.label`
+  SecretCheck: styled.label<{ isSecret: boolean }>`
     display: flex;
     gap: 7px;
     color: #000;
@@ -186,10 +206,8 @@ const Styled = {
       width: 22px;
       height: 22px;
       border-radius: 11px;
-      border: 5px solid #ddd;
-    }
-    & > input:checked {
-      border: 5px solid ${theme.colors.pointGreen};
+      border: 5px solid
+        ${props => (props.isSecret ? `${theme.colors.pointGreen}` : '#ddd')};
     }
   `,
 
@@ -263,6 +281,27 @@ const Styled = {
     font-size: 18px;
     font-weight: 500;
     color: #fff;
+  `,
+  DetailTitle: styled.div`
+    color: #285430;
+    font-size: 16px;
+    font-weight: 500;
+    display: flex;
+    gap: 10px;
+  `,
+  DetailContentBox: styled.div`
+    display: flex;
+    flex-direction: column;
+  `,
+  DetailContent: styled.div`
+    display: flex;
+    gap: 7px;
+    font-size: 16px;
+    font-weight: 500;
+    & > div:first-of-type {
+      color: ${theme.colors.pointGreen};
+      font-weight: 700;
+    }
   `,
 };
 

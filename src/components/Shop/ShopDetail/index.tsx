@@ -1,80 +1,59 @@
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
-import { current } from '@reduxjs/toolkit';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import OrderBar from '../Common/OrderBar';
-import SideAd from '../Common/SideAd';
-import Category from '../Common/Category';
-import Product from '@components/Common/Product';
-import {
-  TempProduct,
-  OrderOptions,
-  CurrentPage,
-  ShortTempProduct,
-} from '../type';
+import { ProductListProps } from 'src/types/shop/types';
+import { CateId } from 'src/utils/shop/sortOption';
+import { getProductList } from 'src/apis/shop/product';
+import Category from '@components/Common/Category';
+import MDPick from './MDPick';
+import ProductWrapper from '../Common/ProductWrapper/ProductWrapper';
 
 const ShopDetail = () => {
-  const router = useRouter();
-  const menu = router.query.category;
-  let category: string;
-  if (menu) {
-    category = menu.toString();
-  }
+  const categoryName = useRouter().query.category?.toString() || '';
+  const categoryId = CateId[categoryName];
+  const [productList, setProductList] = useState<ProductListProps[]>([]);
+  const [productOption, setProductOption] = useState<string>('NEWS');
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [totalPages, setTotalPages] = useState<number>();
+  const [pageElements, setPageElements] = useState<number>(16);
+
+  const handleProductList = async () => {
+    const response = await getProductList({
+      productOption,
+      categoryId,
+      currentIndex}
+    );
+    setProductList(response.content);
+    setTotalPages(response.totalPages);
+    setPageElements(response.numberOfElements);
+  };
+
+  useEffect(() => {
+    handleProductList();
+  }, [productOption, categoryId, currentIndex]);
+
+  useEffect(() => {
+    setCurrentIndex(0);
+    if(currentIndex == 0) handleProductList();
+  }, [ productOption])
+
   return (
     <Styled.Wrapper>
       <Category />
-      <Styled.Title>{CurrentPage[category]}</Styled.Title>
+      <Styled.Title>{categoryName}</Styled.Title>
       <Styled.ContentWrapper>
-        <Styled.PickWrapper>
-          <Styled.PickTitle>MD's PICK</Styled.PickTitle>
-          <Styled.PickItemWrapper>
-            {ShortTempProduct.map(i => (
-              <Link href={`/shop/${CurrentPage[category]}/detail/1`}>
-                <Product
-                  key={i.id}
-                  thumbnailImg={i.image}
-                  name={i.contentTitle}
-                  discountRate={i.percent}
-                  price={i.totalPrice}
-                  averageStarRating={i.reviewScore}
-                  reviewCount={i.totalReview}
-                ></Product>
-              </Link>
-            ))}
-          </Styled.PickItemWrapper>
-        </Styled.PickWrapper>
-        <OrderBar optionList={OrderOptions} />
-        <Styled.OrderItemWrapper>
-          <SideAd top={0} />
-          {/* 추후 api 연동 */}
-          {TempProduct.map(i => (
-            <Link href={`/shop/${CurrentPage[category]}/detail/1`}>
-              <Product
-                key={i.id}
-                thumbnailImg={i.image}
-                name={i.contentTitle}
-                discountRate={i.percent}
-                price={i.totalPrice}
-                averageStarRating={i.reviewScore}
-                reviewCount={i.totalReview}
-              ></Product>
-            </Link>
-          ))}
-          {TempProduct.map(i => (
-            <Link href={`/shop/${CurrentPage[category]}/detail/1`}>
-              <Product
-                key={i.id}
-                thumbnailImg={i.image}
-                name={i.contentTitle}
-                discountRate={i.percent}
-                price={i.totalPrice}
-                averageStarRating={i.reviewScore}
-                reviewCount={i.totalReview}
-              ></Product>
-            </Link>
-          ))}
-        </Styled.OrderItemWrapper>
+        <MDPick />
+        <ProductWrapper
+          productList={productList}
+          setProductOption={setProductOption}
+          productOption={productOption}
+          currentIndex={currentIndex}
+          setCurrentIndex={setCurrentIndex}
+          totalIndex={totalPages}
+          isExceptional={true}
+          pageElements={pageElements}
+        />
       </Styled.ContentWrapper>
     </Styled.Wrapper>
   );
@@ -88,6 +67,7 @@ const Styled = {
     justify-content: center;
     color: ${theme.colors.black};
     text-align: center;
+    min-width: ${theme.size.shopDetailMinWidth};
   `,
   Title: styled.div`
     height: 130px;
@@ -104,42 +84,6 @@ const Styled = {
     flex-direction: column;
     margin-top: 110px;
     align-items: center;
-  `,
-  PickWrapper: styled.div`
-    margin-top: 88px;
-    margin-bottom: 65px;
-    display: flex;
-    flex-direction: column;
-    width: ${theme.size.mainWidth};
-  `,
-  PickTitle: styled.div`
-    text-align: left;
-    font-size: 30px;
-    font-weight: 700;
-    margin-bottom: 17.76px;
-  `,
-  PickItemWrapper: styled.div`
-    margin: 0 auto;
-    width: ${theme.size.mainWidth};
-    height: fit-content;
-    display: flex;
-    justify-content: space-between;
-  `,
-  OrderItemWrapper: styled.div`
-    position: relative;
-    width: ${theme.size.mainWidth};
-    height: 1062px;
-    display: flex;
-    flex-wrap: wrap;
-    align-content: flex-start;
-    margin: 70px 0;
-    & > a > div {
-      margin-bottom: 20.47px;
-      margin-right: 20.27px;
-    }
-    & > a:nth-child(4n + 1) > div {
-      margin-right: 0;
-    }
   `,
 };
 export default ShopDetail;

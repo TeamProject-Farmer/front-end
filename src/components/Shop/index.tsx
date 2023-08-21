@@ -8,7 +8,7 @@ const Shop = () => {
   return (
     <Styled.Wrapper>
       <Styled.EventWrapper>
-        <Link href="/shop/bysize">
+        <Link href="/shop/bysize/s">
           <Styled.NormalEvent>사이즈별</Styled.NormalEvent>
         </Link>
         <Styled.SmallEvent>
@@ -29,6 +29,7 @@ const Styled = {
   Wrapper: styled.div`
     width: 100vw;
     max-width: 100%;
+    min-width: ${theme.size.shopDetailMinWidth};
     height: 100vh;
     max-height: 100%;
   `,
