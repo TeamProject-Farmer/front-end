@@ -25,7 +25,7 @@ const SearchPage: NextPageWithLayout = () => {
     getRecentSearch(),
   );
 
-  console.log(recentSearchWord);
+  console.log('recentSearchWord', recentSearchWord);
 
   //검색 input value값 관리
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,9 +40,8 @@ const SearchPage: NextPageWithLayout = () => {
 
   //검색 버튼 클릭 시
   const handleSearchResult = async () => {
-    const response = await postSearch(inputValue, 'new', memberEmail);
+    const response = await postSearch(inputValue, '', memberEmail);
     setSearchResult(response);
-    // const searchContent = response.searchProduct.content;
     setSearchedWord(inputValue);
     setSortOption('new');
   };
