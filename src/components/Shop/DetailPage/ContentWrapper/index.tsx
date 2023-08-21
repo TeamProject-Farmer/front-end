@@ -5,7 +5,7 @@ import SideAd from '@components/Shop/Common/SideAd';
 import OptionBox from './OptionBox';
 import DetailImage from './DetailImage';
 import Review from './Review';
-import Inquiry from './Inquiry';
+import QnA from './QnA';
 import Notice from './Notice';
 // import SimilarProducts from './SimilarProducts';
 
@@ -19,7 +19,7 @@ const ContentWrapper = (props: OptionBoxProps) => {
         <Styled.ExceptOption>
           <DetailImage />
           <Review />
-          <Inquiry />
+          <QnA />
           <Notice />
           {/* <SimilarProducts /> */}
           {/* <Styled.BackButton>뒤로가기</Styled.BackButton> */}
