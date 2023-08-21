@@ -20,7 +20,7 @@ const Review = () => {
   const productId = Number(router.query?.detail) || 1;
   const [reviewContent, setReviewContent] = useState([]);
   const [reviewStar, setReviewStar] = useState({});
-  const [reviewTotalStar, setReviewTotalStar] = useState<number>();
+  const [reviewTotalStar, setReviewTotalStar] = useState<number>(0);
   const [reviewStarArray, setReviewStarArray] = useState<number[]>([]);
   const [totalElement, setTotalElement] = useState(0);
   const [sortOption, setSortOption] = useState('best');
@@ -32,7 +32,6 @@ const Review = () => {
   const [popStarOption, setPopStarOption] = useState<boolean>(false);
 
   const handleReviewData = async () => {
-    //like 버튼 눌렀을 때 바로바로 데이터가 안들어오는 것 같다.
     const response = await getReview({
       productId,
       currentIndex,
@@ -41,13 +40,14 @@ const Review = () => {
     });
     setReviewContent(response.content);
     setTotalElement(response.totalElements);
-    //filter되도 totalElements는 일정하게 나오기 떄문에 pagenation 값이 변경될 수 없음...!
-    //totalPages 부분을 수정해야 근본적 문제가 해결 될 것 같습니다..!
     setTotalIndex(response.totalPages);
   };
 
   const handleReviewStar = async () => {
     try {
+      console.log('reviewPage-----productId');
+      console.log(productId);
+
       const response = await getReviewStar(productId);
       setReviewStar(response);
       setReviewTotalStar(response.averageStarRating);
@@ -65,16 +65,17 @@ const Review = () => {
       );
     }
   };
-  
+
   useEffect(() => {
     handleReviewData();
-  }, [productId, currentIndex, sortOption, starOption]);
+  }, [router, currentIndex, sortOption, starOption]);
   useEffect(() => {
-    setTimeout(()=>handleReviewData(), 10);
+    setTimeout(() => handleReviewData(), 10);
   }, [reviewClick]);
   useEffect(() => {
+    setErrorMessage(false);
     handleReviewStar();
-  }, [productId]);
+  }, [router]);
   useEffect(() => {
     setCurrentIndex(1);
   }, [starOption]);
@@ -129,6 +130,7 @@ const Review = () => {
           setPopStarOption={setPopStarOption}
           popStarOption={popStarOption}
           setStarOption={setStarOption}
+          starOption={starOption}
         />
       </Styled.ReviewTitle>
       {errorMessage ? (

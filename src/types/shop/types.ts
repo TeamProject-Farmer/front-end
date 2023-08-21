@@ -63,6 +63,7 @@ export interface StarOptionProps {
   setPopStarOption: React.Dispatch<React.SetStateAction<boolean>>;
   popStarOption: boolean;
   setStarOption: React.Dispatch<React.SetStateAction<number | null>>;
+  starOption: number | null;
 }
 
 export interface SingleReviewProps {
