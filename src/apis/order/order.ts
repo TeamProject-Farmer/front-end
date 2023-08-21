@@ -43,3 +43,13 @@ export const postOrders = async (data: PostOrderData) => {
   const response = await request.post('/member/orders', data);
   return response.data;
 };
+
+// 주문조회
+export const getOrdersComplete = async (orderNumber: string | string[]) => {
+  console.log('api', orderNumber);
+  const response = await request.get(
+    `/member/orders/complete?orderNumber=${orderNumber}`,
+  );
+  console.log(response);
+  return response.data;
+};

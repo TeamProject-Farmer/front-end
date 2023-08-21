@@ -30,7 +30,7 @@ const OrderCartList = ({
         (acc, item) => acc + item.totalPrice,
         0,
       );
-      return totalPrice.toLocaleString();
+      return totalPrice + 2500;
     }
   };
 

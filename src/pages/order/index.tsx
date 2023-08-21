@@ -55,27 +55,17 @@ const OrderPage: NextPageWithLayout = () => {
     }
 
     try {
-      const { response, resultInfo } = await processPayment({
+      const { resultInfo } = await processPayment({
         productList,
         selectedMethod,
         totalAmount,
         deliveryInfo,
       });
-      const { pay_method, vbank_name, vbank_num, vbank_date } = response;
-      const { name, phoneNumber, address, paymentPrice, orderedDate } =
-        resultInfo;
+      const { orderNumber } = resultInfo;
       router.push({
         pathname: '/order/result',
         query: {
-          name,
-          phoneNumber,
-          address,
-          paymentPrice,
-          orderedDate,
-          pay_method,
-          vbank_name,
-          vbank_num,
-          vbank_date,
+          orderNumber,
         },
       });
     } catch (error) {
