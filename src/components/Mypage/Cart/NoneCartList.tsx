@@ -16,7 +16,7 @@ const NoneCartList = () => {
         padding="0.7"
         width="125"
       >
-        <Styled.ButtonText size="14" color={theme.colors.white} weight="500">
+        <Styled.ButtonText size="14" color={theme.colors.white} weight="500"  onClick={()=>router.push('/shop/다육이')}>
           쇼핑 하러가기
         </Styled.ButtonText>
       </Styled.CartCommonButton>
