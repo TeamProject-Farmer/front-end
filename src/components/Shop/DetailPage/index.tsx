@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import { detailLinkOptions } from 'src/utils/shop/sortOption';
@@ -9,21 +8,33 @@ import PreviewPhoto from './PreviewPhoto';
 import SortBar from './ContentWrapper/SortBar';
 import ContentWrapper from './ContentWrapper';
 
-
 const DetailPage = () => {
   const [selectList, setSelectList] = useState([]);
-  const router = useRouter();
-  
+  const [selectPrice, setSelectPrice] = useState<number>();
+  const [originPrice, setOriginPrice] = useState<number>();
+
   return (
     <Styled.Wrapper>
-      <Category/>
-      <Panel setSelectList={setSelectList} selectList={selectList}/>
+      <Category />
+      <Panel
+        setSelectList={setSelectList}
+        selectList={selectList}
+        selectPrice={selectPrice}
+        setSelectPrice={setSelectPrice}
+        originPrice={originPrice}
+        setOriginPrice={setOriginPrice}
+      />
       <PreviewPhoto />
       <SortBar
         optionList={detailLinkOptions}
         width={theme.size.shopDetailWrapper}
       />
-      <ContentWrapper setSelectList={setSelectList} selectList={selectList}/>
+      <ContentWrapper
+        setSelectList={setSelectList}
+        selectList={selectList}
+        setSelectPrice={setSelectPrice}
+        selectPrice={selectPrice}
+      />
     </Styled.Wrapper>
   );
 };

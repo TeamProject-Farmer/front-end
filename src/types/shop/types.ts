@@ -134,6 +134,10 @@ export interface OptionBoxProps {
   isPanel?: boolean;
   selectList: selectListProps[];
   setSelectList: React.Dispatch<React.SetStateAction<selectListProps[]>>;
+  selectPrice: number;
+  setSelectPrice?: React.Dispatch<React.SetStateAction<number>>;
+  originPrice?: number;
+  setOriginPrice?: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export interface selectOptionProps {

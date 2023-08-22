@@ -9,13 +9,12 @@ import QnA from './QnA';
 import Notice from './Notice';
 // import SimilarProducts from './SimilarProducts';
 
-
 const ContentWrapper = (props: OptionBoxProps) => {
-  const { selectList, setSelectList } = props;
+  const { selectList, setSelectList, selectPrice, setSelectPrice } = props;
   return (
     <Styled.Wrapper>
       <Styled.ContentWrapper>
-        <SideAd left={-160}/>
+        <SideAd left={-160} />
         <Styled.ExceptOption>
           <DetailImage />
           <Review />
@@ -24,7 +23,12 @@ const ContentWrapper = (props: OptionBoxProps) => {
           {/* <SimilarProducts /> */}
           {/* <Styled.BackButton>뒤로가기</Styled.BackButton> */}
         </Styled.ExceptOption>
-        <OptionBox setSelectList={setSelectList} selectList={selectList}/>
+        <OptionBox
+          setSelectList={setSelectList}
+          selectList={selectList}
+          setSelectPrice={setSelectPrice}
+          selectPrice={selectPrice}
+        />
       </Styled.ContentWrapper>
     </Styled.Wrapper>
   );
@@ -36,7 +40,6 @@ const Styled = {
     flex-direction: column;
     width: ${theme.size.shopDetailWrapper};
     margin: 0 auto;
-    
   `,
   ContentWrapper: styled.div`
     margin-top: 58px;

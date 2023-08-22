@@ -12,20 +12,22 @@ import {
 } from 'src/types/shop/types';
 
 const OptionBox = (props: OptionBoxProps) => {
-  const { isPanel, selectList, setSelectList } = props;
+  const { isPanel, selectList, setSelectList, selectPrice, setSelectPrice, originPrice} = props;
 
   const router = useRouter();
   const productId = Number(router.query?.detail) || 1;
   const [isShowOptions, setShowOptions] = useState(false);
   const [options, setOptions] = useState<selectOptionProps[]>([]);
   const [lastOption, setLastOption] = useState<string>('상품을 선택하세요.');
-  
+
   const handleDetailData = async () => {
     const response = await getDetail(productId);
     setOptions(response.options);
-    console.log('OptionBoxPage----response')
-    console.log(response.options)
   };
+  const handleResultPrice = () => {
+    if(selectList.length > 0) return  selectPrice+'원'
+    else return '0 원'
+  }
   const handleSelectList = (item: selectListProps) => {
     setSelectList([
       ...selectList.filter(i => i.id != item.id),
@@ -35,6 +37,7 @@ const OptionBox = (props: OptionBoxProps) => {
         optionPrice: item.optionPrice,
       },
     ]);
+    setSelectPrice(originPrice+item.optionPrice)
   };
   if (options.length <= 0) {
     setOptions([{ id: 0, optionName: '단일 옵션입니다.', optionPrice: 0 }]);
@@ -43,32 +46,45 @@ const OptionBox = (props: OptionBoxProps) => {
     if (selectList.length <= 0) setLastOption('상품을 선택하세요.');
     else setLastOption(selectList.at(-1).optionName);
   }, [selectList]);
-  
+
   useEffect(() => {
     handleDetailData();
   }, [router]);
 
   if (isPanel) {
     return (
-      <Styled.PanelSelectBox>
-        <Styled.OptionArrow />
-        <Styled.PanelSelect onClick={() => setShowOptions(prev => !prev)}>
-          <Styled.PanelLabel>{lastOption}</Styled.PanelLabel>
-          <Styled.PanelSelectOptions show={isShowOptions}>
-            {options?.map(item => (
-              <Styled.PanelOption
-                key={item.id}
-                onClick={() => handleSelectList(item)}
-              >
-                <div>
-                  <ColorOption>{item.optionName}</ColorOption>
-                  <div>+{item.optionPrice}원</div>
-                </div>
-              </Styled.PanelOption>
-            ))}
-          </Styled.PanelSelectOptions>
-        </Styled.PanelSelect>
-      </Styled.PanelSelectBox>
+      <Styled.PannelWrapper>
+        <Styled.OptionWrapper>
+          <div>옵션</div>
+          <Styled.PanelSelectBox>
+            <Styled.OptionArrow />
+            <Styled.PanelSelect onClick={() => setShowOptions(prev => !prev)}>
+              <Styled.PanelLabel>{lastOption}</Styled.PanelLabel>
+              <Styled.PanelSelectOptions show={isShowOptions}>
+                {options?.map(item => (
+                  <Styled.PanelOption
+                    key={item.id}
+                    onClick={() => handleSelectList(item)}
+                  >
+                    <div>
+                      <ColorOption>{item.optionName}</ColorOption>
+                      <div>+{item.optionPrice}원</div>
+                    </div>
+                  </Styled.PanelOption>
+                ))}
+              </Styled.PanelSelectOptions>
+            </Styled.PanelSelect>
+          </Styled.PanelSelectBox>
+        </Styled.OptionWrapper>
+        <Styled.TotalPriceWrapper>
+          <div>주문금액</div>
+          <div>{handleResultPrice()}</div>
+        </Styled.TotalPriceWrapper>
+        <Styled.ButtonWrapper>
+          <button>구매하기</button>
+          <button>장바구니</button>
+        </Styled.ButtonWrapper>
+      </Styled.PannelWrapper>
     );
   } else {
     return (
@@ -105,7 +121,7 @@ const OptionBox = (props: OptionBoxProps) => {
         <Styled.Lower>
           <Styled.TotalPrice>
             <div>주문금액</div>
-            <div>0원</div>
+            <div>{handleResultPrice()}</div>
           </Styled.TotalPrice>
           <Styled.Buttons>
             <button>장바구니</button>
@@ -119,6 +135,66 @@ const OptionBox = (props: OptionBoxProps) => {
 
 const ColorOption = styled.div``;
 const Styled = {
+  PannelWrapper: styled.div`
+    display: flex;
+    flex-direction: column;
+  `,
+  OptionWrapper: styled.div`
+    color: #000;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 600;
+    display: flex;
+    margin-left: 25px;
+    align-items: center;
+    justify-content: space-between;
+    & > div {
+      padding-top: 30px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+    position: relative;
+  `,
+  TotalPriceWrapper: styled.div`
+    display: flex;
+    justify-content: space-between;
+    margin-left: 18px;
+    margin-top: 38px;
+    margin-bottom: 15px;
+    & > div:first-child {
+      font-size: 16px;
+      font-weight: 600;
+    }
+    & > div:last-child {
+      text-align: right;
+      font-size: 25px;
+      font-weight: 600;
+    }
+  `,
+  ButtonWrapper: styled.div`
+    display: flex;
+    justify-content: space-between;
+    & > button {
+      display: flex;
+      width: 270px;
+      height: 60px;
+      justify-content: center;
+      align-items: center;
+      border-radius: 5px;
+      font-size: 25px;
+      font-weight: 700;
+    }
+    & > button:first-child {
+      color: ${theme.colors.white};
+      background-color: ${theme.colors.green1};
+    }
+    & > button:last-child {
+      color: ${theme.colors.green1};
+      background-color: #ecf9e9;
+    }
+  `,
+
   Wrapper: styled.div`
     width: 302px;
     height: 720px;

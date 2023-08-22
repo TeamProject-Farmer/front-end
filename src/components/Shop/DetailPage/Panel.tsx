@@ -6,10 +6,7 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import { getDetail } from 'src/apis/shop/product';
 import { getReview, getReviewStar } from 'src/apis/shop/review';
-import {
-  selectOptionProps,
-  OptionBoxProps,
-} from 'src/types/shop/types';
+import { selectOptionProps, OptionBoxProps } from 'src/types/shop/types';
 import handlePrice from 'src/utils/shop/handlePrice';
 import NoProduct from './ContentWrapper/NoProduct';
 import TotalStarGauge from '@components/Shop/Common/gauge/TotalStarGauge';
@@ -21,7 +18,7 @@ import boxIcon from '@assets/images/shop/boxIcon.svg';
 import down from '@assets/images/shop/downloadIcon.svg';
 
 const Panel = (props: OptionBoxProps) => {
-  const { isPanel, selectList, setSelectList } = props;
+  const { isPanel, selectList, setSelectList, selectPrice, setSelectPrice, setOriginPrice, originPrice} = props;
 
   const router = useRouter();
   const productId = Number(router.query?.detail) || 1;
@@ -32,15 +29,16 @@ const Panel = (props: OptionBoxProps) => {
   const [totalStar, setTotalStar] = useState(0);
   const [options, setOptions] = useState<selectOptionProps[]>([]);
   const [noProduct, setNoProduct] = useState<boolean>(false);
-  
+
   const handleDetailData = async () => {
     try {
       const response = await getDetail(productId);
       setOptions(response.options);
       setName(response.name);
-      if(response.thumbnailImg) setThumbnailImg(response.thumbnailImg);
+      if (response.thumbnailImg) setThumbnailImg(response.thumbnailImg);
       setDiscountRate(response.discountRate);
       setPrice(handlePrice(response.price));
+      setOriginPrice(response.price);
     } catch (err) {
       if (err.response.data.message === '해당 상품이 존재하지 않습니다.')
         setNoProduct(true);
@@ -61,7 +59,6 @@ const Panel = (props: OptionBoxProps) => {
       const response = await getReviewStar(productId);
       setTotalStar(response.averageStarRating);
     } catch (err) {
-      console.log('Register err : ', err.response);
       if (
         err.response.data.message ==
         '해당 상품에 대한 리뷰가 존재하지 않습니다.'
@@ -156,22 +153,15 @@ const Panel = (props: OptionBoxProps) => {
                 </Styled.EachShip>
               </Styled.ShipmentWrapper>
               <Styled.VerticalLine />
-              <Styled.OptionWrapper>
-                <div>옵션</div>
-                <OptionBox
-                  isPanel={true}
-                  setSelectList={setSelectList}
-                  selectList={selectList}
-                />
-              </Styled.OptionWrapper>
-              <Styled.TotalPriceWrapper>
-                <div>주문금액</div>
-                <div>0원</div>
-              </Styled.TotalPriceWrapper>
-              <Styled.ButtonWrapper>
-                <button>구매하기</button>
-                <button>장바구니</button>
-              </Styled.ButtonWrapper>
+              <OptionBox
+                isPanel={true}
+                setSelectList={setSelectList}
+                selectList={selectList}
+                setSelectPrice={setSelectPrice}
+                selectPrice={selectPrice}
+                setOriginPrice={setOriginPrice}
+                originPrice={originPrice}
+              />
             </Styled.ContentWrapper>
           </Styled.InnerBox>
         </Styled.Wrapper>
@@ -386,62 +376,6 @@ const Styled = {
     height: 1px;
     background-color: #585858;
     border: none;
-  `,
-
-  OptionWrapper: styled.div`
-    color: #000;
-    text-align: center;
-    font-size: 25px;
-    font-weight: 600;
-    display: flex;
-    margin-left: 25px;
-    align-items: center;
-    justify-content: space-between;
-    & > div {
-      padding-top: 30px;
-      height: 100%;
-      display: flex;
-      align-items: center;
-    }
-    position: relative;
-  `,
-  TotalPriceWrapper: styled.div`
-    display: flex;
-    justify-content: space-between;
-    margin-left: 18px;
-    margin-top: 38px;
-    margin-bottom: 15px;
-    & > div:first-child {
-      font-size: 16px;
-      font-weight: 600;
-    }
-    & > div:last-child {
-      text-align: right;
-      font-size: 25px;
-      font-weight: 600;
-    }
-  `,
-  ButtonWrapper: styled.div`
-    display: flex;
-    justify-content: space-between;
-    & > button {
-      display: flex;
-      width: 270px;
-      height: 60px;
-      justify-content: center;
-      align-items: center;
-      border-radius: 5px;
-      font-size: 25px;
-      font-weight: 700;
-    }
-    & > button:first-child {
-      color: ${theme.colors.white};
-      background-color: ${theme.colors.green1};
-    }
-    & > button:last-child {
-      color: ${theme.colors.green1};
-      background-color: #ecf9e9;
-    }
   `,
 };
 export default Panel;
