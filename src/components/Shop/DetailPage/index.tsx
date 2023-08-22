@@ -9,21 +9,20 @@ import PreviewPhoto from './PreviewPhoto';
 import SortBar from './ContentWrapper/SortBar';
 import ContentWrapper from './ContentWrapper';
 
-
 const DetailPage = () => {
   const [selectList, setSelectList] = useState([]);
   const router = useRouter();
-  
+
   return (
     <Styled.Wrapper>
-      <Category/>
-      <Panel setSelectList={setSelectList} selectList={selectList}/>
+      <Category />
+      <Panel setSelectList={setSelectList} selectList={selectList} />
       <PreviewPhoto />
       <SortBar
         optionList={detailLinkOptions}
         width={theme.size.shopDetailWrapper}
       />
-      <ContentWrapper setSelectList={setSelectList} selectList={selectList}/>
+      <ContentWrapper setSelectList={setSelectList} selectList={selectList} />
     </Styled.Wrapper>
   );
 };

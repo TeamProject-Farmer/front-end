@@ -59,6 +59,7 @@ request.interceptors.response.use(
         console.log('res:', res);
 
         const newToken = res.headers.Authorization;
+        console.log('newToken', newToken);
 
         // 재발급 받은 토큰을 저장합니다.
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import type { NextPageWithLayout } from '@pages/_app';
@@ -6,25 +5,27 @@ import { ReactElement } from 'react';
 import Layout from '@pages/layout';
 import NestedLayout from '@components/Order/NestedLayout';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { getOrdersComplete } from 'src/apis/order/order';
+import { useQuery } from 'react-query';
+import formatOrderDate from 'src/utils/order/formatOrderDate';
 
 const orderResultPage: NextPageWithLayout = () => {
-  const resultData = {
-    name: '지원',
-    phoneNumber: '010-1234-5678',
-    address: '서울시 어쩌고 1234',
-    paymentPrice: 48000,
-    orderedDate: '2023-08-17T03:38:57.5952357',
-    orderNumber: '123456',
-  };
-  const { name, phoneNumber, address, paymentPrice, orderedDate, orderNumber } =
-    resultData;
+  const { query } = useRouter();
+  const { orderNumber } = query;
+  const { isLoading, data: orderedData } = useQuery([orderNumber], () =>
+    getOrdersComplete(orderNumber),
+  );
+  if (isLoading) return;
+  const { name, phoneNumber, address, paymentPrice, orderedDate } = orderedData;
+
   return (
     <Styled.Wrapper>
       <Styled.Message>
         <span>주문이 완료</span>되었습니다. 감사합니다!
       </Styled.Message>
       <Styled.OrderData>
-        <li>주문일 {orderedDate}</li>
+        <li>주문일 {formatOrderDate(orderedDate)}</li>
         <li>주문번호 {orderNumber}</li>
       </Styled.OrderData>
       <Styled.FlexColumnWrapper>
@@ -95,7 +96,7 @@ const Styled = {
     }
   `,
   OrderData: styled.ul`
-    width: 455px;
+    width: 470px;
     height: 42px;
     border-radius: 21px;
     background: #ecf9e9;
@@ -157,7 +158,7 @@ const Styled = {
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    :first-child {
+    :first-of-type {
       margin-right: 50px;
     }
   `,

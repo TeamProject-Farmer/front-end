@@ -22,7 +22,6 @@ export interface InputFieldProps {
   setValue?: UseFormSetValue<FieldValues>;
   trigger?: UseFormTrigger<FieldValues>;
   setShowShippingMsgInput?: React.Dispatch<React.SetStateAction<boolean>>;
-  defaultValue?: string | string[];
 }
 
 export interface PaymentInputProps {
@@ -73,11 +72,11 @@ export interface CartItem {
 }
 
 export interface OrderPayload {
-  defaultAddr: boolean;
   productList: CartItem[];
   selectedMethod: PayMethod;
   totalAmount: number;
   deliveryInfo: DeliveryInfo;
+  point: number | undefined;
 }
 
 export interface OrderProduct {
@@ -225,9 +224,24 @@ export interface DeliveryInfo {
   phoneNumber: string;
   memo: string;
   selfMemo: string;
+  defaultAddr: boolean;
   // name: string;
   // postCode: string;
   // basicAddress: string;
   // detailAddress: string;
   // mobile: string;
+}
+
+export interface ResultData {
+  name: string;
+  phoneNumber: string;
+  address: string;
+  paymentPrice: number;
+  orderedDate: string;
+  orderNumber: string;
+}
+
+export interface ProcessPaymentResponse {
+  response: RequestPayResponse;
+  resultInfo: ResultData;
 }

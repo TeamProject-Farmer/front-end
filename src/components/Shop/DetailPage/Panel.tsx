@@ -6,10 +6,7 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import { getDetail } from 'src/apis/shop/product';
 import { getReview, getReviewStar } from 'src/apis/shop/review';
-import {
-  selectOptionProps,
-  OptionBoxProps,
-} from 'src/types/shop/types';
+import { selectOptionProps, OptionBoxProps } from 'src/types/shop/types';
 import handlePrice from 'src/utils/shop/handlePrice';
 import NoProduct from './ContentWrapper/NoProduct';
 import TotalStarGauge from '@components/Shop/Common/gauge/TotalStarGauge';
@@ -32,13 +29,13 @@ const Panel = (props: OptionBoxProps) => {
   const [totalStar, setTotalStar] = useState(0);
   const [options, setOptions] = useState<selectOptionProps[]>([]);
   const [noProduct, setNoProduct] = useState<boolean>(false);
-  
+
   const handleDetailData = async () => {
     try {
       const response = await getDetail(productId);
       setOptions(response.options);
       setName(response.name);
-      if(response.thumbnailImg) setThumbnailImg(response.thumbnailImg);
+      if (response.thumbnailImg) setThumbnailImg(response.thumbnailImg);
       setDiscountRate(response.discountRate);
       setPrice(handlePrice(response.price));
     } catch (err) {

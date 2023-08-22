@@ -13,14 +13,13 @@ import Payment from '@components/Order/Payment';
 import { useForm } from 'react-hook-form';
 import usePayment from 'src/hooks/order/usePayment';
 import processPayment from 'src/utils/order/processPayment';
-import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
 import getTotalPrice from 'src/utils/order/getTotalPrice';
+import { useRouter } from 'next/router';
 
 const OrderPage: NextPageWithLayout = () => {
   const selectedCart = (state: RootState) => state.selectedCart;
-
   const {
     payNowDisabled,
     totalAmount,
@@ -28,8 +27,8 @@ const OrderPage: NextPageWithLayout = () => {
     setSelectedMethod,
     getTotalAmount,
     handleAgreementChange,
-    defaultAddr,
-    handleDefaultAdd,
+    getUsedPoint,
+    point,
   } = usePayment();
   //react hook form
   const { handleSubmit, setValue, trigger, control } = useForm();
@@ -42,7 +41,7 @@ const OrderPage: NextPageWithLayout = () => {
   const totalPrice = getTotalPrice(productList);
 
   // 결제하기 버튼 클릭 시
-  const onSubmit = (deliveryInfo: DeliveryInfo) => {
+  const onSubmit = async (deliveryInfo: DeliveryInfo) => {
     console.log(deliveryInfo);
 
     if (selectedMethod === undefined) {
@@ -55,26 +54,31 @@ const OrderPage: NextPageWithLayout = () => {
       return;
     }
 
-    processPayment({
-      defaultAddr,
-      productList,
-      selectedMethod,
-      totalAmount,
-      deliveryInfo,
-    });
+    try {
+      const { resultInfo } = await processPayment({
+        productList,
+        selectedMethod,
+        totalAmount,
+        deliveryInfo,
+        point,
+      });
+      const { orderNumber } = resultInfo;
+      router.push({
+        pathname: '/order/result',
+        query: {
+          orderNumber,
+        },
+      });
+    } catch (error) {
+      alert(`결제 실패: ${error}`);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Styled.Wrapper>
         {/* 배송지 */}
-        <Delivery
-          control={control}
-          setValue={setValue}
-          trigger={trigger}
-          defaultAddress={defaultAddr}
-          onChange={handleDefaultAdd}
-        />
+        <Delivery control={control} setValue={setValue} trigger={trigger} />
         {/* 주문상품 */}
         <InputGroup title="주문상품">
           <Styled.InnerPaddingWrapper caption="product">
@@ -83,9 +87,9 @@ const OrderPage: NextPageWithLayout = () => {
         </InputGroup>
         {/* 적립금/쿠폰, 결제금액 */}
         <Payment
-          control={control}
           totalPrice={totalPrice}
           getTotalAmount={getTotalAmount}
+          getUsedPoint={getUsedPoint}
         />
         {/* 결제 수단 */}
         <PayMethod
