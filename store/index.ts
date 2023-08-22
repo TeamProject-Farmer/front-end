@@ -46,7 +46,7 @@ const rootReducer = (
 ): CombinedState<RootState> => {
   if (action.type === HYDRATE) return { ...state, ...action.payload };
   const combinedReducer = combineReducers({
-    user: userSlice,
+    user: userSlice.reducer,
     cartIndex: cartIndexSlice,
     selectedCart: selectedCartSlice,
     banner: bannerSlice,
@@ -76,3 +76,11 @@ export default store;
 export const wrapper = createWrapper<Store<RootState>>(() => store);
 
 export const persistor = persistStore(store);
+
+export const setAccessToken = (newAccessToken: string) => {
+  store.dispatch(userSlice.actions.setAccessToken(newAccessToken));
+};
+
+export const setRefreshToken = (newRefreshToken: string) => {
+  store.dispatch(userSlice.actions.setRefreshToken(newRefreshToken));
+};

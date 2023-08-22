@@ -2,7 +2,7 @@ import React from 'react';
 import { Styled } from '@components/Mypage/styles';
 import { SearchOptionProps } from 'src/types/mypage/types';
 import { timeIntervals } from 'src/utils/mypage/orderTimeList';
-import { useFormatDate } from 'src/hooks/formatDate';
+import { useFormatDate } from 'src/utils/order/formatDate';
 
 const SearchOption = ({
   setSelectedDateRange,

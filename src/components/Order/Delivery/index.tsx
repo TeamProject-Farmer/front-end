@@ -87,7 +87,7 @@ const Delivery = ({ control, setValue, trigger }) => {
             caption="shippingMsg"
           />
           {showShippingMsgInput && (
-            <InputField control={control} caption="selfMsg" />
+            <InputField control={control} caption="selfMemo" />
           )}
           <InputField control={control} caption="defaultAddr" />
         </Styled.InnerPaddingWrapper>

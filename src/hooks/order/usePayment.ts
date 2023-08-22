@@ -12,6 +12,12 @@ const usePayment = () => {
   const [paySuccess, setPaySuccess] = useState<boolean>();
   // 사용된 포인트
   const [point, setPoint] = useState<number>();
+  // 사용된 쿠폰
+  const [couponId, setCouponId] = useState<number>();
+
+  const getUsedCoupon = (couponId: number) => {
+    setCouponId(couponId);
+  };
 
   const getUsedPoint = (point: number) => {
     setPoint(point);
@@ -39,6 +45,8 @@ const usePayment = () => {
     setPaySuccess,
     getUsedPoint,
     point,
+    getUsedCoupon,
+    couponId,
   };
 };
 

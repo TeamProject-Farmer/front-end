@@ -53,7 +53,7 @@ const generateOrderPayload = ({
     addressDetail,
     phoneNumber,
     memo,
-    selfMemo: memo !== 'text' ? '' : selfMemo,
+    selfMemo: memo === 'TEXT' ? selfMemo : '',
     defaultAddr,
     orderNumber,
     orderTotalPrice: totalAmount + 2500,

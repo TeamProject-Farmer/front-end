@@ -77,6 +77,7 @@ export interface OrderPayload {
   totalAmount: number;
   deliveryInfo: DeliveryInfo;
   point: number | undefined;
+  couponId?: number;
 }
 
 export interface OrderProduct {

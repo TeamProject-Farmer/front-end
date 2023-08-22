@@ -1,46 +1,59 @@
 import { useState, useEffect } from 'react';
-import { getMemberCoupon } from 'src/apis/order/order';
-import { getMemberPoint } from 'src/apis/order/order';
+import { getMemberCoupon, getMemberPoint } from 'src/apis/order/order';
 import { Coupon } from 'src/types/order/types';
 
 const useDiscount = (orderedPrice: number) => {
-  const [coupon, setCoupon] = useState<Coupon[]>();
   const [point, setPoint] = useState<number>();
   const [usedPoint, setUsedPoint] = useState<number>();
 
-  useEffect(() => {
-    // 적립금 데이터 불러오기
-    getMemberPoint().then(res => {
-      // console.log('point', res);
-      setPoint(res);
-      setUsedPoint(res);
-    });
-    // 쿠폰 데이터 불러오기
-    getMemberCoupon().then(res => setCoupon(res));
-  }, []);
-
-  // 쿠폰이 선택되었을 때
+  const [coupon, setCoupon] = useState<Coupon[]>();
   const [selectedCouponId, setSelectedCouponId] = useState<number>(0);
   const [selectedCoupon, setSelectedCoupon] = useState<Coupon | null>();
+
   const [disabledCouponBtn, setDisabledCouponBtn] = useState(false);
   const [disabledPointBtn, setDisabledPointBtn] = useState(false);
   const [discountedPrice, setDiscountedPrice] = useState<number>(0);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [pointData, couponData] = await Promise.all([
+          getMemberPoint(),
+          getMemberCoupon(),
+        ]);
+        setPoint(pointData);
+        setUsedPoint(pointData);
+        setCoupon(couponData);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  // 쿠폰이 선택되었을 때
   useEffect(() => {
     if (!coupon) return;
 
     const selectedOption = coupon.find(
       coupon => coupon.couponId === selectedCouponId,
     );
-    if (discountedPrice) {
-      setDisabledPointBtn(false);
-      setDisabledCouponBtn(false);
-    }
     setSelectedCoupon(selectedOption || null);
-    setDisabledPointBtn(selectedOption ? true : false);
+    setDisabledPointBtn(!!selectedOption);
   }, [selectedCouponId, coupon]);
 
   // 쿠폰 선택할 때
+  useEffect(() => {
+    if (selectedCoupon === null) {
+      setDiscountedPrice(0);
+    } else if (selectedCoupon?.couponPolicy === 'FIXED') {
+      setDiscountedPrice(selectedCoupon.fixedPrice);
+    } else if (selectedCoupon?.couponPolicy === 'RATE') {
+      const price = orderedPrice * (selectedCoupon.rateAmount / 100);
+      setDiscountedPrice(price);
+    }
+  }, [selectedCoupon, orderedPrice]);
+
   const handleSelectedCoupon = (
     event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
@@ -60,20 +73,20 @@ const useDiscount = (orderedPrice: number) => {
 
   // 최종 할인된 가격 계산
   const calculateDiscountedCouponPrice = (fullPrice: number) => {
-    if (selectedCoupon === null) {
-      setDiscountedPrice(0);
-    }
-    if (selectedCoupon && selectedCoupon.couponPolicy === 'FIXED') {
-      setDiscountedPrice(selectedCoupon.fixedPrice);
-    } else if (selectedCoupon && selectedCoupon.couponPolicy === 'RATE') {
-      const price = fullPrice * (selectedCoupon.rateAmount / 100);
-      setDiscountedPrice(price);
-    }
+    // if (selectedCoupon === null) {
+    //   setDiscountedPrice(0);
+    // }
+    // if (selectedCoupon && selectedCoupon.couponPolicy === 'FIXED') {
+    //   setDiscountedPrice(selectedCoupon.fixedPrice);
+    // } else if (selectedCoupon && selectedCoupon.couponPolicy === 'RATE') {
+    //   const price = fullPrice * (selectedCoupon.rateAmount / 100);
+    //   setDiscountedPrice(price);
+    // }
   };
 
-  useEffect(() => {
-    calculateDiscountedCouponPrice(orderedPrice);
-  }, [selectedCoupon]);
+  // useEffect(() => {
+  //   calculateDiscountedCouponPrice(orderedPrice);
+  // }, [selectedCoupon]);
 
   const calculateDiscountedPointPrice = () => {
     let updatedDiscountedPrice = usedPoint;
@@ -99,13 +112,13 @@ const useDiscount = (orderedPrice: number) => {
   return {
     coupon,
     usedPoint,
+    selectedCouponId,
     handlePointChange,
     handleSelectedCoupon,
     disabledPointBtn,
     disabledCouponBtn,
     discountedPrice,
     finalPrice,
-    calculateDiscountedCouponPrice,
     calculateDiscountedPointPrice,
   };
 };

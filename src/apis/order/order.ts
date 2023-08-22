@@ -7,6 +7,17 @@ export const getMemberCoupon = async () => {
   return response.data;
 };
 
+// 쿠폰 삭제
+export const postCouponDel = async (memberCouponId: number) => {
+  return request.post(
+    '/member/coupon/del',
+    {},
+    {
+      params: { memberCouponId },
+    },
+  );
+};
+
 // 적립금 조회
 export const getMemberPoint = async () => {
   const response = await request.post('/member/point');

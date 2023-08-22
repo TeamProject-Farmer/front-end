@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Layout from '@pages/layout';
 import NestedLayout from '@components/Search/Layout';
 import SearchContainer from '@components/Search/SearchContainer';
@@ -25,7 +25,7 @@ const SearchPage: NextPageWithLayout = () => {
     getRecentSearch(),
   );
 
-  console.log('recentSearchWord', recentSearchWord);
+  // console.log('recentSearchWord', recentSearchWord);
 
   //검색 input value값 관리
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

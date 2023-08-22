@@ -31,7 +31,6 @@ const PaymentInput = ({
                       <Styled.Option
                         key={coupon.couponId}
                         value={coupon.couponId}
-                        onChange={getDiscountedPrice}
                       >
                         {coupon.name}
                       </Styled.Option>

@@ -4,7 +4,6 @@ import Plant from '../../Common/Product';
 import { ProductProps } from 'src/types/common/types';
 
 const SearchContent = ({ searchedWord, searchResult }) => {
-  console.log('searchResult', searchResult);
   const noResult = !searchResult || searchResult.length === 0;
   return (
     <Styled.Wrapper>
@@ -16,7 +15,6 @@ const SearchContent = ({ searchedWord, searchResult }) => {
         </Styled.NoResult>
       )}
       <Styled.Plants>
-        {/* 로딩 추가 */}
         {searchResult &&
           searchResult?.map((plant: ProductProps, index: number) => (
             <Plant
