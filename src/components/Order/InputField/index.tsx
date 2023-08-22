@@ -27,7 +27,6 @@ const InputField = ({
   setValue,
   trigger,
   setShowShippingMsgInput,
-  defaultValue,
 }: InputFieldProps) => {
   // 배송 메시지 옵션
   const [shippingMsgOptions, setShippingMsgOptions] = useState<ShippingMsg[]>();
@@ -85,7 +84,10 @@ const InputField = ({
                     <Styled.Input
                       type="text"
                       {...field}
-                      value={field.value ? field.value : defaultValue}
+                      value={field.value ? field.value : ''}
+                      onClick={event => {
+                        console.log(event.target);
+                      }}
                     />
                     {errorMessage(fieldState)}
                   </>
@@ -107,11 +109,7 @@ const InputField = ({
                     <Styled.Input
                       type="text"
                       {...field}
-                      value={
-                        field.value
-                          ? formatPhoneNumber(field.value)
-                          : defaultValue
-                      }
+                      value={field.value ? field.value : ''}
                       onChange={(
                         event: React.ChangeEvent<HTMLInputElement>,
                       ) => {
@@ -138,13 +136,7 @@ const InputField = ({
                     <Styled.FlexWrapper>
                       <Styled.Input
                         {...field}
-                        value={
-                          field.value
-                            ? field.value
-                            : defaultValue
-                            ? defaultValue[0]
-                            : ''
-                        }
+                        value={field.value ? field.value : ''}
                         readOnly
                         placeholder="우편번호"
                         width={250}
@@ -163,13 +155,7 @@ const InputField = ({
                   <>
                     <Styled.Input
                       {...field}
-                      value={
-                        field.value
-                          ? field.value
-                          : defaultValue
-                          ? defaultValue[1]
-                          : ''
-                      }
+                      value={field.value ? field.value : ''}
                       placeholder="기본주소"
                     />
                     {errorMessage(fieldState)}
@@ -184,13 +170,7 @@ const InputField = ({
                   <>
                     <Styled.Input
                       {...field}
-                      value={
-                        field.value
-                          ? field.value
-                          : defaultValue
-                          ? defaultValue[2]
-                          : ''
-                      }
+                      value={field.value ? field.value : ''}
                       placeholder="상세주소"
                     />
                     {errorMessage(fieldState)}

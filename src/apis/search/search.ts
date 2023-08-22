@@ -13,7 +13,7 @@ export const postSearch = async (
       params: { searchWord, sortSearchCond },
     },
   );
-  console.log('api', response.data.searchProduct.content);
+  // console.log('api', response.data.searchProduct.content);
   return response.data;
 };
 

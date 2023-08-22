@@ -22,7 +22,6 @@ export interface InputFieldProps {
   setValue?: UseFormSetValue<FieldValues>;
   trigger?: UseFormTrigger<FieldValues>;
   setShowShippingMsgInput?: React.Dispatch<React.SetStateAction<boolean>>;
-  defaultValue?: string | string[];
 }
 
 export interface PaymentInputProps {

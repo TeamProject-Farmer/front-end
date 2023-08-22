@@ -96,7 +96,7 @@ const Styled = {
     }
   `,
   OrderData: styled.ul`
-    /* width: 455px; */
+    width: 470px;
     height: 42px;
     border-radius: 21px;
     background: #ecf9e9;
