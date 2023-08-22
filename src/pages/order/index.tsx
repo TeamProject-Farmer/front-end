@@ -27,8 +27,8 @@ const OrderPage: NextPageWithLayout = () => {
     setSelectedMethod,
     getTotalAmount,
     handleAgreementChange,
-    defaultAddr,
-    handleDefaultAdd,
+    getUsedPoint,
+    point,
   } = usePayment();
   //react hook form
   const { handleSubmit, setValue, trigger, control } = useForm();
@@ -60,6 +60,7 @@ const OrderPage: NextPageWithLayout = () => {
         selectedMethod,
         totalAmount,
         deliveryInfo,
+        point,
       });
       const { orderNumber } = resultInfo;
       router.push({
@@ -77,13 +78,7 @@ const OrderPage: NextPageWithLayout = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <Styled.Wrapper>
         {/* 배송지 */}
-        <Delivery
-          control={control}
-          setValue={setValue}
-          trigger={trigger}
-          defaultAddress={defaultAddr}
-          onChange={handleDefaultAdd}
-        />
+        <Delivery control={control} setValue={setValue} trigger={trigger} />
         {/* 주문상품 */}
         <InputGroup title="주문상품">
           <Styled.InnerPaddingWrapper caption="product">
@@ -91,7 +86,11 @@ const OrderPage: NextPageWithLayout = () => {
           </Styled.InnerPaddingWrapper>
         </InputGroup>
         {/* 적립금/쿠폰, 결제금액 */}
-        <Payment totalPrice={totalPrice} getTotalAmount={getTotalAmount} />
+        <Payment
+          totalPrice={totalPrice}
+          getTotalAmount={getTotalAmount}
+          getUsedPoint={getUsedPoint}
+        />
         {/* 결제 수단 */}
         <PayMethod
           selectedMethod={selectedMethod}

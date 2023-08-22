@@ -6,6 +6,7 @@ const generateOrderPayload = ({
   selectedMethod,
   totalAmount,
   deliveryInfo,
+  point,
 }: OrderPayload) => {
   // 주문번호
   const orderNumber = generateOrderNumber();
@@ -44,7 +45,7 @@ const generateOrderPayload = ({
     buyer_postcode: zipcode,
   };
 
-  const data = {
+  const dbData = {
     orderProduct,
     username,
     address,
@@ -58,10 +59,10 @@ const generateOrderPayload = ({
     orderTotalPrice: totalAmount + 2500,
     totalQuantity: 1,
     payMethod: selectedMethod.method,
-    point: 0,
+    point: point !== undefined ? point : 0,
   };
 
-  return { orderData, data };
+  return { orderData, dbData };
 };
 
 export default generateOrderPayload;

@@ -11,15 +11,17 @@ const processPayment = async ({
   selectedMethod,
   totalAmount,
   deliveryInfo,
+  point,
 }: OrderPayload): Promise<ProcessPaymentResponse> => {
   const { IMP } = window;
   IMP.init(process.env.NEXT_PUBLIC_IMP_UID);
 
-  const { orderData, data } = generateOrderPayload({
+  const { orderData, dbData } = generateOrderPayload({
     productList,
     selectedMethod,
     totalAmount,
     deliveryInfo,
+    point,
   });
 
   return new Promise(async (resolve, reject) => {
@@ -27,7 +29,7 @@ const processPayment = async ({
       const { paid_amount, error_msg, imp_uid } = response;
       const verifyRes = await postVerifyIamport(imp_uid, orderData);
       if (verifyRes.amount === paid_amount) {
-        const resultInfo = await postOrders(data);
+        const resultInfo = await postOrders(dbData);
         resolve({ response, resultInfo });
       } else {
         reject(error_msg);

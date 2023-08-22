@@ -76,6 +76,7 @@ export interface OrderPayload {
   selectedMethod: PayMethod;
   totalAmount: number;
   deliveryInfo: DeliveryInfo;
+  point: number | undefined;
 }
 
 export interface OrderProduct {
