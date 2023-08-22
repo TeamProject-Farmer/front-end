@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import heart from '@assets/images/shop/optionBoxHeart.svg';
 import arrow from '@assets/images/shop/optionArrow.svg';
-import { getDetail } from 'src/apis/shop/product';
+import { getDetail, postCart } from 'src/apis/shop/product';
 import {
   OptionBoxProps,
   selectOptionProps,
@@ -24,6 +24,11 @@ const OptionBox = (props: OptionBoxProps) => {
     const response = await getDetail(productId);
     setOptions(response.options);
   };
+  const handleCartData = async() => {
+    let optionId = options[0].id;
+    let count = 1;
+    const response = await postCart({productId: productId.toString(), optionId: optionId.toString() , count: count.toString()});
+  };
   const handleResultPrice = () => {
     if(selectList.length > 0) return  selectPrice+'원'
     else return '0 원'
@@ -39,6 +44,7 @@ const OptionBox = (props: OptionBoxProps) => {
     ]);
     setSelectPrice(originPrice+item.optionPrice)
   };
+  
   if (options.length <= 0) {
     setOptions([{ id: 0, optionName: '단일 옵션입니다.', optionPrice: 0 }]);
   }
@@ -82,7 +88,7 @@ const OptionBox = (props: OptionBoxProps) => {
         </Styled.TotalPriceWrapper>
         <Styled.ButtonWrapper>
           <button>구매하기</button>
-          <button>장바구니</button>
+          <button onClick={()=>handleCartData()}>장바구니</button>
         </Styled.ButtonWrapper>
       </Styled.PannelWrapper>
     );
