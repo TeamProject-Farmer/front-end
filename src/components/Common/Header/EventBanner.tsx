@@ -36,6 +36,7 @@ const Styled = {
     background-color: ${theme.colors.green1};
     color: #ffffff;
     font-size: 18px;
+    text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -4,25 +4,39 @@ import Icon from '../Icon';
 import { ProductProps } from '../type';
 
 const Product = (props: ProductProps) => {
-  const { thumbnailImg, name, price, discountRate, reviewCount, averageStarRating} = props;
+  const {
+    thumbnailImg,
+    name,
+    price,
+    discountRate,
+    reviewCount,
+    averageStarRating,
+  } = props;
 
   return (
     <Styled.Wrapper>
       <Styled.ImgBox>
         <Image
-          className='imageStyle'
+          className="imageStyle"
           src={thumbnailImg}
           alt={name}
           fill={true}
-          sizes='100%, 100%'
+          sizes="100%, 100%"
           priority={true}
         />
       </Styled.ImgBox>
       <Styled.Content>
         <Styled.Title>{name}</Styled.Title>
         <Styled.PriceBox>
-          <Styled.Discount>{discountRate}%</Styled.Discount>
           <Styled.Price>{price}</Styled.Price>
+          <Styled.Discount>{discountRate}%</Styled.Discount>
+          <Styled.EventBox>
+            {discountRate ? (
+              <Styled.SpecialPrice>특가상품</Styled.SpecialPrice>
+            ) : (
+              <></>
+            )}
+          </Styled.EventBox>
         </Styled.PriceBox>
         <Styled.ReviewBox>
           <Styled.Star>
@@ -31,9 +45,7 @@ const Product = (props: ProductProps) => {
           </Styled.Star>
           <Styled.Review>리뷰 {reviewCount}</Styled.Review>
         </Styled.ReviewBox>
-        <Styled.EventBox>
-          {discountRate ? <Styled.SpecialPrice>특가상품</Styled.SpecialPrice> : <></>}
-        </Styled.EventBox>
+
         <Styled.Title />
       </Styled.Content>
     </Styled.Wrapper>

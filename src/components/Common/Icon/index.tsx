@@ -1,7 +1,7 @@
 import React from 'react';
-import { IIconProps } from 'src/types/common/types';
+import { IconProps } from 'src/types/common/types';
 
-const Icon = ({ name, width, height, onClick }: IIconProps) => {
+const Icon = ({ name, width, height, onClick }: IconProps) => {
   return (
     <svg
       onClick={onClick}
