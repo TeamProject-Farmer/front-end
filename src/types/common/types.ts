@@ -10,14 +10,14 @@ export interface Category {
   imgUrl: string;
 }
 
-export interface IIconProps {
+export interface IconProps {
   name: IconName | string;
   width: number;
   height: number;
   onClick?: () => void;
 }
 
-export interface IProductProps {
+export interface ProductProps {
   thumbnailImg: string;
   name: string;
   price: number;

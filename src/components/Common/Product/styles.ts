@@ -45,9 +45,7 @@ const Styled = {
     flex-direction: column;
     gap: 4.5px;
     padding: 13.46px 18.92px;
-    /* 특가 태그가 없는 경우 사이즈가 줄어드는데 그로 인해 상품 별 사이즈가 제각각이라 해결 필요함 */
-    min-height: 134px;
-    
+    min-height: 110px;
   `,
   Title: styled.p`
     font-size: 16px;
