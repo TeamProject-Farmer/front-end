@@ -2,6 +2,8 @@ import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { setOrderData } from 'store/reducers/orderDataSlice';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import { getDetail } from 'src/apis/shop/product';
@@ -18,9 +20,11 @@ import boxIcon from '@assets/images/shop/boxIcon.svg';
 import down from '@assets/images/shop/downloadIcon.svg';
 
 const Panel = (props: OptionBoxProps) => {
-  const { isPanel, selectList, setSelectList, selectPrice, setSelectPrice, setOriginPrice, originPrice} = props;
+  const { isPanel, selectList, setSelectList, selectPrice, setSelectPrice } =
+    props;
 
   const router = useRouter();
+  const dispatch = useDispatch();
   const productId = Number(router.query?.detail) || 1;
   const [thumbnailImg, setThumbnailImg] = useState<string>();
   const [name, setName] = useState<string>();
@@ -32,13 +36,23 @@ const Panel = (props: OptionBoxProps) => {
 
   const handleDetailData = async () => {
     try {
-      const response = await getDetail(productId);
-      setOptions(response.options);
-      setName(response.name);
-      if (response.thumbnailImg) setThumbnailImg(response.thumbnailImg);
-      setDiscountRate(response.discountRate);
-      setPrice(handlePrice(response.price));
-      setOriginPrice(response.price);
+      const response = await getDetail(productId).then(data => {
+        setOptions(data.options);
+        setName(data.name);
+        setThumbnailImg(data.thumbnailImg);
+        setPrice(handlePrice(data.price));
+        setDiscountRate(data.discountRate);
+        if (data.name != undefined)
+          dispatch(
+            setOrderData([
+              {
+                imgUrl: data.thumbnailImg,
+                productName: data.name,
+                productPrice: data.price,
+              },
+            ]),
+          );
+      });
     } catch (err) {
       if (err.response.data.message === '해당 상품이 존재하지 않습니다.')
         setNoProduct(true);
@@ -70,7 +84,7 @@ const Panel = (props: OptionBoxProps) => {
     handleDetailData();
     handleReviewData();
     handleReviewStar();
-  }, [productId, router]);
+  }, [productId, router, selectList]);
 
   return (
     <>
@@ -159,8 +173,6 @@ const Panel = (props: OptionBoxProps) => {
                 selectList={selectList}
                 setSelectPrice={setSelectPrice}
                 selectPrice={selectPrice}
-                setOriginPrice={setOriginPrice}
-                originPrice={originPrice}
               />
             </Styled.ContentWrapper>
           </Styled.InnerBox>

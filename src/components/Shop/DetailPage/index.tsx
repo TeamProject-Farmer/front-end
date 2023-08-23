@@ -11,7 +11,6 @@ import ContentWrapper from './ContentWrapper';
 const DetailPage = () => {
   const [selectList, setSelectList] = useState([]);
   const [selectPrice, setSelectPrice] = useState<number>();
-  const [originPrice, setOriginPrice] = useState<number>();
 
   return (
     <Styled.Wrapper>
@@ -21,8 +20,6 @@ const DetailPage = () => {
         selectList={selectList}
         selectPrice={selectPrice}
         setSelectPrice={setSelectPrice}
-        originPrice={originPrice}
-        setOriginPrice={setOriginPrice}
       />
       <PreviewPhoto />
       <SortBar

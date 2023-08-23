@@ -1,38 +1,78 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import heart from '@assets/images/shop/optionBoxHeart.svg';
-import arrow from '@assets/images/shop/optionArrow.svg';
+import { setSelectedOrder } from 'store/reducers/orderSlice';
+import { orderDataSelector } from 'src/types/shop/types';
+
 import { getDetail, postCart } from 'src/apis/shop/product';
 import {
   OptionBoxProps,
   selectOptionProps,
   selectListProps,
+  SelectedOrderProps,
 } from 'src/types/shop/types';
+import heart from '@assets/images/shop/optionBoxHeart.svg';
+import arrow from '@assets/images/shop/optionArrow.svg';
 
 const OptionBox = (props: OptionBoxProps) => {
-  const { isPanel, selectList, setSelectList, selectPrice, setSelectPrice, originPrice} = props;
+  const { isPanel, selectList, setSelectList, selectPrice, setSelectPrice } =
+    props;
 
   const router = useRouter();
+  const dispatch = useDispatch();
+  const orderData = useSelector(orderDataSelector);
+
   const productId = Number(router.query?.detail) || 1;
   const [isShowOptions, setShowOptions] = useState(false);
   const [options, setOptions] = useState<selectOptionProps[]>([]);
   const [lastOption, setLastOption] = useState<string>('상품을 선택하세요.');
 
+  //옵션 데이터 받아오기
   const handleDetailData = async () => {
     const response = await getDetail(productId);
     setOptions(response.options);
   };
-  const handleCartData = async() => {
+
+  //장바구니 추가
+  const handleCartData = async () => {
     let optionId = options[0].id;
     let count = 1;
-    const response = await postCart({productId: productId.toString(), optionId: optionId.toString() , count: count.toString()});
+    const response = await postCart({
+      productId: productId.toString(),
+      optionId: optionId.toString(),
+      count: count.toString(),
+    });
   };
+
+  //구매하기 데이터
+  const handleOrder = () => {
+    dispatch(
+      setSelectedOrder([
+        {
+          productId,
+          imgUrl: orderData[0].imgUrl,
+          productName: orderData[0].productName,
+          optionId: selectList[0].id,
+          optionName: selectList[0].optionName,
+          count: 1,
+          productPrice: selectPrice,
+        },
+      ]),
+    );
+    // router.push('/order');
+    router.push({
+      pathname: '/order',
+      query: 'fromDetail'
+    });
+  };
+
   const handleResultPrice = () => {
-    if(selectList.length > 0) return  selectPrice+'원'
-    else return '0 원'
-  }
+    if (selectList.length > 0) return selectPrice + '원';
+    else return '0 원';
+  };
+
   const handleSelectList = (item: selectListProps) => {
     setSelectList([
       ...selectList.filter(i => i.id != item.id),
@@ -42,9 +82,9 @@ const OptionBox = (props: OptionBoxProps) => {
         optionPrice: item.optionPrice,
       },
     ]);
-    setSelectPrice(originPrice+item.optionPrice)
+    setSelectPrice(orderData[0].productPrice + item.optionPrice);
   };
-  
+
   if (options.length <= 0) {
     setOptions([{ id: 0, optionName: '단일 옵션입니다.', optionPrice: 0 }]);
   }
@@ -87,8 +127,8 @@ const OptionBox = (props: OptionBoxProps) => {
           <div>{handleResultPrice()}</div>
         </Styled.TotalPriceWrapper>
         <Styled.ButtonWrapper>
-          <button>구매하기</button>
-          <button onClick={()=>handleCartData()}>장바구니</button>
+          <button onClick={() => handleOrder()}>구매하기</button>
+          <button onClick={() => handleCartData()}>장바구니</button>
         </Styled.ButtonWrapper>
       </Styled.PannelWrapper>
     );
@@ -130,8 +170,8 @@ const OptionBox = (props: OptionBoxProps) => {
             <div>{handleResultPrice()}</div>
           </Styled.TotalPrice>
           <Styled.Buttons>
-            <button>장바구니</button>
-            <button>바로구매</button>
+            <button onClick={() => handleCartData()}>장바구니</button>
+            <button onClick={() => handleOrder()}>바로구매</button>
           </Styled.Buttons>
         </Styled.Lower>
       </Styled.Wrapper>
