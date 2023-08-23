@@ -31,6 +31,16 @@ const nextConfig = {
         destination: '/',
         permanent: true,
       },
+      {
+        source: '/mypage',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/mypage/:slug',
+        destination: '/',
+        permanent: true,
+      },
     ];
   },
 };
