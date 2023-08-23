@@ -9,24 +9,23 @@ const SearchContent = ({ searchedWord, searchResult }) => {
     <Styled.Wrapper>
       {noResult && (
         <Styled.NoResult>
-          {!searchResult
-            ? '검색결과가 존재하지 않습니다'
-            : `'${searchedWord}'에 대한 검색결과가 존재하지 않습니다`}
+          {searchResult
+            ? `'${searchedWord}'에 대한 검색결과가 존재하지 않습니다`
+            : '검색결과가 존재하지 않습니다'}
         </Styled.NoResult>
       )}
       <Styled.Plants>
-        {searchResult &&
-          searchResult?.map((plant: ProductProps, index: number) => (
-            <Plant
-              key={index}
-              thumbnailImg={plant.thumbnailImg}
-              name={plant.name}
-              discountRate={plant.discountRate}
-              price={plant.price}
-              averageStarRating={plant.averageStarRating}
-              reviewCount={plant.reviewCount}
-            />
-          ))}
+        {searchResult?.map((plant: ProductProps, index: number) => (
+          <Plant
+            key={index}
+            thumbnailImg={plant.thumbnailImg}
+            name={plant.name}
+            discountRate={plant.discountRate}
+            price={plant.price}
+            averageStarRating={plant.averageStarRating}
+            reviewCount={plant.reviewCount}
+          />
+        ))}
       </Styled.Plants>
     </Styled.Wrapper>
   );

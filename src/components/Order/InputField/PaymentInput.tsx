@@ -29,8 +29,8 @@ const PaymentInput = ({
                   {couponOptions &&
                     couponOptions.map(coupon => (
                       <Styled.Option
-                        key={coupon.couponId}
-                        value={coupon.couponId}
+                        key={coupon.memberCouponId}
+                        value={coupon.memberCouponId}
                       >
                         {coupon.name}
                       </Styled.Option>

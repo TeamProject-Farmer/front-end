@@ -6,7 +6,7 @@ const ProductList = ({ productList }) => {
   return (
     <Styled.Wrapper>
       {productList &&
-        productList.map((ele: CartItem) => {
+        productList?.map((ele: CartItem) => {
           const { productId, productName, count, productPrice, imgUrl } = ele;
           return (
             <Styled.ProductWrapper key={productId}>

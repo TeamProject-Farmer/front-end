@@ -8,6 +8,7 @@ import {
 
 export interface Coupon {
   couponId: number;
+  memberCouponId: number;
   benefits: string;
   name: string;
   couponPolicy: string;

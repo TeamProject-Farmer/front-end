@@ -25,7 +25,7 @@ const Payment = ({
 
   useEffect(() => {
     getTotalAmount(finalPrice);
-    getUsedPoint(usedPoint);
+    getUsedPoint(selectedCouponId === 0 ? usedPoint : 0);
     getUsedCoupon(selectedCouponId);
   }, [finalPrice]);
 

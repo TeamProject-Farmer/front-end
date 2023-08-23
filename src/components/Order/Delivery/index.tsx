@@ -6,12 +6,11 @@ import { getMemberOrderAddress } from 'src/apis/order/order';
 import { OrderedData } from 'src/types/order/types';
 
 const Delivery = ({ control, setValue, trigger }) => {
-  // 주문 이력이 있는 경우 배송지 선택 라디오 버튼이 보이도록
   const [haveOrdered, setHaveOrdered] = useState<boolean>(false);
   const [orderedData, setOrderedData] = useState<OrderedData>();
-  // 배송 메시지 직접 입력 input
   const [showShippingMsgInput, setShowShippingMsgInput] =
     useState<boolean>(false);
+
   // 최근 배송 목록 불러오기
   useEffect(() => {
     getMemberOrderAddress().then(data => {
@@ -22,7 +21,7 @@ const Delivery = ({ control, setValue, trigger }) => {
     });
   }, []);
 
-  // 라디오 버튼에 따라
+  // 최근 배송 이력이 있는 경우 해당 값을 기본값으로
   useEffect(() => {
     if (haveOrdered) {
       setValue('username', orderedData.username);
@@ -50,9 +49,7 @@ const Delivery = ({ control, setValue, trigger }) => {
                 name="address"
                 id="recentAddress"
                 checked={haveOrdered}
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  setHaveOrdered(event.target.checked);
-                }}
+                onChange={() => setHaveOrdered(true)}
               />
               <label htmlFor="recentAddress">최근 배송지</label>
             </Styled.RadioWrapper>

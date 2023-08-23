@@ -4,7 +4,7 @@ import { ko } from 'date-fns/locale';
 import Search from '@assets/images/mypage/iconSearch.svg';
 import { CalendarProps } from 'src/types/mypage/types';
 import { Styled } from '@components/Mypage/styles';
-import { useFormatDate } from 'src/utils/order/formatDate';
+import { useFormatDate } from 'src/utils/mypage/formatDate';
 
 const Calendar = ({
   selectedDateRange,

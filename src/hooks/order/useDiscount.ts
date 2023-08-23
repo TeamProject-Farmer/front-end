@@ -36,13 +36,12 @@ const useDiscount = (orderedPrice: number) => {
     if (!coupon) return;
 
     const selectedOption = coupon.find(
-      coupon => coupon.couponId === selectedCouponId,
+      coupon => coupon.memberCouponId === selectedCouponId,
     );
     setSelectedCoupon(selectedOption || null);
     setDisabledPointBtn(!!selectedOption);
   }, [selectedCouponId, coupon]);
 
-  // 쿠폰 선택할 때
   useEffect(() => {
     if (selectedCoupon === null) {
       setDiscountedPrice(0);
@@ -70,23 +69,6 @@ const useDiscount = (orderedPrice: number) => {
       setDisabledPointBtn(false);
     }
   };
-
-  // 최종 할인된 가격 계산
-  const calculateDiscountedCouponPrice = (fullPrice: number) => {
-    // if (selectedCoupon === null) {
-    //   setDiscountedPrice(0);
-    // }
-    // if (selectedCoupon && selectedCoupon.couponPolicy === 'FIXED') {
-    //   setDiscountedPrice(selectedCoupon.fixedPrice);
-    // } else if (selectedCoupon && selectedCoupon.couponPolicy === 'RATE') {
-    //   const price = fullPrice * (selectedCoupon.rateAmount / 100);
-    //   setDiscountedPrice(price);
-    // }
-  };
-
-  // useEffect(() => {
-  //   calculateDiscountedCouponPrice(orderedPrice);
-  // }, [selectedCoupon]);
 
   const calculateDiscountedPointPrice = () => {
     let updatedDiscountedPrice = usedPoint;

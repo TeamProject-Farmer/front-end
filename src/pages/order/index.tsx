@@ -32,6 +32,7 @@ const OrderPage: NextPageWithLayout = () => {
     getUsedCoupon,
     couponId,
   } = usePayment();
+
   //react hook form
   const { handleSubmit, setValue, trigger, control } = useForm();
 

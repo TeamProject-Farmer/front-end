@@ -1,7 +1,7 @@
 import axios from 'axios';
 import store from '../../store/index';
 import { setAccessToken, setRefreshToken } from '../../store/index';
-import { postMemberRefresh } from './login/login';
+import { getNewToken } from './login/login';
 
 const request = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_KEY,
@@ -11,9 +11,9 @@ request.interceptors.request.use(
   config => {
     try {
       const accessToken = store.getState().user.accessToken;
-      const refreshToken = store.getState().user.refreshToken;
-      console.log('accessToken', accessToken);
-      console.log('refreshToken', refreshToken);
+      // const refreshToken = store.getState().user.refreshToken;
+      // console.log('accessToken', accessToken);
+      // console.log('refreshToken', refreshToken);
       if (accessToken) {
         config.headers['Authorization'] = `Bearer ${accessToken}`;
       }
@@ -24,6 +24,7 @@ request.interceptors.request.use(
     }
   },
   error => {
+    console.log('에러발생');
     console.error(error);
     return Promise.reject(error);
   },
@@ -47,7 +48,7 @@ request.interceptors.response.use(
         const state = store.getState();
         const refreshToken = state.user.refreshToken;
 
-        const newToken = await postMemberRefresh(refreshToken);
+        const newToken = await getNewToken(refreshToken);
 
         // 재발급 받은 토큰을 저장합니다.
         setAccessToken(newToken.accessToken);
