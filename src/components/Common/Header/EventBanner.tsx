@@ -41,14 +41,13 @@ const Styled = {
     height: 50px;
     color: #ffffff;
     font-size: 18px;
-    /* text-align: center; */
     display: flex;
     align-items: center;
     justify-content: center;
   `,
   CloseBtn: styled.div`
     position: absolute;
-    right: 10px;
+    right: 0px;
     cursor: pointer;
   `,
 };
