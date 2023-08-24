@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import Layout from '@pages/layout';
 import NestedLayout from '@components/Search/Layout';
 import SearchContainer from '@components/Search/SearchContainer';
@@ -6,7 +6,6 @@ import SearchUtils from '@components/Search/SearchUtils';
 import SearchContent from '@components/Search/SearchContent';
 import type { NextPageWithLayout } from '@pages/_app';
 import { ReactElement } from 'react';
-import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
 import { postSearch, getRecentSearch } from 'src/apis/search/search';
@@ -21,17 +20,16 @@ const SearchPage: NextPageWithLayout = () => {
   const [sortOption, setSortOption] = useState<string>('');
   const memberEmail = useSelector((state: RootState) => state.user.email);
 
+  // 최근 검색 기록
   const { data: recentSearchWord } = useQuery([searchResult], () =>
     getRecentSearch(),
   );
 
-  console.log('recentSearchWord', recentSearchWord);
-
-  //검색 input value값 관리
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  // 검색 input value값 관리
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>
     setInputValue(event.target.value);
-  };
 
+  // 검색 input에서 엔터 클릭시 onClick
   const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.code === 'Enter') {
       handleSearchResult();
@@ -60,7 +58,7 @@ const SearchPage: NextPageWithLayout = () => {
         handleChange={handleChange}
         handleClick={handleSearchResult}
         inputValue={inputValue}
-        isLoggedin={memberEmail.length !== 0 ? true : false}
+        isLoggedin={memberEmail.length !== 0}
         recentSearchWord={recentSearchWord}
       />
       <SearchUtils

@@ -32,6 +32,7 @@ export interface Plant {
 }
 
 export interface Review {
+  productId: number;
   memberNickName: string;
   imgUrl: string;
   content: string;

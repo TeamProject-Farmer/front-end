@@ -2,16 +2,20 @@ import { useState } from 'react';
 import { PayMethod } from 'src/types/order/types';
 
 const usePayment = () => {
+  // 사용된 포인트
+  const [point, setPoint] = useState<number>();
+  // 사용된 쿠폰
+  const [couponId, setCouponId] = useState<number>();
   // 최종 주문 금액
   const [totalAmount, setTotalAmount] = useState<number>();
   // 약관동의
   const [payNowDisabled, setPayNowDisabled] = useState<boolean>(false);
   // 결제 방식
   const [selectedMethod, setSelectedMethod] = useState<PayMethod>();
-  // 결제 완료
-  const [paySuccess, setPaySuccess] = useState<boolean>();
-  // 사용된 포인트
-  const [point, setPoint] = useState<number>();
+
+  const getUsedCoupon = (couponId: number) => {
+    setCouponId(couponId);
+  };
 
   const getUsedPoint = (point: number) => {
     setPoint(point);
@@ -36,9 +40,10 @@ const usePayment = () => {
     setSelectedMethod,
     getTotalAmount,
     handleAgreementChange,
-    setPaySuccess,
     getUsedPoint,
     point,
+    getUsedCoupon,
+    couponId,
   };
 };
 

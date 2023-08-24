@@ -14,12 +14,14 @@ const EventBanner = () => {
     <>
       {isOpened && (
         <Link href="/register">
-          <Styled.Event>
-            회원가입 후 최대 2만원 할인 받기
-            <Styled.CloseBtn onClick={() => dispatch(setIsBannerClosed())}>
-              <Icon name="closeBtn" width={26} height={26} />
-            </Styled.CloseBtn>
-          </Styled.Event>
+          <Styled.Wrapper>
+            <Styled.Event>
+              회원가입 후 최대 2만원 할인 받기{' '}
+              <Styled.CloseBtn onClick={() => dispatch(setIsBannerClosed())}>
+                <Icon name="closeBtn" width={26} height={26} />
+              </Styled.CloseBtn>
+            </Styled.Event>
+          </Styled.Wrapper>
         </Link>
       )}
     </>
@@ -29,21 +31,23 @@ const EventBanner = () => {
 export default EventBanner;
 
 const Styled = {
+  Wrapper: styled.div`
+    width: 100%;
+    background-color: ${theme.colors.green1};
+  `,
   Event: styled.div`
     position: relative;
-    width: 100%;
+    width: 1920px;
     height: 50px;
-    background-color: ${theme.colors.green1};
     color: #ffffff;
     font-size: 18px;
-    text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
   `,
   CloseBtn: styled.div`
     position: absolute;
-    right: 10px;
+    right: 0px;
     cursor: pointer;
   `,
 };

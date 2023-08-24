@@ -1,4 +1,8 @@
-import { postVerifyIamport, postOrders } from 'src/apis/order/order';
+import {
+  postVerifyIamport,
+  postOrders,
+  postCouponDel,
+} from 'src/apis/order/order';
 import generateOrderPayload from './generateOrderPayload';
 import {
   OrderPayload,
@@ -12,6 +16,7 @@ const processPayment = async ({
   totalAmount,
   deliveryInfo,
   point,
+  couponId,
 }: OrderPayload): Promise<ProcessPaymentResponse> => {
   const { IMP } = window;
   IMP.init(process.env.NEXT_PUBLIC_IMP_UID);
@@ -23,6 +28,7 @@ const processPayment = async ({
     deliveryInfo,
     point,
   });
+  console.log('dbData', dbData);
 
   return new Promise(async (resolve, reject) => {
     const callback = async (response: RequestPayResponse) => {
@@ -30,6 +36,7 @@ const processPayment = async ({
       const verifyRes = await postVerifyIamport(imp_uid, orderData);
       if (verifyRes.amount === paid_amount) {
         const resultInfo = await postOrders(dbData);
+        postCouponDel(couponId);
         resolve({ response, resultInfo });
       } else {
         reject(error_msg);

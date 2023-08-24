@@ -193,9 +193,8 @@ const InputField = ({
                       const value = event.target.value;
                       value === 'TEXT'
                         ? setShowShippingMsgInput(true)
-                        : setShowShippingMsgInput(false);
-
-                      field.onChange(value);
+                        : setShowShippingMsgInput(false),
+                        field.onChange(value);
                     }}
                   >
                     {shippingMsgOptions &&
@@ -227,7 +226,7 @@ const InputField = ({
               <CheckBoxStyled.Label>기본 배송지로 저장</CheckBoxStyled.Label>
             </CheckBoxStyled.Wrapper>
           ),
-          selfMsg: (
+          selfMemo: (
             <Controller
               name="selfMemo"
               control={control}

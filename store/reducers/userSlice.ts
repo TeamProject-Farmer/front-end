@@ -33,8 +33,20 @@ const userSlice = createSlice({
     clearUser: state => {
       return initialState;
     },
+    setAccessToken: (state, action: PayloadAction<string>) => {
+      return {
+        ...state,
+        accessToken: action.payload,
+      };
+    },
+    setRefreshToken: (state, action: PayloadAction<string>) => {
+      return {
+        ...state,
+        refreshToken: action.payload,
+      };
+    },
   },
 });
 
 export const { setUser, setUserNickname, clearUser } = userSlice.actions;
-export default userSlice.reducer;
+export default userSlice;

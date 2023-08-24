@@ -5,20 +5,15 @@ import { useRouter } from 'next/router';
 
 const NestedLayout = ({ children }: LayoutProps) => {
   const { asPath } = useRouter();
+  const isOrderPath = asPath === '/order';
 
   return (
     <Styled.Wrapper>
       <Styled.FlexWrapper>
-        <Styled.Title>
-          {asPath === '/order' ? '주문/결제' : '주문완료'}
-        </Styled.Title>
+        <Styled.Title>{isOrderPath ? '주문/결제' : '주문완료'}</Styled.Title>
         <Styled.StateBox>
-          <Styled.State colored={asPath === '/order'}>
-            주문결제 &gt;{' '}
-          </Styled.State>
-          <Styled.State colored={asPath === '/order/result'}>
-            주문완료
-          </Styled.State>
+          <Styled.State colored={isOrderPath}>주문결제 &gt; </Styled.State>
+          <Styled.State colored={!isOrderPath}>주문완료</Styled.State>
         </Styled.StateBox>
       </Styled.FlexWrapper>
       {children}

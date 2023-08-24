@@ -15,6 +15,7 @@ const BestReview = ({ bestReview }) => {
             reviewList?.map((review: IReview, index) => (
               <Review
                 key={index}
+                productId={review.productId}
                 memberNickName={review.memberNickName}
                 imgUrl={review.imgUrl}
                 likeCount={review.likeCount}

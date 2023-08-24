@@ -29,7 +29,10 @@ const OrderPage: NextPageWithLayout = () => {
     handleAgreementChange,
     getUsedPoint,
     point,
+    getUsedCoupon,
+    couponId,
   } = usePayment();
+
   //react hook form
   const { handleSubmit, setValue, trigger, control } = useForm();
 
@@ -61,6 +64,7 @@ const OrderPage: NextPageWithLayout = () => {
         totalAmount,
         deliveryInfo,
         point,
+        couponId,
       });
       const { orderNumber } = resultInfo;
       router.push({
@@ -90,6 +94,7 @@ const OrderPage: NextPageWithLayout = () => {
           totalPrice={totalPrice}
           getTotalAmount={getTotalAmount}
           getUsedPoint={getUsedPoint}
+          getUsedCoupon={getUsedCoupon}
         />
         {/* 결제 수단 */}
         <PayMethod

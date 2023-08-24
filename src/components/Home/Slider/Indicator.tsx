@@ -31,6 +31,7 @@ const Style = {
     gap: 154px;
   `,
   List: styled.li<{ selected: boolean }>`
+    cursor: pointer;
     position: relative;
     font-size: 20px;
     font-weight: ${({ selected }) => (selected ? '700' : '400')};
