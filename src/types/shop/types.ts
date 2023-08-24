@@ -34,12 +34,17 @@ export interface OptionBarProps {
   productOption?: string;
 }
 
-
 export interface categoryReduxType {
   name: string;
   id: number;
 }
 
+export interface ProductInfoProps {
+  name: string;
+  totalStar: number;
+  discountRate: number;
+  price: number;
+}
 
 export interface ProductListProps {
   id?: number;
