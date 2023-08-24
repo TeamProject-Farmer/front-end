@@ -11,7 +11,7 @@ import TotalStarGauge from '@components/Shop/Common/gauge/TotalStarGauge';
 import EachStarGauge from '@components/Shop/Common/gauge/EachStarGauge';
 import SingleReview from './SingleReview';
 import StarOption from './StarOption';
-import Pagination from './Pagination';
+import Pagination from '../Pagination';
 import photo from '@assets/images/shop/photoIcon.svg';
 import downArrow from '@assets/images/shop/downArrow1.svg';
 

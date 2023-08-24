@@ -5,25 +5,21 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import { setSelectedOrder } from 'store/reducers/orderSlice';
 import { orderDataSelector } from 'src/types/shop/types';
-
 import { getDetail, postCart } from 'src/apis/shop/product';
 import {
   OptionBoxProps,
   selectOptionProps,
   selectListProps,
-  SelectedOrderProps,
 } from 'src/types/shop/types';
 import heart from '@assets/images/shop/optionBoxHeart.svg';
 import arrow from '@assets/images/shop/optionArrow.svg';
 
 const OptionBox = (props: OptionBoxProps) => {
-  const { isPanel, selectList, setSelectList, selectPrice, setSelectPrice } =
-    props;
+  const { isPanel, selectList, setSelectList, selectPrice, setSelectPrice } = props;
 
   const router = useRouter();
   const dispatch = useDispatch();
   const orderData = useSelector(orderDataSelector);
-
   const productId = Number(router.query?.detail) || 1;
   const [isShowOptions, setShowOptions] = useState(false);
   const [options, setOptions] = useState<selectOptionProps[]>([]);
@@ -401,15 +397,6 @@ const Styled = {
     position: relative;
     display: flex;
     align-items: center;
-    /* &::before {
-      content: '⌵';
-      position: absolute;
-      top: 15px;
-      right: 16px;
-      color: #747474;
-      font-size: 20px;
-      font-weight: 600;
-    } */
   `,
   PanelLabel: styled.label`
     margin-left: 4px;

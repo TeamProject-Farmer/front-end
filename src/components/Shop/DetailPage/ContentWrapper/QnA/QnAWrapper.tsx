@@ -22,6 +22,9 @@ const QnAWrapper = (props: {detailList: QnAProps[]}) => {
   const detailClose = () => {
     setDetailOpen(false);
   };
+  const handleDate = (date: string) => {
+    return date.slice(0, 10)+' '+date.slice(11,19)
+  }
   const handleDetailData = async () => {
     try {
       const response = await getDetailQnA(qnaId);
@@ -72,7 +75,7 @@ const QnAWrapper = (props: {detailList: QnAProps[]}) => {
           <div>
             <div>{handleNickname(item.memberName)}</div>
             <VerticalLine height={15} />
-            <div>{item.qcreatedDate}</div>
+            <div>{handleDate(item.qcreatedDate)}</div>
           </div>
           {item.secretQuestion == 'SECRET' ? (
             <Styled.Question>

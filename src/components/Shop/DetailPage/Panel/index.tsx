@@ -13,7 +13,6 @@ import OptionBox from '../ContentWrapper/OptionBox';
 import ProductInfo from './ProductInfo';
 import PayInfo from './PayInfo';
 
-
 const Panel = (props: OptionBoxProps) => {
   const { selectList, setSelectList, selectPrice, setSelectPrice } = props;
 
@@ -109,7 +108,12 @@ const Panel = (props: OptionBoxProps) => {
               )}
             </Styled.ImageBox>
             <Styled.ContentWrapper>
-              <ProductInfo name={name} totalStar={totalStar} discountRate={discountRate} price={price}/>
+              <ProductInfo
+                name={name}
+                totalStar={totalStar}
+                discountRate={discountRate}
+                price={price}
+              />
               <PayInfo />
               <Styled.VerticalLine />
               <OptionBox
