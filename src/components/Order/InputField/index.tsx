@@ -19,6 +19,7 @@ import { postcodeScriptUrl } from 'react-daum-postcode/lib/loadPostcode';
 import { formatAddress } from 'src/utils/order/getAddressfromDaumPostcode';
 import { getDeliveryMemo } from 'src/apis/order/order';
 import { ControllerFieldState } from 'react-hook-form';
+import shippingMsgOptions from 'src/utils/order/shippingMsgOptions';
 
 const InputField = ({
   label,
@@ -28,12 +29,6 @@ const InputField = ({
   trigger,
   setShowShippingMsgInput,
 }: InputFieldProps) => {
-  // 배송 메시지 옵션
-  const [shippingMsgOptions, setShippingMsgOptions] = useState<ShippingMsg[]>();
-  useEffect(() => {
-    getDeliveryMemo().then(res => setShippingMsgOptions(res));
-  }, []);
-
   // 주소 입력
   const handleComplete = (data: DaumPostcodeData) => {
     const addressData = formatAddress(data);

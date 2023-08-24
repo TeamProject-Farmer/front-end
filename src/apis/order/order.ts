@@ -24,6 +24,7 @@ export const getMemberPoint = async () => {
 // 배송 메모 리스트
 export const getDeliveryMemo = async () => {
   const response = await request.get('member/orders/delivery/memo-list');
+  console.log(response.data);
   return response.data;
 };
 
