@@ -61,7 +61,6 @@ const OptionBox = (props: OptionBoxProps) => {
         },
       ]),
     );
-    // router.push('/order');
     router.push({
       pathname: '/order',
       query: 'fromDetail'
