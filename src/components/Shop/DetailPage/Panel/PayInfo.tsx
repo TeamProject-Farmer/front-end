@@ -1,5 +1,6 @@
 import theme from '@styles/theme';
 import styled from '@emotion/styled';
+import handleShipDay from 'src/utils/shop/handleShipDay';
 import checkIcon from '@assets/images/shop/checkIcon.svg';
 import boxIcon from '@assets/images/shop/boxIcon.svg';
 
@@ -29,12 +30,12 @@ const PayInfo = () => {
               </div>
               <div>
                 <Styled.CheckIcon />
-                <div>제주도/도서산간 지역 3,000원</div>
+                <div>제주도/도서산간 지역 2,500원</div>
               </div>
             </Styled.ShipCheck>
             <Styled.ExpectShip>
               <Styled.BoxIcon />
-              <div>4/26(수)</div>
+              <div>{handleShipDay()}</div>
               <div>도착 예정</div>
             </Styled.ExpectShip>
           </Styled.EachShipContent>
@@ -117,8 +118,8 @@ const Styled = {
       font-weight: 300;
     }
   `,
-    
-    BoxIcon: styled(boxIcon)`
+
+  BoxIcon: styled(boxIcon)`
     margin-left: 14px;
     margin-right: 9px;
   `,
