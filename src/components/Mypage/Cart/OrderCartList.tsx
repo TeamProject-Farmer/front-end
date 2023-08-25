@@ -55,7 +55,7 @@ const OrderCartList = ({
 
   // 선택된 상품들을 store 저장 후 주문 페이지로 route
   const handlePlaceOrder = (selectedItems: CartListProps[] | undefined) => {
-    if (selectedItems.length === 0) {
+    if (selectedItems && selectedItems.length === 0) {
       alert('상품을 선택해주세요');
       return;
     }
