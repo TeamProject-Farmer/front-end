@@ -4,12 +4,12 @@ import { StarOptionProps } from 'src/types/shop/types';
 import downArrow from '@assets/images/shop/downArrow1.svg';
 
 const StarOption = (props : StarOptionProps) => {
-  const {setPopStarOption, popStarOption, setStarOption } = props;
+  const {setPopStarOption, popStarOption, setStarOption, starOption } = props;
 
   return (<Styled.StarOptionWrapper
     onClick={() => setPopStarOption(!popStarOption)}
   >
-    별점
+    {starOption == null ? '전체' : starOption+'점'}
     <Styled.DownArrow />
     <Styled.StarOptions popStarOption={popStarOption}>
       <Styled.EachStarOption

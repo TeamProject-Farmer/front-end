@@ -7,7 +7,7 @@ import { CateId } from 'src/utils/shop/sortOption';
 import { getProductList } from 'src/apis/shop/product';
 import Category from '@components/Common/Category';
 import MDPick from './MDPick';
-import ProductWrapper from '../Common/ProductWrapper/ProductWrapper';
+import ProductWrapper from '../Common/ProductWrapper';
 
 const ShopDetail = () => {
   const categoryName = useRouter().query.category?.toString() || '';
@@ -22,8 +22,8 @@ const ShopDetail = () => {
     const response = await getProductList({
       productOption,
       categoryId,
-      currentIndex}
-    );
+      currentIndex,
+    });
     setProductList(response.content);
     setTotalPages(response.totalPages);
     setPageElements(response.numberOfElements);
@@ -35,8 +35,8 @@ const ShopDetail = () => {
 
   useEffect(() => {
     setCurrentIndex(0);
-    if(currentIndex == 0) handleProductList();
-  }, [ productOption])
+    if (currentIndex == 0) handleProductList();
+  }, [productOption]);
 
   return (
     <Styled.Wrapper>

@@ -26,7 +26,8 @@ const PreviewPhoto = () => {
   };
   useEffect(() => {
     handleReviewImage();
-  }, []);
+  }, [router]);
+
   return (
     <Styled.Wrapper>
       <Styled.Title>사진 리뷰 보기</Styled.Title>
