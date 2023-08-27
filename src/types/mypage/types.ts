@@ -108,7 +108,7 @@ export interface CartButtonProps {
 
 export interface CartOrderBoxProps {
   cartListArray: CartListProps[];
-  handleTotalPrice: () => string;
+  handleTotalPrice: () => number;
 }
 
 export interface CartButtonBoxProps {

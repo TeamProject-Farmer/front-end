@@ -30,7 +30,7 @@ const OrderCartList = ({
         (acc, item) => acc + item.totalPrice,
         0,
       );
-      return totalPrice.toLocaleString();
+      return totalPrice + 2500;
     }
   };
 
@@ -55,6 +55,11 @@ const OrderCartList = ({
 
   // 선택된 상품들을 store 저장 후 주문 페이지로 route
   const handlePlaceOrder = (selectedItems: CartListProps[] | undefined) => {
+    if (selectedItems.length === 0) {
+      alert('상품을 선택해주세요');
+      return;
+    }
+
     selectedItems
       ? dispatch(setSelectedCart(selectedItems))
       : dispatch(setSelectedCart(cartListArray));

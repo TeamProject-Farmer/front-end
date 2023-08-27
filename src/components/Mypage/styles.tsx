@@ -5,7 +5,7 @@ import OptionButton from '@assets/images/mypage/option.svg';
 
 export const Styled = {
   Container: styled.div`
-    width: 100%;
+    width: 1920px;
   `,
 
   SplitLine: styled.div`
@@ -64,6 +64,7 @@ export const Styled = {
     padding-right: 9rem;
   `,
   InfoWrapper: styled.div`
+    flex-shrink: 1;
     margin-left: 3.5rem;
   `,
   NameText: styled.h1`
@@ -248,7 +249,6 @@ export const Styled = {
     display: flex;
     align-items: center;
     justify-content: center;
-    
   `,
   ListInfoText: styled.h1<{ size?: string; color?: string }>`
     font-size: ${props => props.size}px;
@@ -409,11 +409,11 @@ export const Styled = {
     height: ${props => props.size}px;
     border-radius: 20px;
     border: 1px solid black;
-    margin-bottom: 8rem;
+    padding: 2.5rem 8rem;
   `,
   PlantCard: styled.div`
-    margin-left: 2.5rem;
-    margin-right: 2.5rem;
+    /* margin-left: 2.5rem;
+    margin-right: 2.5rem; */
     margin-top: 3rem;
     width: 250px;
     height: 370px;
@@ -434,7 +434,7 @@ export const Styled = {
   CardWrapper: styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    gap: 2.5rem;
   `,
 
   // 쿠폰 페이지
@@ -535,7 +535,7 @@ export const Styled = {
   EmptyCart: styled.div`
     display: flex;
     align-items: center;
-    justify-content: center;;
+    justify-content: center;
     width: 100%;
     height: 150px;
     font-size: 20px;

@@ -28,6 +28,8 @@ import selectedCartSlice from './reducers/selectedCartSlice';
 import orderSlice from './reducers/orderSlice';
 import orderDataSlice from './reducers/orderDataSlice';
 import bannerSlice from './reducers/bannerSlice';
+import { Category } from 'src/types/common/types';
+import categorySlice from './reducers/categorySlice';
 
 // import orderSlice from './reducers/orderSlice';
 
@@ -36,6 +38,7 @@ export interface RootState {
   cartIndex: CartState;
   selectedCart: CartListProps[];
   banner: boolean;
+  category: Category[];
   order: SelectedOrderProps[];
   orderData: OrderDataProps[];
   // orderInfo: IOrderInfo;
@@ -52,10 +55,11 @@ const rootReducer = (
 ): CombinedState<RootState> => {
   if (action.type === HYDRATE) return { ...state, ...action.payload };
   const combinedReducer = combineReducers({
-    user: userSlice,
+    user: userSlice.reducer,
     cartIndex: cartIndexSlice,
     selectedCart: selectedCartSlice,
     banner: bannerSlice,
+    category: categorySlice,
     order: orderSlice,
     orderData: orderDataSlice,
     // orderInfo: orderSlice,
@@ -84,3 +88,11 @@ export default store;
 export const wrapper = createWrapper<Store<RootState>>(() => store);
 
 export const persistor = persistStore(store);
+
+export const setAccessToken = (newAccessToken: string) => {
+  store.dispatch(userSlice.actions.setAccessToken(newAccessToken));
+};
+
+export const setRefreshToken = (newRefreshToken: string) => {
+  store.dispatch(userSlice.actions.setRefreshToken(newRefreshToken));
+};

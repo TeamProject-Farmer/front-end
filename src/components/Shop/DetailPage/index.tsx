@@ -8,6 +8,7 @@ import PreviewPhoto from './PreviewPhoto';
 import SortBar from './ContentWrapper/SortBar';
 import ContentWrapper from './ContentWrapper';
 
+
 const DetailPage = () => {
   const [selectList, setSelectList] = useState([]);
   const [selectPrice, setSelectPrice] = useState<number>();

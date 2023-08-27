@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Styled as CheckBoxStyled } from './CheckBoxInput';
 import Styled from './styles';
 import { Controller } from 'react-hook-form';
 import { formatPhoneNumber } from 'src/utils/order/formatPhoneNumber';
@@ -26,7 +27,6 @@ const InputField = ({
   setValue,
   trigger,
   setShowShippingMsgInput,
-  defaultValue,
 }: InputFieldProps) => {
   // 배송 메시지 옵션
   const [shippingMsgOptions, setShippingMsgOptions] = useState<ShippingMsg[]>();
@@ -84,7 +84,10 @@ const InputField = ({
                     <Styled.Input
                       type="text"
                       {...field}
-                      value={field.value ? field.value : defaultValue}
+                      value={field.value ? field.value : ''}
+                      onClick={event => {
+                        console.log(event.target);
+                      }}
                     />
                     {errorMessage(fieldState)}
                   </>
@@ -106,11 +109,7 @@ const InputField = ({
                     <Styled.Input
                       type="text"
                       {...field}
-                      value={
-                        field.value
-                          ? formatPhoneNumber(field.value)
-                          : defaultValue
-                      }
+                      value={field.value ? field.value : ''}
                       onChange={(
                         event: React.ChangeEvent<HTMLInputElement>,
                       ) => {
@@ -137,13 +136,7 @@ const InputField = ({
                     <Styled.FlexWrapper>
                       <Styled.Input
                         {...field}
-                        value={
-                          field.value
-                            ? field.value
-                            : defaultValue
-                            ? defaultValue[0]
-                            : ''
-                        }
+                        value={field.value ? field.value : ''}
                         readOnly
                         placeholder="우편번호"
                         width={250}
@@ -162,13 +155,7 @@ const InputField = ({
                   <>
                     <Styled.Input
                       {...field}
-                      value={
-                        field.value
-                          ? field.value
-                          : defaultValue
-                          ? defaultValue[1]
-                          : ''
-                      }
+                      value={field.value ? field.value : ''}
                       placeholder="기본주소"
                     />
                     {errorMessage(fieldState)}
@@ -183,13 +170,7 @@ const InputField = ({
                   <>
                     <Styled.Input
                       {...field}
-                      value={
-                        field.value
-                          ? field.value
-                          : defaultValue
-                          ? defaultValue[2]
-                          : ''
-                      }
+                      value={field.value ? field.value : ''}
                       placeholder="상세주소"
                     />
                     {errorMessage(fieldState)}
@@ -212,9 +193,8 @@ const InputField = ({
                       const value = event.target.value;
                       value === 'TEXT'
                         ? setShowShippingMsgInput(true)
-                        : setShowShippingMsgInput(false);
-
-                      field.onChange(value);
+                        : setShowShippingMsgInput(false),
+                        field.onChange(value);
                     }}
                   >
                     {shippingMsgOptions &&
@@ -228,7 +208,25 @@ const InputField = ({
               ></Controller>
             </Styled.FlexColumnWrapper>
           ),
-          selfMsg: (
+          defaultAddr: (
+            <CheckBoxStyled.Wrapper>
+              <Controller
+                name="defaultAddr"
+                control={control}
+                defaultValue={false}
+                render={({ field }) => (
+                  <input
+                    {...field}
+                    onChange={() => field.onChange(!field.value)}
+                    type="checkbox"
+                    value={field.value}
+                  />
+                )}
+              ></Controller>
+              <CheckBoxStyled.Label>기본 배송지로 저장</CheckBoxStyled.Label>
+            </CheckBoxStyled.Wrapper>
+          ),
+          selfMemo: (
             <Controller
               name="selfMemo"
               control={control}

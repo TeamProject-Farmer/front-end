@@ -4,20 +4,26 @@ import { RequestPayParams, PostOrderData } from 'src/types/order/types';
 // 쿠폰 조회
 export const getMemberCoupon = async () => {
   const response = await request.get('/member/coupon/use');
+  console.log(response.data);
   return response.data;
+};
+
+// 쿠폰 삭제
+export const postCouponDel = async (memberCouponId: number) => {
+  const formData = new FormData();
+  formData.append('memberCouponId', `${memberCouponId}`);
+  return request.post('/member/coupon/del', formData);
 };
 
 // 적립금 조회
 export const getMemberPoint = async () => {
   const response = await request.post('/member/point');
-  console.log('point', response.data.point);
   return response.data.point;
 };
 
 // 배송 메모 리스트
 export const getDeliveryMemo = async () => {
   const response = await request.get('member/orders/delivery/memo-list');
-  // console.log(response.data);
   return response.data;
 };
 
@@ -40,7 +46,14 @@ export const postVerifyIamport = async (
 
 // DB 주문/결제 요청
 export const postOrders = async (data: PostOrderData) => {
-  console.log('data', data);
-  const response = await request.post('/member/orders', { data });
-  console.log(response);
+  const response = await request.post('/member/orders', data);
+  return response.data;
+};
+
+// 주문조회
+export const getOrdersComplete = async (orderNumber: string | string[]) => {
+  const response = await request.get(
+    `/member/orders/complete?orderNumber=${orderNumber}`,
+  );
+  return response.data;
 };

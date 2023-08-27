@@ -1,29 +1,14 @@
 import styled from '@emotion/styled';
 import { CheckBoxInputProps } from 'src/types/order/types';
-import { Controller } from 'react-hook-form';
 
 const CheckBoxInput = ({
   label,
   smallBox,
   checked,
   onChange,
-  control,
 }: CheckBoxInputProps) => {
   return (
     <Styled.Wrapper>
-      {/* <Controller
-        name="defaultAddr"
-        control={control}
-        defaultValue={false}
-        render={({ field }) => (
-          <input
-            type="checkbox"
-            checked={checked}
-            onChange={onChange}
-            value={field.value}
-          />
-        )}
-      ></Controller> */}
       <input type="checkbox" checked={checked} onChange={onChange} />
       <Styled.Label smallBox={smallBox}>{label}</Styled.Label>
     </Styled.Wrapper>
@@ -32,7 +17,7 @@ const CheckBoxInput = ({
 
 export default CheckBoxInput;
 
-const Styled = {
+export const Styled = {
   Wrapper: styled.div`
     display: flex;
     gap: 33px;
@@ -60,7 +45,7 @@ const Styled = {
       background-color: #d9d9d9;
     }
   `,
-  Label: styled.label<{ smallBox: boolean }>`
+  Label: styled.label<{ smallBox?: boolean }>`
     font-weight: 500;
     font-size: ${({ smallBox }) => (smallBox ? '14px' : '16px')};
   `,

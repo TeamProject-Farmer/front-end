@@ -4,22 +4,29 @@ import InputGroup from '../InputGroup';
 import useDiscount from 'src/hooks/order/useDiscount';
 import { useEffect } from 'react';
 
-const Payment = ({ totalPrice, getTotalAmount, control }) => {
+const Payment = ({
+  totalPrice,
+  getTotalAmount,
+  getUsedPoint,
+  getUsedCoupon,
+}) => {
   const {
     coupon,
     usedPoint,
+    selectedCouponId,
     handlePointChange,
     handleSelectedCoupon,
     disabledPointBtn,
     disabledCouponBtn,
     discountedPrice,
     finalPrice,
-    calculateDiscountedCouponPrice,
     calculateDiscountedPointPrice,
   } = useDiscount(totalPrice);
 
   useEffect(() => {
     getTotalAmount(finalPrice);
+    getUsedPoint(selectedCouponId === 0 ? usedPoint : 0);
+    getUsedCoupon(selectedCouponId);
   }, [finalPrice]);
 
   return (
@@ -39,7 +46,6 @@ const Payment = ({ totalPrice, getTotalAmount, control }) => {
           couponOptions={coupon}
           handleSelectedCoupon={handleSelectedCoupon}
           disabledCouponBtn={disabledCouponBtn}
-          getDiscountedPrice={() => calculateDiscountedCouponPrice(totalPrice)}
         />
         <Styled.InnerMarginWrapper>
           <Styled.DiscountedPrice>

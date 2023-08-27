@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import Icon from '@components/Common/Icon';
+import Link from 'next/link';
 
-const Review = ({ memberNickName, imgUrl, likeCount, content }) => {
+const Review = ({ memberNickName, imgUrl, likeCount, content, productId }) => {
   const countStar = (likeCount: number) => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
@@ -13,25 +14,27 @@ const Review = ({ memberNickName, imgUrl, likeCount, content }) => {
   };
 
   return (
-    <Styled.Wrapper>
-      <Styled.flexBox>
-        <Styled.UserBox>
-          <Styled.UserName>{memberNickName}</Styled.UserName>
-          <Icon name="moreBtn" width={25} height={25} />
-        </Styled.UserBox>
-        <Styled.ImgBox src={imgUrl} alt="리뷰 이미지" />
-        <Styled.ContentBox>
-          <Styled.StarBox>
-            <Styled.Star>{countStar(likeCount)}</Styled.Star>
-            <Styled.Like>
-              <Icon name="thumbsUp" width={28} height={30} />
-              <Styled.LikeQty>{likeCount}</Styled.LikeQty>
-            </Styled.Like>
-          </Styled.StarBox>
-          <Styled.Content>{content}</Styled.Content>
-        </Styled.ContentBox>
-      </Styled.flexBox>
-    </Styled.Wrapper>
+    <Link href={`/shop/detail/${productId}`}>
+      <Styled.Wrapper>
+        <Styled.flexBox>
+          <Styled.UserBox>
+            <Styled.UserName>{memberNickName}</Styled.UserName>
+            <Icon name="moreBtn" width={25} height={25} />
+          </Styled.UserBox>
+          <Styled.ImgBox src={imgUrl} alt="리뷰 이미지" />
+          <Styled.ContentBox>
+            <Styled.StarBox>
+              <Styled.Star>{countStar(likeCount)}</Styled.Star>
+              <Styled.Like>
+                <Icon name="thumbsUp" width={28} height={30} />
+                <Styled.LikeQty>{likeCount}</Styled.LikeQty>
+              </Styled.Like>
+            </Styled.StarBox>
+            <Styled.Content>{content}</Styled.Content>
+          </Styled.ContentBox>
+        </Styled.flexBox>
+      </Styled.Wrapper>
+    </Link>
   );
 };
 

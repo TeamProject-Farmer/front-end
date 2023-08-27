@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Profile from '@assets/images/mypage/profile.svg';
 import Mail from '@assets/images/mypage/mail.svg';
 import { Styled } from '../../styles';
@@ -7,6 +7,8 @@ import Link from 'next/link';
 import { IconText } from './Icon';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
+import { getMemberCoupon } from 'src/apis/order/order';
+import { Coupon } from 'src/types/order/types';
 
 const selectUser = (state: RootState) => state.user;
 
@@ -14,10 +16,15 @@ const MyProfile = () => {
   const route = useRouter();
 
   const user = useSelector(selectUser);
+  const [coupon, setCoupon] = useState<Coupon[]>();
+
+  useEffect(() => {
+    getMemberCoupon().then(res => setCoupon(res));
+  }, []);
 
   const data = [
     { label: 'Point', value: user.point },
-    { label: '쿠폰', value: user.memberCoupon },
+    { label: '쿠폰', value: coupon ? coupon.length : 0 },
   ];
 
   //링크를 넣기 위해 추가한 부분
