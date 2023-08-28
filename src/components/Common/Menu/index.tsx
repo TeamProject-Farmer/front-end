@@ -53,9 +53,9 @@ const Menu = ({ setShowMenu }) => {
           <Styled.Ul>
             {sizeCategory &&
               sizeCategory?.map(el => (
-                <Link href={`/shop/bysize/${el.id}`}>
-                  <Styled.Li key={el.id}>{el.title}</Styled.Li>
-                </Link>
+                <Styled.Li key={el.id}>
+                  <Link href={`/shop/bysize/${el.id}`}>{el.title}</Link>
+                </Styled.Li>
               ))}
           </Styled.Ul>
         </Styled.FlexBox>

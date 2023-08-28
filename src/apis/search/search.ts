@@ -28,19 +28,11 @@ export const postSearch = async (
   // console.log(formData.get('searchWord'));
   // console.log(formData.get('sortSearchCond'));
   // console.log(formData.get('memberEmail'));
-  const response = await request.post(
-    '/main/search',
-    {
-      searchWord: searchWord,
-      memberEmail: memberEmail,
-      sortSearchCond: sortSearchCond,
-    },
-    {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    },
-  );
+  const response = await request.post('/main/search', {
+    searchWord: searchWord,
+    memberEmail: memberEmail,
+    sortSearchCond: sortSearchCond,
+  });
   return response.data.content;
 };
 

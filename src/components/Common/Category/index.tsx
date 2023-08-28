@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { setCategory } from 'store/reducers/categorySlice';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
+
 const categorySelector = (state: RootState) => state.category;
 const Category = () => {
   const dispatch = useDispatch();

@@ -28,7 +28,7 @@ const Header = () => {
         </Link>
         <Styled.Utils>
           {isLogin && (
-            <Link href={'/'}>
+            <Link href="/">
               <Icon
                 onClick={() => dispatch(clearUser())}
                 name="logout"

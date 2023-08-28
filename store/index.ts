@@ -95,9 +95,9 @@ const store = configureStore({
 // const store = makeStore();
 export default store;
 
-export const wrapper = createWrapper<Store<RootState>>(() => store);
+// export const wrapper = createWrapper<Store<RootState>>(() => store);
 
-export const persistor = persistStore(store);
+// export const persistor = persistStore(store);
 
 export const setAccessToken = (newAccessToken: string) => {
   store.dispatch(userSlice.actions.setAccessToken(newAccessToken));

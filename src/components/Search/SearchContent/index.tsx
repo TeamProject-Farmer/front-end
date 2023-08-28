@@ -5,6 +5,7 @@ import { ProductProps } from 'src/types/common/types';
 
 const SearchContent = ({ searchedWord, searchResult }) => {
   const noResult = !searchResult || searchResult.length === 0;
+
   return (
     <Styled.Wrapper>
       {noResult && (
