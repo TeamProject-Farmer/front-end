@@ -1,7 +1,12 @@
 import axios from 'axios';
-import store from '../../store/index';
-import { setAccessToken, setRefreshToken } from '../../store/index';
+// import store from '../../store/index';
+// import { setAccessToken, setRefreshToken } from '../../store/index';
 import { getNewToken } from './login/login';
+import {
+  setTokens,
+  getAccessToken,
+  getRefreshToken,
+} from 'src/utils/login/token';
 
 const request = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_KEY,
@@ -10,7 +15,8 @@ const request = axios.create({
 request.interceptors.request.use(
   config => {
     try {
-      const accessToken = store.getState().user.accessToken;
+      // const accessToken = store.getState().user.accessToken;
+      const accessToken = getAccessToken();
       // const refreshToken = store.getState().user.refreshToken;
       // console.log('accessToken', accessToken);
       // console.log('refreshToken', refreshToken);
@@ -45,14 +51,16 @@ request.interceptors.response.use(
 
       try {
         // 토큰을 재발급
-        const state = store.getState();
-        const refreshToken = state.user.refreshToken;
+        // const state = store.getState();
+        // const refreshToken = state.user.refreshToken;
+        const refreshToken = getRefreshToken();
 
         const newToken = await getNewToken(refreshToken);
 
         // 재발급 받은 토큰을 저장합니다.
-        setAccessToken(newToken.accessToken);
-        setRefreshToken(newToken.refreshToken);
+        // setAccessToken(newToken.accessToken);
+        // setRefreshToken(newToken.refreshToken);
+        setTokens(newToken.accessToken, newToken.refreshToken);
 
         // 재발급한 토큰을 요청 헤더에 포함
         originalRequest.headers.Authorization = `Bearer ${newToken.accessToken}`;

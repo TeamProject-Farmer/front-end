@@ -7,6 +7,7 @@ import { getLogin } from 'src/apis/login/login';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { setUser } from 'store/reducers/userSlice';
+import { setTokens } from 'src/utils/login/token';
 
 const InputGroup = () => {
   const router = useRouter();
@@ -31,6 +32,7 @@ const InputGroup = () => {
       const res = await getLogin({ email, password });
       const userData = res.data;
       dispatch(setUser(userData));
+      setTokens(userData.accessToken, userData.refreshToken);
       router.push('/');
     } catch (err) {
       setErrorText(err.response.data);

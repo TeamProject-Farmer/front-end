@@ -70,7 +70,17 @@ const makeStore = () =>
       }),
   });
 
-const store = makeStore();
+const store = configureStore({
+  reducer: {
+    user: userSlice.reducer,
+    cartIndex: cartIndexSlice,
+    selectedCart: selectedCartSlice,
+    banner: bannerSlice,
+    category: categorySlice,
+  },
+});
+
+// const store = makeStore();
 export default store;
 
 export const wrapper = createWrapper<Store<RootState>>(() => store);

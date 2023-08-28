@@ -6,6 +6,7 @@ import theme from '../styles/theme';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { globalStyles } from '@styles/globalStyle';
 import { persistor, wrapper } from 'store';
+import store from 'store';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import IconLoader from '@components/Common/IconLoader';
@@ -28,38 +29,38 @@ const queryClient = new QueryClient();
 function App({ Component, pageProps, ...rest }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? (page => page);
 
-  const { store } = wrapper.useWrappedStore(rest);
+  // const { store } = wrapper.useWrappedStore(rest);
 
   const router = useRouter();
 
-  useEffect(() => {
-    const state = store.getState();
-    const token = state.user.accessToken;
+  // useEffect(() => {
+  //   const state = store.getState();
+  //   const token = state.user.accessToken;
 
-    // 페이지에 1초 정도 로딩됐다가 리다이렉션 이슈
-    if (router.pathname.startsWith('/mypage') && token.length === 0) {
-      alert('로그인 후 이용 가능한 서비스입니다');
-      router.push('/');
-    }
+  //   // 페이지에 1초 정도 로딩됐다가 리다이렉션 이슈
+  //   if (router.pathname.startsWith('/mypage') && token.length === 0) {
+  //     alert('로그인 후 이용 가능한 서비스입니다');
+  //     router.push('/');
+  //   }
 
-    if (
-      (router.pathname.startsWith('/login') && token) ||
-      (router.pathname.startsWith('/register') && token)
-    ) {
-      router.push('/');
-    }
-  }, [router.pathname]);
+  //   if (
+  //     (router.pathname.startsWith('/login') && token) ||
+  //     (router.pathname.startsWith('/register') && token)
+  //   ) {
+  //     router.push('/');
+  //   }
+  // }, [router.pathname]);
 
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <IconLoader />
-          {globalStyles}
-          <ThemeProvider theme={theme}>
-            {getLayout(<Component {...pageProps} />)}
-          </ThemeProvider>
-        </PersistGate>
+        {/* <PersistGate loading={null} persistor={persistor}> */}
+        <IconLoader />
+        {globalStyles}
+        <ThemeProvider theme={theme}>
+          {getLayout(<Component {...pageProps} />)}
+        </ThemeProvider>
+        {/* </PersistGate> */}
       </Provider>
     </QueryClientProvider>
   );
