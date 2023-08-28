@@ -2,6 +2,8 @@ import { Dispatch, SetStateAction } from 'react';
 import { SortOption } from 'src/types/search/types';
 import { RootState } from 'store';
 
+export const orderDataSelector = (state: RootState) => state.orderData;
+export const orderSelector = (state: RootState) => state.order;
 export const userToken = (state: RootState) => state.user.email;
 
 export interface ProductAPI {
@@ -32,12 +34,17 @@ export interface OptionBarProps {
   productOption?: string;
 }
 
-
 export interface categoryReduxType {
   name: string;
   id: number;
 }
 
+export interface ProductInfoProps {
+  name: string;
+  totalStar: number;
+  discountRate: number;
+  price: number;
+}
 
 export interface ProductListProps {
   id?: number;
@@ -63,6 +70,7 @@ export interface StarOptionProps {
   setPopStarOption: React.Dispatch<React.SetStateAction<boolean>>;
   popStarOption: boolean;
   setStarOption: React.Dispatch<React.SetStateAction<number | null>>;
+  starOption: number | null;
 }
 
 export interface SingleReviewProps {
@@ -133,6 +141,8 @@ export interface OptionBoxProps {
   isPanel?: boolean;
   selectList: selectListProps[];
   setSelectList: React.Dispatch<React.SetStateAction<selectListProps[]>>;
+  selectPrice: number;
+  setSelectPrice?: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export interface selectOptionProps {
@@ -150,4 +160,21 @@ export interface selectListProps {
 export interface OnOffProps {
   myButton: boolean;
   setMyButton: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+//구매하기
+export interface SelectedOrderProps {
+  productId: number;
+  imgUrl: string;
+  productName: string;
+  optionId: number;
+  optionName: string;
+  count: number;
+  productPrice: number;
+}
+
+export interface OrderDataProps {
+  imgUrl: string;
+  productName: string;
+  productPrice: number;
 }

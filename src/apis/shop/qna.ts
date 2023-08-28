@@ -13,10 +13,12 @@ export const getQnAList = async (productId: number, currentIndex: number) => {
 };
 
 //내가 쓴 문의사항
-export const getMyQnA = async () => {
+export const getMyQnA = async (productId:number) => {
   const response = await request.get(
-    '/member/qna/mine?page=0&size=5&direction=ASC'
+    `/member/qna/mine/${productId}?page=0&size=5&direction=ASC`
   );
+  console.log('qna api')
+  console.log(response.data)
   return response.data;
 };
 

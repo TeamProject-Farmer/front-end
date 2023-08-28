@@ -1,17 +1,16 @@
+import styled from '@emotion/styled';
+import theme from '@styles/theme';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
-import styled from '@emotion/styled';
-import theme from '@styles/theme';
 import { getQnAList } from 'src/apis/shop/qna';
 import { QnAProps } from 'src/types/shop/types';
 import { userToken } from 'src/types/shop/types';
 import OnOffButton from './OnOffButton';
 import QnAModal from '@components/Common/MiniModal/QnAModal';
-import QnAWrapper from '@components/Shop/Common/ProductWrapper/QnAWrapper';
+import QnAWrapper from '@components/Shop/DetailPage/ContentWrapper/QnA/QnAWrapper';
 import MyQnA from './MyQnA';
-import Pagination from './Pagination';
-
+import Pagination from '../Pagination';
 
 const Inquiry = () => {
   const router = useRouter();
@@ -26,8 +25,8 @@ const Inquiry = () => {
 
   const openModal = () => {
     //토큰이 있는 경우만 문의하기 창이 열릴 수 있도록, 없으면 로그인 화면으로 이동 처리
-    if(token != '') setModalOpen(true);
-    else router.replace('/login')
+    if (token != '') setModalOpen(true);
+    else router.replace('/login');
   };
   const closeModal = () => {
     setModalOpen(false);
@@ -36,10 +35,10 @@ const Inquiry = () => {
   const handleQnAList = async () => {
     const response = await getQnAList(productId, currentIndex);
     setDetailList(response.content);
-    setTotalIndex(response.totalPages)
-    setTotalElement(response.totalElements)
+    setTotalIndex(response.totalPages);
+    setTotalElement(response.totalElements);
   };
-  
+
   useEffect(() => {
     handleQnAList();
   }, [productId, currentIndex, modalOpen]);
@@ -68,7 +67,7 @@ const Inquiry = () => {
           </Styled.MyInQuiry>
         </Styled.Title>
         {myButton ? (
-          <MyQnA />
+          <MyQnA productId={productId} />
         ) : (
           <>
             {detailList.length == 0 ? (
@@ -76,9 +75,7 @@ const Inquiry = () => {
                 해당 상품에 대한 문의가 존재하지 않습니다.
               </Styled.ErrorMessage>
             ) : (
-              <QnAWrapper
-                detailList={detailList}
-              />
+              <QnAWrapper detailList={detailList} />
             )}
           </>
         )}
