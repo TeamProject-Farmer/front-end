@@ -70,7 +70,7 @@ const Review = () => {
     handleReviewData();
   }, [router, currentIndex, sortOption, starOption]);
   useEffect(() => {
-    setTimeout(() => handleReviewData(), 30);
+    setTimeout(() => handleReviewData(), 10);
   }, [reviewClick]);
   useEffect(() => {
     setErrorMessage(false);
