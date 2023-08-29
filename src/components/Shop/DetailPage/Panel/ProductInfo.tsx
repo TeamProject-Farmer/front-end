@@ -7,8 +7,8 @@ import down from '@assets/images/shop/downloadIcon.svg';
 import share from '@assets/images/shop/shareIcon.svg';
 
 const ProductInfo = (props: ProductInfoProps) => {
-  const {name, totalStar, discountRate, price} = props;
-  
+  const { name, totalStar, discountRate, price } = props;
+
   return (
     <>
       <Styled.TitleWrapper>
@@ -31,14 +31,14 @@ const ProductInfo = (props: ProductInfoProps) => {
           </div>
         </Styled.OriginPrice>
         <Styled.CurrentPrice>
-          <div>
+          <Styled.SpecialTag discountRate={discountRate}>
             <div>{handlePrice(price)}~</div>
             <button>특가</button>
-          </div>
-          <button>
+          </Styled.SpecialTag>
+          <Styled.DownLoadBtn>
             쿠폰받기
             <Styled.DownLoadIcon />
-          </button>
+          </Styled.DownLoadBtn>
         </Styled.CurrentPrice>
       </Styled.PriceWrapper>
     </>
@@ -73,13 +73,6 @@ const Styled = {
     align-items: center;
     justify-content: space-between;
     margin-right: 15px;
-    & > img {
-      width: 19px;
-      height: 19.43px;
-    }
-    & > * > span {
-      margin-right: 0px !important;
-    }
   `,
   PriceWrapper: styled.div`
     display: flex;
@@ -102,12 +95,12 @@ const Styled = {
     justify-content: space-between;
     font-size: 30px;
     font-weight: 700;
-    & > div {
-      display: flex;
-      align-items: center;
-    }
-
-    & > div > button {
+  `,
+  SpecialTag: styled.div<{ discountRate: number }>`
+    display: flex;
+    align-items: center;
+    & > button {
+      display: ${props => (props.discountRate === 0 ? 'none' : '')};
       color: ${theme.colors.white};
       font-size: 14px;
       font-weight: 500;
@@ -117,17 +110,17 @@ const Styled = {
       background-color: #33b822;
       margin-left: 17px;
     }
-    & > button:last-child {
-      color: ${theme.colors.white};
-      font-size: 16px;
-      width: 116px;
-      height: 35px;
-      border-radius: 5px;
-      background-color: #59b941;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+  `,
+  DownLoadBtn: styled.button`
+    color: ${theme.colors.white};
+    font-size: 16px;
+    width: 116px;
+    height: 35px;
+    border-radius: 5px;
+    background-color: #59b941;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   `,
   DownLoadIcon: styled(down)`
     margin-left: 6px;
