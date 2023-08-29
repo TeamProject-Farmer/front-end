@@ -40,6 +40,7 @@ export interface categoryReduxType {
 }
 
 export interface ProductInfoProps {
+  productId: number;
   name: string;
   totalStar: number;
   discountRate: number;

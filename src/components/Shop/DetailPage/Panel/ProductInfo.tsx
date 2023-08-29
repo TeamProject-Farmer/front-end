@@ -7,13 +7,23 @@ import down from '@assets/images/shop/downloadIcon.svg';
 import share from '@assets/images/shop/shareIcon.svg';
 
 const ProductInfo = (props: ProductInfoProps) => {
-  const { name, totalStar, discountRate, price } = props;
+  const { productId, name, totalStar, discountRate, price } = props;
+  const handleCopyClipBoard = async () => {
+    try {
+      await navigator.clipboard.writeText(
+        `https://front-end-farmer-shop.vercel.app/shop/detail/${productId}`,
+      );
+      alert(`클립보드에 '${name}'의 링크가 복사되었습니다.`);
+    } catch (e) {
+      alert('복사에 실패하였습니다');
+    }
+  };
 
   return (
     <>
       <Styled.TitleWrapper>
         <div>{name}</div>
-        <Styled.ShareButton></Styled.ShareButton>
+        <Styled.ShareButton onClick={() => handleCopyClipBoard()} />
       </Styled.TitleWrapper>
       <Styled.Review>
         <Styled.StarWrapper>
