@@ -52,8 +52,8 @@ export const postOrders = async (data: PostOrderData) => {
 };
 
 // 장바구니 항목 삭제
-export const postCartRemove = async (productId: number[]) => {
-  return await request.post(`/member/cart/remove/${productId}`, productId);
+export const postCartRemove = async (cartId: number[]) => {
+  return await request.post('/member/cart/remove', cartId);
 };
 
 // 주문조회

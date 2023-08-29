@@ -77,10 +77,24 @@ request.interceptors.response.use(
 );
 
 request.interceptors.request.use(
-  config => {
-    return config;
+  async config => {
+    try {
+      // const refreshToken = window.localStorage.getItem('refreshToken');
+      // if (refreshToken) {
+      //   const newToken = await getNewToken(refreshToken);
+      //   setTokens(newToken.accessToken, newToken.refreshToken);
+      //   window.localStorage.setItem('refreshToken', newToken.refreshToken);
+      //   config.headers['Authorization'] = `Bearer ${newToken.accessToken}`;
+      // }
+      return config;
+    } catch (error) {
+      console.error(error);
+      return config;
+    }
   },
   error => {
+    console.log('에러발생');
+    console.error(error);
     return Promise.reject(error);
   },
 );

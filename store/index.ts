@@ -89,6 +89,8 @@ const store = configureStore({
     selectedCart: selectedCartSlice,
     banner: bannerSlice,
     category: categorySlice,
+    order: orderSlice,
+    orderData: orderDataSlice,
   },
 });
 

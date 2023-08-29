@@ -31,7 +31,7 @@ const processPayment = async ({
   });
   console.log('dbData', dbData);
 
-  const productIds: number[] = productList.map(item => item.productId);
+  const cartIds: number[] = productList.map(item => item.cartId);
 
   return new Promise(async (resolve, reject) => {
     const callback = async (response: RequestPayResponse) => {
@@ -42,7 +42,7 @@ const processPayment = async ({
         if (couponId !== 0) {
           postCouponDel(couponId);
         }
-        postCartRemove(productIds);
+        postCartRemove(cartIds);
         resolve({ response, resultInfo });
       } else {
         reject(error_msg);
