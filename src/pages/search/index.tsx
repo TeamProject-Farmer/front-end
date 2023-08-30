@@ -25,8 +25,12 @@ const SearchPage: NextPageWithLayout = () => {
   const memberEmail = useSelector((state: RootState) => state.user.email);
 
   // 최근 검색 기록
-  const { data: recentSearchWord } = useQuery([searchResult], () =>
-    getRecentSearch(),
+  const { data: recentSearchWord } = useQuery(
+    [searchResult],
+    () => getRecentSearch(),
+    {
+      enabled: memberEmail ? true : false,
+    },
   );
 
   // 검색 input value값 관리
