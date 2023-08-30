@@ -9,7 +9,7 @@ export const getLogin = async ({ email, password }: LoginUserProps) => {
   return request.post('/main/login', formData);
 };
 
-export const getNewToken = async (refreshToken: string) => {
+export const postMemberRefresh = async (refreshToken: string) => {
   const response = await request.post(
     `${process.env.NEXT_PUBLIC_API_KEY}/member`,
     {},

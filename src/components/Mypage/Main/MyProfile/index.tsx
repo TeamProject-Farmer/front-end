@@ -16,15 +16,10 @@ const MyProfile = () => {
   const route = useRouter();
 
   const user = useSelector(selectUser);
-  const [coupon, setCoupon] = useState<Coupon[]>();
-
-  useEffect(() => {
-    getMemberCoupon().then(res => setCoupon(res));
-  }, []);
 
   const data = [
     { label: 'Point', value: user.point },
-    { label: '쿠폰', value: coupon ? coupon.length : 0 },
+    { label: '쿠폰', value: user.memberCoupon },
   ];
 
   //링크를 넣기 위해 추가한 부분

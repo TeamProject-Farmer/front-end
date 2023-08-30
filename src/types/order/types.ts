@@ -60,7 +60,7 @@ export interface InputGroupProps {
   children: React.ReactNode;
 }
 
-export interface CartItem {
+export interface OrderItem {
   cartId?: number;
   productId: number;
   imgUrl: string;
@@ -69,11 +69,11 @@ export interface CartItem {
   optionName: string;
   count: number;
   productPrice: number;
-  totalPrice: number;
+  totalPrice?: number;
 }
 
 export interface OrderPayload {
-  productList: CartItem[];
+  productList: OrderItem[];
   selectedMethod: PayMethod;
   totalAmount: number;
   deliveryInfo: DeliveryInfo;

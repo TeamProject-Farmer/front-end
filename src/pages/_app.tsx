@@ -5,7 +5,7 @@ import { AppProps } from 'next/app';
 import theme from '../styles/theme';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { globalStyles } from '@styles/globalStyle';
-import { persistor, wrapper } from 'store';
+// import { persistor, wrapper } from 'store';
 import store from 'store';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -15,7 +15,7 @@ import type { NextPage } from 'next';
 import 'react-datepicker/dist/react-datepicker.css';
 import '@components/Mypage/Purchases/Calendar/react-datepicker.css';
 import { useRouter } from 'next/router';
-
+import { CookiesProvider } from 'react-cookie';
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
@@ -52,17 +52,19 @@ function App({ Component, pageProps, ...rest }: AppPropsWithLayout) {
   // }, [router.pathname]);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <Provider store={store}>
-        {/* <PersistGate loading={null} persistor={persistor}> */}
-        <IconLoader />
-        {globalStyles}
-        <ThemeProvider theme={theme}>
-          {getLayout(<Component {...pageProps} />)}
-        </ThemeProvider>
-        {/* </PersistGate> */}
-      </Provider>
-    </QueryClientProvider>
+    <CookiesProvider>
+      <QueryClientProvider client={queryClient}>
+        <Provider store={store}>
+          {/* <PersistGate loading={null} persistor={persistor}> */}
+          <IconLoader />
+          {globalStyles}
+          <ThemeProvider theme={theme}>
+            {getLayout(<Component {...pageProps} />)}
+          </ThemeProvider>
+          {/* </PersistGate> */}
+        </Provider>
+      </QueryClientProvider>
+    </CookiesProvider>
   );
 }
 

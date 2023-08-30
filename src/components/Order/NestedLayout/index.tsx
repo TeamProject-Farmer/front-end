@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 
 const NestedLayout = ({ children }: LayoutProps) => {
   const { asPath } = useRouter();
+  console.log(asPath);
   const isOrderPath = asPath === '/order';
 
   return (

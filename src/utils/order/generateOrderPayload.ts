@@ -16,7 +16,7 @@ const generateOrderPayload = ({
     productId: item.productId,
     optionId: item.optionId,
     count: item.count,
-    orderPrice: item.totalPrice,
+    orderPrice: item.totalPrice ? item.totalPrice : item.productPrice,
   }));
 
   const {

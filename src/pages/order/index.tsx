@@ -17,9 +17,11 @@ import { useSelector } from 'react-redux';
 import { RootState } from 'store';
 import getTotalPrice from 'src/utils/order/getTotalPrice';
 import { useRouter } from 'next/router';
+import { getAccessToken } from 'src/utils/login/setAccessToken';
 
 const OrderPage: NextPageWithLayout = () => {
   const selectedCart = (state: RootState) => state.selectedCart;
+  const order = (state: RootState) => state.order;
   const {
     payNowDisabled,
     totalAmount,
@@ -39,8 +41,12 @@ const OrderPage: NextPageWithLayout = () => {
   //개별 상품페이지에서 온 제품인지 장바구니 목록인지
   const router = useRouter();
   const fromCart = Object.keys(router.query).length === 0;
+  const cartItems = useSelector(selectedCart);
+  const selectedProduct = useSelector(order);
+  console.log('cartItems', cartItems);
+  console.log('selectedProduct', selectedProduct);
 
-  const productList = useSelector(selectedCart);
+  const productList = fromCart ? cartItems : selectedProduct;
   const totalPrice = getTotalPrice(productList);
 
   // 결제하기 버튼 클릭 시
@@ -86,7 +92,7 @@ const OrderPage: NextPageWithLayout = () => {
         {/* 주문상품 */}
         <InputGroup title="주문상품">
           <Styled.InnerPaddingWrapper caption="product">
-            <ProductList productList={fromCart ? productList : []} />
+            <ProductList productList={productList} />
           </Styled.InnerPaddingWrapper>
         </InputGroup>
         {/* 적립금/쿠폰, 결제금액 */}

@@ -7,7 +7,8 @@ import { getLogin } from 'src/apis/login/login';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { setUser } from 'store/reducers/userSlice';
-import { setTokens } from 'src/utils/login/token';
+import { setAccessToken } from 'src/utils/login/setAccessToken';
+import { setCookie } from 'src/utils/cookie';
 
 const InputGroup = () => {
   const router = useRouter();
@@ -32,8 +33,8 @@ const InputGroup = () => {
       const res = await getLogin({ email, password });
       const userData = res.data;
       dispatch(setUser(userData));
-      window.localStorage.setItem('refreshToken', userData.refreshToken);
-      setTokens(userData.accessToken, userData.refreshToken);
+      // setAccessToken(userData.accessToken);
+      setCookie('refreshToken', userData.refreshToken);
       router.push('/');
     } catch (err) {
       setErrorText(err.response.data);

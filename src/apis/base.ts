@@ -1,27 +1,27 @@
 import axios from 'axios';
-// import store from '../../store/index';
-// import { setAccessToken, setRefreshToken } from '../../store/index';
-import { getNewToken } from './login/login';
-import {
-  setTokens,
-  getAccessToken,
-  getRefreshToken,
-} from 'src/utils/login/token';
+import store from '../../store/index';
+import { postMemberRefresh } from './login/login';
+import setAccessToken from 'src/utils/login/setAccessToken';
+import setUser from 'src/utils/login/setUser';
+import { setCookie, getCookie } from 'src/utils/cookie';
 
 const request = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_KEY,
 });
 
+const accessToken = store.getState().user.accessToken;
+const refreshToken = getCookie('refreshToken');
+
 request.interceptors.request.use(
-  config => {
+  async config => {
     try {
-      // const accessToken = store.getState().user.accessToken;
-      const accessToken = getAccessToken();
-      // const refreshToken = store.getState().user.refreshToken;
-      // console.log('accessToken', accessToken);
-      // console.log('refreshToken', refreshToken);
       if (accessToken) {
         config.headers['Authorization'] = `Bearer ${accessToken}`;
+        // 자동 로그인 유지
+      } else if (!accessToken && refreshToken) {
+        const refreshData = await postMemberRefresh(refreshToken);
+        setUser(refreshData);
+        setCookie('refreshToken', refreshData.refreshToken);
       }
       return config;
     } catch (error) {
@@ -51,16 +51,11 @@ request.interceptors.response.use(
 
       try {
         // 토큰을 재발급
-        // const state = store.getState();
-        // const refreshToken = state.user.refreshToken;
-        const refreshToken = getRefreshToken();
+        const newToken = await postMemberRefresh(refreshToken);
 
-        const newToken = await getNewToken(refreshToken);
-
-        // 재발급 받은 토큰을 저장합니다.
-        // setAccessToken(newToken.accessToken);
-        // setRefreshToken(newToken.refreshToken);
-        setTokens(newToken.accessToken, newToken.refreshToken);
+        // 재발급 받은 토큰 저장
+        setAccessToken(newToken.accessToken);
+        setCookie('refreshToken', newToken.refreshToken);
 
         // 재발급한 토큰을 요청 헤더에 포함
         originalRequest.headers.Authorization = `Bearer ${newToken.accessToken}`;
@@ -79,13 +74,8 @@ request.interceptors.response.use(
 request.interceptors.request.use(
   async config => {
     try {
-      // const refreshToken = window.localStorage.getItem('refreshToken');
-      // if (refreshToken) {
-      //   const newToken = await getNewToken(refreshToken);
-      //   setTokens(newToken.accessToken, newToken.refreshToken);
-      //   window.localStorage.setItem('refreshToken', newToken.refreshToken);
-      //   config.headers['Authorization'] = `Bearer ${newToken.accessToken}`;
-      // }
+      console.log('accessToken', accessToken ? true : false);
+      console.log('refreshToken', refreshToken);
       return config;
     } catch (error) {
       console.error(error);

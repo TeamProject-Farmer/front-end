@@ -1,10 +1,12 @@
-import { CartItem } from '../../types/order/types';
+import { OrderItem } from '../../types/order/types';
 
-const getTotalPrice = (productList: CartItem[]) => {
+const getTotalPrice = (productList: OrderItem[]) => {
   let total = 0;
 
   for (const product of productList) {
-    total += product.totalPrice;
+    product.totalPrice
+      ? (total += product.totalPrice)
+      : (total = product.productPrice);
   }
 
   return total;

@@ -17,8 +17,8 @@ const Plant = ({
   const specialPrice = discountRate !== 0;
   const discountedPrice = price * (1 - discountRate / 100);
   return (
-    <Styled.Wrapper>
-      <Link href={`/shop/detail/${productId}`}>
+    <Link href={`/shop/detail/${productId}`}>
+      <Styled.Wrapper>
         <Styled.RankingBox>{ranking}</Styled.RankingBox>
         <Styled.ImgBox>
           <img src={imgUrl} alt="plant image" />
@@ -41,8 +41,8 @@ const Plant = ({
             </Styled.Star>
           </Styled.flexBox>
         </Styled.Content>
-      </Link>
-    </Styled.Wrapper>
+      </Styled.Wrapper>
+    </Link>
   );
 };
 
