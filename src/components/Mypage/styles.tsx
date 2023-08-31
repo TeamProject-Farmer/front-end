@@ -394,6 +394,16 @@ export const Styled = {
     height: 35px;
     padding: 0 15px;
     margin-top: 1rem;
+    margin-right: 10px;
+  `,
+  ReviewButton: styled.button`
+    background-color: ${theme.colors.pointGreen};
+    color: ${theme.colors.white};
+    font-size: 17px;
+    font-weight: 300;
+    height: 35px;
+    padding: 0 15px;
+    margin-top: 1rem;
   `,
   // MyPlants
   MyPlantsButton: styled.button<{ size?: string }>`

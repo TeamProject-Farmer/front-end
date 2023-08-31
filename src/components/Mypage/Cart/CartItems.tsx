@@ -16,7 +16,8 @@ const CartItems = ({ cartListArray }: { cartListArray: CartListProps[] }) => {
   const dispatch = useDispatch();
   const selector = useSelector(cartSelector);
   const lengthChecked = cartListArray?.length === selector.idArray.length;
-
+  console.log('cartListArray')
+  console.log(cartListArray)
   // 상품 개수 변경 기능
   const handleEditCount = async (id: number, operation: 'minus' | 'plus') => {
     try {

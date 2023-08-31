@@ -5,17 +5,37 @@ import OrderInfoText from './OrderInfoText';
 import { OrderListProps } from 'src/types/mypage/types';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { OptionArray } from 'src/utils/mypage/orderStatusData';
+import ReviewModal from '@components/Common/Modal/ReviewModal';
 
 export const OrderItem = ({ order }: { order: OrderListProps }) => {
   const router = useRouter();
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
 
+  const closeModal = () => {
+    setModalOpen(false);
+  };
   const handleProductIntoPage = () => {
     router.push(`/shop/category/detail/${order.productId}`);
   };
 
   return (
     <Styled.FlexRowCenter>
+      <>
+        {modalOpen === true ? (
+          <ReviewModal
+            modalName="리뷰 작성하기"
+            imgUrl = {order.imgUrl}
+            orderProductId={order.orderProductId}
+            productName={order.productName}
+            productOption={order.optionName}
+            productCount={order.count}
+            modalClose={closeModal}
+            setModalOpen={setModalOpen}
+          />
+        ) : null}
+      </>
       <OrderInfoText
         size="20"
         color={theme.colors.black}
@@ -44,6 +64,9 @@ export const OrderItem = ({ order }: { order: OrderListProps }) => {
         <Styled.ProductButton onClick={handleProductIntoPage}>
           상품 상세보기
         </Styled.ProductButton>
+        <Styled.ReviewButton onClick={() => setModalOpen(true)}>
+          리뷰 작성하기
+        </Styled.ReviewButton>
       </Styled.ProductInfoWrapper>
       <OrderInfoText
         size="20"
