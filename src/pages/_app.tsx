@@ -29,8 +29,6 @@ const queryClient = new QueryClient();
 function App({ Component, pageProps, ...rest }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? (page => page);
 
-  // const { store } = wrapper.useWrappedStore(rest);
-
   const router = useRouter();
 
   // useEffect(() => {

@@ -3,11 +3,7 @@ import { Styled as CheckBoxStyled } from './CheckBoxInput';
 import Styled from './styles';
 import { Controller } from 'react-hook-form';
 import { formatPhoneNumber } from 'src/utils/order/formatPhoneNumber';
-import {
-  DaumPostcodeData,
-  ShippingMsg,
-  InputFieldProps,
-} from 'src/types/order/types';
+import { DaumPostcodeData, InputFieldProps } from 'src/types/order/types';
 import {
   requiredErrorMsg,
   validateName,

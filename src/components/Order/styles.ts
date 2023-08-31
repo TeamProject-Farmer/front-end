@@ -63,7 +63,7 @@ const Styled = {
   InnerPaddingWrapper: styled.div<{ caption: string }>`
     padding: ${({ caption }) =>
       caption === 'payment'
-        ? '0 60px'
+        ? '0 60px 10px'
         : caption === 'shippingMsg'
         ? '0 95px'
         : caption === 'product'

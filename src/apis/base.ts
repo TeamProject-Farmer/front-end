@@ -70,10 +70,21 @@ request.interceptors.request.use(
   async config => {
     const accessToken = store.getState().user.accessToken;
     const refreshToken = getCookie('refreshToken');
-    console.log('accessToken', accessToken);
-    console.log('refreshToken', refreshToken);
-    console.log('isRefreshing', isRefreshing);
+    // console.log('accessToken', accessToken);
+    // console.log('refreshToken', refreshToken);
 
+    // if (!config.headers['Authorization']) {
+    //   try {
+    //     const refreshData = await postMemberRefresh(refreshToken);
+    //     setUser(refreshData);
+    //     setCookie('refreshToken', refreshData.refreshToken);
+    //     config.headers['Authorization'] = `Bearer ${refreshData.accessToken}`;
+    //     return config;
+    //   } catch (error) {
+    //     console.error(error);
+    //     return config;
+    //   }
+    // }
     if (!accessToken && refreshToken) {
       if (!isRefreshing) {
         isRefreshing = true;
