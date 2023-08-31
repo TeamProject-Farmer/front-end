@@ -28,16 +28,15 @@ const EventDetail = () => {
           {productList &&
             productList.map(i => (
               <div key={i.productId}>
-                <Link href={`/shop/detail/${i.productId}`}>
-                  <Product
-                    thumbnailImg={i.imgUrl}
-                    name={i.productName}
-                    discountRate={i.discountRate}
-                    price={i.price}
-                    averageStarRating={i.averageStarRating}
-                    reviewCount={i.reviewCount}
-                  ></Product>
-                </Link>
+                <Product
+                  productId={i.productId}
+                  thumbnailImg={i.imgUrl}
+                  name={i.productName}
+                  discountRate={i.discountRate}
+                  price={i.price}
+                  averageStarRating={i.averageStarRating}
+                  reviewCount={i.reviewCount}
+                ></Product>
               </div>
             ))}
         </Styled.ItemWrapper>

@@ -6,8 +6,6 @@ import { ProductProps } from 'src/types/common/types';
 const SearchContent = ({ searchedWord, searchResult }) => {
   const noResult = !searchResult || searchResult.length === 0;
 
-  console.log(searchResult);
-
   return (
     <Styled.Wrapper>
       {noResult && (
@@ -18,16 +16,8 @@ const SearchContent = ({ searchedWord, searchResult }) => {
         </Styled.NoResult>
       )}
       <Styled.Plants>
-        {searchResult?.map((plant: ProductProps, index: number) => (
-          <Plant
-            key={index}
-            thumbnailImg={plant.thumbnailImg}
-            name={plant.name}
-            discountRate={plant.discountRate}
-            price={plant.price}
-            averageStarRating={plant.averageStarRating}
-            reviewCount={plant.reviewCount}
-          />
+        {searchResult?.map((plant: ProductProps) => (
+          <Plant key={plant.productId} {...plant} />
         ))}
       </Styled.Plants>
     </Styled.Wrapper>
