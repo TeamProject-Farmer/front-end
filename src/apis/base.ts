@@ -1,7 +1,6 @@
 import axios from 'axios';
 import store from '../../store/index';
 import { postMemberRefresh } from './login/login';
-import setAccessToken from 'src/utils/login/setAccessToken';
 import setUser from 'src/utils/login/setUser';
 import { setCookie, getCookie } from 'src/utils/cookie';
 
@@ -9,19 +8,12 @@ const request = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_KEY,
 });
 
-const accessToken = store.getState().user.accessToken;
-const refreshToken = getCookie('refreshToken');
-
 request.interceptors.request.use(
   async config => {
     try {
+      const accessToken = store.getState().user.accessToken;
       if (accessToken) {
         config.headers['Authorization'] = `Bearer ${accessToken}`;
-        // 자동 로그인 유지
-      } else if (!accessToken && refreshToken) {
-        const refreshData = await postMemberRefresh(refreshToken);
-        setUser(refreshData);
-        setCookie('refreshToken', refreshData.refreshToken);
       }
       return config;
     } catch (error) {
@@ -51,14 +43,15 @@ request.interceptors.response.use(
 
       try {
         // 토큰을 재발급
-        const newToken = await postMemberRefresh(refreshToken);
+        const refreshToken = getCookie('refreshToken');
+        const refreshData = await postMemberRefresh(refreshToken);
 
         // 재발급 받은 토큰 저장
-        setAccessToken(newToken.accessToken);
-        setCookie('refreshToken', newToken.refreshToken);
+        setUser(refreshData);
+        setCookie('refreshToken', refreshData.refreshToken);
 
         // 재발급한 토큰을 요청 헤더에 포함
-        originalRequest.headers.Authorization = `Bearer ${newToken.accessToken}`;
+        originalRequest.headers.Authorization = `Bearer ${refreshData.accessToken}`;
 
         // 기존 요청을 다시 시도
         return request(originalRequest);
@@ -71,16 +64,34 @@ request.interceptors.response.use(
   },
 );
 
+let isRefreshing = false;
+
 request.interceptors.request.use(
   async config => {
-    try {
-      console.log('accessToken', accessToken ? true : false);
-      console.log('refreshToken', refreshToken);
-      return config;
-    } catch (error) {
-      console.error(error);
-      return config;
+    const accessToken = store.getState().user.accessToken;
+    const refreshToken = getCookie('refreshToken');
+    console.log('accessToken', accessToken);
+    console.log('refreshToken', refreshToken);
+    console.log('isRefreshing', isRefreshing);
+
+    if (!accessToken && refreshToken) {
+      if (!isRefreshing) {
+        isRefreshing = true;
+        try {
+          const refreshData = await postMemberRefresh(refreshToken);
+          setUser(refreshData);
+          setCookie('refreshToken', refreshData.refreshToken);
+          config.headers['Authorization'] = `Bearer ${refreshData.accessToken}`;
+          return config;
+        } catch (error) {
+          console.error(error);
+          return config;
+        } finally {
+          isRefreshing = false; // Reset the flag after the refreshToken request
+        }
+      }
     }
+    return config;
   },
   error => {
     console.log('에러발생');

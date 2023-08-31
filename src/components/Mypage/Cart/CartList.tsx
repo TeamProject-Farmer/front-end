@@ -32,8 +32,12 @@ const CartList = ({ cartListArray }: { cartListArray: CartListProps[] }) => {
         ))}
       </Styled.FlexCartRow>
       {/* 장바구니 아이템 */}
-      {cartListArray === undefined ? <Styled.EmptyCart>장바구니에 담은 상품이 없습니다.</Styled.EmptyCart>:<CartItems cartListArray={cartListArray} />}
-      
+      {cartListArray === undefined ? (
+        <Styled.EmptyCart>장바구니에 담은 상품이 없습니다.</Styled.EmptyCart>
+      ) : (
+        <CartItems cartListArray={cartListArray} />
+      )}
+
       {/* 페이지 하단부 버튼 */}
       <Styled.CartCommonButton
         onClick={() => console.log('쇼핑 페이지로')}
@@ -41,7 +45,12 @@ const CartList = ({ cartListArray }: { cartListArray: CartListProps[] }) => {
         padding="0.7"
         width="125"
       >
-        <Styled.ButtonText size="14" color={theme.colors.black} weight="300" onClick={()=>router.push('/shop/다육이')}>
+        <Styled.ButtonText
+          size="14"
+          color={theme.colors.black}
+          weight="300"
+          onClick={() => router.push('/shop/다육이')}
+        >
           쇼핑 계속하기
         </Styled.ButtonText>
       </Styled.CartCommonButton>

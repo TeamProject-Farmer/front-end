@@ -10,7 +10,8 @@ export const getCartList = async () => {
 
 // 장바구니 목록 삭제
 export const getRemoveCartList = async (cartId: number[]) => {
-  return await request.post('/member/cart/remove-product', cartId);
+  console.log('cartId', cartId);
+  return await request.post('/member/cart/remove', cartId);
 };
 
 // 장바구니 수량 수정

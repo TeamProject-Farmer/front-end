@@ -17,7 +17,6 @@ import { useSelector } from 'react-redux';
 import { RootState } from 'store';
 import getTotalPrice from 'src/utils/order/getTotalPrice';
 import { useRouter } from 'next/router';
-import { getAccessToken } from 'src/utils/login/setAccessToken';
 
 const OrderPage: NextPageWithLayout = () => {
   const selectedCart = (state: RootState) => state.selectedCart;
