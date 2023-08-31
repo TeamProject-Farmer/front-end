@@ -13,7 +13,6 @@ import {
 
 const processPayment = async ({
   productList,
-  selectedMethod,
   totalAmount,
   deliveryInfo,
   point,
@@ -24,15 +23,14 @@ const processPayment = async ({
 
   const { orderData, dbData } = generateOrderPayload({
     productList,
-    selectedMethod,
     totalAmount,
     deliveryInfo,
     point,
   });
+  console.log('orderData', orderData);
   console.log('dbData', dbData);
 
   const cartIds: number[] = productList.map(item => item.cartId);
-  console.log('cartIds', cartIds[0]);
 
   return new Promise(async (resolve, reject) => {
     const callback = async (response: RequestPayResponse) => {

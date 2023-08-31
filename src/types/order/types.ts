@@ -74,7 +74,6 @@ export interface OrderItem {
 
 export interface OrderPayload {
   productList: OrderItem[];
-  selectedMethod: PayMethod;
   totalAmount: number;
   deliveryInfo: DeliveryInfo;
   point: number | undefined;
@@ -227,11 +226,7 @@ export interface DeliveryInfo {
   memo: string;
   selfMemo: string;
   defaultAddr: boolean;
-  // name: string;
-  // postCode: string;
-  // basicAddress: string;
-  // detailAddress: string;
-  // mobile: string;
+  payMethod: string;
 }
 
 export interface ResultData {

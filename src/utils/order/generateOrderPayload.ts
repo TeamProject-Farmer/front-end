@@ -1,9 +1,9 @@
 import generateOrderNumber from 'src/utils/order/generateOrderNumber';
 import { OrderPayload } from 'src/types/order/types';
+import payMethodOptions from './payMethodOptions';
 
 const generateOrderPayload = ({
   productList,
-  selectedMethod,
   totalAmount,
   deliveryInfo,
   point,
@@ -28,11 +28,12 @@ const generateOrderPayload = ({
     memo,
     selfMemo,
     defaultAddr,
+    payMethod,
   } = deliveryInfo;
 
   const orderData = {
-    pg: selectedMethod.pg,
-    pay_method: selectedMethod.method,
+    pg: payMethodOptions.find(item => item.method === payMethod)?.pg,
+    pay_method: payMethod,
     merchant_uid: orderNumber,
     name:
       productList.length === 1
@@ -58,7 +59,7 @@ const generateOrderPayload = ({
     orderNumber,
     orderTotalPrice: totalAmount + 2500,
     totalQuantity: 1,
-    payMethod: selectedMethod.method,
+    payMethod: payMethod,
     point: point !== undefined ? point : 0,
   };
 

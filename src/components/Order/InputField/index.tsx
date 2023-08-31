@@ -17,9 +17,9 @@ import Button from './Button';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { postcodeScriptUrl } from 'react-daum-postcode/lib/loadPostcode';
 import { formatAddress } from 'src/utils/order/getAddressfromDaumPostcode';
-import { getDeliveryMemo } from 'src/apis/order/order';
 import { ControllerFieldState } from 'react-hook-form';
 import shippingMsgOptions from 'src/utils/order/shippingMsgOptions';
+import payMethodOptions from 'src/utils/order/payMethodOptions';
 
 const InputField = ({
   label,
@@ -227,6 +227,38 @@ const InputField = ({
               control={control}
               defaultValue=""
               render={({ field }) => <Styled.Input {...field} width={750} />}
+            ></Controller>
+          ),
+          payMethod: (
+            <Controller
+              name="payMethod"
+              control={control}
+              render={({ field }) => (
+                <Styled.FlexColumnWrapper>
+                  <Styled.FlexWrapper>
+                    <Styled.Dropdown
+                      caption="payMethod"
+                      defaultValue={undefined}
+                      {...field}
+                      onChange={(
+                        event: React.ChangeEvent<HTMLSelectElement>,
+                      ) => {
+                        field.onChange(event.target.value);
+                      }}
+                    >
+                      {payMethodOptions &&
+                        payMethodOptions.map(payMethod => (
+                          <Styled.Option
+                            key={payMethod.method}
+                            value={payMethod.method}
+                          >
+                            {payMethod.title}
+                          </Styled.Option>
+                        ))}
+                    </Styled.Dropdown>
+                  </Styled.FlexWrapper>
+                </Styled.FlexColumnWrapper>
+              )}
             ></Controller>
           ),
         }[caption]

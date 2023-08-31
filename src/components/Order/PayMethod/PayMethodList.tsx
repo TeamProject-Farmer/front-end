@@ -1,12 +1,12 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import payMethod from 'src/utils/order/payMethod';
+import payMethodOptions from 'src/utils/order/payMethodOptions';
 
 const payMethodList = ({ selectedMethod, setSelectedMethod }) => {
   return (
     <Styled.Wrapper>
-      {payMethod &&
-        payMethod.map(ele => {
+      {payMethodOptions &&
+        payMethodOptions.map(ele => {
           const { method, title, pg } = ele;
           const isClicked = selectedMethod?.method === method;
           return (
