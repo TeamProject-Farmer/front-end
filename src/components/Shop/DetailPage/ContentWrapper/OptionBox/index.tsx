@@ -26,7 +26,7 @@ const OptionBox = (props: OptionBoxProps) => {
   const [options, setOptions] = useState<selectOptionProps[]>([]);
   const [lastOption, setLastOption] = useState<string>('상품을 선택하세요.');
 
-  console.log('orderData', orderData);
+  // console.log('orderData', orderData);
 
   //옵션 데이터 받아오기
   const handleDetailData = async () => {

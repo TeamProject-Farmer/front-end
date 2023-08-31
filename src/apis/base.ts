@@ -87,7 +87,7 @@ request.interceptors.request.use(
           console.error(error);
           return config;
         } finally {
-          isRefreshing = false; // Reset the flag after the refreshToken request
+          isRefreshing = false;
         }
       }
     }
@@ -102,11 +102,19 @@ request.interceptors.request.use(
 
 request.interceptors.response.use(
   response => {
-    const res = response;
-    return res;
+    return response;
   },
-
-  error => {
+  async error => {
+    // const originalRequest = error.config;
+    // const message = error.response.data.message;
+    // const errorConsole = error;
+    // console.log('errorConsole', errorConsole);
+    // console.log('error message', message);
+    // if (message === '회원이 존재하지 않습니다.') {
+    //   //쿠키 삭제 & 로그아웃
+    // }
+    console.log('에러발생');
+    console.error(error);
     return Promise.reject(error);
   },
 );

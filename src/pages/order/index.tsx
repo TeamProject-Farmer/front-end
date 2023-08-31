@@ -42,8 +42,6 @@ const OrderPage: NextPageWithLayout = () => {
   const fromCart = Object.keys(router.query).length === 0;
   const cartItems = useSelector(selectedCart);
   const selectedProduct = useSelector(order);
-  console.log('cartItems', cartItems);
-  console.log('selectedProduct', selectedProduct);
 
   const productList = fromCart ? cartItems : selectedProduct;
   const totalPrice = getTotalPrice(productList);

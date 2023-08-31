@@ -4,9 +4,9 @@ import { LayoutProps } from '../../../types/common/types';
 import { useRouter } from 'next/router';
 
 const NestedLayout = ({ children }: LayoutProps) => {
-  const { asPath } = useRouter();
-  console.log(asPath);
-  const isOrderPath = asPath === '/order';
+  const { pathname } = useRouter();
+  const router = useRouter();
+  const isOrderPath = pathname === '/order';
 
   return (
     <Styled.Wrapper>

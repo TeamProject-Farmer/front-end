@@ -4,7 +4,6 @@ import { RequestPayParams, PostOrderData } from 'src/types/order/types';
 // 쿠폰 조회
 export const getMemberCoupon = async () => {
   const response = await request.get('/member/coupon/use');
-  console.log(response.data);
   return response.data;
 };
 
