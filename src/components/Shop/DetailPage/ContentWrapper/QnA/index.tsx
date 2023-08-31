@@ -7,7 +7,7 @@ import { getQnAList } from 'src/apis/shop/qna';
 import { QnAProps } from 'src/types/shop/types';
 import { userToken } from 'src/types/shop/types';
 import OnOffButton from './OnOffButton';
-import QnAModal from '@components/Common/MiniModal/QnAModal';
+import QnAModal from '@components/Common/Modal/QnAModal';
 import QnAWrapper from '@components/Shop/DetailPage/ContentWrapper/QnA/QnAWrapper';
 import MyQnA from './MyQnA';
 import Pagination from '../Pagination';

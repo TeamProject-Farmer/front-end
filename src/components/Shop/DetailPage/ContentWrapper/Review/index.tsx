@@ -45,9 +45,6 @@ const Review = () => {
 
   const handleReviewStar = async () => {
     try {
-      console.log('reviewPage-----productId');
-      console.log(productId);
-
       const response = await getReviewStar(productId);
       setReviewStar(response);
       setReviewTotalStar(response.averageStarRating);

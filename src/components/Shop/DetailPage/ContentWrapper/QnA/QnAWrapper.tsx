@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import handleNickname from 'src/utils/shop/handleNickname';
-import {  getDetailQnA } from 'src/apis/shop/qna';
+import { getDetailQnA } from 'src/apis/shop/qna';
 import { QnAProps } from 'src/types/shop/types';
 import VerticalLine from '@components/Shop/Common/VerticalLine';
-import DetailQnA from '@components/Common/MiniModal/DetailQnA';
+import DetailQnA from '@components/Common/Modal/DetailQnA';
 import secret from '@assets/images/shop/secretIcon.svg';
 
-const QnAWrapper = (props: {detailList: QnAProps[]}) => {
+const QnAWrapper = (props: { detailList: QnAProps[] }) => {
   const { detailList } = props;
 
   const [qnaId, setQnaId] = useState<number>(0);
@@ -23,8 +23,8 @@ const QnAWrapper = (props: {detailList: QnAProps[]}) => {
     setDetailOpen(false);
   };
   const handleDate = (date: string) => {
-    return date.slice(0, 10)+' '+date.slice(11,19)
-  }
+    return date.slice(0, 10) + ' ' + date.slice(11, 19);
+  };
   const handleDetailData = async () => {
     try {
       const response = await getDetailQnA(qnaId);
@@ -33,7 +33,7 @@ const QnAWrapper = (props: {detailList: QnAProps[]}) => {
       setAnswer(response.answer);
       setQcreatedDate(response.qcreatedDate);
       setAcreatedDate(response.acreatedDate);
-      if (response.qcreatedDate) setIsSecret(false);  
+      if (response.qcreatedDate) setIsSecret(false);
     } catch (err) {
       if (err.response.data.message == '비밀글 입니다') {
         setIsSecret(true);
@@ -46,17 +46,17 @@ const QnAWrapper = (props: {detailList: QnAProps[]}) => {
   return (
     <>
       {detailOpen === true && isSecret != true ? (
-          <DetailQnA
-            qnaId={qnaId}
-            subject={subject}
-            detailClose={detailClose}
-            setDetailOpen={setDetailOpen}
-            content={content}
-            answer={answer}
-            qcreatedDate={qcreatedDate}
-            acreatedDate={acreatedDate}
-          />
-        ) : null}
+        <DetailQnA
+          qnaId={qnaId}
+          subject={subject}
+          detailClose={detailClose}
+          setDetailOpen={setDetailOpen}
+          content={content}
+          answer={answer}
+          qcreatedDate={qcreatedDate}
+          acreatedDate={acreatedDate}
+        />
+      ) : null}
       {detailList.map(item => (
         <Styled.Single
           key={item.qnaId}

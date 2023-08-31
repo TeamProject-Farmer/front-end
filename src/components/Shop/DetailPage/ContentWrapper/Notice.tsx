@@ -21,6 +21,7 @@ const Notice = () => {
     { id: 2, title: '교환배송비', content: '5,000원' },
     { id: 3, title: '보내실 곳', content: '파머 주소' },
   ];
+  
   return (
     <Styled.Wrapper>
       <Styled.Title>배송</Styled.Title>
