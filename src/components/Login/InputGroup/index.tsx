@@ -79,7 +79,6 @@ const InputGroup = () => {
           color={theme.colors.white}
           backgroundColor={theme.colors.loginGreen}
           onClick={handleLogin}
-          
         />
       </Styled.InputWrapper>
     </>
