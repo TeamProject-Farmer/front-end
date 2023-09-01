@@ -7,7 +7,6 @@ import DetailImage from './DetailImage';
 import Review from './Review';
 import QnA from './QnA';
 import Notice from './Notice';
-// import SimilarProducts from './SimilarProducts';
 
 const ContentWrapper = (props: OptionBoxProps) => {
   const { selectList, setSelectList, selectPrice, setSelectPrice } = props;
@@ -20,8 +19,6 @@ const ContentWrapper = (props: OptionBoxProps) => {
           <Review />
           <QnA />
           <Notice />
-          {/* <SimilarProducts /> */}
-          {/* <Styled.BackButton>뒤로가기</Styled.BackButton> */}
         </Styled.ExceptOption>
         <OptionBox
           setSelectList={setSelectList}
