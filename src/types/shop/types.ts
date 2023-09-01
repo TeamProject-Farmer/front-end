@@ -99,6 +99,12 @@ export interface QnAProps {
   qcreatedDate: string;
 }
 
+export interface QnAList {
+  detailList: QnAProps[];
+  totalIndex: number;
+  totalElement: number;
+}
+
 //modal
 export interface DetailQnAProps {
   qnaId: number;

@@ -39,12 +39,19 @@ const ReviewModal = (props: ReviewModalProps) => {
   };
   //
   const [file, setFile] = useState();
+  const [imgSrcList, setImgSrcList] = useState<string>();
 
   // const onChange = (e: React.FormEvent<HTMLInputElement>) => {
-  const onChange = (e: any) => {
+  const onChange = e => {
     setFile(e.target.files[0]);
     console.log('image: ');
     console.log(e.target.files[0]);
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(e.target.files[0]);
+    fileReader.onload = e => {
+      const result = e?.target?.result as string;
+      setImgSrcList(result);
+    };
   };
 
   const onSubmit = async () => {
@@ -123,11 +130,33 @@ const ReviewModal = (props: ReviewModalProps) => {
               ></textarea>
               <div>{inputCount}/5,000</div>
             </Styled.TextBox>
-            <Styled.AddPhotoButtn>사진/동영상 첨부하기</Styled.AddPhotoButtn>
-            <form>
-              <input type="file" multiple onChange={onChange} />
-              {/* <input type="submit" value="upload" /> */}
-            </form>
+            {/* <Styled.AddPhotoButtn>사진/동영상 첨부하기</Styled.AddPhotoButtn> */}
+            <Styled.AddPhotoButtn show={imgSrcList?.length}>
+              <Styled.AddPhotoText>사진/동영상 첨부하기</Styled.AddPhotoText>
+              <Styled.AddPhotoInput type="file" multiple onChange={onChange} />
+            </Styled.AddPhotoButtn>
+            <Styled.PreviewPhotoWrapper show={imgSrcList?.length}>
+              <Image
+                src={imgSrcList}
+                alt="미리보기"
+                priority
+                width="0"
+                height="0"
+                sizes="105px"
+                style={{ width: '105px', height: '105px' }}
+              ></Image>
+              <Styled.MorePhotoButton>
+                <Styled.MorePhotoIcon>
+                  <div />
+                  <div />
+                  <Styled.AddPhotoInput
+                    type="file"
+                    multiple
+                    onChange={onChange}
+                  />
+                </Styled.MorePhotoIcon>
+              </Styled.MorePhotoButton>
+            </Styled.PreviewPhotoWrapper>
           </Styled.ReviewContentWrapper>
         </Styled.CommonWrapper>
         <Styled.Footer>

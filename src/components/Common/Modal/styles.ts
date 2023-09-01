@@ -264,18 +264,67 @@ const Styled = {
     flex-direction: column;
     align-items: center;
   `,
-  AddPhotoButtn: styled.button`
+  AddPhotoButtn: styled.form<{ show: number }>`
     width: 436px;
     height: 60px;
     border: none;
     border-radius: 5px;
     background-color: ${theme.colors.green1};
-    display: flex;
+    /* display: flex; */
+    display: ${props => (props.show > 0 ? 'none' : 'flex')};
     align-items: center;
     justify-content: center;
     font-size: 18px;
     font-weight: 500;
     color: #fff;
+    position: relative;
+  `,
+  AddPhotoText: styled.div`
+    position: absolute;
+    top: 15px;
+    left: 137px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+  `,
+  AddPhotoInput: styled.input`
+    opacity: 0;
+  `,
+  PreviewPhotoWrapper: styled.form<{ show: number }>`
+    width: 100%;
+    /* margin: 16px 0; */
+    display: ${props => (props.show > 0 ? 'flex' : 'none')};
+    gap: 5px;
+    align-items: center;
+  `,
+  MorePhotoButton: styled.form`
+    width: 105px;
+    height: 105px;
+    /* border-style: dotted; */
+    border: 1px dashed ${theme.colors.green1};
+  `,
+  MorePhotoIcon: styled.div`
+    position: relative;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    & > div:first-of-type {
+      position: absolute;
+      left: 50 px;
+      width: 4px;
+      height: 36px;
+      background-color: ${theme.colors.green1};
+    }
+    & > div:last-of-type {
+      position: absolute;
+      left: 35px;
+      width: 36px;
+      height: 5px;
+      background-color: ${theme.colors.green1};
+    }
   `,
   DetailTitle: styled.div`
     color: #285430;
