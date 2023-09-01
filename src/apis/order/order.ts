@@ -20,13 +20,6 @@ export const getMemberPoint = async () => {
   return response.data.point;
 };
 
-// 배송 메모 리스트
-export const getDeliveryMemo = async () => {
-  const response = await request.get('member/orders/delivery/memo-list');
-  console.log(response.data);
-  return response.data;
-};
-
 // 최근 배송지 이력 확인
 export const getMemberOrderAddress = async () => {
   const response = await request.get('/member/orders/address');

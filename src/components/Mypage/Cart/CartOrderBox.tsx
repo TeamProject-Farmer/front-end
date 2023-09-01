@@ -2,12 +2,23 @@ import React from 'react';
 import Plus from '@assets/images/mypage/cartPlus.svg';
 import Equals from '@assets/images/mypage/cartEquals.svg';
 import { Styled } from '../styles';
-import { CartOrderBoxProps } from 'src/types/mypage/types';
+import { CartListProps } from 'src/types/mypage/types';
 
 const CartOrderBox = ({
   cartListArray,
-  handleTotalPrice,
-}: CartOrderBoxProps) => {
+}: {
+  cartListArray: CartListProps[];
+}) => {
+  // CartListArray의 모든 객체의 total price 값을 합산
+  const handleTotalPrice = () => {
+    if (cartListArray) {
+      const totalPrice = cartListArray.reduce(
+        (acc, item) => acc + item.totalPrice,
+        0,
+      );
+      return totalPrice + 2500;
+    }
+  };
   return (
     <Styled.CartOrderBox>
       <Styled.OrderText>
@@ -17,7 +28,6 @@ const CartOrderBox = ({
         <span>{handleTotalPrice()}</span>원
       </Styled.OrderText>
       <Plus />
-      {/* 배송비 2500원 고정 */}
       <Styled.OrderText>
         배송비 <span>2,500</span>원
       </Styled.OrderText>

@@ -106,11 +106,6 @@ export interface CartButtonProps {
   onClick: () => void;
 }
 
-export interface CartOrderBoxProps {
-  cartListArray: CartListProps[];
-  handleTotalPrice: () => number;
-}
-
 export interface CartButtonBoxProps {
   getSelectedCartItems: () => CartListProps[];
   handlePlaceOrder: (selectedItems: CartListProps[] | undefined) => void;

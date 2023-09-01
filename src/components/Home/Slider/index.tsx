@@ -14,7 +14,6 @@ const Slider = ({ banner }) => {
     }, 3000);
     return () => clearInterval(sliderInterval);
   }, [activeIndex]);
-
   return (
     <Styled.Wrapper>
       <SliderContent sliderContents={banner} activeIndex={activeIndex} />

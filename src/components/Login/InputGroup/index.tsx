@@ -41,7 +41,6 @@ const InputGroup = () => {
 
   // 로그인 버튼 클릭시
   const handleLogin = async () => {
-    console.log('로그인');
     // 에러 분기처리
     // 이메일 & 패스워드 둘 다 or 이메일 입력되지 않은 경우
     if ((!email && !password) || !email) {

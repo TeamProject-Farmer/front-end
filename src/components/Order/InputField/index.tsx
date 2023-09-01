@@ -230,30 +230,24 @@ const InputField = ({
               name="payMethod"
               control={control}
               render={({ field }) => (
-                <Styled.FlexColumnWrapper>
-                  <Styled.FlexWrapper>
-                    <Styled.Dropdown
-                      caption="payMethod"
-                      defaultValue={undefined}
-                      {...field}
-                      onChange={(
-                        event: React.ChangeEvent<HTMLSelectElement>,
-                      ) => {
-                        field.onChange(event.target.value);
-                      }}
-                    >
-                      {payMethodOptions &&
-                        payMethodOptions.map(payMethod => (
-                          <Styled.Option
-                            key={payMethod.method}
-                            value={payMethod.method}
-                          >
-                            {payMethod.title}
-                          </Styled.Option>
-                        ))}
-                    </Styled.Dropdown>
-                  </Styled.FlexWrapper>
-                </Styled.FlexColumnWrapper>
+                <Styled.Dropdown
+                  caption="payMethod"
+                  defaultValue={undefined}
+                  {...field}
+                  onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
+                    field.onChange(event.target.value);
+                  }}
+                >
+                  {payMethodOptions &&
+                    payMethodOptions.map(payMethod => (
+                      <Styled.Option
+                        key={payMethod.title}
+                        value={payMethod.method}
+                      >
+                        {payMethod.title}
+                      </Styled.Option>
+                    ))}
+                </Styled.Dropdown>
               )}
             ></Controller>
           ),

@@ -17,7 +17,7 @@ request.interceptors.request.use(
       }
       return config;
     } catch (error) {
-      console.error(error);
+      console.error('token error', error);
       return config;
     }
   },
@@ -28,7 +28,7 @@ request.interceptors.request.use(
   },
 );
 
-// 토큰 재발급 응답 인터셉터 설정
+// 토큰 만료시
 request.interceptors.response.use(
   response => {
     return response;
@@ -36,24 +36,17 @@ request.interceptors.response.use(
   async error => {
     const originalRequest = error.config;
     const status = error.response?.status;
-
-    // 401 에러 처리 (토큰 만료 등)
     if (status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true; // 중복 재시도를 방지하기 위해 요청 객체에 _retry 속성 추가
-
+      originalRequest._retry = true;
       try {
-        // 토큰을 재발급
         const refreshToken = getCookie('refreshToken');
         const refreshData = await postMemberRefresh(refreshToken);
 
-        // 재발급 받은 토큰 저장
         setUser(refreshData);
         setCookie('refreshToken', refreshData.refreshToken);
 
-        // 재발급한 토큰을 요청 헤더에 포함
         originalRequest.headers.Authorization = `Bearer ${refreshData.accessToken}`;
 
-        // 기존 요청을 다시 시도
         return request(originalRequest);
       } catch (err) {
         return Promise.reject(err);
@@ -64,34 +57,22 @@ request.interceptors.response.use(
   },
 );
 
-let isRefreshing = false;
+// 로그인 유지
 
+let isRefreshing = false;
 request.interceptors.request.use(
   async config => {
-    const accessToken = store.getState().user.accessToken;
     const refreshToken = getCookie('refreshToken');
-    // console.log('accessToken', accessToken);
-    // console.log('refreshToken', refreshToken);
 
-    // if (!config.headers['Authorization']) {
-    //   try {
-    //     const refreshData = await postMemberRefresh(refreshToken);
-    //     setUser(refreshData);
-    //     setCookie('refreshToken', refreshData.refreshToken);
-    //     config.headers['Authorization'] = `Bearer ${refreshData.accessToken}`;
-    //     return config;
-    //   } catch (error) {
-    //     console.error(error);
-    //     return config;
-    //   }
-    // }
-    if (!accessToken && refreshToken) {
+    if (!config.headers['Authorization'] && refreshToken) {
       if (!isRefreshing) {
         isRefreshing = true;
         try {
           const refreshData = await postMemberRefresh(refreshToken);
+
           setUser(refreshData);
           setCookie('refreshToken', refreshData.refreshToken);
+
           config.headers['Authorization'] = `Bearer ${refreshData.accessToken}`;
           return config;
         } catch (error) {
@@ -116,15 +97,8 @@ request.interceptors.response.use(
     return response;
   },
   async error => {
-    // const originalRequest = error.config;
-    // const message = error.response.data.message;
-    // const errorConsole = error;
-    // console.log('errorConsole', errorConsole);
-    // console.log('error message', message);
-    // if (message === '회원이 존재하지 않습니다.') {
-    //   //쿠키 삭제 & 로그아웃
-    // }
-    console.log('에러발생');
+    // 에러 메시지가 토큰 만료라면 쿠키 지우기
+    console.log(error);
     console.error(error);
     return Promise.reject(error);
   },

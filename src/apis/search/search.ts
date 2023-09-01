@@ -41,6 +41,5 @@ export const postSortSearch = async (
 //최근 검색 항목
 export const getRecentSearch = async () => {
   const response = await request.get('/member/search/word');
-  console.log(response.data);
   return response.data;
 };

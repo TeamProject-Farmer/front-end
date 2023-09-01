@@ -40,7 +40,6 @@ const CartList = ({ cartListArray }: { cartListArray: CartListProps[] }) => {
 
       {/* 페이지 하단부 버튼 */}
       <Styled.CartCommonButton
-        onClick={() => console.log('쇼핑 페이지로')}
         backgroundColor={theme.colors.cartButtonGray}
         padding="0.7"
         width="125"
@@ -49,7 +48,7 @@ const CartList = ({ cartListArray }: { cartListArray: CartListProps[] }) => {
           size="14"
           color={theme.colors.black}
           weight="300"
-          onClick={() => router.push('/shop/다육이')}
+          onClick={() => router.push('/shop')}
         >
           쇼핑 계속하기
         </Styled.ButtonText>

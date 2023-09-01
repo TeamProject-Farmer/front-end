@@ -23,17 +23,6 @@ const OrderCartList = ({
   const router = useRouter();
   const selector = useSelector(cartSelector);
 
-  // CartListArray의 모든 객체의 total price 값을 합산
-  const handleTotalPrice = () => {
-    if (cartListArray) {
-      const totalPrice = cartListArray.reduce(
-        (acc, item) => acc + item.totalPrice,
-        0,
-      );
-      return totalPrice + 2500;
-    }
-  };
-
   // 장바구니 삭제 기능
   const handleRemoveCartList = async () => {
     await getRemoveCartList(selector.idArray);
@@ -71,10 +60,7 @@ const OrderCartList = ({
 
   return (
     <Styled.CheckWrapper>
-      <CartOrderBox
-        cartListArray={cartListArray}
-        handleTotalPrice={handleTotalPrice}
-      />
+      <CartOrderBox cartListArray={getSelectedCartItems()} />
 
       <CartButtonBox
         getSelectedCartItems={getSelectedCartItems}

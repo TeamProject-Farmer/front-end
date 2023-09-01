@@ -4,13 +4,11 @@ import request from '../base';
 // 장바구니 목록 조회
 export const getCartList = async () => {
   const response = await request('/member/cart/cart-list');
-  console.log(response.data);
   return response.data as CartListProps[];
 };
 
 // 장바구니 목록 삭제
 export const getRemoveCartList = async (cartId: number[]) => {
-  console.log('cartId', cartId);
   return await request.post('/member/cart/remove', cartId);
 };
 
