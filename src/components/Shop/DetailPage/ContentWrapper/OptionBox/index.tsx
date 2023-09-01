@@ -47,7 +47,11 @@ const OptionBox = (props: OptionBoxProps) => {
     ]);
     setSelectPrice(orderData[0].productPrice + item.optionPrice);
   };
-
+  const routeToCart = () => {
+    if (window.confirm("장바구니로 이동하시겠습니까?")) {
+      router.push('/mypage/cart');
+    } 
+  };
   //장바구니 추가
   const handleCartData = async () => {
     if (token == '') {
@@ -68,6 +72,7 @@ const OptionBox = (props: OptionBoxProps) => {
           count: count.toString(),
         });
         handleSelectList(options[0]);
+        routeToCart();
       }
     }
   };
