@@ -53,13 +53,11 @@ function App({ Component, pageProps, ...rest }: AppPropsWithLayout) {
     <CookiesProvider>
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
-          {/* <PersistGate loading={null} persistor={persistor}> */}
           <IconLoader />
           {globalStyles}
           <ThemeProvider theme={theme}>
             {getLayout(<Component {...pageProps} />)}
           </ThemeProvider>
-          {/* </PersistGate> */}
         </Provider>
       </QueryClientProvider>
     </CookiesProvider>

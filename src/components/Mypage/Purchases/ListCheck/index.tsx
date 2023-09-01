@@ -21,7 +21,7 @@ const ListCheck = ({
   const handleSearchList = async () => {
     try {
       if (startDate < endDate) {
-        // alert('정확한 날짜를 입력해주세요.');
+        alert('정확한 날짜를 입력해주세요.');
         return; // Alert를 발생시킨 후 함수 실행 중단
       }
       const res = await getPurchaseList({
