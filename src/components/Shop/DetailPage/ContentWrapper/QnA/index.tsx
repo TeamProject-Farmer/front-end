@@ -3,9 +3,9 @@ import theme from '@styles/theme';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
+import { useQuery } from 'react-query';
 import { getQnAList } from 'src/apis/shop/qna';
-import { QnAProps } from 'src/types/shop/types';
-import { userToken } from 'src/types/shop/types';
+import { userToken, QnAProps, QnAList } from 'src/types/shop/types';
 import OnOffButton from './OnOffButton';
 import QnAModal from '@components/Common/Modal/QnAModal';
 import QnAWrapper from '@components/Shop/DetailPage/ContentWrapper/QnA/QnAWrapper';
@@ -32,6 +32,13 @@ const Inquiry = () => {
     setModalOpen(false);
   };
 
+  //쿼리 사용 아직 미적용
+  // const { isLoading, data: qnaList } = useQuery('qnaList', () =>
+  //   getQnAList(productId, currentIndex),{
+  //     refetchOnWindowFocus: true, 
+  //     retry: 2,
+  //   }
+  // );
   const handleQnAList = async () => {
     const response = await getQnAList(productId, currentIndex);
     setDetailList(response.content);
@@ -43,6 +50,9 @@ const Inquiry = () => {
     handleQnAList();
   }, [productId, currentIndex, modalOpen]);
 
+  // if (isLoading) {
+  //   return <></>;
+  // }
   return (
     <Styled.Wrapper>
       <Styled.Container>
