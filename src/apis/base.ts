@@ -2,7 +2,7 @@ import axios from 'axios';
 import store from '../../store/index';
 import { postMemberRefresh } from './login/login';
 import setUser from 'src/utils/login/setUser';
-import { setCookie, getCookie } from 'src/utils/cookie';
+import { setCookie, getCookie, removeCookie } from 'src/utils/cookie';
 
 const request = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_KEY,
@@ -28,7 +28,7 @@ request.interceptors.request.use(
   },
 );
 
-// 토큰 만료시
+// accessToken 만료시
 request.interceptors.response.use(
   response => {
     return response;
@@ -52,7 +52,6 @@ request.interceptors.response.use(
         return Promise.reject(err);
       }
     }
-
     return Promise.reject(error);
   },
 );
@@ -92,14 +91,39 @@ request.interceptors.request.use(
   },
 );
 
+// refreshToken 만료시
 request.interceptors.response.use(
   response => {
     return response;
   },
   async error => {
-    // 에러 메시지가 토큰 만료라면 쿠키 지우기
-    console.log(error);
-    console.error(error);
+    const errorMsg = error.response.data.message;
+    if (errorMsg === '회원이 존재하지 않습니다.') {
+      try {
+        removeCookie('refreshToken');
+      } catch (err) {
+        return Promise.reject(err);
+      }
+    }
+    return Promise.reject(error);
+  },
+);
+
+// refreshToken 만료시
+request.interceptors.response.use(
+  response => {
+    return response;
+  },
+  async error => {
+    const errorMsg = error.response.data.message;
+    console.log(errorMsg);
+    // if (errorMsg === '회원이 존재하지 않습니다.') {
+    //   try {
+    //     removeCookie('refreshToken');
+    //   } catch (err) {
+    //     return Promise.reject(err);
+    //   }
+    // }
     return Promise.reject(error);
   },
 );
