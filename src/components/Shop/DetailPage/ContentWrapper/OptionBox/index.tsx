@@ -5,9 +5,10 @@ import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedOrder } from 'store/reducers/orderSlice';
 import { orderDataSelector } from 'src/types/shop/types';
-import { userToken } from 'src/types/shop/types';
-import { getDetail, postCart } from 'src/apis/shop/product';
 import { OptionBoxProps, selectOptionProps } from 'src/types/shop/types';
+import { userToken } from 'src/types/shop/types';
+import handlePrice from 'src/utils/shop/handlePrice';
+import { getDetail, postCart } from 'src/apis/shop/product';
 import heart from '@assets/images/shop/optionBoxHeart.svg';
 import arrow from '@assets/images/shop/optionArrow.svg';
 
@@ -32,7 +33,7 @@ const OptionBox = (props: OptionBoxProps) => {
   };
 
   const handleResultPrice = () => {
-    if (selectList.length > 0) return selectPrice + '원';
+    if (selectList.length > 0) return handlePrice(selectPrice) + '원';
     else return '0 원';
   };
 
