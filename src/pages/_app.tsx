@@ -14,7 +14,6 @@ import type { ReactElement, ReactNode } from 'react';
 import type { NextPage } from 'next';
 import 'react-datepicker/dist/react-datepicker.css';
 import '@components/Mypage/Purchases/Calendar/react-datepicker.css';
-import { useRouter } from 'next/router';
 import { CookiesProvider } from 'react-cookie';
 import { getCookie, setCookie } from 'src/utils/cookie';
 import { postMemberRefresh } from 'src/apis/login/login';

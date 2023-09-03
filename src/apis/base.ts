@@ -57,8 +57,31 @@ request.interceptors.response.use(
   },
 );
 
+// 로그인 유지
+let isRefreshing = false;
 request.interceptors.request.use(
   async config => {
+    const refreshToken = getCookie('refreshToken');
+
+    if (!config.headers['Authorization'] && refreshToken) {
+      if (!isRefreshing) {
+        isRefreshing = true;
+        try {
+          const refreshData = await postMemberRefresh(refreshToken);
+
+          setUser(refreshData);
+          setCookie('refreshToken', refreshData.refreshToken);
+
+          config.headers['Authorization'] = `Bearer ${refreshData.accessToken}`;
+          return config;
+        } catch (error) {
+          console.error(error);
+          return config;
+        } finally {
+          isRefreshing = false;
+        }
+      }
+    }
     return config;
   },
   error => {

@@ -16,6 +16,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(clearUser());
+    removeCookie('accessToken');
     removeCookie('refreshToken');
   };
   return (
