@@ -63,7 +63,7 @@ request.interceptors.request.use(
   async config => {
     const refreshToken = getCookie('refreshToken');
 
-    if (!config.headers['Authorization'] && refreshToken) {
+    if (refreshToken) {
       if (!isRefreshing) {
         isRefreshing = true;
         try {
@@ -103,6 +103,7 @@ request.interceptors.response.use(
       errorMsg === '토큰을 다시 확인해주세요'
     ) {
       try {
+        removeCookie('accessToken');
         removeCookie('refreshToken');
       } catch (err) {
         return Promise.reject(err);
