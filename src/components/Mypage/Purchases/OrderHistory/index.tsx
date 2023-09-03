@@ -8,7 +8,7 @@ import { OrderListProps } from 'src/types/mypage/types';
 const OrderHistory = ({ purchaseList }: { purchaseList: OrderListProps[] }) => {
   return (
     <Styled.CheckWrapper>
-      {purchaseList.length > 0 ? (
+      {purchaseList && purchaseList.length > 0 ? (
         <>
           <Styled.TitleText>주문내역 조회</Styled.TitleText>
           <Styled.FlexRow>

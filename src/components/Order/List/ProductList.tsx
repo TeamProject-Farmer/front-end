@@ -1,12 +1,12 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import { CartItem } from '../../../types/order/types';
+import { OrderItem } from '../../../types/order/types';
 
 const ProductList = ({ productList }) => {
   return (
     <Styled.Wrapper>
       {productList &&
-        productList?.map((ele: CartItem) => {
+        productList?.map((ele: OrderItem) => {
           const { productId, productName, count, productPrice, imgUrl } = ele;
           return (
             <Styled.ProductWrapper key={productId}>

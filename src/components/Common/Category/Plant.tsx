@@ -4,8 +4,8 @@ import Link from 'next/link';
 
 const Plant = ({ name, src }) => {
   return (
-    <Styled.Wrapper>
-      <Link href={`/shop/${name}`}>
+    <Link href={`/shop/${name}`}>
+      <Styled.Wrapper>
         <Image
           src={src}
           alt={name}
@@ -14,8 +14,8 @@ const Plant = ({ name, src }) => {
           style={{ objectFit: 'contain' }}
         />
         <Styled.Name>{name}</Styled.Name>
-      </Link>
-    </Styled.Wrapper>
+      </Styled.Wrapper>
+    </Link>
   );
 };
 

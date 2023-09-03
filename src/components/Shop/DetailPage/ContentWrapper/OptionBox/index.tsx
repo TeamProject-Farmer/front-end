@@ -15,7 +15,8 @@ import heart from '@assets/images/shop/optionBoxHeart.svg';
 import arrow from '@assets/images/shop/optionArrow.svg';
 
 const OptionBox = (props: OptionBoxProps) => {
-  const { isPanel, selectList, setSelectList, selectPrice, setSelectPrice } = props;
+  const { isPanel, selectList, setSelectList, selectPrice, setSelectPrice } =
+    props;
 
   const router = useRouter();
   const dispatch = useDispatch();
@@ -24,6 +25,8 @@ const OptionBox = (props: OptionBoxProps) => {
   const [isShowOptions, setShowOptions] = useState(false);
   const [options, setOptions] = useState<selectOptionProps[]>([]);
   const [lastOption, setLastOption] = useState<string>('상품을 선택하세요.');
+
+  // console.log('orderData', orderData);
 
   //옵션 데이터 받아오기
   const handleDetailData = async () => {
@@ -59,7 +62,7 @@ const OptionBox = (props: OptionBoxProps) => {
     );
     router.push({
       pathname: '/order',
-      query: 'fromDetail'
+      query: 'fromDetail',
     });
   };
 

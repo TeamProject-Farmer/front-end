@@ -43,7 +43,9 @@ const Menu = ({ setShowMenu }) => {
             {category &&
               category?.map((el: Category) => (
                 <Link href={`/shop/${el.categoryName}`}>
-                  <Styled.Li key={el.categoryId}>{el.categoryName}</Styled.Li>
+                  <Styled.Li onClick={handleClose} key={el.categoryId}>
+                    {el.categoryName}
+                  </Styled.Li>
                 </Link>
               ))}
           </Styled.Ul>
@@ -53,9 +55,9 @@ const Menu = ({ setShowMenu }) => {
           <Styled.Ul>
             {sizeCategory &&
               sizeCategory?.map(el => (
-                <Link href={`/shop/bysize/${el.id}`}>
-                  <Styled.Li key={el.id}>{el.title}</Styled.Li>
-                </Link>
+                <Styled.Li onClick={handleClose} key={el.id}>
+                  <Link href={`/shop/bysize/${el.id}`}>{el.title}</Link>
+                </Styled.Li>
               ))}
           </Styled.Ul>
         </Styled.FlexBox>

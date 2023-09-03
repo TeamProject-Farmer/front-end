@@ -28,6 +28,10 @@ export const Styled = {
     border-radius: 20px;
     border: 1px solid black;
   `,
+   HeaderFlexDiv: styled.div`
+   display: flex;
+   justify-content: space-between;
+ `,
   HeaderDiv: styled.div`
     display: flex;
     margin-top: 2rem;

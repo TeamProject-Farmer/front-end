@@ -22,17 +22,16 @@ const MDPick = () => {
       <Styled.PickItemWrapper>
         {MDPickList &&
           MDPickList.map(i => (
-            <Link href={`/shop/detail/${i.productId}`}>
-              <Product
-                key={i.productId}
-                thumbnailImg={i.imgUrl}
-                name={i.productName}
-                discountRate={i.discountRate}
-                price={i.price}
-                averageStarRating={i.averageStarRating}
-                reviewCount={i.reviewCount}
-              ></Product>
-            </Link>
+            <Product
+              key={i.productId}
+              productId={i.productId}
+              thumbnailImg={i.imgUrl}
+              name={i.productName}
+              discountRate={i.discountRate}
+              price={i.price}
+              averageStarRating={i.averageStarRating}
+              reviewCount={i.reviewCount}
+            ></Product>
           ))}
       </Styled.PickItemWrapper>
     </Styled.PickWrapper>

@@ -23,17 +23,6 @@ const OrderCartList = ({
   const router = useRouter();
   const selector = useSelector(cartSelector);
 
-  // CartListArray의 모든 객체의 total price 값을 합산
-  const handleTotalPrice = () => {
-    if (cartListArray) {
-      const totalPrice = cartListArray.reduce(
-        (acc, item) => acc + item.totalPrice,
-        0,
-      );
-      return totalPrice + 2500;
-    }
-  };
-
   // 장바구니 삭제 기능
   const handleRemoveCartList = async () => {
     await getRemoveCartList(selector.idArray);
@@ -55,7 +44,7 @@ const OrderCartList = ({
 
   // 선택된 상품들을 store 저장 후 주문 페이지로 route
   const handlePlaceOrder = (selectedItems: CartListProps[] | undefined) => {
-    if (selectedItems.length === 0) {
+    if (selectedItems && selectedItems.length === 0) {
       alert('상품을 선택해주세요');
       return;
     }
@@ -71,10 +60,7 @@ const OrderCartList = ({
 
   return (
     <Styled.CheckWrapper>
-      <CartOrderBox
-        cartListArray={cartListArray}
-        handleTotalPrice={handleTotalPrice}
-      />
+      <CartOrderBox cartListArray={getSelectedCartItems()} />
 
       <CartButtonBox
         getSelectedCartItems={getSelectedCartItems}

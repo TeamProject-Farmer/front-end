@@ -1,25 +1,23 @@
 import axios from 'axios';
 import store from '../../store/index';
-import { setAccessToken, setRefreshToken } from '../../store/index';
-import { getNewToken } from './login/login';
+import { postMemberRefresh } from './login/login';
+import setUser from 'src/utils/login/setUser';
+import { setCookie, getCookie, removeCookie } from 'src/utils/cookie';
 
 const request = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_KEY,
 });
 
 request.interceptors.request.use(
-  config => {
+  async config => {
     try {
       const accessToken = store.getState().user.accessToken;
-      // const refreshToken = store.getState().user.refreshToken;
-      // console.log('accessToken', accessToken);
-      // console.log('refreshToken', refreshToken);
       if (accessToken) {
         config.headers['Authorization'] = `Bearer ${accessToken}`;
       }
       return config;
     } catch (error) {
-      console.error(error);
+      console.error('token error', error);
       return config;
     }
   },
@@ -30,7 +28,7 @@ request.interceptors.request.use(
   },
 );
 
-// 토큰 재발급 응답 인터셉터 설정
+// accessToken 만료시
 request.interceptors.response.use(
   response => {
     return response;
@@ -38,52 +36,80 @@ request.interceptors.response.use(
   async error => {
     const originalRequest = error.config;
     const status = error.response?.status;
-
-    // 401 에러 처리 (토큰 만료 등)
     if (status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true; // 중복 재시도를 방지하기 위해 요청 객체에 _retry 속성 추가
-
+      originalRequest._retry = true;
       try {
-        // 토큰을 재발급
-        const state = store.getState();
-        const refreshToken = state.user.refreshToken;
+        const refreshToken = getCookie('refreshToken');
+        const refreshData = await postMemberRefresh(refreshToken);
 
-        const newToken = await getNewToken(refreshToken);
+        setUser(refreshData);
+        setCookie('accessToken', refreshData.accessToken);
+        setCookie('refreshToken', refreshData.refreshToken);
 
-        // 재발급 받은 토큰을 저장합니다.
-        setAccessToken(newToken.accessToken);
-        setRefreshToken(newToken.refreshToken);
+        originalRequest.headers.Authorization = `Bearer ${refreshData.accessToken}`;
 
-        // 재발급한 토큰을 요청 헤더에 포함
-        originalRequest.headers.Authorization = `Bearer ${newToken.accessToken}`;
-
-        // 기존 요청을 다시 시도
         return request(originalRequest);
       } catch (err) {
         return Promise.reject(err);
       }
     }
-
     return Promise.reject(error);
   },
 );
 
+// 로그인 유지
+let isRefreshing = false;
 request.interceptors.request.use(
-  config => {
+  async config => {
+    const refreshToken = getCookie('refreshToken');
+
+    if (refreshToken) {
+      if (!isRefreshing) {
+        isRefreshing = true;
+        try {
+          const refreshData = await postMemberRefresh(refreshToken);
+
+          setUser(refreshData);
+          setCookie('refreshToken', refreshData.refreshToken);
+
+          config.headers['Authorization'] = `Bearer ${refreshData.accessToken}`;
+          return config;
+        } catch (error) {
+          console.error(error);
+          return config;
+        } finally {
+          isRefreshing = false;
+        }
+      }
+    }
     return config;
   },
   error => {
+    console.log('에러발생');
+    console.error(error);
     return Promise.reject(error);
   },
 );
 
+// refreshToken 만료시
 request.interceptors.response.use(
   response => {
-    const res = response;
-    return res;
+    return response;
   },
-
-  error => {
+  async error => {
+    const errorMsg = error.response.data.message;
+    if (
+      errorMsg === '회원이 존재하지 않습니다.' ||
+      errorMsg === '토큰을 다시 확인해주세요'
+    ) {
+      try {
+        removeCookie('accessToken');
+        removeCookie('refreshToken');
+      } catch (err) {
+        return Promise.reject(err);
+      }
+    }
+    console.log(error);
     return Promise.reject(error);
   },
 );

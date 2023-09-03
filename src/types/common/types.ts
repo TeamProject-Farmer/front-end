@@ -18,6 +18,7 @@ export interface IconProps {
 }
 
 export interface ProductProps {
+  productId: number;
   thumbnailImg: string;
   name: string;
   price: number;

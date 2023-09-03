@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import SideAd from '../SideAd';
@@ -18,9 +17,9 @@ const ProductWrapper = (props: ProductWrapperProps) => {
     setCurrentIndex,
     totalIndex,
     isExceptional,
-    pageElements
+    pageElements,
   } = props;
- 
+
   return (
     <Styled.Wrapper>
       <OrderBar
@@ -29,19 +28,18 @@ const ProductWrapper = (props: ProductWrapperProps) => {
         productOption={productOption}
       />
       <Styled.OrderItemWrapper height={handleHeight(pageElements)}>
-        <SideAd top={0}/>
+        <SideAd top={0} />
         {productList?.map((item: ProductAPI) => (
           <Styled.OrderItem key={item.productId}>
-            <Link href={`/shop/detail/${item.productId}`}>
-              <Product
-                thumbnailImg={item.imgUrl}
-                name={item.productName}
-                discountRate={item.discountRate}
-                price={item.price}
-                averageStarRating={item.averageStarRating}
-                reviewCount={item.reviewCount}
-              ></Product>
-            </Link>
+            <Product
+              productId={item.productId}
+              thumbnailImg={item.imgUrl}
+              name={item.productName}
+              discountRate={item.discountRate}
+              price={item.price}
+              averageStarRating={item.averageStarRating}
+              reviewCount={item.reviewCount}
+            ></Product>
           </Styled.OrderItem>
         ))}
         <Pagination
@@ -57,11 +55,11 @@ const ProductWrapper = (props: ProductWrapperProps) => {
 
 const Styled = {
   Wrapper: styled.div``,
-  OrderItemWrapper: styled.div<{height: number}>`
+  OrderItemWrapper: styled.div<{ height: number }>`
     position: relative;
     width: ${theme.size.mainWidth};
     /* height: 2032px; */
-    height: ${props => props.height? `${props.height}px`: '2032px'};
+    height: ${props => (props.height ? `${props.height}px` : '2032px')};
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;

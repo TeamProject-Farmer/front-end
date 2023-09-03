@@ -20,17 +20,16 @@ const ListCheck = ({
   // 구매목록 조회
   const handleSearchList = async () => {
     try {
-      if (startDate > endDate) {
+      if (startDate < endDate) {
         alert('정확한 날짜를 입력해주세요.');
         return; // Alert를 발생시킨 후 함수 실행 중단
       }
-
       const res = await getPurchaseList({
         startDate,
         endDate,
         orderStatus,
       });
-      console.log(res.data);
+      console.log('구매 목록', res.data);
       setPurchaseList(res.data);
     } catch (err) {
       console.log(err);
@@ -51,6 +50,7 @@ const ListCheck = ({
           setEndDate={setEndDate}
           setStartDate={setStartDate}
           setSelectedDateRange={setSelectedDateRange}
+          handleSearchList={handleSearchList}
         />
 
         {/* 기간 검색 */}

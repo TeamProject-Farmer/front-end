@@ -8,11 +8,17 @@ import { RootState } from 'store';
 import { useDispatch } from 'react-redux';
 import { clearUser } from 'store/reducers/userSlice';
 import Menu from '../Menu';
+import { removeCookie } from 'src/utils/cookie';
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const isLogin = useSelector((state: RootState) => state.user.accessToken);
   const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(clearUser());
+    removeCookie('accessToken');
+    removeCookie('refreshToken');
+  };
   return (
     <Styled.Wrapper>
       {showMenu && <Menu setShowMenu={setShowMenu} />}
@@ -28,9 +34,9 @@ const Header = () => {
         </Link>
         <Styled.Utils>
           {isLogin && (
-            <Link href={'/'}>
+            <Link href="/">
               <Icon
-                onClick={() => dispatch(clearUser())}
+                onClick={handleLogout}
                 name="logout"
                 width={36}
                 height={32}

@@ -53,6 +53,7 @@ export interface SearchOptionProps {
   setSelectedDateRange: Dispatch<SetStateAction<[Date | null, Date | null]>>;
   setStartDate: Dispatch<SetStateAction<string>>;
   setEndDate: Dispatch<SetStateAction<string>>;
+  handleSearchList: () => void;
 }
 
 export interface OrderStatusProps {
@@ -104,11 +105,6 @@ export interface CartButtonProps {
   weight: string;
   label: string;
   onClick: () => void;
-}
-
-export interface CartOrderBoxProps {
-  cartListArray: CartListProps[];
-  handleTotalPrice: () => number;
 }
 
 export interface CartButtonBoxProps {

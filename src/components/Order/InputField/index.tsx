@@ -3,11 +3,7 @@ import { Styled as CheckBoxStyled } from './CheckBoxInput';
 import Styled from './styles';
 import { Controller } from 'react-hook-form';
 import { formatPhoneNumber } from 'src/utils/order/formatPhoneNumber';
-import {
-  DaumPostcodeData,
-  ShippingMsg,
-  InputFieldProps,
-} from 'src/types/order/types';
+import { DaumPostcodeData, InputFieldProps } from 'src/types/order/types';
 import {
   requiredErrorMsg,
   validateName,
@@ -17,8 +13,9 @@ import Button from './Button';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { postcodeScriptUrl } from 'react-daum-postcode/lib/loadPostcode';
 import { formatAddress } from 'src/utils/order/getAddressfromDaumPostcode';
-import { getDeliveryMemo } from 'src/apis/order/order';
 import { ControllerFieldState } from 'react-hook-form';
+import shippingMsgOptions from 'src/utils/order/shippingMsgOptions';
+import payMethodOptions from 'src/utils/order/payMethodOptions';
 
 const InputField = ({
   label,
@@ -28,12 +25,6 @@ const InputField = ({
   trigger,
   setShowShippingMsgInput,
 }: InputFieldProps) => {
-  // 배송 메시지 옵션
-  const [shippingMsgOptions, setShippingMsgOptions] = useState<ShippingMsg[]>();
-  useEffect(() => {
-    getDeliveryMemo().then(res => setShippingMsgOptions(res));
-  }, []);
-
   // 주소 입력
   const handleComplete = (data: DaumPostcodeData) => {
     const addressData = formatAddress(data);
@@ -232,6 +223,32 @@ const InputField = ({
               control={control}
               defaultValue=""
               render={({ field }) => <Styled.Input {...field} width={750} />}
+            ></Controller>
+          ),
+          payMethod: (
+            <Controller
+              name="payMethod"
+              control={control}
+              render={({ field }) => (
+                <Styled.Dropdown
+                  caption="payMethod"
+                  defaultValue={undefined}
+                  {...field}
+                  onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
+                    field.onChange(event.target.value);
+                  }}
+                >
+                  {payMethodOptions &&
+                    payMethodOptions.map(payMethod => (
+                      <Styled.Option
+                        key={payMethod.title}
+                        value={payMethod.method}
+                      >
+                        {payMethod.title}
+                      </Styled.Option>
+                    ))}
+                </Styled.Dropdown>
+              )}
             ></Controller>
           ),
         }[caption]

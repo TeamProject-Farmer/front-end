@@ -16,37 +16,30 @@ import request from '../base';
 //   return response.data.content;
 // };
 
-export const postSearch = async (
+export const postSearch = async (searchWord: string, memberEmail?: string) => {
+  const response = await request.post('/main/search', {
+    searchWord: searchWord,
+    memberEmail: memberEmail,
+  });
+  return response.data.content;
+};
+
+// 검색 결과 조건부 정렬
+export const postSortSearch = async (
   searchWord: string,
-  sortSearchCond?: string,
+  sortSearchCond: string,
   memberEmail?: string,
 ) => {
-  // const formData = new FormData();
-  // formData.append('searchWord', searchWord);
-  // formData.append('sortSearchCond', sortSearchCond);
-  // formData.append('memberEmail', memberEmail);
-  // console.log(formData.get('searchWord'));
-  // console.log(formData.get('sortSearchCond'));
-  // console.log(formData.get('memberEmail'));
-  const response = await request.post(
-    '/main/search',
-    {
-      searchWord: searchWord,
-      memberEmail: memberEmail,
-      sortSearchCond: sortSearchCond,
-    },
-    {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    },
-  );
+  const response = await request.post('/main/search', {
+    searchWord: searchWord,
+    sortSearchCond: sortSearchCond,
+    memberEmail: memberEmail,
+  });
   return response.data.content;
 };
 
 //최근 검색 항목
 export const getRecentSearch = async () => {
   const response = await request.get('/member/search/word');
-  console.log(response.data);
   return response.data;
 };
