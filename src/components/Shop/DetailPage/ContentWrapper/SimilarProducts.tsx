@@ -42,6 +42,7 @@ const SimilarProducts = () => {
         {TempList.map(i => (
           <SmallProduct
             key={i.id}
+            productId={i.id}
             thumbnailImg={i.image}
             name={i.contentTitle}
             discountRate={i.percent}
