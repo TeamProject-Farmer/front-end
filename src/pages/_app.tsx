@@ -16,6 +16,10 @@ import 'react-datepicker/dist/react-datepicker.css';
 import '@components/Mypage/Purchases/Calendar/react-datepicker.css';
 import { useRouter } from 'next/router';
 import { CookiesProvider } from 'react-cookie';
+import { getCookie, setCookie } from 'src/utils/cookie';
+import { postMemberRefresh } from 'src/apis/login/login';
+import setUser from 'src/utils/login/setUser';
+
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
@@ -29,7 +33,19 @@ const queryClient = new QueryClient();
 function App({ Component, pageProps, ...rest }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? (page => page);
 
-  const router = useRouter();
+  // const refreshToken = getCookie('refreshToken');
+  // useEffect(() => {
+  //   if (refreshToken) {
+  //     try {
+  //       postMemberRefresh(refreshToken).then(res => {
+  //         setUser(res);
+  //         setCookie('refreshToken', res.refreshToken);
+  //       });
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+  // });
 
   // useEffect(() => {
   //   const state = store.getState();

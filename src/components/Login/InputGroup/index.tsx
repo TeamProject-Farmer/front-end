@@ -32,6 +32,7 @@ const InputGroup = () => {
       const res = await getLogin({ email, password });
       const userData = res.data;
       dispatch(setUser(userData));
+      setCookie('accessToken', userData.accessToken);
       setCookie('refreshToken', userData.refreshToken);
       router.push('/');
     } catch (err) {

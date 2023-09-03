@@ -26,7 +26,7 @@ const SearchPage: NextPageWithLayout = () => {
 
   // 최근 검색 기록
   const { data: recentSearchWord } = useQuery(
-    [searchResult],
+    searchedWord,
     () => getRecentSearch(),
     {
       enabled: memberEmail ? true : false,

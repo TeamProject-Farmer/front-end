@@ -43,6 +43,7 @@ request.interceptors.response.use(
         const refreshData = await postMemberRefresh(refreshToken);
 
         setUser(refreshData);
+        setCookie('accessToken', refreshData.accessToken);
         setCookie('refreshToken', refreshData.refreshToken);
 
         originalRequest.headers.Authorization = `Bearer ${refreshData.accessToken}`;
@@ -56,32 +57,8 @@ request.interceptors.response.use(
   },
 );
 
-// 로그인 유지
-
-let isRefreshing = false;
 request.interceptors.request.use(
   async config => {
-    const refreshToken = getCookie('refreshToken');
-
-    if (!config.headers['Authorization'] && refreshToken) {
-      if (!isRefreshing) {
-        isRefreshing = true;
-        try {
-          const refreshData = await postMemberRefresh(refreshToken);
-
-          setUser(refreshData);
-          setCookie('refreshToken', refreshData.refreshToken);
-
-          config.headers['Authorization'] = `Bearer ${refreshData.accessToken}`;
-          return config;
-        } catch (error) {
-          console.error(error);
-          return config;
-        } finally {
-          isRefreshing = false;
-        }
-      }
-    }
     return config;
   },
   error => {
@@ -98,32 +75,17 @@ request.interceptors.response.use(
   },
   async error => {
     const errorMsg = error.response.data.message;
-    if (errorMsg === '회원이 존재하지 않습니다.') {
+    if (
+      errorMsg === '회원이 존재하지 않습니다.' ||
+      errorMsg === '토큰을 다시 확인해주세요'
+    ) {
       try {
         removeCookie('refreshToken');
       } catch (err) {
         return Promise.reject(err);
       }
     }
-    return Promise.reject(error);
-  },
-);
-
-// refreshToken 만료시
-request.interceptors.response.use(
-  response => {
-    return response;
-  },
-  async error => {
-    const errorMsg = error.response.data.message;
-    console.log(errorMsg);
-    // if (errorMsg === '회원이 존재하지 않습니다.') {
-    //   try {
-    //     removeCookie('refreshToken');
-    //   } catch (err) {
-    //     return Promise.reject(err);
-    //   }
-    // }
+    console.log(error);
     return Promise.reject(error);
   },
 );
