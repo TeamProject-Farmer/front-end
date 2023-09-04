@@ -11,7 +11,9 @@ const request = axios.create({
 request.interceptors.request.use(
   async config => {
     try {
-      const accessToken = store.getState().user.accessToken;
+      console.log(store.getState());
+      const accessToken = store.getState().token;
+      console.log(accessToken);
       if (accessToken) {
         config.headers['Authorization'] = `Bearer ${accessToken}`;
       }
@@ -41,9 +43,18 @@ request.interceptors.response.use(
       try {
         const refreshToken = getCookie('refreshToken');
         const refreshData = await postMemberRefresh(refreshToken);
+        const userInfo = {
+          socialId: refreshData.socialId,
+          email: refreshData.email,
+          nickname: refreshData.nickname,
+          point: refreshData.point,
+          grade: refreshData.grade,
+          role: refreshData.role,
+          cumulativeAmount: refreshData.cumulativeAmount,
+          memberCoupon: refreshData.memberCoupon,
+        };
 
-        setUser(refreshData);
-        setCookie('accessToken', refreshData.accessToken);
+        setUser(userInfo);
         setCookie('refreshToken', refreshData.refreshToken);
 
         originalRequest.headers.Authorization = `Bearer ${refreshData.accessToken}`;
@@ -61,21 +72,32 @@ request.interceptors.response.use(
 let isRefreshing = false;
 request.interceptors.request.use(
   async config => {
+    const user = store.getState().token;
     const refreshToken = getCookie('refreshToken');
 
-    if (refreshToken) {
+    if (!user && refreshToken) {
       if (!isRefreshing) {
         isRefreshing = true;
         try {
+          console.log('working');
           const refreshData = await postMemberRefresh(refreshToken);
+          const userInfo = {
+            socialId: refreshData.socialId,
+            email: refreshData.email,
+            nickname: refreshData.nickname,
+            point: refreshData.point,
+            grade: refreshData.grade,
+            role: refreshData.role,
+            cumulativeAmount: refreshData.cumulativeAmount,
+            memberCoupon: refreshData.memberCoupon,
+          };
 
-          setUser(refreshData);
+          setUser(userInfo);
           setCookie('refreshToken', refreshData.refreshToken);
 
           config.headers['Authorization'] = `Bearer ${refreshData.accessToken}`;
           return config;
         } catch (error) {
-          console.error(error);
           return config;
         } finally {
           isRefreshing = false;
@@ -103,8 +125,7 @@ request.interceptors.response.use(
       errorMsg === '토큰을 다시 확인해주세요'
     ) {
       try {
-        removeCookie('accessToken');
-        removeCookie('refreshToken');
+        // removeCookie('refreshToken');
       } catch (err) {
         return Promise.reject(err);
       }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from '@pages/layout';
 import NestedLayout from '@components/Search/Layout';
 import SearchContainer from '@components/Search/SearchContainer';
@@ -16,6 +16,10 @@ import {
 import { sortingOptions } from 'src/utils/search/sortingOptions';
 import { useQuery } from 'react-query';
 import { ProductProps } from 'src/types/common/types';
+import { postMemberRefresh } from 'src/apis/login/login';
+import { getCookie, setCookie } from 'src/utils/cookie';
+import { setUser } from 'store/reducers/userSlice';
+import { useDispatch } from 'react-redux';
 
 const SearchPage: NextPageWithLayout = () => {
   const [inputValue, setInputValue] = useState<string>('');
@@ -25,13 +29,9 @@ const SearchPage: NextPageWithLayout = () => {
   const memberEmail = useSelector((state: RootState) => state.user.email);
 
   // 최근 검색 기록
-  const { data: recentSearchWord } = useQuery(
-    searchedWord,
-    () => getRecentSearch(),
-    {
-      enabled: memberEmail ? true : false,
-    },
-  );
+  const { data: recentSearchWord } = useQuery(searchedWord, getRecentSearch, {
+    enabled: memberEmail ? true : false,
+  });
 
   // 검색 input value값 관리
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>

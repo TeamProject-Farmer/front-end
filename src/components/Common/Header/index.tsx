@@ -9,15 +9,20 @@ import { useDispatch } from 'react-redux';
 import { clearUser } from 'store/reducers/userSlice';
 import Menu from '../Menu';
 import { removeCookie } from 'src/utils/cookie';
+import { useRouter } from 'next/router';
+import { clearToken } from 'store/reducers/tokenSlice';
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
-  const isLogin = useSelector((state: RootState) => state.user.accessToken);
+  const isLogin = useSelector((state: RootState) => state.user.email);
+
   const dispatch = useDispatch();
+  const router = useRouter();
   const handleLogout = () => {
     dispatch(clearUser());
-    removeCookie('accessToken');
+    dispatch(clearToken());
     removeCookie('refreshToken');
+    router.push('/');
   };
   return (
     <Styled.Wrapper>

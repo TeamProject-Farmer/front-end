@@ -4,8 +4,9 @@ import { AppProps } from 'next/app';
 import theme from '../styles/theme';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { globalStyles } from '@styles/globalStyle';
-import store from 'store';
+import { persistor, wrapper } from 'store';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import IconLoader from '@components/Common/IconLoader';
 import type { ReactElement, ReactNode } from 'react';
 import type { NextPage } from 'next';
@@ -26,15 +27,19 @@ const queryClient = new QueryClient();
 function App({ Component, pageProps, ...rest }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? (page => page);
 
+  const { store } = wrapper.useWrappedStore(rest);
+
   return (
     <CookiesProvider>
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
-          <IconLoader />
-          {globalStyles}
-          <ThemeProvider theme={theme}>
-            {getLayout(<Component {...pageProps} />)}
-          </ThemeProvider>
+          <PersistGate loading={null} persistor={persistor}>
+            <IconLoader />
+            {globalStyles}
+            <ThemeProvider theme={theme}>
+              {getLayout(<Component {...pageProps} />)}
+            </ThemeProvider>
+          </PersistGate>
         </Provider>
       </QueryClientProvider>
     </CookiesProvider>

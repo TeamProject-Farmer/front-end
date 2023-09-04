@@ -13,6 +13,8 @@ const index = () => {
     getCartList,
   );
 
+  console.log(cartListArray);
+
   return (
     <Layout>
       {cartListArray?.length === 0 ? (

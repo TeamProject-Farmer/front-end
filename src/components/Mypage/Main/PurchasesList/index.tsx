@@ -25,8 +25,8 @@ const PurchasesList = () => {
         <Styled.ListWrapper>
           {/* slice 메서드로 렌더링 제한 */}
           {purchaseArray?.slice(0, 7).map((purchase, index) => (
-            <Link href={`shop/detail/${purchase.productId}`}>
-              <Styled.ListDiv key={index}>
+            <Link key={index} href={`shop/detail/${purchase.productId}`}>
+              <Styled.ListDiv>
                 <Image
                   src={purchase.imgUrl}
                   alt="식물 사진"

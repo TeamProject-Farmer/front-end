@@ -10,6 +10,7 @@ const Styled = {
     height: 80px;
     display: flex;
     align-items: center;
+    justify-content: center;
   `,
   Menu: styled.div`
     margin-right: 484px;
