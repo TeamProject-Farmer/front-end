@@ -7,14 +7,23 @@ const ProductList = ({ productList }) => {
     <Styled.Wrapper>
       {productList &&
         productList?.map((ele: OrderItem) => {
-          const { productId, productName, count, productPrice, imgUrl } = ele;
+          const {
+            productId,
+            productName,
+            count,
+            productPrice,
+            imgUrl,
+            totalPrice,
+          } = ele;
           return (
             <Styled.ProductWrapper key={productId}>
               <Styled.ImgBox src={imgUrl} alt={productName} />
               <Styled.ContentWrapper>
                 <Styled.FontBlack>상품명 : {productName}</Styled.FontBlack>
                 <Styled.FontGray>수량 : {count}</Styled.FontGray>
-                <Styled.FontBlack>{productPrice}</Styled.FontBlack>
+                <Styled.FontBlack>
+                  {totalPrice ? totalPrice : productPrice}
+                </Styled.FontBlack>
               </Styled.ContentWrapper>
             </Styled.ProductWrapper>
           );

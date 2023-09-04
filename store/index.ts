@@ -46,16 +46,8 @@ export interface RootState {
 const persistConfig: PersistConfig<RootState> = {
   key: 'root',
   storage,
-  whitelist: ['user'],
-  blacklist: [
-    'cartIndex',
-    'selectedCart',
-    'banner',
-    'category',
-    'order',
-    'orderData',
-    'tokenSlice',
-  ],
+  whitelist: ['user', 'selectedCart', 'order'],
+  blacklist: ['cartIndex', 'banner', 'category', 'orderData'],
 };
 
 const rootReducer = (
@@ -71,7 +63,7 @@ const rootReducer = (
     category: categorySlice,
     order: orderSlice,
     orderData: orderDataSlice,
-    token: tokenSlice,
+    token: tokenSlice.reducer,
   });
   return combinedReducer(state, action);
 };
@@ -97,60 +89,3 @@ export default store;
 export const wrapper = createWrapper<Store<RootState>>(() => store);
 
 export const persistor = persistStore(store);
-// import { combineReducers, configureStore } from '@reduxjs/toolkit';
-// import userSlice from './reducers/userSlice';
-// import cartIndexSlice from './reducers/cartSlice';
-// import { CartState, UserState } from 'src/types/redux/types';
-// import { CartListProps } from 'src/types/mypage/types';
-// import { SelectedOrderProps } from 'src/types/shop/types';
-// import { OrderDataProps } from 'src/types/shop/types';
-// import selectedCartSlice from './reducers/selectedCartSlice';
-// import orderSlice from './reducers/orderSlice';
-// import orderDataSlice from './reducers/orderDataSlice';
-// import bannerSlice from './reducers/bannerSlice';
-// import { Category } from 'src/types/common/types';
-// import categorySlice from './reducers/categorySlice';
-// import storage from 'redux-persist/lib/storage';
-// import { PersistConfig, persistReducer, persistStore } from 'redux-persist';
-
-// export interface RootState {
-//   user: UserState;
-//   cartIndex: CartState;
-//   selectedCart: CartListProps[];
-//   banner: boolean;
-//   category: Category[];
-//   order: SelectedOrderProps[];
-//   orderData: OrderDataProps[];
-// }
-
-// const persistConfig: PersistConfig<RootState> = {
-//   key: 'root',
-//   storage,
-//   whitelist: ['user'],
-//   blacklist: [
-//     'cartIndex',
-//     'selectedCart',
-//     'banner',
-//     'category',
-//     'order',
-//     'orderData',
-//   ],
-// };
-
-// const reducers = combineReducers({
-//   user: userSlice.reducer,
-//   cartIndex: cartIndexSlice,
-//   selectedCart: selectedCartSlice,
-//   banner: bannerSlice,
-//   category: categorySlice,
-//   order: orderSlice,
-//   orderData: orderDataSlice,
-// });
-
-// const persistedReducer = persistReducer(persistConfig, reducers);
-
-// const store = configureStore({
-//   reducer: persistedReducer,
-// });
-
-// export default store;

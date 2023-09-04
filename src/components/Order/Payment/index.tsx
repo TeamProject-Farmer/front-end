@@ -29,6 +29,8 @@ const Payment = ({
     getUsedCoupon(selectedCouponId);
   }, [finalPrice]);
 
+  console.log('coupon', coupon);
+
   return (
     <>
       <InputGroup title="적립금/쿠폰">

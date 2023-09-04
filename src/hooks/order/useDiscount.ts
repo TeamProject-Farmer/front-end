@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { getMemberCoupon, getMemberPoint } from 'src/apis/order/order';
 import { Coupon } from 'src/types/order/types';
+import { getToken } from 'src/utils/login/setToken';
+import { getOrderPageInfo, myPromiseAll } from '../../apis/order/order';
 
 const useDiscount = (orderedPrice: number) => {
   const [point, setPoint] = useState<number>();
@@ -14,20 +16,36 @@ const useDiscount = (orderedPrice: number) => {
   const [disabledPointBtn, setDisabledPointBtn] = useState(false);
   const [discountedPrice, setDiscountedPrice] = useState<number>(0);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [pointData, couponData] = await Promise.all([
-          getMemberPoint(),
-          getMemberCoupon(),
-        ]);
-        setPoint(pointData);
-        setUsedPoint(pointData);
-        setCoupon(couponData);
-      } catch (error) {
-        console.error(error);
+  const fetchData = async () => {
+    try {
+      // const accessToken = getToken();
+      // if (!accessToken) return;
+      // const [pointData, couponData] = await Promise.all([
+      //   getMemberPoint(),
+      //   getMemberCoupon(),
+      // ]);
+      // console.log('pointData', pointData.point);
+      // const pointData = await getMemberPoint();
+      // const couponData = await getMemberCoupon();
+      // const { pointData, couponData } = await getOrderPageInfo();
+      const [pointData, couponData] = await myPromiseAll([
+        getMemberPoint,
+        getMemberCoupon,
+      ]);
+      console.log(pointData, 'pointData');
+      if (pointData) {
+        setPoint(pointData.point);
+        setUsedPoint(pointData.point);
       }
-    };
+
+      setCoupon(couponData);
+    } catch (error) {
+      console.log('포인트, 쿠폰', error);
+      return Promise.reject(error);
+    }
+  };
+
+  useEffect(() => {
     fetchData();
   }, []);
 

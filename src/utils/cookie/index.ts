@@ -1,9 +1,11 @@
 import { Cookies } from 'react-cookie';
 
 const cookies = new Cookies();
+const oneWeekFromNow = new Date();
+oneWeekFromNow.setDate(oneWeekFromNow.getDate() + 7);
 
-export const setCookie = (name: string, value: string, option?: any) => {
-  return cookies.set(name, value, { ...option });
+export const setCookie = (name: string, value: string) => {
+  return cookies.set(name, value, { path: '/', expires: oneWeekFromNow });
 };
 
 export const getCookie = (name: string) => {

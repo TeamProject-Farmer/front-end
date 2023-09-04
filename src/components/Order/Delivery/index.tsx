@@ -4,6 +4,7 @@ import InputField from '../InputField';
 import Styled from '../styles';
 import { getMemberOrderAddress } from 'src/apis/order/order';
 import { OrderedData } from 'src/types/order/types';
+import { getToken } from 'src/utils/login/setToken';
 
 const Delivery = ({ control, setValue, trigger }) => {
   const [haveOrdered, setHaveOrdered] = useState<boolean>(false);
@@ -13,6 +14,8 @@ const Delivery = ({ control, setValue, trigger }) => {
 
   // 최근 배송 목록 불러오기
   useEffect(() => {
+    const accessToken = getToken();
+    // if (!accessToken) return;
     getMemberOrderAddress().then(data => {
       if (data) {
         setOrderedData(data);

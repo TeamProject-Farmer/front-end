@@ -8,7 +8,8 @@ import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { setUser } from 'store/reducers/userSlice';
 import { setCookie } from 'src/utils/cookie';
-import { setToken } from 'store/reducers/tokenSlice';
+// import { setToken } from 'store/reducers/tokenSlice';
+import { setToken } from 'src/utils/login/setToken';
 
 const InputGroup = () => {
   const router = useRouter();
@@ -43,7 +44,8 @@ const InputGroup = () => {
         memberCoupon: userData.memberCoupon,
       };
       dispatch(setUser(userInfo));
-      dispatch(setToken(userData.accessToken));
+      // dispatch(setToken(userData.accessToken));
+      setToken(userData.accessToken);
       setCookie('refreshToken', userData.refreshToken);
       router.push('/');
     } catch (err) {

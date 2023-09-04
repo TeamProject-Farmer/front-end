@@ -1,5 +1,8 @@
 import request from '../base';
 import { RequestPayParams, PostOrderData } from 'src/types/order/types';
+import { getCookie, setCookie } from 'src/utils/cookie';
+import { getToken, setToken } from 'src/utils/login/setToken';
+import { postMemberRefresh } from '../login/login';
 
 // 쿠폰 조회
 export const getMemberCoupon = async () => {
@@ -17,7 +20,7 @@ export const postCouponDel = async (memberCouponId: number) => {
 // 적립금 조회
 export const getMemberPoint = async () => {
   const response = await request.post('/member/point');
-  return response.data.point;
+  return response.data;
 };
 
 // 최근 배송지 이력 확인
@@ -54,4 +57,49 @@ export const getOrdersComplete = async (orderNumber: string | string[]) => {
     `/member/orders/complete?orderNumber=${orderNumber}`,
   );
   return response.data;
+};
+
+// 오더페이지
+export const getOrderPageInfo = async () => {
+  const accessToken = getToken();
+  const refreshToken = getCookie('refreshToken');
+  if (!refreshToken) throw new Error('refreshToken 없음');
+
+  if (!accessToken) {
+    const response = await postMemberRefresh(refreshToken); // userData
+    const newAccessToken = response.accessToken;
+    const newRefreshToken = response.refreshToken;
+    setToken(newAccessToken);
+    setCookie('refreshToken', newRefreshToken);
+  }
+
+  const [pointData, couponData] = await Promise.all([
+    getMemberPoint(),
+    getMemberCoupon(),
+  ]);
+
+  return { pointData, couponData };
+};
+
+export const validatingTokens = async () => {
+  const accessToken = getToken();
+  const refreshToken = getCookie('refreshToken');
+  if (accessToken && refreshToken) return { accessToken, refreshToken };
+
+  if (!refreshToken) throw new Error('refreshToken 없음');
+
+  if (!accessToken) {
+    const response = await postMemberRefresh(refreshToken); // userData
+    const newAccessToken = response.accessToken;
+    const newRefreshToken = response.refreshToken;
+    setToken(newAccessToken);
+    setCookie('refreshToken', newRefreshToken);
+    return { accessToken: newAccessToken, refreshToken: newRefreshToken };
+  }
+};
+
+export const myPromiseAll = async (...asyncFtns) => {
+  validatingTokens();
+
+  return await Promise.all(asyncFtns);
 };
