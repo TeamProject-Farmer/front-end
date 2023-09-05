@@ -16,6 +16,10 @@ export interface Coupon {
   rateAmount: number;
 }
 
+export interface Point {
+  point: number;
+}
+
 export interface InputFieldProps {
   label?: string;
   caption?: string;

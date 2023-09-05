@@ -1,9 +1,9 @@
-import { getToken, setToken } from './token';
+import { getTokens, setToken } from './token';
 import { getCookie, setCookie } from '../cookie';
 import { postMemberRefresh } from 'src/apis/login/login';
 import setUser from '../login/setUser';
 
-const getNewTokens = async () => {
+const renewTokens = async () => {
   const refreshToken = getCookie('refreshToken');
 
   const response = await postMemberRefresh(refreshToken);
@@ -28,4 +28,4 @@ const getNewTokens = async () => {
   return { accessToken: newAccessToken, refreshToken: newRefreshToken };
 };
 
-export default getNewTokens;
+export default renewTokens;

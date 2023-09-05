@@ -1,14 +1,30 @@
 import { useState, useEffect } from 'react';
 import { getMemberCoupon, getMemberPoint } from 'src/apis/order/order';
 import { Coupon } from 'src/types/order/types';
-import { getToken } from 'src/utils/token/token';
+import { getTokens } from 'src/utils/token/token';
 import { getOrderPageInfo, myPromiseAll } from '../../apis/order/order';
+import { OrderedData } from 'src/types/order/types';
+import { useQuery, useQueries } from 'react-query';
+const useDiscount = (orderedPrice?: number) => {
+  // const { data: point } = useQuery({
+  //   queryKey: 'point',
+  //   queryFn: getMemberPoint,
+  // });
+  // const { data: coupon } = useQuery({
+  //   queryKey: 'coupon',
+  //   queryFn: getMemberCoupon,
+  // });
 
-const useDiscount = (orderedPrice: number) => {
-  const [point, setPoint] = useState<number>();
+  const [pointData, couponData] = useQueries([
+    { queryKey: ['point'], queryFn: getMemberPoint },
+    { queryKey: ['coupon'], queryFn: getMemberCoupon },
+  ]);
+
+  const { data: point } = pointData;
+  const { data: coupon } = couponData;
+
   const [usedPoint, setUsedPoint] = useState<number>();
 
-  const [coupon, setCoupon] = useState<Coupon[]>();
   const [selectedCouponId, setSelectedCouponId] = useState<number>(0);
   const [selectedCoupon, setSelectedCoupon] = useState<Coupon | null>();
 
@@ -16,26 +32,46 @@ const useDiscount = (orderedPrice: number) => {
   const [disabledPointBtn, setDisabledPointBtn] = useState(false);
   const [discountedPrice, setDiscountedPrice] = useState<number>(0);
 
-  const fetchData = async () => {
-    try {
-      // const pointData = await getMemberPoint();
-      // const couponData = await getMemberCoupon();
-      const { pointData, couponData } = await getOrderPageInfo();
-      if (pointData) {
-        setPoint(pointData.point);
-        setUsedPoint(pointData.point);
-      }
+  // const fetchData = async () => {
+  //   try {
+  //     // const pointData = await getMemberPoint();
+  //     // const couponData = await getMemberCoupon();
+  //     const accessToken = getTokens();
+  //     // const [pointData, couponData] = await myPromiseAll(
+  //     //   getMemberPoint(),
+  //     //   getMemberCoupon(),
+  //     // );
+  //     const pointData = { point: 123 };
+  //     const couponData = [
+  //       {
+  //         couponId: 1,
+  //         memberCouponId: 1,
+  //         benefits: '3000원 할인 쿠폰',
+  //         name: '3000원 할인 쿠폰',
+  //         couponPolicy: 'FIXED', // "FIXED" | "RATE"
+  //         fixedPrice: 3000,
+  //         rateAmount: 0,
+  //       },
+  //     ];
+  //     if (pointData) {
+  //       setPoint(pointData.point);
+  //       setUsedPoint(pointData.point);
+  //     }
 
-      setCoupon(couponData);
-    } catch (error) {
-      console.log('포인트, 쿠폰', error);
-      return Promise.reject(error);
-    }
-  };
+  //     setCoupon(couponData);
+  //     // if (addressData) {
+  //     //   setOrderedData(addressData);
+  //     //   setHaveOrdered(true);
+  //     // }
+  //   } catch (error) {
+  //     console.log('포인트, 쿠폰', error);
+  //     return Promise.reject(error);
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   // 쿠폰이 선택되었을 때
   useEffect(() => {

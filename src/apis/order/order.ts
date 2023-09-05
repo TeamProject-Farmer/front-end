@@ -1,11 +1,15 @@
 import request from '../base';
 import { RequestPayParams, PostOrderData } from 'src/types/order/types';
 import { getCookie, setCookie } from 'src/utils/cookie';
-import { getToken, setToken } from 'src/utils/token/token';
+import { getTokens, setToken } from 'src/utils/token/token';
 import { postMemberRefresh } from '../login/login';
+import axios from 'axios';
+import validateTokens from 'src/utils/token/validateTokens';
+import renewTokens from 'src/utils/token/getNewTokens';
+import { Coupon, Point, OrderedData } from 'src/types/order/types';
 
 // 쿠폰 조회
-export const getMemberCoupon = async () => {
+export const getMemberCoupon = async (): Promise<Coupon[]> => {
   const response = await request.get('/member/coupon/use');
   return response.data;
 };
@@ -18,13 +22,13 @@ export const postCouponDel = async (memberCouponId: number) => {
 };
 
 // 적립금 조회
-export const getMemberPoint = async () => {
+export const getMemberPoint = async (): Promise<number> => {
   const response = await request.post('/member/point');
-  return response.data;
+  return response.data.point;
 };
 
 // 최근 배송지 이력 확인
-export const getMemberOrderAddress = async () => {
+export const getMemberOrderAddress = async (): Promise<OrderedData> => {
   const response = await request.get('/member/orders/address');
   return response.data;
 };
@@ -61,28 +65,39 @@ export const getOrdersComplete = async (orderNumber: string | string[]) => {
 
 // 오더페이지
 export const getOrderPageInfo = async () => {
-  const accessToken = getToken();
-  const refreshToken = getCookie('refreshToken');
-  if (!refreshToken) throw new Error('refreshToken 없음');
+  const accessToken = getTokens();
+  // const refreshToken = getCookie('refreshToken');
+  // if (!refreshToken) throw new Error('refreshToken 없음');
 
-  if (!accessToken) {
-    const response = await postMemberRefresh(refreshToken); // userData
-    const newAccessToken = response.accessToken;
-    const newRefreshToken = response.refreshToken;
-    setToken(newAccessToken);
-    setCookie('refreshToken', newRefreshToken);
-  }
-
-  const [pointData, couponData] = await Promise.all([
+  // if (!accessToken) {
+  //   const response = await postMemberRefresh(refreshToken); // userData
+  //   const newAccessToken = response.accessToken;
+  //   const newRefreshToken = response.refreshToken;
+  //   setToken(newAccessToken);
+  //   setCookie('refreshToken', newRefreshToken);
+  // }
+  const [pointData, couponData, addressData] = await Promise.all([
     getMemberPoint(),
     getMemberCoupon(),
+    getMemberOrderAddress(),
   ]);
 
-  return { pointData, couponData };
+  return { pointData, couponData, addressData };
 };
 
 export const myPromiseAll = async (...func) => {
-  // validatingTokens();
-  const result = await Promise.all(func);
+  const { accessToken, refreshToken } = getTokens();
+
+  if (!refreshToken) throw new Error('로그인화면으로보내야함');
+
+  // 자 여러분 이제부터 refreshToken 존재합니다!
+  if (!accessToken) {
+    // const tokens = await renewTokens(); // 새걸로 갱신
+    await renewTokens();
+  }
+
+  // 자 여러분 이제부터 accessToken 존재합니다!
+
+  const result = await Promise.all(func); // 비동기처리 '동시'
   return result;
 };
