@@ -1,7 +1,7 @@
 import request from '../base';
 import { RequestPayParams, PostOrderData } from 'src/types/order/types';
 import { getCookie, setCookie } from 'src/utils/cookie';
-import { getToken, setToken } from 'src/utils/login/setToken';
+import { getToken, setToken } from 'src/utils/token/token';
 import { postMemberRefresh } from '../login/login';
 
 // 쿠폰 조회
@@ -81,25 +81,8 @@ export const getOrderPageInfo = async () => {
   return { pointData, couponData };
 };
 
-export const validatingTokens = async () => {
-  const accessToken = getToken();
-  const refreshToken = getCookie('refreshToken');
-  if (accessToken && refreshToken) return { accessToken, refreshToken };
-
-  if (!refreshToken) throw new Error('refreshToken 없음');
-
-  if (!accessToken) {
-    const response = await postMemberRefresh(refreshToken); // userData
-    const newAccessToken = response.accessToken;
-    const newRefreshToken = response.refreshToken;
-    setToken(newAccessToken);
-    setCookie('refreshToken', newRefreshToken);
-    return { accessToken: newAccessToken, refreshToken: newRefreshToken };
-  }
-};
-
-export const myPromiseAll = async (...asyncFtns) => {
-  validatingTokens();
-
-  return await Promise.all(asyncFtns);
+export const myPromiseAll = async (...func) => {
+  // validatingTokens();
+  const result = await Promise.all(func);
+  return result;
 };

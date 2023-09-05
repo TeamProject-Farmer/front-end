@@ -1,22 +1,21 @@
 import axios from 'axios';
-import { postMemberRefresh } from './login/login';
-import setUser from 'src/utils/login/setUser';
-import { setCookie, getCookie, removeCookie } from 'src/utils/cookie';
-// import { setToken } from 'store/reducers/tokenSlice';
-import { getToken, setToken } from 'src/utils/login/setToken';
-import { validatingTokens } from './order/order';
+import validateTokens from 'src/utils/token/validateTokens';
+import getNewTokens from 'src/utils/token/getNewTokens';
+import { getToken } from 'src/utils/token/token';
+import { getCookie } from 'src/utils/cookie';
 
 export const BASE_URL = process.env.NEXT_PUBLIC_API_KEY;
+
 const request = axios.create({
   baseURL: BASE_URL,
 });
 
 request.interceptors.request.use(
   async config => {
-    // const accessToken = store.getState().token;
-
-    const { accessToken } = await validatingTokens();
-
+    // console.log('인터셉터 탄다');
+    // const { accessToken } = await validateTokens();
+    const accessToken = getToken();
+    // const refreshToken = getCookie('refreshToken');
     if (accessToken) {
       config.headers['Authorization'] = `Bearer ${accessToken}`;
     }
@@ -29,36 +28,15 @@ request.interceptors.request.use(
   },
 );
 
-// 로그인 유지
 request.interceptors.request.use(
   async config => {
+    console.log('인터셉터 탄다');
     const accessToken = getToken();
     const refreshToken = getCookie('refreshToken');
-
     if (!accessToken && refreshToken) {
-      try {
-        console.log('로그인 유지 working');
-        const refreshData = await postMemberRefresh(refreshToken);
-        const userInfo = {
-          socialId: refreshData.socialId,
-          email: refreshData.email,
-          nickname: refreshData.nickname,
-          point: refreshData.point,
-          grade: refreshData.grade,
-          role: refreshData.role,
-          cumulativeAmount: refreshData.cumulativeAmount,
-          memberCoupon: refreshData.memberCoupon,
-        };
-
-        setUser(userInfo);
-        setToken(refreshData.accessToken);
-        setCookie('refreshToken', refreshData.refreshToken);
-
-        config.headers['Authorization'] = `Bearer ${refreshData.accessToken}`;
-        return config;
-      } catch (error) {
-        return config;
-      }
+      console.log('로그인 유지');
+      // const { accessToken } = await getNewTokens();
+      config.headers['Authorization'] = `Bearer ${accessToken}`;
     }
     return config;
   },
@@ -80,26 +58,8 @@ request.interceptors.response.use(
     if (status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       try {
-        console.log('토큰 만료시');
-        const refreshToken = getCookie('refreshToken');
-        const refreshData = await postMemberRefresh(refreshToken);
-        const userInfo = {
-          socialId: refreshData.socialId,
-          email: refreshData.email,
-          nickname: refreshData.nickname,
-          point: refreshData.point,
-          grade: refreshData.grade,
-          role: refreshData.role,
-          cumulativeAmount: refreshData.cumulativeAmount,
-          memberCoupon: refreshData.memberCoupon,
-        };
-
-        setUser(userInfo);
-        setToken(refreshData.accessToken);
-        setCookie('refreshToken', refreshData.refreshToken);
-
-        originalRequest.headers.Authorization = `Bearer ${refreshData.accessToken}`;
-
+        const token = await getNewTokens();
+        originalRequest.headers.Authorization = `Bearer ${token.accessToken}`;
         return request(originalRequest);
       } catch (err) {
         return Promise.reject(err);
@@ -109,57 +69,20 @@ request.interceptors.response.use(
   },
 );
 
-// accessToken이 없을 때
+// accessToken 만료시
 request.interceptors.response.use(
   response => {
     return response;
   },
   async error => {
-    console.log(error.response);
-    const refreshToken = getCookie('refreshToken');
-    const errorMsg = error.response.data.message;
-    if (errorMsg === '토큰을 다시 확인해주세요') {
+    const originalRequest = error.config;
+    const status = error.response?.status;
+    if (status === 500 && !originalRequest._retry) {
+      originalRequest._retry = true;
       try {
-        console.log('토큰 없을 때');
-        const refreshData = await postMemberRefresh(refreshToken);
-        const userInfo = {
-          socialId: refreshData.socialId,
-          email: refreshData.email,
-          nickname: refreshData.nickname,
-          point: refreshData.point,
-          grade: refreshData.grade,
-          role: refreshData.role,
-          cumulativeAmount: refreshData.cumulativeAmount,
-          memberCoupon: refreshData.memberCoupon,
-        };
-
-        setUser(userInfo);
-        setToken(refreshData.accessToken);
-        setCookie('refreshToken', refreshData.refreshToken);
-
-        error.config.headers[
-          'Authorization'
-        ] = `Bearer ${refreshData.accessToken}`;
-        return error;
-      } catch (err) {
-        return Promise.reject(err);
-      }
-    }
-    return Promise.reject(error);
-  },
-);
-
-// refreshToken 만료시
-request.interceptors.response.use(
-  response => {
-    return response;
-  },
-  async error => {
-    console.log('error', error);
-    const errorMsg = error.response.data.message;
-    if (errorMsg === '회원이 존재하지 않습니다.') {
-      try {
-        // removeCookie('refreshToken');
+        const token = await getNewTokens();
+        originalRequest.headers.Authorization = `Bearer ${token.accessToken}`;
+        return request(originalRequest);
       } catch (err) {
         return Promise.reject(err);
       }

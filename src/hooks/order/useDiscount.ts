@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getMemberCoupon, getMemberPoint } from 'src/apis/order/order';
 import { Coupon } from 'src/types/order/types';
-import { getToken } from 'src/utils/login/setToken';
+import { getToken } from 'src/utils/token/token';
 import { getOrderPageInfo, myPromiseAll } from '../../apis/order/order';
 
 const useDiscount = (orderedPrice: number) => {
@@ -18,21 +18,9 @@ const useDiscount = (orderedPrice: number) => {
 
   const fetchData = async () => {
     try {
-      // const accessToken = getToken();
-      // if (!accessToken) return;
-      // const [pointData, couponData] = await Promise.all([
-      //   getMemberPoint(),
-      //   getMemberCoupon(),
-      // ]);
-      // console.log('pointData', pointData.point);
       // const pointData = await getMemberPoint();
       // const couponData = await getMemberCoupon();
-      // const { pointData, couponData } = await getOrderPageInfo();
-      const [pointData, couponData] = await myPromiseAll([
-        getMemberPoint,
-        getMemberCoupon,
-      ]);
-      console.log(pointData, 'pointData');
+      const { pointData, couponData } = await getOrderPageInfo();
       if (pointData) {
         setPoint(pointData.point);
         setUsedPoint(pointData.point);

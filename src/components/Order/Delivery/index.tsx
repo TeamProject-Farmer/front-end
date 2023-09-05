@@ -4,7 +4,7 @@ import InputField from '../InputField';
 import Styled from '../styles';
 import { getMemberOrderAddress } from 'src/apis/order/order';
 import { OrderedData } from 'src/types/order/types';
-import { getToken } from 'src/utils/login/setToken';
+import { getToken } from 'src/utils/token/token';
 
 const Delivery = ({ control, setValue, trigger }) => {
   const [haveOrdered, setHaveOrdered] = useState<boolean>(false);

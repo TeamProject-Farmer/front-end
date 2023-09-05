@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { setUser } from 'store/reducers/userSlice';
 import { setCookie } from 'src/utils/cookie';
 // import { setToken } from 'store/reducers/tokenSlice';
-import { setToken } from 'src/utils/login/setToken';
+import { setToken } from 'src/utils/token/token';
 
 const InputGroup = () => {
   const router = useRouter();
