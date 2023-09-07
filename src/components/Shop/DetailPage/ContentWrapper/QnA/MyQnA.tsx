@@ -15,6 +15,7 @@ const MyQnA = ({ productId }: { productId: number }) => {
       const mine = await getMyQnA(productId);
       setMyDetailList(mine.content);
     } catch (err) {
+      alert('로그인 후 이용 가능한 기능입니다.');
       router.replace('/login');
     }
   };
