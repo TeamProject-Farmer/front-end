@@ -1,12 +1,8 @@
 import Styled from './styles';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useQuery } from 'react-query';
-import { getNews } from 'src/apis/home/home';
 
-const News = () => {
-  const { data: news, isLoading } = useQuery('news', getNews);
-  if (isLoading) return;
+const News = ({ news }) => {
   const { subject, content, imgUrl } = news;
   return (
     <Styled.Wrapper>

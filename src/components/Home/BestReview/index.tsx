@@ -2,19 +2,10 @@ import Styled from './styles';
 import Title from '../Common/Title';
 import Review from './Review';
 import { Review as IReview } from 'src/types/home/types';
-import { useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
-import { getBestReview } from 'src/apis/home/home';
+import { useState } from 'react';
 
-const BestReview = () => {
-  const [reviewList, setReviewList] = useState([]);
-  const { data, isLoading } = useQuery('bestReview', getBestReview);
-
-  useEffect(() => {
-    if (data && !isLoading) {
-      setReviewList([...data, ...data]);
-    }
-  }, [data]);
+const BestReview = ({ bestReview }) => {
+  const [reviewList, setReviewList] = useState([...bestReview, ...bestReview]);
 
   return (
     <Styled.Wrapper>

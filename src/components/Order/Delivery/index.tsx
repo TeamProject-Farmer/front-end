@@ -6,7 +6,7 @@ import { getMemberOrderAddress } from 'src/apis/order/order';
 import { OrderedData } from 'src/types/order/types';
 import { getTokens } from 'src/utils/token/token';
 import useDiscount from 'src/hooks/order/useDiscount';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 const Delivery = ({ control, setValue, trigger }) => {
   const [haveOrdered, setHaveOrdered] = useState<boolean>(false);
   // const [orderedData, setOrderedData] = useState<OrderedData>();
@@ -16,7 +16,7 @@ const Delivery = ({ control, setValue, trigger }) => {
   // 최근 배송 목록 불러오기
 
   const { data: orderedData } = useQuery({
-    queryKey: 'orderedData',
+    queryKey: ['orderedData'],
     queryFn: getMemberOrderAddress,
     onSuccess: data => setHaveOrdered(true),
   });

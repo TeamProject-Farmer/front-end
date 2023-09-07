@@ -2,15 +2,11 @@ import { useState, useEffect, useMemo } from 'react';
 import styled from '@emotion/styled';
 import SliderContent from './SliderContent';
 import Indicator from './Indicator';
-import { useQuery } from 'react-query';
-import { getMainBanner } from 'src/apis/home/home';
 
-const Slider = () => {
-  const { data: banner, isLoading } = useQuery('banner', getMainBanner);
+const Slider = ({ banner }) => {
   const [activeIndex, setActiveIndex] = useState(1);
 
   useEffect(() => {
-    if (isLoading) return;
     const sliderInterval = setInterval(() => {
       setActiveIndex(prevIndex =>
         prevIndex === banner.length ? 1 : prevIndex + 1,
@@ -19,7 +15,6 @@ const Slider = () => {
     return () => clearInterval(sliderInterval);
   }, [activeIndex]);
 
-  if (isLoading) return;
   return (
     <Styled.Wrapper>
       <SliderContent sliderContents={banner} activeIndex={activeIndex} />

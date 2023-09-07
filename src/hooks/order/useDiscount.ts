@@ -4,7 +4,7 @@ import { Coupon } from 'src/types/order/types';
 import { getTokens } from 'src/utils/token/token';
 import { getOrderPageInfo, myPromiseAll } from '../../apis/order/order';
 import { OrderedData } from 'src/types/order/types';
-import { useQuery, useQueries } from 'react-query';
+import { useQuery, useQueries } from '@tanstack/react-query';
 const useDiscount = (orderedPrice?: number) => {
   // const { data: point } = useQuery({
   //   queryKey: 'point',
@@ -15,10 +15,12 @@ const useDiscount = (orderedPrice?: number) => {
   //   queryFn: getMemberCoupon,
   // });
 
-  const [pointData, couponData] = useQueries([
-    { queryKey: ['point'], queryFn: getMemberPoint },
-    { queryKey: ['coupon'], queryFn: getMemberCoupon },
-  ]);
+  const [pointData, couponData] = useQueries({
+    queries: [
+      { queryKey: ['point'], queryFn: getMemberPoint },
+      { queryKey: ['coupon'], queryFn: getMemberCoupon },
+    ],
+  });
 
   const { data: point } = pointData;
   const { data: coupon } = couponData;

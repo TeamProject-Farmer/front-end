@@ -2,11 +2,8 @@ import Styled from './styles';
 import Title from '../Common/Title';
 import Plant from './Plant';
 import { Plant as IPlant } from 'src/types/home/types';
-import { useQuery } from 'react-query';
-import { getBestProduct } from 'src/apis/home/home';
 
-const BestPlant = () => {
-  const { data: bestPlant } = useQuery('bestPlant', getBestProduct);
+const BestPlant = ({ bestPlant }) => {
   const settings = {
     centerMode: true,
     dots: false,

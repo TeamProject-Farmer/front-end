@@ -7,7 +7,7 @@ import NestedLayout from '@components/Order/NestedLayout';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { getOrdersComplete } from 'src/apis/order/order';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import formatOrderDate from 'src/utils/order/formatOrderDate';
 
 const orderResultPage: NextPageWithLayout = () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Styled } from '../../styles';
 import { useRouter } from 'next/router';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { PurchaseListProps } from 'src/types/mypage/types';
 import { getPurchase } from 'src/apis/mypage/purchase';
 import Image from 'next/image';
@@ -10,10 +10,10 @@ import Link from 'next/link';
 const PurchasesList = () => {
   const route = useRouter();
 
-  const { data: purchaseArray } = useQuery<PurchaseListProps[]>(
-    'purchase',
-    getPurchase,
-  );
+  const { data: purchaseArray } = useQuery<PurchaseListProps[]>({
+    queryKey: ['purchase'],
+    queryFn: getPurchase,
+  });
 
   return purchaseArray?.length === 0 ? null : (
     <Styled.BoxWrapper margin="8">

@@ -2,7 +2,8 @@ import 'tailwindcss/tailwind.css';
 import { ThemeProvider } from '@emotion/react';
 import { AppProps } from 'next/app';
 import theme from '../styles/theme';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { globalStyles } from '@styles/globalStyle';
 import { persistor, wrapper } from 'store';
 import { Provider } from 'react-redux';
@@ -41,6 +42,7 @@ function App({ Component, pageProps, ...rest }: AppPropsWithLayout) {
             </ThemeProvider>
           </PersistGate>
         </Provider>
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </CookiesProvider>
   );

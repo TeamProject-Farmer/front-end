@@ -3,7 +3,7 @@ import { Styled } from '../styles';
 import { CartListProps } from 'src/types/mypage/types';
 import { useSelector } from 'react-redux';
 import { clearCartIndex, setChecked } from 'store/reducers/cartSlice';
-import { useQueryClient } from 'react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
 import { RootState } from 'store';
 import { getRemoveCartList } from 'src/apis/mypage/cart';
@@ -26,7 +26,7 @@ const OrderCartList = ({
   // 장바구니 삭제 기능
   const handleRemoveCartList = async () => {
     await getRemoveCartList(selector.idArray);
-    await queryClient.invalidateQueries('cartList');
+    await queryClient.invalidateQueries(['cartList']);
     dispatch(clearCartIndex());
     dispatch(setChecked(false));
   };
