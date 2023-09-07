@@ -10,7 +10,6 @@ import { clearUser } from 'store/reducers/userSlice';
 import Menu from '../Menu';
 import { getCookie, removeCookie } from 'src/utils/cookie';
 import { useRouter } from 'next/router';
-import { clearToken } from 'store/reducers/tokenSlice';
 import { setToken } from 'store/reducers/tokenSlice';
 
 const Header = () => {
@@ -20,9 +19,9 @@ const Header = () => {
 
   const dispatch = useDispatch();
   const router = useRouter();
+
   const handleLogout = () => {
     dispatch(clearUser());
-    // dispatch(clearToken());
     setToken('');
     removeCookie('refreshToken');
     router.push('/');
