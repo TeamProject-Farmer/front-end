@@ -51,6 +51,7 @@ request.interceptors.response.use(
     if (status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       try {
+        console.log('인터셉터1');
         const token = await renewTokens();
         originalRequest.headers.Authorization = `Bearer ${token.accessToken}`;
         return request(originalRequest);

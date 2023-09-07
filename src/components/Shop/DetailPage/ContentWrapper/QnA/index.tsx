@@ -3,7 +3,7 @@ import theme from '@styles/theme';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from 'react-query';
 import { getQnAList } from 'src/apis/shop/qna';
 import { userToken, QnAProps, QnAList } from 'src/types/shop/types';
 import OnOffButton from './OnOffButton';
@@ -35,7 +35,7 @@ const Inquiry = () => {
   //쿼리 사용 아직 미적용
   // const { isLoading, data: qnaList } = useQuery('qnaList', () =>
   //   getQnAList(productId, currentIndex),{
-  //     refetchOnWindowFocus: true,
+  //     refetchOnWindowFocus: true, 
   //     retry: 2,
   //   }
   // );

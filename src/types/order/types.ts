@@ -33,7 +33,6 @@ export interface InputFieldProps {
 export interface PaymentInputProps {
   label?: string;
   caption?: string;
-  control?: Control<FieldValues>;
   couponOptions?: Coupon[];
   usedPoint?: number;
   handleSelectedCoupon?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -72,7 +71,7 @@ export interface OrderItem {
   imgUrl: string;
   productName: string;
   optionId: number;
-  optionName?: string;
+  optionName: string;
   count: number;
   productPrice: number;
   totalPrice?: number;
