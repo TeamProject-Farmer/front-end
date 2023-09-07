@@ -1,4 +1,6 @@
+import axios from 'axios';
 import request from '../base';
+import { BASE_URL } from '../base';
 import {
   productListProps,
   shopBySizeProps,
@@ -10,8 +12,8 @@ export const getProductList = async (props: productListProps) => {
   let { productOption, categoryId, currentIndex } = props;
   if (categoryId == undefined) categoryId = 1;
 
-  const response = await request({
-    url: `/main/product/${categoryId}?page=${currentIndex}&size=16`,
+  const response = await axios({
+    url: `${BASE_URL}/main/product/${categoryId}?page=${currentIndex}&size=16`,
     params: {
       orderCondition: productOption,
     },
@@ -21,39 +23,38 @@ export const getProductList = async (props: productListProps) => {
 
 //MD PICK 리스트
 export const getMDPickList = async () => {
-  const response = await request({
-    url: '/main/product/md-pick?division=MD_PICK',
-  });
+  const response = await axios(
+    `${BASE_URL}/main/product/md-pick?division=MD_PICK`,
+  );
   return response.data;
 };
 
 //SHOP BY SIZE 상품
 export const getShopBySize = async (props: shopBySizeProps) => {
   const { sizeOption, orderType, currentIndex } = props;
-  const response = await request({
-    url: `main/product/shop-by-size/product-list?productSize=${sizeOption}&page=${currentIndex}&size=16&sort=string&orderCondition=${orderType}`,
-  });
+  const response = await axios(
+    `${BASE_URL}/main/product/shop-by-size/product-list?productSize=${sizeOption}&page=${currentIndex}&size=16&sort=string&orderCondition=${orderType}`,
+  );
   return response.data;
 };
 
 //상품 세부 페이지
 export const getDetail = async (productId: number) => {
-  const response = await request({ url: `/main/product/detail/${productId}` });
+  const response = await axios(`${BASE_URL}/main/product/detail/${productId}`);
   return response.data;
 };
 
 //기획전 상품 리스트
 export const getEventProduct = async () => {
-  const response = await request({
-    url: '/main/product/plan-products?division=PLAN',
+  const response = await axios({
+    url: `${BASE_URL}/main/product/plan-products?division=PLAN`,
   });
   return response.data;
 };
 
 //장바구니 추가
-// http://3.39.150.186:8080/api/member/cart
 export const postCart = async (props: cartProps) => {
-  const {productId, optionId, count} = props
+  const { productId, optionId, count } = props;
   let formData = new FormData();
   formData.append('product', productId);
   formData.append('option', optionId);

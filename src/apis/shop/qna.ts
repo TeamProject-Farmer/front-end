@@ -1,4 +1,6 @@
+import axios from 'axios';
 import request from '../base';
+import { BASE_URL } from '../base';
 import { QnAEditProps } from 'src/types/shop/apiTypes';
 import store from '../../../store/index';
 
@@ -6,9 +8,7 @@ const email = store.getState().user.email;
 
 //QnA 리스트 전체 출력
 export const getQnAList = async (productId: number, currentIndex: number) => {
-  const response = await request.get(
-    `/main/qna/${productId}?page=${currentIndex}&size=5&direction=ASC`,
-  );
+  const response = await axios(`${BASE_URL}/main/qna/${productId}?page=${currentIndex}&size=5&direction=ASC`);
   return response.data;
 };
 
@@ -22,9 +22,7 @@ export const getMyQnA = async (productId: number) => {
 
 //문의 사항 상세보기
 export const getDetailQnA = async (qnaId: number) => {
-  const response = await request.get(
-    `/main/productQna/${qnaId}?memberEmail=${email}`,
-  );
+  const response = await axios(`${BASE_URL}/main/productQna/${qnaId}?memberEmail=${email}`);
   return response.data;
 };
 //QnA 작성
