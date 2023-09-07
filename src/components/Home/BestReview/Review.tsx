@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import Icon from '@components/Common/Icon';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const Review = ({ memberNickName, imgUrl, likeCount, content, productId }) => {
   const countStar = (likeCount: number) => {
@@ -21,7 +22,9 @@ const Review = ({ memberNickName, imgUrl, likeCount, content, productId }) => {
             <Styled.UserName>{memberNickName}</Styled.UserName>
             <Icon name="moreBtn" width={25} height={25} />
           </Styled.UserBox>
-          <Styled.ImgBox src={imgUrl} alt="리뷰 이미지" />
+          <Styled.ImgBox>
+            <Image src={imgUrl} alt="리뷰 이미지" fill={true} />
+          </Styled.ImgBox>
           <Styled.ContentBox>
             <Styled.StarBox>
               <Styled.Star>{countStar(likeCount)}</Styled.Star>
@@ -66,7 +69,8 @@ const Styled = {
     font-weight: 500;
   `,
   MoreBtn: styled.p``,
-  ImgBox: styled.img`
+  ImgBox: styled.div`
+    position: relative;
     width: 266px;
     height: 266px;
     background-color: ${theme.colors.lightGray};

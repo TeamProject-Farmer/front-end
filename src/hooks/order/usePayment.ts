@@ -10,8 +10,6 @@ const usePayment = () => {
   const [totalAmount, setTotalAmount] = useState<number>();
   // 약관동의
   const [payNowDisabled, setPayNowDisabled] = useState<boolean>(false);
-  // 결제 방식
-  const [selectedMethod, setSelectedMethod] = useState<PayMethod>();
 
   const getUsedCoupon = (couponId: number) => {
     setCouponId(couponId);
@@ -36,8 +34,6 @@ const usePayment = () => {
   return {
     payNowDisabled,
     totalAmount,
-    selectedMethod,
-    setSelectedMethod,
     getTotalAmount,
     handleAgreementChange,
     getUsedPoint,

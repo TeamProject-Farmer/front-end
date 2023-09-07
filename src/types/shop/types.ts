@@ -1,5 +1,4 @@
 import { Dispatch, SetStateAction } from 'react';
-import { SortOption } from 'src/types/search/types';
 import { RootState } from 'store';
 
 export const orderDataSelector = (state: RootState) => state.orderData;
@@ -25,6 +24,11 @@ export interface ReviewAPI {
   imgUrl: string;
   likeCount: number;
   content: string;
+}
+
+export interface SortOption {
+  title: string;
+  param: string;
 }
 
 export interface OptionBarProps {
@@ -151,7 +155,6 @@ export interface PaginationProps {
   totalIndex: number;
   isExceptional?: boolean;
 }
-
 
 export interface OptionBoxProps {
   isPanel?: boolean;

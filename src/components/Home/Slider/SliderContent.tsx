@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import Link from 'next/link';
 import { Banner } from 'src/types/home/types';
+import Image from 'next/image';
 
 const SliderContent = ({ sliderContents, activeIndex }) => {
   const imgVariants = {
@@ -35,11 +36,15 @@ const SliderContent = ({ sliderContents, activeIndex }) => {
               <Link key={content.id} href={content.linkUrl}>
                 <Styled.Content
                   variants={imgVariants}
-                  imgurl={content.imgUrl}
                   initial="initial"
                   animate="start"
                   exit="end"
                 >
+                  <Image
+                    src={content.imgUrl}
+                    alt="슬라이더 이미지"
+                    fill={true}
+                  />
                   {content.id === 1 && (
                     <Styled.ShopBtn>&gt; Shop Now</Styled.ShopBtn>
                   )}
@@ -55,11 +60,10 @@ const SliderContent = ({ sliderContents, activeIndex }) => {
 export default SliderContent;
 
 const Styled = {
-  Content: styled(motion.div)<{ imgurl: string }>`
+  Content: styled(motion.div)`
     position: absolute;
     width: 100%;
     height: 100%;
-    background-image: url(${({ imgurl }) => imgurl});
     background-size: 100%;
     background-repeat: no-repeat;
   `,

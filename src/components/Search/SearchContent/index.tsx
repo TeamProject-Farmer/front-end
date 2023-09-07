@@ -5,26 +5,19 @@ import { ProductProps } from 'src/types/common/types';
 
 const SearchContent = ({ searchedWord, searchResult }) => {
   const noResult = !searchResult || searchResult.length === 0;
+
   return (
     <Styled.Wrapper>
       {noResult && (
         <Styled.NoResult>
           {searchResult
             ? `'${searchedWord}'에 대한 검색결과가 존재하지 않습니다`
-            : '검색결과가 존재하지 않습니다'}
+            : '검색어를 입력해주세요.'}
         </Styled.NoResult>
       )}
       <Styled.Plants>
-        {searchResult?.map((plant: ProductProps, index: number) => (
-          <Plant
-            key={index}
-            thumbnailImg={plant.thumbnailImg}
-            name={plant.name}
-            discountRate={plant.discountRate}
-            price={plant.price}
-            averageStarRating={plant.averageStarRating}
-            reviewCount={plant.reviewCount}
-          />
+        {searchResult?.map((plant: ProductProps) => (
+          <Plant key={plant.productId} {...plant} />
         ))}
       </Styled.Plants>
     </Styled.Wrapper>

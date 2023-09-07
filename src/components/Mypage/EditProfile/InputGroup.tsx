@@ -22,7 +22,6 @@ const InputGroup = ({
   const user = useSelector(selectUser);
 
   const inputGroupData = [
-    { label: '이메일', readOnly: true, value: `${user.email} 변경 불가능` },
     {
       label: '닉네임',
       edit: true,

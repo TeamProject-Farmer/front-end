@@ -2,24 +2,37 @@ import { useEffect, useState, useMemo } from 'react';
 import InputGroup from '../InputGroup';
 import InputField from '../InputField';
 import Styled from '../styles';
-import { getMemberOrderAddress } from 'src/apis/order/order';
+import { getOrderAddress } from 'src/apis/order/order';
 import { OrderedData } from 'src/types/order/types';
-
+import { getTokens } from 'src/utils/token/token';
+import useDiscount from 'src/hooks/order/useDiscount';
+import { useQuery } from '@tanstack/react-query';
 const Delivery = ({ control, setValue, trigger }) => {
   const [haveOrdered, setHaveOrdered] = useState<boolean>(false);
-  const [orderedData, setOrderedData] = useState<OrderedData>();
+  // const [orderedData, setOrderedData] = useState<OrderedData>();
   const [showShippingMsgInput, setShowShippingMsgInput] =
     useState<boolean>(false);
-
+  // const { haveOrdered, orderedData, setHaveOrdered } = useDiscount();
   // 최근 배송 목록 불러오기
-  useEffect(() => {
-    getMemberOrderAddress().then(data => {
-      if (data) {
-        setOrderedData(data);
-        setHaveOrdered(true);
-      }
-    });
-  }, []);
+
+  const { data: orderedData } = useQuery({
+    queryKey: ['orderedData'],
+    queryFn: getOrderAddress,
+    onSuccess: data => setHaveOrdered(true),
+  });
+
+  // useEffect(() => {
+  //   const data = {
+  //     username: '지원',
+  //     zipcode: '123',
+  //     address: '마포구',
+  //     addressDetail: '상세정보',
+  //     phoneNumber: '123-567',
+  //   };
+  //   // setOrderedData(data);
+  //   // setHaveOrdered(true);
+
+  // }, []);
 
   // 최근 배송 이력이 있는 경우 해당 값을 기본값으로
   useEffect(() => {

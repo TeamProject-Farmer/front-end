@@ -1,18 +1,19 @@
 import React from 'react';
 import { Styled } from '../../styles';
 import { useRouter } from 'next/router';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { PurchaseListProps } from 'src/types/mypage/types';
 import { getPurchase } from 'src/apis/mypage/purchase';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const PurchasesList = () => {
   const route = useRouter();
 
-  const { data: purchaseArray } = useQuery<PurchaseListProps[]>(
-    'purchase',
-    getPurchase,
-  );
+  const { data: purchaseArray } = useQuery<PurchaseListProps[]>({
+    queryKey: ['purchase'],
+    queryFn: getPurchase,
+  });
 
   return purchaseArray?.length === 0 ? null : (
     <Styled.BoxWrapper margin="8">
@@ -24,17 +25,19 @@ const PurchasesList = () => {
         <Styled.ListWrapper>
           {/* slice 메서드로 렌더링 제한 */}
           {purchaseArray?.slice(0, 7).map((purchase, index) => (
-            <Styled.ListDiv key={index}>
-              <Image
-                src={purchase.imgUrl}
-                alt="식물 사진"
-                width="0"
-                height="0"
-                sizes="170px"
-                style={{ width: '170px', height: '170px' }}
-              />
-              <Styled.Title>{purchase.productName}</Styled.Title>
-            </Styled.ListDiv>
+            <Link key={index} href={`shop/detail/${purchase.productId}`}>
+              <Styled.ListDiv>
+                <Image
+                  src={purchase.imgUrl}
+                  alt="식물 사진"
+                  width="0"
+                  height="0"
+                  sizes="170px"
+                  style={{ width: '170px', height: '170px' }}
+                />
+                <Styled.Title>{purchase.productName}</Styled.Title>
+              </Styled.ListDiv>
+            </Link>
           ))}
         </Styled.ListWrapper>
       </Styled.TextBox>

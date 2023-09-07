@@ -1,4 +1,4 @@
-import { SortOption } from 'src/types/search/types'; //지원님 코드 머지 시 이 부분 수정 필요
+import { SortOption } from 'src/types/shop/types';
 
 export const productSortOptions: SortOption[] = [
   { title: '신상품순', param: 'NEWS' },

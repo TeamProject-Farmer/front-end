@@ -5,7 +5,6 @@ import Delivery from '@components/Order/Delivery';
 import InputGroup from '@components/Order/InputGroup';
 import ProductList from '@components/Order/List/ProductList';
 import Agreement from '@components/Order/Agreement';
-import PayMethod from '@components/Order/PayMethod';
 import { DeliveryInfo } from 'src/types/order/types';
 import type { NextPageWithLayout } from '@pages/_app';
 import { ReactElement } from 'react';
@@ -17,14 +16,14 @@ import { useSelector } from 'react-redux';
 import { RootState } from 'store';
 import getTotalPrice from 'src/utils/order/getTotalPrice';
 import { useRouter } from 'next/router';
+import InputField from '@components/Order/InputField';
 
 const OrderPage: NextPageWithLayout = () => {
   const selectedCart = (state: RootState) => state.selectedCart;
+  const order = (state: RootState) => state.order;
   const {
     payNowDisabled,
     totalAmount,
-    selectedMethod,
-    setSelectedMethod,
     getTotalAmount,
     handleAgreementChange,
     getUsedPoint,
@@ -39,15 +38,16 @@ const OrderPage: NextPageWithLayout = () => {
   //개별 상품페이지에서 온 제품인지 장바구니 목록인지
   const router = useRouter();
   const fromCart = Object.keys(router.query).length === 0;
+  const cartItems = useSelector(selectedCart);
+  const selectedProduct = useSelector(order);
 
-  const productList = useSelector(selectedCart);
+  const productList = fromCart ? cartItems : selectedProduct;
   const totalPrice = getTotalPrice(productList);
 
   // 결제하기 버튼 클릭 시
   const onSubmit = async (deliveryInfo: DeliveryInfo) => {
-    console.log(deliveryInfo);
-
-    if (selectedMethod === undefined) {
+    console.log('deliveryInfo', deliveryInfo);
+    if (deliveryInfo.payMethod === undefined) {
       alert('결제 방법을 선택해주세요');
       return;
     }
@@ -60,7 +60,6 @@ const OrderPage: NextPageWithLayout = () => {
     try {
       const { resultInfo } = await processPayment({
         productList,
-        selectedMethod,
         totalAmount,
         deliveryInfo,
         point,
@@ -86,7 +85,7 @@ const OrderPage: NextPageWithLayout = () => {
         {/* 주문상품 */}
         <InputGroup title="주문상품">
           <Styled.InnerPaddingWrapper caption="product">
-            <ProductList productList={fromCart ? productList : []} />
+            <ProductList productList={productList} />
           </Styled.InnerPaddingWrapper>
         </InputGroup>
         {/* 적립금/쿠폰, 결제금액 */}
@@ -97,10 +96,11 @@ const OrderPage: NextPageWithLayout = () => {
           getUsedCoupon={getUsedCoupon}
         />
         {/* 결제 수단 */}
-        <PayMethod
-          selectedMethod={selectedMethod}
-          setSelectedMethod={setSelectedMethod}
-        />
+        <InputGroup title="결제수단" before="none">
+          <Styled.InnerPaddingWrapper caption="payment">
+            <InputField control={control} caption="payMethod" />
+          </Styled.InnerPaddingWrapper>
+        </InputGroup>
         {/* 약관동의 */}
         <Agreement handleAgreementChange={handleAgreementChange} />
       </Styled.Wrapper>

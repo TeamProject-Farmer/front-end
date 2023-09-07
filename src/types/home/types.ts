@@ -56,3 +56,19 @@ export interface IconProps {
   height?: number;
   onClick?: () => void;
 }
+
+export type HoverType =
+  | 'smallBtn'
+  | 'smallBtn_w'
+  | 'mediumBtn'
+  | 'mediumBtn_w'
+  | 'largeBtn'
+  | 'largeBtn_w';
+
+export interface SizeCategory {
+  id: string;
+  title: string;
+  src: HoverType;
+  hover: HoverType;
+  bg: string;
+}

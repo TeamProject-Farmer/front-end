@@ -36,4 +36,5 @@ export type IconName =
   | 'emptyStar'
   | 'thumbsUp'
   | 'dropDown'
-  | 'viewMore';
+  | 'viewMore'
+  | 'logout';

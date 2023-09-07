@@ -313,7 +313,7 @@ const Styled = {
     justify-content: center;
     & > div:first-of-type {
       position: absolute;
-      left: 50 px;
+      left: 50px;
       width: 4px;
       height: 36px;
       background-color: ${theme.colors.green1};

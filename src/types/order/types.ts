@@ -1,4 +1,3 @@
-import { UseFormRegisterReturn } from 'react-hook-form';
 import {
   UseFormSetValue,
   UseFormTrigger,
@@ -6,14 +5,20 @@ import {
   Control,
 } from 'react-hook-form';
 
+export type CouponPolicy = 'FIXED' | 'RATE';
+
 export interface Coupon {
   couponId: number;
   memberCouponId: number;
   benefits: string;
   name: string;
-  couponPolicy: string;
+  couponPolicy: CouponPolicy;
   fixedPrice: number;
   rateAmount: number;
+}
+
+export interface Point {
+  point: number;
 }
 
 export interface InputFieldProps {
@@ -60,7 +65,7 @@ export interface InputGroupProps {
   children: React.ReactNode;
 }
 
-export interface CartItem {
+export interface OrderItem {
   cartId?: number;
   productId: number;
   imgUrl: string;
@@ -69,12 +74,11 @@ export interface CartItem {
   optionName: string;
   count: number;
   productPrice: number;
-  totalPrice: number;
+  totalPrice?: number;
 }
 
 export interface OrderPayload {
-  productList: CartItem[];
-  selectedMethod: PayMethod;
+  productList: OrderItem[];
   totalAmount: number;
   deliveryInfo: DeliveryInfo;
   point: number | undefined;
@@ -88,14 +92,25 @@ export interface OrderProduct {
   orderPrice: number;
 }
 
+export type PgOption =
+  | 'INIpayTest'
+  | 'INIBillTst'
+  | 'TC0ONETIME'
+  | 'TC0ONETIME'
+  | 'A010002002';
+
+export type MethodOption = 'card' | 'trans' | 'vbank' | 'kakaopay' | 'phone';
+
 export interface PayMethod {
   title?: string;
-  pg: string;
-  method: string;
+  pg: PgOption;
+  method: MethodOption;
 }
 
+export type ShippingMsgOption = 'OFFICE' | 'BOX' | 'FRONT' | 'CALL' | 'TEXT';
+
 export interface ShippingMsg {
-  type: string;
+  type: ShippingMsgOption;
   text: string;
 }
 
@@ -206,8 +221,8 @@ declare global {
 }
 
 export interface OrderInfo {
-  pg: string;
-  pay_method: string;
+  pg: PgOption;
+  pay_method: MethodOption;
   merchant_uid: string;
   name: string;
   amount: number;
@@ -224,14 +239,10 @@ export interface DeliveryInfo {
   zipcode: string;
   addressDetail: string;
   phoneNumber: string;
-  memo: string;
+  memo: ShippingMsgOption;
   selfMemo: string;
   defaultAddr: boolean;
-  // name: string;
-  // postCode: string;
-  // basicAddress: string;
-  // detailAddress: string;
-  // mobile: string;
+  payMethod: MethodOption;
 }
 
 export interface ResultData {

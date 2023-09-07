@@ -2,6 +2,7 @@ import {
   postVerifyIamport,
   postOrders,
   postCouponDel,
+  postCartRemove,
 } from 'src/apis/order/order';
 import generateOrderPayload from './generateOrderPayload';
 import {
@@ -12,7 +13,6 @@ import {
 
 const processPayment = async ({
   productList,
-  selectedMethod,
   totalAmount,
   deliveryInfo,
   point,
@@ -23,12 +23,14 @@ const processPayment = async ({
 
   const { orderData, dbData } = generateOrderPayload({
     productList,
-    selectedMethod,
     totalAmount,
     deliveryInfo,
     point,
   });
+  console.log('orderData', orderData);
   console.log('dbData', dbData);
+
+  const cartIds: number[] = productList.map(item => item.cartId);
 
   return new Promise(async (resolve, reject) => {
     const callback = async (response: RequestPayResponse) => {
@@ -36,7 +38,12 @@ const processPayment = async ({
       const verifyRes = await postVerifyIamport(imp_uid, orderData);
       if (verifyRes.amount === paid_amount) {
         const resultInfo = await postOrders(dbData);
-        postCouponDel(couponId);
+        if (couponId !== 0) {
+          postCouponDel(couponId);
+        }
+        if (cartIds[0] !== undefined) {
+          postCartRemove(cartIds);
+        }
         resolve({ response, resultInfo });
       } else {
         reject(error_msg);

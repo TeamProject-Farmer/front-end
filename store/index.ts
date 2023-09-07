@@ -20,18 +20,17 @@ import {
 } from 'redux-persist';
 import userSlice from './reducers/userSlice';
 import cartIndexSlice from './reducers/cartSlice';
-import { CartState, UserState } from 'src/types/redux/types';
+import bannerSlice from './reducers/bannerSlice';
+import orderSlice from './reducers/orderSlice';
+import categorySlice from './reducers/categorySlice';
+import selectedCartSlice from './reducers/selectedCartSlice';
+import orderDataSlice from './reducers/orderDataSlice';
+import tokenSlice from './reducers/tokenSlice';
+import { CartState, UserState, TokenState } from 'src/types/redux/types';
 import { CartListProps } from 'src/types/mypage/types';
+import { Category } from 'src/types/common/types';
 import { SelectedOrderProps } from 'src/types/shop/types';
 import { OrderDataProps } from 'src/types/shop/types';
-import selectedCartSlice from './reducers/selectedCartSlice';
-import orderSlice from './reducers/orderSlice';
-import orderDataSlice from './reducers/orderDataSlice';
-import bannerSlice from './reducers/bannerSlice';
-import { Category } from 'src/types/common/types';
-import categorySlice from './reducers/categorySlice';
-
-// import orderSlice from './reducers/orderSlice';
 
 export interface RootState {
   user: UserState;
@@ -41,12 +40,14 @@ export interface RootState {
   category: Category[];
   order: SelectedOrderProps[];
   orderData: OrderDataProps[];
-  // orderInfo: IOrderInfo;
+  token: string;
 }
 
 const persistConfig: PersistConfig<RootState> = {
   key: 'root',
   storage,
+  whitelist: ['user', 'selectedCart', 'order'],
+  blacklist: ['cartIndex', 'banner', 'category', 'orderData'],
 };
 
 const rootReducer = (
@@ -62,7 +63,7 @@ const rootReducer = (
     category: categorySlice,
     order: orderSlice,
     orderData: orderDataSlice,
-    // orderInfo: orderSlice,
+    token: tokenSlice.reducer,
   });
   return combinedReducer(state, action);
 };
@@ -88,11 +89,3 @@ export default store;
 export const wrapper = createWrapper<Store<RootState>>(() => store);
 
 export const persistor = persistStore(store);
-
-export const setAccessToken = (newAccessToken: string) => {
-  store.dispatch(userSlice.actions.setAccessToken(newAccessToken));
-};
-
-export const setRefreshToken = (newRefreshToken: string) => {
-  store.dispatch(userSlice.actions.setRefreshToken(newRefreshToken));
-};

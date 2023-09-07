@@ -28,6 +28,10 @@ export const Styled = {
     border-radius: 20px;
     border: 1px solid black;
   `,
+  HeaderFlexDiv: styled.div`
+    display: flex;
+    justify-content: space-between;
+  `,
   HeaderDiv: styled.div`
     display: flex;
     margin-top: 2rem;
@@ -254,6 +258,7 @@ export const Styled = {
     font-size: ${props => props.size}px;
     font-weight: 400;
     color: ${props => props.color};
+    text-align: center;
   `,
   ListSpan: styled.span`
     font-size: 12px;

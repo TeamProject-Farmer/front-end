@@ -7,9 +7,11 @@ const Footer = () => {
     <Styled.Wrapper>
       <Styled.ShrinkWrapper>
         <Link href="/">
-          <Styled.Logo
+          <Image
             src="/assets/images/home/footerLogo.png"
             alt="footerLogo"
+            width={176}
+            height={207}
           />
         </Link>
       </Styled.ShrinkWrapper>

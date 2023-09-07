@@ -42,10 +42,10 @@ const Row = () => {
   return (
     <Styled.BoxWrapper>
       <Styled.CardBox size="350">
-        <Styled.HeaderDiv>
+        <Styled.HeaderFlexDiv>
           <Styled.HeaderText />
           <Styled.EditButton onClick={handleEdit}>수정하기</Styled.EditButton>
-        </Styled.HeaderDiv>
+        </Styled.HeaderFlexDiv>
 
         <InputGroup
           nickname={nickname}

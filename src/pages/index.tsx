@@ -14,6 +14,8 @@ import {
   getNews,
 } from 'src/apis/home/home';
 import { IndexPageProps } from 'src/types/home/types';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 const IndexPage = ({
   banner,
@@ -21,6 +23,15 @@ const IndexPage = ({
   bestReview,
   news,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const router = useRouter();
+
+  useEffect(() => {
+    if (router.query.alert) {
+      alert(router.query.alert);
+      router.push(router.pathname);
+    }
+  }, [router]);
+
   return (
     <>
       <Slider banner={banner} />

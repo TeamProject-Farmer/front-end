@@ -4,13 +4,12 @@ import { getCoupon } from 'src/apis/mypage/coupon';
 import CouponHeader from './Header';
 import Coupons from './Coupons';
 import { CouponArrayProps } from 'src/types/mypage/types';
-import { useQuery } from 'react-query';
-
+import { useQuery } from '@tanstack/react-query';
 const Row = () => {
-  const { data: couponArray } = useQuery<CouponArrayProps[]>(
-    'coupons',
-    getCoupon,
-  );
+  const { data: couponArray } = useQuery<CouponArrayProps[]>({
+    queryKey: ['coupons'],
+    queryFn: getCoupon,
+  });
 
   return (
     <Styled.BoxWrapper>

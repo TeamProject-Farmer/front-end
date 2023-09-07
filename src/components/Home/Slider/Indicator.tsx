@@ -5,7 +5,7 @@ import { Banner } from 'src/types/home/types';
 const Indicator = ({ activeIndex, sliderContents, onclick }) => {
   return (
     <Style.Indicator>
-      {sliderContents.map((content: Banner) => (
+      {sliderContents?.map((content: Banner) => (
         <Style.List
           key={content.id}
           selected={content.id === activeIndex ? true : false}

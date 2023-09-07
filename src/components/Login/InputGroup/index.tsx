@@ -3,10 +3,13 @@ import Styled from '../styles';
 import FormButton from '@components/Register/FormButton';
 import { ErrorText } from 'src/types/login/types';
 import theme from '@styles/theme';
-import { getLogin } from 'src/apis/login/login';
+import { postLogin } from 'src/apis/login/login';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { setUser } from 'store/reducers/userSlice';
+import { setCookie } from 'src/utils/cookie';
+// import { setToken } from 'store/reducers/tokenSlice';
+import { setToken } from 'src/utils/token/token';
 
 const InputGroup = () => {
   const router = useRouter();
@@ -28,9 +31,22 @@ const InputGroup = () => {
   // 로그인 성공시 API
   const handleLoginSuccess = async () => {
     try {
-      const res = await getLogin({ email, password });
+      const res = await postLogin({ email, password });
       const userData = res.data;
-      dispatch(setUser(userData));
+      const userInfo = {
+        socialId: userData.socialId,
+        email: userData.email,
+        nickname: userData.nickname,
+        point: userData.point,
+        grade: userData.grade,
+        role: userData.role,
+        cumulativeAmount: userData.cumulativeAmount,
+        memberCoupon: userData.memberCoupon,
+      };
+      dispatch(setUser(userInfo));
+      // dispatch(setToken(userData.accessToken));
+      setToken(userData.accessToken);
+      setCookie('refreshToken', userData.refreshToken);
       router.push('/');
     } catch (err) {
       setErrorText(err.response.data);
@@ -39,7 +55,6 @@ const InputGroup = () => {
 
   // 로그인 버튼 클릭시
   const handleLogin = async () => {
-    console.log('로그인');
     // 에러 분기처리
     // 이메일 & 패스워드 둘 다 or 이메일 입력되지 않은 경우
     if ((!email && !password) || !email) {
