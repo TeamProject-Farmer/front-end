@@ -15,16 +15,6 @@ const useDiscount = (orderedPrice?: number) => {
   //   queryFn: getMemberCoupon,
   // });
 
-  const [pointData, couponData] = useQueries({
-    queries: [
-      { queryKey: ['point'], queryFn: getPoint },
-      { queryKey: ['coupon'], queryFn: getCoupon },
-    ],
-  });
-
-  const { data: point } = pointData;
-  const { data: coupon } = couponData;
-
   const [usedPoint, setUsedPoint] = useState<number>();
 
   const [selectedCouponId, setSelectedCouponId] = useState<number>(0);
@@ -34,46 +24,19 @@ const useDiscount = (orderedPrice?: number) => {
   const [disabledPointBtn, setDisabledPointBtn] = useState(false);
   const [discountedPrice, setDiscountedPrice] = useState<number>(0);
 
-  // const fetchData = async () => {
-  //   try {
-  //     // const pointData = await getMemberPoint();
-  //     // const couponData = await getMemberCoupon();
-  //     const accessToken = getTokens();
-  //     // const [pointData, couponData] = await myPromiseAll(
-  //     //   getMemberPoint(),
-  //     //   getMemberCoupon(),
-  //     // );
-  //     const pointData = { point: 123 };
-  //     const couponData = [
-  //       {
-  //         couponId: 1,
-  //         memberCouponId: 1,
-  //         benefits: '3000원 할인 쿠폰',
-  //         name: '3000원 할인 쿠폰',
-  //         couponPolicy: 'FIXED', // "FIXED" | "RATE"
-  //         fixedPrice: 3000,
-  //         rateAmount: 0,
-  //       },
-  //     ];
-  //     if (pointData) {
-  //       setPoint(pointData.point);
-  //       setUsedPoint(pointData.point);
-  //     }
+  const [pointData, couponData] = useQueries({
+    queries: [
+      {
+        queryKey: ['point'],
+        queryFn: getPoint,
+        onSuccess: (data: number) => setUsedPoint(data),
+      },
+      { queryKey: ['coupon'], queryFn: getCoupon },
+    ],
+  });
 
-  //     setCoupon(couponData);
-  //     // if (addressData) {
-  //     //   setOrderedData(addressData);
-  //     //   setHaveOrdered(true);
-  //     // }
-  //   } catch (error) {
-  //     console.log('포인트, 쿠폰', error);
-  //     return Promise.reject(error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
+  const { data: point } = pointData;
+  const { data: coupon } = couponData;
 
   // 쿠폰이 선택되었을 때
   useEffect(() => {
