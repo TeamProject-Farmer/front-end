@@ -11,7 +11,7 @@ export interface Category {
 }
 
 export interface IconProps {
-  name: IconName | string;
+  name: IconName;
   width: number;
   height: number;
   onClick?: () => void;

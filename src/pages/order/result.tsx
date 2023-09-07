@@ -16,7 +16,7 @@ const orderResultPage: NextPageWithLayout = () => {
   const { isLoading, data: orderedData } = useQuery([orderNumber], () =>
     getOrdersComplete(orderNumber),
   );
-  console.log(orderedData);
+
   if (isLoading) return;
   const { name, phoneNumber, address, paymentPrice, orderedDate } = orderedData;
 

@@ -1,11 +1,8 @@
 import request from '../base';
 import axios from 'axios';
 import { BASE_URL } from '../base';
+import { PostSearch } from 'src/types/search/types';
 
-interface PostSearch {
-  searchWord: string;
-  memberEmail?: string;
-}
 export const postSearch = async (searchWord: string, memberEmail?: string) => {
   const requestData: PostSearch = {
     searchWord: searchWord,
