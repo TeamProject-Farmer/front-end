@@ -1,7 +1,7 @@
 import Styled from './styles';
 import { useState } from 'react';
 import Image from 'next/image';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { ReviewModalProps } from 'src/types/shop/types';
 import { postReview } from 'src/apis/mypage/review';
 import { postReviewProps } from 'src/types/mypage/types';

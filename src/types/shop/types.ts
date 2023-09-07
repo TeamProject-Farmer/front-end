@@ -170,7 +170,6 @@ export interface selectOptionProps {
   optionPrice: number;
 }
 
-
 export interface OnOffProps {
   myButton: boolean;
   setMyButton: React.Dispatch<React.SetStateAction<boolean>>;
