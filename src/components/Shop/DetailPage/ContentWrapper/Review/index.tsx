@@ -45,9 +45,6 @@ const Review = () => {
 
   const handleReviewStar = async () => {
     try {
-      console.log('reviewPage-----productId');
-      console.log(productId);
-
       const response = await getReviewStar(productId);
       setReviewStar(response);
       setReviewTotalStar(response.averageStarRating);
@@ -70,7 +67,7 @@ const Review = () => {
     handleReviewData();
   }, [router, currentIndex, sortOption, starOption]);
   useEffect(() => {
-    setTimeout(() => handleReviewData(), 30);
+    setTimeout(() => handleReviewData(), 10);
   }, [reviewClick]);
   useEffect(() => {
     setErrorMessage(false);

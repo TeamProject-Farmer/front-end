@@ -44,6 +44,7 @@ export interface categoryReduxType {
 }
 
 export interface ProductInfoProps {
+  productId: number;
   name: string;
   totalStar: number;
   discountRate: number;
@@ -102,6 +103,12 @@ export interface QnAProps {
   qcreatedDate: string;
 }
 
+export interface QnAList {
+  detailList: QnAProps[];
+  totalIndex: number;
+  totalElement: number;
+}
+
 //modal
 export interface DetailQnAProps {
   qnaId: number;
@@ -114,9 +121,18 @@ export interface DetailQnAProps {
   acreatedDate: string;
 }
 
-export interface QnAModalProps {
+export interface ModalProps {
   modalName: string;
-  reviewItem?: string[];
+  modalClose: () => void;
+  setModalOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+}
+export interface ReviewModalProps {
+  modalName: string;
+  imgUrl: string;
+  orderProductId: number;
+  productName: string;
+  productOption: string;
+  productCount: number;
   modalClose: () => void;
   setModalOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -142,8 +158,8 @@ export interface PaginationProps {
 
 export interface OptionBoxProps {
   isPanel?: boolean;
-  selectList: selectListProps[];
-  setSelectList: React.Dispatch<React.SetStateAction<selectListProps[]>>;
+  selectList: selectOptionProps[];
+  setSelectList: React.Dispatch<React.SetStateAction<selectOptionProps[]>>;
   selectPrice: number;
   setSelectPrice?: React.Dispatch<React.SetStateAction<number>>;
 }
@@ -154,11 +170,6 @@ export interface selectOptionProps {
   optionPrice: number;
 }
 
-export interface selectListProps {
-  id: number;
-  optionName: string;
-  optionPrice: number;
-}
 
 export interface OnOffProps {
   myButton: boolean;
@@ -170,8 +181,7 @@ export interface SelectedOrderProps {
   productId: number;
   imgUrl: string;
   productName: string;
-  optionId: number;
-  optionName: string;
+  optionId: number | null;
   count: number;
   productPrice: number;
 }

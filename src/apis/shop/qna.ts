@@ -17,8 +17,6 @@ export const getMyQnA = async (productId: number) => {
   const response = await request.get(
     `/member/qna/mine/${productId}?page=0&size=5&direction=ASC`,
   );
-  console.log('qna api');
-  console.log(response.data);
   return response.data;
 };
 
@@ -31,15 +29,8 @@ export const getDetailQnA = async (qnaId: number) => {
 };
 //QnA 작성
 export const getQnAEdit = async (props: QnAEditProps) => {
-  const {
-    productId,
-    currentOption,
-    content,
-    secretQuestion,
-    qcreatedDateTime,
-  } = props;
-  console.log('secretQuestion');
-  console.log(secretQuestion);
+  const {productId, currentOption, content, secretQuestion, qcreatedDateTime} = props
+
   const formData = new FormData();
   formData.append('productId', productId);
   formData.append('subject', currentOption);

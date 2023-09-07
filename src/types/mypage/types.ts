@@ -7,6 +7,7 @@ export interface OrderListProps {
   optionName: string;
   optionPrice: number;
   orderPrice: number;
+  orderProductId: number;
   orderStatus: string;
   price: number;
   productId: number;
@@ -65,6 +66,14 @@ export interface OrderTextProps {
   size: string;
   color: string;
   text: string | number;
+}
+
+//리뷰 post
+export interface postReviewProps{
+  productId: number;
+  fiveStarRating: string;
+  content: string;
+  reviewImage: File |Blob;
 }
 
 // 쿠폰

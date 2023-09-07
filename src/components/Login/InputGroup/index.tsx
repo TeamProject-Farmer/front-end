@@ -68,6 +68,12 @@ const InputGroup = () => {
     }
   };
 
+  //엔터키 눌렀을 시
+  const activeEnter = (e:React.KeyboardEvent<HTMLInputElement>) => {
+    if(e.key === "Enter") {
+      handleLogin();
+    }
+  }
   return (
     <>
       <Styled.InputWrapper>
@@ -80,6 +86,7 @@ const InputGroup = () => {
           type="password"
           placeholder="비밀번호"
           onChange={handlePasswordChange}
+          onKeyDown={(e)=>activeEnter(e)}
         />
         <Styled.ErrorText>{errorText}</Styled.ErrorText>
         <FormButton

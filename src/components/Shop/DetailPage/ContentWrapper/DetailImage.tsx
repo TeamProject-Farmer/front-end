@@ -12,7 +12,6 @@ const Styled = {
   Wrapper: styled.div`
   width: ${theme.size.shopDetailWidth};
   margin-bottom: 48px;
-  /* 나중에 추가적인 이미지가 들어간다면 아래꺼를 삭제하고 넣으면 될 것 같음*/
   /* height: 1509px; */
   height: 1276px;
   `,

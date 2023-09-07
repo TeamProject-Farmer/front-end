@@ -1,25 +1,23 @@
+import styled from '@emotion/styled';
+import theme from '@styles/theme';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from '@emotion/styled';
-import theme from '@styles/theme';
 import { setSelectedOrder } from 'store/reducers/orderSlice';
 import { orderDataSelector } from 'src/types/shop/types';
+import { OptionBoxProps, selectOptionProps } from 'src/types/shop/types';
+import { userToken } from 'src/types/shop/types';
+import handlePrice from 'src/utils/shop/handlePrice';
 import { getDetail, postCart } from 'src/apis/shop/product';
-import {
-  OptionBoxProps,
-  selectOptionProps,
-  selectListProps,
-} from 'src/types/shop/types';
 import heart from '@assets/images/shop/optionBoxHeart.svg';
 import arrow from '@assets/images/shop/optionArrow.svg';
 
 const OptionBox = (props: OptionBoxProps) => {
-  const { isPanel, selectList, setSelectList, selectPrice, setSelectPrice } =
-    props;
+  const { isPanel, selectList, setSelectList, selectPrice, setSelectPrice } = props;
 
   const router = useRouter();
   const dispatch = useDispatch();
+  const token = useSelector(userToken);
   const orderData = useSelector(orderDataSelector);
   const productId = Number(router.query?.detail) || 1;
   const [isShowOptions, setShowOptions] = useState(false);
@@ -31,47 +29,16 @@ const OptionBox = (props: OptionBoxProps) => {
   //옵션 데이터 받아오기
   const handleDetailData = async () => {
     const response = await getDetail(productId);
+    console.log(response.options);
     setOptions(response.options);
   };
 
-  //장바구니 추가
-  const handleCartData = async () => {
-    let optionId = options[0].id;
-    let count = 1;
-    const response = await postCart({
-      productId: productId.toString(),
-      optionId: optionId.toString(),
-      count: count.toString(),
-    });
-  };
-
-  //구매하기 데이터
-  const handleOrder = () => {
-    dispatch(
-      setSelectedOrder([
-        {
-          productId,
-          imgUrl: orderData[0].imgUrl,
-          productName: orderData[0].productName,
-          optionId: selectList[0].id,
-          optionName: selectList[0].optionName,
-          count: 1,
-          productPrice: selectPrice,
-        },
-      ]),
-    );
-    router.push({
-      pathname: '/order',
-      query: 'fromDetail',
-    });
-  };
-
   const handleResultPrice = () => {
-    if (selectList.length > 0) return selectPrice + '원';
+    if (selectList.length > 0) return handlePrice(selectPrice) + '원';
     else return '0 원';
   };
 
-  const handleSelectList = (item: selectListProps) => {
+  const handleSelectList = (item: selectOptionProps) => {
     setSelectList([
       ...selectList.filter(i => i.id != item.id),
       {
@@ -81,6 +48,71 @@ const OptionBox = (props: OptionBoxProps) => {
       },
     ]);
     setSelectPrice(orderData[0].productPrice + item.optionPrice);
+  };
+  const routeToCart = () => {
+    if (window.confirm("장바구니로 이동하시겠습니까?")) {
+      router.push('/mypage/cart');
+    } 
+  };
+  //장바구니 추가
+  const handleCartData = async () => {
+    if (token == '') {
+      //로그인 되어있지 않은 경우
+      alert('로그인 해주세요.');
+      router.push('/login');
+    } else {
+      if (selectList.length === 0) {
+        //옵션을 선택하지 않은 경우
+        alert('옵션을 선택하지 않았습니다. 옵션을 선택해주세요.');
+      } else { //로그인 되어있고, 옵션이 선택된 경우
+        let optionId = options[0].id;
+        if (options[0].id === 0) optionId = null;
+        let count = 1;
+        const response = await postCart({
+          productId: productId.toString(),
+          optionId: optionId.toString(),
+          count: count.toString(),
+        });
+        handleSelectList(options[0]);
+        routeToCart();
+      }
+    }
+  };
+
+  //구매하기 데이터
+  const handleOrder = () => {
+    console.log('selectList');
+    console.log(selectList);
+    if (token == '') {
+      //로그인 되어있지 않은 경우
+      alert('로그인 해주세요.');
+      router.push('/login');
+    } else {
+      if (selectList.length === 0) {
+        //옵션을 선택하지 않은 경우
+        alert('옵션을 선택하지 않았습니다. 옵션을 선택해주세요.');
+      } else {
+        //로그인 되어있고, 옵션이 선택된 경우
+        let optionId = selectList[0].id;
+        if (optionId === 0) optionId = null;
+        dispatch(
+          setSelectedOrder([
+            {
+              productId,
+              imgUrl: orderData[0].imgUrl,
+              productName: orderData[0].productName,
+              optionId,
+              count: 1,
+              productPrice: selectPrice,
+            },
+          ]),
+        );
+        router.push({
+          pathname: '/order',
+          query: 'fromDetail',
+        });
+      }
+    }
   };
 
   if (options.length <= 0) {

@@ -109,6 +109,7 @@ const Panel = (props: OptionBoxProps) => {
             </Styled.ImageBox>
             <Styled.ContentWrapper>
               <ProductInfo
+                productId={productId}
                 name={name}
                 totalStar={totalStar}
                 discountRate={discountRate}

@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { getQnAEdit } from 'src/apis/shop/qna';
-import { secretQuestion, QnAModalProps } from 'src/types/shop/types';
+import { secretQuestion, ModalProps } from 'src/types/shop/types';
 import Styled from './styles';
 
-const QnAModal = (props: QnAModalProps) => {
-  const { modalName, reviewItem, modalClose, setModalOpen } = props;
+const QnAModal = (props: ModalProps) => {
+  const { modalName, modalClose, setModalOpen } = props;
   const router = useRouter();
   const tempProductId = Number(router.query?.detail) || 1;
   const close = modalClose;
