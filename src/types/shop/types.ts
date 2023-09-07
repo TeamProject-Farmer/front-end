@@ -180,7 +180,6 @@ export interface SelectedOrderProps {
   productId: number;
   imgUrl: string;
   productName: string;
-  optionName: string;
   optionId: number | null;
   count: number;
   productPrice: number;

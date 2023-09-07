@@ -13,7 +13,8 @@ import heart from '@assets/images/shop/optionBoxHeart.svg';
 import arrow from '@assets/images/shop/optionArrow.svg';
 
 const OptionBox = (props: OptionBoxProps) => {
-  const { isPanel, selectList, setSelectList, selectPrice, setSelectPrice } = props;
+  const { isPanel, selectList, setSelectList, selectPrice, setSelectPrice } =
+    props;
 
   const router = useRouter();
   const dispatch = useDispatch();
@@ -50,9 +51,9 @@ const OptionBox = (props: OptionBoxProps) => {
     setSelectPrice(orderData[0].productPrice + item.optionPrice);
   };
   const routeToCart = () => {
-    if (window.confirm("장바구니로 이동하시겠습니까?")) {
+    if (window.confirm('장바구니로 이동하시겠습니까?')) {
       router.push('/mypage/cart');
-    } 
+    }
   };
   //장바구니 추가
   const handleCartData = async () => {
@@ -64,7 +65,8 @@ const OptionBox = (props: OptionBoxProps) => {
       if (selectList.length === 0) {
         //옵션을 선택하지 않은 경우
         alert('옵션을 선택하지 않았습니다. 옵션을 선택해주세요.');
-      } else { //로그인 되어있고, 옵션이 선택된 경우
+      } else {
+        //로그인 되어있고, 옵션이 선택된 경우
         let optionId = options[0].id;
         if (options[0].id === 0) optionId = null;
         let count = 1;

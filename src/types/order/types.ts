@@ -72,7 +72,7 @@ export interface OrderItem {
   imgUrl: string;
   productName: string;
   optionId: number;
-  optionName: string;
+  optionName?: string;
   count: number;
   productPrice: number;
   totalPrice?: number;
