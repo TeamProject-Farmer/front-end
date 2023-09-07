@@ -1,7 +1,7 @@
 import request from '../base';
 import { QnAEditProps } from 'src/types/shop/apiTypes';
 import store from '../../../store/index';
-const accessToken = store.getState().user.accessToken;
+
 const email = store.getState().user.email;
 
 //QnA 리스트 전체 출력
@@ -13,12 +13,12 @@ export const getQnAList = async (productId: number, currentIndex: number) => {
 };
 
 //내가 쓴 문의사항
-export const getMyQnA = async (productId:number) => {
+export const getMyQnA = async (productId: number) => {
   const response = await request.get(
-    `/member/qna/mine/${productId}?page=0&size=5&direction=ASC`
+    `/member/qna/mine/${productId}?page=0&size=5&direction=ASC`,
   );
-  console.log('qna api')
-  console.log(response.data)
+  console.log('qna api');
+  console.log(response.data);
   return response.data;
 };
 
@@ -31,7 +31,13 @@ export const getDetailQnA = async (qnaId: number) => {
 };
 //QnA 작성
 export const getQnAEdit = async (props: QnAEditProps) => {
-  const {productId, currentOption, content, secretQuestion, qcreatedDateTime} = props
+  const {
+    productId,
+    currentOption,
+    content,
+    secretQuestion,
+    qcreatedDateTime,
+  } = props;
   console.log('secretQuestion');
   console.log(secretQuestion);
   const formData = new FormData();

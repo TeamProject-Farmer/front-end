@@ -4,20 +4,6 @@ import InputGroup from '../InputGroup';
 import useDiscount from 'src/hooks/order/useDiscount';
 import { useEffect } from 'react';
 
-/**
- * 페이먼트 컴포넌트에 전달해야 한느 prop
- * <Payment point={point} discountedPrice={discountedPrice} finalPrice={finalPrice} />
- *
- * function Payment({point, coupons, finalPrice}){
- *
- * return <>
- *  <span>points : {point}</span>
- *  <span>coupons : {coupons}</span>
- *  <span>finalPrice : {finalPrice}</span>
- * </>
- * }
- */
-
 const Payment = ({
   totalPrice,
   getTotalAmount,
@@ -42,8 +28,6 @@ const Payment = ({
     getUsedPoint(selectedCouponId === 0 ? usedPoint : 0);
     getUsedCoupon(selectedCouponId);
   }, [finalPrice]);
-
-  console.log('coupon', coupon);
 
   return (
     <>

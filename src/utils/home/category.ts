@@ -1,4 +1,6 @@
-export const sizeCategory = [
+import { SizeCategory } from 'src/types/home/types';
+
+export const sizeCategory: SizeCategory[] = [
   {
     id: 's',
     title: 'small',

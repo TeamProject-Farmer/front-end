@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import Icon from '@components/Common/Icon';
-import { ProductProps } from '@components/Common/type';
+import { ProductProps } from 'src/types/common/types';
 
 const SmallProduct = (props: ProductProps) => {
   const {
