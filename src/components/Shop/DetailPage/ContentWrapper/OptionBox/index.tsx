@@ -12,8 +12,7 @@ import heart from '@assets/images/shop/optionBoxHeart.svg';
 import arrow from '@assets/images/shop/optionArrow.svg';
 
 const OptionBox = (props: OptionBoxProps) => {
-  const { isPanel, selectList, setSelectList, selectPrice, setSelectPrice } =
-    props;
+  const { isPanel, selectList, setSelectList, selectPrice, setSelectPrice } = props;
 
   const router = useRouter();
   const dispatch = useDispatch();
