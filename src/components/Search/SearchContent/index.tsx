@@ -1,50 +1,56 @@
-import React from 'react'
+import React from 'react';
 import styled from '@emotion/styled';
 import Plant from '../../Common/Product';
+import { ProductProps } from 'src/types/common/types';
 
-const plants = [];
-
-for (let id = 1; id <= 7; id++) {
-  const newPlant = {
-    id: id,
-    title: '상품명',
-    discount: '20%',
-    price: '10,000',
-    star: '4.8',
-    review: '1,105',
-    specialPrice: true,
-    freeShipping: true,
-  };
-
-  plants.push(newPlant);
-}
-
-const SearchContent = () => {
+const SearchContent = ({ searchedWord, searchResult }) => {
+  const noResult = !searchResult || searchResult.length === 0;
   return (
     <Styled.Wrapper>
-      {plants.map(plant => (
-        <Plant
-          key={plant.id}
-          title={plant.title}
-          discount={plant.discount}
-          price={plant.price}
-          star={plant.star}
-          review={plant.review}
-          specialPrice={plant.specialPrice}
-          freeShipping={plant.freeShipping}
-        />
-      ))}
+      {noResult && (
+        <Styled.NoResult>
+          {searchResult
+            ? `'${searchedWord}'에 대한 검색결과가 존재하지 않습니다`
+            : '검색결과가 존재하지 않습니다'}
+        </Styled.NoResult>
+      )}
+      <Styled.Plants>
+        {searchResult?.map((plant: ProductProps, index: number) => (
+          <Plant
+            key={index}
+            thumbnailImg={plant.thumbnailImg}
+            name={plant.name}
+            discountRate={plant.discountRate}
+            price={plant.price}
+            averageStarRating={plant.averageStarRating}
+            reviewCount={plant.reviewCount}
+          />
+        ))}
+      </Styled.Plants>
     </Styled.Wrapper>
-  )
-}
+  );
+};
 
-export default SearchContent
+export default SearchContent;
 
 const Styled = {
   Wrapper: styled.div`
+    width: 1920px;
+    min-height: 547px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  `,
+  Plants: styled.div`
     display: grid;
+    place-items: center;
     grid-template-columns: repeat(4, 1fr);
     gap: 37px;
     padding-bottom: 130px;
-  `
-}
+  `,
+  NoResult: styled.div`
+    font-size: 15px;
+    font-weight: 500;
+  `,
+};

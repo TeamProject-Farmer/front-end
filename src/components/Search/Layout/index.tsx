@@ -1,18 +1,12 @@
-import React from 'react'
-import styled from '@emotion/styled'
-import Header from '@components/Common/Header'
-import Footer from '@components/Common/Footer'
-import { ILayoutProps } from 'src/types/search/types'
+import React from 'react';
+import styled from '@emotion/styled';
+import { LayoutProps } from 'src/types/common/types';
 
-const Layout = ({children}: ILayoutProps) => {
-  return (
-    <Styled.Wrapper>
-        {children}
-    </Styled.Wrapper>
-  )
-}
+const NestedLayout = ({ children }: LayoutProps) => {
+  return <Styled.Wrapper>{children}</Styled.Wrapper>;
+};
 
-export default Layout
+export default NestedLayout;
 
 const Styled = {
   Wrapper: styled.div`
@@ -21,4 +15,4 @@ const Styled = {
     align-items: center;
     gap: 50px;
   `,
-}
+};

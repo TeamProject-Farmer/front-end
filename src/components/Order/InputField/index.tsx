@@ -1,132 +1,243 @@
-import {useState} from 'react'
+import { useEffect, useState } from 'react';
+import { Styled as CheckBoxStyled } from './CheckBoxInput';
 import Styled from './styles';
-import { useForm } from 'react-hook-form';
-import { emailOptions } from 'src/utils/register/emailListUtil';
+import { Controller } from 'react-hook-form';
+import { formatPhoneNumber } from 'src/utils/order/formatPhoneNumber';
 import {
-  FieldName,
-  IAuthForm,
-  Validate,
-} from 'src/types/register/types';
+  DaumPostcodeData,
+  ShippingMsg,
+  InputFieldProps,
+} from 'src/types/order/types';
 import {
-  requiredErrorMessage,
-} from 'src/utils/register/formUtil';
+  requiredErrorMsg,
+  validateName,
+  validateMobile,
+} from 'src/utils/order/formValidation';
 import Button from './Button';
-import {IInputFieldProps} from 'src/types/order/types'
-import Icon from '@components/Common/Icon';
+import { useDaumPostcodePopup } from 'react-daum-postcode';
+import { postcodeScriptUrl } from 'react-daum-postcode/lib/loadPostcode';
+import { formatAddress } from 'src/utils/order/getAddressfromDaumPostcode';
+import { getDeliveryMemo } from 'src/apis/order/order';
+import { ControllerFieldState } from 'react-hook-form';
 
-const InputField = ({label, required, field, width, placeholder}: IInputFieldProps) => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+const InputField = ({
+  label,
+  caption,
+  control,
+  setValue,
+  trigger,
+  setShowShippingMsgInput,
+}: InputFieldProps) => {
+  // 배송 메시지 옵션
+  const [shippingMsgOptions, setShippingMsgOptions] = useState<ShippingMsg[]>();
+  useEffect(() => {
+    getDeliveryMemo().then(res => setShippingMsgOptions(res));
+  }, []);
 
-   // react-hook-form
-   const {
-    register,
-    formState: { errors },
-    setValue,
-    trigger,
-  } = useForm<IAuthForm>({
-    mode: 'onChange',
-  });
-
-  const handleOptionClick = (email: string) => {
-    email === '직접입력'
-      ? setValue('selectedEmail', '')
-      : setValue('selectedEmail', email);
-    setIsDropdownOpen(false);
-    trigger('selectedEmail');
+  // 주소 입력
+  const handleComplete = (data: DaumPostcodeData) => {
+    const addressData = formatAddress(data);
+    setValue('zipcode', data.zonecode);
+    setValue('address', addressData);
+    trigger('zipcode');
+    trigger('address');
   };
 
-  // form validation hook
-  const useFormValidation = (fieldName: FieldName, value?: Validate) => {
-    const validation = register(fieldName, {
-      required: requiredErrorMessage,
-      validate: value,
+  const open = useDaumPostcodePopup(postcodeScriptUrl);
+
+  const handleDaumPost = () => {
+    open({
+      onComplete: handleComplete,
+      height: 500,
+      top: (window.innerHeight - 500) / 2,
+      left: (window.innerWidth - 500) / 2,
     });
-
-    return validation;
   };
 
-  const selectedEmail = useFormValidation('selectedEmail');
+  //에러 메시지
+  const errorMessage = (fieldState: ControllerFieldState) =>
+    fieldState.error ? (
+      <Styled.ErrorMsg>* {fieldState.error.message}</Styled.ErrorMsg>
+    ) : null;
 
   return (
-    <Styled.InputWrapper field={field}>
-      {label && 
+    <Styled.InputWrapper caption={caption}>
+      {label && (
         <Styled.Label>
           {label}
-          {required && <Styled.AstBox>*</Styled.AstBox>}
+          <Styled.AstBox>*</Styled.AstBox>
         </Styled.Label>
-      }
-      {field === 'email' ? (
-        <Styled.EmailWrapper>
-          <Styled.Input width={width} />
-          <Styled.EmailAt>@</Styled.EmailAt>
-          <Styled.EmailOptionWrapper>
-            <Styled.Input
-              {...selectedEmail}
-              placeholder="선택해주세요"
-            />
-            <Styled.IconWrapper onClick={() => setIsDropdownOpen(prev => !prev)}>
-              <Icon name="dropDown" width={15} height={13} />
-            </Styled.IconWrapper>
-            {isDropdownOpen && (
-              <Styled.Dropdown>
-                {emailOptions.map((email, index) => (
-                  <Styled.Option
-                    key={index}
-                    onClick={() => handleOptionClick(email)}
-                  >
-                    {email}
-                  </Styled.Option>
-                ))}
-              </Styled.Dropdown>
-            )}
-          </Styled.EmailOptionWrapper>
-        </Styled.EmailWrapper>
-      ) : field === 'phone' ? (
-        <Styled.FlexGapWrapper>
-          <Styled.Input />
-        </Styled.FlexGapWrapper>
-      ) : field === 'address' ? (
-        <Styled.FlexColumnWrapper>
-          <Styled.FlexWrapper>
-            <Styled.Input placeholder="우편번호" width={250} />
-            <Button text="주소검색" />
-          </Styled.FlexWrapper>
-          <Styled.Input placeholder="기본주소" />
-          <Styled.Input placeholder="상세주소" />
-        </Styled.FlexColumnWrapper>
-      ) : field === 'coupon' ? (
-        <Styled.FlexColumnWrapper>
-          <Styled.FlexWrapper>
-            <Styled.Input width={660} />
-            <Button text="전액사용" />
-          </Styled.FlexWrapper>
-          <Styled.Explanation>1회 구매시 적립금 최소 사용금액은 2,000원입니다.</Styled.Explanation>
-          </Styled.FlexColumnWrapper>
-      ) : field === 'point' ? (
-        <Styled.FlexColumnWrapper>
-          <Styled.FlexWrapper>
-            <Styled.Input width={660} />
-            <Button text="쿠폰적용" />
-          </Styled.FlexWrapper>
-          <Styled.FlexGapWrapper>
-            <Styled.Explanation>적립금과 쿠폰은 중복사용이 불가합니다.</Styled.Explanation>
-            <Styled.Explanation>일부 할인 상품에 한하여 쿠폰 사용이 제한될 수 있습니다.</Styled.Explanation>
-          </Styled.FlexGapWrapper>
-        </Styled.FlexColumnWrapper>
-      )
-      : field === 'card' || field === 'instalment' ? (
-        <Styled.Input width={844} placeholder={placeholder} />
-      ) :
-      field === 'shippingMsg' ? (
-        <Styled.Input width={750} placeholder={placeholder}/>
-      ) :
-      (
-        <Styled.Input />
       )}
+      {
+        {
+          username: (
+            <Styled.FlexGapWrapper>
+              <Controller
+                name="username"
+                control={control}
+                rules={{
+                  required: requiredErrorMsg,
+                  validate: value => validateName(value),
+                }}
+                render={({ field, fieldState }) => (
+                  <>
+                    <Styled.Input
+                      type="text"
+                      {...field}
+                      value={field.value ? field.value : ''}
+                      onClick={event => {
+                        console.log(event.target);
+                      }}
+                    />
+                    {errorMessage(fieldState)}
+                  </>
+                )}
+              ></Controller>
+            </Styled.FlexGapWrapper>
+          ),
+          phoneNumber: (
+            <Styled.FlexGapWrapper>
+              <Controller
+                name="phoneNumber"
+                control={control}
+                rules={{
+                  required: requiredErrorMsg,
+                  validate: value => validateMobile(value),
+                }}
+                render={({ field, fieldState }) => (
+                  <>
+                    <Styled.Input
+                      type="text"
+                      {...field}
+                      value={field.value ? field.value : ''}
+                      onChange={(
+                        event: React.ChangeEvent<HTMLInputElement>,
+                      ) => {
+                        const formattedValue = formatPhoneNumber(
+                          event.target.value,
+                        );
+                        field.onChange(formattedValue);
+                      }}
+                    />
+                    {errorMessage(fieldState)}
+                  </>
+                )}
+              ></Controller>
+            </Styled.FlexGapWrapper>
+          ),
+          address: (
+            <Styled.FlexColumnWrapper>
+              <Controller
+                name="zipcode"
+                control={control}
+                rules={{ required: requiredErrorMsg }}
+                render={({ field, fieldState }) => (
+                  <>
+                    <Styled.FlexWrapper>
+                      <Styled.Input
+                        {...field}
+                        value={field.value ? field.value : ''}
+                        readOnly
+                        placeholder="우편번호"
+                        width={250}
+                      />
+                      <Button onClick={handleDaumPost} text="주소검색" />
+                    </Styled.FlexWrapper>
+                    {errorMessage(fieldState)}
+                  </>
+                )}
+              ></Controller>
+              <Controller
+                name="address"
+                control={control}
+                rules={{ required: requiredErrorMsg }}
+                render={({ field, fieldState }) => (
+                  <>
+                    <Styled.Input
+                      {...field}
+                      value={field.value ? field.value : ''}
+                      placeholder="기본주소"
+                    />
+                    {errorMessage(fieldState)}
+                  </>
+                )}
+              ></Controller>
+              <Controller
+                name="addressDetail"
+                control={control}
+                rules={{ required: requiredErrorMsg }}
+                render={({ field, fieldState }) => (
+                  <>
+                    <Styled.Input
+                      {...field}
+                      value={field.value ? field.value : ''}
+                      placeholder="상세주소"
+                    />
+                    {errorMessage(fieldState)}
+                  </>
+                )}
+              ></Controller>
+            </Styled.FlexColumnWrapper>
+          ),
+          shippingMsg: (
+            <Styled.FlexColumnWrapper>
+              <Controller
+                name="memo"
+                control={control}
+                defaultValue="OFFICE"
+                render={({ field }) => (
+                  <Styled.Dropdown
+                    caption="shippingMsg"
+                    {...field}
+                    onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
+                      const value = event.target.value;
+                      value === 'TEXT'
+                        ? setShowShippingMsgInput(true)
+                        : setShowShippingMsgInput(false),
+                        field.onChange(value);
+                    }}
+                  >
+                    {shippingMsgOptions &&
+                      shippingMsgOptions.map(msg => (
+                        <Styled.Option key={msg.type} value={msg.type}>
+                          {msg.text}
+                        </Styled.Option>
+                      ))}
+                  </Styled.Dropdown>
+                )}
+              ></Controller>
+            </Styled.FlexColumnWrapper>
+          ),
+          defaultAddr: (
+            <CheckBoxStyled.Wrapper>
+              <Controller
+                name="defaultAddr"
+                control={control}
+                defaultValue={false}
+                render={({ field }) => (
+                  <input
+                    {...field}
+                    onChange={() => field.onChange(!field.value)}
+                    type="checkbox"
+                    value={field.value}
+                  />
+                )}
+              ></Controller>
+              <CheckBoxStyled.Label>기본 배송지로 저장</CheckBoxStyled.Label>
+            </CheckBoxStyled.Wrapper>
+          ),
+          selfMemo: (
+            <Controller
+              name="selfMemo"
+              control={control}
+              defaultValue=""
+              render={({ field }) => <Styled.Input {...field} width={750} />}
+            ></Controller>
+          ),
+        }[caption]
+      }
     </Styled.InputWrapper>
   );
-}
+};
 
-export default InputField
-
-
+export default InputField;

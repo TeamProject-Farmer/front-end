@@ -1,23 +1,26 @@
+import Link from 'next/link';
+import Image from 'next/image';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import Footer from '@components/Common/Footer';
+import Category from '@components/Common/Category';
 
 const Shop = () => {
-  const Add1: string = '식물 키우기 어려우시죠?';
-  const Add2: string = '내 반려식물을 등록하고 관리해보세요.';
+  const event1: string = '/assets/images/shop/eventBanner1.svg';
+  const event2: string = '/assets/images/shop/eventBanner2.svg';
   return (
     <Styled.Wrapper>
+      <Category />
       <Styled.EventWrapper>
         <Styled.SmallEvent>
-          <div>
-            <span>{Add1}</span>
-            <span>{Add2}</span>
-          </div>
+          <Image src={event1} alt="event1" width={1194} height={226} />
         </Styled.SmallEvent>
-        <Styled.NormalEvent>이벤트 페이지</Styled.NormalEvent>
-        <Styled.NormalEvent>이벤트 페이지</Styled.NormalEvent>
+        <Link href="/shop/bysize/s">
+          <Styled.NormalEvent>사이즈별</Styled.NormalEvent>
+        </Link>
+        <Link href="/shop/event/1">
+          <Styled.NormalEvent>이벤트 페이지</Styled.NormalEvent>
+        </Link>
       </Styled.EventWrapper>
-      <Footer />
     </Styled.Wrapper>
   );
 };
@@ -26,49 +29,41 @@ const Styled = {
   Wrapper: styled.div`
     width: 100vw;
     max-width: 100%;
-    height: 100vh;
-    max-height: 100%;
+    min-width: ${theme.size.shopDetailMinWidth};
+    height: fit-content;
   `,
   EventWrapper: styled.div`
     width: 100%;
-    height: 1351px;
-    padding: 45px 363px;
+    height: 1189px;
+    padding: 45px 0;
     display: flex;
     flex-direction: column;
-    border-top: 1px solid  ${theme.colors.black};
-    & > div {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 20px;
-      background: #d9d9d9;
-      margin: 25px 0;
-    }
+    align-items: center;
+    border-top: 1px solid ${theme.colors.black};
+    background-color: ${theme.colors.white};
   `,
   SmallEvent: styled.div`
     height: 226px;
-    & > div {
-      display: flex;
-      flex-direction: column;
-      text-align: left;
-      & > span {
-        color: #000;
-        font-size: 25px;
-        font-family: Inter;
-        font-style: normal;
-        font-weight: 500;
-        line-height: normal;
-      }
-      & > span:last-child {
-        font-weight: 700;
-      }
-    }
+    width: 1194px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    background: #d9d9d9;
+    margin: 25px 0;
+    overflow: hidden;
   `,
   NormalEvent: styled.div`
     height: 330px;
     font-size: 64px;
     font-weight: 700;
+    width: 1194px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    background: #d9d9d9;
+    margin: 25px 0;
   `,
 };
 

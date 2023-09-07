@@ -1,20 +1,51 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Profile from '@assets/images/mypage/profile.svg';
-import Call from '@assets/images/mypage/call.svg';
 import Mail from '@assets/images/mypage/mail.svg';
 import { Styled } from '../../styles';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { IconText } from './Icon';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store';
+import { getMemberCoupon } from 'src/apis/order/order';
+import { Coupon } from 'src/types/order/types';
+
+const selectUser = (state: RootState) => state.user;
 
 const MyProfile = () => {
   const route = useRouter();
 
-  // 쿠폰, 포인트 데이터 배열 생성 (임시)
+  const user = useSelector(selectUser);
+  const [coupon, setCoupon] = useState<Coupon[]>();
+
+  useEffect(() => {
+    getMemberCoupon().then(res => setCoupon(res));
+  }, []);
+
   const data = [
-    { label: 'Point', value: '1,000' },
-    { label: '쿠폰', value: '0' },
+    { label: 'Point', value: user.point },
+    { label: '쿠폰', value: coupon ? coupon.length : 0 },
   ];
 
+  //링크를 넣기 위해 추가한 부분
+  const handleComponents = (item: { label: string; value: number }) => {
+    if (item.label === '쿠폰') {
+      return (
+        <Link href="/mypage/mycoupons">
+          <Styled.SubText>{item.label}</Styled.SubText>
+          <Styled.NumberText>{item.value}</Styled.NumberText>
+        </Link>
+      );
+    } else {
+      return (
+        <>
+          <Styled.SubText>{item.label}</Styled.SubText>
+          <Styled.NumberText>{item.value}</Styled.NumberText>
+        </>
+      );
+    }
+  };
+  //
   return (
     <Styled.BoxWrapper>
       <Styled.TextBox>
@@ -32,23 +63,21 @@ const MyProfile = () => {
             {/* 프로필 왼쪽 */}
             <Styled.InfoWrapper>
               <Styled.NameText>
-                <span>파머</span>님 안녕하세요.
+                <span>{user.nickname}</span>님 안녕하세요.
               </Styled.NameText>
               <Styled.AccumulatedAmountText>
-                누적 구매금액: <span>0</span>원
+                누적 구매금액: <span>{user.cumulativeAmount}</span>원
               </Styled.AccumulatedAmountText>
 
-              <IconText icon={<Call />} text="+82 10 0***-0***" />
-              <IconText icon={<Mail />} text="이메일@이메일.com" />
+              <IconText icon={<Mail />} text={user.email} />
             </Styled.InfoWrapper>
           </Styled.ProfileTextWrapper>
 
-          {/* 쿠폰, 포인트 */}
+          {/* 쿠폰, 포인트 <- 이 부분 변경됨*/}
           <Styled.FlexDiv>
             {data.map((item, index) => (
               <Styled.Line key={index}>
-                <Styled.SubText>{item.label}</Styled.SubText>
-                <Styled.NumberText>{item.value}</Styled.NumberText>
+                <>{handleComponents(item)}</>
               </Styled.Line>
             ))}
           </Styled.FlexDiv>

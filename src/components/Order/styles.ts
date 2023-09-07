@@ -1,5 +1,5 @@
-import styled from '@emotion/styled'
-import theme from '@styles/theme'
+import styled from '@emotion/styled';
+import theme from '@styles/theme';
 
 const Styled = {
   Wrapper: styled.div`
@@ -24,10 +24,10 @@ const Styled = {
     margin-top: 15px;
     padding: 18px 20px;
   `,
-  FlexWrapper: styled.div<{agreement?: boolean}>`
+  FlexWrapper: styled.div<{ agreement?: boolean }>`
     display: flex;
     align-items: flex-start;
-    gap: ${({agreement}) => agreement ? '160px' : '48px'};
+    gap: ${({ agreement }) => (agreement ? '160px' : '48px')};
   `,
   FlexColumnWrapper: styled.div`
     position: relative;
@@ -35,15 +35,15 @@ const Styled = {
     flex-direction: column;
     gap: 15px;
     ::before {
-        content: '';
-        position: absolute;
-        display: 'block';
-        background-color: #fff;
-        width: 3px;
-        height: 104px;
-        top: 0;
-        right: -114px;
-      }
+      content: '';
+      position: absolute;
+      display: 'block';
+      background-color: #fff;
+      width: 3px;
+      height: 104px;
+      top: 0;
+      right: -114px;
+    }
   `,
   InfoTitle: styled.div`
     font-size: 16px;
@@ -54,25 +54,24 @@ const Styled = {
     font-weight: 600;
   `,
   RedFont: styled.span`
-    color: #FF0505;
+    color: #ff0505;
   `,
   AgreementWrapper: styled.div`
     background-color: ${theme.colors.green4};
     padding: 27px 60px;
   `,
-  InnerPaddingWrapper: styled.div<{field: string}>`
-    padding: ${({ field }) =>
-      field === 'payment'
+  InnerPaddingWrapper: styled.div<{ caption: string }>`
+    padding: ${({ caption }) =>
+      caption === 'payment'
         ? '0 60px'
-        : field === 'shippingMsg'
-        ? '0 154px'
-        : field === 'product'
-        ? '0 37px;'
-        : '0 25px'
-      };
+        : caption === 'shippingMsg'
+        ? '0 95px'
+        : caption === 'product'
+        ? '29px 95px;'
+        : '0 25px'};
     display: flex;
     flex-direction: column;
-    gap: ${({field}) => field === 'agreement' ? '14px' : '19px'};
+    gap: ${({ caption }) => (caption === 'agreement' ? '14px' : '19px')};
   `,
   PayWrapper: styled.div`
     height: 250px;
@@ -80,18 +79,36 @@ const Styled = {
     justify-content: center;
     align-items: center;
   `,
-  PayNow: styled.div`
+  PayNow: styled.button`
     background-color: ${theme.colors.green1};
     border-radius: 5px;
-    color: #FFF;
+    color: #fff;
     font-size: 25px;
-    font-weight: 700;
+    font-weight: 400;
     width: 252px;
     height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
   `,
-}
+  RadioWrapper: styled.div`
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    input {
+      appearance: none;
+      border: 5px solid #ddd;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+    }
+    input:checked {
+      border: 0.4em solid ${theme.colors.pointGreen};
+    }
+    label {
+      font-size: 16px;
+    }
+  `,
+};
 
 export default Styled;

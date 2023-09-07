@@ -1,42 +1,50 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-interface Props {
-  optionList: string[];
-  //나중에 onClick관련으로 넣어줘야할 것 같음
-}
+import { OptionBarProps } from 'src/types/shop/types';
+import { SortOption } from 'src/types/search/types';
 
-const OrderBar = (props: Props) => {
-  const { optionList } = props;
+const OrderBar = (props: OptionBarProps) => {
+  const { optionList, width, setProductOption, productOption } = props;
+
   return (
     <Styled.OrderWrapper>
-      <div>
-        {optionList.map((option, index) => (
-          <div key={index}>{option}</div>
+      <Styled.InnerWrapper width={width}>
+        {optionList?.map((item: SortOption) => (
+          <Styled.InnerBox
+            onClick={() => setProductOption(item.param)}
+            key={item.title}
+            isClicked={item.param === productOption}
+          >
+            {item.title}
+          </Styled.InnerBox>
         ))}
-      </div>
+      </Styled.InnerWrapper>
     </Styled.OrderWrapper>
   );
 };
 const Styled = {
   OrderWrapper: styled.div`
-    width: 99vw;
+    width: 98.9vw;
+    min-width: ${theme.size.shopDetailMinWidth};
     max-width: 100%;
     height: 60px;
-    /* 디자인처럼 색이 잘 보이려면 3px로 바꿔야할 것 같음 */
     border-top: 2px solid ${theme.colors.green1};
     border-bottom: 2px solid ${theme.colors.green1};
-    & > div {
-      width: ${theme.size.mainWidth};
-      height: inherit;
-      display: flex;
-      align-items: center;
-      margin: 0 auto;
-      & > div {
-        padding-right: 113px;
-        font-size: 16px;
-        font-weight: 500;
-      }
-    }
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+  `,
+  InnerWrapper: styled.div<{ width?: string }>`
+    width: ${({ width }) => (width ? width : `${theme.size.mainWidth}`)};
+    height: inherit;
+    display: flex;
+    align-items: center;
+  `,
+  InnerBox: styled.div<{ isClicked?: boolean }>`
+    padding-right: 95px;
+    font-size: 16px;
+    font-weight: 500;
+    color: ${({ isClicked }) => (isClicked ? `${theme.colors.pointGreen}` : '')};
   `,
 };
 export default OrderBar;

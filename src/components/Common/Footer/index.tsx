@@ -1,16 +1,19 @@
 import Styled from './styles';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Footer = () => {
   return (
     <Styled.Wrapper>
-        <Image
-          src="/assets/images/home/footerLogo.png"
-          alt="footerLogo"
-          width={176}
-          height={207}
-          style={{ objectFit: 'contain' }}
-        />
+      <Styled.ShrinkWrapper>
+        <Link href="/">
+          <Styled.Logo
+            src="/assets/images/home/footerLogo.png"
+            alt="footerLogo"
+          />
+        </Link>
+      </Styled.ShrinkWrapper>
+      <Styled.ShrinkWrapper>
         <Styled.InfoWrapper>
           <Styled.Info>
             <Styled.BoldContent>파머(주)</Styled.BoldContent>
@@ -30,6 +33,7 @@ const Footer = () => {
             </Styled.AccountBox>
           </Styled.Info>
         </Styled.InfoWrapper>
+      </Styled.ShrinkWrapper>
     </Styled.Wrapper>
   );
 };

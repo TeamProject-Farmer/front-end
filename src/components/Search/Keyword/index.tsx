@@ -1,23 +1,21 @@
-import React from 'react'
-import styled from '@emotion/styled'
+import React from 'react';
+import styled from '@emotion/styled';
+import { KeywordProps } from 'src/types/search/types';
 
-const Keyword = ({keywordList}) => {
-  const {title, content} = keywordList;
+const Keyword = ({ title, wordList }: KeywordProps) => {
   return (
     <Styled.FlexWrapper>
       <Styled.Title>{title}</Styled.Title>
       <Styled.FlexWrapper>
-        {
-          content?.map(word => (
-            <Styled.Keyword>{word}</Styled.Keyword>
-          ))
-        }
+        {wordList?.map((word: string, index: number) => (
+          <Styled.Keyword key={index}>{word}</Styled.Keyword>
+        ))}
       </Styled.FlexWrapper>
     </Styled.FlexWrapper>
-  )
-}
+  );
+};
 
-export default Keyword
+export default Keyword;
 
 const Styled = {
   FlexWrapper: styled.div`
@@ -31,6 +29,6 @@ const Styled = {
   Keyword: styled.div`
     font-size: 14px;
     font-weight: 500;
-    color: #33B822;
-  `
-}
+    color: #33b822;
+  `,
+};

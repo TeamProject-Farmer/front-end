@@ -6,5 +6,18 @@ export const getLogin = async ({ email, password }: LoginUserProps) => {
   formData.append('email', email);
   formData.append('password', password);
 
-  return request.post('/member/login', formData);
+  return request.post('/main/login', formData);
+};
+
+export const getNewToken = async (refreshToken: string) => {
+  const response = await request.post(
+    `${process.env.NEXT_PUBLIC_API_KEY}/member`,
+    {},
+    {
+      headers: {
+        AuthorizationRefresh: `Bearer ${refreshToken}`,
+      },
+    },
+  );
+  return response.data;
 };

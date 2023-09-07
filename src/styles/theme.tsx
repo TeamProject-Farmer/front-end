@@ -15,10 +15,13 @@ const theme: Theme = {
     apricot: '#E5D9B6',
     loginGreen: '#8AC22B',
     borderGray: '#ABABAB',
+    cartButtonGray: '#EEEEEE',
   },
   size: {
     mainWidth: '1200px',
-    shopDetailWidth: '692px',
+    shopDetailWidth: '740px',
+    shopDetailWrapper: '1330px',
+    shopDetailMinWidth: '1300px',
   },
 };
 

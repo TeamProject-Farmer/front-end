@@ -1,43 +1,40 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import Icon from '@components/Common/Icon';
+import Link from 'next/link';
 
-const Review = ({ userName, star, like, title, content }) => {
-  const countStar = () => {
+const Review = ({ memberNickName, imgUrl, likeCount, content, productId }) => {
+  const countStar = (likeCount: number) => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
-      const iconSrc = i < star ? 'fullStar' : 'emptyStar';
+      const iconSrc = i < likeCount ? 'fullStar' : 'emptyStar';
       stars.push(<Icon key={i} name={iconSrc} width={30} height={28} />);
     }
     return stars;
-  }
-
-  // const countStar = () => {
-  //   return Array(5).fill().map((_, index) => {
-  //     const iconSrc = index < star ? 'star' : 'emptyStar';
-  //     return <Icon key={index} name={iconSrc} width={30} height={28} />;
-  //   });
-  // }
+  };
 
   return (
-    <Styled.Wrapper>
-      <Styled.UserBox>
-        <Styled.UserName>{userName}</Styled.UserName>
-        <Icon name="moreBtn" width={25} height={25} />
-      </Styled.UserBox>
-      <Styled.ImgBox />
-      <Styled.ContentBox>
-        <Styled.StarBox>
-          <Styled.Star>{countStar()}</Styled.Star>
-          <Styled.Like>
-            <Icon name="thumbsUp" width={28} height={30}/>
-            <Styled.LikeQty>{like}</Styled.LikeQty>
-          </Styled.Like>
-        </Styled.StarBox>
-        <Styled.Title>{title}</Styled.Title>
-        <Styled.Content>{content}</Styled.Content>
-      </Styled.ContentBox>
-    </Styled.Wrapper>
+    <Link href={`/shop/detail/${productId}`}>
+      <Styled.Wrapper>
+        <Styled.flexBox>
+          <Styled.UserBox>
+            <Styled.UserName>{memberNickName}</Styled.UserName>
+            <Icon name="moreBtn" width={25} height={25} />
+          </Styled.UserBox>
+          <Styled.ImgBox src={imgUrl} alt="리뷰 이미지" />
+          <Styled.ContentBox>
+            <Styled.StarBox>
+              <Styled.Star>{countStar(likeCount)}</Styled.Star>
+              <Styled.Like>
+                <Icon name="thumbsUp" width={28} height={30} />
+                <Styled.LikeQty>{likeCount}</Styled.LikeQty>
+              </Styled.Like>
+            </Styled.StarBox>
+            <Styled.Content>{content}</Styled.Content>
+          </Styled.ContentBox>
+        </Styled.flexBox>
+      </Styled.Wrapper>
+    </Link>
   );
 };
 
@@ -48,14 +45,18 @@ const Styled = {
     margin-right: 32px;
     width: 277px;
     height: 426px;
-    padding: 0 5px;
     border: 1px solid #000000;
     border-radius: 15px;
+    flex-shrink: 0;
+  `,
+  flexBox: styled.div`
+    padding: 30px 5px;
     display: flex;
     flex-direction: column;
     justify-content: center;
   `,
   UserBox: styled.div`
+    padding: 0 10px;
     margin-bottom: 17px;
     display: flex;
     justify-content: space-between;
@@ -65,7 +66,7 @@ const Styled = {
     font-weight: 500;
   `,
   MoreBtn: styled.p``,
-  ImgBox: styled.div`
+  ImgBox: styled.img`
     width: 266px;
     height: 266px;
     background-color: ${theme.colors.lightGray};
@@ -100,10 +101,6 @@ const Styled = {
     color: #fff;
     background-color: ${theme.colors.pointGreen};
     font-size: 12px;
-  `,
-  Title: styled.p`
-    font-weight: 600;
-    font-size: 16px;
   `,
   Content: styled.p`
     font-weight: 500;

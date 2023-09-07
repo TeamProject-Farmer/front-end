@@ -3,29 +3,60 @@ import theme from '@styles/theme';
 
 const Styled = {
   Wrapper: styled.div`
-    width: 272px;
+    width: 282.727px;
     border: 1px solid #000;
+  `,
+  Img: styled.img`
+    width: 100%;
+    height: 279.515px;
+    width: auto;
+    background-color: ${theme.colors.lightGray};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: 700;
+    overflow: hidden;
+    .imageStyle {
+      width: auto;
+      height: auto;
+      object-fit: cover;
+    }
   `,
   ImgBox: styled.div`
     position: relative;
-    height: 271px;
+    height: 279.515px;
+    width: auto;
     background-color: ${theme.colors.lightGray};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: 700;
+    overflow: hidden;
+    .imageStyle {
+      width: auto;
+      height: auto;
+      object-fit: cover;
+    }
   `,
   Content: styled.div`
     display: flex;
     flex-direction: column;
     gap: 4.5px;
-    padding: 13px;
+    padding: 13.46px 18.92px;
+    min-height: 110px;
   `,
   Title: styled.p`
     font-size: 16px;
+    text-align: left;
   `,
   PriceBox: styled.div`
     display: flex;
     gap: 10px;
   `,
   Discount: styled.p`
-    color: #5f8d4e;
+    color: #62c655;
     font-size: 16px;
     font-weight: 700;
   `,
@@ -55,7 +86,7 @@ const Styled = {
     margin-top: 3px;
   `,
   SpecialPrice: styled.p`
-    background-color: #a4be7b;
+    background-color: #62c655;
     border-radius: 4px;
     padding: 3px 5px;
     font-size: 10px;
@@ -65,7 +96,7 @@ const Styled = {
     justify-content: center;
   `,
   FreeShipping: styled.p`
-    background-color: ${theme.colors.lightGray};
+    background-color: ${theme.colors.green4};
     border-radius: 4px;
     padding: 3px 5px;
     font-size: 10px;

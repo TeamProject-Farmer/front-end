@@ -1,48 +1,49 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
+import theme from '@styles/theme';
+import { CartItem } from '../../../types/order/types';
 
-const ProductList = ({productList}) => {
+const ProductList = ({ productList }) => {
   return (
     <Styled.Wrapper>
-    {
-      productList &&
-      productList.map((ele) => {
-        const {id, title, count, price} = ele;
-        return (
-          <Styled.ProductWrapper key={id}>
-            <Styled.ImgBox/>
-            <Styled.ContentWrapper>
-              <Styled.FontBlack>상품명 : {title}</Styled.FontBlack>
-              <Styled.FontGray>수량 : {count}</Styled.FontGray>
-              <Styled.FontBlack>{price}</Styled.FontBlack>
-            </Styled.ContentWrapper>
-          </Styled.ProductWrapper>
-        )
-      })
-    }
-  </Styled.Wrapper>
-  )
-}
+      {productList &&
+        productList?.map((ele: CartItem) => {
+          const { productId, productName, count, productPrice, imgUrl } = ele;
+          return (
+            <Styled.ProductWrapper key={productId}>
+              <Styled.ImgBox src={imgUrl} alt={productName} />
+              <Styled.ContentWrapper>
+                <Styled.FontBlack>상품명 : {productName}</Styled.FontBlack>
+                <Styled.FontGray>수량 : {count}</Styled.FontGray>
+                <Styled.FontBlack>{productPrice}</Styled.FontBlack>
+              </Styled.ContentWrapper>
+            </Styled.ProductWrapper>
+          );
+        })}
+    </Styled.Wrapper>
+  );
+};
 
-export default ProductList
+export default ProductList;
 
 const Styled = {
   Wrapper: styled.div`
     display: flex;
     flex-direction: column;
+    gap: 20px;
   `,
   ProductWrapper: styled.div`
-    width: 847px;
+    width: 500px;
     height: 130px;
     border-radius: 8px;
-    background-color: #F0F0F0;
+    border: 1px solid ${theme.colors.green1};
     display: flex;
     gap: 20px;
     padding: 20px;
   `,
-  ImgBox: styled.div`
+  ImgBox: styled.img`
     width: 90px;
     height: 90px;
-    background-color: #D9D9D9;
+    background-color: #d9d9d9;
   `,
   ContentWrapper: styled.div`
     display: flex;
@@ -56,4 +57,4 @@ const Styled = {
     font-size: 16px;
     color: #606367;
   `,
-}
+};

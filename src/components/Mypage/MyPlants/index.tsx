@@ -1,25 +1,11 @@
 import React from 'react';
-import { Styled } from '../styles';
-import styled from '@emotion/styled';
-import { WeekdaysCheckbox } from './Weekdays';
 import ProgressBar from './ProgressBar';
+import { WeekdaysCheckbox } from './Weekdays';
+import { Styled } from '../styles';
+import { plantData } from 'src/utils/mypage/myPlantsData';
 
-// (임시) 백엔드에서 받아올 데이터, 맥북 기준 3개 정렬 가능(반응형 필요) *타입 선언 전
-const plantData = [
-  {
-    name: '피쉬본',
-    image: '이미지 URL',
-  },
-  {
-    name: '다른 식물',
-    image: '이미지 URL',
-  },
-  {
-    name: '다른 식물',
-    image: '이미지 URL',
-  },
-  // 추가적인 식물 데이터...
-];
+// ** 해당 페이지 API는 백엔드에서 아직 구현되지 않아 다음 배포 때 구현 예정입니다 ** //
+// ** 프론트 구현은 완성된 상태 ** //
 
 const Row = () => {
   return (
@@ -28,7 +14,6 @@ const Row = () => {
         <Styled.HeaderDiv>
           <Styled.HeaderText>나의 식물들</Styled.HeaderText>
           <div>
-            {/* 해당 기능 action 아직 구현 안된거 같음 */}
             <Styled.MyPlantsButton size="0.5">등록하기</Styled.MyPlantsButton>
             <Styled.MyPlantsButton size="2.5">삭제하기</Styled.MyPlantsButton>
           </div>

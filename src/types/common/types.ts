@@ -1,7 +1,27 @@
 import { IconName } from '@components/Common/Icon';
 
-export interface IIconProps {
+export interface LayoutProps {
+  children: React.ReactNode;
+}
+
+export interface Category {
+  categoryId: number;
+  categoryName: string;
+  imgUrl: string;
+}
+
+export interface IconProps {
   name: IconName | string;
   width: number;
   height: number;
+  onClick?: () => void;
+}
+
+export interface ProductProps {
+  thumbnailImg: string;
+  name: string;
+  price: number;
+  discountRate: number;
+  reviewCount: number;
+  averageStarRating: number;
 }

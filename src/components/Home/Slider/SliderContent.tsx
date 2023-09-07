@@ -1,9 +1,10 @@
-import {AnimatePresence, motion} from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
+import Link from 'next/link';
+import { Banner } from 'src/types/home/types';
 
-const SliderContent = ({sliderContents, activeIndex}) => {
-
+const SliderContent = ({ sliderContents, activeIndex }) => {
   const imgVariants = {
     initial: {
       opacity: 1,
@@ -26,77 +27,55 @@ const SliderContent = ({sliderContents, activeIndex}) => {
   };
 
   return (
-    <Styled.Wrapper>
+    <>
       <AnimatePresence initial={false}>
-        {sliderContents.map((content) =>
-          activeIndex === content.id ? (
-            <Styled.Content
-              key={content.id}
-              id={content.id}
-              variants={imgVariants}
-              initial="initial"
-              animate="start"
-              exit="end"
-            >
-              <Styled.ContentBox>
-                <Styled.Slogan>Let's be a</Styled.Slogan>
-                <Styled.Slogan>Farmer!</Styled.Slogan>        
-                <Styled.Description>
-                  사무공간, 생활공간을 그린 친화적으로
-                </Styled.Description>
-                <Styled.ShopBtn>&gt; Shop Now</Styled.ShopBtn>
-              </Styled.ContentBox>
-            </Styled.Content>
-          ) : null,
-        )}
+        {sliderContents &&
+          sliderContents?.map((content: Banner) =>
+            activeIndex === content.id ? (
+              <Link key={content.id} href={content.linkUrl}>
+                <Styled.Content
+                  variants={imgVariants}
+                  imgurl={content.imgUrl}
+                  initial="initial"
+                  animate="start"
+                  exit="end"
+                >
+                  {content.id === 1 && (
+                    <Styled.ShopBtn>&gt; Shop Now</Styled.ShopBtn>
+                  )}
+                </Styled.Content>
+              </Link>
+            ) : null,
+          )}
       </AnimatePresence>
-    </Styled.Wrapper>
+    </>
   );
-}
+};
 
-export default SliderContent
+export default SliderContent;
 
 const Styled = {
-  Wrapper: styled.div`
-  `,
-  Content: styled(motion.div)`
+  Content: styled(motion.div)<{ imgurl: string }>`
     position: absolute;
     width: 100%;
     height: 100%;
-    background-image: url('/assets/images/home/bannerBg${props => props.id}.png');
-    background-size: 100% auto;
-    `,
-    ContentBox: styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 670px;
-    height: 610px;
-    padding: 120px 100px;
-    position: absolute;
-    top: 118px;
-    left: 388px;
-  `,
-  Slogan: styled.p`
-    font-size: 90px;
-    color: #fff;
-  `,
-  Description: styled.p`
-    font-size: 30px;
-    color: ${theme.colors.green1};
+    background-image: url(${({ imgurl }) => imgurl});
+    background-size: 100%;
+    background-repeat: no-repeat;
   `,
   ShopBtn: styled.p`
-    margin-top: 30px;
-    flex-grow: 0;
-    border: 1px solid ${theme.colors.green1};
+    position: absolute;
+    top: 488px;
+    left: 584px;
     border-radius: 10px;
-    width: 169px;
-    height: 53px;
-    padding: 11px 8px;
-    font-size: 20px;
-    color: ${theme.colors.green1};
+    width: 114px;
+    height: 40px;
+    background-color: ${theme.colors.green1};
+    color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 16px;
+    font-weight: 400;
   `,
-}
+};

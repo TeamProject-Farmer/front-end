@@ -1,105 +1,122 @@
-import React, { useState } from 'react'
-import Styled from '../../components/Order/styles'
-import Layout from '@components/Order/Layout'
-import InputGroup from '@components/Order/InputGroup'
-import InputField from '@components/Order/InputField'
-import CheckBoxInput from '@components/Order/InputField/CheckBoxInput'
-import ProductList from '@components/Order/List/ProductList'
-import PaymentList from '@components/Order/List/PaymentList'
-import { IOrderedProduct } from 'src/types/order/types'
+import Styled from '../../components/Order/styles';
+import Layout from '@pages/layout';
+import NestedLayout from '@components/Order/NestedLayout';
+import Delivery from '@components/Order/Delivery';
+import InputGroup from '@components/Order/InputGroup';
+import ProductList from '@components/Order/List/ProductList';
+import Agreement from '@components/Order/Agreement';
+import PayMethod from '@components/Order/PayMethod';
+import { DeliveryInfo } from 'src/types/order/types';
+import type { NextPageWithLayout } from '@pages/_app';
+import { ReactElement } from 'react';
+import Payment from '@components/Order/Payment';
+import { useForm } from 'react-hook-form';
+import usePayment from 'src/hooks/order/usePayment';
+import processPayment from 'src/utils/order/processPayment';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store';
+import getTotalPrice from 'src/utils/order/getTotalPrice';
+import { useRouter } from 'next/router';
 
-const productList: IOrderedProduct[] = [{id: '1', title: '상품명', count: 1, price: 12900}]
+const OrderPage: NextPageWithLayout = () => {
+  const selectedCart = (state: RootState) => state.selectedCart;
+  const {
+    payNowDisabled,
+    totalAmount,
+    selectedMethod,
+    setSelectedMethod,
+    getTotalAmount,
+    handleAgreementChange,
+    getUsedPoint,
+    point,
+    getUsedCoupon,
+    couponId,
+  } = usePayment();
 
-const index = () => {
+  //react hook form
+  const { handleSubmit, setValue, trigger, control } = useForm();
+
+  //개별 상품페이지에서 온 제품인지 장바구니 목록인지
+  const router = useRouter();
+  const fromCart = Object.keys(router.query).length === 0;
+
+  const productList = useSelector(selectedCart);
+  const totalPrice = getTotalPrice(productList);
+
+  // 결제하기 버튼 클릭 시
+  const onSubmit = async (deliveryInfo: DeliveryInfo) => {
+    console.log(deliveryInfo);
+
+    if (selectedMethod === undefined) {
+      alert('결제 방법을 선택해주세요');
+      return;
+    }
+
+    if (payNowDisabled) {
+      alert('주문 내용 확인 및 결제에 동의하셔야 구매가 가능합니다.');
+      return;
+    }
+
+    try {
+      const { resultInfo } = await processPayment({
+        productList,
+        selectedMethod,
+        totalAmount,
+        deliveryInfo,
+        point,
+        couponId,
+      });
+      const { orderNumber } = resultInfo;
+      router.push({
+        pathname: '/order/result',
+        query: {
+          orderNumber,
+        },
+      });
+    } catch (error) {
+      alert(`결제 실패: ${error}`);
+    }
+  };
+
   return (
-    <Layout>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Styled.Wrapper>
-        {/* 주문정보 */}
-        <InputGroup title='주문정보'>
-          <InputField label='주문자' field='text' required={true} />
-          <InputField label='이메일' field='email' required={true} />
-          <InputField label='휴대전화' field='phone' required={true}/>
-          <InputField label='주소' field='address' required={true}/>
-        </InputGroup>
         {/* 배송지 */}
-        <InputGroup title='배송지'>
-          <InputField label='받는사람' field='text' required={true} />
-          <InputField label='주소' field='address' required={true}/>
-          <InputField label='휴대전화' field='phone' required={true}/>
-        </InputGroup>
-        <InputGroup title='' before='none'>
-          <Styled.InnerPaddingWrapper field="shippingMsg">
-            <InputField field='shippingMsg' placeholder='-- 메시지 선택 (선택사항) --' />
-            <CheckBoxInput label='기본 배송지로 저장' />
-          </Styled.InnerPaddingWrapper>
-        </InputGroup>
+        <Delivery control={control} setValue={setValue} trigger={trigger} />
         {/* 주문상품 */}
-        <InputGroup title='주문상품'>
-          <Styled.InnerPaddingWrapper field='product'>
-            <ProductList productList={productList}/>
+        <InputGroup title="주문상품">
+          <Styled.InnerPaddingWrapper caption="product">
+            <ProductList productList={fromCart ? productList : []} />
           </Styled.InnerPaddingWrapper>
         </InputGroup>
-        {/* 적립금/쿠폰 */}
-        <InputGroup title='적립금/쿠폰'>
-          <InputField label='적립금' field='point'/>
-          <InputField label='쿠폰' field='coupon'/>
-          <Styled.InnerMarginWrapper>
-            <Styled.DiscountedPrice>
-              <Styled.Title>적용금액</Styled.Title>
-              <Styled.Title>-0원</Styled.Title>
-            </Styled.DiscountedPrice>
-          </Styled.InnerMarginWrapper>
-        </InputGroup>
-        {/* 적립금/쿠폰 */}
-        <InputGroup title='적립금/쿠폰' before='none'>
-          <Styled.FlexColumnWrapper>
-            <Styled.FlexWrapper>
-              <Styled.InfoTitle>주문상품</Styled.InfoTitle>
-              <Styled.InfoContent>129000원</Styled.InfoContent>
-            </Styled.FlexWrapper>
-            <Styled.FlexWrapper>
-              <Styled.InfoTitle>배송비</Styled.InfoTitle>
-              <Styled.InfoContent>+2500원</Styled.InfoContent>
-            </Styled.FlexWrapper>
-            <Styled.FlexWrapper>
-              <Styled.InfoTitle>할인/부가결제</Styled.InfoTitle>
-              <Styled.InfoContent><Styled.RedFont>-0</Styled.RedFont>원</Styled.InfoContent>
-            </Styled.FlexWrapper>
-            <Styled.InnerMarginWrapper>
-            <Styled.DiscountedPrice>
-              <Styled.Title>최종 결제 금액</Styled.Title>
-              <Styled.Title>15400원</Styled.Title>
-            </Styled.DiscountedPrice>
-          </Styled.InnerMarginWrapper>
-          </Styled.FlexColumnWrapper>
-        </InputGroup>
-        {/* 결제수단 */}
-        <InputGroup title='결제수단' before='none'>
-          <Styled.InnerPaddingWrapper field="payment">
-            <PaymentList/>
-            <InputField field='card' placeholder='카드를 선택해주세요.'/>
-            <InputField field='instalment' placeholder='일시불'/>
-          </Styled.InnerPaddingWrapper>
-        </InputGroup>
+        {/* 적립금/쿠폰, 결제금액 */}
+        <Payment
+          totalPrice={totalPrice}
+          getTotalAmount={getTotalAmount}
+          getUsedPoint={getUsedPoint}
+          getUsedCoupon={getUsedCoupon}
+        />
+        {/* 결제 수단 */}
+        <PayMethod
+          selectedMethod={selectedMethod}
+          setSelectedMethod={setSelectedMethod}
+        />
         {/* 약관동의 */}
-        <Styled.AgreementWrapper>
-          <Styled.FlexWrapper agreement={true}>
-            <Styled.FlexColumnWrapper>
-              <CheckBoxInput smallBox={false} label='아래 내용에 모두 동의합니다. (필수)'/>
-              <Styled.InnerPaddingWrapper field='agreement'>
-                <CheckBoxInput label='개인정보 제 3자 제공'/>
-                <CheckBoxInput label='개인정보 수집 및 이용'/>
-              </Styled.InnerPaddingWrapper>
-            </Styled.FlexColumnWrapper>
-            <CheckBoxInput label='결제대행 서비스 이용약관 동의 (필수)'/>
-          </Styled.FlexWrapper>
-        </Styled.AgreementWrapper>
+        <Agreement handleAgreementChange={handleAgreementChange} />
       </Styled.Wrapper>
       <Styled.PayWrapper>
-          <Styled.PayNow>결제하기</Styled.PayNow>
-        </Styled.PayWrapper>
-    </Layout>
-  )
-}
+        <Styled.PayNow type="submit">결제하기</Styled.PayNow>
+      </Styled.PayWrapper>
+    </form>
+  );
+};
 
-export default index
+export default OrderPage;
+
+OrderPage.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <Layout>
+      <NestedLayout>{page}</NestedLayout>
+    </Layout>
+  );
+};
