@@ -1,16 +1,17 @@
 import { LoginUserProps } from 'src/types/login/types';
-import request from '../base';
+import axios from 'axios';
+import { BASE_URL } from '../base';
 
-export const getLogin = async ({ email, password }: LoginUserProps) => {
+export const postLogin = async ({ email, password }: LoginUserProps) => {
   const formData = new FormData();
   formData.append('email', email);
   formData.append('password', password);
 
-  return request.post('/main/login', formData);
+  return axios.post(`${BASE_URL}/main/login`, formData);
 };
 
 export const postMemberRefresh = async (refreshToken: string) => {
-  const response = await request.post(
+  const response = await axios.post(
     `${process.env.NEXT_PUBLIC_API_KEY}/member`,
     {},
     {

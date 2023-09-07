@@ -13,10 +13,6 @@ const Styled = {
   ShrinkWrapper: styled.div`
     flex-shrink: 0;
   `,
-  Logo: styled.img`
-    width: 176px;
-    height: 207px;
-  `,
   InfoWrapper: styled.div`
     position: relative;
     margin-left: 118px;

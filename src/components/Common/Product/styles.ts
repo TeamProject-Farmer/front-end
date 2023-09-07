@@ -6,23 +6,6 @@ const Styled = {
     width: 282.727px;
     border: 1px solid #000;
   `,
-  Img: styled.img`
-    width: 100%;
-    height: 279.515px;
-    width: auto;
-    background-color: ${theme.colors.lightGray};
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 30px;
-    font-weight: 700;
-    overflow: hidden;
-    .imageStyle {
-      width: auto;
-      height: auto;
-      object-fit: cover;
-    }
-  `,
   ImgBox: styled.div`
     position: relative;
     height: 279.515px;

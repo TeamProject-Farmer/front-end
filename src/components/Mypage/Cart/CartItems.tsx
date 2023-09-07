@@ -4,7 +4,7 @@ import theme from '@styles/theme';
 import { CartListProps } from 'src/types/mypage/types';
 import Image from 'next/image';
 import { getEditCount } from 'src/apis/mypage/cart';
-import { useQueryClient } from 'react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
 import { setCartIndex, setChecked } from 'store/reducers/cartSlice';
 import { useSelector } from 'react-redux';
@@ -21,7 +21,7 @@ const CartItems = ({ cartListArray }: { cartListArray: CartListProps[] }) => {
   const handleEditCount = async (id: number, operation: 'minus' | 'plus') => {
     try {
       await getEditCount(id, operation);
-      await queryClient.invalidateQueries('cartList');
+      await queryClient.invalidateQueries(['cartList']);
     } catch (error) {
       console.error(error);
     }

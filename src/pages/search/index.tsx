@@ -14,7 +14,7 @@ import {
   getRecentSearch,
 } from 'src/apis/search/search';
 import { sortingOptions } from 'src/utils/search/sortingOptions';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { ProductProps } from 'src/types/common/types';
 
 const SearchPage: NextPageWithLayout = () => {
@@ -25,13 +25,11 @@ const SearchPage: NextPageWithLayout = () => {
   const memberEmail = useSelector((state: RootState) => state.user.email);
 
   // 최근 검색 기록
-  const { data: recentSearchWord } = useQuery(
-    searchedWord,
-    () => getRecentSearch(),
-    {
-      enabled: memberEmail ? true : false,
-    },
-  );
+  const { data: recentSearchWord } = useQuery({
+    queryKey: [memberEmail, searchedWord],
+    queryFn: () => getRecentSearch(),
+    enabled: memberEmail ? true : false,
+  });
 
   // 검색 input value값 관리
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>

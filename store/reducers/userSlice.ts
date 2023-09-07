@@ -10,21 +10,16 @@ const initialState: UserState = {
   role: '',
   cumulativeAmount: 0,
   memberCoupon: 0,
-  accessToken: '',
-  refreshToken: '',
 };
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<UserState>) => {
-      return {
-        ...state,
-        ...action.payload,
-      };
+    setUser: (state, action) => {
+      return action.payload;
     },
-    setUserNickname: (state, action: PayloadAction<string>) => {
+    setUserNickname: (state, action) => {
       return {
         ...state,
         nickname: action.payload,
@@ -32,18 +27,6 @@ const userSlice = createSlice({
     },
     clearUser: state => {
       return initialState;
-    },
-    setAccessToken: (state, action: PayloadAction<string>) => {
-      return {
-        ...state,
-        accessToken: action.payload,
-      };
-    },
-    setRefreshToken: (state, action: PayloadAction<string>) => {
-      return {
-        ...state,
-        refreshToken: action.payload,
-      };
     },
   },
 });

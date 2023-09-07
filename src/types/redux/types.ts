@@ -7,8 +7,6 @@ export interface UserState {
   role: string;
   cumulativeAmount: number;
   memberCoupon: number;
-  accessToken: string;
-  refreshToken: string;
 }
 
 export interface CartState {
@@ -16,7 +14,6 @@ export interface CartState {
   allChecked: boolean;
 }
 
-export interface categoryState {
-  name: string;
-  id: number;
+export interface TokenState {
+  accessToken: string;
 }

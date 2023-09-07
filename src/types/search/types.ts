@@ -1,6 +1,13 @@
+export interface PostSearch {
+  searchWord: string;
+  memberEmail?: string;
+}
+
+export type ParamType = 'new' | 'review' | 'low' | 'high';
+
 export interface SortOption {
   title: string;
-  param: string;
+  param: ParamType;
 }
 
 export interface KeywordProps {

@@ -37,7 +37,6 @@ const Styled = {
   `,
   Event: styled.div`
     position: relative;
-    width: 1920px;
     height: 50px;
     color: #ffffff;
     font-size: 18px;
@@ -47,7 +46,7 @@ const Styled = {
   `,
   CloseBtn: styled.div`
     position: absolute;
-    right: 0px;
+    right: 10px;
     cursor: pointer;
   `,
 };

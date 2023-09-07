@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Styled from './styles';
+import Image from 'next/image';
 import Icon from '../Icon';
 import EventBanner from './EventBanner';
 import Link from 'next/link';
@@ -8,16 +9,23 @@ import { RootState } from 'store';
 import { useDispatch } from 'react-redux';
 import { clearUser } from 'store/reducers/userSlice';
 import Menu from '../Menu';
-import { removeCookie } from 'src/utils/cookie';
+import { getCookie, removeCookie } from 'src/utils/cookie';
+import { useRouter } from 'next/router';
+import { setToken } from 'store/reducers/tokenSlice';
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
-  const isLogin = useSelector((state: RootState) => state.user.accessToken);
+  const refreshToken = getCookie('refreshToken');
+  const isLogin = useSelector((state: RootState) => state.user.email);
+
   const dispatch = useDispatch();
+  const router = useRouter();
+
   const handleLogout = () => {
     dispatch(clearUser());
-    removeCookie('accessToken');
+    setToken('');
     removeCookie('refreshToken');
+    router.push('/');
   };
   return (
     <Styled.Wrapper>
@@ -29,11 +37,16 @@ const Header = () => {
         </Styled.Menu>
         <Link href="/">
           <Styled.Logo>
-            <img alt="headerLogo" src="/assets/images/home/headerLogo.png" />
+            <Image
+              src="/assets/images/home/headerLogo.png"
+              alt="headerLogo"
+              width={150}
+              height={33}
+            />
           </Styled.Logo>
         </Link>
         <Styled.Utils>
-          {isLogin && (
+          {isLogin && refreshToken && (
             <Link href="/">
               <Icon
                 onClick={handleLogout}
@@ -44,7 +57,7 @@ const Header = () => {
             </Link>
           )}
           <li>
-            <Link href={isLogin ? '/mypage' : '/login'}>
+            <Link href={isLogin && refreshToken ? '/mypage' : '/login'}>
               <Icon name="myPage" width={32} height={32} />
             </Link>
           </li>

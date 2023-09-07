@@ -1,14 +1,11 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import { url } from 'inspector';
 
 const Styled = {
   Wrapper: styled.div<{ sizeBg: string }>`
     width: 1920px;
     height: 830px;
     position: relative;
-    /* background-image: url(${({ sizeBg }) =>
-      `assets/images/home/${sizeBg}.png`}); */
     background-image: url(${props => `assets/images/home/${props.sizeBg}.png`});
   `,
   ContentBox: styled.div`

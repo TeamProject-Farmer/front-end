@@ -4,7 +4,7 @@ import Icon from '@components/Common/Icon';
 import theme from '@styles/theme';
 import { Plant } from 'src/types/home/types';
 import Link from 'next/link';
-
+import Image from 'next/image';
 const Plant = ({
   productId,
   ranking,
@@ -21,7 +21,7 @@ const Plant = ({
       <Styled.Wrapper>
         <Styled.RankingBox>{ranking}</Styled.RankingBox>
         <Styled.ImgBox>
-          <img src={imgUrl} alt="plant image" />
+          <Image src={imgUrl} alt="plant image" width={160} height={201} />
         </Styled.ImgBox>
         <Styled.Title>{productName}</Styled.Title>
         <Styled.Content>

@@ -1,12 +1,9 @@
 import React, { useEffect } from 'react';
 import Styled from './styles';
-import { getProductCategory } from 'src/apis/common/category';
 import { sizeCategory } from 'src/utils/home/category';
 import { Category } from 'src/types/common/types';
-import { useQuery } from 'react-query';
 import Link from 'next/link';
 import Icon from '../Icon';
-import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
 const categorySelector = (state: RootState) => state.category;

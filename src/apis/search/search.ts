@@ -1,26 +1,17 @@
 import request from '../base';
-
-//검색 결과 가져오기
-// export const postSearch = async (
-//   searchWord: string,
-//   sortSearchCond?: string,
-//   memberEmail?: string,
-// ) => {
-//   const response = await request.post(
-//     '/main/search',
-//     {},
-//     {
-//       params: { searchWord, sortSearchCond, memberEmail },
-//     },
-//   );
-//   return response.data.content;
-// };
+import axios from 'axios';
+import { BASE_URL } from '../base';
+import { PostSearch } from 'src/types/search/types';
 
 export const postSearch = async (searchWord: string, memberEmail?: string) => {
-  const response = await request.post('/main/search', {
+  const requestData: PostSearch = {
     searchWord: searchWord,
-    memberEmail: memberEmail,
-  });
+  };
+
+  if (memberEmail) {
+    requestData.memberEmail = memberEmail;
+  }
+  const response = await axios.post(`${BASE_URL}/main/search`, requestData);
   return response.data.content;
 };
 
@@ -30,7 +21,7 @@ export const postSortSearch = async (
   sortSearchCond: string,
   memberEmail?: string,
 ) => {
-  const response = await request.post('/main/search', {
+  const response = await axios.post(`${BASE_URL}/main/search`, {
     searchWord: searchWord,
     sortSearchCond: sortSearchCond,
     memberEmail: memberEmail,
