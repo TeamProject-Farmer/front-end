@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Layout from '@pages/layout';
 import NestedLayout from '@components/Search/Layout';
 import SearchContainer from '@components/Search/SearchContainer';
@@ -16,47 +16,20 @@ import {
 import { sortingOptions } from 'src/utils/search/sortingOptions';
 import { useQuery } from '@tanstack/react-query';
 import { ProductProps } from 'src/types/common/types';
-import { postMemberRefresh } from 'src/apis/login/login';
-import { getCookie, setCookie } from 'src/utils/cookie';
-import { setUser } from 'store/reducers/userSlice';
-import { useDispatch } from 'react-redux';
 
 const SearchPage: NextPageWithLayout = () => {
   const [inputValue, setInputValue] = useState<string>('');
   const [searchedWord, setSearchedWord] = useState<string>('');
-  const [isSort, setIsSort] = useState<boolean>(false);
-  // const [searchResult, setSearchResult] = useState<ProductProps[]>();
+  const [searchResult, setSearchResult] = useState<ProductProps[]>();
   const [sortOption, setSortOption] = useState<string>('');
   const memberEmail = useSelector((state: RootState) => state.user.email);
 
   // 최근 검색 기록
   const { data: recentSearchWord } = useQuery({
-    queryKey: [searchedWord],
-    queryFn: getRecentSearch,
+    queryKey: [memberEmail, searchedWord],
+    queryFn: () => getRecentSearch(),
     enabled: memberEmail ? true : false,
   });
-  // 검색
-  const { data: searchResult, refetch } = useQuery({
-    queryKey: ['searchResult', searchedWord],
-    queryFn: () => postSearch(inputValue, memberEmail),
-    enabled: false,
-    onSuccess: data => {
-      setSearchedWord(inputValue);
-      setSortOption('new');
-    },
-  });
-  // 검색 정렬
-  const { data: searchSortResult, refetch: sortRefetch } = useQuery({
-    queryKey: ['searchSortResult', searchedWord, sortOption],
-    queryFn: () => postSortSearch(inputValue, sortOption, memberEmail),
-    enabled: false,
-    onSuccess: data => {
-      setSearchedWord(inputValue);
-    },
-  });
-
-  console.log(sortOption);
-  // console.log('searchResult', searchResult);
 
   // 검색 input value값 관리
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>
@@ -71,22 +44,22 @@ const SearchPage: NextPageWithLayout = () => {
 
   //검색 버튼 클릭 시
   const handleSearchResult = async () => {
-    setIsSort(false);
-    refetch();
+    const response = await postSearch(inputValue, memberEmail);
+    setSearchResult(response);
+    setSearchedWord(inputValue);
+    setSortOption('new');
   };
 
   //검색 결과 정렬
   const handleSort = async (sortSearchCond: string) => {
+    const response = await postSortSearch(
+      inputValue,
+      sortSearchCond,
+      memberEmail,
+    );
     setSortOption(sortSearchCond);
-    setIsSort(true);
+    setSearchResult(response);
   };
-
-  useEffect(() => {
-    sortRefetch();
-  }, [sortOption]);
-
-  console.log('searchSortResult', searchSortResult);
-  console.log(isSort);
 
   return (
     <>
@@ -103,10 +76,7 @@ const SearchPage: NextPageWithLayout = () => {
         sortOption={sortOption}
         handleSort={handleSort}
       />
-      <SearchContent
-        searchedWord={searchedWord}
-        searchResult={isSort ? searchSortResult : searchResult}
-      />
+      <SearchContent searchedWord={searchedWord} searchResult={searchResult} />
     </>
   );
 };

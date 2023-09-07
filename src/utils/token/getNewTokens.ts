@@ -1,4 +1,4 @@
-import { getTokens, setToken } from './token';
+import { setToken } from './token';
 import { getCookie, setCookie } from '../cookie';
 import { postMemberRefresh } from 'src/apis/login/login';
 import setUser from '../login/setUser';

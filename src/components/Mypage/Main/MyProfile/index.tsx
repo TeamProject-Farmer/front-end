@@ -7,8 +7,6 @@ import Link from 'next/link';
 import { IconText } from './Icon';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
-import { getMemberCoupon } from 'src/apis/order/order';
-import { Coupon } from 'src/types/order/types';
 
 const selectUser = (state: RootState) => state.user;
 

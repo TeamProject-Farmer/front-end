@@ -1,5 +1,5 @@
+import axios from 'axios';
 import { RegisterData } from 'src/types/register/types';
-import request from '../base';
 
 // 회원가입 API
 export const getJoin = async ({ email, password, nickname }: RegisterData) => {
@@ -8,5 +8,5 @@ export const getJoin = async ({ email, password, nickname }: RegisterData) => {
   formData.append('password', password);
   formData.append('nickname', nickname);
 
-  return request.post('/main/join/membership', formData);
+  return axios.post('/main/join/membership', formData);
 };

@@ -1,9 +1,8 @@
 import { LoginUserProps } from 'src/types/login/types';
 import axios from 'axios';
 import { BASE_URL } from '../base';
-import request from '../base';
 
-export const getLogin = async ({ email, password }: LoginUserProps) => {
+export const postLogin = async ({ email, password }: LoginUserProps) => {
   const formData = new FormData();
   formData.append('email', email);
   formData.append('password', password);

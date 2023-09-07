@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Styled from './styles';
+import Image from 'next/image';
 import Icon from '../Icon';
 import EventBanner from './EventBanner';
 import Link from 'next/link';
@@ -36,7 +37,12 @@ const Header = () => {
         </Styled.Menu>
         <Link href="/">
           <Styled.Logo>
-            <img alt="headerLogo" src="/assets/images/home/headerLogo.png" />
+            <Image
+              src="/assets/images/home/headerLogo.png"
+              alt="headerLogo"
+              width={150}
+              height={33}
+            />
           </Styled.Logo>
         </Link>
         <Styled.Utils>

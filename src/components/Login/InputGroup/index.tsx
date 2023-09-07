@@ -3,7 +3,7 @@ import Styled from '../styles';
 import FormButton from '@components/Register/FormButton';
 import { ErrorText } from 'src/types/login/types';
 import theme from '@styles/theme';
-import { getLogin } from 'src/apis/login/login';
+import { postLogin } from 'src/apis/login/login';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { setUser } from 'store/reducers/userSlice';
@@ -31,7 +31,7 @@ const InputGroup = () => {
   // 로그인 성공시 API
   const handleLoginSuccess = async () => {
     try {
-      const res = await getLogin({ email, password });
+      const res = await postLogin({ email, password });
       const userData = res.data;
       const userInfo = {
         socialId: userData.socialId,

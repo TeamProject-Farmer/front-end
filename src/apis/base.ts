@@ -11,7 +11,6 @@ const request = axios.create({
 request.interceptors.request.use(
   async config => {
     const { accessToken, refreshToken } = getTokens();
-    console.log('refreshToken', refreshToken);
     if (!refreshToken) throw new Error('로그인화면으로보내야함');
     if (!accessToken) {
       return await renewTokens().then(tokens => {

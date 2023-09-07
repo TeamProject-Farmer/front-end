@@ -1,21 +1,7 @@
 import request from '../base';
 import axios from 'axios';
 import { BASE_URL } from '../base';
-//검색 결과 가져오기
-// export const postSearch = async (
-//   searchWord: string,
-//   sortSearchCond?: string,
-//   memberEmail?: string,
-// ) => {
-//   const response = await request.post(
-//     '/main/search',
-//     {},
-//     {
-//       params: { searchWord, sortSearchCond, memberEmail },
-//     },
-//   );
-//   return response.data.content;
-// };
+
 interface PostSearch {
   searchWord: string;
   memberEmail?: string;

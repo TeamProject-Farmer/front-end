@@ -2,7 +2,7 @@ import { useEffect, useState, useMemo } from 'react';
 import InputGroup from '../InputGroup';
 import InputField from '../InputField';
 import Styled from '../styles';
-import { getMemberOrderAddress } from 'src/apis/order/order';
+import { getOrderAddress } from 'src/apis/order/order';
 import { OrderedData } from 'src/types/order/types';
 import { getTokens } from 'src/utils/token/token';
 import useDiscount from 'src/hooks/order/useDiscount';
@@ -17,7 +17,7 @@ const Delivery = ({ control, setValue, trigger }) => {
 
   const { data: orderedData } = useQuery({
     queryKey: ['orderedData'],
-    queryFn: getMemberOrderAddress,
+    queryFn: getOrderAddress,
     onSuccess: data => setHaveOrdered(true),
   });
 
