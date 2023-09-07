@@ -42,7 +42,7 @@ const Review = () => {
     setTotalElement(response.totalElements);
     setTotalIndex(response.totalPages);
   };
-
+  
   const handleReviewStar = async () => {
     try {
       const response = await getReviewStar(productId);

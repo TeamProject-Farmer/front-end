@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { useQuery } from '@tanstack/react-query';
 import { getMyQnA } from 'src/apis/shop/qna';
 import QnAWrapper from '@components/Shop/DetailPage/ContentWrapper/QnA/QnAWrapper';
 
@@ -14,14 +15,27 @@ const MyQnA = ({ productId }: { productId: number }) => {
       const mine = await getMyQnA(productId);
       setMyDetailList(mine.content);
     } catch (err) {
-      if (err.response.status == 500) {
-        // "message": "토큰을 다시 확인해주세요" 이기 때문에 login 화면으로 route 처리함
-        router.replace('/login');
-      }
+      router.replace('/login');
     }
   };
+  //아래와 같이 쿼리로 변경하려고 했으나 에러 부분의 호출 지연이 너무 심해 기존의 코드를 유지하기로 했습니다
+  //코드에 잘못된 부분이 있어 늦게 호출이 되는거라면 의견 부탁드립니다!
+  //pr 리뷰 완료 후 이 부분은 삭제 예정입니다.
+  // const { data, refetch  } = useQuery({
+  //   queryKey: ['myQnA'],
+  //   queryFn: () =>  getMyQnA(productId),
+  //   onSuccess: (data) => setMyDetailList(data.content),
+  //   onError: error => {
+  //     console.log('나의 문의하기 err')
+  //     console.log(error)
+  //     if(error == 'Error: 로그인화면으로보내야함'){
+  //       router.replace('/login');
+  //     }
+  //   }
+  // });
   useEffect(() => {
     handleQnAList();
+    // refetch();
   }, []);
 
   return (

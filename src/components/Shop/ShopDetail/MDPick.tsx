@@ -1,21 +1,15 @@
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import Product from '@components/Common/Product';
 import { getMDPickList } from 'src/apis/shop/product';
 
 const MDPick = () => {
-  const [MDPickList, setMDPickList] = useState([]);
+  const { data: MDPickList } = useQuery({
+    queryKey: ['MDPick'],
+    queryFn: () =>getMDPickList(),
+  });
 
-  const handleMDPickList = async () => {
-    const response = await getMDPickList();
-    setMDPickList(response);
-  };
-
-  useEffect(() => {
-    handleMDPickList();
-  }, []);
   return (
     <Styled.PickWrapper>
       <Styled.PickTitle>MD's PICK</Styled.PickTitle>
