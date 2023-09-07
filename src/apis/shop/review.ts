@@ -33,5 +33,5 @@ export const getReviewImage = async (productId: number) => {
 
 //리뷰 좋아요 누르기
 export const postReviewLike = async (reviewId: number) => {
-  return await request.post(`/main/review/like?reviewId=${reviewId}`);
+  return await axios.post(`${BASE_URL}/main/review/like?reviewId=${reviewId}`);
 };
