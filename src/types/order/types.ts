@@ -33,6 +33,7 @@ export interface InputFieldProps {
 export interface PaymentInputProps {
   label?: string;
   caption?: string;
+  control?: Control<FieldValues>;
   couponOptions?: Coupon[];
   usedPoint?: number;
   handleSelectedCoupon?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
