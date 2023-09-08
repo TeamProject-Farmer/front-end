@@ -20,24 +20,16 @@ const Layout = ({ children, title = 'Farmer' }: LayoutProps) => (
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-      <Script>
-        {`
-          (function(j, ennifer) {
-            j['dmndata'] = [];
-            j['jenniferFront'] = function(args) {
-              window.dmndata.push(args);
-            };
-            j['dmnaid'] = ennifer;
-            j['dmnatime'] = new Date();
-            j['dmnanocookie'] = false;
-            j['dmnajennifer'] = 'JENNIFER_FRONT@INTG';
-          })(window, '5bb1ff');
-        `}
-      </Script>
-      <Script
+      <script>
+        {`(function(j,ennifer) {
+        j['dmndata']=[];j['jenniferFront']=function(args){window.dmndata.push(args)};
+        j['dmnaid']=ennifer;j['dmnatime']=new Date();j['dmnanocookie']=false;j['dmnajennifer']='JENNIFER_FRONT@INTG';
+    }(window, '5bb1ff'));`}
+      </script>
+      <script
         async
         src="https://d-collect.jennifersoft.com/5bb1ff/demian.js"
-      ></Script>
+      ></script>
       <link rel="icon" href="/favicon.ico" sizes="any" />
     </Head>
     <Styled.Wrapper>
