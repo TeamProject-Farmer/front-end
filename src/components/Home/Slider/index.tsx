@@ -2,7 +2,21 @@ import { useState, useEffect, useMemo } from 'react';
 import styled from '@emotion/styled';
 import SliderContent from './SliderContent';
 import Indicator from './Indicator';
-
+// const banner = [
+//   {
+//     id: 1,
+//     img: 'farmer',
+//     linkUrl: '/shop',
+//     name: 'farmer',
+//   },
+//   {
+//     id: 2,
+//     img: 'event01',
+//     linkUrl: '/shop/event/1',
+//     name: 'Event 01',
+//   },
+//   { id: 3, img: 'event02', linkUrl: '/shop', name: 'Event 02' },
+// ];
 const Slider = ({ banner }) => {
   const [activeIndex, setActiveIndex] = useState(1);
 

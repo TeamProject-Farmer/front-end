@@ -6,7 +6,7 @@ import BestReview from '@components/Home/BestReview';
 import News from '@components/Home/News';
 import Layout from './layout';
 import { ReactElement } from 'react';
-import type { InferGetServerSidePropsType, GetServerSideProps } from 'next';
+import type { InferGetStaticPropsType, GetStaticProps } from 'next';
 import {
   getMainBanner,
   getBestProduct,
@@ -22,16 +22,14 @@ const IndexPage = ({
   bestPlant,
   bestReview,
   news,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
-
   useEffect(() => {
     if (router.query.alert) {
       alert(router.query.alert);
       router.push(router.pathname);
     }
   }, [router]);
-
   return (
     <>
       <Slider banner={banner} />
@@ -48,9 +46,7 @@ IndexPage.getLayout = (page: ReactElement) => {
   return <Layout>{page}</Layout>;
 };
 
-export const getServerSideProps: GetServerSideProps<
-  IndexPageProps
-> = async () => {
+export const getStaticProps: GetStaticProps<IndexPageProps> = async () => {
   const banner = await getMainBanner();
   const bestPlant = await getBestProduct();
   const bestReview = await getBestReview();
