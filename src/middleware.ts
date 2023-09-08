@@ -16,16 +16,4 @@ export function middleware(request: NextRequest, event: NextFetchEvent) {
       );
     }
   }
-  if (!refreshToken) {
-    // if (pathname.startsWith('/order')) {
-    //   return NextResponse.redirect(
-    //     new URL('/?alert=로그인 후 이용 가능한 서비스입니다.', request.url),
-    //   )
-    // }
-    if (pathname.startsWith('/mypage')) {
-      return NextResponse.redirect(
-        new URL('/?alert=로그인 후 이용 가능한 서비스입니다.', request.url),
-      );
-    }
-  }
 }

@@ -67,7 +67,7 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <Link href="/mypage/cart">
+            <Link href={isLogin && refreshToken ? '/mypage/cart' : '/login'}>
               <Icon name="cart" width={33} height={30} />
             </Link>
           </li>
