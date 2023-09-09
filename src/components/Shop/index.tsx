@@ -11,9 +11,11 @@ const Shop = () => {
     <Styled.Wrapper>
       <Category />
       <Styled.EventWrapper>
+        <Link href="/mypage/myplants">
         <Styled.SmallEvent>
           <Image src={event1} alt="event1" width={1194} height={226} />
         </Styled.SmallEvent>
+        </Link>
         <Link href="/shop/bysize/s">
           <Styled.NormalEvent>사이즈별</Styled.NormalEvent>
         </Link>
