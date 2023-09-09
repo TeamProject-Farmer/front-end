@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import styled from '@emotion/styled';
@@ -7,27 +8,25 @@ import { getReviewImage } from 'src/apis/shop/review';
 import leftArrow from '@assets/images/shop/previewLeftArrow.svg';
 import rightArrow from '@assets/images/shop/previewRightArrow.svg';
 
-
 const PreviewPhoto = () => {
   const router = useRouter();
   const productId = Number(router.query?.detail) || 1;
-  const [imageList, setImageList] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const handleReviewImage = async () => {
-    const response = await getReviewImage(productId);
-    setImageList(response);
-  };
-  let filtered: string[] = imageList.filter((value: string) => value != null);
+
+  const { data:imageList, isLoading } = useQuery({
+    queryKey: ['evetProductList', router],
+    queryFn: () => getReviewImage(productId),
+    keepPreviousData: true,
+  });
+  let filtered: string[] = imageList?.filter((value: string) => value != null);
 
   const handleArrow = (move: number) => {
     let nextIndex = currentIndex + move;
     if (nextIndex <= 0 && nextIndex > -Math.ceil(filtered.length / 5))
       setCurrentIndex(nextIndex);
   };
-  useEffect(() => {
-    handleReviewImage();
-  }, [router]);
 
+  if (isLoading) return;
   return (
     <Styled.Wrapper>
       <Styled.Title>사진 리뷰 보기</Styled.Title>
