@@ -63,3 +63,54 @@ export const FirstCouponStyled = {
   `,
   Arrow: styled(arrow79)``,
 };
+
+export const EventStyled = {
+  Wrapper: styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: ${theme.size.shopDetailMinWidth};
+  `,
+  VerticalLine: styled.div`
+    width: 98.9vw;
+    max-width: 100%;
+    height: 2px;
+    background-color: #585858;
+  `,
+
+  ContentWrapper: styled.div`
+    display: flex;
+    flex-direction: column;
+    width: ${theme.size.mainWidth};
+    margin-top: 110px;
+    position: relative;
+    height: 2615px;
+  `,
+  ImageWrapper: styled.div`
+    width: inherit;
+    height: 1500px;
+    background-color: ${theme.colors.lightGray};
+    margin-bottom: 72px;
+  `,
+  ItemWrapper: styled.div`
+    width: inherit;
+    height: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    & > div {
+      margin-right: 22.56px;
+      margin-bottom: 21.76px;
+    }
+    & > div:nth-of-type(4n)  {
+      margin-right: 0;
+    }
+  `,
+  BlankItem: styled.div`
+    width: 280px;
+    height: 410px;
+    background-color: #ecf9e9;
+    margin-bottom: 24px;
+  `,
+};
