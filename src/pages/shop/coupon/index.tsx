@@ -1,12 +1,15 @@
-import { ReactElement } from 'react';
 import Image from 'next/image';
+import { ReactElement } from 'react';
 import type { NextPageWithLayout } from "@pages/_app";
 import Layout from "@pages/layout";
 import Category from '@components/Common/Category';
 import SideAd from '@components/Shop/Common/SideAd';
+import checkIsMember from 'src/utils/shop/checkIsMember';
 import { FirstCouponStyled as Styled } from '@components/Shop/styles';
 
 const BySizePage: NextPageWithLayout = () => {
+  const {coupon} = checkIsMember();
+
   return (
     <Styled.Wrapper>
       <Category />
@@ -19,7 +22,7 @@ const BySizePage: NextPageWithLayout = () => {
             width={1000}
             height={3097}
           />
-          <Styled.Button onClick={()=>alert('신규 가입 쿠폰이 발급되었습니다.')}>
+          <Styled.Button onClick={coupon}>
             다운받기
             <Styled.Arrow />
           </Styled.Button>
