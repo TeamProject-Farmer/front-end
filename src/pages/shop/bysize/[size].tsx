@@ -1,5 +1,3 @@
-import styled from '@emotion/styled';
-import theme from '@styles/theme';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useQuery } from '@tanstack/react-query';
@@ -9,6 +7,7 @@ import Layout from "@pages/layout";
 import { getShopBySize } from 'src/apis/shop/product';
 import { sizeSortOptions } from 'src/utils/shop/sortOption';
 import { scrollToTop } from 'src/utils/register/scrollUp';
+import { BySizeStyled as Styled } from '@components/Shop/styles';
 import SizeBar from '@components/Shop/Common/SizeBar';
 import ProductWrapper from '@components/Shop/Common/ProductWrapper';
 
@@ -59,23 +58,6 @@ const BySizePage: NextPageWithLayout = () => {
     </Styled.Wrapper>
   );
 }
-
-const Styled = {
-  Wrapper: styled.div`
-    width: 100%;
-    min-width: ${theme.size.shopDetailMinWidth};
-    height: 60%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  `,
-  ContentWrapper: styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: fit-content;
-  `,
-};
 
 BySizePage.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
