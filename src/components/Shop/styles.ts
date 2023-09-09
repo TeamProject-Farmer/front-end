@@ -157,6 +157,34 @@ export const ShopIndexStyled = {
   `,
 };
 
+export const ShopPageStyled = {
+  Wrapper: styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: ${theme.colors.black};
+    text-align: center;
+    min-width: ${theme.size.shopDetailMinWidth};
+  `,
+  Title: styled.div`
+    height: 130px;
+    width: 100%;
+    font-size: 30px;
+    font-weight: 700;
+    background-color: #ecf9e9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  `,
+  ContentWrapper: styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-top: 110px;
+    align-items: center;
+  `,
+};
+
 export const DetailPageStyled = {
   Wrapper: styled.div`
     display: flex;
