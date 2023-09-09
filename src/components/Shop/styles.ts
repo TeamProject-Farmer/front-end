@@ -156,3 +156,13 @@ export const ShopIndexStyled = {
     margin: 25px 0;
   `,
 };
+
+export const DetailPageStyled = {
+  Wrapper: styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    max-width: 100%;
+    min-width: ${theme.size.shopDetailMinWidth};
+  `,
+};
