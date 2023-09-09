@@ -6,7 +6,8 @@ import Category from '@components/Common/Category';
 
 const Shop = () => {
   const event1: string = '/assets/images/shop/eventBanner1.svg';
-  const event2: string = '/assets/images/shop/eventBanner2.svg';
+  // const event2: string = '/assets/images/shop/eventBanner2.svg';
+
   return (
     <Styled.Wrapper>
       <Category />
