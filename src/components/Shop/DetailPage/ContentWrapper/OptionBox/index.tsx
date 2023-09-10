@@ -240,11 +240,11 @@ const Styled = {
     margin-left: 18px;
     margin-top: 38px;
     margin-bottom: 15px;
-    & > div:first-child {
+    & > div:first-of-type {
       font-size: 16px;
       font-weight: 600;
     }
-    & > div:last-child {
+    & > div:last-of-type {
       text-align: right;
       font-size: 25px;
       font-weight: 600;
@@ -263,11 +263,11 @@ const Styled = {
       font-size: 25px;
       font-weight: 700;
     }
-    & > button:first-child {
+    & > button:first-of-type {
       color: ${theme.colors.white};
       background-color: ${theme.colors.green1};
     }
-    & > button:last-child {
+    & > button:last-of-type {
       color: ${theme.colors.green1};
       background-color: #ecf9e9;
     }
@@ -325,7 +325,7 @@ const Styled = {
     color: ${theme.colors.black};
     font-size: 16px;
     font-weight: 500;
-    & > li:last-child > div {
+    & > li:last-of-type > div {
       border: none;
     }
   `,
@@ -384,10 +384,10 @@ const Styled = {
     }
   `,
   TotalPrice: styled.div`
-    & > div:first-child {
+    & > div:first-of-type {
       font-size: 14px;
     }
-    & > div:last-child {
+    & > div:last-of-type {
       font-size: 20px;
     }
   `,
@@ -401,11 +401,11 @@ const Styled = {
       width: 145px;
       height: 53px;
     }
-    & > button:first-child {
+    & > button:first-of-type {
       color: ${theme.colors.green1};
       border: 1px solid ${theme.colors.green1};
     }
-    & > button:last-child {
+    & > button:last-of-type {
       color: ${theme.colors.white};
       background-color: ${theme.colors.green1};
     }
@@ -457,7 +457,7 @@ const Styled = {
     color: ${theme.colors.black};
     font-size: 16px;
     font-weight: 500;
-    & > li:last-child > div {
+    & > li:last-of-type > div {
       border: none;
     }
   `,
@@ -480,7 +480,7 @@ const Styled = {
       justify-content: space-between;
       align-items: center;
     }
-    & > div > div:last-child {
+    & > div > div:last-of-type {
       color: #727272;
       font-size: 12px;
       line-height: 15px;

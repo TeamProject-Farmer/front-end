@@ -5,7 +5,7 @@ interface Props {
   star: number;
   color?: string;
 }
-const TestStar = (props: Props) => {
+const TotalStarGauge = (props: Props) => {
   const {size, star, color} = props;
 
   const ratingToPercent = () => {
@@ -89,4 +89,4 @@ const Styled = {
   `,
 };
 
-export default TestStar;
+export default TotalStarGauge;

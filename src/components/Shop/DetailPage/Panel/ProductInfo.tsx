@@ -61,7 +61,7 @@ const Styled = {
   Review: styled.div`
     display: flex;
     align-items: center;
-    & > div:last-child {
+    & > div:last-of-type {
       font-size: 12px;
       font-weight: 600;
       padding-top: 5px;
@@ -85,7 +85,7 @@ const Styled = {
     font-size: 16px;
     font-weight: 400;
     color: #585858;
-    & > div:last-child {
+    & > div:last-of-type {
       margin-left: 8px;
       text-decoration: line-through;
       color: #b3b3b3;
