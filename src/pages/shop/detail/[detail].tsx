@@ -1,43 +1,81 @@
+import theme from '@styles/theme';
+import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { ReactElement } from 'react';
-import type { NextPageWithLayout } from "@pages/_app";
-import Layout from "@pages/layout";
+import { useDispatch } from 'react-redux';
+import { setOrderData } from 'store/reducers/orderDataSlice';
+import type { NextPageWithLayout } from '@pages/_app';
+import Layout from '@pages/layout';
+import { getDetail } from 'src/apis/shop/product';
 import { detailLinkOptions } from 'src/utils/shop/sortOption';
 import Category from '@components/Common/Category';
 import Panel from '@components/Shop/DetailPage/Panel';
 import PreviewPhoto from '@components/Shop/DetailPage/PreviewPhoto';
 import SortBar from '@components/Shop/DetailPage/ContentWrapper/SortBar';
 import ContentWrapper from '@components/Shop/DetailPage/ContentWrapper';
+import NoProduct from '@components/Shop/DetailPage/ContentWrapper/NoProduct';
 import { DetailPageStyled as Styled } from '@components/Shop/styles';
-import theme from '@styles/theme';
 
 const CategoryDetailPage: NextPageWithLayout = () => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const productId = Number(router.query?.detail);
   const [selectList, setSelectList] = useState([]);
   const [selectPrice, setSelectPrice] = useState<number>();
 
-  return (
-    <Styled.Wrapper>
-      <Category />
-      <Panel
-        setSelectList={setSelectList}
-        selectList={selectList}
-        selectPrice={selectPrice}
-        setSelectPrice={setSelectPrice}
-      />
-      <PreviewPhoto />
-      <SortBar
-        optionList={detailLinkOptions}
-        width={theme.size.shopDetailWrapper}
-      />
-      <ContentWrapper
-        setSelectList={setSelectList}
-        selectList={selectList}
-        setSelectPrice={setSelectPrice}
-        selectPrice={selectPrice}
-      />
-    </Styled.Wrapper>
-  );
-}
+  //상세페이지 데이터 호출
+  const {
+    data: productData,
+    isLoading,
+    isError: detailError,
+  } = useQuery({
+    queryKey: ['detailData', router],
+    queryFn: () => getDetail(productId),
+    retry: 0,
+    onSuccess: data => {
+      if (data.name != undefined){
+        dispatch(
+          setOrderData([
+            {
+              imgUrl: data.thumbnailImg,
+              productName: data.name,
+              productPrice: data.price,
+            },
+          ]),
+        );
+      }
+    }
+  });
+
+  if (isLoading) return;
+  if (detailError) return <NoProduct />;
+  else {
+    return (
+      <Styled.Wrapper>
+        <Category />
+        <Panel
+          productData={productData}
+          setSelectList={setSelectList}
+          selectList={selectList}
+          selectPrice={selectPrice}
+          setSelectPrice={setSelectPrice}
+        />
+        <PreviewPhoto />
+        <SortBar
+          optionList={detailLinkOptions}
+          width={theme.size.shopDetailWrapper}
+        />
+        <ContentWrapper
+          setSelectList={setSelectList}
+          selectList={selectList}
+          setSelectPrice={setSelectPrice}
+          selectPrice={selectPrice}
+        />
+      </Styled.Wrapper>
+    );
+  }
+};
 
 CategoryDetailPage.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;

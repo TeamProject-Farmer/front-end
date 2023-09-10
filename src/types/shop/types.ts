@@ -47,6 +47,7 @@ export interface ProductInfoProps {
   productId: number;
   name: string;
   totalStar: number;
+  starRating: number;
   discountRate: number;
   price: number;
 }
@@ -70,6 +71,15 @@ export interface ProductListProps {
   detailImg4?: string;
   detailImg5?: string;
 }
+
+export interface PanelProps {
+  productData: ProductListProps;
+  selectList: selectOptionProps[];
+  setSelectList: React.Dispatch<React.SetStateAction<selectOptionProps[]>>;
+  selectPrice: number;
+  setSelectPrice: React.Dispatch<React.SetStateAction<number>>;
+}
+
 
 export interface StarOptionProps {
   setPopStarOption: React.Dispatch<React.SetStateAction<boolean>>;
