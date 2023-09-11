@@ -14,7 +14,13 @@ const checkIsMember = () => {
     else alert('신규 가입 쿠폰이 발급되었습니다.');
   };
   
-  return {coupon}
+  const routeToLogin = () => {
+    if (token === ''){
+      alert('로그인 후 사용 가능한 기능입니다.')
+      router.replace('/login');
+    }
+  }
+  return {coupon, routeToLogin}
 }
 
 export default checkIsMember;
