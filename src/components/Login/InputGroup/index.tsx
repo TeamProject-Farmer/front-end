@@ -8,7 +8,6 @@ import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { setUser } from 'store/reducers/userSlice';
 import { setCookie } from 'src/utils/cookie';
-// import { setToken } from 'store/reducers/tokenSlice';
 import { setToken } from 'src/utils/token/token';
 
 const InputGroup = () => {
@@ -69,11 +68,11 @@ const InputGroup = () => {
   };
 
   //엔터키 눌렀을 시
-  const activeEnter = (e:React.KeyboardEvent<HTMLInputElement>) => {
-    if(e.key === "Enter") {
+  const activeEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
       handleLogin();
     }
-  }
+  };
   return (
     <>
       <Styled.InputWrapper>
@@ -86,7 +85,7 @@ const InputGroup = () => {
           type="password"
           placeholder="비밀번호"
           onChange={handlePasswordChange}
-          onKeyDown={(e)=>activeEnter(e)}
+          onKeyDown={e => activeEnter(e)}
         />
         <Styled.ErrorText>{errorText}</Styled.ErrorText>
         <FormButton

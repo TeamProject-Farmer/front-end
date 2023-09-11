@@ -53,7 +53,7 @@ export const getEventProduct = async () => {
 //장바구니 추가
 // http://3.39.150.186:8080/api/member/cart
 export const postCart = async (props: cartProps) => {
-  const {productId, optionId, count} = props
+  const { productId, optionId, count } = props;
   let formData = new FormData();
   formData.append('product', productId);
   formData.append('option', optionId);
