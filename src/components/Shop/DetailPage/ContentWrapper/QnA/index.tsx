@@ -10,7 +10,7 @@ import OnOffButton from './OnOffButton';
 import QnAModal from '@components/Common/Modal/QnAModal';
 import QnAWrapper from '@components/Shop/DetailPage/ContentWrapper/QnA/QnAWrapper';
 import MyQnA from './MyQnA';
-import Pagination from '../Pagination';
+import Pagination from '../../../Common/Pagination/Pagination';
 
 const Inquiry = () => {
   const router = useRouter();

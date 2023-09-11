@@ -9,7 +9,9 @@ import QnA from './QnA';
 import Notice from './Notice';
 
 const ContentWrapper = (props: OptionBoxProps) => {
-  const { optionList, selectList, setSelectList, selectPrice, setSelectPrice } = props;
+  const { optionList, selectList, setSelectList, selectPrice, setSelectPrice } =
+    props;
+
   return (
     <Styled.Wrapper>
       <Styled.ContentWrapper>

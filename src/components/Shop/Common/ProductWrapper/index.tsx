@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import SideAd from '../SideAd';
-import OrderBar from '../OrderBar';
+import OrderBar from '../OptionBars/OrderBar';
 import Product from '@components/Common/Product';
-import Pagination from '@components/Shop/DetailPage/ContentWrapper/Pagination';
+import Pagination from '@components/Shop/Common/Pagination/Pagination';
 import { productSortOptions } from 'src/utils/shop/sortOption';
 import { handleHeight } from 'src/utils/shop/handleHeight';
 import { ProductAPI, ProductWrapperProps } from 'src/types/shop/types';

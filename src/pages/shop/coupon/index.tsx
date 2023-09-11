@@ -1,14 +1,14 @@
 import Image from 'next/image';
 import { ReactElement } from 'react';
-import type { NextPageWithLayout } from "@pages/_app";
-import Layout from "@pages/layout";
+import type { NextPageWithLayout } from '@pages/_app';
+import Layout from '@pages/layout';
 import Category from '@components/Common/Category';
 import SideAd from '@components/Shop/Common/SideAd';
 import checkIsMember from 'src/utils/shop/checkIsMember';
 import { FirstCouponStyled as Styled } from '@components/Shop/styles';
 
 const BySizePage: NextPageWithLayout = () => {
-  const {coupon} = checkIsMember();
+  const { coupon } = checkIsMember();
 
   return (
     <Styled.Wrapper>
@@ -30,11 +30,10 @@ const BySizePage: NextPageWithLayout = () => {
       </Styled.ContentWrapper>
     </Styled.Wrapper>
   );
-}
+};
 
 BySizePage.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
 };
 
 export default BySizePage;
-

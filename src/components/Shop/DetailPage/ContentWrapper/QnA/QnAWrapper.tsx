@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import handleNickname from 'src/utils/shop/handleNickname';
 import { getDetailQnA } from 'src/apis/shop/qna';
 import { QnAProps } from 'src/types/shop/types';
-import VerticalLine from '@components/Shop/Common/VerticalLine';
+import VerticalLine from '@components/Shop/Common/SmallParts/VerticalLine';
 import DetailQnA from '@components/Common/Modal/DetailQnA';
 import secret from '@assets/images/shop/secretIcon.svg';
 

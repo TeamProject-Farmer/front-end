@@ -6,12 +6,12 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import { getReview, getReviewStar } from 'src/apis/shop/review';
 import { SingleReviewProps } from 'src/types/shop/types';
-import VerticalLine from '@components/Shop/Common/VerticalLine';
-import TotalStarGauge from '@components/Shop/Common/gauge/TotalStarGauge';
-import EachStarGauge from '@components/Shop/Common/gauge/EachStarGauge';
+import VerticalLine from '@components/Shop/Common/SmallParts/VerticalLine';
+import TotalStarGauge from '@components/Shop/Common/Gauge/TotalStarGauge';
+import EachStarGauge from '@components/Shop/Common/Gauge/EachStarGauge';
 import SingleReview from './SingleReview';
 import StarOption from './StarOption';
-import Pagination from '../Pagination';
+import Pagination from '../../../Common/Pagination/Pagination';
 import photo from '@assets/images/shop/photoIcon.svg';
 import downArrow from '@assets/images/shop/downArrow1.svg';
 
@@ -42,7 +42,7 @@ const Review = () => {
     setTotalElement(response.totalElements);
     setTotalIndex(response.totalPages);
   };
-  
+
   const handleReviewStar = async () => {
     try {
       const response = await getReviewStar(productId);

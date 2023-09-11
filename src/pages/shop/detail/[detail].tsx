@@ -12,9 +12,9 @@ import { detailLinkOptions } from 'src/utils/shop/sortOption';
 import Category from '@components/Common/Category';
 import Panel from '@components/Shop/DetailPage/Panel';
 import PreviewPhoto from '@components/Shop/DetailPage/PreviewPhoto';
-import SortBar from '@components/Shop/DetailPage/ContentWrapper/SortBar';
+import SortBar from '@components/Shop/Common/OptionBars/SortBar';
 import ContentWrapper from '@components/Shop/DetailPage/ContentWrapper';
-import NoProduct from '@components/Shop/DetailPage/ContentWrapper/NoProduct';
+import NoProduct from '@components/Shop/DetailPage/NoProduct';
 import { DetailPageStyled as Styled } from '@components/Shop/styles';
 
 const CategoryDetailPage: NextPageWithLayout = () => {

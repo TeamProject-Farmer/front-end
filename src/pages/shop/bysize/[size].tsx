@@ -8,7 +8,7 @@ import { getShopBySize } from 'src/apis/shop/product';
 import { sizeSortOptions } from 'src/utils/shop/sortOption';
 import { scrollToTop } from 'src/utils/register/scrollUp';
 import { BySizeStyled as Styled } from '@components/Shop/styles';
-import SizeBar from '@components/Shop/Common/SizeBar';
+import SizeBar from '@components/Shop/Common/OptionBars/SizeBar';
 import ProductWrapper from '@components/Shop/Common/ProductWrapper';
 
 const BySizePage: NextPageWithLayout = () => {

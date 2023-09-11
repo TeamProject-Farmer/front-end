@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import handlePrice from 'src/utils/shop/handlePrice';
 import { handleCopyClipBoard } from 'src/utils/shop/handleClipBoard';
 import { ProductInfoProps } from 'src/types/shop/types';
-import TotalStarGauge from '@components/Shop/Common/gauge/TotalStarGauge';
+import TotalStarGauge from '@components/Shop/Common/Gauge/TotalStarGauge';
 import down from '@assets/images/shop/downloadIcon.svg';
 import share from '@assets/images/shop/shareIcon.svg';
 
@@ -14,7 +14,9 @@ const ProductInfo = (props: ProductInfoProps) => {
     <>
       <Styled.TitleWrapper>
         <div>{name}</div>
-        <Styled.ShareButton onClick={() => handleCopyClipBoard(productId, name)} />
+        <Styled.ShareButton
+          onClick={() => handleCopyClipBoard(productId, name)}
+        />
       </Styled.TitleWrapper>
       <Styled.Review>
         <Styled.StarWrapper>
