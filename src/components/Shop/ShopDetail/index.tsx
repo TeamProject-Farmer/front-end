@@ -5,6 +5,7 @@ import theme from '@styles/theme';
 import { ProductListProps } from 'src/types/shop/types';
 import { CateId } from 'src/utils/shop/sortOption';
 import { getProductList } from 'src/apis/shop/product';
+import { scrollToTop } from 'src/utils/register/scrollUp';
 import Category from '@components/Common/Category';
 import MDPick from './MDPick';
 import ProductWrapper from '../Common/ProductWrapper';
@@ -31,6 +32,7 @@ const ShopDetail = () => {
 
   useEffect(() => {
     handleProductList();
+    scrollToTop();
   }, [productOption, categoryId, currentIndex]);
 
   useEffect(() => {

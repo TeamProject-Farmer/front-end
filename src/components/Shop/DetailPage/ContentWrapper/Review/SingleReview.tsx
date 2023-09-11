@@ -23,6 +23,7 @@ const SingleReview = ({ dataList }: Props) => {
   const handleReviewLike = async (reviewId: number) => {
     const response = await postReviewLike(reviewId);
   };
+  
   return (
     <Styled.SingleReview>
       <div></div>
