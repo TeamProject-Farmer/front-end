@@ -74,6 +74,7 @@ export interface ProductListProps {
 
 export interface PanelProps {
   productData: ProductListProps;
+  optionList?: selectOptionProps[];
   selectList: selectOptionProps[];
   setSelectList: React.Dispatch<React.SetStateAction<selectOptionProps[]>>;
   selectPrice: number;
@@ -168,10 +169,45 @@ export interface PaginationProps {
 
 export interface OptionBoxProps {
   isPanel?: boolean;
+  optionList?: selectOptionProps[];
   selectList: selectOptionProps[];
   setSelectList: React.Dispatch<React.SetStateAction<selectOptionProps[]>>;
   selectPrice: number;
   setSelectPrice?: React.Dispatch<React.SetStateAction<number>>;
+}
+
+export interface OptionBoxFuncProps {
+  isPanel?: boolean;
+  productId: number;
+  optionList?: selectOptionProps[];
+  selectList: selectOptionProps[];
+  setSelectList: React.Dispatch<React.SetStateAction<selectOptionProps[]>>;
+  selectPrice: number;
+  setSelectPrice?: React.Dispatch<React.SetStateAction<number>>;
+  orderData: OrderDataProps[];
+}
+
+export interface PanelOptionProps {
+  isShowOptions: boolean;
+  setShowOptions: React.Dispatch<React.SetStateAction<boolean>>;
+  lastOption: string;
+  options: selectOptionProps[];
+  handleSelectList: (item: selectOptionProps) => void;
+  handleResultPrice: () => string;
+  handleOrder: () => void;
+  handleCartData: () => void;
+}
+
+export interface ContentOptionProps {
+  isShowOptions: boolean;
+  setShowOptions: React.Dispatch<React.SetStateAction<boolean>>;
+  options: selectOptionProps[];
+  selectList: selectOptionProps[];
+  setSelectList: React.Dispatch<React.SetStateAction<selectOptionProps[]>>;
+  handleSelectList: (item: selectOptionProps) => void;
+  handleResultPrice: () => string;
+  handleOrder: () => void;
+  handleCartData: () => void;
 }
 
 export interface selectOptionProps {

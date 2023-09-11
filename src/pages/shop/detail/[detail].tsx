@@ -30,7 +30,7 @@ const CategoryDetailPage: NextPageWithLayout = () => {
     isLoading,
     isError: detailError,
   } = useQuery({
-    queryKey: ['detailData', router],
+    queryKey: ['detailData', productId],
     queryFn: () => getDetail(productId),
     retry: 0,
     onSuccess: data => {
@@ -56,6 +56,7 @@ const CategoryDetailPage: NextPageWithLayout = () => {
         <Category />
         <Panel
           productData={productData}
+          optionList={productData.options}
           setSelectList={setSelectList}
           selectList={selectList}
           selectPrice={selectPrice}
@@ -67,6 +68,7 @@ const CategoryDetailPage: NextPageWithLayout = () => {
           width={theme.size.shopDetailWrapper}
         />
         <ContentWrapper
+          optionList={productData.options}
           setSelectList={setSelectList}
           selectList={selectList}
           setSelectPrice={setSelectPrice}

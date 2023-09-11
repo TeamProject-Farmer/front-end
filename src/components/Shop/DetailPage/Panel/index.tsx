@@ -16,6 +16,7 @@ import PayInfo from './PayInfo';
 const Panel = (props: PanelProps) => {
   const {
     productData,
+    optionList,
     selectList,
     setSelectList,
     selectPrice,
@@ -54,6 +55,7 @@ const Panel = (props: PanelProps) => {
             <Styled.VerticalLine />
             <OptionBox
               isPanel={true}
+              optionList={optionList}
               setSelectList={setSelectList}
               selectList={selectList}
               setSelectPrice={setSelectPrice}
