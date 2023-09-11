@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { useQuery } from '@tanstack/react-query';
@@ -26,6 +26,8 @@ const Inquiry = () => {
     //토큰이 있는 경우만 문의하기 창이 열릴 수 있도록, 없으면 로그인 화면으로 이동 처리
     if (token != '') setModalOpen(true);
     else routeToLogin();
+    console.log(data)
+    console.log(data.content.length)
   };
   const closeModal = () => {
     setModalOpen(false);
@@ -36,7 +38,6 @@ const Inquiry = () => {
     queryFn: () => getQnAList(productId, currentIndex),
     keepPreviousData: true,
   });
-
   
   if (isLoading) return;
   else {
@@ -67,7 +68,7 @@ const Inquiry = () => {
             <MyQnA productId={productId} />
           ) : (
             <>
-              {data.content.length == 0 ? (
+              {data?.content.length == 0 ? (
                 <Styled.ErrorMessage>
                   해당 상품에 대한 문의가 존재하지 않습니다.
                 </Styled.ErrorMessage>
