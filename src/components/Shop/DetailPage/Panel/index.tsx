@@ -1,15 +1,9 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import Image from 'next/image';
-import { useQuery } from '@tanstack/react-query';
-import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
-import { setOrderData } from 'store/reducers/orderDataSlice';
-import { getDetail } from 'src/apis/shop/product';
 import usePanelStars from 'src/hooks/shop/usePanelStars';
-import { getReview, getReviewStar } from 'src/apis/shop/review';
-import { selectOptionProps, PanelProps } from 'src/types/shop/types';
+import {  PanelProps } from 'src/types/shop/types';
 import OptionBox from '../ContentWrapper/OptionBox';
 import ProductInfo from './ProductInfo';
 import PayInfo from './PayInfo';
@@ -24,7 +18,6 @@ const Panel = (props: PanelProps) => {
   } = props;
 
   const router = useRouter();
-  const dispatch = useDispatch();
   const productId = Number(router.query?.detail);
   const { totalStar, starRating} = usePanelStars(productId);
 
