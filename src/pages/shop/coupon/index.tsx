@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import type { NextPageWithLayout } from "@pages/_app";
 import Layout from "@pages/layout";
-import FirstCoupon from '@components/FirstCoupon';
+import FirstCoupon from '@components/Shop/FirstCoupon';
 
 const BySizePage: NextPageWithLayout = () => {
   return <FirstCoupon />;

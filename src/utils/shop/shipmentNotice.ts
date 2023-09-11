@@ -5,7 +5,7 @@ export const shipList = [
     title: '배송비',
     content: '2,500원',
   },
-  { id: 3, title: '도서산간 추가 배송비', content: '5,000원' },
+  { id: 3, title: '도서산간 추가 배송비', content: '2,500원' },
   { id: 4, title: '배송불가 지역', content: '배송불가 지역이 없습니다.' },
 ];
 
