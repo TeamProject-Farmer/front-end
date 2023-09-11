@@ -11,7 +11,7 @@ import OnOffButton from './OnOffButton';
 import QnAModal from '@components/Common/Modal/QnAModal';
 import QnAWrapper from '@components/Shop/DetailPage/ContentWrapper/QnA/QnAWrapper';
 import MyQnA from './MyQnA';
-import Pagination from '../../../Common/Pagination/Pagination';
+import Pagination from '@components/Shop/Common/Pagination';
 
 const Inquiry = () => {
   const router = useRouter();
@@ -26,8 +26,8 @@ const Inquiry = () => {
     //토큰이 있는 경우만 문의하기 창이 열릴 수 있도록, 없으면 로그인 화면으로 이동 처리
     if (token != '') setModalOpen(true);
     else routeToLogin();
-    console.log(data)
-    console.log(data.content.length)
+    console.log(data);
+    console.log(data.content.length);
   };
   const closeModal = () => {
     setModalOpen(false);
@@ -38,7 +38,7 @@ const Inquiry = () => {
     queryFn: () => getQnAList(productId, currentIndex),
     keepPreviousData: true,
   });
-  
+
   if (isLoading) return;
   else {
     return (

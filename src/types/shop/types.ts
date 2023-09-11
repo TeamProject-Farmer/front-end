@@ -177,13 +177,12 @@ export interface OptionBoxProps {
 }
 
 export interface OptionBoxFuncProps {
-  isPanel?: boolean;
   productId: number;
-  optionList?: selectOptionProps[];
+  optionList: selectOptionProps[];
   selectList: selectOptionProps[];
   setSelectList: React.Dispatch<React.SetStateAction<selectOptionProps[]>>;
   selectPrice: number;
-  setSelectPrice?: React.Dispatch<React.SetStateAction<number>>;
+  setSelectPrice: React.Dispatch<React.SetStateAction<number>>;
   orderData: OrderDataProps[];
 }
 

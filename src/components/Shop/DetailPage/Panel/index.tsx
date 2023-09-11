@@ -3,10 +3,11 @@ import theme from '@styles/theme';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import usePanelStars from 'src/hooks/shop/usePanelStars';
-import {  PanelProps } from 'src/types/shop/types';
+import { PanelProps } from 'src/types/shop/types';
 import OptionBox from '../ContentWrapper/OptionBox';
 import ProductInfo from './ProductInfo';
 import PayInfo from './PayInfo';
+
 const Panel = (props: PanelProps) => {
   const {
     productData,

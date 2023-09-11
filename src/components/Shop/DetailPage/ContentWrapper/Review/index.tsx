@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { useQuery } from '@tanstack/react-query';
 import { setTimeout } from 'timers';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
@@ -10,10 +11,9 @@ import TotalStarGauge from '@components/Shop/Common/Gauge/TotalStarGauge';
 import EachStarGauge from '@components/Shop/Common/Gauge/EachStarGauge';
 import SingleReview from './SingleReview';
 import StarOption from './StarOption';
-import Pagination from '../../../Common/Pagination/Pagination';
+import Pagination from '@components/Shop/Common/Pagination';
 import photo from '@assets/images/shop/photoIcon.svg';
 import downArrow from '@assets/images/shop/downArrow1.svg';
-import { useQuery } from '@tanstack/react-query';
 
 const Review = () => {
   const router = useRouter();
@@ -66,8 +66,8 @@ const Review = () => {
     setCurrentIndex(1);
   }, [starOption]);
   useEffect(() => {
-    setStarGauge(isNoStar ? 0 : starData?.averageStarRating)
-  }, [isNoStar])
+    setStarGauge(isNoStar ? 0 : starData?.averageStarRating);
+  }, [isNoStar]);
 
   if (isLoading) return;
   else {
