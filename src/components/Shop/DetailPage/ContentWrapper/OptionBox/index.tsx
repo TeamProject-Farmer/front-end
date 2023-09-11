@@ -3,6 +3,7 @@ import theme from '@styles/theme';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
+import { useQuery } from '@tanstack/react-query';
 import { setSelectedOrder } from 'store/reducers/orderSlice';
 import { orderDataSelector } from 'src/types/shop/types';
 import { OptionBoxProps, selectOptionProps } from 'src/types/shop/types';
@@ -11,6 +12,7 @@ import handlePrice from 'src/utils/shop/handlePrice';
 import { getDetail, postCart } from 'src/apis/shop/product';
 import heart from '@assets/images/shop/optionBoxHeart.svg';
 import arrow from '@assets/images/shop/optionArrow.svg';
+
 
 const OptionBox = (props: OptionBoxProps) => {
   const { isPanel, selectList, setSelectList, selectPrice, setSelectPrice } =
@@ -25,14 +27,12 @@ const OptionBox = (props: OptionBoxProps) => {
   const [options, setOptions] = useState<selectOptionProps[]>([]);
   const [lastOption, setLastOption] = useState<string>('상품을 선택하세요.');
 
-  // console.log('orderData', orderData);
-
   //옵션 데이터 받아오기
-  const handleDetailData = async () => {
-    const response = await getDetail(productId);
-    console.log(response.options);
-    setOptions(response.options);
-  };
+  const { data, refetch  } = useQuery({
+    queryKey: ['options'],
+    queryFn: () => getDetail(productId),
+    onSuccess: (data) => setOptions(data.options),
+  });
 
   const handleResultPrice = () => {
     if (selectList.length > 0) return handlePrice(selectPrice) + '원';
@@ -126,7 +126,7 @@ const OptionBox = (props: OptionBoxProps) => {
   }, [selectList]);
 
   useEffect(() => {
-    handleDetailData();
+    refetch();
   }, [router]);
 
   if (isPanel) {

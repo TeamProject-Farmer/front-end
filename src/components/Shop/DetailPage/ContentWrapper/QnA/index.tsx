@@ -32,27 +32,21 @@ const Inquiry = () => {
     setModalOpen(false);
   };
 
-  //쿼리 사용 아직 미적용
-  // const { isLoading, data: qnaList } = useQuery('qnaList', () =>
-  //   getQnAList(productId, currentIndex),{
-  //     refetchOnWindowFocus: true,
-  //     retry: 2,
-  //   }
-  // );
-  const handleQnAList = async () => {
-    const response = await getQnAList(productId, currentIndex);
-    setDetailList(response.content);
-    setTotalIndex(response.totalPages);
-    setTotalElement(response.totalElements);
-  };
+  const { data, refetch } = useQuery({
+    queryKey: ['QnAList'],
+    queryFn: () => getQnAList(productId, currentIndex),
+    onSuccess: data => {
+      setDetailList(data.content);
+      setTotalIndex(data.totalPages);
+      setTotalElement(data.totalElements);
+    },
+    keepPreviousData: true,
+  });
 
   useEffect(() => {
-    handleQnAList();
+    refetch();
   }, [productId, currentIndex, modalOpen]);
 
-  // if (isLoading) {
-  //   return <></>;
-  // }
   return (
     <Styled.Wrapper>
       <Styled.Container>

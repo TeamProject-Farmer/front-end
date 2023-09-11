@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import SizeBar from '../Common/SizeBar';
-import ProductWrapper from '../Common/ProductWrapper';
 import { getShopBySize } from 'src/apis/shop/product';
 import { sizeSortOptions } from 'src/utils/shop/sortOption';
+import { scrollToTop } from 'src/utils/register/scrollUp';
+import SizeBar from '../Common/SizeBar';
+import ProductWrapper from '../Common/ProductWrapper';
+
 
 const BySize = () => {
   const size = useRouter().query.size?.toString().toUpperCase() || '';
@@ -26,6 +28,7 @@ const BySize = () => {
   };
   useEffect(() => {
     handleDetailData();
+    scrollToTop();
   }, [currentIndex]);
 
   useEffect(() => {
