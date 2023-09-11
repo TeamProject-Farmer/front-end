@@ -55,7 +55,6 @@ export const getEventProduct = async () => {
 //장바구니 추가
 export const postCart = async (props: cartProps) => {
   const { productId, optionId, count } = props;
-  
   let formData = new FormData();
   formData.append('product', productId);
   formData.append('option', optionId);
