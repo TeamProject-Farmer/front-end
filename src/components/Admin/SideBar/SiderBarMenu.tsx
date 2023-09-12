@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import styled from '@emotion/styled';
-import { sideMenuProps } from '../Type';
 import Icon from './Icon';
+import { sideMenuProps } from '../Type';
+import { SideBarMenuStyled as Styled} from './styles';
 
 const SiderBarMenu = (props: sideMenuProps) => {
   const { isCurrentPage, imageName, text } = props;
@@ -14,10 +14,10 @@ const SiderBarMenu = (props: sideMenuProps) => {
   return (
     <>
       <Styled.Wrapper isClicked={isCurrentPage}>
-        <Styled.MenuWrapper>
+        <Styled.InnerWrapper>
           <Icon imageName={imageName} colorName={color}/>
-          <Styled.Menu>{text}</Styled.Menu>
-        </Styled.MenuWrapper>
+          <Styled.MenuText>{text}</Styled.MenuText>
+        </Styled.InnerWrapper>
         <Image
           src="/assets/images/admin/downArrow.svg"
           alt="arrow"
@@ -30,31 +30,5 @@ const SiderBarMenu = (props: sideMenuProps) => {
 };
 
 
-const Styled = {
-  Wrapper: styled.div<{isClicked?: boolean} >`
-    width: 100%;
-    height: 56px;
-    display: flex;
-    padding: 5px 30px;
-    justify-content: space-between;
-    color: ${props => (props.isClicked ? '#9CDC1F' : '#8a8a8a')};
-    background-color: ${props => (props.isClicked ? '#292929' : '')};
-    &:hover {
-      background-color: #ffffff15;
-      color: #ffffffd4;
-    }
-  `,
-  MenuWrapper: styled.div`
-    margin-left: 3px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  `,
-  Menu: styled.div`
-    display: flex;
-    align-items: center;
-    margin-left: 18px;
-    height: 100%;
-  `,
-};
+
 export default SiderBarMenu;

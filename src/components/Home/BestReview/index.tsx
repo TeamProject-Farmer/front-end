@@ -1,38 +1,32 @@
 import Styled from './styles';
 import Title from '../Common/Title';
 import Review from './Review';
+import { Review as IReview } from 'src/types/home/types';
+import { useEffect, useState } from 'react';
 
-const reviews = [];
+const BestReview = ({ bestReview }) => {
+  const [reviewList, setReviewList] = useState<IReview[]>();
 
-for (let id = 1; id <= 12; id++) {
-  const newReview = {
-    id: id,
-    userName: 'USER NAME',
-    star: '4',
-    like: '4',
-    title: '리뷰의 제목',
-    content: '리뷰의 내용',
-  };
+  useEffect(() => {
+    setReviewList([...bestReview, ...bestReview]);
+  }, []);
 
-  reviews.push(newReview);
-}
-
-const BestReview = () => {
   return (
     <Styled.Wrapper>
       <Styled.ReviewContainer>
         <Title title="베스트 리뷰" color="#285430" />
         <Styled.Reviews>
-          {reviews.map(review => (
-            <Review
-              key={review.id}
-              userName={review.userName}
-              star={review.star}
-              like={review.like}
-              title={review.title}
-              content={review.content}
-            />
-          ))}
+          {reviewList &&
+            reviewList.map((review: IReview, index) => (
+              <Review
+                key={index}
+                productId={review.productId}
+                memberNickName={review.memberNickName}
+                imgUrl={review.imgUrl}
+                likeCount={review.likeCount}
+                content={review.content}
+              />
+            ))}
         </Styled.Reviews>
       </Styled.ReviewContainer>
     </Styled.Wrapper>

@@ -25,4 +25,39 @@ const Styled = {
   `,
 };
 
+export const SideBarMenuStyled = {
+  Wrapper: styled.div<{isClicked?: boolean} >`
+    width: 100%;
+    height: 56px;
+    display: flex;
+    padding: 5px 30px;
+    justify-content: space-between;
+    color: ${props => (props.isClicked ? '#9CDC1F' : '#8a8a8a')};
+    background-color: ${props => (props.isClicked ? '#292929' : '')};
+    &:hover {
+      background-color: #ffffff15;
+      color: #ffffffd4;
+    }
+  `,
+  InnerWrapper: styled.div`
+    margin-left: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  `,
+  MenuText: styled.div`
+    display: flex;
+    align-items: center;
+    margin-left: 18px;
+    height: 100%;
+  `,
+};
+
+export const SubMenuStyled = {
+  Wrapper: styled.div`
+    display: flex;
+    flex-direction: column;
+  `,
+};
+
 export default Styled;

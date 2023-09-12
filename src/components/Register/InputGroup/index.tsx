@@ -3,23 +3,18 @@ import theme from 'src/styles/theme';
 import { FieldError, useForm } from 'react-hook-form';
 import { emailOptions } from 'src/utils/register/emailListUtil';
 import {
-  DaumPostcodeData,
   FieldName,
   IAuthForm,
   RegisterData,
   Validate,
 } from 'src/types/register/types';
-import { useDaumPostcodePopup } from 'react-daum-postcode';
-import { postcodeScriptUrl } from 'react-daum-postcode/lib/loadPostcode';
 import FormButton from '../FormButton';
 import Styled from '../styles';
 import InputField from '../InputField';
 import {
   requiredErrorMessage,
-  validateName,
   validateNickname,
   validatePassword,
-  validatePhoneNumber,
 } from 'src/utils/register/formUtil';
 import { emailCheck, emailVerification } from 'src/apis/register/email';
 import { getJoin } from 'src/apis/register/join';
@@ -67,14 +62,9 @@ const InputGroup = () => {
   // validation
   const emailValid = useFormValidation('email');
   const selectedEmail = useFormValidation('selectedEmail');
-  const nameValid = useFormValidation('name', validateName);
-  const postCodeValid = useFormValidation('postCode');
-  const basicAddressValid = useFormValidation('basicAddress');
-  const detailAddressValid = useFormValidation('detailAddress');
   const nicknameValid = useFormValidation('nickname', validateNickname);
   const checkBoxValid = useFormValidation('checked');
   const passwordValid = useFormValidation('password', validatePassword);
-  const phoneValid = useFormValidation('phone', validatePhoneNumber);
   const passwordConfirm = useFormValidation('passwordConfirm', matchesPassword);
 
   // 에러 중복시 하나의 에러만 render
@@ -99,41 +89,42 @@ const InputGroup = () => {
   };
 
   // 카카오 postcode 기능
-  const open = useDaumPostcodePopup(postcodeScriptUrl);
+  // const open = useDaumPostcodePopup(postcodeScriptUrl);
 
-  const handleComplete = (data: DaumPostcodeData) => {
-    let fullAddress = data.address;
-    let extraAddress = '';
+  // const handleComplete = (data: DaumPostcodeData) => {
+  //   let fullAddress = data.address;
+  //   let extraAddress = '';
 
-    if (data.addressType === 'R') {
-      if (data.bname !== '') {
-        extraAddress += data.bname;
-      }
-      if (data.buildingName !== '') {
-        extraAddress +=
-          extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName;
-      }
-      fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
-    }
-    setValue('postCode', data.zonecode);
-    setValue('basicAddress', fullAddress);
-    clearErrors('postCode');
-    clearErrors('basicAddress');
-  };
+  //   if (data.addressType === 'R') {
+  //     if (data.bname !== '') {
+  //       extraAddress += data.bname;
+  //     }
+  //     if (data.buildingName !== '') {
+  //       extraAddress +=
+  //         extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName;
+  //     }
+  //     fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
+  //   }
+  //   setValue('postCode', data.zonecode);
+  //   setValue('basicAddress', fullAddress);
+  //   clearErrors('postCode');
+  //   clearErrors('basicAddress');
+  // };
 
-  const handleClick = () => {
-    open({
-      onComplete: handleComplete,
-      height: 500,
-      top: (window.innerHeight - 500) / 2,
-      left: (window.innerWidth - 500) / 2,
-    });
-  };
+  // const handleClick = () => {
+  //   open({
+  //     onComplete: handleComplete,
+  //     height: 500,
+  //     top: (window.innerHeight - 500) / 2,
+  //     left: (window.innerWidth - 500) / 2,
+  //   });
+  // };
 
   // 이메일 인증 발송
   const handleSendEmail = async () => {
     try {
       const res = await emailVerification(email);
+      alert('인증 메일이 발송되었습니다.');
       console.log(res.data);
     } catch (error) {
       setError('email', { message: '이미 인증된 메일입니다.' });
@@ -163,11 +154,6 @@ const InputGroup = () => {
           email,
           password: getValues().password,
           nickname: getValues().nickname,
-          name: getValues().name,
-          phone: getValues().phone,
-          postCode: getValues().postCode,
-          address: getValues().basicAddress,
-          detailAddress: getValues().detailAddress,
         };
         await handleJoin(joinData);
         router.push('/login');
@@ -244,41 +230,6 @@ const InputGroup = () => {
         error={errors?.passwordConfirm?.message}
         type="password"
       />
-
-      {/* 이름 입력 필드 */}
-      <InputField
-        label="이름"
-        placeholder="이름을 입력해주세요"
-        inputProps={nameValid}
-        error={errors?.name?.message}
-      />
-
-      {/* 전화번호 입력 필드 */}
-      <InputField
-        label="전화번호"
-        placeholder="‘-’를 제외한 휴대폰 11자리"
-        inputProps={phoneValid}
-        error={errors?.phone?.message}
-      />
-
-      {/* 주소 입력 필드 */}
-      <Styled.InputWrapper>
-        <Styled.Label>주소</Styled.Label>
-        <Styled.AddressGridInputWrapper>
-          <Styled.Input {...postCodeValid} readOnly placeholder="우편번호" />
-          <Styled.PostButton onClick={handleClick}>
-            우편번호 찾기
-          </Styled.PostButton>
-        </Styled.AddressGridInputWrapper>
-        <Styled.Input {...basicAddressValid} placeholder="기본주소" />
-        <Styled.Gap />
-        <Styled.Input {...detailAddressValid} placeholder="상세주소" />
-      </Styled.InputWrapper>
-      <Styled.ErrorText>
-        {getFirstErrorMessage(
-          errors.postCode || errors.basicAddress || errors.detailAddress,
-        )}
-      </Styled.ErrorText>
 
       {/* 닉네임 입력 필드 */}
       <InputField

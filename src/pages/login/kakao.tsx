@@ -1,7 +1,7 @@
-import KakaoLogin from '@components/Login/KakaoLogin';
+import SocialLogin from '@components/Login/SocialLogin';
 
 const KakaoLoginPage = () => {
-  return <KakaoLogin />;
+  return <SocialLogin provider="kakao" />;
 };
 
 export default KakaoLoginPage;

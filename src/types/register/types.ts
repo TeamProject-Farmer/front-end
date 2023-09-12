@@ -7,34 +7,24 @@ export interface IAuthForm {
   selectedEmail: string;
   password: string;
   passwordConfirm: string;
-  name: string;
-  phone: string;
-  postCode: string;
-  basicAddress: string;
-  detailAddress: string;
   nickname: string;
   checked: boolean;
 }
 
-export interface DaumPostcodeData {
-  address: string;
-  addressType: string;
-  bname: string;
-  buildingName: string;
-  zonecode: string;
-  // 추가적인 필드들을 필요에 따라 정의
-}
+// export interface DaumPostcodeData {
+//   address: string;
+//   addressType: string;
+//   bname: string;
+//   buildingName: string;
+//   zonecode: string;
+//   // 추가적인 필드들을 필요에 따라 정의
+// }
 
 export type FieldName =
   | 'email'
   | 'selectedEmail'
   | 'password'
   | 'passwordConfirm'
-  | 'name'
-  | 'phone'
-  | 'postCode'
-  | 'basicAddress'
-  | 'detailAddress'
   | 'nickname'
   | 'checked';
 
@@ -67,9 +57,4 @@ export interface RegisterData {
   email: string;
   password: string;
   nickname: string;
-  name: string;
-  phone: string;
-  postCode: string;
-  address: string;
-  detailAddress: string;
 }
