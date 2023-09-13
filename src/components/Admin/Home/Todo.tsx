@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { TodoList } from '../ArrayItem';
+import { TodoList } from '../../../utils/admin/ArrayItem';
 
 const Todo = () => {
   return (
@@ -43,15 +43,15 @@ const Styled = {
     border: 1px solid #e5e5e5;
     display: flex;
     flex-direction: column;
-    &:first-child {
+    &:first-of-type {
       border-radius: 5px 0 0 5px;
-      & > div:last-child {
+      & > div:last-of-type {
         border-radius: 0 0 0 7px;
       }
     }
-    &:last-child {
+    &:last-of-type {
       border-radius: 0 5px 5px 0;
-      & > div:last-child {
+      & > div:last-of-type {
         border-radius: 0 0 5px 0;
       }
     }

@@ -12,7 +12,7 @@ const adminPage = () => {
 
   const pageComponent = (
     <Wrapper>
-      <SideBar menuName={category} />
+      <SideBar/>
       {/* 추후 추가 예정*/}
     </Wrapper>
   );

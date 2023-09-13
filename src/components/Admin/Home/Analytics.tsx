@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { AnalysticsTab } from '../ArrayItem';
+import { AnalysticsTab } from '../../../utils/admin/ArrayItem';
 
 const Analytics = () => {
   return (
@@ -40,10 +40,10 @@ const Styled = {
     border-radius: 5px 5px 0 0;
     display: flex;
     border-bottom: 1px solid #e5e5e5;
-    & > div:first-child {
+    & > div:first-of-type {
       border-radius: 5px 0 0 0;
     }
-    &:last-child {
+    &:last-of-type {
       border-radius: 0 5px 0 0;
     }
   `,

@@ -4,15 +4,9 @@ import SideBar from '@components/Admin/SideBar';
 import AdminLayout from '@components/Admin/AdminLayout';
 
 const adminPage = () => {
-  const router = useRouter();
-  const menu = router.query.menu;
-  let category: string;
-  if (menu) {
-    category = menu.toString();
-  }
   return (
     <Wrapper>
-      <SideBar menuName={category} />
+      <SideBar />
       <AdminLayout page='Home' />
     </Wrapper>
   );

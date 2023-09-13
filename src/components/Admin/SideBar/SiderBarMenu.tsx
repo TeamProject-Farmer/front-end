@@ -1,34 +1,26 @@
-import Image from 'next/image';
+import Link from 'next/link';
 import Icon from './Icon';
-import { sideMenuProps } from '../Type';
-import { SideBarMenuStyled as Styled} from './styles';
+import { sideMenuProps } from '../../../types/admin/types';
+import SubMenu from './SubMenu';
+import { SideBarMenuStyled as Styled } from './styles';
 
 const SiderBarMenu = (props: sideMenuProps) => {
-  const { isCurrentPage, imageName, text } = props;
-  let color = null;
-  if(isCurrentPage){
-    color = '#9CDC1F';
-  } else{
-    color =  '#8a8a8a';
-  }
+  const { href, isCurrentPage, currentPage, imageName, text } = props;
+
   return (
-    <>
-      <Styled.Wrapper isClicked={isCurrentPage}>
-        <Styled.InnerWrapper>
-          <Icon imageName={imageName} colorName={color}/>
-          <Styled.MenuText>{text}</Styled.MenuText>
-        </Styled.InnerWrapper>
-        <Image
-          src="/assets/images/admin/downArrow.svg"
-          alt="arrow"
-          width={7}
-          height={12.7}
-        ></Image>
-      </Styled.Wrapper>
-    </>
+    <Link href={href}>
+      <Styled.WholeWrapper>
+        <Styled.Wrapper isClicked={isCurrentPage}>
+          <Styled.InnerWrapper>
+            <Icon imageName={imageName} isCurrentPage={isCurrentPage} />
+            <Styled.MenuText>{text}</Styled.MenuText>
+          </Styled.InnerWrapper>
+          <>{isCurrentPage ? <Styled.UpArrow /> : <Styled.DownArrow />}</>
+        </Styled.Wrapper>
+        <SubMenu menuName={imageName} currentPage={currentPage} />
+      </Styled.WholeWrapper>
+    </Link>
   );
 };
-
-
 
 export default SiderBarMenu;

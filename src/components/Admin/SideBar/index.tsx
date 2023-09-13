@@ -1,16 +1,14 @@
 import Link from 'next/link';
-import Image from 'next/image';
+import { useRouter } from 'next/router';
 import Styled from './styles';
 import SiderBarMenu from './SiderBarMenu';
-import { sideBarMenuItems } from '@components/Admin/ArrayItem';
+import { sideBarMenuItems, MenuRoute } from 'src/utils/admin/ArrayItem';
 
-interface PropsList {
-  menuName: string | undefined;
-}
-const SideBar = (props: PropsList) => {
-  const { menuName } = props;
+const SideBar = () => {
+  const router = useRouter();
   let category: string;
 
+  let menuName = MenuRoute(router.pathname);
   if (menuName == undefined) {
     category = 'home';
   } else {
@@ -21,23 +19,18 @@ const SideBar = (props: PropsList) => {
     <Styled.Wrapper>
       <Styled.Header>
         <Link href="/">
-          <Image
-            src="/assets/images/admin/logo.svg"
-            alt="logo"
-            width={150}
-            height={34}
-            priority
-          ></Image>
+          <Styled.Logo />
         </Link>
       </Styled.Header>
       {sideBarMenuItems.map((item, index) => (
-        <Link href={item.href} key={index}>
-          <SiderBarMenu
-            isCurrentPage={category === item.imageName}
-            imageName={item.imageName}
-            text={item.menuName}
-          />
-        </Link>
+        <SiderBarMenu
+          key={index}
+          href={item.href}
+          isCurrentPage={category === item.imageName}
+          currentPage={category}
+          imageName={item.imageName}
+          text={item.menuName}
+        />
       ))}
     </Styled.Wrapper>
   );

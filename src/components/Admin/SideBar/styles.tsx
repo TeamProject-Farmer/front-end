@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-
+import logo from '@assets/images/admin/logo.svg';
+import upArrow from '@assets/images/admin/upArrow.svg';
+import downArrow from '@assets/images/admin/downArrow.svg';
 
 const Styled = {
   Wrapper: styled.div`
@@ -23,13 +25,19 @@ const Styled = {
     justify-content: center;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   `,
+  Logo: styled(logo)``,
 };
 
 export const SideBarMenuStyled = {
-  Wrapper: styled.div<{isClicked?: boolean} >`
+  WholeWrapper: styled.div`
+    display: flex;
+    flex-direction: column;
+  `,
+  Wrapper: styled.div<{ isClicked?: boolean }>`
     width: 100%;
     height: 56px;
     display: flex;
+    align-items: center;
     padding: 5px 30px;
     justify-content: space-between;
     color: ${props => (props.isClicked ? '#9CDC1F' : '#8a8a8a')};
@@ -51,13 +59,32 @@ export const SideBarMenuStyled = {
     margin-left: 18px;
     height: 100%;
   `,
+  UpArrow: styled(upArrow)``,
+  DownArrow: styled(downArrow)``,
 };
 
 export const SubMenuStyled = {
   Wrapper: styled.div`
     display: flex;
     flex-direction: column;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    overflow: hidden;
+  `,
+  InnerWrapper:styled.div`
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding-left: 78px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    font-weight: 500;
+    &:hover {
+      background-color: #ffffff15;
+      color: #ffffffd4;
+    }
   `,
 };
-
 export default Styled;

@@ -7,6 +7,31 @@ export const sideBarMenuItems = [
   { href: '/admin/promotion', imageName: 'promotion', menuName: '프로모션' },
 ];
 
+export const MenuRoute = (route: string) => {
+  switch (route) {
+    case '/admin/cart':
+      return 'cart';
+      break;
+    case '/admin/product':
+      return 'product';
+      break;
+    case '/admin/member':
+      return 'member';
+      break;
+    case '/admin/board':
+      return 'board';
+      break;
+    case '/admin/promotion':
+      return 'promotion';
+      break;
+    default:
+      return 'home';
+      break;
+  }
+};
+
+
+
 export const TodoList = [
   { title: '결제대기', id: 0 },
   { title: '배송대기', id: 1 },
@@ -17,8 +42,8 @@ export const TodoList = [
 ];
 
 export const AnalysticsTab = [
-  {id: 0, title:'일별 매출 현황'},
-  {id: 1, title:'주문처리 현황'},
-  {id: 2, title:'회원/적립금 현황'},
-  {id: 3, title:'게시물 현황'},
+  { id: 0, title: '일별 매출 현황' },
+  { id: 1, title: '주문처리 현황' },
+  { id: 2, title: '회원/적립금 현황' },
+  { id: 3, title: '게시물 현황' },
 ];
