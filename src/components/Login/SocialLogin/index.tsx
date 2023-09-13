@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import request from 'src/apis/base';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { setUser } from 'store/reducers/userSlice';
@@ -42,6 +41,7 @@ const SocialLogin = ({ provider }: { provider: string }) => {
         cumulativeAmount: userData.cumulativeAmount,
         memberCoupon: userData.memberCoupon,
       };
+      console.log('userData', userData);
       dispatch(setUser(userInfo));
       setToken(userData.accessToken);
       setCookie('refreshToken', userData.refreshToken);
