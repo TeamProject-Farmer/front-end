@@ -48,7 +48,7 @@ const CategoryDetailPage: NextPageWithLayout = () => {
     }
   });
 
-  if (isLoading) return;
+  if (isLoading) return <div></div>;
   if (detailError) return <NoProduct />;
   else {
     return (

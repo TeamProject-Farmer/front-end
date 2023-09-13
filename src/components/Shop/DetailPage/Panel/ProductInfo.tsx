@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import handlePrice from 'src/utils/shop/handlePrice';
 import { handleCopyClipBoard } from 'src/utils/shop/handleClipBoard';
 import { ProductInfoProps } from 'src/types/shop/types';
-import TotalStarGauge from '@components/Shop/Common/Gauge/TotalStarGauge';
+import TotalStarGauge from '@components/Shop/Common/GaugeBox/TotalStarGauge';
 import down from '@assets/images/shop/downloadIcon.svg';
 import share from '@assets/images/shop/shareIcon.svg';
 
