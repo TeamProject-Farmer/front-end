@@ -41,6 +41,7 @@ const SocialLogin = ({ provider }: { provider: string }) => {
         cumulativeAmount: userData.cumulativeAmount,
         memberCoupon: userData.memberCoupon,
       };
+      console.log('userData', userData);
       dispatch(setUser(userInfo));
       setToken(userData.accessToken);
       setCookie('refreshToken', userData.refreshToken);
