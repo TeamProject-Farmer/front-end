@@ -2,7 +2,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Styled from './styles';
 import SiderBarMenu from './SiderBarMenu';
-import { sideBarMenuItems, MenuRoute } from 'src/utils/admin/ArrayItem';
+import { sideBarMenuItems, MenuRoute } from 'src/utils/admin/sideBarMenu';
+
 
 const SideBar = () => {
   const router = useRouter();
@@ -14,25 +15,27 @@ const SideBar = () => {
   } else {
     category = menuName;
   }
-  
+
   return (
-    <Styled.Wrapper>
-      <Styled.Header>
-        <Link href="/">
-          <Styled.Logo />
-        </Link>
-      </Styled.Header>
-      {sideBarMenuItems.map((item, index) => (
-        <SiderBarMenu
-          key={index}
-          href={item.href}
-          isCurrentPage={category === item.imageName}
-          currentPage={category}
-          imageName={item.imageName}
-          text={item.menuName}
-        />
-      ))}
-    </Styled.Wrapper>
+    <>
+      <Styled.Wrapper>
+        <Styled.Header>
+          <Link href="/">
+            <Styled.Logo />
+          </Link>
+        </Styled.Header>
+        {sideBarMenuItems.map((item, index) => (
+          <SiderBarMenu
+            key={index}
+            href={item.href}
+            currentPage={category}
+            imageName={item.imageName}
+            text={item.menuName}
+            pathName = {router.pathname}
+          />
+        ))}
+      </Styled.Wrapper>
+    </>
   );
 };
 

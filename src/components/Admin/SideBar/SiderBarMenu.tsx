@@ -5,7 +5,8 @@ import SubMenu from './SubMenu';
 import { SideBarMenuStyled as Styled } from './styles';
 
 const SiderBarMenu = (props: sideMenuProps) => {
-  const { href, isCurrentPage, currentPage, imageName, text } = props;
+  const { href, currentPage, imageName, text, pathName } = props;
+  const isCurrentPage: boolean = currentPage === imageName;
 
   return (
     <Link href={href}>
@@ -17,7 +18,7 @@ const SiderBarMenu = (props: sideMenuProps) => {
           </Styled.InnerWrapper>
           <>{isCurrentPage ? <Styled.UpArrow /> : <Styled.DownArrow />}</>
         </Styled.Wrapper>
-        <SubMenu menuName={imageName} currentPage={currentPage} />
+        <SubMenu menuName={imageName} currentPage={currentPage} pathName={pathName}/>
       </Styled.WholeWrapper>
     </Link>
   );

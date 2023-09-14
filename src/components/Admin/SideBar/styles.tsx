@@ -72,13 +72,13 @@ export const SubMenuStyled = {
     display: flex;
     overflow: hidden;
   `,
-  InnerWrapper:styled.div`
+  InnerWrapper:styled.div<{ isClicked?: boolean }>`
     width: 100%;
     height: 40px;
     display: flex;
     align-items: center;
     padding-left: 78px;
-    color: rgba(255, 255, 255, 0.8);
+    color: ${props => (props.isClicked ? '#9CDC1F' : '#8a8a8a')};
     font-size: 14px;
     font-weight: 500;
     &:hover {
