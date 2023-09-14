@@ -13,7 +13,7 @@ const PaymentInput = ({
   disabledCouponBtn,
   getDiscountedPrice,
 }: PaymentInputProps) => {
-  console.log('usedPoint', usedPoint);
+
   return (
     <Styled.InputWrapper caption={caption}>
       {label && <Styled.Label>{label}</Styled.Label>}

@@ -54,7 +54,7 @@ export interface SearchOptionProps {
   setSelectedDateRange: Dispatch<SetStateAction<[Date | null, Date | null]>>;
   setStartDate: Dispatch<SetStateAction<string>>;
   setEndDate: Dispatch<SetStateAction<string>>;
-  handleSearchList: () => void;
+  // handleSearchList: () => void;
 }
 
 export interface OrderStatusProps {
@@ -69,11 +69,11 @@ export interface OrderTextProps {
 }
 
 //리뷰 post
-export interface postReviewProps{
+export interface postReviewProps {
   productId: number;
   fiveStarRating: string;
   content: string;
-  reviewImage: File |Blob;
+  reviewImage: File | Blob;
 }
 
 // 쿠폰

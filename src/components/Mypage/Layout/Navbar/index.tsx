@@ -16,6 +16,7 @@ const navbarItemStyles = (isActive: boolean) => css`
   color: ${isActive ? 'rgba(89, 185, 65, 1)' : 'inherit'};
   margin-right: 5.5rem;
   font-weight: '500';
+  width: 70px;
 `;
 
 const Navbar = () => {
@@ -28,7 +29,7 @@ const Navbar = () => {
           const isActive = router.pathname === item.link;
           return (
             <Link key={item.title} href={item.link}>
-              <span css={navbarItemStyles(isActive)}>{item.title}</span>
+              <div css={navbarItemStyles(isActive)}>{item.title}</div>
             </Link>
           );
         })}

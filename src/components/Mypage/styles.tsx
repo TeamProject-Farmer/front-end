@@ -5,9 +5,8 @@ import OptionButton from '@assets/images/mypage/option.svg';
 
 export const Styled = {
   Container: styled.div`
-    width: 1920px;
+    /* width: 1920px; */
   `,
-
   SplitLine: styled.div`
     margin-top: 15px;
     border-bottom: 2px solid ${theme.colors.green1};
@@ -183,6 +182,7 @@ export const Styled = {
     margin-bottom: 1.5rem;
   `,
   InfoText: styled.h1`
+    width: 640px;
     cursor: pointer;
     font-size: 16px;
     font-weight: 500;
@@ -201,14 +201,24 @@ export const Styled = {
     height: 35rem;
   `,
   Checkbox: styled.div`
+    width: 1195px;
+    padding: 0 114px;
     display: flex;
     height: 6rem;
     border-radius: 12px;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     background-color: #f4f4f4;
     align-items: center;
     margin-top: 0.9rem;
+  `,
+  CheckboxItem: styled.div`
+    flex-shrink: 0;
+    width: 40px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    color: ${theme.colors.mypageGray};
   `,
   SearchInput: styled.select`
     background-color: ${theme.colors.white};

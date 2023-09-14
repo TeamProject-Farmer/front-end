@@ -8,7 +8,6 @@ const SearchOption = ({
   setSelectedDateRange,
   setStartDate,
   setEndDate,
-  handleSearchList,
 }: SearchOptionProps) => {
   const handleIntervalClick = (interval: string) => {
     const today = Date.now();
@@ -41,17 +40,15 @@ const SearchOption = ({
     setEndDate(useFormatDate(start));
   };
 
-  const handleClick = (interval: string) => {
-    handleIntervalClick(interval);
-    handleSearchList()
-  };
-
   return (
     <>
       {timeIntervals.map(interval => (
-        <Styled.InfoText onClick={() => handleClick(interval)} key={interval}>
+        <Styled.CheckboxItem
+          onClick={() => handleIntervalClick(interval)}
+          key={interval}
+        >
           {interval}
-        </Styled.InfoText>
+        </Styled.CheckboxItem>
       ))}
     </>
   );

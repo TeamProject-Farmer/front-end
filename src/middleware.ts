@@ -5,7 +5,6 @@ export function middleware(request: NextRequest, event: NextFetchEvent) {
   const pathname = request.nextUrl.pathname;
 
   if (refreshToken) {
-    console.log('pathname', pathname);
     if (pathname === '/login') {
       return NextResponse.redirect(
         new URL('/?alert=이미 로그인한 사용자입니다.', request.url),
