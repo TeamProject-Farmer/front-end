@@ -1,13 +1,13 @@
 import Image from 'next/image';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import VerticalLine from '@components/Shop/Common/VerticalLine';
-import TotalStarGauge from '@components/Shop/Common/gauge/TotalStarGauge';
+import VerticalLine from '@components/Shop/Common/SmallParts/VerticalLine';
+import TotalStarGauge from '@components/Shop/Common/GaugeBox/TotalStarGauge';
 import { postReviewLike } from 'src/apis/shop/review';
 import { SingleReviewProps } from 'src/types/shop/types';
-type Props= {
-  dataList: SingleReviewProps
-}
+type Props = {
+  dataList: SingleReviewProps;
+};
 const SingleReview = ({ dataList }: Props) => {
   const {
     content,
@@ -18,17 +18,17 @@ const SingleReview = ({ dataList }: Props) => {
     memberNickname,
     optionName,
     productName,
-    reviewId
+    reviewId,
   } = dataList;
   const handleReviewLike = async (reviewId: number) => {
     const response = await postReviewLike(reviewId);
   };
-  
+
   return (
     <Styled.SingleReview>
       <div></div>
       <div>
-        <TotalStarGauge star={fiveStarRating} size={16}/>
+        <TotalStarGauge star={fiveStarRating} size={16} />
         <Styled.ReviewDate>{createdDate.slice(0, 10)}</Styled.ReviewDate>
         <div>·</div>
         <div>{memberNickname} 구매</div>
@@ -43,14 +43,16 @@ const SingleReview = ({ dataList }: Props) => {
       <Styled.ReviewImage>
         <Image
           alt="reviewImage"
-          className='imageStyle'
+          className="imageStyle"
           src={imgUrl}
           width={112}
           height={112}
         ></Image>
       </Styled.ReviewImage>
       <div>{content}</div>
-      <Styled.RecomendBtn onClick={()=>handleReviewLike(reviewId)}>도움이 돼요 &nbsp; {likeCount}</Styled.RecomendBtn>
+      <Styled.RecomendBtn onClick={() => handleReviewLike(reviewId)}>
+        도움이 돼요 &nbsp; {likeCount}
+      </Styled.RecomendBtn>
     </Styled.SingleReview>
   );
 };

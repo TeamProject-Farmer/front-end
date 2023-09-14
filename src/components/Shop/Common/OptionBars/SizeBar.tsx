@@ -5,12 +5,14 @@ import { OptionBarProps } from 'src/types/shop/types';
 import { SortOption } from 'src/types/search/types';
 
 const SizeBar = (props: OptionBarProps) => {
-  const { optionList, width, setProductOption, productOption } = props;
+  const { optionList, setProductOption, productOption } = props;
   const router = useRouter();
+  
   const handleClick = (productOption:string) => {
     setProductOption(productOption)
     router.push(`/shop/bysize/${productOption.toLowerCase()}`)
   }
+
   return (
     <Styled.Wrapper>
       <Styled.InnerWrapper>
