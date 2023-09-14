@@ -1,9 +1,8 @@
-import styled from '@emotion/styled';
-import theme from '@styles/theme';
 import { useQuery } from '@tanstack/react-query';
 import { getMyQnA } from 'src/apis/shop/qna';
 import checkIsMember from 'src/utils/shop/checkIsMember';
 import QnAWrapper from '@components/Shop/DetailPage/ContentWrapper/QnA/QnAWrapper';
+import { MyQnAStyled as Styled } from './styles';
 
 const MyQnA = ({ productId }: { productId: number }) => {
   const { routeToLogin } = checkIsMember();
@@ -33,18 +32,5 @@ const MyQnA = ({ productId }: { productId: number }) => {
   }
 };
 
-const Styled = {
-  ErrorMessage: styled.div`
-    width: 100%;
-    height: 450px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-bottom: 70px;
-    font-size: 25px;
-    font-weight: 600;
-    color: ${theme.colors.gray};
-  `,
-};
 
 export default MyQnA;

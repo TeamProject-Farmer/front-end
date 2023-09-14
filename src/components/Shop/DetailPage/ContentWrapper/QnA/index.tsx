@@ -1,5 +1,3 @@
-import styled from '@emotion/styled';
-import theme from '@styles/theme';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
@@ -12,6 +10,7 @@ import QnAModal from '@components/Common/Modal/QnAModal';
 import QnAWrapper from '@components/Shop/DetailPage/ContentWrapper/QnA/QnAWrapper';
 import MyQnA from './MyQnA';
 import Pagination from '@components/Shop/Common/Pagination';
+import { QnAStyled as Styled } from './styles';
 
 const Inquiry = () => {
   const router = useRouter();
@@ -88,63 +87,5 @@ const Inquiry = () => {
   }
 };
 
-const Styled = {
-  Wrapper: styled.div`
-    width: ${theme.size.shopDetailWidth};
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 80px;
-  `,
-  Container: styled.div`
-    border-bottom: 1px solid ${theme.colors.green1};
-    margin-bottom: 33px;
-  `,
-  Title: styled.div`
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 25px;
-    display: flex;
-    justify-content: space-between;
-    & > div {
-      display: flex;
-      align-items: center;
-    }
-    & > div:first-child > div:last-child {
-      color: #47ac3a;
-      margin-left: 6px;
-    }
-  `,
-  MyInQuiry: styled.div`
-    & > span {
-      font-size: 16px;
-      font-weight: 500;
-      color: ${theme.colors.pointGreen};
-      margin-right: 10px;
-    }
-  `,
-  OpenModalButton: styled.button`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 25px;
-    width: 95px;
-    height: 32px;
-    border-radius: 5px;
-    background-color: ${theme.colors.pointGreen};
-    color: #fff;
-    font-size: 16px;
-    font-weight: 600;
-  `,
-  ErrorMessage: styled.div`
-    width: 100%;
-    height: 450px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-bottom: 70px;
-    font-size: 25px;
-    font-weight: 600;
-    color: ${theme.colors.gray};
-  `,
-};
+
 export default Inquiry;
