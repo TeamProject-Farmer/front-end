@@ -15,6 +15,7 @@ export const Styled = {
 
   // profile
   BoxWrapper: styled.div<{ margin?: string }>`
+    width: 1200px;
     margin-left: 12.5rem;
     margin-right: 12.5rem;
     margin-bottom: 2rem;

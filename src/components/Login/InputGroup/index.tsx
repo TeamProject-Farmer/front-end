@@ -43,7 +43,6 @@ const InputGroup = () => {
         memberCoupon: userData.memberCoupon,
       };
       dispatch(setUser(userInfo));
-      // dispatch(setToken(userData.accessToken));
       setToken(userData.accessToken);
       setCookie('refreshToken', userData.refreshToken);
       router.push('/');
