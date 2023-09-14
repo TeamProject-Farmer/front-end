@@ -2,15 +2,9 @@ import { setToken } from './token';
 import { getCookie, setCookie } from '../cookie';
 import { postMemberRefresh } from 'src/apis/login/login';
 import setUser from '../login/setUser';
-import { useQuery } from '@tanstack/react-query';
 
 const renewTokens = async () => {
   const refreshToken = getCookie('refreshToken');
-
-  // const { data: response } = useQuery({
-  //   queryKey: ['token'],
-  //   queryFn: () => postMemberRefresh(refreshToken),
-  // });
 
   const response = await postMemberRefresh(refreshToken);
 

@@ -23,9 +23,10 @@ const OrderHistory = ({ purchaseList }: { purchaseList: OrderListProps[] }) => {
             ))}
           </Styled.FlexRow>
 
-          {purchaseList.map((order, index) => (
-            <OrderItem key={index} order={order} />
-          ))}
+          {purchaseList &&
+            purchaseList.map((order, index) => (
+              <OrderItem key={index} order={order} />
+            ))}
         </>
       ) : (
         // 주문 내역이 비었을 경우

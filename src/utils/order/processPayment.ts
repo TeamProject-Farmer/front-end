@@ -27,8 +27,8 @@ const processPayment = async ({
     deliveryInfo,
     point,
   });
-  console.log('orderData', orderData);
-  console.log('dbData', dbData);
+  // console.log('orderData', orderData);
+  // console.log('dbData', dbData);
 
   const cartIds: number[] = productList.map(item => item.cartId);
 

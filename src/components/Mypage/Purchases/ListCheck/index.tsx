@@ -24,6 +24,7 @@ const ListCheck = ({
         alert('정확한 날짜를 입력해주세요.');
         return; // Alert를 발생시킨 후 함수 실행 중단
       }
+
       const res = await getPurchaseList({
         startDate,
         endDate,
@@ -50,7 +51,6 @@ const ListCheck = ({
           setEndDate={setEndDate}
           setStartDate={setStartDate}
           setSelectedDateRange={setSelectedDateRange}
-          handleSearchList={handleSearchList}
         />
 
         {/* 기간 검색 */}
