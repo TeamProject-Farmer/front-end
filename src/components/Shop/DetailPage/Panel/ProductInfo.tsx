@@ -29,7 +29,7 @@ const ProductInfo = (props: ProductInfoProps) => {
           <div>
             {discountRate === 0
               ? handlePrice(price)
-              : handlePrice(price * (100 / (100 - discountRate)))}
+              : handlePrice(price * ( 1+ discountRate/100))}
           </div>
         </Styled.OriginPrice>
         <Styled.CurrentPrice>
