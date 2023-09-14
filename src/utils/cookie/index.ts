@@ -5,7 +5,8 @@ const oneWeekFromNow = new Date();
 oneWeekFromNow.setDate(oneWeekFromNow.getDate() + 7);
 
 export const setCookie = (name: string, value: string) => {
-  return cookies.set(name, value, { path: '/', expires: oneWeekFromNow });
+  // return cookies.set(name, value, { path: '/', expires: oneWeekFromNow });
+  return cookies.set(name, value);
 };
 
 export const getCookie = (name: string) => {

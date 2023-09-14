@@ -24,8 +24,8 @@ const Header = () => {
   const handleLogout = () => {
     dispatch(clearUser());
     setToken('');
-    document.cookie = 'refreshToken=; expires=0; path=/;';
-    // removeCookie('refreshToken');
+    // document.cookie = 'refreshToken=; expires=0; path=/;';
+    removeCookie('refreshToken');
     router.push('/');
   };
   return (

@@ -8,9 +8,6 @@ const index = () => {
   return (
     <Layout>
       <MyProfile />
-
-      <TextBanner />
-
       <PurchasesList />
     </Layout>
   );
