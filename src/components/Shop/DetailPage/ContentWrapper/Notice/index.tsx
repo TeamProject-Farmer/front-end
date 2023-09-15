@@ -56,7 +56,7 @@ const Styled = {
     display: flex;
     height: 43px;
     align-items: center;
-    & > div:first-child {
+    & > div:first-of-type {
       width: 160px;
     }
   `,

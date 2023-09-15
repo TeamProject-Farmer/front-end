@@ -9,7 +9,9 @@ import QnA from './QnA';
 import Notice from './Notice';
 
 const ContentWrapper = (props: OptionBoxProps) => {
-  const { selectList, setSelectList, selectPrice, setSelectPrice } = props;
+  const { optionList, selectList, setSelectList, selectPrice, setSelectPrice } =
+    props;
+
   return (
     <Styled.Wrapper>
       <Styled.ContentWrapper>
@@ -21,6 +23,7 @@ const ContentWrapper = (props: OptionBoxProps) => {
           <Notice />
         </Styled.ExceptOption>
         <OptionBox
+          optionList={optionList}
           setSelectList={setSelectList}
           selectList={selectList}
           setSelectPrice={setSelectPrice}

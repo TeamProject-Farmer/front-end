@@ -1,8 +1,7 @@
 import theme from '@styles/theme';
 import styled from '@emotion/styled';
 import handleShipDay from 'src/utils/shop/handleShipDay';
-import checkIcon from '@assets/images/shop/checkIcon.svg';
-import boxIcon from '@assets/images/shop/boxIcon.svg';
+import { PayInfoStyled as Styled } from './styles';
 
 const PayInfo = () => {
   return (
@@ -45,84 +44,5 @@ const PayInfo = () => {
   );
 };
 
-const Styled = {
-  ShipmentWrapper: styled.div`
-    display: flex;
-    flex-direction: column;
-    color: #585858;
-    font-weight: 400;
-    font-size: 16px;
-    & > div {
-    }
-  `,
-  EachShip: styled.div`
-    display: flex;
-    & > div {
-      display: flex;
-    }
-  `,
-  EachShipTitle: styled.div`
-    width: 46px;
-    margin-bottom: 8px;
-  `,
-  EachShipContent: styled.div`
-    display: flex;
-    flex-direction: column;
-  `,
-  ShipCommonBox: styled.div`
-    display: flex;
-    font-size: 16px;
-    margin-bottom: 6px;
-    & > div:first-child {
-      font-weight: 600;
-      margin-right: 4px;
-      color: ${theme.colors.black};
-    }
-    & > div:nth-child(2) {
-      font-weight: 400;
-    }
-  `,
-  ShipCheck: styled.div`
-    display: flex;
-    margin-top: 11px;
-    margin-left: 1px;
-    & > div {
-      margin-right: 19px;
-      font-size: 12px;
-      display: flex;
-      align-items: center;
-      & > svg:first-child {
-        margin-right: 6px;
-      }
-    }
-  `,
-  CheckIcon: styled(checkIcon)``,
-  ExpectShip: styled.div`
-    width: 502px;
-    height: 41px;
-    border-radius: 5px;
-    margin-top: 11px;
-    margin-bottom: 15px;
-    background-color: var(--4, #ecf9e9);
-    display: flex;
-    align-items: center;
-    & > div:nth-child(2) {
-      color: #33b822;
-      font-size: 16px;
-      font-weight: 600;
-      margin-right: 5px;
-    }
-    & > div:last-child {
-      color: #010101;
-      font-size: 14px;
-      font-weight: 300;
-    }
-  `,
-
-  BoxIcon: styled(boxIcon)`
-    margin-left: 14px;
-    margin-right: 9px;
-  `,
-};
 
 export default PayInfo;
