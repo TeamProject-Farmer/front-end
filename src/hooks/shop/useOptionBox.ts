@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { postCart } from 'src/apis/shop/product';
-import { userToken } from 'src/types/shop/types';
 import { selectOptionProps, OptionBoxFuncProps } from 'src/types/shop/types';
 import { setSelectedOrder } from 'store/reducers/orderSlice';
 import handlePrice from 'src/utils/shop/handlePrice';
+import { getCookie } from 'src/utils/cookie';
 
 
 const useOptionBox = (props: OptionBoxFuncProps) => {
@@ -20,7 +20,9 @@ const useOptionBox = (props: OptionBoxFuncProps) => {
   
   const router = useRouter();
   const dispatch = useDispatch();
-  const token = useSelector(userToken);
+  const token = getCookie('refreshToken');
+  console.log('token')
+  console.log(token)
 
   const handleResultPrice = () => {
     if (selectList.length > 0) return handlePrice(selectPrice) + '원';
@@ -51,7 +53,7 @@ const useOptionBox = (props: OptionBoxFuncProps) => {
 
   //장바구니 추가
   const handleCartData = async () => {
-    if (token == '') {
+    if (token == undefined) {
       //로그인 되어있지 않은 경우
       routeToLogin();
     } else {
@@ -76,7 +78,7 @@ const useOptionBox = (props: OptionBoxFuncProps) => {
 
   //구매하기 데이터
   const handleOrder = () => {
-    if (token == '') {
+    if (token == undefined) {
       //로그인 되어있지 않은 경우
       routeToLogin();
     } else {

@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { useSelector } from 'react-redux';
 import { useQuery } from '@tanstack/react-query';
 import { getQnAList } from 'src/apis/shop/qna';
-import { userToken } from 'src/types/shop/types';
 import checkIsMember from 'src/utils/shop/checkIsMember';
+import { getCookie } from 'src/utils/cookie';
 import OnOffButton from './OnOffButton';
 import QnAModal from '@components/Common/Modal/QnAModal';
 import QnAWrapper from '@components/Shop/DetailPage/ContentWrapper/QnA/QnAWrapper';
@@ -15,7 +14,7 @@ import { QnAStyled as Styled } from './styles';
 const Inquiry = () => {
   const router = useRouter();
   const productId = Number(router.query?.detail) || 1;
-  const token = useSelector(userToken);
+  const token = getCookie('refreshToken');
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [myButton, setMyButton] = useState<boolean>(false);
   const [currentIndex, setCurrentIndex] = useState<number>(1);
@@ -23,7 +22,7 @@ const Inquiry = () => {
   const { routeToLogin } = checkIsMember();
   const openModal = () => {
     //토큰이 있는 경우만 문의하기 창이 열릴 수 있도록, 없으면 로그인 화면으로 이동 처리
-    if (token != '') setModalOpen(true);
+    if (token != undefined ) setModalOpen(true);
     else routeToLogin();
     console.log(data);
     console.log(data.content.length);
