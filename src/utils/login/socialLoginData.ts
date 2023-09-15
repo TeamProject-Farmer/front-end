@@ -3,7 +3,8 @@ import Kakao from '@assets/images/login/kakao.svg';
 import Naver from '@assets/images/login/naver.svg';
 
 // const address = 'http://localhost:3000';
-const address = 'https://front-end-farmer-shop.vercel.app';
+const address = 'https://farmer-clone.vercel.app/';
+// const address = 'https://front-end-farmer-shop.vercel.app';
 
 // 카카오
 const KAKAO_CLIENT_ID = process.env.NEXT_PUBLIC_KAKAO_API_KEY;
