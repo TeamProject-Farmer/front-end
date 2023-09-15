@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import styled from '@emotion/styled';
 import handleNickname from 'src/utils/shop/handleNickname';
 import { getDetailQnA } from 'src/apis/shop/qna';
 import { QnAProps } from 'src/types/shop/types';
-import VerticalLine from '@components/Shop/Common/VerticalLine';
+import VerticalLine from '@components/Shop/Common/SmallParts/VerticalLine';
 import DetailQnA from '@components/Common/Modal/DetailQnA';
-import secret from '@assets/images/shop/secretIcon.svg';
+import { QnAWrapperStyled as Styled } from './styles';
 
 const QnAWrapper = (props: { detailList: QnAProps[] }) => {
   const { detailList } = props;
@@ -98,50 +97,5 @@ const QnAWrapper = (props: { detailList: QnAProps[] }) => {
   );
 };
 
-const Styled = {
-  Single: styled.div`
-    display: flex;
-    font-size: 12px;
-    font-weight: 500;
-    flex-direction: column;
-    cursor: pointer;
-    & > div {
-      display: flex;
-      gap: 3px;
-    }
-  `,
-  OpenQuestion: styled.div`
-    margin-top: 12px;
-    gap: 9px !important;
-    display: flex;
-    font-size: 16px;
-    font-weight: 700;
-    align-content: center;
-    margin-bottom: 26px;
-    & > div {
-      height: fit-content;
-      display: flex;
-      justify-content: flex-start;
-      flex-direction: column;
-    }
-    & > div > div {
-      display: flex;
-      flex-direction: column;
-    }
-  `,
-  Question: styled.div`
-    margin-top: 12px;
-    gap: 9px !important;
-    display: flex;
-    font-size: 16px;
-    font-weight: 700;
-    align-items: center;
-    margin-bottom: 26px;
-  `,
-  SecretIcon: styled(secret)``,
-  ProductName: styled.div`
-    font-size: 12px;
-    margin-top: 5px;
-  `,
-};
+
 export default QnAWrapper;
