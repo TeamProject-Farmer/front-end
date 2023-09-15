@@ -10,12 +10,12 @@ type Props = {
 
 const Layout = ({ children }: Props) => {
   return (
-    <Styled.Container>
+    <>
       <Header />
       <Navbar />
-      {children}
+      <Styled.Container>{children}</Styled.Container>
       <Footer />
-    </Styled.Container>
+    </>
   );
 };
 
