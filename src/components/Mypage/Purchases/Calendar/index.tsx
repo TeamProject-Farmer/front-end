@@ -20,6 +20,8 @@ const Calendar = ({
 
     setStartDate(useFormatDate(start));
     setEndDate(useFormatDate(end));
+
+    handleSearchList();
   };
 
   return (
@@ -36,8 +38,8 @@ const Calendar = ({
         placeholderText="검색 날짜 범위 선택"
       />
       <Search
-        onClick={handleSearchList}
         className="relative cursor-pointer right-10"
+        onClick={handleSearchList}
       />
     </Styled.Box>
   );

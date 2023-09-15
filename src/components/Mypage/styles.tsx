@@ -6,6 +6,9 @@ import OptionButton from '@assets/images/mypage/option.svg';
 export const Styled = {
   Container: styled.div`
     /* width: 1920px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   `,
   SplitLine: styled.div`
     margin-top: 15px;
@@ -190,8 +193,8 @@ export const Styled = {
     color: ${theme.colors.mypageGray};
   `,
   CheckWrapper: styled.div`
-    margin-left: 12.5rem;
-    margin-right: 12.5rem;
+    /* margin-left: 12.5rem;
+    margin-right: 12.5rem; */
   `,
   NoneListWrapper: styled.div`
     align-items: center;
@@ -295,6 +298,9 @@ export const Styled = {
     padding-top: 1rem;
     padding-bottom: 1rem;
   `,
+  RowWrapper: styled.div`
+    width: 1194px;
+  `,
   CartRow: styled.div`
     display: grid;
     grid-template-columns: 0.5fr 2fr 2fr 1fr 1fr 1.5fr;
@@ -311,8 +317,8 @@ export const Styled = {
     background-color: '#D9D9D9';
   `,
   CartCheckBox: styled.input`
-    width: '16px';
-    height: '16px';
+    width: 16px;
+    height: 16px;
   `,
   FlexRowCenter: styled.div`
     display: grid;
@@ -474,7 +480,6 @@ export const Styled = {
     color: ${theme.colors.black};
   `,
   CouponBox: styled.div`
-    height: 500px;
     border-radius: 20px;
     margin-bottom: 8rem;
   `,
