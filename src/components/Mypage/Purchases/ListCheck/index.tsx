@@ -30,7 +30,7 @@ const ListCheck = ({
         endDate,
         orderStatus,
       });
-      console.log('구매 목록', res.data);
+      console.log('구매 목록', res);
       setPurchaseList(res.data);
     } catch (err) {
       console.log(err);
