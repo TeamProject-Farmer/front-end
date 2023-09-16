@@ -24,9 +24,6 @@ const SearchPage: NextPageWithLayout = () => {
   const [sortOption, setSortOption] = useState<string>('');
   const socialType = useSelector((state: RootState) => state.user.socialType);
   const email = useSelector((state: RootState) => state.user.email);
-  console.log('socialType', socialType);
-  console.log('email', email);
-  console.log(`${email}[${socialType}]`);
   const memberEmail = socialType ? `${email}[${socialType}]` : email;
 
   // 최근 검색 기록
@@ -43,6 +40,7 @@ const SearchPage: NextPageWithLayout = () => {
   // 검색 input에서 엔터 클릭시 onClick
   const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.code === 'Enter') {
+      console.log('enter');
       handleSearchResult();
     }
   };

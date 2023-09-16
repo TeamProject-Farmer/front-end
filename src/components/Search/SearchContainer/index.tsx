@@ -20,7 +20,7 @@ const SearchContainer = ({
       <Styled.Input
         type="search"
         onChange={handleChange}
-        onKeyUp={handleKeyUp}
+        onKeyPress={handleKeyUp}
         value={inputValue}
       />
       <Styled.KeywordWrapper>
