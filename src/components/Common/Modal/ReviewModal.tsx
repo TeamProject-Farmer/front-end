@@ -1,10 +1,8 @@
 import Styled from './styles';
 import { useState } from 'react';
 import Image from 'next/image';
-import { useQuery } from '@tanstack/react-query';
 import { ReviewModalProps } from 'src/types/shop/types';
 import { postReview } from 'src/apis/mypage/review';
-import { postReviewProps } from 'src/types/mypage/types';
 import Star from './ReviewStar';
 
 const ReviewModal = (props: ReviewModalProps) => {
@@ -41,11 +39,8 @@ const ReviewModal = (props: ReviewModalProps) => {
   const [file, setFile] = useState();
   const [imgSrcList, setImgSrcList] = useState<string>();
 
-  // const onChange = (e: React.FormEvent<HTMLInputElement>) => {
   const onChange = e => {
     setFile(e.target.files[0]);
-    console.log('image: ');
-    console.log(e.target.files[0]);
     const fileReader = new FileReader();
     fileReader.readAsDataURL(e.target.files[0]);
     fileReader.onload = e => {
@@ -62,7 +57,7 @@ const ReviewModal = (props: ReviewModalProps) => {
       content: content,
       reviewImage: file,
     });
-    close;
+    modalClose();
   };
   return (
     <Styled.Wrapper>
