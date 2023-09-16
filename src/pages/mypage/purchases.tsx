@@ -16,7 +16,6 @@ const index = () => {
   return (
     <Layout>
       <ListCheck setPurchaseList={setPurchaseList} />
-
       <OrderHistory purchaseList={purchaseList} />
     </Layout>
   );

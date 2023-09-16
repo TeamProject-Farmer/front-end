@@ -16,7 +16,7 @@ const navbarItemStyles = (isActive: boolean) => css`
   color: ${isActive ? 'rgba(89, 185, 65, 1)' : 'inherit'};
   margin-right: 5.5rem;
   font-weight: '500';
-  width: 100px;
+  width: 80px;
 `;
 
 const Navbar = () => {

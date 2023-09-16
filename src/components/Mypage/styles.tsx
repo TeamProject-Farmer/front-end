@@ -202,7 +202,7 @@ export const Styled = {
     height: 35rem;
   `,
   Checkbox: styled.div`
-    width: 1195px;
+    width: 1346.32px;
     padding: 0 114px;
     display: flex;
     height: 6rem;
@@ -215,7 +215,7 @@ export const Styled = {
   `,
   CheckboxItem: styled.div`
     flex-shrink: 0;
-    width: 40px;
+    width: 42px;
     cursor: pointer;
     font-size: 16px;
     font-weight: 500;
