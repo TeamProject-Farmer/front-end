@@ -23,15 +23,15 @@ const SearchPage: NextPageWithLayout = () => {
   const [searchResult, setSearchResult] = useState<ProductProps[]>();
   const [sortOption, setSortOption] = useState<string>('');
   const socialType = useSelector((state: RootState) => state.user.socialType);
-  const memberEmail = useSelector((state: RootState) => state.user.email);
+  const email = useSelector((state: RootState) => state.user.email);
 
-  const apiParamEmail = socialType ? memberEmail[socialType] : memberEmail;
+  const memberEmail = socialType ? `${email[socialType]}` : email;
 
   // 최근 검색 기록
   const { data: recentSearchWord } = useQuery({
-    queryKey: [memberEmail, searchedWord],
+    queryKey: [email, searchedWord],
     queryFn: () => getRecentSearch(),
-    enabled: memberEmail ? true : false,
+    enabled: email ? true : false,
   });
 
   // 검색 input value값 관리
@@ -47,7 +47,7 @@ const SearchPage: NextPageWithLayout = () => {
 
   //검색 버튼 클릭 시
   const handleSearchResult = async () => {
-    const response = await postSearch(inputValue, apiParamEmail);
+    const response = await postSearch(inputValue, memberEmail);
     setSearchResult(response);
     setSearchedWord(inputValue);
     setSortOption('new');
