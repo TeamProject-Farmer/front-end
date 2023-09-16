@@ -1,5 +1,6 @@
 export interface UserState {
   socialId: string;
+  socialType: string;
   email: string;
   nickname: string;
   point: number;

@@ -29,9 +29,10 @@ const SocialLogin = ({ provider }: { provider: string }) => {
         `${BASE_URL}/main/login/oauth/${provider}?code=${code}`,
       );
       const userData = response.data;
-      console.log('socialLogin', userData);
+      // console.log('socialLogin', userData);
       const userInfo = {
         socialId: userData.socialId,
+        socialType: userData.socialType,
         email: userData.email,
         nickname: userData.nickname,
         point: userData.point,
