@@ -9,9 +9,6 @@ export default Title;
 
 const StyledTitle = styled.p<{ color?: string }>`
   font-weight: 700;
-  font-size: 16px;
-  font-style: normal;
-  line-height: 140%; /* 22.4px */
-  letter-spacing: -0.064px;
-  color: ${({ color }) => color || '#1A1C1E'};
+  font-size: 30px;
+  color: ${({ color }) => color || 'black'};
 `;
