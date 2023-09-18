@@ -27,10 +27,8 @@ const Row = () => {
     try {
       const response = await getEdit({ nickname, password });
 
-      console.log(nickname);
       dispatch(setUserNickname(nickname));
 
-      console.log(response.data);
       router.push('/mypage');
     } catch (err) {
       if (err.response.data.message === '해당 닉네임이 존재합니다.') {

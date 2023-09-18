@@ -3,11 +3,12 @@ import Kakao from '@assets/images/login/kakao.svg';
 import Naver from '@assets/images/login/naver.svg';
 
 // const address = 'http://localhost:3000';
+// const address = 'https://farmer-clone.vercel.app';
 const address = 'https://front-end-farmer-shop.vercel.app';
 
 // 카카오
 const KAKAO_CLIENT_ID = process.env.NEXT_PUBLIC_KAKAO_API_KEY;
-const KAKAO_REDIRECT_URI = `${address}/login/kakao`; // 추후 배포 주소로 변경 예정
+const KAKAO_REDIRECT_URI = `${address}/login/kakao`;
 export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}`;
 
 // 네이버

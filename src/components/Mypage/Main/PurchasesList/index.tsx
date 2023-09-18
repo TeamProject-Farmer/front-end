@@ -15,7 +15,7 @@ const PurchasesList = () => {
     queryFn: getPurchase,
   });
 
-  return purchaseArray?.length === 0 ? null : (
+  return !purchaseArray ? null : (
     <Styled.BoxWrapper margin="8">
       <Styled.TextBox>
         <Styled.HeaderDiv>

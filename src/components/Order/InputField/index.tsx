@@ -76,9 +76,9 @@ const InputField = ({
                       type="text"
                       {...field}
                       value={field.value ? field.value : ''}
-                      onClick={event => {
-                        console.log(event.target);
-                      }}
+                      // onClick={event => {
+                      //   console.log(event.target);
+                      // }}
                     />
                     {errorMessage(fieldState)}
                   </>

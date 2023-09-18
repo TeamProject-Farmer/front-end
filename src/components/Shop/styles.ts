@@ -121,10 +121,13 @@ export const ShopIndexStyled = {
     max-width: 100%;
     min-width: ${theme.size.shopDetailMinWidth};
     height: fit-content;
+    background-color: ${theme.colors.white};
   `,
   EventWrapper: styled.div`
     width: 100%;
-    height: 1189px;
+    height: fit-content;
+    margin-top: 70px;
+    margin-bottom: 133px;
     padding: 45px 0;
     display: flex;
     flex-direction: column;

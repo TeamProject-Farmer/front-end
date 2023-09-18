@@ -5,9 +5,11 @@ import OptionButton from '@assets/images/mypage/option.svg';
 
 export const Styled = {
   Container: styled.div`
-    width: 1920px;
+    /* width: 1920px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   `,
-
   SplitLine: styled.div`
     margin-top: 15px;
     border-bottom: 2px solid ${theme.colors.green1};
@@ -16,6 +18,7 @@ export const Styled = {
 
   // profile
   BoxWrapper: styled.div<{ margin?: string }>`
+    width: 1200px;
     margin-left: 12.5rem;
     margin-right: 12.5rem;
     margin-bottom: 2rem;
@@ -183,14 +186,15 @@ export const Styled = {
     margin-bottom: 1.5rem;
   `,
   InfoText: styled.h1`
+    width: 640px;
     cursor: pointer;
     font-size: 16px;
     font-weight: 500;
     color: ${theme.colors.mypageGray};
   `,
   CheckWrapper: styled.div`
-    margin-left: 12.5rem;
-    margin-right: 12.5rem;
+    /* margin-left: 12.5rem;
+    margin-right: 12.5rem; */
   `,
   NoneListWrapper: styled.div`
     align-items: center;
@@ -201,14 +205,24 @@ export const Styled = {
     height: 35rem;
   `,
   Checkbox: styled.div`
+    width: 1195px;
+    padding: 0 114px;
     display: flex;
     height: 6rem;
     border-radius: 12px;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     background-color: #f4f4f4;
     align-items: center;
     margin-top: 0.9rem;
+  `,
+  CheckboxItem: styled.div`
+    flex-shrink: 0;
+    width: 40px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    color: ${theme.colors.mypageGray};
   `,
   SearchInput: styled.select`
     background-color: ${theme.colors.white};
@@ -284,6 +298,9 @@ export const Styled = {
     padding-top: 1rem;
     padding-bottom: 1rem;
   `,
+  RowWrapper: styled.div`
+    width: 1194px;
+  `,
   CartRow: styled.div`
     display: grid;
     grid-template-columns: 0.5fr 2fr 2fr 1fr 1fr 1.5fr;
@@ -300,8 +317,8 @@ export const Styled = {
     background-color: '#D9D9D9';
   `,
   CartCheckBox: styled.input`
-    width: '16px';
-    height: '16px';
+    width: 16px;
+    height: 16px;
   `,
   FlexRowCenter: styled.div`
     display: grid;
@@ -463,7 +480,6 @@ export const Styled = {
     color: ${theme.colors.black};
   `,
   CouponBox: styled.div`
-    height: 500px;
     border-radius: 20px;
     margin-bottom: 8rem;
   `,

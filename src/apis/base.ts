@@ -1,5 +1,5 @@
 import axios from 'axios';
-import renewTokens from 'src/utils/token/getNewTokens';
+import renewTokens from 'src/utils/token/renewTokens';
 import { getTokens } from 'src/utils/token/token';
 
 export const BASE_URL = process.env.NEXT_PUBLIC_API_KEY;
@@ -11,7 +11,12 @@ const request = axios.create({
 request.interceptors.request.use(
   async config => {
     const { accessToken, refreshToken } = getTokens();
-    if (!refreshToken) throw new Error('로그인화면으로보내야함');
+
+    if (!refreshToken) {
+      window.location.href = 'https://front-end-farmer-shop.vercel.app/login';
+      return config;
+    }
+
     if (!accessToken) {
       return await renewTokens().then(tokens => {
         config.headers['Authorization'] = `Bearer ${tokens.accessToken}`;
@@ -57,6 +62,23 @@ request.interceptors.response.use(
       } catch (err) {
         return Promise.reject(err);
       }
+    }
+    return Promise.reject(error);
+  },
+);
+
+// refreshToken 만료시
+request.interceptors.response.use(
+  response => {
+    return response;
+  },
+  async error => {
+    console.log('api error', error);
+    const status = error.response?.status;
+    const message = error.response?.data.message;
+    if (status === 500 && message === '회원이 존재하지 않습니다.') {
+      document.cookie = 'refreshToken=; expires=0; path=/;';
+      window.location.href = 'https://front-end-farmer-shop.vercel.app/login';
     }
     return Promise.reject(error);
   },

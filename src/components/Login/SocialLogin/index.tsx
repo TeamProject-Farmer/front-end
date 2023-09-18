@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import request from 'src/apis/base';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { setUser } from 'store/reducers/userSlice';
@@ -20,8 +19,6 @@ const SocialLogin = ({ provider }: { provider: string }) => {
     setCode(code);
   });
 
-  console.log(code);
-
   useEffect(() => {
     if (code) socialLogin();
   }, [code]);
@@ -32,8 +29,10 @@ const SocialLogin = ({ provider }: { provider: string }) => {
         `${BASE_URL}/main/login/oauth/${provider}?code=${code}`,
       );
       const userData = response.data;
+
       const userInfo = {
         socialId: userData.socialId,
+        socialType: userData.socialType,
         email: userData.email,
         nickname: userData.nickname,
         point: userData.point,
@@ -42,6 +41,7 @@ const SocialLogin = ({ provider }: { provider: string }) => {
         cumulativeAmount: userData.cumulativeAmount,
         memberCoupon: userData.memberCoupon,
       };
+
       dispatch(setUser(userInfo));
       setToken(userData.accessToken);
       setCookie('refreshToken', userData.refreshToken);

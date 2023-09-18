@@ -12,18 +12,16 @@ const EventBanner = () => {
 
   return (
     <>
-      {isOpened && (
-        <Link href="/register">
-          <Styled.Wrapper>
-            <Styled.Event>
-              회원가입 후 최대 2만원 할인 받기{' '}
-              <Styled.CloseBtn onClick={() => dispatch(setIsBannerClosed())}>
-                <Icon name="closeBtn" width={26} height={26} />
-              </Styled.CloseBtn>
-            </Styled.Event>
-          </Styled.Wrapper>
-        </Link>
-      )}
+      <Link href="/shop/event/1">
+        <Styled.Wrapper>
+          <Styled.Event>
+            첫 구매라면 누구나 최대 2만원 할인 받기{' '}
+            <Styled.CloseBtn onClick={() => dispatch(setIsBannerClosed())}>
+              <Icon name="closeBtn" width={26} height={26} />
+            </Styled.CloseBtn>
+          </Styled.Event>
+        </Styled.Wrapper>
+      </Link>
     </>
   );
 };

@@ -17,7 +17,7 @@ export const OrderItem = ({ order }: { order: OrderListProps }) => {
     setModalOpen(false);
   };
   const handleProductIntoPage = () => {
-    router.push(`/shop/category/detail/${order.productId}`);
+    router.push(`/shop/detail/${order.productId}`);
   };
 
   return (
@@ -26,7 +26,7 @@ export const OrderItem = ({ order }: { order: OrderListProps }) => {
         {modalOpen === true ? (
           <ReviewModal
             modalName="리뷰 작성하기"
-            imgUrl = {order.imgUrl}
+            imgUrl={order.imgUrl}
             orderProductId={order.orderProductId}
             productName={order.productName}
             productOption={order.optionName}

@@ -43,7 +43,6 @@ const InputGroup = () => {
         memberCoupon: userData.memberCoupon,
       };
       dispatch(setUser(userInfo));
-      // dispatch(setToken(userData.accessToken));
       setToken(userData.accessToken);
       setCookie('refreshToken', userData.refreshToken);
       router.push('/');
@@ -68,8 +67,8 @@ const InputGroup = () => {
   };
 
   //엔터키 눌렀을 시
-  const activeEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
       handleLogin();
     }
   };
@@ -85,7 +84,7 @@ const InputGroup = () => {
           type="password"
           placeholder="비밀번호"
           onChange={handlePasswordChange}
-          onKeyDown={e => activeEnter(e)}
+          onKeyPress={handleKeyPress}
         />
         <Styled.ErrorText>{errorText}</Styled.ErrorText>
         <FormButton

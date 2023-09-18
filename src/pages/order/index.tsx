@@ -46,7 +46,6 @@ const OrderPage: NextPageWithLayout = () => {
 
   // 결제하기 버튼 클릭 시
   const onSubmit = async (deliveryInfo: DeliveryInfo) => {
-    console.log('deliveryInfo', deliveryInfo);
     if (deliveryInfo.payMethod === undefined) {
       alert('결제 방법을 선택해주세요');
       return;
