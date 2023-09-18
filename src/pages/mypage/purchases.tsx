@@ -13,7 +13,7 @@ const index = () => {
   const [endDate, setEndDate] = useState('');
   const [orderStatus, setOrderStatus] = useState('ALL');
   const [purchaseList, setPurchaseList] = useState<OrderListProps[]>([]);
-
+  console.log('startDate');
   // 구매목록 조회
   const handleSearchList = async () => {
     try {

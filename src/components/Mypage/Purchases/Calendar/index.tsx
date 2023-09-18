@@ -20,8 +20,6 @@ const Calendar = ({
 
     setStartDate(useFormatDate(start));
     setEndDate(useFormatDate(end));
-
-    handleSearchList();
   };
 
   return (
