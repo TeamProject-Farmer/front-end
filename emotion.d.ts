@@ -8,5 +8,8 @@ declare module '@emotion/react' {
     size: {
       [key: string]: string;
     };
+    adminColors: {
+      [key: string]: string;
+    };
   }
 }

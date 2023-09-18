@@ -23,6 +23,9 @@ const theme: Theme = {
     shopDetailWrapper: '1330px',
     shopDetailMinWidth: '1300px',
   },
+  adminColors: {
+    black: '#1A1C1E',
+  }
 };
 
 export default theme;
