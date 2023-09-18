@@ -1,15 +1,19 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
-import { ISortOption } from 'src/types/search/types';
+import { SortOption } from 'src/types/search/types';
 
-const SearchUtils = ({ sortingOptions, handleSort }) => {
+const SearchUtils = ({ sortingOptions, sortOption, handleSort }) => {
   return (
     <Styled.Wrapper>
-      {sortingOptions?.map((option: ISortOption) => (
-        <div onClick={() => handleSort(option.param)} key={option.param}>
+      {sortingOptions?.map((option: SortOption) => (
+        <Styled.Option
+          onClick={() => handleSort(option.param)}
+          clicked={sortOption === option.param}
+          key={option.param}
+        >
           {option.title}
-        </div>
+        </Styled.Option>
       ))}
     </Styled.Wrapper>
   );
@@ -19,7 +23,8 @@ export default SearchUtils;
 
 const Styled = {
   Wrapper: styled.div`
-    width: 1920px;
+    width: 100vw;
+    max-width: 100%;
     height: 59px;
     border-top: 2px solid ${theme.colors.green2};
     border-bottom: 2px solid ${theme.colors.green2};
@@ -28,5 +33,10 @@ const Styled = {
     justify-content: flex-start;
     align-items: center;
     gap: 111px;
+    cursor: pointer;
+  `,
+  Option: styled.p<{ clicked: boolean }>`
+    min-width: 75px;
+    color: ${({ clicked }) => (clicked ? theme.colors.green2 : '#000 ')};
   `,
 };

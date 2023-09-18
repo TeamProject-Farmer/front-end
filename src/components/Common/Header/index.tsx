@@ -1,31 +1,64 @@
+import { useState } from 'react';
 import Styled from './styles';
-import Icon from '../Icon';
 import Image from 'next/image';
-import FirstBuyEvent from './FirstBuyEvent';
+import Icon from '../Icon';
+import EventBanner from './EventBanner';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
+import { useDispatch } from 'react-redux';
+import { clearUser } from 'store/reducers/userSlice';
+import Menu from '../Menu';
+import { getCookie, removeCookie } from 'src/utils/cookie';
+import { useRouter } from 'next/router';
+import { setToken } from 'store/reducers/tokenSlice';
 
 const Header = () => {
-  const isLoggedIn = useSelector((state: RootState) => state.user.email !== '');
+  const [showMenu, setShowMenu] = useState<boolean>(false);
+  const refreshToken = getCookie('refreshToken');
+  const isLogin = useSelector((state: RootState) => state.user.email);
+
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const handleLogout = () => {
+    dispatch(clearUser());
+    setToken('');
+    // document.cookie = 'refreshToken=; expires=0; path=/;';
+    removeCookie('refreshToken');
+    router.push('/');
+  };
   return (
     <Styled.Wrapper>
-      <FirstBuyEvent />
+      {showMenu && <Menu setShowMenu={setShowMenu} />}
+      <EventBanner />
       <Styled.Header>
-        <Icon name="menu" width={32} height={32} />
+        <Styled.Menu onClick={() => setShowMenu(true)}>
+          <Icon name="menu" width={32} height={32} />
+        </Styled.Menu>
         <Link href="/">
-          <Image
-            alt="headerLogo"
-            src="/assets/images/home/headerLogo.png"
-            width={150}
-            height={33.6}
-          />
+          <Styled.Logo>
+            <Image
+              src="/assets/images/home/headerLogo.png"
+              alt="headerLogo"
+              width={150}
+              height={33}
+            />
+          </Styled.Logo>
         </Link>
-
         <Styled.Utils>
-          {isLoggedIn && <Icon name="logout" width={36} height={32} />}
+          {isLogin && refreshToken && (
+            <Link href="/">
+              <Icon
+                onClick={handleLogout}
+                name="logout"
+                width={36}
+                height={32}
+              />
+            </Link>
+          )}
           <li>
-            <Link href={isLoggedIn ? '/mypage' : '/login'}>
+            <Link href={isLogin && refreshToken ? '/mypage' : '/login'}>
               <Icon name="myPage" width={32} height={32} />
             </Link>
           </li>
@@ -35,7 +68,7 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <Link href="/mypage/cart">
+            <Link href={isLogin && refreshToken ? '/mypage/cart' : '/login'}>
               <Icon name="cart" width={33} height={30} />
             </Link>
           </li>

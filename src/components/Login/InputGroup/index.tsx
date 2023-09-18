@@ -3,10 +3,12 @@ import Styled from '../styles';
 import FormButton from '@components/Register/FormButton';
 import { ErrorText } from 'src/types/login/types';
 import theme from '@styles/theme';
-import { getLogin } from 'src/apis/login/login';
+import { postLogin } from 'src/apis/login/login';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { setUser } from 'store/reducers/userSlice';
+import { setCookie } from 'src/utils/cookie';
+import { setToken } from 'src/utils/token/token';
 
 const InputGroup = () => {
   const router = useRouter();
@@ -28,10 +30,21 @@ const InputGroup = () => {
   // 로그인 성공시 API
   const handleLoginSuccess = async () => {
     try {
-      const res = await getLogin({ email, password });
-      console.log(res.data);
+      const res = await postLogin({ email, password });
       const userData = res.data;
-      dispatch(setUser(userData));
+      const userInfo = {
+        socialId: userData.socialId,
+        email: userData.email,
+        nickname: userData.nickname,
+        point: userData.point,
+        grade: userData.grade,
+        role: userData.role,
+        cumulativeAmount: userData.cumulativeAmount,
+        memberCoupon: userData.memberCoupon,
+      };
+      dispatch(setUser(userInfo));
+      setToken(userData.accessToken);
+      setCookie('refreshToken', userData.refreshToken);
       router.push('/');
     } catch (err) {
       setErrorText(err.response.data);
@@ -53,6 +66,12 @@ const InputGroup = () => {
     }
   };
 
+  //엔터키 눌렀을 시
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleLogin();
+    }
+  };
   return (
     <>
       <Styled.InputWrapper>
@@ -65,6 +84,7 @@ const InputGroup = () => {
           type="password"
           placeholder="비밀번호"
           onChange={handlePasswordChange}
+          onKeyPress={handleKeyPress}
         />
         <Styled.ErrorText>{errorText}</Styled.ErrorText>
         <FormButton

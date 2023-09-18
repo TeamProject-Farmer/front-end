@@ -1,65 +1,72 @@
 import React from 'react';
 import { Styled } from '../styles';
-import theme from '@styles/theme';
-import CartButtonComponent from './CartButtonComponent';
-import Plus from '@assets/images/mypage/cartPlus.svg';
-import Equals from '@assets/images/mypage/cartEquals.svg';
+import { CartListProps } from 'src/types/mypage/types';
+import { useSelector } from 'react-redux';
+import { clearCartIndex, setChecked } from 'store/reducers/cartSlice';
+import { useQueryClient } from '@tanstack/react-query';
+import { useDispatch } from 'react-redux';
+import { RootState } from 'store';
+import { getRemoveCartList } from 'src/apis/mypage/cart';
+import { setSelectedCart } from 'store/reducers/selectedCartSlice';
+import CartOrderBox from './CartOrderBox';
+import CartButtonBox from './CartButtonBox';
+import { useRouter } from 'next/router';
+const cartSelector = (state: RootState) => state.cartIndex;
 
-const OrderCartList = () => {
+const OrderCartList = ({
+  cartListArray,
+}: {
+  cartListArray: CartListProps[];
+}) => {
+  const queryClient = useQueryClient();
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const selector = useSelector(cartSelector);
+
+  // 장바구니 삭제 기능
+  const handleRemoveCartList = async () => {
+    await getRemoveCartList(selector.idArray);
+    await queryClient.invalidateQueries(['cartList']);
+    dispatch(clearCartIndex());
+    dispatch(setChecked(false));
+  };
+
+  // 장버구니에서 선택된 상품들을 저장
+  const getSelectedCartItems = () => {
+    if (!selector.idArray) {
+      return [];
+    }
+
+    return cartListArray?.filter(item =>
+      selector.idArray.includes(item.cartId),
+    );
+  };
+
+  // 선택된 상품들을 store 저장 후 주문 페이지로 route
+  const handlePlaceOrder = (selectedItems: CartListProps[] | undefined) => {
+    if (selectedItems && selectedItems.length === 0) {
+      alert('상품을 선택해주세요');
+      return;
+    }
+
+    selectedItems
+      ? dispatch(setSelectedCart(selectedItems))
+      : dispatch(setSelectedCart(cartListArray));
+
+    dispatch(clearCartIndex());
+
+    router.push('/order');
+  };
+
   return (
     <Styled.CheckWrapper>
-      <Styled.CartOrderBox>
-        <Styled.OrderText>
-          총 <span>2</span>개의 상품금액
-        </Styled.OrderText>
-        <Styled.OrderText>
-          <span>25,800</span>원
-        </Styled.OrderText>
-        <Plus />
-        <Styled.OrderText>
-          배송비 <span>0</span>원
-        </Styled.OrderText>
-        <Equals />
-        <Styled.OrderText>합계</Styled.OrderText>
-        <Styled.OrderText>
-          <span>25,800</span>원
-        </Styled.OrderText>
-      </Styled.CartOrderBox>
+      <CartOrderBox cartListArray={getSelectedCartItems()} />
 
-      <Styled.ButtonWrapper>
-        <div>
-          <CartButtonComponent
-            backgroundColor={theme.colors.lightGray}
-            padding="0.7"
-            width="125"
-            size="14"
-            color={theme.colors.black}
-            weight="300"
-            label="선택 상품 삭제"
-          />
-        </div>
-
-        <div>
-          <CartButtonComponent
-            backgroundColor={theme.colors.cartButtonGray}
-            padding="1"
-            width="170"
-            size="15"
-            color={theme.colors.black}
-            weight="700"
-            label="선택 상품 주문"
-          />
-          <CartButtonComponent
-            backgroundColor={theme.colors.green3}
-            padding="1"
-            width="170"
-            size="15"
-            color={theme.colors.white}
-            weight="700"
-            label="전체 상품 주문"
-          />
-        </div>
-      </Styled.ButtonWrapper>
+      <CartButtonBox
+        getSelectedCartItems={getSelectedCartItems}
+        handlePlaceOrder={handlePlaceOrder}
+        handleRemoveCartList={handleRemoveCartList}
+      />
     </Styled.CheckWrapper>
   );
 };

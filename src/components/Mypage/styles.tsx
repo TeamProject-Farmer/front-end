@@ -1,13 +1,15 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import More from '@assets/images/mypage/more.svg';
-import Button from '@components/Home/Common/Button';
+import OptionButton from '@assets/images/mypage/option.svg';
 
 export const Styled = {
   Container: styled.div`
-    width: 100%;
+    /* width: 1920px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   `,
-
   SplitLine: styled.div`
     margin-top: 15px;
     border-bottom: 2px solid ${theme.colors.green1};
@@ -16,8 +18,10 @@ export const Styled = {
 
   // profile
   BoxWrapper: styled.div<{ margin?: string }>`
+    width: 1200px;
     margin-left: 12.5rem;
     margin-right: 12.5rem;
+    margin-bottom: 2rem;
     justify-content: center;
     margin-top: 25px;
     margin-bottom: ${props => props.margin}rem;
@@ -26,6 +30,10 @@ export const Styled = {
     height: 340px;
     border-radius: 20px;
     border: 1px solid black;
+  `,
+  HeaderFlexDiv: styled.div`
+    display: flex;
+    justify-content: space-between;
   `,
   HeaderDiv: styled.div`
     display: flex;
@@ -63,6 +71,7 @@ export const Styled = {
     padding-right: 9rem;
   `,
   InfoWrapper: styled.div`
+    flex-shrink: 1;
     margin-left: 3.5rem;
   `,
   NameText: styled.h1`
@@ -109,6 +118,7 @@ export const Styled = {
   `,
   FlexDiv: styled.div`
     display: flex;
+    cursor: pointer;
   `,
 
   // 문구 배너
@@ -176,38 +186,68 @@ export const Styled = {
     margin-bottom: 1.5rem;
   `,
   InfoText: styled.h1`
+    width: 640px;
+    cursor: pointer;
     font-size: 16px;
     font-weight: 500;
     color: ${theme.colors.mypageGray};
   `,
   CheckWrapper: styled.div`
-    margin-left: 12.5rem;
-    margin-right: 12.5rem;
+    /* margin-left: 12.5rem;
+    margin-right: 12.5rem; */
+  `,
+  NoneListWrapper: styled.div`
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    display: flex;
+    gap: 2rem;
+    height: 35rem;
   `,
   Checkbox: styled.div`
+    width: 1195px;
+    padding: 0 114px;
     display: flex;
     height: 6rem;
     border-radius: 12px;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     background-color: #f4f4f4;
     align-items: center;
     margin-top: 0.9rem;
   `,
-  SearchInput: styled.input`
-    background-color: ${theme.colors.white};
-    padding: 0 40px;
-    height: 2.3rem;
+  CheckboxItem: styled.div`
+    flex-shrink: 0;
+    width: 40px;
+    cursor: pointer;
     font-size: 16px;
     font-weight: 500;
-    color: ${theme.colors.black};
+    color: ${theme.colors.mypageGray};
+  `,
+  SearchInput: styled.select`
+    background-color: ${theme.colors.white};
+    cursor: pointer;
+    padding: 0 60px;
+    height: 2.3rem;
+    font-size: 16px;
+    font-weight: 400;
+    color: ${theme.colors.mypageGray};
+    text-align: center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  `,
+  OPtionIcon: styled(OptionButton)`
+    margin-left: -40px;
+    align-self: center;
+    cursor: pointer;
+    pointer-events: none;
   `,
   IconWrapper: styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
   `,
-
   TitleText: styled.h1`
     font-size: 20px;
     font-weight: 700;
@@ -215,10 +255,24 @@ export const Styled = {
     margin-top: 2.5rem;
     margin-bottom: 1rem;
   `,
+  NoneText: styled.h1`
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    color: ${theme.colors.mypageGray};
+    /* margin-top: 2.5rem;
+    margin-bottom: 2.5rem; */
+    height: 500px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  `,
   ListInfoText: styled.h1<{ size?: string; color?: string }>`
     font-size: ${props => props.size}px;
-    font-weight: 500;
+    font-weight: 400;
     color: ${props => props.color};
+    text-align: center;
   `,
   ListSpan: styled.span`
     font-size: 12px;
@@ -244,6 +298,9 @@ export const Styled = {
     padding-top: 1rem;
     padding-bottom: 1rem;
   `,
+  RowWrapper: styled.div`
+    width: 1194px;
+  `,
   CartRow: styled.div`
     display: grid;
     grid-template-columns: 0.5fr 2fr 2fr 1fr 1fr 1.5fr;
@@ -253,6 +310,15 @@ export const Styled = {
     padding-bottom: 1.5rem;
     /* margin-bottom: 2rem; */
     border-bottom: 1px solid ${theme.colors.borderGray};
+  `,
+  CartListRow: styled.div`
+    width: 100px;
+    height: 100px;
+    background-color: '#D9D9D9';
+  `,
+  CartCheckBox: styled.input`
+    width: 16px;
+    height: 16px;
   `,
   FlexRowCenter: styled.div`
     display: grid;
@@ -350,6 +416,16 @@ export const Styled = {
     height: 35px;
     padding: 0 15px;
     margin-top: 1rem;
+    margin-right: 10px;
+  `,
+  ReviewButton: styled.button`
+    background-color: ${theme.colors.pointGreen};
+    color: ${theme.colors.white};
+    font-size: 17px;
+    font-weight: 300;
+    height: 35px;
+    padding: 0 15px;
+    margin-top: 1rem;
   `,
   // MyPlants
   MyPlantsButton: styled.button<{ size?: string }>`
@@ -365,11 +441,11 @@ export const Styled = {
     height: ${props => props.size}px;
     border-radius: 20px;
     border: 1px solid black;
-    margin-bottom: 8rem;
+    padding: 2.5rem 8rem;
   `,
   PlantCard: styled.div`
-    margin-left: 2.5rem;
-    margin-right: 2.5rem;
+    /* margin-left: 2.5rem;
+    margin-right: 2.5rem; */
     margin-top: 3rem;
     width: 250px;
     height: 370px;
@@ -390,29 +466,47 @@ export const Styled = {
   CardWrapper: styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    gap: 2.5rem;
   `,
 
   // 쿠폰 페이지
-  CouponWrapper: styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-left: 2.5rem;
-    margin-right: 2.5rem;
-    margin-top: 2rem;
-  `,
   Coupon: styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    border-bottom: 1px solid ${theme.colors.gray};
+    margin-left: 2.5rem;
   `,
   CouponText: styled.h1`
     font-size: 16px;
     font-weight: 400;
     color: ${theme.colors.black};
-    margin-top: 0.8rem;
+  `,
+  CouponBox: styled.div`
+    border-radius: 20px;
+    margin-bottom: 8rem;
+  `,
+  CouponHeader: styled.div`
+    display: flex;
+    margin-top: 2.5rem;
+    margin-left: 2.5rem;
+    justify-content: space-between;
+    background-color: ${theme.colors.green3};
+    padding: 1.5rem;
+  `,
+  HeaderLabel: styled.h1`
+    font-size: 15px;
+    margin-right: 6.3rem;
+    margin-left: 7.3rem;
+    color: ${theme.colors.white};
+    font-weight: 600;
+  `,
+  CouponTextWrapper: styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 4.5rem;
+    margin-right: 4.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
   `,
 
   // 프로필 수정
@@ -458,5 +552,26 @@ export const Styled = {
     font-weight: 500;
     color: #fd6666;
     margin-left: 1rem;
+  `,
+
+  // calendar
+  Box: styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: ${theme.colors.white};
+  `,
+
+  //새로 추가된 부분
+  EmptyCart: styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 150px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #606367;
+    padding-top: 50px;
   `,
 };

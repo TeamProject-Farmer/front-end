@@ -60,18 +60,18 @@ const Styled = {
     background-color: ${theme.colors.green4};
     padding: 27px 60px;
   `,
-  InnerPaddingWrapper: styled.div<{ field: string }>`
-    padding: ${({ field }) =>
-      field === 'payment'
-        ? '0 60px'
-        : field === 'shippingMsg'
+  InnerPaddingWrapper: styled.div<{ caption: string }>`
+    padding: ${({ caption }) =>
+      caption === 'payment'
+        ? '0 60px 10px'
+        : caption === 'shippingMsg'
         ? '0 95px'
-        : field === 'product'
+        : caption === 'product'
         ? '29px 95px;'
         : '0 25px'};
     display: flex;
     flex-direction: column;
-    gap: ${({ field }) => (field === 'agreement' ? '14px' : '19px')};
+    gap: ${({ caption }) => (caption === 'agreement' ? '14px' : '19px')};
   `,
   PayWrapper: styled.div`
     height: 250px;
@@ -79,7 +79,7 @@ const Styled = {
     justify-content: center;
     align-items: center;
   `,
-  PayNow: styled.div`
+  PayNow: styled.button`
     background-color: ${theme.colors.green1};
     border-radius: 5px;
     color: #fff;

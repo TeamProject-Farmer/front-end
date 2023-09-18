@@ -1,21 +1,29 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import styled from '@emotion/styled';
 import SliderContent from './SliderContent';
 import Indicator from './Indicator';
-
-const sliderContents = [
-  { id: 0, title: 'farmer' },
-  { id: 1, title: 'Event 01' },
-  { id: 2, title: 'Event 02' },
-];
-
+// const banner = [
+//   {
+//     id: 1,
+//     img: 'farmer',
+//     linkUrl: '/shop',
+//     name: 'farmer',
+//   },
+//   {
+//     id: 2,
+//     img: 'event01',
+//     linkUrl: '/shop/event/1',
+//     name: 'Event 01',
+//   },
+//   { id: 3, img: 'event02', linkUrl: '/shop', name: 'Event 02' },
+// ];
 const Slider = ({ banner }) => {
   const [activeIndex, setActiveIndex] = useState(1);
 
   useEffect(() => {
     const sliderInterval = setInterval(() => {
       setActiveIndex(prevIndex =>
-        prevIndex === sliderContents.length - 1 ? 1 : prevIndex + 1,
+        prevIndex === banner.length ? 1 : prevIndex + 1,
       );
     }, 3000);
     return () => clearInterval(sliderInterval);
@@ -39,6 +47,6 @@ const Styled = {
   Wrapper: styled.div`
     position: relative;
     width: 1920px;
-    height: 876px;
+    height: 801px;
   `,
 };

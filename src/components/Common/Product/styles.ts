@@ -9,18 +9,26 @@ const Styled = {
   ImgBox: styled.div`
     position: relative;
     height: 279.515px;
+    width: auto;
     background-color: ${theme.colors.lightGray};
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 30px;
     font-weight: 700;
+    overflow: hidden;
+    .imageStyle {
+      width: auto;
+      height: auto;
+      object-fit: cover;
+    }
   `,
   Content: styled.div`
     display: flex;
     flex-direction: column;
     gap: 4.5px;
     padding: 13.46px 18.92px;
+    min-height: 110px;
   `,
   Title: styled.p`
     font-size: 16px;
@@ -31,7 +39,7 @@ const Styled = {
     gap: 10px;
   `,
   Discount: styled.p`
-    color: #62C655;
+    color: #62c655;
     font-size: 16px;
     font-weight: 700;
   `,

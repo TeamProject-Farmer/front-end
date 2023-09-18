@@ -10,6 +10,9 @@ const Styled = {
     align-items: center;
     border-top: 4px solid ${theme.colors.green1};
   `,
+  ShrinkWrapper: styled.div`
+    flex-shrink: 0;
+  `,
   InfoWrapper: styled.div`
     position: relative;
     margin-left: 118px;

@@ -1,13 +1,16 @@
-export interface ILayoutProps {
-  children: React.ReactNode;
+export interface PostSearch {
+  searchWord: string;
+  memberEmail?: string;
 }
 
-export interface ISortOption {
+export type ParamType = 'new' | 'review' | 'low' | 'high';
+
+export interface SortOption {
   title: string;
-  param: string;
+  param: ParamType;
 }
 
-export interface IKeywordProps {
+export interface KeywordProps {
   title: string;
   wordList: string[];
 }

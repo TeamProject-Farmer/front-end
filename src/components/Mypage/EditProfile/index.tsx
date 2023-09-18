@@ -27,10 +27,8 @@ const Row = () => {
     try {
       const response = await getEdit({ nickname, password });
 
-      const updatedNickname = response.data.nickname;
-      dispatch(setUserNickname(updatedNickname));
+      dispatch(setUserNickname(nickname));
 
-      console.log(response.data);
       router.push('/mypage');
     } catch (err) {
       if (err.response.data.message === '해당 닉네임이 존재합니다.') {
@@ -42,10 +40,10 @@ const Row = () => {
   return (
     <Styled.BoxWrapper>
       <Styled.CardBox size="350">
-        <Styled.HeaderDiv>
+        <Styled.HeaderFlexDiv>
           <Styled.HeaderText />
           <Styled.EditButton onClick={handleEdit}>수정하기</Styled.EditButton>
-        </Styled.HeaderDiv>
+        </Styled.HeaderFlexDiv>
 
         <InputGroup
           nickname={nickname}

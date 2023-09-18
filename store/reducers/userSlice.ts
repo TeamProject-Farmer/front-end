@@ -2,7 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { UserState } from 'src/types/redux/types';
 
 const initialState: UserState = {
-  socialId: '', // 소셜로그인 유저만
+  socialId: '',
+  socialType: '',
   email: '',
   nickname: '',
   point: 0,
@@ -10,21 +11,16 @@ const initialState: UserState = {
   role: '',
   cumulativeAmount: 0,
   memberCoupon: 0,
-  accessToken: '',
-  refreshToken: '',
 };
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<UserState>) => {
-      return {
-        ...state,
-        ...action.payload,
-      };
+    setUser: (state, action) => {
+      return action.payload;
     },
-    setUserNickname: (state, action: PayloadAction<string>) => {
+    setUserNickname: (state, action) => {
       return {
         ...state,
         nickname: action.payload,
@@ -37,4 +33,4 @@ const userSlice = createSlice({
 });
 
 export const { setUser, setUserNickname, clearUser } = userSlice.actions;
-export default userSlice.reducer;
+export default userSlice;

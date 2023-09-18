@@ -4,18 +4,18 @@ import Link from 'next/link';
 
 const Plant = ({ name, src }) => {
   return (
-    <Styled.Wrapper>
-      <Link href={`/shop/${name}`}>
+    <Link href={`/shop/${name}`}>
+      <Styled.Wrapper>
         <Image
-          src={`/assets/images/home/${src}.png`}
+          src={src}
           alt={name}
           width={169}
           height={212}
           style={{ objectFit: 'contain' }}
         />
         <Styled.Name>{name}</Styled.Name>
-      </Link>
-    </Styled.Wrapper>
+      </Styled.Wrapper>
+    </Link>
   );
 };
 
@@ -29,6 +29,7 @@ const Styled = {
     align-items: center;
   `,
   Name: styled.p`
+    text-align: center;
     font-size: 20px;
     margin-top: 15px;
   `,

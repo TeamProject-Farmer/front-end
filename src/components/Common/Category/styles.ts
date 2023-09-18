@@ -8,6 +8,7 @@ const Styled = {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 0 auto;
   `,
   Plants: styled.ul`
     margin-top: 41px;

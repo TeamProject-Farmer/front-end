@@ -1,11 +1,15 @@
 import styled from '@emotion/styled';
-import { ICheckBoxInputProps } from 'src/types/order/types';
-import { css } from '@emotion/react';
+import { CheckBoxInputProps } from 'src/types/order/types';
 
-const CheckBoxInput = ({ label, field, smallBox }: ICheckBoxInputProps) => {
+const CheckBoxInput = ({
+  label,
+  smallBox,
+  checked,
+  onChange,
+}: CheckBoxInputProps) => {
   return (
     <Styled.Wrapper>
-      <input type="checkbox" />
+      <input type="checkbox" checked={checked} onChange={onChange} />
       <Styled.Label smallBox={smallBox}>{label}</Styled.Label>
     </Styled.Wrapper>
   );
@@ -13,15 +17,7 @@ const CheckBoxInput = ({ label, field, smallBox }: ICheckBoxInputProps) => {
 
 export default CheckBoxInput;
 
-const shippingMsgCheckBox = css`
-  appearance: none;
-  width: 22px;
-  height: 22px;
-  border-radius: 3px;
-  background-color: #d9d9d9;
-`;
-
-const Styled = {
+export const Styled = {
   Wrapper: styled.div`
     display: flex;
     gap: 33px;
@@ -49,7 +45,7 @@ const Styled = {
       background-color: #d9d9d9;
     }
   `,
-  Label: styled.label<{ smallBox: boolean }>`
+  Label: styled.label<{ smallBox?: boolean }>`
     font-weight: 500;
     font-size: ${({ smallBox }) => (smallBox ? '14px' : '16px')};
   `,

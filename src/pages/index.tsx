@@ -6,27 +6,34 @@ import BestReview from '@components/Home/BestReview';
 import News from '@components/Home/News';
 import Layout from './layout';
 import { ReactElement } from 'react';
-import type { InferGetServerSidePropsType, GetServerSideProps } from 'next';
+import type { InferGetStaticPropsType, GetStaticProps } from 'next';
 import {
   getMainBanner,
   getBestProduct,
   getBestReview,
   getNews,
 } from 'src/apis/home/home';
-import { getProductCategory } from 'src/apis/common/category';
 import { IndexPageProps } from 'src/types/home/types';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 const IndexPage = ({
   banner,
-  category,
   bestPlant,
   bestReview,
   news,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const router = useRouter();
+  useEffect(() => {
+    if (router.query.alert) {
+      alert(router.query.alert);
+      router.push(router.pathname);
+    }
+  }, [router]);
   return (
     <>
       <Slider banner={banner} />
-      <Category category={category} />
+      <Category />
       <ShopPrev />
       <BestPlant bestPlant={bestPlant} />
       <BestReview bestReview={bestReview} />
@@ -39,15 +46,12 @@ IndexPage.getLayout = (page: ReactElement) => {
   return <Layout>{page}</Layout>;
 };
 
-export const getServerSideProps: GetServerSideProps<
-  IndexPageProps
-> = async () => {
+export const getStaticProps: GetStaticProps<IndexPageProps> = async () => {
   const banner = await getMainBanner();
-  const category = await getProductCategory();
   const bestPlant = await getBestProduct();
   const bestReview = await getBestReview();
   const news = await getNews();
-  return { props: { banner, category, bestPlant, bestReview, news } };
+  return { props: { banner, bestPlant, bestReview, news } };
 };
 
 export default IndexPage;

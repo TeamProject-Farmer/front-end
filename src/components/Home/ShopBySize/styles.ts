@@ -2,11 +2,11 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 
 const Styled = {
-  Wrapper: styled.div`
+  Wrapper: styled.div<{ sizeBg: string }>`
     width: 1920px;
     height: 830px;
     position: relative;
-    background-color: ${theme.colors.lightGray};
+    background-image: url(${props => `assets/images/home/${props.sizeBg}.png`});
   `,
   ContentBox: styled.div`
     width: 460px;

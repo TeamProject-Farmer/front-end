@@ -1,19 +1,29 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
+import { OrderItem } from '../../../types/order/types';
 
 const ProductList = ({ productList }) => {
   return (
     <Styled.Wrapper>
       {productList &&
-        productList.map(ele => {
-          const { id, title, count, price } = ele;
+        productList?.map((ele: OrderItem) => {
+          const {
+            productId,
+            productName,
+            count,
+            productPrice,
+            imgUrl,
+            totalPrice,
+          } = ele;
           return (
-            <Styled.ProductWrapper key={id}>
-              <Styled.ImgBox />
+            <Styled.ProductWrapper key={productId}>
+              <Styled.ImgBox src={imgUrl} alt={productName} />
               <Styled.ContentWrapper>
-                <Styled.FontBlack>상품명 : {title}</Styled.FontBlack>
+                <Styled.FontBlack>상품명 : {productName}</Styled.FontBlack>
                 <Styled.FontGray>수량 : {count}</Styled.FontGray>
-                <Styled.FontBlack>{price}</Styled.FontBlack>
+                <Styled.FontBlack>
+                  {totalPrice ? totalPrice : productPrice}
+                </Styled.FontBlack>
               </Styled.ContentWrapper>
             </Styled.ProductWrapper>
           );
@@ -28,6 +38,7 @@ const Styled = {
   Wrapper: styled.div`
     display: flex;
     flex-direction: column;
+    gap: 20px;
   `,
   ProductWrapper: styled.div`
     width: 500px;
@@ -38,7 +49,7 @@ const Styled = {
     gap: 20px;
     padding: 20px;
   `,
-  ImgBox: styled.div`
+  ImgBox: styled.img`
     width: 90px;
     height: 90px;
     background-color: #d9d9d9;

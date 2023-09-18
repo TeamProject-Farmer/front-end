@@ -4,25 +4,29 @@ import theme from '@styles/theme';
 import Icon from '@components/Common/Icon';
 import Keyword from '../Keyword';
 
-const popularContent: string[] = ['다육이', '선인장', '블루베리'];
-
 const SearchContainer = ({
+  handleKeyPress,
   handleChange,
   handleClick,
-  searchWord,
+  inputValue,
   recentSearchWord,
+  isLoggedin,
 }) => {
   return (
     <Styled.Wrapper>
       <Styled.IconWrapper onClick={handleClick}>
         <Icon name="search" width={26} height={25} />
       </Styled.IconWrapper>
-      <Styled.Input type="search" onChange={handleChange} value={searchWord} />
+      <Styled.Input
+        type="search"
+        onChange={handleChange}
+        onKeyPress={handleKeyPress}
+        value={inputValue}
+      />
       <Styled.KeywordWrapper>
-        {recentSearchWord.length !== 0 && (
+        {isLoggedin && (
           <Keyword title="최근 검색 키워드" wordList={recentSearchWord} />
         )}
-        <Keyword title="실시간 인기 키워드" wordList={popularContent} />
       </Styled.KeywordWrapper>
     </Styled.Wrapper>
   );
@@ -38,6 +42,17 @@ const Styled = {
     flex-direction: column;
     justify-content: flex-start;
     gap: 28px;
+    /* input 초기화 버튼 제거 */
+    input::-ms-clear,
+    input::-ms-reveal {
+      display: none;
+    }
+    input::-webkit-search-decoration,
+    input::-webkit-search-cancel-button,
+    input::-webkit-search-results-button,
+    input::-webkit-search-results-decoration {
+      display: none;
+    }
   `,
   KeywordWrapper: styled.div`
     display: flex;

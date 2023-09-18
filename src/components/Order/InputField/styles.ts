@@ -2,11 +2,11 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 
 const Styled = {
-  InputWrapper: styled.div<{ field: string }>`
+  InputWrapper: styled.div<{ caption: string }>`
     position: relative;
     display: flex;
-    align-items: ${({ field }) =>
-      field === 'coupon' || field === 'point' ? 'flex-start' : 'center'};
+    align-items: ${({ caption }) =>
+      caption === 'coupon' || caption === 'point' ? 'flex-start' : 'center'};
   `,
   Label: styled.label`
     font-size: 16px;
@@ -25,8 +25,13 @@ const Styled = {
     padding-left: 10px;
     border: 1px solid ${theme.colors.borderGray};
   `,
-  Dropdown: styled.select<{ isMobile?: boolean }>`
-    width: ${({ isMobile }) => (isMobile ? '130px' : '750px')};
+  Dropdown: styled.select<{ caption: string }>`
+    width: ${({ caption }) =>
+      caption === 'mobile'
+        ? '130px'
+        : caption === 'shippingMsg'
+        ? '750px'
+        : '660px'};
     height: 40px;
     padding-left: 10px;
     border-radius: 4px;
@@ -42,7 +47,12 @@ const Styled = {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='6' fill='none'%3E%3Cpath fill='%23ABABAB' d='M5.5 6 .737.75h9.526L5.5 6Z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-size: 15px 13px;
-    background-position: ${({ isMobile }) => (isMobile ? '100px' : '720px')}
+    background-position: ${({ caption }) =>
+        caption === 'mobile'
+          ? '100px'
+          : caption === 'shippingMsg'
+          ? '720px'
+          : '630px'}
       center;
   `,
   Option: styled.option`
@@ -66,6 +76,7 @@ const Styled = {
     gap: 17px;
   `,
   Explanation: styled.p`
+    flex-grow: 0;
     padding: 6px 12px;
     font-size: 16px;
     border-radius: 5px;
