@@ -5,7 +5,7 @@ import Icon from '@components/Common/Icon';
 import Keyword from '../Keyword';
 
 const SearchContainer = ({
-  handleKeyUp,
+  handleKeyPress,
   handleChange,
   handleClick,
   inputValue,
@@ -20,7 +20,7 @@ const SearchContainer = ({
       <Styled.Input
         type="search"
         onChange={handleChange}
-        onKeyPress={handleKeyUp}
+        onKeyPress={handleKeyPress}
         value={inputValue}
       />
       <Styled.KeywordWrapper>

@@ -22,30 +22,26 @@ const SearchPage: NextPageWithLayout = () => {
   const [searchedWord, setSearchedWord] = useState<string>('');
   const [searchResult, setSearchResult] = useState<ProductProps[]>();
   const [sortOption, setSortOption] = useState<string>('');
+
   const socialType = useSelector((state: RootState) => state.user.socialType);
   const email = useSelector((state: RootState) => state.user.email);
   const memberEmail = socialType ? `${email}[${socialType}]` : email;
 
-  // 최근 검색 기록
   const { data: recentSearchWord } = useQuery({
     queryKey: [email, searchedWord],
     queryFn: () => getRecentSearch(),
     enabled: email ? true : false,
   });
 
-  // 검색 input value값 관리
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>
     setInputValue(event.target.value);
 
-  // 검색 input에서 엔터 클릭시 onClick
-  const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.code === 'Enter') {
-      console.log('enter');
       handleSearchResult();
     }
   };
 
-  //검색 버튼 클릭 시
   const handleSearchResult = async () => {
     const response = await postSearch(inputValue, memberEmail);
     setSearchResult(response);
@@ -53,7 +49,6 @@ const SearchPage: NextPageWithLayout = () => {
     setSortOption('new');
   };
 
-  //검색 결과 정렬
   const handleSort = async (sortSearchCond: string) => {
     const response = await postSortSearch(
       inputValue,
@@ -67,7 +62,7 @@ const SearchPage: NextPageWithLayout = () => {
   return (
     <>
       <SearchContainer
-        handleKeyUp={handleKeyUp}
+        handleKeyPress={handleKeyPress}
         handleChange={handleChange}
         handleClick={handleSearchResult}
         inputValue={inputValue}
