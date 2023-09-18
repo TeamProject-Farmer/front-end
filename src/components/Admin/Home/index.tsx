@@ -7,14 +7,13 @@ import Board from './Board';
 const Home = () => {
   return (
     <Styled.Wrapper>
-      <Title title='오늘의 할 일'/>
+      <Title title="오늘의 할 일" />
       <Todo />
-      <Title title='통계'/>
+      <Title title="통계" />
       <Analytics />
-      <Title title='게시판'/>
+      <Title title="게시판" />
       <Board />
     </Styled.Wrapper>
-    
   );
 };
 
@@ -24,10 +23,8 @@ const Styled = {
     height: fit-content;
     display: flex;
     flex-direction: column;
-    padding-top: 8px;
-    padding-bottom: 20px;
+    padding: 8px 0 20px 32px;
     cursor: pointer;
   `,
-
 };
 export default Home;

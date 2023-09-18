@@ -1,24 +1,15 @@
-import { useRouter } from 'next/router';
-import styled from '@emotion/styled';
-import SideBar from '@components/Admin/SideBar';
-import AdminLayout from '@components/Admin/AdminLayout';
+import { ReactElement } from 'react';
+import type { NextPageWithLayout } from "@pages/_app";
+import AdminLayout from '@pages/adminlayout';
+import Home from '@components/Admin/Home';
 
-const adminPage = () => {
-  return (
-    <Wrapper>
-      <SideBar />
-      <AdminLayout page='Home' />
-    </Wrapper>
-  );
+const AdminPage: NextPageWithLayout = () => {
+  return(<Home />)
 };
 
-const Wrapper = styled.div`
-  display: flex;
-  width: 100vw;
-  max-width: 100%;
-  height: 100vh;
-  max-height: 100%;
-  background-color: #f7f7f7;
-`;
+AdminPage.getLayout = function getLayout(page: ReactElement) {
+  return <AdminLayout>{page}</AdminLayout>;
+};
 
-export default adminPage;
+export default AdminPage;
+
