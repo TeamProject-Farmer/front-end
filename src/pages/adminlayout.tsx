@@ -46,6 +46,7 @@ export default AdminLayout;
 const Styled = {
   Wrapper: styled.div`
     display: flex;
+    background-color: #F7F7F7;
   `,
   MainWrapper: styled.div`
     display: flex;
