@@ -10,8 +10,8 @@ export const getPurchase = async () => {
 // 마이페이지 구매목록 조회
 export const getPurchaseList = async (params: PurchaseListParams) => {
   const formData = new FormData();
-  formData.append('startDate', params.endDate);
-  formData.append('endDate', params.startDate);
+  formData.append('startDate', params.startDate);
+  formData.append('endDate', params.endDate);
   formData.append('orderStatus', params.orderStatus);
 
   const response = await request.post(
