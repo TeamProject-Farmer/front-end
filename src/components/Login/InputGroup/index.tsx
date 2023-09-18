@@ -9,7 +9,6 @@ import { useDispatch } from 'react-redux';
 import { setUser } from 'store/reducers/userSlice';
 import { setCookie } from 'src/utils/cookie';
 import { setToken } from 'src/utils/token/token';
-import activeEnter from 'src/utils/common/activeEnter';
 
 const InputGroup = () => {
   const router = useRouter();
