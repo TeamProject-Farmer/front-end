@@ -26,10 +26,8 @@ const OptionBox = (props: OptionBoxProps) => {
   useEffect(() => {
     if (optionList) {
       if (optionList.length <= 0) {
-        console.log(optionList.length);
         setOptions([{ id: 0, optionName: '단일 옵션입니다.', optionPrice: 0 }]);
       } else {
-        console.log(optionList.length);
         setOptions(optionList);
       }
     }

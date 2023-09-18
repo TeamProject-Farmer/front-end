@@ -6,7 +6,6 @@ import { setSelectedOrder } from 'store/reducers/orderSlice';
 import handlePrice from 'src/utils/shop/handlePrice';
 import { getCookie } from 'src/utils/cookie';
 
-
 const useOptionBox = (props: OptionBoxFuncProps) => {
   const {
     productId,
@@ -15,20 +14,20 @@ const useOptionBox = (props: OptionBoxFuncProps) => {
     setSelectList,
     selectPrice,
     setSelectPrice,
-    orderData
+    orderData,
   } = props;
-  
+
   const router = useRouter();
   const dispatch = useDispatch();
   const token = getCookie('refreshToken');
-  console.log('token')
-  console.log(token)
+  console.log('token');
+  console.log(token);
 
   const handleResultPrice = () => {
     if (selectList.length > 0) return handlePrice(selectPrice) + '원';
     else return '0 원';
   };
-  
+
   const handleSelectList = (item: selectOptionProps) => {
     setSelectList([
       ...selectList.filter(i => i.id != item.id),
@@ -49,7 +48,7 @@ const useOptionBox = (props: OptionBoxFuncProps) => {
   const routeToLogin = () => {
     alert('로그인 해주세요.');
     router.push('/login');
-  }
+  };
 
   //장바구니 추가
   const handleCartData = async () => {
@@ -62,12 +61,16 @@ const useOptionBox = (props: OptionBoxFuncProps) => {
         alert('옵션을 선택하지 않았습니다. 옵션을 선택해주세요.');
       } else {
         //로그인 되어있고, 옵션이 선택된 경우
-        let optionId = optionList[0].id;
-        if (optionList[0].id === 0) optionId = null;
+        let optionId: string = '';
         let count = 1;
+        if (optionList.length == 0) optionId = null;
+        else optionId = optionList[0].id.toString();
+        console.log('optionId')
+        console.log(optionId)
+
         const response = await postCart({
           productId: productId.toString(),
-          optionId: optionId.toString(),
+          optionId: optionId,
           count: count.toString(),
         });
         handleSelectList(optionList[0]);
@@ -109,7 +112,7 @@ const useOptionBox = (props: OptionBoxFuncProps) => {
     }
   };
 
-  return {handleResultPrice, handleSelectList, handleCartData, handleOrder};
-}
+  return { handleResultPrice, handleSelectList, handleCartData, handleOrder };
+};
 
 export default useOptionBox;
