@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { AnalysticsTab } from '../../../utils/admin/ArrayItem';
+import { AnalysticsTab } from '../../../../utils/admin/ArrayItem';
 
 const Analytics = () => {
   return (

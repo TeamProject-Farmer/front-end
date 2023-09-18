@@ -54,5 +54,7 @@ const Styled = {
     height: 100%;
     margin-left: 240px;
     margin-top: 80px;
+    padding-left: 32px;
+    padding-top: 24px;
   `,
 };

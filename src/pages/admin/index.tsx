@@ -1,24 +1,27 @@
-import { useRouter } from 'next/router';
-import styled from '@emotion/styled';
-import SideBar from '@components/Admin/SideBar';
-import AdminLayout from '@components/Admin/AdminLayout';
+import { ReactElement } from 'react';
+import type { NextPageWithLayout } from '@pages/_app';
+import AdminLayout from '@pages/adminlayout';
+import Analytics from '@components/Admin/Home/Analytics';
+import Board from '@components/Admin/Home/Board';
+import Todo from '@components/Admin/Home/Todo';
+import Title from '@components/Home/Common/Title';
+import { HomeStyled as Styled } from '@components/Admin/styles';
 
-const adminPage = () => {
+const AdminPage: NextPageWithLayout = () => {
   return (
-    <Wrapper>
-      <SideBar />
-      <AdminLayout page='Home' />
-    </Wrapper>
+    <Styled.Wrapper>
+      <Title title="오늘의 할 일" />
+      <Todo />
+      <Title title="통계" />
+      <Analytics />
+      <Title title="게시판" />
+      <Board />
+    </Styled.Wrapper>
   );
 };
 
-const Wrapper = styled.div`
-  display: flex;
-  width: 100vw;
-  max-width: 100%;
-  height: 100vh;
-  max-height: 100%;
-  background-color: #f7f7f7;
-`;
+AdminPage.getLayout = function getLayout(page: ReactElement) {
+  return <AdminLayout>{page}</AdminLayout>;
+};
 
-export default adminPage;
+export default AdminPage;
