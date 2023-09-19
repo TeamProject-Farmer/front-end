@@ -9,7 +9,7 @@ const navbarStyles = css`
   align-items: center;
   justify-content: flex-start;
   margin-top: 15px;
-  padding: 0 200px;
+  padding: 0 400px;
 `;
 
 const navbarItemStyles = (isActive: boolean) => css`

@@ -6,37 +6,14 @@ import SearchOption from '../SearchOption';
 import Calendar from '../Calendar';
 
 const ListCheck = ({
-  setPurchaseList,
-}: {
-  setPurchaseList: Dispatch<SetStateAction<[]>>;
+  setStartDate,
+  setEndDate,
+  handleSearchList,
+  selectedDateRange,
+  setSelectedDateRange,
+  orderStatus,
+  setOrderStatus,
 }) => {
-  const [selectedDateRange, setSelectedDateRange] = useState<
-    [Date | null, Date | null]
-  >([null, null]);
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [orderStatus, setOrderStatus] = useState('ALL');
-
-  // 구매목록 조회
-  const handleSearchList = async () => {
-    try {
-      if (startDate < endDate) {
-        alert('정확한 날짜를 입력해주세요.');
-        return; // Alert를 발생시킨 후 함수 실행 중단
-      }
-
-      const res = await getPurchaseList({
-        startDate,
-        endDate,
-        orderStatus,
-      });
-      console.log('구매 목록', res);
-      setPurchaseList(res.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   return (
     <Styled.CheckWrapper>
       <Styled.ListText>구매목록</Styled.ListText>

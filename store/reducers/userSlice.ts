@@ -2,7 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { UserState } from 'src/types/redux/types';
 
 const initialState: UserState = {
-  socialId: '', // 소셜로그인 유저만
+  socialId: '',
+  socialType: '',
   email: '',
   nickname: '',
   point: 0,

@@ -36,8 +36,8 @@ const SearchOption = ({
     }
 
     setSelectedDateRange([start, end]);
-    setStartDate(useFormatDate(end));
-    setEndDate(useFormatDate(start));
+    setStartDate(useFormatDate(start));
+    setEndDate(useFormatDate(end));
   };
 
   return (

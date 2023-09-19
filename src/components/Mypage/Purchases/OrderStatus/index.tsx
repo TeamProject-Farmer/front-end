@@ -7,7 +7,6 @@ const OrderStatus = ({ orderStatus, setOrderStatus }: OrderStatusProps) => {
   // 주문 처리상태 선택
   const handleSelect = (event: ChangeEvent<HTMLSelectElement>) => {
     setOrderStatus(event.target.value);
-    console.log(orderStatus);
   };
 
   return (
