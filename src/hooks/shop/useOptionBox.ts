@@ -20,8 +20,6 @@ const useOptionBox = (props: OptionBoxFuncProps) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const token = getCookie('refreshToken');
-  console.log('token');
-  console.log(token);
 
   const handleResultPrice = () => {
     if (selectList.length > 0) return handlePrice(selectPrice) + '원';
@@ -61,20 +59,21 @@ const useOptionBox = (props: OptionBoxFuncProps) => {
         alert('옵션을 선택하지 않았습니다. 옵션을 선택해주세요.');
       } else {
         //로그인 되어있고, 옵션이 선택된 경우
-        let optionId: string = '';
         let count = 1;
-        if (optionList.length == 0) optionId = null;
-        else optionId = optionList[0].id.toString();
-        console.log('optionId')
-        console.log(optionId)
-
-        const response = await postCart({
-          productId: productId.toString(),
-          optionId: optionId,
-          count: count.toString(),
-        });
-        handleSelectList(optionList[0]);
+        if (optionList.length == 0) {
+          const response = await postCart({
+            productId: productId.toString(),
+            count: count.toString(),
+          });
+        } else {
+          const response = await postCart({
+            productId: productId.toString(),
+            optionId: optionList[0].id.toString(),
+            count: count.toString(),
+          });
+        }
         routeToCart();
+        setSelectList([])
       }
     }
   };

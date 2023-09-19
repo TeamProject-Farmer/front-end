@@ -14,7 +14,7 @@ export interface shopBySizeProps {
 export interface cartProps {
   // 상품 일련번호, 옵션 일련번호, 갯수
   productId: string;
-  optionId: string | null;
+  optionId?: string;
   count: string;
 }
 
