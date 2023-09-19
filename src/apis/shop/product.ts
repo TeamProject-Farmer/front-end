@@ -57,7 +57,7 @@ export const postCart = async (props: cartProps) => {
   const { productId, optionId, count } = props;
   let formData = new FormData();
   formData.append('product', productId);
-  formData.append('option', optionId);
+  if(optionId) formData.append('option', optionId);
   formData.append('count', count);
 
   return await request.post('/member/cart', formData);

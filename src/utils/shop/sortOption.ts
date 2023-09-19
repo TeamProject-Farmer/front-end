@@ -9,8 +9,8 @@ export const productSortOptions: SortOption[] = [
 
 export const detailLinkOptions: SortOption[] = [
   { title: '상품', param: '' },
-  { title: '리뷰 766', param: '' },
-  { title: '상품문의 177', param: '' },
+  { title: '리뷰', param: '' },
+  { title: '상품문의', param: '' },
   { title: '배송/환불', param: '' },
   { title: '비슷한상품', param: '' },
 ];

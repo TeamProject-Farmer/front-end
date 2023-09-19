@@ -43,7 +43,6 @@ const index = () => {
         orderStatus={orderStatus}
         setOrderStatus={setOrderStatus}
       />
-
       <OrderHistory purchaseList={purchaseList} />
     </Layout>
   );
