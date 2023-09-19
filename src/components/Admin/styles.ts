@@ -14,6 +14,28 @@ export const HomeStyled = {
   `,
 };
 
+export const BoardStyled = {
+  WholeWrapper: styled.div`
+    display: flex;
+    flex-direction: column;
+    .wrapper {
+      height: 922px;
+      border-radius: 5px;
+      background: #fff;
+    }
+  `,
+  RowWrapper: styled.div`
+    display: flex;
+  `,
+  LeftWrapper: styled.div`
+    width: 384px;
+  `,
+  RightWrapper: styled.div`
+    margin-left: 16px;
+    width: 1216px;
+  `,
+};
+
 export const BoardManageStyled = {
   WholeWrapper: styled.div`
     display: flex;
