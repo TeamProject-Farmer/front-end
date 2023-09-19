@@ -25,6 +25,7 @@ const theme: Theme = {
   },
   adminColors: {
     black: '#1A1C1E',
+    white: '#ffffff',
   }
 };
 

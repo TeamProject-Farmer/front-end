@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import rightSmallArrow from '@assets/images/admin/rightSmallArrow.svg';
+import searchIcon from '@assets/images/admin/boardSearchIcon.svg';
+import optionArrow from '@assets/images/admin/boardOptionArrow.svg';
 
 export const HomeStyled = {
   Wrapper: styled.div`
@@ -18,10 +20,14 @@ export const BoardStyled = {
   WholeWrapper: styled.div`
     display: flex;
     flex-direction: column;
+    margin-bottom: 14px;
     .wrapper {
       height: 922px;
       border-radius: 5px;
-      background: #fff;
+      background-color: ${theme.adminColors.white};
+      padding: 17px 24px;
+      display: flex;
+      flex-direction: column;
     }
   `,
   RowWrapper: styled.div`
@@ -33,6 +39,93 @@ export const BoardStyled = {
   RightWrapper: styled.div`
     margin-left: 16px;
     width: 1216px;
+  `,
+  SubTitle: styled.div`
+    color: ${theme.adminColors.black};
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 140%; /* 19.6px */
+    letter-spacing: -0.056px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    align-items: center;
+    .subTitleButton {
+      padding: 8px 15px;
+      color: #1a1c1e;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 140%; /* 16.8px */
+      letter-spacing: -0.048px;
+      border-radius: 3px;
+      border: 1px solid #b9b9b9;
+      margin-left: -0.5px;
+    }
+  `,
+  SubTitleRightWrapper: styled.div`
+    display: flex;
+    gap: 8px;
+  `,
+  SearchBar: styled.div`
+    width: 304px;
+    height: 32px;
+    border-radius: 5px;
+    border: 1px solid #b9b9b9;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6.7px;
+  `,
+  SearchInput: styled.input`
+    border: none;
+    outline: none;
+    width: 95%;
+    height: 100%;
+  `,
+  SearchIcon: styled(searchIcon)`
+    width: 18.363px;
+    height: 18.252px;
+  `,
+  SortOption: styled.div`
+    padding: 5px;
+    color: #1a1c1e;
+    ${theme.adminColors.black};
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 140%; /* 16.8px */
+    letter-spacing: -0.048px;
+    display: flex;
+    align-items: center;
+    margin-left: 13px;
+  `,
+  OptionArrow: styled(optionArrow)`
+    width: 6px;
+    height: 4px;
+    margin-left: 4px;
+  `,
+  TabWrapper: styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-left: -8px;
+    .singleTab {
+      width: 352px;
+      height: 48px;
+      color: ${theme.adminColors.black};
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 140%; /* 19.6px */
+      letter-spacing: -0.056px;
+      border: 1px solid #e5e5e5;
+      background-color: ${theme.adminColors.white};
+      padding-left: 17px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .singleTab:hover {
+      background-color: #e5e5e5;
+    }
   `,
 };
 
@@ -46,12 +139,11 @@ export const BoardManageStyled = {
     width: 1616px;
     min-height: 632px;
     border-radius: 5px;
-    background: #fff;
+    background: ${theme.adminColors.white};
   `,
   BackButton: styled.div`
     color: ${theme.adminColors.black};
     font-size: 14px;
-    font-style: normal;
     font-weight: 500;
     line-height: 140%; /* 19.6px */
     letter-spacing: -0.056px;
