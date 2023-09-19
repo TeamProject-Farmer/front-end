@@ -80,7 +80,7 @@ const OrderPage: NextPageWithLayout = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <Styled.Wrapper>
         {/* 배송지 */}
-        <Delivery control={control} setValue={setValue} trigger={trigger} />
+        <Delivery control={control} setValue={setValue} />
         {/* 주문상품 */}
         <InputGroup title="주문상품">
           <Styled.InnerPaddingWrapper caption="product">
