@@ -1,6 +1,8 @@
 import { ReactElement } from 'react';
 import type { NextPageWithLayout } from '@pages/_app';
 import AdminLayout from '@pages/adminlayout';
+import DetailModal from '@components/Admin/DetailModal';
+import Title from '@components/Admin/Common/Title';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 import OrderList from '@components/Admin/OrderList';
@@ -8,7 +10,8 @@ import OrderList from '@components/Admin/OrderList';
 const CartPage: NextPageWithLayout = () => {
   return (
     <Styled.Wrapper>
-      <Styled.Title>전체 조회</Styled.Title>
+      <DetailModal />
+      <Title title="전체 조회" />
       <Styled.OrderWrapper>
         <Styled.OrderStatus>
           <Styled.StatusWrapper>
