@@ -8,6 +8,7 @@ export const setCookie = (name: string, value: string) => {
   return cookies.set(name, value, {
     path: '/',
     expires: oneWeekFromNow,
+    httpOnly: true,
   });
 };
 
@@ -16,5 +17,5 @@ export const getCookie = (name: string) => {
 };
 
 export const removeCookie = (name: string) => {
-  return cookies.remove(name, { path: '/' });
+  return cookies.remove(name, { path: '/', httpOnly: true });
 };
