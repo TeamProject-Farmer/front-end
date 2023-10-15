@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import theme from '@styles/theme';
 import { Banner } from 'src/types/home/types';
 
 const Indicator = ({ activeIndex, sliderContents, onclick }) => {
