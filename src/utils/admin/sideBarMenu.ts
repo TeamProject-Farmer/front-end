@@ -1,6 +1,6 @@
 export const sideBarMenuItems = [
   { href: '/admin', imageName: 'home', menuName: '홈' },
-  { href: '/admin/cart', imageName: 'cart', menuName: '주문' },
+  { href: '/admin/order', imageName: 'order', menuName: '주문' },
   { href: '/admin/product', imageName: 'product', menuName: '상품' },
   { href: '/admin/member', imageName: 'member', menuName: '회원' },
   { href: '/admin/board', imageName: 'board', menuName: '게시판' },
@@ -9,16 +9,16 @@ export const sideBarMenuItems = [
 
 export const MenuRoute = (route: string) => {
   const splitRoute = route.split('/', 3);
-  return splitRoute[2]
+  return splitRoute[2];
 };
 
 export const SubMenus = (menuName: string) => {
   switch (menuName) {
-    case 'cart':
+    case 'order':
       return [
-        { id: 'totalSearch', value: '전체조회', pathName: '/admin/cart' },
-        { id: 'order', value: '주문관리', pathName: '' },
-        { id: 'cancel', value: '취소/반품/교환', pathName: '' },
+        { id: 'totalSearch', value: '전체조회', pathName: '/admin/order' },
+        // { id: 'order', value: '주문관리', pathName: '/admin/order/management' },
+        // { id: 'cancel', value: '취소/반품/교환', pathName: '/admin/' },
       ];
       break;
     case 'product':
@@ -42,8 +42,16 @@ export const SubMenus = (menuName: string) => {
       break;
     case 'promotion':
       return [
-        { id: 'point', value: '적립금 설정/관리', pathName: '/admin/promotion' },
-        { id: 'coupon', value: '쿠폰 조회/관리', pathName: '/admin/promotion/coupon' },
+        {
+          id: 'point',
+          value: '적립금 설정/관리',
+          pathName: '/admin/promotion',
+        },
+        {
+          id: 'coupon',
+          value: '쿠폰 조회/관리',
+          pathName: '/admin/promotion/coupon',
+        },
       ];
       break;
     default:

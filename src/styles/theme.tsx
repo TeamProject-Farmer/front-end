@@ -16,6 +16,8 @@ const theme: Theme = {
     loginGreen: '#8AC22B',
     borderGray: '#ABABAB',
     cartButtonGray: '#EEEEEE',
+    adminBlack: '#1A1C1E',
+    adminGray: '#B9B9B9',
   },
   size: {
     mainWidth: '1200px',

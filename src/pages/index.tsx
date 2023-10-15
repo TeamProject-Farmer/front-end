@@ -24,12 +24,14 @@ const IndexPage = ({
   news,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
+
   useEffect(() => {
     if (router.query.alert) {
       alert(router.query.alert);
       router.push(router.pathname);
     }
   }, [router]);
+
   return (
     <>
       <Slider banner={banner} />
@@ -51,7 +53,15 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async () => {
   const bestPlant = await getBestProduct();
   const bestReview = await getBestReview();
   const news = await getNews();
-  return { props: { banner, bestPlant, bestReview, news } };
+  return {
+    props: {
+      banner,
+      bestPlant,
+      bestReview,
+      news,
+    },
+    revalidate: 60 * 60 * 24,
+  };
 };
 
 export default IndexPage;

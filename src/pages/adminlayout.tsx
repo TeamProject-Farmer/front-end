@@ -46,9 +46,10 @@ export default AdminLayout;
 const Styled = {
   Wrapper: styled.div`
     display: flex;
-    background-color: #F7F7F7;
+    background-color: #f7f7f7;
   `,
   MainWrapper: styled.div`
+    position: relative;
     display: flex;
     flex-direction: column;
     width: 100%;

@@ -25,8 +25,9 @@ export interface InputFieldProps {
   label?: string;
   caption?: string;
   control?: Control<FieldValues>;
+  haveOrdered?: boolean;
+  orderedData?: OrderedData;
   setValue?: UseFormSetValue<FieldValues>;
-  trigger?: UseFormTrigger<FieldValues>;
   setShowShippingMsgInput?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 

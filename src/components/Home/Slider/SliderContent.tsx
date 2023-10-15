@@ -44,6 +44,7 @@ const SliderContent = ({ sliderContents, activeIndex }) => {
                     src={content.imgUrl}
                     alt="슬라이더 이미지"
                     fill={true}
+                    priority
                   />
                   {content.id === 1 && (
                     <Styled.ShopBtn>&gt; Shop Now</Styled.ShopBtn>
