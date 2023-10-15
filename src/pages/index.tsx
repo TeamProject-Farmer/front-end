@@ -22,11 +22,7 @@ const IndexPage = ({
   bestPlant,
   bestReview,
   news,
-  time,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  function revalidate() {
-    fetch('/api/revalidate');
-  }
   const router = useRouter();
 
   useEffect(() => {
@@ -36,15 +32,8 @@ const IndexPage = ({
     }
   }, [router]);
 
-  const handleClick = () => {
-    console.log('click');
-    revalidate();
-  };
   return (
     <>
-      <div>
-        {time} <button onClick={handleClick}>revalidate</button>
-      </div>
       <Slider banner={banner} />
       <Category />
       <ShopPrev />
@@ -70,9 +59,8 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async () => {
       bestPlant,
       bestReview,
       news,
-      time: new Date().toString(),
     },
-    revalidate: 60,
+    revalidate: 60 * 60 * 24,
   };
 };
 

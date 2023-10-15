@@ -5,7 +5,6 @@ export interface IndexPageProps {
   bestPlant: Plant[];
   bestReview: Review[];
   news: News;
-  time: string;
 }
 
 export interface Banner {
