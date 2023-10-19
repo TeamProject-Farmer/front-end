@@ -8,21 +8,16 @@ import Image from 'next/image';
 const SliderContent = ({ sliderContents, activeIndex }) => {
   const imgVariants = {
     initial: {
-      opacity: 1,
-      transition: {
-        duration: 1,
-      },
+      opacity: 0,
     },
     start: {
       opacity: 1,
-      transition: {
-        duration: 1,
-      },
     },
     end: {
-      opacity: 0,
+      opacity: 0.5,
       transition: {
-        duration: 1,
+        duration: 0.3,
+        ease: 'easeInOut',
       },
     },
   };
@@ -31,26 +26,27 @@ const SliderContent = ({ sliderContents, activeIndex }) => {
     <>
       <AnimatePresence initial={false}>
         {sliderContents &&
-          sliderContents?.map((content: Banner) =>
+          sliderContents?.map((content: Banner, index: number) =>
             activeIndex === content.id ? (
-              <Link key={content.id} href={content.linkUrl}>
-                <Styled.Content
-                  variants={imgVariants}
-                  initial="initial"
-                  animate="start"
-                  exit="end"
-                >
+              <Styled.Content
+                key={content.id}
+                variants={imgVariants}
+                initial="initial"
+                animate="start"
+                exit="end"
+              >
+                <Link href={content.linkUrl}>
                   <Image
                     src={content.imgUrl}
                     alt="슬라이더 이미지"
                     fill={true}
                     priority
                   />
-                  {content.id === 1 && (
-                    <Styled.ShopBtn>&gt; Shop Now</Styled.ShopBtn>
-                  )}
-                </Styled.Content>
-              </Link>
+                </Link>
+                {content.id === 1 && (
+                  <Styled.ShopBtn>&gt; Shop Now</Styled.ShopBtn>
+                )}
+              </Styled.Content>
             ) : null,
           )}
       </AnimatePresence>
@@ -65,8 +61,6 @@ const Styled = {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-size: 100%;
-    background-repeat: no-repeat;
   `,
   ShopBtn: styled.p`
     position: absolute;

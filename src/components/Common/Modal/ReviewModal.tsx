@@ -51,13 +51,19 @@ const ReviewModal = (props: ReviewModalProps) => {
 
   const onSubmit = async () => {
     //orderProductId 부분은 api 수정 중이라 추후 수정 예정
-    const response = await postReview({
-      productId: orderProductId,
-      fiveStarRating: clickedStarIndex.toString(),
-      content: content,
-      reviewImage: file,
-    });
-    modalClose();
+    if(file){
+      const response = await postReview({
+        productId: orderProductId,
+        fiveStarRating: clickedStarIndex.toString(),
+        content: content,
+        reviewImage: file,
+      });
+      modalClose();
+      alert('리뷰가 등록되었습니다.');
+    }else {
+      alert('이미지를 첨부해주세요!')
+    }
+
   };
   return (
     <Styled.Wrapper>

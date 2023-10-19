@@ -31,12 +31,12 @@ const CategoryPage: NextPageWithLayout = () => {
 
   useEffect(() => {
     scrollToTop(1030);
-  }, [categoryId, currentIndex]);
+  }, [currentIndex]);
 
   useEffect(() => {
     scrollToTop(1030);
     setCurrentIndex(0);
-  }, [productOption]);
+  }, [productOption, categoryId]);
 
   if (isLoading) return;
   return (
