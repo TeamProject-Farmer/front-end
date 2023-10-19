@@ -16,7 +16,11 @@ export function middleware(request: NextRequest, event: NextFetchEvent) {
       );
     }
   }
-
+  if (pathname === '/mypage/myplant') {
+    return NextResponse.redirect(
+      new URL('/?alert=준비 중인 서비스입니다.', request.url),
+    );
+  }
   if (!refreshToken && pathname.startsWith('/mypage')) {
     return NextResponse.redirect(
       new URL('/?alert=로그인 후 이용 가능한 서비스입니다.', request.url),
