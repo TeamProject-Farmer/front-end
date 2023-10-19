@@ -4,19 +4,22 @@
 
 <br />
 
-## 프로젝트 소개 📝:
+## 프로젝트 소개 📝
 
 `Farmer`는 식물을 판매하는 온라인 쇼핑몰입니다. 우리는 환경 보호와 건강한 라이프스타일을 지향하며, 소비자들에게 고품질의 친환경 식물을 제공하여 더욱 지속 가능한 소비를 장려하고자 합니다.
 
-## 기술스텍 ⚙️:
+## 기술스텍 ⚙️
+
 [![stackticon](https://firebasestorage.googleapis.com/v0/b/stackticon-81399.appspot.com/o/images%2F1691929014439?alt=media&token=a3949e0a-d136-4dc9-a3a4-36427232b6b8)](https://github.com/msdio/stackticon)
 
-## 시연영상
+## 시연 영상
+
 ### 1. 로그인
+
 ![로그인](https://github.com/TeamProject-Farmer/front-end/assets/115068278/04adc2ff-879f-49bf-bf21-cf7589c21780)
 
-
 ### 2. 세부 페이지 사용 영상
+
 **- 신규가입 쿠폰 다운로드**
 ![쿠폰](https://github.com/TeamProject-Farmer/front-end/assets/115068278/70d62eaf-a062-4a05-8c37-3cb83dd5f596)
 
@@ -39,7 +42,6 @@
 **- 리뷰**
 ![리뷰](https://github.com/TeamProject-Farmer/front-end/assets/115068278/b65b1d97-07a9-4be2-a054-af3d8cf22060)
 
-
 ### 3. 구매관련 영상
-![구매방법](https://github.com/TeamProject-Farmer/front-end/assets/115068278/bb6873ee-2b28-4160-8485-7595a573d7af)
 
+![구매방법](https://github.com/TeamProject-Farmer/front-end/assets/115068278/bb6873ee-2b28-4160-8485-7595a573d7af)
