@@ -11,7 +11,7 @@ const Slider = ({ banner }) => {
       setActiveIndex(prevIndex =>
         prevIndex === banner.length ? 1 : prevIndex + 1,
       );
-    }, 3000);
+    }, 4000);
     return () => clearInterval(sliderInterval);
   }, [activeIndex]);
 

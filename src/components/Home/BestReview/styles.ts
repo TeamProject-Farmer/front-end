@@ -33,7 +33,7 @@ const Styled = {
     margin-top: 51px;
     display: flex;
     align-items: center;
-    animation: ${carousel} 40s linear infinite;
+    animation: ${carousel} 90s linear infinite;
   `,
 };
 

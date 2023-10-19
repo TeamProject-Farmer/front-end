@@ -16,7 +16,7 @@ const SliderContent = ({ sliderContents, activeIndex }) => {
     end: {
       opacity: 0.5,
       transition: {
-        duration: 0.3,
+        duration: 1,
         ease: 'easeInOut',
       },
     },
@@ -40,7 +40,6 @@ const SliderContent = ({ sliderContents, activeIndex }) => {
                     src={content.imgUrl}
                     alt="슬라이더 이미지"
                     fill={true}
-                    priority
                   />
                 </Link>
                 {content.id === 1 && (
