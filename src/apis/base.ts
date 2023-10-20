@@ -78,11 +78,11 @@ request.interceptors.response.use(
     const status = error.response?.status;
     const message = error.response?.data.message;
 
-    const queryClient = useQueryClient();
-
     if (status === 500 && message === '회원이 존재하지 않습니다.') {
       document.cookie = 'refreshToken=; expires=0; path=/;';
       window.location.href = 'https://farmer-shop.vercel.app/login';
+
+      const queryClient = useQueryClient();
       queryClient.clear();
     }
     return Promise.reject(error);

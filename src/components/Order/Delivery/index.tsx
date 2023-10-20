@@ -8,8 +8,6 @@ import InputField from '../InputField';
 import { useQuery } from '@tanstack/react-query';
 import { getOrderAddress } from 'src/apis/order/order';
 
-import userSlice from 'store/reducers/userSlice';
-
 const Delivery = ({ control, setValue }) => {
   const [haveOrdered, setHaveOrdered] = useState<boolean>(false);
   const [showShippingMsgInput, setShowShippingMsgInput] =
@@ -26,8 +24,6 @@ const Delivery = ({ control, setValue }) => {
       setHaveOrdered(true);
     }
   }, [orderedData]);
-
-  console.log(orderedData);
 
   useEffect(() => {
     if (haveOrdered) {

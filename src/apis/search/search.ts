@@ -1,7 +1,7 @@
 import request from '../base';
 import axios from 'axios';
 import { BASE_URL } from '../base';
-import { PostSearch } from 'src/types/search/types';
+import { PostSearch, SearchResponse } from 'src/types/search/types';
 
 export const postSearch = async (searchWord: string, memberEmail?: string) => {
   const requestData: PostSearch = {
@@ -12,7 +12,7 @@ export const postSearch = async (searchWord: string, memberEmail?: string) => {
     requestData.memberEmail = memberEmail;
   }
   const response = await axios.post(`${BASE_URL}/main/search`, requestData);
-  return response.data.content;
+  return response.data.content as SearchResponse[];
 };
 
 // 검색 결과 조건부 정렬
@@ -26,11 +26,11 @@ export const postSortSearch = async (
     sortSearchCond: sortSearchCond,
     memberEmail: memberEmail,
   });
-  return response.data.content;
+  return response.data.content as SearchResponse[];
 };
 
 //최근 검색 항목
 export const getRecentSearch = async () => {
-  const response = await request.get('/member/search/word');
+  const response = await request.get<string[]>('/member/search/word');
   return response.data;
 };
