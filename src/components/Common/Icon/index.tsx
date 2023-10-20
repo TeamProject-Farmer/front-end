@@ -1,4 +1,3 @@
-import React from 'react';
 import { IconProps } from 'src/types/common/types';
 
 const Icon = ({ name, width, height, onClick }: IconProps) => {

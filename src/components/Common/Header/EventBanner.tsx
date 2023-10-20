@@ -1,13 +1,15 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
+
 import Icon from '../Icon';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'store';
 import { setIsBannerClosed } from 'store/reducers/bannerSlice';
+
 import Link from 'next/link';
 
 const EventBanner = () => {
-  const isOpened = useSelector((state: RootState) => state.banner);
   const dispatch = useDispatch();
 
   return (

@@ -5,8 +5,8 @@ import { RequestPayParams, PostOrderData } from 'src/types/order/types';
 import { Coupon, OrderedData, ResultData } from 'src/types/order/types';
 
 // 쿠폰 조회
-export const getCoupon = async (): Promise<Coupon[]> => {
-  const response = await request.get('/member/coupon/use');
+export const getCoupon = async () => {
+  const response = await request.get<Coupon[]>('/member/coupon/use');
   return response.data;
 };
 
@@ -17,15 +17,19 @@ export const postCouponDel = async (memberCouponId: number) => {
   return request.post('/member/coupon/del', formData);
 };
 
+type GetPointResponse = {
+  point: number;
+};
+
 // 적립금 조회
-export const getPoint = async (): Promise<number> => {
-  const response = await request.post('/member/point');
+export const getPoint = async () => {
+  const response = await request.post<GetPointResponse>('/member/point');
   return response.data.point;
 };
 
 // 최근 배송지 이력 확인
-export const getOrderAddress = async (): Promise<OrderedData> => {
-  const response = await request.get('/member/orders/address');
+export const getOrderAddress = async () => {
+  const response = await request.get<OrderedData>('/member/orders/address');
   return response.data;
 };
 
@@ -52,10 +56,8 @@ export const postCartRemove = async (cartId: number[]) => {
 };
 
 // 주문조회
-export const getOrdersComplete = async (
-  orderNumber: string | string[],
-): Promise<ResultData> => {
-  const response = await request.get(
+export const getOrdersComplete = async (orderNumber: string | string[]) => {
+  const response = await request.get<ResultData>(
     `/member/orders/complete?orderNumber=${orderNumber}`,
   );
   return response.data;

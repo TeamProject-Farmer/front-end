@@ -1,20 +1,26 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
+
+import Link from 'next/link';
+
+import Icon from '../Icon';
+
 import Styled from './styles';
+
 import { sizeCategory } from 'src/utils/home/category';
 import { Category } from 'src/types/common/types';
-import Link from 'next/link';
-import Icon from '../Icon';
+
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
+
 const categorySelector = (state: RootState) => state.category;
 
 const Menu = ({ setShowMenu }) => {
   const category = useSelector(categorySelector);
-  // 메뉴 닫기
+
   const handleClose = () => {
     setShowMenu(false);
   };
-  // 스크롤 이벤트 발생시 메뉴 닫기
+
   const handleScroll = () => {
     handleClose();
     window.removeEventListener('scroll', handleScroll);

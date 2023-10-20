@@ -1,32 +1,42 @@
 import { useState } from 'react';
-import Styled from './styles';
-import Image from 'next/image';
-import Icon from '../Icon';
-import EventBanner from './EventBanner';
+
 import Link from 'next/link';
-import { useSelector } from 'react-redux';
-import { RootState } from 'store';
-import { useDispatch } from 'react-redux';
-import { clearUser } from 'store/reducers/userSlice';
-import Menu from '../Menu';
-import { getCookie, removeCookie } from 'src/utils/cookie';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
+
+import Styled from './styles';
+
+import Icon from '../Icon';
+import Menu from '../Menu';
+import EventBanner from './EventBanner';
+
+import { useQueryClient } from '@tanstack/react-query';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from 'store';
+import { clearUser } from 'store/reducers/userSlice';
 import { setToken } from 'store/reducers/tokenSlice';
+
+import { getCookie, removeCookie } from 'src/utils/cookie';
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const refreshToken = getCookie('refreshToken');
-  const isLogin = useSelector((state: RootState) => state.user.email);
+  const isLoggedIn = useSelector((state: RootState) => state.user.email);
 
   const dispatch = useDispatch();
   const router = useRouter();
 
+  const queryClient = useQueryClient();
+
   const handleLogout = () => {
     dispatch(clearUser());
     setToken('');
-    // document.cookie = 'refreshToken=; expires=0; path=/;';
     removeCookie('refreshToken');
+
     router.push('/');
+
+    queryClient.clear();
   };
   return (
     <Styled.Wrapper>
@@ -47,7 +57,7 @@ const Header = () => {
           </Styled.Logo>
         </Link>
         <Styled.Utils>
-          {isLogin && refreshToken && (
+          {isLoggedIn && refreshToken && (
             <Link href="/">
               <Icon
                 onClick={handleLogout}
@@ -58,7 +68,7 @@ const Header = () => {
             </Link>
           )}
           <li>
-            <Link href={isLogin && refreshToken ? '/mypage' : '/login'}>
+            <Link href={isLoggedIn && refreshToken ? '/mypage' : '/login'}>
               <Icon name="myPage" width={32} height={32} />
             </Link>
           </li>
@@ -68,7 +78,7 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <Link href={isLogin && refreshToken ? '/mypage/cart' : '/login'}>
+            <Link href={isLoggedIn && refreshToken ? '/mypage/cart' : '/login'}>
               <Icon name="cart" width={33} height={30} />
             </Link>
           </li>

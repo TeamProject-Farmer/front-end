@@ -14,3 +14,13 @@ export interface KeywordProps {
   title: string;
   wordList: string[];
 }
+
+export interface SearchResponse {
+  averageStarRating: number;
+  discountRate: number;
+  name: string;
+  price: number;
+  productId: number;
+  reviewCount: number;
+  thumbnailImg: string;
+}
