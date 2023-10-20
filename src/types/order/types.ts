@@ -37,11 +37,13 @@ export interface PaymentInputProps {
   control?: Control<FieldValues>;
   couponOptions?: Coupon[];
   usedPoint?: number;
+  typedPoint?: number;
   handleSelectedCoupon?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   handlePoint?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   disabledPointBtn?: boolean;
   disabledCouponBtn?: boolean;
-  getDiscountedPrice?: () => void;
+  handlePointClick?: () => void;
+  setDisabledCouponBtn?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface CheckBoxInputProps {
@@ -81,10 +83,10 @@ export interface OrderItem {
 
 export interface OrderPayload {
   productList: OrderItem[];
-  totalAmount: number;
+  finalPrice: number;
   deliveryInfo: DeliveryInfo;
-  point: number | undefined;
-  couponId?: number;
+  usedPoint?: number;
+  selectedCouponId?: number;
 }
 
 export interface OrderProduct {

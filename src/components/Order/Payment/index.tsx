@@ -1,33 +1,34 @@
+import { useState, useEffect } from 'react';
+
 import Styled from '../styles';
+
 import PaymentInput from '../InputField/PaymentInput';
 import InputGroup from '../InputGroup';
-import useDiscount from 'src/hooks/order/useDiscount';
-import { useEffect } from 'react';
 
 const Payment = ({
+  coupon,
+  usedPoint,
+  typedPoint,
+  selectedCouponId,
+  handlePointChange,
+  handleSelectedCoupon,
+  discountedPrice,
+  finalPrice,
+  handlePointClick,
   totalPrice,
-  getTotalAmount,
-  getUsedPoint,
-  getUsedCoupon,
 }) => {
-  const {
-    coupon,
-    usedPoint,
-    selectedCouponId,
-    handlePointChange,
-    handleSelectedCoupon,
-    disabledPointBtn,
-    disabledCouponBtn,
-    discountedPrice,
-    finalPrice,
-    calculateDiscountedPointPrice,
-  } = useDiscount(totalPrice);
+  const [disabledCouponBtn, setDisabledCouponBtn] = useState(false);
+  const [disabledPointBtn, setDisabledPointBtn] = useState(false);
 
   useEffect(() => {
-    getTotalAmount(finalPrice);
-    getUsedPoint(selectedCouponId === 0 ? usedPoint : 0);
-    getUsedCoupon(selectedCouponId);
-  }, [finalPrice]);
+    setDisabledPointBtn(selectedCouponId === 0 ? false : true);
+    if (selectedCouponId !== 0) {
+      setDisabledCouponBtn(false);
+    }
+  }, [selectedCouponId]);
+
+  const discountedAmount =
+    disabledCouponBtn && !disabledPointBtn ? usedPoint : discountedPrice;
 
   return (
     <>
@@ -36,9 +37,11 @@ const Payment = ({
           label="적립금"
           caption="point"
           usedPoint={usedPoint}
+          typedPoint={typedPoint}
           handlePoint={handlePointChange}
           disabledPointBtn={disabledPointBtn}
-          getDiscountedPrice={calculateDiscountedPointPrice}
+          setDisabledCouponBtn={setDisabledCouponBtn}
+          handlePointClick={handlePointClick}
         />
         <PaymentInput
           label="쿠폰"
@@ -67,7 +70,7 @@ const Payment = ({
           <Styled.FlexWrapper>
             <Styled.InfoTitle>할인/부가결제</Styled.InfoTitle>
             <Styled.InfoContent>
-              <Styled.RedFont>-{discountedPrice}</Styled.RedFont>원
+              <Styled.RedFont>-{discountedAmount}</Styled.RedFont>원
             </Styled.InfoContent>
           </Styled.FlexWrapper>
           <Styled.InnerMarginWrapper>

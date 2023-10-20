@@ -13,22 +13,22 @@ import {
 
 const processPayment = async ({
   productList,
-  totalAmount,
+  finalPrice,
   deliveryInfo,
-  point,
-  couponId,
+  usedPoint,
+  selectedCouponId,
 }: OrderPayload): Promise<ProcessPaymentResponse> => {
   const { IMP } = window;
   IMP.init(process.env.NEXT_PUBLIC_IMP_UID);
 
   const { orderData, dbData } = generateOrderPayload({
     productList,
-    totalAmount,
+    finalPrice,
     deliveryInfo,
-    point,
+    usedPoint,
   });
-  // console.log('orderData', orderData);
-  // console.log('dbData', dbData);
+  console.log('orderData', orderData);
+  console.log('dbData', dbData);
 
   const cartIds: number[] = productList.map(item => item.cartId);
 
@@ -38,8 +38,8 @@ const processPayment = async ({
       const verifyRes = await postVerifyIamport(imp_uid, orderData);
       if (verifyRes.amount === paid_amount) {
         const resultInfo = await postOrders(dbData);
-        if (couponId !== 0) {
-          postCouponDel(couponId);
+        if (selectedCouponId !== 0) {
+          postCouponDel(selectedCouponId);
         }
         if (cartIds[0] !== undefined) {
           postCartRemove(cartIds);

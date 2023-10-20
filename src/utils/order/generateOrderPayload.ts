@@ -4,9 +4,9 @@ import payMethodOptions from './payMethodOptions';
 
 const generateOrderPayload = ({
   productList,
-  totalAmount,
+  finalPrice,
   deliveryInfo,
-  point,
+  usedPoint,
 }: OrderPayload) => {
   // 주문번호
   const orderNumber = generateOrderNumber();
@@ -39,7 +39,7 @@ const generateOrderPayload = ({
       productList.length === 1
         ? productList[0].productName
         : `${productList[0].productName} 외 ${productList.length}개의 상품`,
-    amount: totalAmount + 2500,
+    amount: finalPrice + 2500,
     buyer_name: username,
     buyer_tel: phoneNumber,
     buyer_addr: address + addressDetail,
@@ -57,10 +57,10 @@ const generateOrderPayload = ({
     selfMemo: memo === 'TEXT' ? selfMemo : '',
     defaultAddr,
     orderNumber,
-    orderTotalPrice: totalAmount + 2500,
+    orderTotalPrice: finalPrice + 2500,
     totalQuantity: 1,
     payMethod: payMethod,
-    point: point !== undefined ? point : 0,
+    point: usedPoint !== undefined ? usedPoint : 0,
   };
 
   return { orderData, dbData };

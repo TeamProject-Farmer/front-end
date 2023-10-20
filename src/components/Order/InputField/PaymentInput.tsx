@@ -7,13 +7,18 @@ const PaymentInput = ({
   caption,
   couponOptions,
   usedPoint,
+  typedPoint,
   handleSelectedCoupon,
   handlePoint,
   disabledPointBtn,
   disabledCouponBtn,
-  getDiscountedPrice,
+  handlePointClick,
+  setDisabledCouponBtn,
 }: PaymentInputProps) => {
-
+  const handleClick = () => {
+    handlePointClick();
+    setDisabledCouponBtn(true);
+  };
   return (
     <Styled.InputWrapper caption={caption}>
       {label && <Styled.Label>{label}</Styled.Label>}
@@ -54,14 +59,14 @@ const PaymentInput = ({
               <Styled.FlexWrapper>
                 <Styled.Input
                   width={660}
-                  value={usedPoint ? usedPoint : 0}
+                  value={usedPoint ? typedPoint : 0}
                   onChange={handlePoint}
                   disabled={disabledPointBtn}
                 />
                 <Button
                   text="적용하기"
                   disabled={disabledPointBtn}
-                  onClick={getDiscountedPrice}
+                  onClick={handleClick}
                 />
               </Styled.FlexWrapper>
               <Styled.FlexGapWrapper>
