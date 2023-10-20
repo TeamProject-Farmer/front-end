@@ -13,7 +13,7 @@ import { getCookie, removeCookie } from 'src/utils/cookie';
 import { useRouter } from 'next/router';
 import { setToken } from 'store/reducers/tokenSlice';
 import { QueryCache } from '@tanstack/react-query';
-
+import { useQueryClient } from '@tanstack/react-query';
 const Header = () => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const refreshToken = getCookie('refreshToken');
@@ -22,14 +22,14 @@ const Header = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const queryCache = new QueryCache();
+  const queryClient = useQueryClient();
 
   const handleLogout = () => {
     dispatch(clearUser());
     setToken('');
     removeCookie('refreshToken');
     router.push('/');
-    queryCache.clear();
+    queryClient.clear();
   };
   return (
     <Styled.Wrapper>

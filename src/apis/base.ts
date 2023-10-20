@@ -1,6 +1,7 @@
 import axios from 'axios';
 import renewTokens from 'src/utils/token/renewTokens';
 import { getTokens } from 'src/utils/token/token';
+import { useQueryClient } from '@tanstack/react-query';
 
 export const BASE_URL = process.env.NEXT_PUBLIC_API_KEY;
 
@@ -76,9 +77,13 @@ request.interceptors.response.use(
     console.log('api error', error);
     const status = error.response?.status;
     const message = error.response?.data.message;
+
+    const queryClient = useQueryClient();
+
     if (status === 500 && message === '회원이 존재하지 않습니다.') {
       document.cookie = 'refreshToken=; expires=0; path=/;';
       window.location.href = 'https://farmer-shop.vercel.app/login';
+      queryClient.clear();
     }
     return Promise.reject(error);
   },
