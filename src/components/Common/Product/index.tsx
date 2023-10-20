@@ -1,8 +1,11 @@
 import Image from 'next/image';
-import Styled from './styles';
-import Icon from '../Icon';
-import { ProductProps } from 'src/types/common/types';
 import Link from 'next/link';
+
+import Styled from './styles';
+
+import Icon from '../Icon';
+
+import { ProductProps } from 'src/types/common/types';
 
 const Product = (props: ProductProps) => {
   const {
@@ -25,7 +28,6 @@ const Product = (props: ProductProps) => {
             alt={name}
             fill={true}
             sizes="100%, 100%"
-            priority={true}
           />
         </Styled.ImgBox>
         <Styled.Content>

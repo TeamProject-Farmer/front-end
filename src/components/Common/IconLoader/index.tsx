@@ -1,7 +1,3 @@
-import React from 'react';
-const preserveAspectRatio =
-  '[xMinYMin/xMidYMin/xMaxYMin/xMinYMid/xMidYMid/xMaxYMid/xMinYMax/xMidYMax/xMaxYMax] [meet/slice/none]';
-
 const IconLoader = () => {
   return (
     <svg

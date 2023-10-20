@@ -16,9 +16,9 @@ import InputField from '@components/Order/InputField';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
 
-import { DeliveryInfo } from 'src/types/order/types';
-
 import { useForm } from 'react-hook-form';
+
+import { DeliveryInfo } from 'src/types/order/types';
 
 import useCoupon from 'src/hooks/order/useCoupon';
 import usePoint from 'src/hooks/order/usePoint';
