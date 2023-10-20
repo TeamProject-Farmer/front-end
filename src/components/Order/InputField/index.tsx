@@ -26,6 +26,7 @@ const InputField = ({
   setValue,
   setShowShippingMsgInput,
 }: InputFieldProps) => {
+  // console.log(orderedData);
   // 주소 입력
   const handleComplete = (data: DaumPostcodeData) => {
     const addressData = formatAddress(data);
@@ -66,7 +67,7 @@ const InputField = ({
                 name="username"
                 control={control}
                 rules={{
-                  required: requiredErrorMsg,
+                  // required: requiredErrorMsg,
                   validate: value => validateName(value),
                 }}
                 render={({ field, fieldState }) => (
@@ -74,13 +75,8 @@ const InputField = ({
                     <Styled.Input
                       type="text"
                       {...field}
-                      value={
-                        haveOrdered
-                          ? orderedData.username
-                          : field.value
-                          ? field.value
-                          : ''
-                      }
+                      disabled={haveOrdered}
+                      value={field.value}
                     />
                     {errorMessage(fieldState)}
                   </>
@@ -102,13 +98,8 @@ const InputField = ({
                     <Styled.Input
                       type="text"
                       {...field}
-                      value={
-                        haveOrdered
-                          ? orderedData.phoneNumber
-                          : field.value
-                          ? field.value
-                          : '010-'
-                      }
+                      disabled={haveOrdered}
+                      value={field.value ? field.value : '010-'}
                       onChange={(
                         event: React.ChangeEvent<HTMLInputElement>,
                       ) => {
@@ -135,13 +126,8 @@ const InputField = ({
                     <Styled.FlexWrapper>
                       <Styled.Input
                         {...field}
-                        value={
-                          haveOrdered
-                            ? orderedData.zipcode
-                            : field.value
-                            ? field.value
-                            : ''
-                        }
+                        disabled={haveOrdered}
+                        value={field.value ? field.value : ''}
                         readOnly
                         placeholder="우편번호"
                         width={250}
@@ -160,13 +146,8 @@ const InputField = ({
                   <>
                     <Styled.Input
                       {...field}
-                      value={
-                        haveOrdered
-                          ? orderedData.address
-                          : field.value
-                          ? field.value
-                          : ''
-                      }
+                      disabled={haveOrdered}
+                      value={field.value ? field.value : ''}
                       placeholder="기본주소"
                     />
                     {errorMessage(fieldState)}
@@ -181,13 +162,8 @@ const InputField = ({
                   <>
                     <Styled.Input
                       {...field}
-                      value={
-                        haveOrdered
-                          ? orderedData.addressDetail
-                          : field.value
-                          ? field.value
-                          : ''
-                      }
+                      disabled={haveOrdered}
+                      value={field.value ? field.value : ''}
                       placeholder="상세주소"
                     />
                     {errorMessage(fieldState)}

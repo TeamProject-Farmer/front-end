@@ -24,8 +24,8 @@ export const getPoint = async (): Promise<number> => {
 };
 
 // 최근 배송지 이력 확인
-export const getOrderAddress = async (): Promise<OrderedData> => {
-  const response = await request.get('/member/orders/address');
+export const getOrderAddress = async () => {
+  const response = await request.get<OrderedData>('/member/orders/address');
   return response.data;
 };
 

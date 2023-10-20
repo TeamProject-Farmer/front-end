@@ -12,6 +12,7 @@ import Menu from '../Menu';
 import { getCookie, removeCookie } from 'src/utils/cookie';
 import { useRouter } from 'next/router';
 import { setToken } from 'store/reducers/tokenSlice';
+import { QueryCache } from '@tanstack/react-query';
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
@@ -21,12 +22,14 @@ const Header = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
+  const queryCache = new QueryCache();
+
   const handleLogout = () => {
     dispatch(clearUser());
     setToken('');
-    // document.cookie = 'refreshToken=; expires=0; path=/;';
     removeCookie('refreshToken');
     router.push('/');
+    queryCache.clear();
   };
   return (
     <Styled.Wrapper>
