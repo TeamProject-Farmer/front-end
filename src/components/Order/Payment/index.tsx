@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 
 import Styled from '../styles';
 
+import { PaymentProps } from 'src/types/order/types';
+
 import PaymentInput from '../InputField/PaymentInput';
 import InputGroup from '../InputGroup';
 
 const Payment = ({
-  coupon,
+  couponList,
   usedPoint,
   typedPoint,
   selectedCouponId,
@@ -16,18 +18,16 @@ const Payment = ({
   finalPrice,
   handlePointClick,
   totalPrice,
-}) => {
+}: PaymentProps) => {
   const [disabledCouponBtn, setDisabledCouponBtn] = useState(false);
   const [disabledPointBtn, setDisabledPointBtn] = useState(false);
 
   useEffect(() => {
     setDisabledPointBtn(selectedCouponId === 0 ? false : true);
-    if (selectedCouponId !== 0) {
-      setDisabledCouponBtn(false);
-    }
+    selectedCouponId !== 0 && setDisabledCouponBtn(false);
   }, [selectedCouponId]);
 
-  const discountedAmount =
+  const totalDiscountedAmount =
     disabledCouponBtn && !disabledPointBtn ? usedPoint : discountedPrice;
 
   return (
@@ -46,7 +46,7 @@ const Payment = ({
         <PaymentInput
           label="쿠폰"
           caption="coupon"
-          couponOptions={coupon}
+          couponOptions={couponList}
           handleSelectedCoupon={handleSelectedCoupon}
           disabledCouponBtn={disabledCouponBtn}
         />
@@ -70,7 +70,7 @@ const Payment = ({
           <Styled.FlexWrapper>
             <Styled.InfoTitle>할인/부가결제</Styled.InfoTitle>
             <Styled.InfoContent>
-              <Styled.RedFont>-{discountedAmount}</Styled.RedFont>원
+              <Styled.RedFont>-{totalDiscountedAmount}</Styled.RedFont>원
             </Styled.InfoContent>
           </Styled.FlexWrapper>
           <Styled.InnerMarginWrapper>

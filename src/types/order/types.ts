@@ -1,9 +1,4 @@
-import {
-  UseFormSetValue,
-  UseFormTrigger,
-  FieldValues,
-  Control,
-} from 'react-hook-form';
+import { UseFormSetValue, FieldValues, Control } from 'react-hook-form';
 
 export type CouponPolicy = 'FIXED' | 'RATE';
 
@@ -19,6 +14,19 @@ export interface Coupon {
 
 export interface Point {
   point: number;
+}
+
+export interface PaymentProps {
+  couponList: Coupon[];
+  usedPoint: number;
+  typedPoint: number;
+  selectedCouponId: number;
+  handlePointChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSelectedCoupon: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  discountedPrice: number;
+  finalPrice: number;
+  handlePointClick: () => void;
+  totalPrice: number;
 }
 
 export interface InputFieldProps {

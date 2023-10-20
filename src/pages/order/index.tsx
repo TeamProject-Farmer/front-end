@@ -107,7 +107,7 @@ const OrderPage: NextPageWithLayout = () => {
         </InputGroup>
         {/* 적립금/쿠폰, 결제금액 */}
         <Payment
-          coupon={couponList}
+          couponList={couponList}
           usedPoint={usedPoint}
           typedPoint={typedPoint}
           selectedCouponId={selectedCouponId}
