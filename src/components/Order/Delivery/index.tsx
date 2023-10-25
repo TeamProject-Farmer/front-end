@@ -6,9 +6,12 @@ import InputGroup from '../InputGroup';
 import InputField from '../InputField';
 
 import { useQuery } from '@tanstack/react-query';
+
 import { getOrderAddress } from 'src/apis/order/order';
 
-const Delivery = ({ control, setValue }) => {
+import { DeliveryProps } from 'src/types/order/types';
+
+const Delivery = ({ control, setValue }: DeliveryProps) => {
   const [haveOrdered, setHaveOrdered] = useState<boolean>(false);
   const [showShippingMsgInput, setShowShippingMsgInput] =
     useState<boolean>(false);

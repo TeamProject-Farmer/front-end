@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+
 import { BtnProps } from 'src/types/home/types';
 
 const Button = ({ content, color }: BtnProps) => {

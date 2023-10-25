@@ -270,3 +270,15 @@ export interface ProcessPaymentResponse {
   response: RequestPayResponse;
   resultInfo: ResultData;
 }
+
+export interface AgreementProps {
+  handleAgreementChange: (
+    isAllChecked: boolean,
+    paymentChecked: boolean,
+  ) => void;
+}
+
+export interface DeliveryProps {
+  control: Control<FieldValues, any>;
+  setValue: UseFormSetValue<FieldValues>;
+}

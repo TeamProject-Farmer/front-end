@@ -1,7 +1,9 @@
-import React from 'react';
 import Styled from './styles';
+
 import Button from './Button';
+
 import { PaymentInputProps } from 'src/types/order/types';
+
 const PaymentInput = ({
   label,
   caption,
@@ -19,6 +21,7 @@ const PaymentInput = ({
     handlePointClick();
     setDisabledCouponBtn(true);
   };
+
   return (
     <Styled.InputWrapper caption={caption}>
       {label && <Styled.Label>{label}</Styled.Label>}

@@ -1,8 +1,10 @@
-import React from 'react';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
+
 import Icon from '@components/Common/Icon';
 import Keyword from '../Keyword';
+
+import { SearchContainerProps } from 'src/types/search/types';
 
 const SearchContainer = ({
   handleKeyPress,
@@ -10,8 +12,8 @@ const SearchContainer = ({
   handleClick,
   inputValue,
   recentSearchWord,
-  isLoggedin,
-}) => {
+  isLoggedIn,
+}: SearchContainerProps) => {
   return (
     <Styled.Wrapper>
       <Styled.IconWrapper onClick={handleClick}>
@@ -24,7 +26,7 @@ const SearchContainer = ({
         value={inputValue}
       />
       <Styled.KeywordWrapper>
-        {isLoggedin && (
+        {isLoggedIn && (
           <Keyword title="최근 검색 키워드" wordList={recentSearchWord} />
         )}
       </Styled.KeywordWrapper>

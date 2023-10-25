@@ -18,7 +18,7 @@ import { RootState } from 'store';
 
 import { useForm } from 'react-hook-form';
 
-import { DeliveryInfo } from 'src/types/order/types';
+import { DeliveryInfo, OrderItem } from 'src/types/order/types';
 
 import useCoupon from 'src/hooks/order/useCoupon';
 import usePoint from 'src/hooks/order/usePoint';
@@ -29,8 +29,8 @@ import getTotalPrice from 'src/utils/order/getTotalPrice';
 
 const OrderPage: NextPageWithLayout = () => {
   // 장바구니 or 개별 상품페이지 주문
-  const selectedCart = (state: RootState) => state.selectedCart;
-  const order = (state: RootState) => state.order;
+  const selectedCart = (state: RootState): OrderItem[] => state.selectedCart;
+  const order = (state: RootState): OrderItem[] => state.order;
 
   const router = useRouter();
   const fromCart = Object.keys(router.query).length === 0;

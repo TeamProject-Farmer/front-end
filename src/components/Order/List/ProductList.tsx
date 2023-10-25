@@ -1,12 +1,13 @@
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
+
 import { OrderItem } from '../../../types/order/types';
 
-const ProductList = ({ productList }) => {
+const ProductList = ({ productList }: { productList: OrderItem[] }) => {
   return (
     <Styled.Wrapper>
       {productList &&
-        productList?.map((ele: OrderItem) => {
+        productList?.map(ele => {
           const {
             productId,
             productName,
@@ -15,6 +16,7 @@ const ProductList = ({ productList }) => {
             imgUrl,
             totalPrice,
           } = ele;
+
           return (
             <Styled.ProductWrapper key={productId}>
               <Styled.ImgBox src={imgUrl} alt={productName} />

@@ -1,8 +1,11 @@
+import { useState } from 'react';
+
+import Link from 'next/link';
+
 import Styled from './styles';
 import Icon from '@components/Common/Icon';
-import { useState } from 'react';
+
 import { sizeCategory } from 'src/utils/home/category';
-import Link from 'next/link';
 
 const ShopPrev = () => {
   const [hoveredSize, setHoveredSize] = useState<string>();
