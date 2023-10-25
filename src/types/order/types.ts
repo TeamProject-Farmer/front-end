@@ -95,6 +95,7 @@ export interface OrderPayload {
   deliveryInfo: DeliveryInfo;
   usedPoint?: number;
   selectedCouponId?: number;
+  orderedData: OrderedData;
 }
 
 export interface OrderProduct {
@@ -269,4 +270,17 @@ export interface ResultData {
 export interface ProcessPaymentResponse {
   response: RequestPayResponse;
   resultInfo: ResultData;
+}
+
+export interface AgreementProps {
+  handleAgreementChange: (
+    isAllChecked: boolean,
+    paymentChecked: boolean,
+  ) => void;
+}
+
+export interface DeliveryProps {
+  control: Control<FieldValues, any>;
+  setValue: UseFormSetValue<FieldValues>;
+  orderedData: OrderedData;
 }

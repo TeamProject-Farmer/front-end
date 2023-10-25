@@ -1,11 +1,14 @@
-import { AnimatePresence, motion } from 'framer-motion';
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
+
 import Link from 'next/link';
-import { Banner } from 'src/types/home/types';
 import Image from 'next/image';
 
-const SliderContent = ({ sliderContents, activeIndex }) => {
+import { AnimatePresence, motion } from 'framer-motion';
+
+import { Banner, SliderContentProps } from 'src/types/home/types';
+
+const SliderContent = ({ sliderContents, activeIndex }: SliderContentProps) => {
   const imgVariants = {
     initial: {
       opacity: 0,
@@ -26,7 +29,7 @@ const SliderContent = ({ sliderContents, activeIndex }) => {
     <>
       <AnimatePresence initial={false}>
         {sliderContents &&
-          sliderContents?.map((content: Banner, index: number) =>
+          sliderContents?.map((content: Banner) =>
             activeIndex === content.id ? (
               <Styled.Content
                 key={content.id}

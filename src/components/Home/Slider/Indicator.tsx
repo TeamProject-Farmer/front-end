@@ -1,7 +1,12 @@
 import styled from '@emotion/styled';
-import { Banner } from 'src/types/home/types';
 
-const Indicator = ({ activeIndex, sliderContents, onclick }) => {
+import { Banner, IndicatorProps } from 'src/types/home/types';
+
+const Indicator = ({
+  activeIndex,
+  sliderContents,
+  onclick,
+}: IndicatorProps) => {
   return (
     <Style.Indicator>
       {sliderContents?.map((content: Banner) => (

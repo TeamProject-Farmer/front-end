@@ -1,9 +1,14 @@
-import Styled from '../styles';
-import CheckBoxInput from '../InputField/CheckBoxInput';
-import useCheckBox from 'src/hooks/order/useCheckBox';
 import { useEffect } from 'react';
 
-const Agreement = ({ handleAgreementChange }) => {
+import Styled from '../styles';
+
+import CheckBoxInput from '../InputField/CheckBoxInput';
+
+import useCheckBox from 'src/hooks/order/useCheckBox';
+
+import { AgreementProps } from 'src/types/order/types';
+
+const Agreement = ({ handleAgreementChange }: AgreementProps) => {
   const {
     isAllChecked,
     checkedState,

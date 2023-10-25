@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
-import { ButtonProps } from 'src/types/order/types';
 import theme from '@styles/theme';
+
+import { ButtonProps } from 'src/types/order/types';
 
 const Button = ({ text, bgColor, color, onClick, disabled }: ButtonProps) => {
   return (

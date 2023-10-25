@@ -1,10 +1,20 @@
-import styled from '@emotion/styled';
-import theme from '@styles/theme';
-import Icon from '@components/Common/Icon';
 import Link from 'next/link';
 import Image from 'next/image';
 
-const Review = ({ memberNickName, imgUrl, likeCount, content, productId }) => {
+import styled from '@emotion/styled';
+import theme from '@styles/theme';
+
+import Icon from '@components/Common/Icon';
+
+import { Review as IReview } from 'src/types/home/types';
+
+const Review = ({
+  memberNickName,
+  imgUrl,
+  likeCount,
+  content,
+  productId,
+}: IReview) => {
   const countStar = (likeCount: number) => {
     const stars = [];
     for (let i = 0; i < 5; i++) {

@@ -1,10 +1,11 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
+
 import Head from 'next/head';
+import { Inter } from 'next/font/google';
+
 import Header from '@components/Common/Header';
 import Footer from '@components/Common/Footer';
 import styled from '@emotion/styled';
-import { Inter } from 'next/font/google';
-import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'] });
 

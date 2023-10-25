@@ -1,11 +1,4 @@
-import { Category } from '../common/types';
-
-export interface IndexPageProps {
-  banner: Banner[];
-  bestPlant: Plant[];
-  bestReview: Review[];
-  news: News;
-}
+import { ParsedUrlQuery } from 'querystring';
 
 export interface Banner {
   id: number;
@@ -37,8 +30,17 @@ export interface Review {
   imgUrl: string;
   content: string;
   likeCount: number;
-  fiveStarRating: number;
+  fiveStarRating?: number;
 }
+
+export interface IndexPageProps {
+  banner: Banner[];
+  bestPlant: Plant[];
+  bestReview: Review[];
+  news: News;
+}
+
+export interface Params extends ParsedUrlQuery {}
 
 export interface BtnProps {
   content: string;
@@ -71,4 +73,15 @@ export interface SizeCategory {
   src: HoverType;
   hover: HoverType;
   bg: string;
+}
+
+export interface IndicatorProps {
+  activeIndex: number;
+  sliderContents: Banner[];
+  onclick: (clickedIndex: number) => void;
+}
+
+export interface SliderContentProps {
+  sliderContents: Banner[];
+  activeIndex: number;
 }

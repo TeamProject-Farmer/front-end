@@ -16,9 +16,11 @@ import InputField from '@components/Order/InputField';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
 
+import { useQuery } from '@tanstack/react-query';
+
 import { useForm } from 'react-hook-form';
 
-import { DeliveryInfo } from 'src/types/order/types';
+import { DeliveryInfo, OrderItem } from 'src/types/order/types';
 
 import useCoupon from 'src/hooks/order/useCoupon';
 import usePoint from 'src/hooks/order/usePoint';
@@ -27,10 +29,12 @@ import useAgreement from 'src/hooks/order/useAgreement';
 import processPayment from 'src/utils/order/processPayment';
 import getTotalPrice from 'src/utils/order/getTotalPrice';
 
+import { getOrderAddress } from 'src/apis/order/order';
+
 const OrderPage: NextPageWithLayout = () => {
   // 장바구니 or 개별 상품페이지 주문
-  const selectedCart = (state: RootState) => state.selectedCart;
-  const order = (state: RootState) => state.order;
+  const selectedCart = (state: RootState): OrderItem[] => state.selectedCart;
+  const order = (state: RootState): OrderItem[] => state.order;
 
   const router = useRouter();
   const fromCart = Object.keys(router.query).length === 0;
@@ -39,6 +43,7 @@ const OrderPage: NextPageWithLayout = () => {
 
   const productList = fromCart ? cartItems : selectedProduct;
 
+  // 전체 주문 가격
   const totalPrice = getTotalPrice(productList);
 
   // 약관 동의
@@ -54,6 +59,7 @@ const OrderPage: NextPageWithLayout = () => {
   const { typedPoint, usedPoint, handlePointChange, handlePointClick } =
     usePoint();
 
+  // 최종 주문 가격
   const finalPrice =
     selectedCouponId === 0
       ? totalPrice - usedPoint
@@ -61,6 +67,12 @@ const OrderPage: NextPageWithLayout = () => {
 
   //react hook form
   const { handleSubmit, setValue, control } = useForm();
+
+  // 이전 주문 정보
+  const { data: orderedData } = useQuery({
+    queryKey: ['orderedData'],
+    queryFn: getOrderAddress,
+  });
 
   // 결제하기 버튼 클릭 시
   const onSubmit = async (deliveryInfo: DeliveryInfo) => {
@@ -81,6 +93,7 @@ const OrderPage: NextPageWithLayout = () => {
         deliveryInfo,
         usedPoint,
         selectedCouponId,
+        orderedData,
       });
       const { orderNumber } = resultInfo;
       router.push({
@@ -98,7 +111,11 @@ const OrderPage: NextPageWithLayout = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <Styled.Wrapper>
         {/* 배송지 */}
-        <Delivery control={control} setValue={setValue} />
+        <Delivery
+          orderedData={orderedData}
+          control={control}
+          setValue={setValue}
+        />
         {/* 주문상품 */}
         <InputGroup title="주문상품">
           <Styled.InnerPaddingWrapper caption="product">

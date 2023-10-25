@@ -1,5 +1,7 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
+
 import styled from '@emotion/styled';
+
 import SliderContent from './SliderContent';
 import Indicator from './Indicator';
 
@@ -12,6 +14,7 @@ const Slider = ({ banner }) => {
         prevIndex === banner.length ? 1 : prevIndex + 1,
       );
     }, 4000);
+
     return () => clearInterval(sliderInterval);
   }, [activeIndex]);
 

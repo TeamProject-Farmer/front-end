@@ -1,10 +1,14 @@
+import theme from '@styles/theme';
+
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+
 import Icon from '@components/Common/Icon';
-import theme from '@styles/theme';
-import { Plant } from 'src/types/home/types';
+import { Plant as IPlant } from 'src/types/home/types';
+
 import Link from 'next/link';
 import Image from 'next/image';
+
 const Plant = ({
   productId,
   ranking,
@@ -13,9 +17,10 @@ const Plant = ({
   price,
   averageStarRating,
   imgUrl,
-}: Plant) => {
+}: IPlant) => {
   const specialPrice = discountRate !== 0;
   const discountedPrice = price * (1 - discountRate / 100);
+
   return (
     <Link href={`/shop/detail/${productId}`}>
       <Styled.Wrapper>

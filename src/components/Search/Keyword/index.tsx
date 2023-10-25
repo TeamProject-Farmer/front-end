@@ -1,5 +1,5 @@
-import React from 'react';
 import styled from '@emotion/styled';
+
 import { KeywordProps } from 'src/types/search/types';
 
 const Keyword = ({ title, wordList }: KeywordProps) => {

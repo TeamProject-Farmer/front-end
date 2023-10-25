@@ -6,16 +6,21 @@ import Icon from '../Icon';
 
 import Styled from './styles';
 
+import { useQuery } from '@tanstack/react-query';
+
 import { sizeCategory } from 'src/utils/home/category';
+
 import { Category } from 'src/types/common/types';
 
-import { useSelector } from 'react-redux';
-import { RootState } from 'store';
-
-const categorySelector = (state: RootState) => state.category;
+import { getProductCategory } from 'src/apis/common/category';
 
 const Menu = ({ setShowMenu }) => {
-  const category = useSelector(categorySelector);
+  const { data: category } = useQuery<Category[]>({
+    queryKey: ['category'],
+    queryFn: getProductCategory,
+    cacheTime: Infinity,
+    staleTime: Infinity,
+  });
 
   const handleClose = () => {
     setShowMenu(false);

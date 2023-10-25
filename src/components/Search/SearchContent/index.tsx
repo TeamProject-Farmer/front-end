@@ -1,9 +1,10 @@
-import React from 'react';
 import styled from '@emotion/styled';
-import Plant from '../../Common/Product';
-import { ProductProps } from 'src/types/common/types';
 
-const SearchContent = ({ searchedWord, searchResult }) => {
+import Plant from '../../Common/Product';
+
+import { SearchContentProps } from 'src/types/search/types';
+
+const SearchContent = ({ searchedWord, searchResult }: SearchContentProps) => {
   const noResult = !searchResult || searchResult.length === 0;
 
   return (
@@ -16,7 +17,7 @@ const SearchContent = ({ searchedWord, searchResult }) => {
         </Styled.NoResult>
       )}
       <Styled.Plants>
-        {searchResult?.map((plant: ProductProps) => (
+        {searchResult?.map(plant => (
           <Plant key={plant.productId} {...plant} />
         ))}
       </Styled.Plants>

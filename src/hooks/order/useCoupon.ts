@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
+
 import { useQuery } from '@tanstack/react-query';
+
 import { getCoupon } from 'src/apis/order/order';
+
 import { Coupon } from 'src/types/order/types';
 
 const useCoupon = (orderedPrice: number) => {

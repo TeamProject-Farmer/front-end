@@ -17,6 +17,7 @@ const processPayment = async ({
   deliveryInfo,
   usedPoint,
   selectedCouponId,
+  orderedData,
 }: OrderPayload): Promise<ProcessPaymentResponse> => {
   const { IMP } = window;
   IMP.init(process.env.NEXT_PUBLIC_IMP_UID);
@@ -26,7 +27,10 @@ const processPayment = async ({
     finalPrice,
     deliveryInfo,
     usedPoint,
+    orderedData,
   });
+
+  console.log(orderedData);
   console.log('orderData', orderData);
   console.log('dbData', dbData);
 

@@ -1,7 +1,7 @@
-import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import theme from '@styles/theme';
+
 import { InputGroupProps } from 'src/types/order/types';
 
 const InputGroup = ({ title, before, children }: InputGroupProps) => {

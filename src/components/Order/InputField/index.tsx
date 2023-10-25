@@ -1,32 +1,33 @@
-import { useEffect, useState } from 'react';
 import { Styled as CheckBoxStyled } from './CheckBoxInput';
 import Styled from './styles';
-import { Controller } from 'react-hook-form';
+
+import Button from './Button';
+
+import { Controller, ControllerFieldState } from 'react-hook-form';
+
+import { useDaumPostcodePopup } from 'react-daum-postcode';
+import { postcodeScriptUrl } from 'react-daum-postcode/lib/loadPostcode';
+
 import { formatPhoneNumber } from 'src/utils/order/formatPhoneNumber';
-import { DaumPostcodeData, InputFieldProps } from 'src/types/order/types';
+import { formatAddress } from 'src/utils/order/getAddressfromDaumPostcode';
+import shippingMsgOptions from 'src/utils/order/shippingMsgOptions';
+import payMethodOptions from 'src/utils/order/payMethodOptions';
 import {
   requiredErrorMsg,
   validateName,
   validateMobile,
 } from 'src/utils/order/formValidation';
-import Button from './Button';
-import { useDaumPostcodePopup } from 'react-daum-postcode';
-import { postcodeScriptUrl } from 'react-daum-postcode/lib/loadPostcode';
-import { formatAddress } from 'src/utils/order/getAddressfromDaumPostcode';
-import { ControllerFieldState } from 'react-hook-form';
-import shippingMsgOptions from 'src/utils/order/shippingMsgOptions';
-import payMethodOptions from 'src/utils/order/payMethodOptions';
+
+import { DaumPostcodeData, InputFieldProps } from 'src/types/order/types';
 
 const InputField = ({
   label,
   caption,
   control,
   haveOrdered,
-  orderedData,
   setValue,
   setShowShippingMsgInput,
 }: InputFieldProps) => {
-  // console.log(orderedData);
   // 주소 입력
   const handleComplete = (data: DaumPostcodeData) => {
     const addressData = formatAddress(data);
@@ -67,7 +68,7 @@ const InputField = ({
                 name="username"
                 control={control}
                 rules={{
-                  // required: requiredErrorMsg,
+                  required: requiredErrorMsg,
                   validate: value => validateName(value),
                 }}
                 render={({ field, fieldState }) => (

@@ -1,9 +1,11 @@
 import Styled from './styles';
+
 import Image from 'next/image';
 import Link from 'next/link';
 
 const News = ({ news }) => {
   const { subject, content, imgUrl } = news;
+
   return (
     <Styled.Wrapper>
       <Styled.Title>farmer news</Styled.Title>

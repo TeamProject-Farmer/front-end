@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
 import styled from '@emotion/styled';
-import { LayoutProps } from '../../../types/common/types';
+
 import { useRouter } from 'next/router';
+
+import { LayoutProps } from '../../../types/common/types';
 
 const NestedLayout = ({ children }: LayoutProps) => {
   const { pathname } = useRouter();
-  const router = useRouter();
   const isOrderPath = pathname === '/order';
 
   return (

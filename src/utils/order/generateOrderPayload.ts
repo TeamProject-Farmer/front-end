@@ -7,6 +7,7 @@ const generateOrderPayload = ({
   finalPrice,
   deliveryInfo,
   usedPoint,
+  orderedData,
 }: OrderPayload) => {
   // 주문번호
   const orderNumber = generateOrderNumber();
@@ -40,10 +41,12 @@ const generateOrderPayload = ({
         ? productList[0].productName
         : `${productList[0].productName} 외 ${productList.length}개의 상품`,
     amount: finalPrice + 2500,
-    buyer_name: username,
-    buyer_tel: phoneNumber,
-    buyer_addr: address + addressDetail,
-    buyer_postcode: zipcode,
+    buyer_name: username || orderedData.username,
+    buyer_tel: phoneNumber || orderedData.phoneNumber,
+    buyer_addr:
+      address + addressDetail ||
+      orderedData.address + orderedData.addressDetail,
+    buyer_postcode: zipcode || orderedData.zipcode,
   };
 
   const dbData = {

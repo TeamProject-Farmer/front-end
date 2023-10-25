@@ -1,21 +1,24 @@
+import { ReactElement, useEffect } from 'react';
+
+import type { InferGetStaticPropsType, GetStaticProps } from 'next';
+import { useRouter } from 'next/router';
+
+import Layout from './layout';
 import Slider from '@components/Home/Slider';
 import Category from '@components/Common/Category';
 import ShopPrev from '@components/Home/ShopBySize';
 import BestPlant from '@components/Home/BestPlant';
 import BestReview from '@components/Home/BestReview';
 import News from '@components/Home/News';
-import Layout from './layout';
-import { ReactElement } from 'react';
-import type { InferGetStaticPropsType, GetStaticProps } from 'next';
+
 import {
   getMainBanner,
   getBestProduct,
   getBestReview,
   getNews,
 } from 'src/apis/home/home';
+
 import { IndexPageProps } from 'src/types/home/types';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 
 const IndexPage = ({
   banner,
@@ -31,7 +34,7 @@ const IndexPage = ({
       router.push(router.pathname);
     }
   }, [router]);
-
+  console.log(banner);
   return (
     <>
       <Slider banner={banner} />
@@ -42,10 +45,6 @@ const IndexPage = ({
       <News news={news} />
     </>
   );
-};
-
-IndexPage.getLayout = (page: ReactElement) => {
-  return <Layout>{page}</Layout>;
 };
 
 export const getStaticProps: GetStaticProps<IndexPageProps> = async () => {
@@ -59,9 +58,13 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async () => {
       bestPlant,
       bestReview,
       news,
-    },
+    } satisfies IndexPageProps,
     revalidate: 60 * 60 * 24,
   };
+};
+
+IndexPage.getLayout = (page: ReactElement) => {
+  return <Layout>{page}</Layout>;
 };
 
 export default IndexPage;

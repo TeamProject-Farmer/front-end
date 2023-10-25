@@ -1,13 +1,19 @@
+import { ReactElement } from 'react';
+
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
+
 import type { NextPageWithLayout } from '@pages/_app';
-import { ReactElement } from 'react';
 import Layout from '@pages/layout';
 import NestedLayout from '@components/Order/NestedLayout';
+
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { getOrdersComplete } from 'src/apis/order/order';
+
 import { useQuery } from '@tanstack/react-query';
+
+import { getOrdersComplete } from 'src/apis/order/order';
+
 import formatOrderDate from 'src/utils/order/formatOrderDate';
 
 const orderResultPage: NextPageWithLayout = () => {
