@@ -15,7 +15,7 @@ import { Category } from 'src/types/common/types';
 import { getProductCategory } from 'src/apis/common/category';
 
 const Menu = ({ setShowMenu }) => {
-  const { data: category, isLoading } = useQuery<Category[]>({
+  const { data: category } = useQuery<Category[]>({
     queryKey: ['category'],
     queryFn: getProductCategory,
     cacheTime: Infinity,
