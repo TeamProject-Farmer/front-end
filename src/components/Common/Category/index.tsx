@@ -1,30 +1,23 @@
-import { useEffect } from 'react';
-
 import Styled from './styles';
 
 import Title from '../../Home/Common/Title';
 import Plant from './Plant';
 
-import { useDispatch } from 'react-redux';
-import { setCategory } from 'store/reducers/categorySlice';
-import { useSelector } from 'react-redux';
-import { RootState } from 'store';
+import { useQuery } from '@tanstack/react-query';
 
 import { Category as ICategory } from 'src/types/common/types';
 
 import { getProductCategory } from 'src/apis/common/category';
 
-const categorySelector = (state: RootState) => state.category;
 const Category = () => {
-  const dispatch = useDispatch();
-  const category = useSelector(categorySelector);
+  const { data: category, isLoading } = useQuery<ICategory[]>({
+    queryKey: ['category'],
+    queryFn: getProductCategory,
+    cacheTime: Infinity,
+    staleTime: Infinity,
+  });
 
-  useEffect(() => {
-    getProductCategory().then(res => {
-      dispatch(setCategory(res));
-    });
-  }, []);
-
+  if (isLoading) return;
   return (
     <Styled.Wrapper>
       <Title title="카테고리" />

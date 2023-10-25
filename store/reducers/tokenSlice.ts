@@ -1,7 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 const tokenSlice = createSlice({
-  name: 'user',
+  name: 'token',
   initialState: '',
   reducers: {
     setToken: (state, action) => {
