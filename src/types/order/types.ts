@@ -95,6 +95,7 @@ export interface OrderPayload {
   deliveryInfo: DeliveryInfo;
   usedPoint?: number;
   selectedCouponId?: number;
+  orderedData: OrderedData;
 }
 
 export interface OrderProduct {
@@ -281,4 +282,5 @@ export interface AgreementProps {
 export interface DeliveryProps {
   control: Control<FieldValues, any>;
   setValue: UseFormSetValue<FieldValues>;
+  orderedData: OrderedData;
 }

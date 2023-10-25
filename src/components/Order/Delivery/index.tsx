@@ -11,16 +11,10 @@ import { getOrderAddress } from 'src/apis/order/order';
 
 import { DeliveryProps } from 'src/types/order/types';
 
-const Delivery = ({ control, setValue }: DeliveryProps) => {
+const Delivery = ({ control, setValue, orderedData }: DeliveryProps) => {
   const [haveOrdered, setHaveOrdered] = useState<boolean>(false);
   const [showShippingMsgInput, setShowShippingMsgInput] =
     useState<boolean>(false);
-
-  const { data: orderedData } = useQuery({
-    queryKey: ['orderedData'],
-    queryFn: getOrderAddress,
-    onSuccess: () => setHaveOrdered(true),
-  });
 
   useEffect(() => {
     if (orderedData) {
