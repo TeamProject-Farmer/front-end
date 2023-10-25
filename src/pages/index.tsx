@@ -34,7 +34,7 @@ const IndexPage = ({
       router.push(router.pathname);
     }
   }, [router]);
-  console.log(banner);
+
   return (
     <>
       <Slider banner={banner} />

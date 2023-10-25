@@ -30,10 +30,6 @@ const processPayment = async ({
     orderedData,
   });
 
-  console.log(orderedData);
-  console.log('orderData', orderData);
-  console.log('dbData', dbData);
-
   const cartIds: number[] = productList.map(item => item.cartId);
 
   return new Promise(async (resolve, reject) => {
