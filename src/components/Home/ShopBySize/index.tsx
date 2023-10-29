@@ -1,14 +1,15 @@
 import { useState } from 'react';
 
 import Link from 'next/link';
+import Image from 'next/image';
 
 import Styled from './styles';
 import Icon from '@components/Common/Icon';
 
 import { sizeCategory } from 'src/utils/home/category';
 
-const ShopPrev = () => {
-  const [hoveredSize, setHoveredSize] = useState<string>();
+const ShopBySize = () => {
+  const [hoveredSize, setHoveredSize] = useState<string>('');
   const [sizeBg, setSizeBg] = useState<string>('smallBg');
 
   const handleMouseEnter = (id: string, bg: string) => {
@@ -21,7 +22,13 @@ const ShopPrev = () => {
   };
 
   return (
-    <Styled.Wrapper sizeBg={sizeBg}>
+    <Styled.Wrapper>
+      <Image
+        src={`/assets/images/home/${sizeBg}.png`}
+        alt="배경 이미지"
+        width={1920}
+        height={830}
+      />
       <Styled.ContentBox>
         <Styled.Title>shop by size</Styled.Title>
         <Styled.SizeBox>
@@ -47,4 +54,4 @@ const ShopPrev = () => {
   );
 };
 
-export default ShopPrev;
+export default ShopBySize;
