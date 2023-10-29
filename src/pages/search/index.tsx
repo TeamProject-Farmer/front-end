@@ -1,4 +1,4 @@
-import React, { useState, ReactElement } from 'react';
+import React, { useState, ReactElement, useRef } from 'react';
 
 import Layout from '@pages/layout';
 import type { NextPageWithLayout } from '@pages/_app';
@@ -23,10 +23,10 @@ import { sortingOptions } from 'src/utils/search/sortingOptions';
 import { ProductProps } from 'src/types/common/types';
 
 const SearchPage: NextPageWithLayout = () => {
-  const [inputValue, setInputValue] = useState<string>('');
   const [searchedWord, setSearchedWord] = useState<string>('');
-  const [searchResult, setSearchResult] = useState<ProductProps[]>();
+  const [searchResult, setSearchResult] = useState<ProductProps[] | null>(null);
   const [sortOption, setSortOption] = useState<string>('');
+  const inputRef = useRef(null);
 
   const socialType = useSelector((state: RootState) => state.user.socialType);
   const email = useSelector((state: RootState) => state.user.email);
@@ -34,12 +34,9 @@ const SearchPage: NextPageWithLayout = () => {
 
   const { data: recentSearchWord } = useQuery({
     queryKey: [email, searchedWord],
-    queryFn: () => getRecentSearch(),
-    enabled: email ? true : false,
+    queryFn: getRecentSearch,
+    enabled: memberEmail ? true : false,
   });
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setInputValue(event.target.value);
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.code === 'Enter') {
@@ -48,15 +45,15 @@ const SearchPage: NextPageWithLayout = () => {
   };
 
   const handleSearchResult = async () => {
-    const response = await postSearch(inputValue, memberEmail);
+    const response = await postSearch(inputRef.current?.value, memberEmail);
     setSearchResult(response);
-    setSearchedWord(inputValue);
+    setSearchedWord(inputRef.current?.value);
     setSortOption('new');
   };
 
   const handleSort = async (sortSearchCond: string) => {
     const response = await postSortSearch(
-      inputValue,
+      inputRef.current?.value,
       sortSearchCond,
       memberEmail,
     );
@@ -68,11 +65,9 @@ const SearchPage: NextPageWithLayout = () => {
     <>
       <SearchContainer
         handleKeyPress={handleKeyPress}
-        handleChange={handleChange}
         handleClick={handleSearchResult}
-        inputValue={inputValue}
-        isLoggedIn={memberEmail.length !== 0}
         recentSearchWord={recentSearchWord}
+        ref={inputRef}
       />
       <SearchUtils
         sortingOptions={sortingOptions}

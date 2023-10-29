@@ -86,3 +86,7 @@ export default store;
 export const wrapper = createWrapper<Store<RootState>>(() => store);
 
 export const persistor = persistStore(store);
+
+export const clearUser = () => {
+  store.dispatch(userSlice.actions.clearUser());
+};

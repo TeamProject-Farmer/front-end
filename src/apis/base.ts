@@ -2,6 +2,7 @@ import axios from 'axios';
 import renewTokens from 'src/utils/token/renewTokens';
 import { getTokens } from 'src/utils/token/token';
 import { useQueryClient } from '@tanstack/react-query';
+import { clearUser } from 'store';
 
 export const BASE_URL = process.env.NEXT_PUBLIC_API_KEY;
 
@@ -12,9 +13,9 @@ const request = axios.create({
 request.interceptors.request.use(
   async config => {
     const { accessToken, refreshToken } = getTokens();
-
     if (!refreshToken) {
       window.location.href = 'https://farmer-shop.vercel.app/login';
+      clearUser();
       return config;
     }
 

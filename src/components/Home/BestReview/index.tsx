@@ -8,19 +8,22 @@ import Review from './Review';
 import { Review as IReview } from 'src/types/home/types';
 
 const BestReview = ({ bestReview }) => {
-  const [reviewList, setReviewList] = useState<IReview[]>();
+  // const [reviewList, setReviewList] = useState<IReview[]>([
+  //   ...bestReview,
+  //   ...bestReview,
+  // ]);
 
-  useEffect(() => {
-    setReviewList([...bestReview, ...bestReview]);
-  }, []);
+  // useEffect(() => {
+  //   setReviewList([...bestReview, ...bestReview]);
+  // }, []);
 
   return (
     <Styled.Wrapper>
       <Styled.ReviewContainer>
         <Title title="베스트 리뷰" color="#285430" />
         <Styled.Reviews>
-          {reviewList &&
-            reviewList.map((review: IReview, index) => (
+          {bestReview &&
+            [...bestReview, ...bestReview].map((review: IReview, index) => (
               <Review
                 key={index}
                 productId={review.productId}

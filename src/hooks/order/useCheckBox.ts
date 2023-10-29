@@ -2,8 +2,10 @@ import { useState } from 'react';
 
 const useCheckBox = () => {
   // 개인정보 체크 여부 확인
-  const [isAllChecked, setAllChecked] = useState(false);
-  const [checkedState, setCheckedState] = useState(new Array(2).fill(false));
+  const [isAllChecked, setAllChecked] = useState<boolean>(false);
+  const [checkedState, setCheckedState] = useState<boolean[]>(
+    new Array(2).fill(false),
+  );
 
   const handleAllCheck = () => {
     setAllChecked(prev => !prev);

@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import Layout from './layout';
 import Slider from '@components/Home/Slider';
 import Category from '@components/Common/Category';
-import ShopPrev from '@components/Home/ShopBySize';
+import ShopBySize from '@components/Home/ShopBySize';
 import BestPlant from '@components/Home/BestPlant';
 import BestReview from '@components/Home/BestReview';
 import News from '@components/Home/News';
@@ -39,7 +39,7 @@ const IndexPage = ({
     <>
       <Slider banner={banner} />
       <Category />
-      <ShopPrev />
+      <ShopBySize />
       <BestPlant bestPlant={bestPlant} />
       <BestReview bestReview={bestReview} />
       <News news={news} />

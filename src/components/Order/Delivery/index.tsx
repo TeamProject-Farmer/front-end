@@ -5,10 +5,6 @@ import Styled from '../styles';
 import InputGroup from '../InputGroup';
 import InputField from '../InputField';
 
-import { useQuery } from '@tanstack/react-query';
-
-import { getOrderAddress } from 'src/apis/order/order';
-
 import { DeliveryProps } from 'src/types/order/types';
 
 const Delivery = ({ control, setValue, orderedData }: DeliveryProps) => {

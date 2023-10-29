@@ -15,7 +15,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'store';
 import { clearUser } from 'store/reducers/userSlice';
-import { setToken, clearToken } from 'store/reducers/tokenSlice';
+import { clearToken } from 'store/reducers/tokenSlice';
 
 import { getCookie, removeCookie } from 'src/utils/cookie';
 

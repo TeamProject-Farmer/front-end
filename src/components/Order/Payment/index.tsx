@@ -19,8 +19,8 @@ const Payment = ({
   handlePointClick,
   totalPrice,
 }: PaymentProps) => {
-  const [disabledCouponBtn, setDisabledCouponBtn] = useState(false);
-  const [disabledPointBtn, setDisabledPointBtn] = useState(false);
+  const [disabledCouponBtn, setDisabledCouponBtn] = useState<boolean>(false);
+  const [disabledPointBtn, setDisabledPointBtn] = useState<boolean>(false);
 
   useEffect(() => {
     setDisabledPointBtn(selectedCouponId === 0 ? false : true);
