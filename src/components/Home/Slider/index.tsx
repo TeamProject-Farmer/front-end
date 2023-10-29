@@ -6,7 +6,7 @@ import SliderContent from './SliderContent';
 import Indicator from './Indicator';
 
 const Slider = ({ banner }) => {
-  const [activeIndex, setActiveIndex] = useState(1);
+  const [activeIndex, setActiveIndex] = useState<number>(1);
 
   useEffect(() => {
     const sliderInterval = setInterval(() => {

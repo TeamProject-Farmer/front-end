@@ -42,6 +42,7 @@ const InputGroup = () => {
         cumulativeAmount: userData.cumulativeAmount,
         memberCoupon: userData.memberCoupon,
       };
+      console.log('userInfo', userInfo);
       dispatch(setUser(userInfo));
       setToken(userData.accessToken);
       setCookie('refreshToken', userData.refreshToken);

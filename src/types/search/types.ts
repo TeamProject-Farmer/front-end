@@ -1,4 +1,5 @@
 import { ProductProps } from '../common/types';
+import { LegacyRef } from 'react';
 
 export interface PostSearch {
   searchWord: string;
@@ -35,11 +36,9 @@ export interface SearchResponse {
 
 export interface SearchContainerProps {
   handleKeyPress: (event: React.KeyboardEvent<HTMLInputElement>) => void;
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleClick: () => Promise<void>;
-  inputValue: string;
-  isLoggedIn: boolean;
   recentSearchWord: string[];
+  ref: LegacyRef<HTMLInputElement>;
 }
 
 export interface SearchContentProps {

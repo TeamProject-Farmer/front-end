@@ -1,3 +1,5 @@
+import { ForwardedRef, useRef } from 'react';
+
 import styled from '@emotion/styled';
 import theme from '@styles/theme';
 
@@ -5,34 +7,28 @@ import Icon from '@components/Common/Icon';
 import Keyword from '../Keyword';
 
 import { SearchContainerProps } from 'src/types/search/types';
+import { forwardRef } from 'react';
 
-const SearchContainer = ({
-  handleKeyPress,
-  handleChange,
-  handleClick,
-  inputValue,
-  recentSearchWord,
-  isLoggedIn,
-}: SearchContainerProps) => {
-  return (
-    <Styled.Wrapper>
-      <Styled.IconWrapper onClick={handleClick}>
-        <Icon name="search" width={26} height={25} />
-      </Styled.IconWrapper>
-      <Styled.Input
-        type="search"
-        onChange={handleChange}
-        onKeyPress={handleKeyPress}
-        value={inputValue}
-      />
-      <Styled.KeywordWrapper>
-        {isLoggedIn && (
-          <Keyword title="최근 검색 키워드" wordList={recentSearchWord} />
-        )}
-      </Styled.KeywordWrapper>
-    </Styled.Wrapper>
-  );
-};
+const SearchContainer = forwardRef(
+  (
+    { handleKeyPress, handleClick, recentSearchWord }: SearchContainerProps,
+    ref: ForwardedRef<HTMLInputElement>,
+  ) => {
+    return (
+      <Styled.Wrapper>
+        <Styled.IconWrapper onClick={handleClick}>
+          <Icon name="search" width={26} height={25} />
+        </Styled.IconWrapper>
+        <Styled.Input type="search" ref={ref} onKeyPress={handleKeyPress} />
+        <Styled.KeywordWrapper>
+          {recentSearchWord && (
+            <Keyword title="최근 검색 키워드" wordList={recentSearchWord} />
+          )}
+        </Styled.KeywordWrapper>
+      </Styled.Wrapper>
+    );
+  },
+);
 
 export default SearchContainer;
 
